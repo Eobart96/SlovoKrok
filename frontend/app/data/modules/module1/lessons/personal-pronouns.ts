@@ -1,6 +1,27 @@
 import type { CourseLesson } from "../../../courseTypes";
 
 export const personalPronounsLesson: CourseLesson = {
+  vocabulary: [
+    {"word":"Ja som Ari. Ty si doma.","translation":"Я Ари. Ты дома.","example":"Ja som Ari. Ty si doma."},
+    {"word":"Peter a Eva? Oni sú tu. Knihy? Ony sú nové.","translation":"Петер и Эва? Они здесь. Книги? Они новые.","example":"Peter a Eva? Oni sú tu. Knihy? Ony sú nové."},
+    {"word":"Ako sa máte? Odkiaľ ste?","translation":"Как вы? Откуда вы?","example":"Ako sa máte? Odkiaľ ste?"},
+    {"word":"Bývam v Moskve. Pracuješ doma.","translation":"Я живу в Москве. Ты работаешь дома.","example":"Bývam v Moskve. Pracuješ doma."},
+    {"word":"Ja som Ari.","translation":"Я Ари.","example":"Ja som Ari."},
+    {"word":"Ty si doma.","translation":"Ты дома.","example":"Ty si doma."},
+    {"word":"On je lekár.","translation":"Он врач.","example":"On je lekár."},
+    {"word":"Ona je učiteľka.","translation":"Она учительница.","example":"Ona je učiteľka."},
+    {"word":"Ono je malé.","translation":"Оно маленькое.","example":"Ono je malé."},
+    {"word":"My sme priatelia.","translation":"Мы друзья.","example":"My sme priatelia."},
+    {"word":"Vy ste z Bratislavy.","translation":"Вы из Братиславы.","example":"Vy ste z Bratislavy."},
+    {"word":"Oni sú študenti.","translation":"Они студенты.","example":"Oni sú študenti."},
+    {"word":"Ony sú nové.","translation":"Они новые.","example":"Ony sú nové."},
+    {"word":"Som z Ruska.","translation":"Я из России.","example":"Som z Ruska."},
+    {"word":"Bývaš tu?","translation":"Ты живёшь здесь?","example":"Bývaš tu?"},
+    {"word":"Pracujeme spolu.","translation":"Мы работаем вместе.","example":"Pracujeme spolu."},
+    {"word":"Ste pripravení?","translation":"Вы готовы?","example":"Ste pripravení?"},
+    {"word":"Nie som doma.","translation":"Я не дома.","example":"Nie som doma."},
+    {"word":"Ja čítam, ty píšeš.","translation":"Я читаю, ты пишешь.","example":"Ja čítam, ty píšeš."},
+  ],
   slug: "personal-pronouns",
   order: 5,
   title: "Личные местоимения",

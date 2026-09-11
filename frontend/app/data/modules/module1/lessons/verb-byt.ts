@@ -1,6 +1,12 @@
 import type { CourseLesson } from "../../../courseTypes";
 
 export const verbBytLesson: CourseLesson = {
+  vocabulary: [
+    {"word":"Som doma. Ja som doma, ale on je v práci.","translation":"Я дома. Я дома, а он на работе.","example":"Som doma. Ja som doma, ale on je v práci."},
+    {"word":"Si doma? — Áno, som. / Nie, nie som.","translation":"Ты дома? — Да. / Нет.","example":"Si doma? — Áno, som. / Nie, nie som."},
+    {"word":"Som študent. Káva je dobrá. Sme doma.","translation":"Я студент. Кофе хороший. Мы дома.","example":"Som študent. Káva je dobrá. Sme doma."},
+    {"word":"Včera som bol / bola doma. Zajtra budem v škole.","translation":"Вчера я был / была дома. Завтра я буду в школе.","example":"Včera som bol / bola doma. Zajtra budem v škole."},
+  ],
   slug: "verb-byt",
   order: 6,
   title: "Глагол byť",

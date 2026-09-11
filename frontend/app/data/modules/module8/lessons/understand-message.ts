@@ -1,30 +1,170 @@
-import type { CompactLessonContent } from "../../plannedLessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const understandMessageContent: CompactLessonContent = {
-  "slug": "understand-message",
-  "title": "Понимание личного сообщения",
-  "slovakTitle": "Porozumenie správe",
-  "outcome": "Извлекать время, место, просьбу и ключевой факт.",
-  "summary": "После урока вы сможете извлекать время, место, просьбу и ключевой факт в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Читайте сначала цель сообщения, затем найдите kto, kedy, kde и čo treba urobiť. Незнакомое слово не мешает, если эти элементы понятны.",
-  "examples": [
-    {
-      "slovak": "Ahoj, prídem zajtra o piatej.",
-      "russian": "Привет, я приду завтра в пять."
-    },
-    {
-      "slovak": "Stretneme sa pred stanicou.",
-      "russian": "Встретимся перед вокзалом."
-    },
-    {
-      "slovak": "Prosím, prines knihu.",
-      "russian": "Пожалуйста, принеси книгу."
-    },
-    {
-      "slovak": "Dnes nemôžem, prepáč.",
-      "russian": "Сегодня не могу, извини."
-    }
+export const understandMessageContent = {
+  vocabulary: [
+    {"word":"Ahoj, prídem zajtra o piatej.","translation":"Привет, я приду завтра в пять.","example":"Ahoj, prídem zajtra o piatej."},
+    {"word":"Stretneme sa pred stanicou.","translation":"Встретимся перед вокзалом.","example":"Stretneme sa pred stanicou."},
+    {"word":"Prosím, prines knihu.","translation":"Пожалуйста, принеси книгу.","example":"Prosím, prines knihu."},
+    {"word":"Dnes nemôžem, prepáč.","translation":"Сегодня не могу, извини.","example":"Dnes nemôžem, prepáč."},
+    {"word":"Počkaj na mňa pri vchode.","translation":"Подожди меня у входа.","example":"Počkaj na mňa pri vchode."},
+    {"word":"Áno, piata mi vyhovuje.","translation":"Да, пять мне подходит.","example":"Áno, piata mi vyhovuje."},
   ],
-  "mistake": "Не приписывайте сообщению действие, которого в нём нет; опирайтесь на конкретные слова и время.",
-  "task": "Прочитайте короткое сообщение и выпишите отправителя, время, место, просьбу и нужный ответ."
-};
+  slug: "understand-message",
+  order: 4,
+  title: "Понимание личного сообщения",
+  slovakTitle: "Porozumenie správe",
+  description: "Извлекать время, место, просьбу и ключевой факт.",
+  duration: "35–40 мин",
+  goals: [
+    "Быстро определять главную цель личного сообщения",
+    "Находить автора, время, место и изменение планов",
+    "Замечать отрицание и ожидаемое действие",
+    "Выбирать короткий уместный ответ",
+  ],
+  theory: {
+    summary: "Формула понимания: кто пишет → зачем → когда и где → что нужно сделать. Сначала найдите каркас сообщения и ключевые сигналы; незнакомые слова разбирайте только потом.",
+    rules: [
+      "После первого чтения ответьте: кто пишет, что произошло, какие время и место важны и нужно ли вам действовать.",
+      "Слова dnes, zajtra, večer, o piatej, pri vchode и числа несут ключевые детали.",
+      "Отрицание часто прикрепляется к глаголу: môžem → nemôžem, prídem → neprídem, funguje → nefunguje.",
+      "Тип сообщения подсказывает реакцию: информация, приглашение, просьба или изменение планов.",
+      "Глаголы počkaj, zavolaj, napíš, prines, nezabudni и daj mi vedieť показывают ожидаемое действие.",
+      "Выбирайте ответ по цели: Dobre, ďakujem; Áno, môžeme; Dobre, kúpim to; Áno, šiesta mi vyhovuje.",
+    ],
+    examples: [
+      { slovak: "Ahoj, prídem zajtra o piatej.", russian: "Привет, я приду завтра в пять.", explanation: "Zajtra и o piatej дают день и время." },
+      { slovak: "Stretneme sa pred stanicou.", russian: "Встретимся перед вокзалом.", explanation: "Pred stanicou указывает место встречи." },
+      { slovak: "Prosím, prines knihu.", russian: "Пожалуйста, принеси книгу.", explanation: "Prines показывает действие, которого ждёт автор." },
+      { slovak: "Dnes nemôžem, prepáč.", russian: "Сегодня не могу, извини.", explanation: "Ne- меняет смысл глагола на отрицательный." },
+      { slovak: "Počkaj na mňa pri vchode.", russian: "Подожди меня у входа.", explanation: "Сообщение содержит действие и место." },
+      { slovak: "Áno, piata mi vyhovuje.", russian: "Да, пять мне подходит.", explanation: "Короткий ответ подтверждает предложенное время." },
+    ],
+  },
+  sections: [
+    {
+      title: "Не переводите всё: найдите каркас",
+      paragraphs: [
+        "Пример: Ahoj, Ari! Dnes neprídem na kurz. Som chorá. Môžeme sa stretnúť zajtra o piatej? Napíš mi, prosím. Katka.",
+        "Главный смысл: Катка не придёт сегодня, предлагает завтра в 17:00 и просит ответить. Дословный перевод каждого слова не нужен.",
+      ],
+      table: { headers: ["Часть", "Фрагмент", "Что понятно"], rows: [
+        ["контакт", "Ahoj, Ari!", "сообщение адресовано Ари"],
+        ["главная новость", "Dnes neprídem na kurz.", "сегодня Катка не придёт"],
+        ["причина", "Som chorá.", "она больна"],
+        ["новое предложение", "zajtra o piatej", "встретиться завтра в пять"],
+        ["ожидаемое действие", "Napíš mi, prosím.", "нужно ответить"],
+      ] },
+      note: "Четыре вопроса: кто пишет? что произошло? когда и где? что нужно сделать?",
+    },
+    {
+      title: "Сигналы, которые несут детали",
+      paragraphs: [
+        "При втором чтении отмечайте слова времени, места, отрицание и глагол действия.",
+        "Даже при незнакомой лексике сначала выпишите имя, дату, время, номер телефона, адрес или сумму.",
+      ],
+      table: { headers: ["Сигнал", "Значение", "Пример"], rows: [
+        ["dnes / zajtra / včera", "сегодня / завтра / вчера", "Prídem zajtra."],
+        ["ráno / poobede / večer", "утром / днём / вечером", "Zavolám večer."],
+        ["o piatej", "в пять часов", "Stretneme sa o piatej."],
+        ["v škole / pri vchode", "в школе / у входа", "Čakám pri vchode."],
+        ["nie / ne-", "нет / отрицание", "Neprídem."],
+        ["ale", "но, изменение", "Prídem, ale neskôr."],
+        ["prosím", "просьба", "Zavolaj mi, prosím."],
+      ] },
+      items: ["Dnes prídem. ↔ Dnes neprídem.", "Môžem prísť. ↔ Nemôžem prísť."],
+      note: "Если пропустить ne-, смысл станет противоположным.",
+    },
+    {
+      title: "Четыре типа личных сообщений",
+      paragraphs: ["Тип сообщения помогает предсказать содержание и нужный ответ."],
+      table: { headers: ["Тип", "Сообщение", "Нужная реакция"], rows: [
+        ["информация", "Som už doma. Večera je v chladničke.", "знать; ответ необязателен"],
+        ["приглашение", "Máš čas v sobotu? Môžeme ísť na kávu o tretej.", "принять или отказаться"],
+        ["просьба", "Prosím, kúp chlieb a mlieko. Nezabudni na kľúče.", "выполнить или ответить"],
+        ["изменение планов", "Dnes nemôžem prísť. Stretneme sa zajtra o šiestej?", "заметить новое время"],
+      ] },
+      items: ["понял: Dobre, ďakujem.", "согласен: Áno, môžeme.", "выполню: Dobre, kúpim to.", "время подходит: Áno, šiesta mi vyhovuje."],
+      note: "На вопрос недостаточно ответить только Ďakujem: автор ожидает согласия или отказа.",
+    },
+    {
+      title: "Банк сообщений и мини-алгоритм",
+      paragraphs: ["Определяйте функцию каждой строки: факт, время, место, просьба или изменение."],
+      table: { headers: ["Фрагмент", "Естественный перевод"], rows: [
+        ["Dnes prídem neskôr.", "Сегодня я приду позже."], ["Meškám desať minút.", "Я опаздываю на десять минут."],
+        ["Čakám pred domom.", "Я жду перед домом."], ["Stretneme sa pri stanici.", "Встретимся у вокзала."],
+        ["Kurz sa začína o šiestej.", "Курс начинается в шесть."], ["Nemôžem prísť.", "Я не могу прийти."],
+        ["Počkaj na mňa pri vchode.", "Подожди меня у входа."], ["Zavolaj mi večer, prosím.", "Позвони мне вечером, пожалуйста."],
+        ["Napíš mi adresu.", "Напиши мне адрес."], ["Nezabudni na kľúče.", "Не забудь ключи."],
+        ["Daj mi vedieť.", "Дай мне знать."], ["Platí to.", "Договорились / всё в силе."],
+      ] },
+      note: "Мини-алгоритм: подчеркните ne- → обведите время и место → найдите действие → сформулируйте смысл одним предложением.",
+    },
+    {
+      title: "Типичные ошибки и самопроверка",
+      paragraphs: ["Проверяйте цель, отрицание, все слова времени и ожидаемый тип ответа."],
+      table: { headers: ["Ошибка чтения", "Правильная стратегия"], rows: [
+        ["Переводить слово за словом", "Сначала определить цель и ключевые детали."],
+        ["Не заметить ne- в neprídem", "Всегда отдельно проверить отрицание."],
+        ["Спутать dnes и zajtra", "Подчеркнуть все слова времени."],
+        ["Ответить только Ďakujem на вопрос", "Проверить, ждёт ли автор согласия или отказа."],
+      ] },
+      items: ["Я называю цель сообщения.", "Я нахожу время и место.", "Я замечаю отрицание.", "Я понимаю просьбу.", "Я выбираю уместный ответ."],
+      note: "Главная защита от ошибки — отдельно проверить ne- и все числа, даты и слова времени.",
+    },
+  ],
+  stepPractices: [
+    { id: "m8-understand-message-step-1", sectionIndex: 0, type: "choice", prompt: "Как по-словацки: «Привет, я приду завтра в пять»?", options: ["Ahoj, prídem zajtra o piatej.", "Dnes nemôžem, prepáč.", "Stretneme sa pred stanicou."], answer: "Ahoj, prídem zajtra o piatej.", hint: "Найдите слова zajtra и o piatej.", explanation: "Верная фраза: Ahoj, prídem zajtra o piatej." },
+    { id: "m8-understand-message-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Встретимся перед вокзалом.»", answer: "Stretneme sa pred stanicou.", hint: "Используйте stretneme sa и готовый блок места.", explanation: "Верная фраза: Stretneme sa pred stanicou." },
+    { id: "m8-understand-message-step-3", sectionIndex: 2, type: "text", prompt: "Переведите: «Пожалуйста, принеси книгу.»", answer: "Prosím, prines knihu.", acceptableAnswers: ["Prines, prosím, knihu."], hint: "Используйте глагол действия prines.", explanation: "Верно: Prosím, prines knihu. Также естественно: Prines, prosím, knihu." },
+    { id: "m8-understand-message-step-4", sectionIndex: 3, type: "pairs", prompt: "Определите функцию каждого фрагмента.", answer: "время; место; просьба; отрицание", showSlovakKeyboard: false, pairs: [
+      { prompt: "Zavolám večer.", answer: "время", options: ["время", "место", "просьба", "отрицание"] },
+      { prompt: "Čakám pri vchode.", answer: "место", options: ["время", "место", "просьба", "отрицание"] },
+      { prompt: "Napíš mi adresu.", answer: "просьба", options: ["время", "место", "просьба", "отрицание"] },
+      { prompt: "Nemôžem prísť.", answer: "отрицание", options: ["время", "место", "просьба", "отрицание"] },
+    ], hint: "Ищите слова-сигналы и глагол действия.", explanation: "Фрагменты показывают время, место, просьбу и отрицание." },
+    { id: "m8-understand-message-step-5", sectionIndex: 4, type: "choice", prompt: "Какая стратегия помогает не перепутать смысл?", options: ["Сначала проверить цель, ne-, время, место и действие", "Сразу переводить каждое слово", "Игнорировать числа и отрицание"], answer: "Сначала проверить цель, ne-, время, место и действие", showSlovakKeyboard: false, hint: "Вспомните мини-алгоритм.", explanation: "Каркас и сигналы важнее дословного перевода." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 4",
+  reinforcementPractices: [
+    { id: "reinforcement:understand-message:1", sectionIndex: 0, type: "pairs", prompt: "Определите цель сообщения.", answer: "просьба; приглашение; информация", showSlovakKeyboard: false, pairs: [
+      { prompt: "Prosím, kúp mlieko.", answer: "просьба", options: ["информация", "приглашение", "просьба"] },
+      { prompt: "Môžeme ísť zajtra na kávu?", answer: "приглашение", options: ["информация", "приглашение", "просьба"] },
+      { prompt: "Dnes prídem o siedmej.", answer: "информация", options: ["информация", "приглашение", "просьба"] },
+    ], hint: "Смотрите на глагол и ожидаемую реакцию.", explanation: "Это просьба, приглашение и информация." },
+    { id: "reinforcement:understand-message:2", sectionIndex: 1, type: "pairs", prompt: "Найдите детали: Ahoj! Meškám desať minút. Počkaj na mňa pri stanici.", answer: "10 минут; у вокзала", showSlovakKeyboard: false, pairs: [
+      { prompt: "На сколько опаздывает автор?", answer: "10 минут", options: ["5 минут", "10 минут", "30 минут"] },
+      { prompt: "Где нужно ждать?", answer: "у вокзала", options: ["у входа", "у вокзала", "перед домом"] },
+    ], hint: "Найдите число и блок места pri stanici.", explanation: "Автор опаздывает на 10 минут; ждать нужно у вокзала." },
+    { id: "reinforcement:understand-message:3", sectionIndex: 2, type: "pairs", prompt: "Верно или неверно: Dnes nemôžem prísť. Stretneme sa zajtra o šiestej.", answer: "Неверно; Верно; Верно", showSlovakKeyboard: false, pairs: [
+      { prompt: "Автор придёт сегодня.", answer: "Неверно", options: ["Верно", "Неверно"] },
+      { prompt: "Встреча предлагается завтра.", answer: "Верно", options: ["Верно", "Неверно"] },
+      { prompt: "Время — 18:00.", answer: "Верно", options: ["Верно", "Неверно"] },
+    ], hint: "Особенно внимательно проверьте ne- и zajtra.", explanation: "Сегодня автор не может прийти; встреча предложена завтра в 18:00." },
+    { id: "reinforcement:understand-message:4", sectionIndex: 2, type: "choice", prompt: "Выберите ответ на Môžeme sa stretnúť v piatok o piatej?", options: ["Áno, piata mi vyhovuje.", "Kúpim chlieb.", "Som v autobuse."], answer: "Áno, piata mi vyhovuje.", hint: "Ответ должен подтвердить или отклонить встречу.", explanation: "Уместный ответ подтверждает предложенное время: Áno, piata mi vyhovuje." },
+    { id: "reinforcement:understand-message:5", sectionIndex: 3, type: "pairs", prompt: "Передайте смысл строк сообщения по-русски.", answer: "Привет, я перед домом.; Открой мне, пожалуйста.; У меня нет ключей.", showSlovakKeyboard: false, pairs: [
+      { prompt: "Ahoj, som pred domom.", answer: "Привет, я перед домом.", options: ["Привет, я перед домом.", "Привет, я у вокзала.", "Сегодня я дома."] },
+      { prompt: "Otvor mi, prosím.", answer: "Открой мне, пожалуйста.", options: ["Открой мне, пожалуйста.", "Позвони мне вечером.", "Подожди меня."] },
+      { prompt: "Nemám kľúče.", answer: "У меня нет ключей.", options: ["У меня нет ключей.", "Я нашёл ключи.", "Не забудь ключи."] },
+    ], hint: "Сохраните факт, просьбу и отрицание.", explanation: "Автор стоит перед домом, просит открыть и сообщает, что у него нет ключей." },
+    { id: "reinforcement:understand-message:6", sectionIndex: 4, type: "pairs", prompt: "Разберите сообщение и выберите уместный ответ: Ahoj, Ari! Zajtra kurz nie je. Stretneme sa v piatok o 17:30 v škole. Daj mi vedieť, či môžeš prísť.", answer: "завтра курса нет; в пятницу; в 17:30; в школе; сообщить, можете ли вы прийти; Ahoj! Áno, môžem prísť. Piatok o 17:30 mi vyhovuje. Ďakujem.", pairs: [
+      { prompt: "Что изменилось?", answer: "завтра курса нет", options: ["завтра курса нет", "курс начнётся позже"] },
+      { prompt: "Когда встреча?", answer: "в пятницу", options: ["в пятницу", "завтра"] },
+      { prompt: "Во сколько?", answer: "в 17:30", options: ["в 17:30", "в 18:00"] },
+      { prompt: "Где?", answer: "в школе", options: ["в школе", "у вокзала"] },
+      { prompt: "Что нужно сделать?", answer: "сообщить, можете ли вы прийти", options: ["сообщить, можете ли вы прийти", "купить продукты"] },
+      { prompt: "Уместный ответ", answer: "Ahoj! Áno, môžem prísť. Piatok o 17:30 mi vyhovuje. Ďakujem.", options: ["Ahoj! Áno, môžem prísť. Piatok o 17:30 mi vyhovuje. Ďakujem.", "Dobre, kúpim chlieb a mlieko."] },
+    ], hint: "Найдите изменение, день, время, место, действие и подтверждение.", explanation: "Курса завтра нет; новая встреча — в пятницу в 17:30 в школе; нужно подтвердить возможность прийти." },
+  ],
+  chatPrompt: "Прочитайте короткое личное сообщение и назовите его цель, время, место, отрицание и ожидаемое действие, затем предложите один уместный ответ.",
+  chatSuggestions: ["Dobre, ďakujem.", "Áno, môžeme.", "Dobre, kúpim to.", "Áno, piata mi vyhovuje."],
+  knowledgeChecks: [
+    { id: "m8-understand-message-check-1", question: "Как по-словацки: «Привет, я приду завтра в пять»?", options: ["Ahoj, prídem zajtra o piatej.", "Dnes nemôžem, prepáč.", "Stretneme sa pred stanicou."], answer: "Ahoj, prídem zajtra o piatej.", explanation: "Правильная фраза: Ahoj, prídem zajtra o piatej." },
+    { id: "m8-understand-message-check-2", question: "Как по-словацки: «Встретимся перед вокзалом»?", options: ["Stretneme sa pred stanicou.", "Počkaj na mňa pri vchode.", "Som už v autobuse."], answer: "Stretneme sa pred stanicou.", explanation: "Правильная фраза: Stretneme sa pred stanicou." },
+  ],
+  finalChecks: [
+    { id: "m8-understand-message-final-1", question: "Выберите перевод «Пожалуйста, принеси книгу».", options: ["Prosím, prines knihu.", "Napíš mi adresu.", "Nezabudni na kľúče."], answer: "Prosím, prines knihu.", explanation: "Правильный ответ: Prosím, prines knihu." },
+  ],
+} satisfies CourseLesson;

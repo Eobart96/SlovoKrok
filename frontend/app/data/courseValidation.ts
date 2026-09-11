@@ -83,6 +83,22 @@ export function validateCourseModules(modules: CourseModule[], coverage: A1Cover
       for (const example of lesson.theory.examples) {
         if (!example.slovak.trim() || !example.russian.trim()) throw new Error(`Словарь недоступен из примера: ${lesson.slug}`);
       }
+      if (lesson.vocabulary !== undefined) {
+        const words = new Set<string>();
+        for (const item of lesson.vocabulary) {
+          if (!item.word.trim() || !item.translation.trim() || item.word.length > 255 || item.translation.length > 500 || words.has(item.word)) {
+            throw new Error(`Неверная или повторная словарная карточка: ${lesson.slug}`);
+          }
+          words.add(item.word);
+        }
+      }
+      const listeningIds = new Set<string>();
+      for (const clip of lesson.listening ?? []) {
+        if (!clip.id.trim() || listeningIds.has(clip.id) || !/^\/audio\/[a-z0-9/-]+\.mp3$/.test(clip.audio) || !clip.transcript.trim() || !clip.question.trim() || !clip.explanation.trim() || clip.options.length < 2 || new Set(clip.options).size !== clip.options.length || !clip.options.includes(clip.answer)) {
+          throw new Error(`Неверное аудиозадание: ${lesson.slug}`);
+        }
+        listeningIds.add(clip.id);
+      }
     }
 
     if (module.topicGroups?.length) {

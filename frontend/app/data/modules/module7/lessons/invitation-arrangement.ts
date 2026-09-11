@@ -1,30 +1,201 @@
-import type { CompactLessonContent } from "../../plannedLessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const invitationArrangementContent: CompactLessonContent = {
-  "slug": "invitation-arrangement",
-  "title": "Приглашение и договорённость",
-  "slovakTitle": "Pozvanie a dohoda",
-  "outcome": "Предлагать встречу, принимать или отклонять предложение.",
-  "summary": "После урока вы сможете предлагать встречу, принимать или отклонять предложение в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Приглашение: Chceš…?/Môžeme…? Принятие: Áno, rád/rada. Отказ должен быть вежливым и по возможности содержать альтернативу.",
-  "examples": [
-    {
-      "slovak": "Chceš ísť v sobotu do kina?",
-      "russian": "Хочешь в субботу пойти в кино?"
-    },
-    {
-      "slovak": "Áno, rada. O koľkej?",
-      "russian": "Да, с удовольствием. Во сколько?"
-    },
-    {
-      "slovak": "Prepáč, v sobotu nemôžem.",
-      "russian": "Извини, в субботу не могу."
-    },
-    {
-      "slovak": "Môžeme sa stretnúť v nedeľu?",
-      "russian": "Можем встретиться в воскресенье?"
-    }
+export const invitationArrangementContent = {
+  vocabulary: [
+    {"word":"Chceš ísť v sobotu do kina?","translation":"Хочешь в субботу пойти в кино?","example":"Chceš ísť v sobotu do kina?"},
+    {"word":"Nechceš ísť na kávu?","translation":"Не хочешь пойти на кофе?","example":"Nechceš ísť na kávu?"},
+    {"word":"Áno, rada. O koľkej?","translation":"Да, с удовольствием. Во сколько?","example":"Áno, rada. O koľkej?"},
+    {"word":"Ďakujem, ale v sobotu nemôžem. A čo v nedeľu?","translation":"Спасибо, но в субботу не могу. А как насчёт воскресенья?","example":"Ďakujem, ale v sobotu nemôžem. A čo v nedeľu?"},
+    {"word":"Kde sa stretneme?","translation":"Где встретимся?","example":"Kde sa stretneme?"},
+    {"word":"Takže v sobotu o štvrtej pred kinom?","translation":"Значит, в субботу в четыре перед кинотеатром?","example":"Takže v sobotu o štvrtej pred kinom?"},
   ],
-  "mistake": "Не ограничивайте отказ одним Nie в нейтральной социальной ситуации; добавьте Prepáč и альтернативу.",
-  "task": "Пригласите собеседника, согласуйте день, время и место; затем отработайте вежливый отказ."
-};
+  slug: "invitation-arrangement",
+  order: 7,
+  title: "Приглашение и договорённость",
+  slovakTitle: "Pozvanie a dohoda",
+  description: "Приглашать, отвечать и договариваться о встрече.",
+  duration: "35–40 мин",
+  goals: [
+    "Приглашать с Chceš…?, Nechceš…?, Môžeme…? и Poďme…",
+    "Принимать приглашение или вежливо отказываться",
+    "Уточнять день, время и точное место встречи",
+    "Предлагать другой вариант и подтверждать готовый план",
+  ],
+  theory: {
+    summary: "Схема договорённости: приглашение → ответ → когда? → где? → подтверждение. Сначала предложите действие, после согласия уточните детали и завершите разговор словом platí.",
+    rules: [
+      "Для приглашения используйте Chceš + infinitív?, мягкое Nechceš + infinitív?, Môžeme + infinitív? или Poďme…",
+      "В вежливой форме ty заменяется на vy: Chceš → Chcete, Máš → Máte; Môžeme не меняется.",
+      "При согласии rád относится к мужчине, rada — к женщине.",
+      "Вежливый отказ лучше строить как благодарность + причина + другой вариант.",
+      "День спрашивают Kedy?, время — O koľkej?, место — Kde?, точку встречи — Kde presne?",
+      "Готовый план повторяют целиком и подтверждают: Dobre, platí.",
+    ],
+    examples: [
+      { slovak: "Chceš ísť v sobotu do kina?", russian: "Хочешь в субботу пойти в кино?", explanation: "Chceš + infinitív — прямое дружеское приглашение." },
+      { slovak: "Nechceš ísť na kávu?", russian: "Не хочешь пойти на кофе?", explanation: "Nechceš здесь смягчает приглашение, а не выражает отказ." },
+      { slovak: "Áno, rada. O koľkej?", russian: "Да, с удовольствием. Во сколько?", explanation: "Rada — ответ женщины; затем уточняется время." },
+      { slovak: "Ďakujem, ale v sobotu nemôžem. A čo v nedeľu?", russian: "Спасибо, но в субботу не могу. А как насчёт воскресенья?", explanation: "После причины сразу предлагается альтернатива." },
+      { slovak: "Kde sa stretneme?", russian: "Где встретимся?", explanation: "Для одной будущей встречи используется stretneme sa." },
+      { slovak: "Takže v sobotu o štvrtej pred kinom?", russian: "Значит, в субботу в четыре перед кинотеатром?", explanation: "Полный повтор помогает проверить детали." },
+    ],
+  },
+  sections: [
+    {
+      title: "Как пригласить",
+      paragraphs: [
+        "Сначала предложите действие, а день, время и место уточняйте после согласия. Nechceš…? — мягкое «не хочешь ли…?», а не отрицательный ответ.",
+        "С друзьями говорите Chceš…? и Máš čas…?, в вежливом обращении — Chcete…? и Máte čas…?.",
+      ],
+      table: { headers: ["Модель", "Пример", "Перевод"], rows: [
+        ["Chceš + infinitív?", "Chceš ísť na kávu?", "Хочешь пойти на кофе?"],
+        ["Nechceš + infinitív?", "Nechceš ísť do kina?", "Не хочешь пойти в кино?"],
+        ["Môžeme + infinitív?", "Môžeme sa stretnúť zajtra?", "Можем встретиться завтра?"],
+        ["Poďme + направление.", "Poďme na prechádzku.", "Пойдём на прогулку."],
+        ["Čo povieš na…?", "Čo povieš na kávu?", "Как насчёт кофе?"],
+        ["Máš čas…?", "Máš čas v sobotu?", "У тебя есть время в субботу?"],
+      ] },
+      items: ["ísť na kávu — пойти на кофе", "ísť do kina — пойти в кино", "ísť na obed — пойти на обед", "ísť na prechádzku — пойти на прогулку", "stretnúť sa — встретиться"],
+      note: "Не перегружайте первое приглашение всеми деталями: действие → согласие → уточнения.",
+    },
+    {
+      title: "Принять или вежливо отказаться",
+      paragraphs: [
+        "Согласие: Jasné. Dobre. To je dobrý nápad. Фраза To mi vyhovuje означает, что предложенный вариант вам подходит.",
+        "Одно Nie возможно, но дружелюбнее поблагодарить, назвать причину и предложить другой день или время.",
+      ],
+      table: { headers: ["Намерение", "Фраза", "Перевод"], rows: [
+        ["согласиться", "Áno, rád / rada.", "Да, с удовольствием."],
+        ["одобрить", "To je dobrý nápad.", "Это хорошая идея."],
+        ["подтвердить удобство", "To mi vyhovuje.", "Мне это подходит."],
+        ["отказаться", "Ďakujem, ale nemôžem. Možno inokedy.", "Спасибо, но не могу. Может быть, в другой раз."],
+        ["предложить день", "Bohužiaľ nemám čas. A čo v nedeľu?", "К сожалению, нет времени. А как насчёт воскресенья?"],
+        ["предложить время", "Vtedy nemôžem. Môžem o šiestej.", "Тогда не могу. Могу в шесть."],
+      ] },
+      note: "Модель: Ďakujem, ale v sobotu nemôžem. Môžeme sa stretnúť v nedeľu?",
+    },
+    {
+      title: "Уточняем время и место",
+      paragraphs: [
+        "Для одной будущей встречи используйте stretneme sa: Kedy sa stretneme? Kde sa stretneme?",
+        "Повторите весь план одним предложением, чтобы собеседник подтвердил каждую деталь.",
+      ],
+      table: { headers: ["Что уточнить", "Вопрос", "Пример ответа"], rows: [
+        ["день", "Kedy sa stretneme?", "V sobotu."],
+        ["время", "O koľkej?", "O štvrtej."],
+        ["место", "Kde sa stretneme?", "V centre."],
+        ["точка встречи", "Kde presne?", "Pred kinom."],
+        ["длительность", "Ako dlho tam budeme?", "Asi dve hodiny."],
+        ["транспорт", "Pôjdeme autobusom?", "Áno, pôjdeme."],
+      ] },
+      items: ["v centre — в центре", "pred kinom — перед кинотеатром", "pri stanici — у вокзала / станции", "v kaviarni — в кафе", "na námestí — на площади"],
+      note: "Проверка: Takže v sobotu o štvrtej pred kinom? — Áno, presne tak. / Nie, o piatej.",
+    },
+    {
+      title: "Банк фраз и диалоги",
+      paragraphs: [
+        "Без изменения: Máš čas v sobotu? — Áno. Prečo? — Nechceš ísť na kávu? — Áno, rada. O koľkej? — O štvrtej. Stretneme sa v centre. — Dobre, platí.",
+        "Новое время: Môžeme sa stretnúť v piatok o piatej? — Ďakujem, ale vtedy nemôžem. Môžem o šiestej. — Dobre. Pri stanici? — Áno. V piatok o šiestej pri stanici. — Platí.",
+      ],
+      table: { headers: ["Шаг", "Фраза", "Перевод"], rows: [
+        ["проверить время", "Máš čas v piatok?", "У тебя есть время в пятницу?"],
+        ["пригласить", "Chceš ísť na kávu?", "Хочешь пойти на кофе?"],
+        ["предложить встречу", "Môžeme sa stretnúť zajtra?", "Можем встретиться завтра?"],
+        ["назвать причину", "Bohužiaľ budem pracovať.", "К сожалению, я буду работать."],
+        ["уточнить", "O koľkej sa stretneme?", "Во сколько встретимся?"],
+        ["подтвердить", "Dobre, platí.", "Хорошо, договорились."],
+        ["повторить план", "V sobotu o šiestej pri stanici.", "В субботу в шесть у вокзала."],
+        ["завершить", "Teším sa. Tak zatiaľ!", "С нетерпением жду. Пока!"],
+      ] },
+      note: "Готовая договорённость отвечает: когда, во сколько и где — и заканчивается подтверждением.",
+    },
+    {
+      title: "Частые ошибки и самопроверка",
+      paragraphs: ["Проверяйте предлог направления, sa в stretneme sa, вопрос O koľkej? и финальное подтверждение."],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Chceš ísť kino?", "Chceš ísť do kina?", "Нужна модель do kina."],
+        ["Áno, rád. (женщина)", "Áno, rada.", "Форма зависит от пола говорящего."],
+        ["Kde stretneme?", "Kde sa stretneme?", "Глаголу stretnúť sa нужно sa."],
+        ["Na koľkej?", "O koľkej?", "Вопрос о времени требует o."],
+        ["Время без подтверждения", "Dobre, platí.", "Фраза завершает договорённость."],
+      ] },
+      items: ["Есть ли приглашение?", "Есть ли ясный ответ?", "Названы ли день, точное время и место?", "Есть ли альтернатива при отказе?", "Повторён и подтверждён ли план?"],
+      note: "Формула: приглашение → ответ → детали → альтернатива при необходимости → platí.",
+    },
+  ],
+  stepPractices: [
+    { id: "m7-invitation-arrangement-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите перевод «Хочешь в субботу пойти в кино?»", options: ["Áno, rada. O koľkej?", "Chceš ísť v sobotu do kina?", "Prepáč, v sobotu nemôžem."], answer: "Chceš ísť v sobotu do kina?", hint: "Сверьтесь с основной моделью.", explanation: "Верная фраза: Chceš ísť v sobotu do kina?" },
+    { id: "m7-invitation-arrangement-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Да, с удовольствием. Во сколько?»", answer: "Áno, rada. O koľkej?", hint: "Используйте опорную фразу из таблицы.", explanation: "Верная фраза: Áno, rada. O koľkej?" },
+    { id: "m7-invitation-arrangement-step-3", sectionIndex: 2, type: "text", prompt: "Переведите: «Извини, в субботу не могу.»", answer: "Prepáč, v sobotu nemôžem.", hint: "Сохраните порядок слов и диакритику.", explanation: "Верная фраза: Prepáč, v sobotu nemôžem." },
+    { id: "m7-invitation-arrangement-step-4", sectionIndex: 3, type: "pairs", prompt: "Завершите договорённость готовыми фразами.", answer: "Máš čas v piatok?; Nechceš ísť do kina?; O koľkej sa stretneme?; Dobre, platí.", pairs: [
+      { prompt: "У тебя есть время в пятницу?", answer: "Máš čas v piatok?", inputHint: "Введите фразу" },
+      { prompt: "Не хочешь пойти в кино?", answer: "Nechceš ísť do kina?", inputHint: "Введите фразу" },
+      { prompt: "Во сколько встретимся?", answer: "O koľkej sa stretneme?", inputHint: "Введите фразу" },
+      { prompt: "Хорошо, договорились.", answer: "Dobre, platí.", inputHint: "Введите фразу" },
+    ], hint: "Идите от проверки времени к приглашению, уточнению и подтверждению.", explanation: "Каждая реплика выполняет отдельный шаг договорённости." },
+    { id: "m7-invitation-arrangement-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки.", answer: "Chceš ísť do kina?; Áno, rada.; Kde sa stretneme?; O koľkej?; Stretneme sa v centre.", pairs: [
+      { prompt: "Chceš ísť kino?", answer: "Chceš ísť do kina?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Áno, rád. (говорит женщина)", answer: "Áno, rada.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Kde stretneme?", answer: "Kde sa stretneme?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Na koľkej?", answer: "O koľkej?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Stretneme v centre.", answer: "Stretneme sa v centre.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Введите каждую исправленную фразу целиком.", explanation: "Проверьте do kina, rada, sa и O koľkej." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 7",
+  reinforcementPractices: [
+    { id: "reinforcement:invitation-arrangement:1", sectionIndex: 0, type: "pairs", prompt: "Выберите подходящую реплику для каждого шага.", answer: "Chceš ísť na kávu?; Áno, rada.; O koľkej?; Platí.", pairs: [
+      { prompt: "пригласить", answer: "Chceš ísť na kávu?", options: ["Chceš ísť na kávu?", "Áno, rada.", "O koľkej?", "Platí."] },
+      { prompt: "согласиться, женщина", answer: "Áno, rada.", options: ["Chceš ísť na kávu?", "Áno, rada.", "O koľkej?", "Platí."] },
+      { prompt: "спросить время", answer: "O koľkej?", options: ["Chceš ísť na kávu?", "Áno, rada.", "O koľkej?", "Platí."] },
+      { prompt: "подтвердить", answer: "Platí.", options: ["Chceš ísť na kávu?", "Áno, rada.", "O koľkej?", "Platí."] },
+    ], hint: "Определите функцию реплики.", explanation: "Приглашение, согласие, время и подтверждение образуют договорённость." },
+    { id: "reinforcement:invitation-arrangement:2", sectionIndex: 0, type: "pairs", prompt: "Соберите четыре приглашения.", answer: "Chceš ísť do kina?; Môžeme sa stretnúť zajtra?; Máš čas v sobotu?; Poďme na prechádzku.", pairs: [
+      { prompt: "chceš / ísť / do kina", answer: "Chceš ísť do kina?", inputHint: "Введите предложение" },
+      { prompt: "môžeme / zajtra / sa stretnúť", answer: "Môžeme sa stretnúť zajtra?", inputHint: "Введите предложение" },
+      { prompt: "čas / máš / v sobotu", answer: "Máš čas v sobotu?", inputHint: "Введите предложение" },
+      { prompt: "poďme / na prechádzku", answer: "Poďme na prechádzku.", inputHint: "Введите предложение" },
+    ], hint: "Начните с Chceš, Môžeme, Máš или Poďme.", explanation: "Сохраняйте sa и готовые направления do kina, na prechádzku." },
+    { id: "reinforcement:invitation-arrangement:3", sectionIndex: 2, type: "pairs", prompt: "Дополните короткий диалог.", answer: "rád; Kedy; koľkej; platí", pairs: [
+      { prompt: "Nechceš ísť na kávu? — Áno, ____. (мужчина)", answer: "rád", options: ["rád", "Kedy", "koľkej", "platí"] },
+      { prompt: "____ sa stretneme? — V sobotu.", answer: "Kedy", options: ["rád", "Kedy", "koľkej", "platí"] },
+      { prompt: "O ____? — O štvrtej.", answer: "koľkej", options: ["rád", "Kedy", "koľkej", "platí"] },
+      { prompt: "Dobre, ____.", answer: "platí", options: ["rád", "Kedy", "koľkej", "platí"] },
+    ], hint: "Проверьте пол говорящего и функцию вопроса.", explanation: "Ответы: rád, Kedy, koľkej, platí." },
+    { id: "reinforcement:invitation-arrangement:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте каждую ошибку.", answer: "Chceš ísť do kina?; Áno, rada.; Kedy sa stretneme?; O koľkej?; Stretneme sa v centre.", pairs: [
+      { prompt: "Chceš ísť kino?", answer: "Chceš ísť do kina?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Áno, rád. (говорит женщина)", answer: "Áno, rada.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Kedy sa stretnúť?", answer: "Kedy sa stretneme?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Na koľkej?", answer: "O koľkej?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Stretneme v centre.", answer: "Stretneme sa v centre.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Введите целую нормативную фразу.", explanation: "Проверьте предлог, rada, stretneme, sa и O koľkej." },
+    { id: "reinforcement:invitation-arrangement:5", sectionIndex: 3, type: "pairs", prompt: "Переведите на словацкий.", answer: "Máš čas v piatok?; Nechceš ísť do kina?; Bohužiaľ nemôžem.; Kde sa stretneme?; Dobre, platí.", pairs: [
+      { prompt: "У тебя есть время в пятницу?", answer: "Máš čas v piatok?", inputHint: "Введите перевод" },
+      { prompt: "Не хочешь пойти в кино?", answer: "Nechceš ísť do kina?", inputHint: "Введите перевод" },
+      { prompt: "К сожалению, я не могу.", answer: "Bohužiaľ nemôžem.", acceptableAnswers: ["Bohužiaľ, nemôžem."], inputHint: "Введите перевод" },
+      { prompt: "Где встретимся?", answer: "Kde sa stretneme?", inputHint: "Введите перевод" },
+      { prompt: "Хорошо, договорились.", answer: "Dobre, platí.", inputHint: "Введите перевод" },
+    ], hint: "Используйте готовые модели.", explanation: "Задание проверяет начало, ответ, место и подтверждение." },
+    { id: "reinforcement:invitation-arrangement:6", sectionIndex: 3, type: "pairs", prompt: "Соберите полный диалог о встрече.", answer: "Máš čas v sobotu?; Dopoludnia nemôžem, ale poobede áno.; Nechceš ísť do kina?; To je dobrý nápad. O koľkej?; O piatej.; Môžem až o šiestej.; Dobre. Stretneme sa o šiestej pred kinom.; Áno, presne tak. Platí.", pairs: [
+      { prompt: "1 · проверить день", answer: "Máš čas v sobotu?", options: ["Máš čas v sobotu?", "Kde bývaš?"] },
+      { prompt: "2 · ответить", answer: "Dopoludnia nemôžem, ale poobede áno.", options: ["Dopoludnia nemôžem, ale poobede áno.", "Nie."] },
+      { prompt: "3 · пригласить", answer: "Nechceš ísť do kina?", options: ["Nechceš ísť do kina?", "O koľkej?"] },
+      { prompt: "4 · согласиться", answer: "To je dobrý nápad. O koľkej?", options: ["To je dobrý nápad. O koľkej?", "Bohužiaľ nemám čas."] },
+      { prompt: "5 · назвать время", answer: "O piatej.", options: ["O piatej.", "V centre."] },
+      { prompt: "6 · изменить время", answer: "Môžem až o šiestej.", options: ["Môžem až o šiestej.", "Môžem až v sobotu."] },
+      { prompt: "7 · повторить план", answer: "Dobre. Stretneme sa o šiestej pred kinom.", options: ["Dobre. Stretneme sa o šiestej pred kinom.", "Dobre. Stretneme o šiestej kino."] },
+      { prompt: "8 · подтвердить", answer: "Áno, presne tak. Platí.", options: ["Áno, presne tak. Platí.", "Možno inokedy."] },
+    ], hint: "Нужны приглашение, ответ, новая деталь, полный повтор и подтверждение.", explanation: "План: суббота после обеда, в шесть перед кинотеатром." },
+  ],
+  chatPrompt: "Разыграйте диалог из 7–9 реплик: пригласите, ответьте, уточните день, время и место, предложите альтернативу, повторите план и подтвердите его словом platí.",
+  chatSuggestions: ["Máš čas v sobotu?", "Nechceš ísť do kina?", "Môžem o šiestej.", "Dobre, platí."],
+  knowledgeChecks: [
+    { id: "m7-invitation-arrangement-check-1", question: "Как по-словацки: «Хочешь в субботу пойти в кино?»", options: ["Áno, rada. O koľkej?", "Chceš ísť v sobotu do kina?", "Prepáč, v sobotu nemôžem."], answer: "Chceš ísť v sobotu do kina?", explanation: "Правильная модель: Chceš ísť v sobotu do kina?" },
+    { id: "m7-invitation-arrangement-check-2", question: "Как по-словацки: «Да, с удовольствием. Во сколько?»", options: ["Áno, rada. O koľkej?", "Chceš ísť v sobotu do kina?", "Prepáč, v sobotu nemôžem."], answer: "Áno, rada. O koľkej?", explanation: "Правильная фраза: Áno, rada. O koľkej?" },
+  ],
+  finalChecks: [
+    { id: "m7-invitation-arrangement-final-1", question: "Выберите перевод «Извини, в субботу не могу.»", options: ["Áno, rada. O koľkej?", "Chceš ísť v sobotu do kina?", "Prepáč, v sobotu nemôžem."], answer: "Prepáč, v sobotu nemôžem.", explanation: "Правильный ответ: Prepáč, v sobotu nemôžem." },
+  ],
+} satisfies CourseLesson;

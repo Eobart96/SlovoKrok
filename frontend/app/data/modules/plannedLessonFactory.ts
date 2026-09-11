@@ -15,7 +15,11 @@ export type CompactLessonContent = {
   task: string;
 };
 
-export function definePlannedLesson(moduleOrder: number, order: number, planned: PlannedLesson, content: CompactLessonContent): CourseLesson {
+export function definePlannedLesson(moduleOrder: number, order: number, planned: PlannedLesson, content: CompactLessonContent | CourseLesson): CourseLesson {
+  if ("sections" in content) {
+    if (content.slug !== planned.slug) throw new Error(`Lesson content mismatch: ${content.slug} / ${planned.slug}`);
+    return { ...content, order, title: planned.title, slovakTitle: planned.slovakTitle, description: planned.outcome };
+  }
   const prefix = `m${moduleOrder}-${planned.slug}`;
   const examples = content.examples.slice(0, 4);
   if (content.slug !== planned.slug) throw new Error(`Lesson content mismatch: ${content.slug} / ${planned.slug}`);

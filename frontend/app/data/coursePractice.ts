@@ -35,6 +35,10 @@ function editDistance(left: string, right: string): number {
 }
 
 function getAnswerMatch(answer: string, acceptableAnswers: string[] | undefined, value: string): PracticeMatch {
+  // Some exercises explicitly accept a dash for "none". Punctuation-only
+  // answers must match an authored alternative, never the normalized empty string.
+  const literal = value.normalize("NFC").trim();
+  if (literal && [answer, ...(acceptableAnswers ?? [])].some((item) => item.normalize("NFC").trim() === literal)) return "correct";
   const normalized = normalizeAnswer(value);
   const accepted = [...new Set([answer, ...(acceptableAnswers ?? [])].map(normalizeAnswer).filter(Boolean))];
   if (accepted.includes(normalized)) return "correct";

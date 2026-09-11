@@ -1,32 +1,125 @@
-import { defineModule5Lesson } from "../lessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const chcietInfinitiveLesson = defineModule5Lesson("chciet-infinitive", 4, {
-  "title": "chcieť + infinitív",
-  "slovakTitle": "Chcieť s infinitívom",
-  "outcome": "Выражать желание и намерение.",
-  "summary": "После урока вы сможете выражать желание и намерение в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "После личной формы chcieť ставится инфинитив: chcem kúpiť, chceš ísť, chceme jesť. Объект относится к инфинитиву и получает нужную форму.",
-  "examples": [
-    {
-      "slovak": "Chcem kúpiť lístok.",
-      "russian": "Я хочу купить билет."
-    },
-    {
-      "slovak": "Chceš piť vodu?",
-      "russian": "Ты хочешь пить воду?"
-    },
-    {
-      "slovak": "Chceme bývať v meste.",
-      "russian": "Мы хотим жить в городе."
-    },
-    {
-      "slovak": "Nechcem čakať.",
-      "russian": "Я не хочу ждать."
-    }
+export const chcietInfinitiveLesson = {
+  vocabulary: [
+    {"word":"Chcem pracovať doma.","translation":"Я хочу работать дома.","example":"Chcem pracovať doma."},
+    {"word":"Chceš ísť do kina?","translation":"Ты хочешь пойти в кино?","example":"Chceš ísť do kina?"},
+    {"word":"Nechceme jesť.","translation":"Мы не хотим есть.","example":"Nechceme jesť."},
+    {"word":"Chcem sa učiť slovenčinu.","translation":"Я хочу учить словацкий.","example":"Chcem sa učiť slovenčinu."},
+    {"word":"Čo chcete robiť?","translation":"Что вы хотите делать?","example":"Čo chcete robiť?"},
+    {"word":"Dnes chcem pracovať doma.","translation":"Сегодня я хочу работать дома.","example":"Dnes chcem pracovať doma."},
   ],
-  "mistake": "Не спрягается второй глагол: chcem ísť, не chcem idem.",
-  "task": "Скажите, что вы хотите купить, поесть и сделать вечером; добавьте одно отрицание."
-}, {
-    rules: ["Chcieť + infinitív выражает желание или намерение.", "Частотные формы: chcem, chceš, chce, chceme, chcete, chcú.", "После личной формы идёт инфинитив без изменения: Chcem pracovať.", "Для заказа chcem звучит прямее; вежливая модель chcel/chcela by som рассматривается отдельно."],
-    contrasts: ["Chcem spať — я хочу спать.", "Chceš jesť? — ты хочешь есть?", "Chceme cestovať — мы хотим путешествовать."], prompt: "Переведите: «Мы хотим учиться».", answer: "Chceme sa učiť.", hint: "Используйте chceme и инфинитив učiť sa.",
-  });
+  slug: "chciet-infinitive",
+  order: 5,
+  title: "chcieť + infinitív",
+  slovakTitle: "Chcieť s infinitívom",
+  description: "Выражать желание, намерение и выбор действия.",
+  duration: "35–40 мин",
+  goals: ["Выбирать форму chcieť по лицу", "Оставлять второй глагол в инфинитиве", "Строить отрицание, вопросы и краткие ответы", "Правильно ставить sa/si рядом с личной формой", "Говорить о желаниях естественно и уместно"],
+  theory: {
+    summary: "В модели chcieť + infinitív изменяется только chcieť, а второй глагол остаётся в словарной форме. Эта конструкция сообщает о желании или намерении одного и того же деятеля.",
+    rules: [
+      "Формы нужно запомнить целиком: chcem, chceš, chce, chceme, chcete, chcú.",
+      "После личной формы ставится инфинитив: Chcem pracovať. Chceme cestovať.",
+      "Отрицание пишется слитно: nechcem, nechceš, nechce, nechceme, nechcete, nechcú.",
+      "Вопрос не требует вспомогательного глагола: Chceš pracovať? Čo chceš robiť?",
+      "В ответе меняется перспектива: Chceš ísť? — Áno, chcem. Chcete cestovať? — Áno, chceme.",
+      "Возвратная частица стоит ближе к личной форме: Chcem sa učiť. Chcem si oddýchnuť.",
+      "После chcieť возможен предмет или действие: Chcem kávu. / Chcem piť kávu.",
+      "Chcem подходит для желаний и планов; в кафе мягче звучат Dám si… и Prosím si…",
+    ],
+    examples: [
+      { slovak: "Chcem pracovať doma.", russian: "Я хочу работать дома.", explanation: "Chcem согласуется с ja, pracovať остаётся инфинитивом." },
+      { slovak: "Chceš ísť do kina?", russian: "Ты хочешь пойти в кино?", explanation: "Общий вопрос строится без вспомогательного глагола." },
+      { slovak: "Nechceme jesť.", russian: "Мы не хотим есть.", explanation: "Ne- присоединяется к форме chceme." },
+      { slovak: "Chcem sa učiť slovenčinu.", russian: "Я хочу учить словацкий.", explanation: "Sa перемещается к личной форме chcem." },
+      { slovak: "Čo chcete robiť?", russian: "Что вы хотите делать?", explanation: "Вопросительное слово стоит первым, затем личная форма и инфинитив." },
+      { slovak: "Dnes chcem pracovať doma.", russian: "Сегодня я хочу работать дома.", explanation: "Акцент времени можно поставить в начало." },
+    ],
+  },
+  sections: [
+    {
+      title: "Формы chcieť и инфинитив",
+      paragraphs: ["Chcieť — частотный неправильный глагол. Не выводите его формы только по виду инфинитива: учите весь ряд вместе с местоимениями."],
+      table: { headers: ["ja", "ty", "on / ona", "my", "vy", "oni / ony"], rows: [["chcem", "chceš", "chce", "chceme", "chcete", "chcú"]] },
+      items: ["Chcem spať. — Я хочу спать.", "Chcete začať? — Вы хотите начать?", "Chcú cestovať. — Они хотят путешествовать."],
+      note: "Местоимение обычно не требуется: личное окончание уже показывает лицо.",
+    },
+    {
+      title: "Один глагол меняется, второй остаётся",
+      paragraphs: ["Сначала определите деятеля, выберите форму chcieť, затем добавьте инфинитив и при необходимости время, место или дополнение."],
+      table: { headers: ["Личная форма", "Инфинитив", "Готовая фраза"], rows: [["chcem", "pracovať", "Chcem pracovať."], ["chceš", "ísť", "Chceš ísť?"], ["chceme", "jesť", "Chceme jesť."], ["chcú", "bývať", "Chcú bývať v meste."]] },
+      items: ["robiť — делать · pracovať — работать · ísť — идти / ехать", "jesť — есть · piť — пить · spať — спать", "bývať — жить · učiť sa — учиться · oddýchnuť si — отдохнуть"],
+      note: "Ошибка: Chcem pracujem. Правильно: Chcem pracovať. Личное окончание получает только chcieť.",
+    },
+    {
+      title: "Отрицание, вопросы и краткие ответы",
+      paragraphs: ["Присоедините ne- к личной форме chcieť; инфинитив не меняется. В вопросе сохраняйте ту же конструкцию и меняйте лицо в ответе."],
+      table: { headers: ["Модель", "Пример", "Ответ"], rows: [["отрицание", "Chcem čakať. → Nechcem čakať.", "Я не хочу ждать."], ["да / нет", "Chceš jesť?", "Áno, chcem. / Nie, nechcem."], ["что", "Čo chceš robiť?", "Chcem cestovať."], ["куда", "Kam chcete ísť?", "Chceme ísť do Tatier."], ["когда / почему", "Kedy chcete začať? / Prečo chce odísť?", "—"]] },
+      note: "Если вежливое vy обращено к одному человеку, собеседник отвечает формой ja: Chcete začať? — Áno, chcem.",
+    },
+    {
+      title: "Sa/si, акцент и естественность",
+      paragraphs: ["Возвратный инфинитив записывайте целиком, но в готовой фразе sa/si стоит ближе к личной форме. Различайте желание получить предмет и желание выполнить действие."],
+      table: { headers: ["Словарная форма", "С chcieť", "Перевод"], rows: [["učiť sa", "Chcem sa učiť.", "Я хочу учиться."], ["stretnúť sa", "Chceme sa stretnúť.", "Мы хотим встретиться."], ["oddýchnuť si", "Chcem si oddýchnuť.", "Я хочу отдохнуть."], ["kúpiť si", "Chce si kúpiť lístok.", "Он хочет купить себе билет."]] },
+      items: ["Chcem kávu. — Я хочу кофе.", "Chcem piť kávu. — Я хочу пить кофе.", "Dnes chcem pracovať doma. — акцент на времени", "Doma chcem oddychovať. — акцент на месте", "Желание / план: Chcem ísť do kina. · В кафе: Dám si kávu. / Prosím si kávu."],
+      note: "Chcem cestovať сообщает о желании, но не обещает и не обозначает точный план.",
+    },
+    {
+      title: "Готовые фразы, ошибки и самопроверка",
+      paragraphs: ["Называйте лицо формы chcieť, находите инфинитив и переводите всю фразу. Затем проверяйте отрицание и положение sa/si."],
+      table: { headers: ["Ситуация", "Словацкий пример", "Перевод"], rows: [["жильё", "Chcem bývať v Bratislave.", "Я хочу жить в Братиславе."], ["движение", "Chcem ísť do mesta.", "Я хочу пойти в город."], ["напиток", "Chcem piť vodu.", "Я хочу пить воду."], ["отдых", "Chcem si oddýchnuť.", "Я хочу отдохнуть."], ["путешествие", "Chceme cestovať.", "Мы хотим путешествовать."], ["покупка", "Chcú si kúpiť lístok.", "Они хотят купить себе билет."], ["выходные", "Nechcem pracovať cez víkend.", "Я не хочу работать на выходных."], ["вопрос", "Čo chceš robiť?", "Что ты хочешь делать?"]] },
+      items: ["Chcem pracujem. → Chcem pracovať.", "Ja chce spať. → Ja chcem spať.", "Ne chcem ísť. → Nechcem ísť.", "Chcem učiť sa. → Chcem sa učiť.", "Chcem si oddýchnem. → Chcem si oddýchnuť."],
+      note: "Самопроверка: chcieť согласовано с лицом; второй глагол — инфинитив; nechcem написано слитно; sa/si стоит перед смысловым инфинитивом.",
+    },
+  ],
+  stepPractices: [
+    { id: "m5-chciet-infinitive-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите форму для oni / ony.", options: ["chce", "chcete", "chcú"], answer: "chcú", hint: "Вспомните последнюю форму полного ряда.", explanation: "Oni / ony chcú." },
+    { id: "m5-chciet-infinitive-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Мы хотим путешествовать».", answer: "Chceme cestovať.", hint: "Изменяется только chcieť; второй глагол остаётся инфинитивом.", explanation: "Chceme cestovať." },
+    { id: "m5-chciet-infinitive-step-3", sectionIndex: 2, type: "choice", prompt: "Как правильно ответить на Chceš jesť?", options: ["Áno, chcem.", "Áno, chceš.", "Áno, chcem jesťem."], answer: "Áno, chcem.", hint: "При ответе смените ty на ja.", explanation: "Собеседник отвечает от первого лица: Áno, chcem." },
+    { id: "m5-chciet-infinitive-step-4", sectionIndex: 3, type: "text", prompt: "Переведите: «Я хочу отдохнуть».", answer: "Chcem si oddýchnuť.", hint: "Частица si стоит рядом с chcem, инфинитив сохраняется.", explanation: "Chcem si oddýchnuť." },
+    { id: "m5-chciet-infinitive-step-5", sectionIndex: 4, type: "text", prompt: "Исправьте: Ne chcem čakať.", answer: "Nechcem čakať.", hint: "Отрицательная форма chcieť пишется слитно.", explanation: "Правильно: Nechcem čakať." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 5",
+  reinforcementPractices: [
+    { id: "reinforcement:chciet-infinitive:1", sectionIndex: 0, type: "pairs", prompt: "Выберите форму chcieť.", answer: "chcem; chceš; chce; chceme; chcete; chcú", pairs: [
+      { prompt: "Ja ___ pracovať.", answer: "chcem", options: ["chcem", "chceš", "chce", "chceme", "chcete", "chcú"] }, { prompt: "Ty ___ spať.", answer: "chceš", options: ["chcem", "chceš", "chce", "chceme", "chcete", "chcú"] },
+      { prompt: "Eva ___ ísť.", answer: "chce", options: ["chcem", "chceš", "chce", "chceme", "chcete", "chcú"] }, { prompt: "My ___ jesť.", answer: "chceme", options: ["chcem", "chceš", "chce", "chceme", "chcete", "chcú"] },
+      { prompt: "Vy ___ začať.", answer: "chcete", options: ["chcem", "chceš", "chce", "chceme", "chcete", "chcú"] }, { prompt: "Oni ___ cestovať.", answer: "chcú", options: ["chcem", "chceš", "chce", "chceme", "chcete", "chcú"] },
+    ], hint: "Определите лицо подлежащего.", explanation: "Полный ряд: chcem, chceš, chce, chceme, chcete, chcú." },
+    { id: "reinforcement:chciet-infinitive:2", sectionIndex: 1, type: "pairs", prompt: "Поставьте второй глагол в инфинитив.", answer: "pracovať; ísť; piť; bývať; spať", pairs: [
+      { prompt: "Chcem ___ doma. (pracujem)", answer: "pracovať", inputHint: "Введите инфинитив" }, { prompt: "Chceš ___ do mesta. (ideš)", answer: "ísť", inputHint: "Введите инфинитив" }, { prompt: "Chceme ___ vodu. (pijeme)", answer: "piť", inputHint: "Введите инфинитив" },
+      { prompt: "Chcú ___ v centre. (bývajú)", answer: "bývať", inputHint: "Введите инфинитив" }, { prompt: "Chce ___. (spí)", answer: "spať", inputHint: "Введите инфинитив" },
+    ], hint: "Личное окончание уже находится в форме chcieť.", explanation: "После chcieť второй глагол остаётся в словарной форме." },
+    { id: "reinforcement:chciet-infinitive:3", sectionIndex: 3, type: "pairs", prompt: "Соберите предложение.", answer: "Dnes chcem pracovať doma.; Chcem sa učiť slovenčinu.; Chcem si kúpiť lístok.; Nechcem pracovať cez víkend.", pairs: [
+      { prompt: "dnes / chcem / pracovať / doma", answer: "Dnes chcem pracovať doma.", acceptableAnswers: ["Chcem dnes pracovať doma."], inputHint: "Введите предложение" }, { prompt: "chcem / sa / učiť / slovenčinu", answer: "Chcem sa učiť slovenčinu.", inputHint: "Введите предложение" },
+      { prompt: "si / chcem / kúpiť / lístok", answer: "Chcem si kúpiť lístok.", inputHint: "Введите предложение" }, { prompt: "nechcem / cez víkend / pracovať", answer: "Nechcem pracovať cez víkend.", acceptableAnswers: ["Cez víkend nechcem pracovať."], inputHint: "Введите предложение" },
+    ], hint: "Личная форма идёт перед инфинитивом, а sa/si занимает раннюю позицию.", explanation: "Порядок слов сохраняет инфинитив и ставит sa/si рядом с chcem." },
+    { id: "reinforcement:chciet-infinitive:4", sectionIndex: 2, type: "pairs", prompt: "Ответьте, меняя лицо.", answer: "Áno, chcem.; Áno, chceme.; Nie, nechce.; Áno, chcem.", pairs: [
+      { prompt: "Chceš spať? · да", answer: "Áno, chcem.", inputHint: "Введите краткий ответ" }, { prompt: "Chcete cestovať? · да, отвечают двое", answer: "Áno, chceme.", inputHint: "Введите краткий ответ" },
+      { prompt: "Chce Nina pracovať? · нет", answer: "Nie, nechce.", inputHint: "Введите краткий ответ" }, { prompt: "Chcete začať? · да, вежливо отвечает один человек", answer: "Áno, chcem.", inputHint: "Введите краткий ответ" },
+    ], hint: "Определите, кто отвечает: ja, my или Nina.", explanation: "Форма в ответе отражает говорящего, а не форму вопроса." },
+    { id: "reinforcement:chciet-infinitive:5", sectionIndex: 4, type: "pairs", prompt: "Исправьте или переведите.", answer: "Nechcem čakať.; Chcem si oddýchnuť.; Chceme cestovať.; Chceš ísť do kina?; Čo chcete robiť?", pairs: [
+      { prompt: "Ne chcem čakať.", answer: "Nechcem čakať.", inputHint: "Введите исправленную фразу" }, { prompt: "Chcem oddýchnuť si.", answer: "Chcem si oddýchnuť.", inputHint: "Введите исправленную фразу" }, { prompt: "Мы хотим путешествовать.", answer: "Chceme cestovať.", inputHint: "Введите перевод" },
+      { prompt: "Ты хочешь пойти в кино?", answer: "Chceš ísť do kina?", inputHint: "Введите перевод" }, { prompt: "Что вы хотите делать?", answer: "Čo chcete robiť?", inputHint: "Введите перевод" },
+    ], hint: "Проверьте слитное отрицание, положение si, форму лица и диакритику.", explanation: "Пять строк проверяют все главные опоры темы." },
+    { id: "reinforcement:chciet-infinitive:6", sectionIndex: 4, type: "pairs", prompt: "Соберите диалог о сегодняшнем дне и выходных.", answer: "Čo chceš robiť dnes?; Dnes chcem pracovať doma. Večer si chcem oddýchnuť.; Chceš ísť cez víkend do mesta?; Nie, nechcem. Chcem sa učiť slovenčinu.; A Nina?; Ona chce cestovať.", pairs: [
+      { prompt: "1 · вопрос о сегодняшних желаниях", answer: "Čo chceš robiť dnes?", options: ["Čo chceš robiť dnes?", "Čo chcem robiť dnes?", "Kam chceš dnes?"] },
+      { prompt: "2 · работа и отдых", answer: "Dnes chcem pracovať doma. Večer si chcem oddýchnuť.", options: ["Dnes chcem pracovať doma. Večer si chcem oddýchnuť.", "Dnes chcem pracujem doma. Večer chcem oddýchnuť si.", "Dnes chceš pracovať doma. Večer sa chcem oddýchnuť."] },
+      { prompt: "3 · вопрос о выходных", answer: "Chceš ísť cez víkend do mesta?", options: ["Chceš ísť cez víkend do mesta?", "Chceš ideš cez víkend do mesta?", "Chcem ísť cez víkend do mesta?"] },
+      { prompt: "4 · отрицание и учёба", answer: "Nie, nechcem. Chcem sa učiť slovenčinu.", options: ["Nie, nechcem. Chcem sa učiť slovenčinu.", "Nie, ne chcem. Chcem učiť sa slovenčinu.", "Nie, nechceš. Chcem si učiť slovenčinu."] },
+      { prompt: "5 · вопрос о Нине", answer: "A Nina?", options: ["A Nina?", "A Ninu?", "Aj Nina chce?"] }, { prompt: "6 · желание Нины", answer: "Ona chce cestovať.", options: ["Ona chce cestovať.", "Ona chcem cestovať.", "Ona chce cestuje."] },
+    ], hint: "Следите за лицом, инфинитивом, отрицанием и положением sa/si.", explanation: "Диалог объединяет желание, вопрос, отрицание и две возвратные модели." },
+  ],
+  knowledgeChecks: [
+    { id: "m5-chciet-infinitive-check-1", question: "Какая модель нормативна?", options: ["Chcem pracovať.", "Chcem pracujem.", "Chce pracovať ja."], answer: "Chcem pracovať.", explanation: "После личной формы chcem нужен инфинитив." },
+    { id: "m5-chciet-infinitive-check-2", question: "Как правильно сказать «Мы не хотим идти»?", options: ["Nechceme ísť.", "Ne chceme ideme.", "Nie chceme ísť."], answer: "Nechceme ísť.", explanation: "Nechceme пишется слитно, а ísť остаётся инфинитивом." },
+    { id: "m5-chciet-infinitive-check-3", question: "Где правильно стоит sa?", options: ["Chcem sa učiť.", "Chcem učiť sa.", "Sa chcem učím."], answer: "Chcem sa učiť.", explanation: "Sa стоит рядом с личной формой, смысловой глагол остаётся инфинитивом." },
+  ],
+  finalChecks: [{ id: "m5-chciet-infinitive-final-1", question: "Как спросить «Что вы хотите делать?»", options: ["Čo chcete robiť?", "Čo chcete robíte?", "Čo chcem robiť?"], answer: "Čo chcete robiť?", explanation: "Čo стоит первым, chcete согласуется с vy, robiť остаётся инфинитивом." }],
+  chatPrompt: "Расскажите, что вы хотите делать сегодня и на выходных, чего не хотите делать, затем задайте два вопроса с chcieť.",
+  chatSuggestions: ["Dnes chcem pracovať doma.", "Nechcem čakať.", "Čo chceš robiť?"],
+} satisfies CourseLesson;

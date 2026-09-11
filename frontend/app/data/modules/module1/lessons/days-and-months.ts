@@ -1,6 +1,18 @@
 import type { CourseLesson } from "../../../courseTypes";
 
 export const daysAndMonthsLesson: CourseLesson = {
+  vocabulary: [
+    {"word":"Aký je dnes deň? — Dnes je pondelok.","translation":"Какой сегодня день? — Сегодня понедельник.","example":"Aký je dnes deň? — Dnes je pondelok."},
+    {"word":"Kedy sa stretneme? — V piatok.","translation":"Когда встретимся? — В пятницу.","example":"Kedy sa stretneme? — V piatok."},
+    {"word":"V ktorom mesiaci máš narodeniny? — V máji.","translation":"В каком месяце у тебя день рождения? — В мае.","example":"V ktorom mesiaci máš narodeniny? — V máji."},
+    {"word":"Koľkého je dnes? — Dnes je prvého mája.","translation":"Какое сегодня число? — Первое мая.","example":"Koľkého je dnes? — Dnes je prvého mája."},
+    {"word":"Kurz je v pondelok.","translation":"Курс в понедельник.","example":"Kurz je v pondelok."},
+    {"word":"Stretnutie je v stredu.","translation":"Встреча в среду.","example":"Stretnutie je v stredu."},
+    {"word":"Dovolenka je v auguste.","translation":"Отпуск в августе.","example":"Dovolenka je v auguste."},
+    {"word":"Narodeniny mám v decembri.","translation":"У меня день рождения в декабре.","example":"Narodeniny mám v decembri."},
+    {"word":"Uvidíme sa zajtra.","translation":"Увидимся завтра.","example":"Uvidíme sa zajtra."},
+    {"word":"Do pondelka!","translation":"До понедельника!","example":"Do pondelka!"},
+  ],
   slug: "days-and-months",
   order: 4,
   title: "Дни и месяцы",

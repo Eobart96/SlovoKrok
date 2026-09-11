@@ -1,29 +1,221 @@
-import { defineModule6Lesson } from "../lessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const workStudyLesson = defineModule6Lesson("work-study", 6, {
-  "title": "Работа и учёба",
-  "slovakTitle": "Práca a štúdium",
-  "outcome": "Сообщать занятие, место работы или учёбы.",
-  "summary": "После урока вы сможете сообщать занятие, место работы или учёбы в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Профессия после byť обычно стоит без артикля: Som programátor. Место выражается pracovať v/na; учебное направление - študovať + Akuzatív.",
-  "examples": [
-    {
-      "slovak": "Som učiteľka.",
-      "russian": "Я учительница."
-    },
-    {
-      "slovak": "Pracujem v kancelárii.",
-      "russian": "Я работаю в офисе."
-    },
-    {
-      "slovak": "Študujem slovenčinu.",
-      "russian": "Я изучаю словацкий."
-    },
-    {
-      "slovak": "O koľkej začínaš pracovať?",
-      "russian": "Во сколько ты начинаешь работать?"
-    }
+export const workStudyLesson = {
+  vocabulary: [
+    {"word":"Som učiteľka.","translation":"Я учительница.","example":"Som učiteľka."},
+    {"word":"Pracujem v kancelárii.","translation":"Я работаю в офисе.","example":"Pracujem v kancelárii."},
+    {"word":"Študujem slovenčinu.","translation":"Я изучаю словацкий язык.","example":"Študujem slovenčinu."},
+    {"word":"O koľkej začínaš pracovať?","translation":"Во сколько ты начинаешь работать?","example":"O koľkej začínaš pracovať?"},
+    {"word":"Pracujem od ôsmej do štvrtej.","translation":"Я работаю с восьми до четырёх.","example":"Pracujem od ôsmej do štvrtej."},
+    {"word":"Moja práca je zaujímavá.","translation":"Моя работа интересная.","example":"Moja práca je zaujímavá."},
   ],
-  "mistake": "Не добавляйте лишний указатель перед профессией: Som lekár, а не Som ten lekár при обычном представлении.",
-  "task": "Сообщите профессию/занятие, место и время начала работы или учёбы."
-}, { focus: "Сообщайте профессию, место работы/учёбы и простой распорядок.", interaction: "Структура: чем занимаюсь → где → когда → нравится ли.", boundary: "Резюме, собеседование и профессиональная терминология не входят в урок.", prompt: "Переведите: «Я работаю в школе».", answer: "Pracujem v škole.", hint: "Используйте pracujem и готовую форму v škole." });
+  slug: "work-study",
+  order: 7,
+  title: "Работа и учёба",
+  slovakTitle: "Práca a štúdium",
+  description: "Сообщайте занятие, место работы или учёбы и простой распорядок.",
+  duration: "35–40 мин",
+  goals: [
+    "Называть профессию или статус студента",
+    "Сообщать место работы или учёбы",
+    "Описывать несколько простых обязанностей",
+    "Говорить о начале, окончании и перерыве",
+    "Составлять короткий профиль работы или учёбы",
+  ],
+  theory: {
+    summary: "Короткое представление о работе или учёбе отвечает на четыре вопроса: кто вы, где работаете или учитесь, что обычно делаете и когда начинается ваш день.",
+    rules: [
+      "Профессия после byť называется без артикля: Som učiteľ. Som učiteľka. Мужская и женская формы часто различаются.",
+      "Место работы выражается готовыми сочетаниями с pracovať: pracujem v kancelárii, v škole, v nemocnici или doma.",
+      "Место учёбы: študujem na univerzite / v škole. Предмет изучения ставится после študujem: Študujem slovenčinu.",
+      "Простые обязанности сообщаются глаголом в форме ja: učím deti, píšem e-maily, pracujem s počítačom, čítam texty.",
+      "Время: O koľkej začínaš pracovať? — Začínam o ôsmej. Pracujem od ôsmej do štvrtej.",
+      "Краткая оценка не требует сложного объяснения: Moja práca je zaujímavá. Štúdium je náročné, ale zaujímavé.",
+    ],
+    examples: [
+      { slovak: "Som učiteľka.", russian: "Я учительница.", explanation: "Женская профессия названа после som без дополнительного указателя." },
+      { slovak: "Pracujem v kancelárii.", russian: "Я работаю в офисе.", explanation: "V kancelárii — готовая форма места." },
+      { slovak: "Študujem slovenčinu.", russian: "Я изучаю словацкий язык.", explanation: "После študujem назван предмет изучения." },
+      { slovak: "O koľkej začínaš pracovať?", russian: "Во сколько ты начинаешь работать?", explanation: "После začínaš используется инфинитив pracovať." },
+      { slovak: "Pracujem od ôsmej do štvrtej.", russian: "Я работаю с восьми до четырёх.", explanation: "Интервал задаётся парой od — do." },
+      { slovak: "Moja práca je zaujímavá.", russian: "Моя работа интересная.", explanation: "Короткая оценка согласуется со словом práca." },
+    ],
+  },
+  sections: [
+    {
+      title: "Профессия и статус",
+      paragraphs: [
+        "Чтобы представиться, используйте som и название профессии или статус študent/študentka. Не добавляйте артикль или указатель перед профессией.",
+        "У многих профессий есть мужская и женская формы. Запоминайте их парами, но говорите только ту форму, которая относится к человеку.",
+      ],
+      table: { headers: ["Мужчина", "Женщина", "Перевод"], rows: [
+        ["učiteľ", "učiteľka", "учитель / учительница"],
+        ["lekár", "lekárka", "врач"],
+        ["predavač", "predavačka", "продавец / продавщица"],
+        ["študent", "študentka", "студент / студентка"],
+        ["programátor", "programátorka", "программист / программистка"],
+      ] },
+      items: ["Som učiteľka.", "Som študent.", "On je lekár.", "Ona je programátorka."],
+      note: "При обычном представлении говорите Som lekár, а не Som ten lekár.",
+    },
+    {
+      title: "Где я работаю или учусь",
+      paragraphs: [
+        "После профессии добавьте место. Не выводите окончание заново: используйте целые блоки v kancelárii, v škole, v nemocnici, na univerzite.",
+        "Если вы работаете из дома, скажите Pracujem doma. Doma здесь отвечает на вопрос kde.",
+      ],
+      table: { headers: ["Ситуация", "Реплика", "Перевод"], rows: [
+        ["офис", "Pracujem v kancelárii.", "Я работаю в офисе."],
+        ["школа", "Pracujem v škole.", "Я работаю в школе."],
+        ["больница", "Pracujem v nemocnici.", "Я работаю в больнице."],
+        ["университет", "Študujem na univerzite.", "Я учусь в университете."],
+        ["дом", "Pracujem doma.", "Я работаю дома."],
+      ] },
+      items: ["Kde pracuješ?", "Kde študuješ?", "Pracujem v škole.", "Študujem na univerzite."],
+      note: "Pracujem v škole сообщает место; Som učiteľka сообщает профессию. Это разные факты.",
+    },
+    {
+      title: "Что я делаю",
+      paragraphs: [
+        "Назовите две-три обычные задачи знакомыми глаголами. Для A1 не нужно объяснять процесс или использовать профессиональные термины.",
+        "При учёбе можно назвать предмет и простые действия: študujem slovenčinu, čítam texty, píšem úlohy.",
+      ],
+      table: { headers: ["Действие", "Пример", "Перевод"], rows: [
+        ["учить", "Učím deti.", "Я учу детей."],
+        ["писать", "Píšem e-maily.", "Я пишу электронные письма."],
+        ["работать с техникой", "Pracujem s počítačom.", "Я работаю с компьютером."],
+        ["изучать язык", "Študujem slovenčinu.", "Я изучаю словацкий."],
+        ["читать", "Čítam texty.", "Я читаю тексты."],
+      ] },
+      items: ["Telefonujem.", "Robím domáce úlohy.", "Hovorím so študentmi."],
+      note: "После študujem нужен предмет: študujem slovenčinu. Для места используйте na univerzite или v škole.",
+    },
+    {
+      title: "Рабочее и учебное время",
+      paragraphs: [
+        "Спросите начало через O koľkej začínaš ...? В ответе можно назвать одну точку времени или интервал od — do.",
+        "Для распорядка достаточно начала, окончания и одного перерыва. Дни недели при необходимости добавляются готовым блоком od pondelka do piatka.",
+      ],
+      table: { headers: ["Факт", "Реплика", "Перевод"], rows: [
+        ["вопрос", "O koľkej začínaš pracovať?", "Во сколько ты начинаешь работать?"],
+        ["начало", "Začínam pracovať o ôsmej.", "Я начинаю работать в восемь."],
+        ["интервал", "Pracujem od ôsmej do štvrtej.", "Я работаю с восьми до четырёх."],
+        ["окончание", "Končím o štvrtej.", "Я заканчиваю в четыре."],
+        ["перерыв", "Mám prestávku o dvanástej.", "У меня перерыв в двенадцать."],
+      ] },
+      items: ["Kedy máš vyučovanie?", "Vyučovanie začína o deviatej.", "Pracujem od pondelka do piatka."],
+      note: "После začínam/začínaš перед действием нужен инфинитив: začínam pracovať, začínaš študovať.",
+    },
+    {
+      title: "Короткий профиль и частые ошибки",
+      paragraphs: [
+        "Соберите профиль из четырёх фактов: профессия или статус, место, одно действие и время. В конце можно добавить короткую оценку.",
+        "Перед ответом проверьте форму профессии, v/na, объект после študujem, инфинитив после začínam и словацкую диакритику.",
+      ],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Som ten lekár.", "Som lekár.", "При представлении лишний указатель не нужен."],
+        ["Pracujem na kancelárii.", "Pracujem v kancelárii.", "Нормативный готовый блок — v kancelárii."],
+        ["Študujem slovenčina.", "Študujem slovenčinu.", "После študujem нужна объектная форма."],
+        ["Začínam pracujem o ôsmej.", "Začínam pracovať o ôsmej.", "После začínam нужен инфинитив."],
+        ["Pracujem v skole.", "Pracujem v škole.", "Нужна буква š."],
+      ] },
+      items: ["Som učiteľka.", "Pracujem v škole.", "Učím deti.", "Začínam o ôsmej.", "Moja práca je zaujímavá."],
+      note: "Резюме, собеседование и профессиональная терминология не входят в урок.",
+    },
+  ],
+  stepPractices: [
+    { id: "m6-work-study-step-1", sectionIndex: 0, type: "pairs", prompt: "Выберите подходящую профессию или статус.", answer: "učiteľ; učiteľka; lekár; lekárka; študentka", pairs: [
+      { prompt: "учитель", answer: "učiteľ", options: ["učiteľ", "učiteľka", "lekár", "lekárka", "študentka"] },
+      { prompt: "учительница", answer: "učiteľka", options: ["učiteľ", "učiteľka", "lekár", "lekárka", "študentka"] },
+      { prompt: "врач · мужчина", answer: "lekár", options: ["učiteľ", "učiteľka", "lekár", "lekárka", "študentka"] },
+      { prompt: "врач · женщина", answer: "lekárka", options: ["učiteľ", "učiteľka", "lekár", "lekárka", "študentka"] },
+      { prompt: "студентка", answer: "študentka", options: ["učiteľ", "učiteľka", "lekár", "lekárka", "študentka"] },
+    ], showSlovakKeyboard: false, hint: "Сопоставьте профессию и пол человека.", explanation: "Формы различаются: učiteľ/učiteľka, lekár/lekárka; študentka — студентка." },
+    { id: "m6-work-study-step-2", sectionIndex: 1, type: "pairs", prompt: "Выберите готовую модель места.", answer: "v kancelárii; v škole; v nemocnici; na univerzite; doma", pairs: [
+      { prompt: "Pracujem ___. · офис", answer: "v kancelárii", options: ["v kancelárii", "v škole", "v nemocnici", "na univerzite", "doma"] },
+      { prompt: "Pracujem ___. · школа", answer: "v škole", options: ["v kancelárii", "v škole", "v nemocnici", "na univerzite", "doma"] },
+      { prompt: "Pracujem ___. · больница", answer: "v nemocnici", options: ["v kancelárii", "v škole", "v nemocnici", "na univerzite", "doma"] },
+      { prompt: "Študujem ___. · университет", answer: "na univerzite", options: ["v kancelárii", "v škole", "v nemocnici", "na univerzite", "doma"] },
+      { prompt: "Pracujem ___. · из дома", answer: "doma", options: ["v kancelárii", "v škole", "v nemocnici", "na univerzite", "doma"] },
+    ], hint: "Выберите место работы или учёбы целым блоком.", explanation: "Нормативны v kancelárii/škole/nemocnici, na univerzite и doma." },
+    { id: "m6-work-study-step-3", sectionIndex: 2, type: "pairs", prompt: "Выберите подходящее действие.", answer: "učím; píšem; pracujem; študujem; čítam", pairs: [
+      { prompt: "___ deti.", answer: "učím", options: ["učím", "píšem", "pracujem", "študujem", "čítam"] },
+      { prompt: "___ e-maily.", answer: "píšem", options: ["učím", "píšem", "pracujem", "študujem", "čítam"] },
+      { prompt: "___ s počítačom.", answer: "pracujem", options: ["učím", "píšem", "pracujem", "študujem", "čítam"] },
+      { prompt: "___ slovenčinu.", answer: "študujem", options: ["učím", "píšem", "pracujem", "študujem", "čítam"] },
+      { prompt: "___ texty.", answer: "čítam", options: ["učím", "píšem", "pracujem", "študujem", "čítam"] },
+    ], hint: "Смотрите на объект или готовое дополнение после глагола.", explanation: "Učím deti, píšem e-maily, pracujem s počítačom, študujem slovenčinu, čítam texty." },
+    { id: "m6-work-study-step-4", sectionIndex: 3, type: "pairs", prompt: "Выберите нормативную фразу о времени.", answer: "O koľkej začínaš pracovať?; Začínam o ôsmej.; od ôsmej do štvrtej; Končím o štvrtej.; o dvanástej", pairs: [
+      { prompt: "Во сколько ты начинаешь работать?", answer: "O koľkej začínaš pracovať?", options: ["O koľkej začínaš pracovať?", "Kde začínaš práca?"] },
+      { prompt: "Я начинаю в восемь.", answer: "Začínam o ôsmej.", options: ["Začínam o ôsmej.", "Začínam v osem."] },
+      { prompt: "с восьми до четырёх", answer: "od ôsmej do štvrtej", options: ["od ôsmej do štvrtej", "z ôsmej na štyri"] },
+      { prompt: "Я заканчиваю в четыре.", answer: "Končím o štvrtej.", options: ["Končím o štvrtej.", "Končím v štyri."] },
+      { prompt: "Mám prestávku ___. · в двенадцать", answer: "o dvanástej", options: ["o dvanástej", "v dvanásť"] },
+    ], hint: "Проверьте O koľkej?, o + время и интервал od — do.", explanation: "Время точки вводится o, интервал — od ôsmej do štvrtej." },
+    { id: "m6-work-study-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте каждую реплику.", answer: "Pracujem v škole.; Som učiteľka.; Pracujem v kancelárii.; Študujem slovenčinu.; Začínam pracovať o ôsmej.", pairs: [
+      { prompt: "Переведите: «Я работаю в школе».", answer: "Pracujem v škole.", inputHint: "Введите перевод" },
+      { prompt: "Som tá učiteľka. · обычное представление", answer: "Som učiteľka.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Pracujem na kancelárii.", answer: "Pracujem v kancelárii.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Študujem slovenčina.", answer: "Študujem slovenčinu.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Začínam pracujem o ôsmej.", answer: "Začínam pracovať o ôsmej.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Проверьте профессию, место, объект и инфинитив.", explanation: "Нормативны som učiteľka, v kancelárii, slovenčinu и začínam pracovať." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 7",
+  reinforcementPractices: [
+    { id: "reinforcement:work-study:1", sectionIndex: 0, type: "pairs", prompt: "Выберите профессию или статус.", answer: "učiteľ; učiteľka; lekár; lekárka; študentka", pairs: [
+      { prompt: "учитель · мужчина", answer: "učiteľ", options: ["učiteľ", "učiteľka", "lekár", "lekárka", "študentka"] },
+      { prompt: "учитель · женщина", answer: "učiteľka", options: ["učiteľ", "učiteľka", "lekár", "lekárka", "študentka"] },
+      { prompt: "врач · мужчина", answer: "lekár", options: ["učiteľ", "učiteľka", "lekár", "lekárka", "študentka"] },
+      { prompt: "врач · женщина", answer: "lekárka", options: ["učiteľ", "učiteľka", "lekár", "lekárka", "študentka"] },
+      { prompt: "студентка", answer: "študentka", options: ["učiteľ", "učiteľka", "lekár", "lekárka", "študentka"] },
+    ], showSlovakKeyboard: false, hint: "Учитывайте действие и пол человека.", explanation: "Učiteľ/učiteľka учат, lekár/lekárka работают в больнице, študentka учится." },
+    { id: "reinforcement:work-study:2", sectionIndex: 1, type: "pairs", prompt: "Дополните место работы или учёбы.", answer: "v kancelárii; v škole; v nemocnici; na univerzite; doma", pairs: [
+      { prompt: "programátor · офис", answer: "v kancelárii", options: ["v kancelárii", "v škole", "v nemocnici", "na univerzite", "doma"] },
+      { prompt: "učiteľka · школа", answer: "v škole", options: ["v kancelárii", "v škole", "v nemocnici", "na univerzite", "doma"] },
+      { prompt: "lekár · больница", answer: "v nemocnici", options: ["v kancelárii", "v škole", "v nemocnici", "na univerzite", "doma"] },
+      { prompt: "študentka · университет", answer: "na univerzite", options: ["v kancelárii", "v škole", "v nemocnici", "na univerzite", "doma"] },
+      { prompt: "удалённая работа", answer: "doma", options: ["v kancelárii", "v škole", "v nemocnici", "na univerzite", "doma"] },
+    ], hint: "Выберите устойчивую модель места.", explanation: "Пять ответов различают v, na и наречие doma." },
+    { id: "reinforcement:work-study:3", sectionIndex: 2, type: "pairs", prompt: "Выберите ключевой глагол.", answer: "učím; píšem; pracujem; študujem; začínam", pairs: [
+      { prompt: "___ deti.", answer: "učím", options: ["učím", "píšem", "pracujem", "študujem", "začínam"] },
+      { prompt: "___ e-maily.", answer: "píšem", options: ["učím", "píšem", "pracujem", "študujem", "začínam"] },
+      { prompt: "___ v kancelárii.", answer: "pracujem", options: ["učím", "píšem", "pracujem", "študujem", "začínam"] },
+      { prompt: "___ slovenčinu.", answer: "študujem", options: ["učím", "píšem", "pracujem", "študujem", "začínam"] },
+      { prompt: "___ pracovať o ôsmej.", answer: "začínam", options: ["učím", "píšem", "pracujem", "študujem", "začínam"] },
+    ], hint: "Смотрите на дополнение и форму следующего глагола.", explanation: "Каждый контекст требует отдельной формы ja." },
+    { id: "reinforcement:work-study:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки в профиле.", answer: "Som učiteľka.; Pracujem v škole.; Študujem slovenčinu.; Začínam pracovať o ôsmej.; Moja práca je zaujímavá.", pairs: [
+      { prompt: "Som tá učiteľka. · представление", answer: "Som učiteľka.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Pracujem do školy.", answer: "Pracujem v škole.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Študujem slovenčina.", answer: "Študujem slovenčinu.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Začínam pracujem o ôsmej.", answer: "Začínam pracovať o ôsmej.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Moja práca je zaujímavý.", answer: "Moja práca je zaujímavá.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Исправьте всю строку: профессию, место, объект, инфинитив и согласование.", explanation: "Профиль требует som bez указателя, v škole, slovenčinu, pracovať и zaujímavá." },
+    { id: "reinforcement:work-study:5", sectionIndex: 4, type: "pairs", prompt: "Переведите на словацкий.", answer: "Som učiteľka.; Pracujem v kancelárii.; Študujem slovenčinu.; O koľkej začínaš pracovať?; Pracujem v škole.", pairs: [
+      { prompt: "Я учительница.", answer: "Som učiteľka.", inputHint: "Введите перевод" },
+      { prompt: "Я работаю в офисе.", answer: "Pracujem v kancelárii.", acceptableAnswers: ["V kancelárii pracujem."], inputHint: "Введите перевод" },
+      { prompt: "Я изучаю словацкий.", answer: "Študujem slovenčinu.", inputHint: "Введите перевод" },
+      { prompt: "Во сколько ты начинаешь работать?", answer: "O koľkej začínaš pracovať?", inputHint: "Введите перевод" },
+      { prompt: "Я работаю в школе.", answer: "Pracujem v škole.", acceptableAnswers: ["V škole pracujem."], inputHint: "Введите перевод" },
+    ], hint: "Используйте модели урока и сохраните диакритику.", explanation: "Переводы покрывают профессию, место, предмет и время." },
+    { id: "reinforcement:work-study:6", sectionIndex: 4, type: "pairs", prompt: "Соберите короткий профиль учительницы.", answer: "Som učiteľka.; Pracujem v škole.; Učím deti.; Začínam pracovať o ôsmej.; Moja práca je zaujímavá.", pairs: [
+      { prompt: "1 · профессия", answer: "Som učiteľka.", options: ["Som učiteľka.", "Som učiteľ.", "Som tá učiteľka."] },
+      { prompt: "2 · место", answer: "Pracujem v škole.", options: ["Pracujem do školy.", "Pracujem v škole.", "Som v škole pracujem."] },
+      { prompt: "3 · действие", answer: "Učím deti.", options: ["Učím deti.", "Učím deťom.", "Učím detí."] },
+      { prompt: "4 · начало", answer: "Začínam pracovať o ôsmej.", options: ["Začínam pracujem o ôsmej.", "Začínam pracovať o ôsmej.", "Začínam práca v osem."] },
+      { prompt: "5 · оценка", answer: "Moja práca je zaujímavá.", options: ["Môj práca je zaujímavý.", "Moja práca je zaujímavá.", "Moje práca je zaujímavé."] },
+    ], hint: "Следуйте порядку: профессия, место, действие, время, оценка.", explanation: "Пять нормативных строк образуют связный A1-профиль." },
+  ],
+  knowledgeChecks: [
+    { id: "m6-work-study-check-1", question: "Как женщина скажет «Я учительница»?", options: ["Som učiteľka.", "Som učiteľ.", "Som tá učiteľka."], answer: "Som učiteľka.", explanation: "Женская форма — učiteľka; при представлении указатель не нужен." },
+    { id: "m6-work-study-check-2", question: "Как сказать «Я работаю в офисе»?", options: ["Pracujem v kancelárii.", "Pracujem na kancelárii.", "Študujem kanceláriu."], answer: "Pracujem v kancelárii.", explanation: "Нормативная модель места — v kancelárii." },
+    { id: "m6-work-study-check-3", question: "Какая граница соответствует уровню A1?", options: ["Резюме, собеседование и профессиональная терминология не входят в урок.", "Нужно провести полное собеседование.", "Нужно написать профессиональное резюме."], answer: "Резюме, собеседование и профессиональная терминология не входят в урок.", explanation: "Тема ограничена коротким рассказом о занятии, месте и времени." },
+  ],
+  finalChecks: [
+    { id: "m6-work-study-final-1", question: "Переведите: «Я работаю в школе».", options: ["Pracujem v škole.", "Pracujem do školy.", "Študujem do školy."], answer: "Pracujem v škole.", explanation: "Используйте pracujem и готовую форму v škole." },
+  ],
+  chatPrompt: "Кратко расскажите о работе или учёбе: кто вы, где работаете или учитесь, что делаете и когда начинаете.",
+  chatSuggestions: ["Som učiteľka.", "Pracujem v škole.", "Začínam o ôsmej."],
+} satisfies CourseLesson;

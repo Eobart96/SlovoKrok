@@ -1,30 +1,187 @@
-import type { CompactLessonContent } from "../../plannedLessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const supportedDialogueContent: CompactLessonContent = {
-  "slug": "supported-dialogue",
-  "title": "Знакомство и поддерживаемый диалог",
-  "slovakTitle": "Jednoduchý dialóg",
-  "outcome": "Начинать, поддерживать и завершать разговор.",
-  "summary": "После урока вы сможете начинать, поддерживать и завершать разговор в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Диалог A1 опирается на готовые реплики, вопросы о личных данных и короткие реакции. Используйте A ty?/A vy?, Teší ma и стратегию повторения.",
-  "examples": [
-    {
-      "slovak": "Dobrý deň, volám sa Alexej.",
-      "russian": "Добрый день, меня зовут Алексей."
-    },
-    {
-      "slovak": "Odkiaľ ste?",
-      "russian": "Откуда вы?"
-    },
-    {
-      "slovak": "Som z Ruska, ale bývam v Nitre.",
-      "russian": "Я из России, но живу в Нитре."
-    },
-    {
-      "slovak": "Teší ma. Dovidenia.",
-      "russian": "Приятно познакомиться. До свидания."
-    }
+export const supportedDialogueContent = {
+  vocabulary: [
+    {"word":"Dobrý deň, volám sa Alexej.","translation":"Добрый день, меня зовут Алексей.","example":"Dobrý deň, volám sa Alexej."},
+    {"word":"Odkiaľ ste?","translation":"Откуда вы?","example":"Odkiaľ ste?"},
+    {"word":"Som z Ruska, ale bývam v Nitre.","translation":"Я из России, но живу в Нитре.","example":"Som z Ruska, ale bývam v Nitre."},
+    {"word":"Aha. Páči sa vám Nitra?","translation":"Понятно. Вам нравится Нитра?","example":"Aha. Páči sa vám Nitra?"},
+    {"word":"Trochu. Učím sa každý deň. A vy?","translation":"Немного. Я учусь каждый день. А вы?","example":"Trochu. Učím sa každý deň. A vy?"},
+    {"word":"Teší ma. Dovidenia.","translation":"Приятно познакомиться. До свидания.","example":"Teší ma. Dovidenia."},
   ],
-  "mistake": "Не превращайте взаимодействие в монолог: задавайте ответный вопрос и реагируйте на ответ.",
-  "task": "Проведите диалог из восьми реплик: приветствие, имя, страна, город, язык и завершение."
-};
+  slug: "supported-dialogue",
+  order: 2,
+  title: "Знакомство и поддерживаемый диалог",
+  slovakTitle: "Jednoduchý dialóg",
+  description: "Начинать, поддерживать и завершать разговор.",
+  duration: "35–40 мин",
+  goals: [
+    "Представляться и вежливо узнавать имя собеседника",
+    "Задавать базовые вопросы о стране, городе, работе и языках",
+    "Отвечать с небольшой деталью, реагировать и возвращать вопрос",
+    "Проводить короткий диалог из 6–8 реплик",
+  ],
+  theory: {
+    summary: "Формула живого диалога A1: вопрос → ответ с маленькой деталью → реакция → встречный вопрос. Задавайте по одному вопросу и давайте собеседнику понятный повод продолжить.",
+    rules: [
+      "Каркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.",
+      "На первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.",
+      "Ответ áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.",
+      "Короткие реакции Aha, Naozaj?, To je zaujímavé, To je super и Aj ja поддерживают ритм разговора.",
+      "Вернуть предыдущий вопрос можно без повтора: A vy? / A čo vy?; на ty — A ty? / A čo ty?.",
+      "Не задавайте вопросы списком: один вопрос → ответ → реакция → следующий вопрос.",
+    ],
+    examples: [
+      { slovak: "Dobrý deň, volám sa Alexej.", russian: "Добрый день, меня зовут Алексей.", explanation: "Готовая модель приветствия и представления." },
+      { slovak: "Odkiaľ ste?", russian: "Откуда вы?", explanation: "Короткий вежливый вопрос о стране или городе." },
+      { slovak: "Som z Ruska, ale bývam v Nitre.", russian: "Я из России, но живу в Нитре.", explanation: "Ответ содержит дополнительную деталь и помогает продолжить разговор." },
+      { slovak: "Aha. Páči sa vám Nitra?", russian: "Понятно. Вам нравится Нитра?", explanation: "Реакция подхватывает слово собеседника и превращает его в новый вопрос." },
+      { slovak: "Trochu. Učím sa každý deň. A vy?", russian: "Немного. Я учусь каждый день. А вы?", explanation: "Короткий ответ, деталь и встречный вопрос." },
+      { slovak: "Teší ma. Dovidenia.", russian: "Приятно познакомиться. До свидания.", explanation: "Доброжелательная реакция и завершение знакомства." },
+    ],
+  },
+  sections: [
+    {
+      title: "Каркас знакомства: пять шагов",
+      paragraphs: [
+        "Хороший разговор уровня A1 не требует длинных фраз. Пройдите понятный маршрут и после каждого ответа дайте собеседнику возможность продолжить.",
+        "На первом знакомстве со взрослым начните с vy. После перехода на ty меняйте все формы последовательно.",
+      ],
+      table: { headers: ["Шаг", "Полезная фраза", "Что происходит"], rows: [
+        ["1. Приветствие", "Dobrý deň. / Ahoj.", "Выбираем тон."],
+        ["2. Имя", "Ja som Ari. Ako sa voláte?", "Представляемся и спрашиваем имя."],
+        ["3. Контакт", "Teší ma. / Aj mňa teší.", "Доброжелательно реагируем."],
+        ["4. Тема", "Odkiaľ ste? / Čo robíte?", "Задаём один простой вопрос."],
+        ["5. Продолжение", "A vy? / A čo vy?", "Возвращаем вопрос."],
+      ] },
+      items: ["Ako sa voláte? → Ako sa voláš?", "Odkiaľ ste? → Odkiaľ si?", "Kde bývate? → Kde bývaš?"],
+      note: "Ключевой принцип: не задавайте вопросы списком — спросите, выслушайте, отреагируйте и только затем продолжите.",
+    },
+    {
+      title: "Вопрос и короткий ответ с деталью",
+      paragraphs: [
+        "Ответ только áno или nie быстро останавливает разговор. Добавьте одну небольшую деталь: город, профессию, язык, оценку или частоту.",
+        "A vy? и A čo vy? возвращают предыдущий вопрос. На ty используйте A ty? или A čo ty?.",
+      ],
+      table: { headers: ["Вопрос", "Короткий ответ с деталью"], rows: [
+        ["Odkiaľ ste?", "Som z Ruska, z Moskvy."],
+        ["Kde bývate?", "Bývam v Bratislave."],
+        ["Čo robíte?", "Pracujem v IT."],
+        ["Študujete?", "Áno, študujem slovenčinu."],
+        ["Hovoríte po slovensky?", "Trochu. Učím sa každý deň."],
+        ["Ako sa vám páči Slovensko?", "Veľmi sa mi páči."],
+      ] },
+      note: "Экономная модель: Pracujem v banke. A vy? — Ja pracujem z domu. Som dizajnér. — To je zaujímavé.",
+    },
+    {
+      title: "Как поддерживать разговор",
+      paragraphs: [
+        "Подхватите слово собеседника: Bývam v Košiciach. — V Košiciach? A páči sa vám tam?",
+        "Найдите общее: Učím sa slovenčinu. — Aj ja! Učíte sa každý deň?",
+        "Соедините реакцию и новый вопрос: Pracujem ako kuchár. — To je zaujímavé. Kde pracujete?",
+      ],
+      table: { headers: ["Реакция", "Значение"], rows: [
+        ["Aha.", "Ага / понятно."], ["Naozaj?", "Правда?"], ["To je zaujímavé.", "Это интересно."],
+        ["To je super.", "Это здорово."], ["Aj ja.", "Я тоже."],
+      ] },
+      note: "Одна реакция достаточна. После неё задайте вопрос, связанный с ответом собеседника.",
+    },
+    {
+      title: "Полная модель и банк фраз",
+      paragraphs: ["Чередуйте роли: вопрос → ответ → реакция → вопрос. Говорить долго не нужно; важен понятный повод ответить."],
+      table: { headers: ["Реплика", "Функция"], rows: [
+        ["Dobrý deň, ja som Ari. Ako sa voláte?", "приветствие + имя"],
+        ["Ja som Nina. Teší ma.", "ответ + контакт"],
+        ["Aj mňa teší. Odkiaľ ste?", "реакция + вопрос"],
+        ["Som z Ukrajiny, ale bývam v Bratislave.", "ответ + деталь"],
+        ["Aha. Páči sa vám Bratislava?", "реакция + продолжение"],
+        ["Áno, veľmi. A vy? Kde bývate?", "ответ + встречный вопрос"],
+        ["Bývam v Trnave.", "короткий ответ"],
+      ] },
+      items: [
+        "начать: Dobrý deň. / Ahoj.", "представиться: Ja som Ari. / Volám sa Ari.",
+        "узнать имя: Ako sa voláte? / Ako sa voláš?", "занятие: Čo robíte? / Pracujem v škole.",
+        "язык: Hovoríte po anglicky? / Trochu.", "вернуть вопрос: A vy? / A čo ty?",
+        "завершить: Rád som vás spoznal. / Dovidenia.",
+      ],
+      note: "Rád относится к мужчине, rada — к женщине: Rada cestujem.",
+    },
+    {
+      title: "Типичные ошибки и самопроверка",
+      paragraphs: ["Проверяйте готовую модель представления, порядок слов, формы после предлога z и лишние местоимения."],
+      table: { headers: ["Неудачно", "Лучше", "Почему"], rows: [
+        ["Ja som volať Ari.", "Volám sa Ari. / Ja som Ari.", "Нужна готовая модель представления."],
+        ["Odkiaľ vy ste?", "Odkiaľ ste?", "Нейтральный порядок: вопросительное слово + глагол."],
+        ["Som z Rusko.", "Som z Ruska.", "После z нужна форма Ruska."],
+        ["Čo vy robíte?", "Čo robíte?", "Местоимение обычно не требуется."],
+      ] },
+      items: ["Я могу представиться.", "Я могу задать три простых вопроса.", "Я отвечаю с одной деталью.", "Я реагирую и возвращаю вопрос.", "Я могу завершить знакомство."],
+      note: "Четыре опоры: приветствие и имя; один вопрос за раз; одна деталь в ответе; реакция и A vy? / A ty?.",
+    },
+  ],
+  stepPractices: [
+    { id: "m8-supported-dialogue-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите начало вежливого знакомства.", options: ["Dobrý deň, volám sa Alexej.", "A vy?", "Dovidenia."], answer: "Dobrý deň, volám sa Alexej.", hint: "Начните с приветствия и имени.", explanation: "Верное начало: Dobrý deň, volám sa Alexej." },
+    { id: "m8-supported-dialogue-step-2", sectionIndex: 1, type: "text", prompt: "Переведите вежливо: «Откуда вы?»", answer: "Odkiaľ ste?", hint: "Используйте вопросительное слово и форму ste.", explanation: "Верный вопрос: Odkiaľ ste?" },
+    { id: "m8-supported-dialogue-step-3", sectionIndex: 2, type: "text", prompt: "Переведите: «Я из России, но живу в Нитре.»", answer: "Som z Ruska, ale bývam v Nitre.", hint: "Соедините страну и город словом ale.", explanation: "Верная фраза: Som z Ruska, ale bývam v Nitre." },
+    { id: "m8-supported-dialogue-step-4", sectionIndex: 3, type: "pairs", prompt: "Выберите функцию каждой реплики.", answer: "представиться; узнать имя; отреагировать; вернуть вопрос", showSlovakKeyboard: false, pairs: [
+      { prompt: "Volám sa Ari.", answer: "представиться", options: ["представиться", "узнать имя", "отреагировать", "вернуть вопрос"] },
+      { prompt: "Ako sa voláte?", answer: "узнать имя", options: ["представиться", "узнать имя", "отреагировать", "вернуть вопрос"] },
+      { prompt: "To je zaujímavé.", answer: "отреагировать", options: ["представиться", "узнать имя", "отреагировать", "вернуть вопрос"] },
+      { prompt: "A vy?", answer: "вернуть вопрос", options: ["представиться", "узнать имя", "отреагировать", "вернуть вопрос"] },
+    ], hint: "Смотрите, что реплика делает в разговоре.", explanation: "Реплики образуют маршрут: представиться → спросить → отреагировать → вернуть вопрос." },
+    { id: "m8-supported-dialogue-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте типичные ошибки.", answer: "Volám sa Boris.; Odkiaľ ste?; Som zo Slovenska.; Čo robíte?", pairs: [
+      { prompt: "Ja som volať Boris.", answer: "Volám sa Boris.", acceptableAnswers: ["Ja som Boris."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Odkiaľ vy ste?", answer: "Odkiaľ ste?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Som z Slovensko.", answer: "Som zo Slovenska.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Čo vy robíte?", answer: "Čo robíte?", inputHint: "Введите исправленную фразу" },
+    ], hint: "Используйте готовые модели из материала.", explanation: "Правильно: Volám sa Boris; Odkiaľ ste; Som zo Slovenska; Čo robíte." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 2",
+  reinforcementPractices: [
+    { id: "reinforcement:supported-dialogue:1", sectionIndex: 0, type: "pairs", prompt: "Выберите естественное продолжение.", answer: "Teší ma.; Aha. Páči sa vám tam?; A vy?", pairs: [
+      { prompt: "После Ja som Eva.", answer: "Teší ma.", options: ["Teší ma.", "Dovidenia."] },
+      { prompt: "После Som z Nitry.", answer: "Aha. Páči sa vám tam?", options: ["Aha. Páči sa vám tam?", "Ako sa voláte?"] },
+      { prompt: "Вернуть предыдущий вопрос", answer: "A vy?", options: ["A vy?", "Prosím vás."] },
+    ], hint: "Реагируйте на предыдущую реплику и сохраняйте тему.", explanation: "Правильно: Teší ma; Aha. Páči sa vám tam?; A vy?" },
+    { id: "reinforcement:supported-dialogue:2", sectionIndex: 1, type: "pairs", prompt: "Вставьте пропущенные слова.", answer: "voláte; Som; v; vy", pairs: [
+      { prompt: "Ako sa …?", answer: "voláte", inputHint: "Введите одно слово" },
+      { prompt: "… z Poľska.", answer: "Som", inputHint: "Введите одно слово" },
+      { prompt: "Bývam … Bratislave.", answer: "v", inputHint: "Введите одно слово" },
+      { prompt: "A …?", answer: "vy", inputHint: "Введите одно слово" },
+    ], hint: "Восстановите знакомые модели целиком.", explanation: "Получаются фразы Ako sa voláte? Som z Poľska. Bývam v Bratislave. A vy?" },
+    { id: "reinforcement:supported-dialogue:3", sectionIndex: 2, type: "order", prompt: "Расставьте реплики знакомства в правильном порядке.", tokens: ["Aj mňa teší. Odkiaľ ste?", "Ja som Tomáš. Teší ma.", "Dobrý deň, ja som Anna. Ako sa voláte?"], answer: "Dobrý deň, ja som Anna. Ako sa voláte? Ja som Tomáš. Teší ma. Aj mňa teší. Odkiaľ ste?", hint: "Сначала приветствие и вопрос об имени, затем ответ и новый вопрос.", explanation: "Порядок: приветствие Анны → ответ Томаша → реакция и вопрос о стране." },
+    { id: "reinforcement:supported-dialogue:4", sectionIndex: 3, type: "pairs", prompt: "Исправьте ошибки.", answer: "Volám sa Boris.; Odkiaľ ste?; Som zo Slovenska.; Čo robíte?", pairs: [
+      { prompt: "Ja som volať Boris.", answer: "Volám sa Boris.", acceptableAnswers: ["Ja som Boris."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Odkiaľ vy ste?", answer: "Odkiaľ ste?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Som z Slovensko.", answer: "Som zo Slovenska.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Čo vy robíte?", answer: "Čo robíte?", inputHint: "Введите исправленную фразу" },
+    ], hint: "Проверьте готовые модели, порядок слов и форму после z.", explanation: "Каждая строка исправляется отдельно; для представления допустимо Ja som Boris." },
+    { id: "reinforcement:supported-dialogue:5", sectionIndex: 3, type: "pairs", prompt: "Переведите на словацкий.", answer: "Teší ma.; Kde bývate?; Trochu hovorím po slovensky.; To je zaujímavé. A vy?", pairs: [
+      { prompt: "Очень приятно.", answer: "Teší ma.", inputHint: "Введите перевод" },
+      { prompt: "Где вы живёте?", answer: "Kde bývate?", inputHint: "Введите перевод" },
+      { prompt: "Я немного говорю по-словацки.", answer: "Trochu hovorím po slovensky.", inputHint: "Введите перевод" },
+      { prompt: "Это интересно. А вы?", answer: "To je zaujímavé. A vy?", inputHint: "Введите перевод" },
+    ], hint: "Используйте вежливые формы и короткие реакции.", explanation: "Переводы сохраняют vy, реакцию и встречный вопрос." },
+    { id: "reinforcement:supported-dialogue:6", sectionIndex: 4, type: "pairs", prompt: "Соберите полный диалог знакомства.", answer: "Dobrý deň, ja som Ari. Ako sa voláte?; Ja som Petra. Teší ma.; Aj mňa teší. Odkiaľ ste?; Som zo Slovenska, z Nitry. A vy?; Som z Ruska, ale bývam v Bratislave.; Aha. Páči sa vám Bratislava?; Áno, veľmi.", pairs: [
+      { prompt: "1 · приветствие, имя и вопрос", answer: "Dobrý deň, ja som Ari. Ako sa voláte?", options: ["Dobrý deň, ja som Ari. Ako sa voláte?", "A vy? Kde bývate?"] },
+      { prompt: "2 · ответ и контакт", answer: "Ja som Petra. Teší ma.", options: ["Ja som Petra. Teší ma.", "Dovidenia, Petra."] },
+      { prompt: "3 · реакция и вопрос о стране", answer: "Aj mňa teší. Odkiaľ ste?", options: ["Aj mňa teší. Odkiaľ ste?", "Ahoj. Odkiaľ si?"] },
+      { prompt: "4 · ответ с деталью и встречный вопрос", answer: "Som zo Slovenska, z Nitry. A vy?", options: ["Som zo Slovenska, z Nitry. A vy?", "Áno. Nie."] },
+      { prompt: "5 · страна и город", answer: "Som z Ruska, ale bývam v Bratislave.", options: ["Som z Ruska, ale bývam v Bratislave.", "Som z Rusko. Bratislava."] },
+      { prompt: "6 · реакция и продолжение", answer: "Aha. Páči sa vám Bratislava?", options: ["Aha. Páči sa vám Bratislava?", "Ako sa voláte?"] },
+      { prompt: "7 · короткий ответ", answer: "Áno, veľmi.", options: ["Áno, veľmi.", "Prosím vás."] },
+    ], hint: "Каждая реплика должна реагировать на предыдущую и давать повод продолжить.", explanation: "Диалог включает имя, страну, город, ответ с деталью, реакцию и встречный вопрос." },
+  ],
+  chatPrompt: "Проведите знакомство из 6–8 реплик: начните с приветствия и имени, задайте один вопрос, ответьте с деталью, отреагируйте, верните вопрос и завершите разговор.",
+  chatSuggestions: ["Dobrý deň, ja som Ari. Ako sa voláte?", "Odkiaľ ste?", "To je zaujímavé. A vy?", "Rád som vás spoznal. Dovidenia."],
+  knowledgeChecks: [
+    { id: "m8-supported-dialogue-check-1", question: "Как по-словацки: «Добрый день, меня зовут Алексей»?", options: ["Dobrý deň, volám sa Alexej.", "Odkiaľ ste?", "Teší ma. Dovidenia."], answer: "Dobrý deň, volám sa Alexej.", explanation: "Правильная модель: Dobrý deň, volám sa Alexej." },
+    { id: "m8-supported-dialogue-check-2", question: "Как по-словацки: «Откуда вы?»", options: ["Odkiaľ ste?", "Kde bývate?", "Ako sa voláte?"], answer: "Odkiaľ ste?", explanation: "Правильный вопрос: Odkiaľ ste?" },
+  ],
+  finalChecks: [
+    { id: "m8-supported-dialogue-final-1", question: "Выберите перевод «Я из России, но живу в Нитре».", options: ["Som z Ruska, ale bývam v Nitre.", "Som zo Slovenska, z Nitry.", "Bývam v Bratislave."], answer: "Som z Ruska, ale bývam v Nitre.", explanation: "Правильный ответ: Som z Ruska, ale bývam v Nitre." },
+  ],
+} satisfies CourseLesson;

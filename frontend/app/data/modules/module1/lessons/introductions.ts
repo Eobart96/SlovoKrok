@@ -1,6 +1,12 @@
 import type { CourseLesson } from "../../../courseTypes";
 
 export const introductionsLesson: CourseLesson = {
+  vocabulary: [
+    {"word":"Volám sa Ari. Teší ma.","translation":"Меня зовут Ари. Очень приятно.","example":"Volám sa Ari. Teší ma."},
+    {"word":"Som z Ruska a bývam v Moskve.","translation":"Я из России и живу в Москве.","example":"Som z Ruska a bývam v Moskve."},
+    {"word":"Pracujem v IT. Hovorím po rusky a po anglicky.","translation":"Я работаю в IT. Я говорю по-русски и по-английски.","example":"Pracujem v IT. Hovorím po rusky a po anglicky."},
+    {"word":"Mám tridsať rokov.","translation":"Мне тридцать лет.","example":"Mám tridsať rokov."},
+  ],
   slug: "introductions",
   order: 2,
   title: "Представление себя",

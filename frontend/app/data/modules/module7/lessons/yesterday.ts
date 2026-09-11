@@ -1,30 +1,187 @@
-import type { CompactLessonContent } from "../../plannedLessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const yesterdayContent: CompactLessonContent = {
-  "slug": "yesterday",
-  "title": "Рассказ о вчерашнем дне",
-  "slovakTitle": "Včerajší deň",
-  "outcome": "Создавать короткую последовательность фраз о прошлом.",
-  "summary": "После урока вы сможете создавать короткую последовательность фраз о прошлом в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Рассказ организуют временные маркеры ráno, potom, popoludní, večer и nakoniec. На A1 достаточно 5-6 коротких последовательных фраз.",
-  "examples": [
-    {
-      "slovak": "Ráno som vstal o siedmej.",
-      "russian": "Утром я встал в семь."
-    },
-    {
-      "slovak": "Potom som sa naraňajkoval.",
-      "russian": "Потом я позавтракал."
-    },
-    {
-      "slovak": "Popoludní som pracoval.",
-      "russian": "Днём я работал."
-    },
-    {
-      "slovak": "Večer som bol doma.",
-      "russian": "Вечером я был дома."
-    }
+export const yesterdayContent = {
+  vocabulary: [
+    {"word":"Ráno som vstal o siedmej.","translation":"Утром я встал в семь.","example":"Ráno som vstal o siedmej."},
+    {"word":"Potom som sa naraňajkoval.","translation":"Потом я позавтракал.","example":"Potom som sa naraňajkoval."},
+    {"word":"Popoludní som pracoval.","translation":"Днём я работал.","example":"Popoludní som pracoval."},
+    {"word":"Večer som bol doma.","translation":"Вечером я был дома.","example":"Večer som bol doma."},
+    {"word":"Pršalo, preto som zostala doma.","translation":"Шёл дождь, поэтому я осталась дома.","example":"Pršalo, preto som zostala doma."},
+    {"word":"Zostala som doma, lebo pršalo.","translation":"Я осталась дома, потому что шёл дождь.","example":"Zostala som doma, lebo pršalo."},
   ],
-  "mistake": "Не меняйте время внутри рассказа без причины; после Včera сохраняйте прошедшие формы.",
-  "task": "Составьте рассказ из шести фраз от утра до вечера и задайте один вопрос собеседнику."
-};
+  slug: "yesterday",
+  order: 3,
+  title: "Рассказ о вчерашнем дне",
+  slovakTitle: "Včerajší deň",
+  description: "Создавать короткую последовательность фраз о прошлом.",
+  duration: "35–40 мин",
+  goals: [
+    "Строить рассказ по маршруту начало — утро — день — вечер — итог",
+    "Связывать действия словами najprv, potom, neskôr и nakoniec",
+    "Добавлять время, место, участника, причину и оценку",
+    "Составлять связный рассказ из 6–8 фраз в одном роде",
+  ],
+  theory: {
+    summary: "Рассказ о вчерашнем дне строится из знакомых прошедших форм, временных маркеров и коротких связок. Удобная модель: когда + что сделал(а) + где или с кем + что было потом. Главная цель темы — не новые формы, а понятная последовательность событий.",
+    rules: [
+      "Начните с рамки Včera som mal/mala bežný deň или Včera bol zaujímavý deň, затем двигайтесь от утра к вечеру.",
+      "Обозначайте время словами ráno, dopoludnia, na obed, poobede, večer и v noci; не повторяйте včera в каждом предложении.",
+      "Показывайте порядок связками najprv — сначала, potom — потом, neskôr — позже, nakoniec — наконец; predtým означает до этого.",
+      "Сохраняйте один род рассказчика: vstal — raňajkoval — išiel или vstala — raňajkovala — išla.",
+      "Добавляйте только одну–две детали: kde, kam, s kým, o koľkej, prečo или краткую оценку дня.",
+      "Preto вводит результат: Pršalo, preto som zostal doma. Lebo вводит причину: Zostal som doma, lebo pršalo.",
+    ],
+    examples: [
+      { slovak: "Ráno som vstal o siedmej.", russian: "Утром я встал в семь.", explanation: "Мужская форма vstal согласована с рассказчиком, время стоит в начале." },
+      { slovak: "Potom som sa naraňajkoval.", russian: "Потом я позавтракал.", explanation: "Potom связывает второе действие с первым." },
+      { slovak: "Popoludní som pracoval.", russian: "Днём я работал.", explanation: "Временной маркер помогает двигать рассказ вперёд." },
+      { slovak: "Večer som bol doma.", russian: "Вечером я был дома.", explanation: "Короткая фраза завершает дневную последовательность." },
+      { slovak: "Pršalo, preto som zostala doma.", russian: "Шёл дождь, поэтому я осталась дома.", explanation: "Preto соединяет причину с её результатом." },
+      { slovak: "Zostala som doma, lebo pršalo.", russian: "Я осталась дома, потому что шёл дождь.", explanation: "Lebo вводит объяснение причины." },
+    ],
+  },
+  sections: [
+    {
+      title: "Каркас рассказа и единый род",
+      paragraphs: [
+        "Сначала задайте рамку рассказа, затем назовите утро, день, вечер и финальную оценку. Для уровня A1 достаточно 6–8 коротких фраз.",
+        "Перед началом выберите форму рассказчика и не меняйте её: мужчина говорит vstal, raňajkoval, išiel; женщина — vstala, raňajkovala, išla.",
+      ],
+      table: { headers: ["Этап", "Вопрос", "Опорная фраза"], rows: [
+        ["начало", "Когда? Где?", "Včera som bol / bola doma."],
+        ["утро", "Что было утром?", "Ráno som raňajkoval / raňajkovala."],
+        ["день", "Что было потом?", "Potom som pracoval / pracovala."],
+        ["вечер", "С кем? Где?", "Večer som sa stretol / stretla s kamarátom."],
+        ["конец", "Чем всё закончилось?", "Nakoniec som oddychoval / oddychovala."],
+      ] },
+      items: ["Včera som mal / mala bežný deň.", "Včera bol zaujímavý deň.", "Ráno som vstal, raňajkoval a išiel do práce.", "Ráno som vstala, raňajkovala a išla do práce."],
+      note: "Формула: когда + что сделал(а) + где / с кем + что было потом.",
+    },
+    {
+      title: "Время и последовательность",
+      paragraphs: [
+        "Временные маркеры отвечают на вопрос когда, а связки показывают порядок действий. Обычно маркер ставится перед som: Ráno som pracoval, не Ráno pracoval som.",
+        "Včera достаточно назвать один раз в начале. Дальше используйте более точные ориентиры и связки.",
+      ],
+      table: { headers: ["Когда", "Пример", "Порядок", "Значение"], rows: [
+        ["včera", "Včera som bol doma.", "najprv", "сначала"],
+        ["ráno", "Ráno som vstal o siedmej.", "potom", "потом"],
+        ["dopoludnia", "Dopoludnia som pracoval.", "neskôr", "позже"],
+        ["na obed", "Na obed som jedol polievku.", "nakoniec", "наконец"],
+        ["poobede", "Poobede som išiel do obchodu.", "predtým", "до этого"],
+        ["večer / v noci", "Večer som čítal. V noci som spal.", "—", "—"],
+      ] },
+      note: "Не начинайте каждую фразу с včera: это делает рассказ однообразным.",
+    },
+    {
+      title: "Добавляем детали, причины и контрасты",
+      paragraphs: [
+        "Одна–две детали делают фразу конкретной: назовите место, направление, участника, время, причину или оценку.",
+        "Связки a и ale соединяют действия или контраст, preto называет результат, а lebo — причину. На A1 лучше две короткие фразы, чем одна перегруженная.",
+      ],
+      table: { headers: ["Деталь", "Вопрос", "Пример"], rows: [
+        ["место", "Kde?", "Pracoval som doma."],
+        ["направление", "Kam?", "Išla som do obchodu."],
+        ["с кем", "S kým?", "Bol som s rodinou."],
+        ["время", "Kedy? O koľkej?", "Prišla som o šiestej."],
+        ["причина", "Prečo?", "Bol som unavený, preto som zostal doma."],
+        ["оценка", "Aký bol deň?", "Bol to dobrý deň."],
+      ] },
+      items: ["Varila som a počúvala hudbu.", "Chcel som ísť von, ale pršalo.", "Pršalo, preto som zostala doma.", "Zostala som doma, lebo pršalo."],
+      note: "Preto = результат; lebo = причина.",
+    },
+    {
+      title: "Банк фраз и образец рассказа",
+      paragraphs: [
+        "Выберите из банка подходящие блоки и соедините их в хронологическом порядке. Не обязательно использовать всё.",
+        "Образец женского рассказа: Včera som mala bežný deň. Vstala som o siedmej a potom som raňajkovala. O ôsmej som išla do práce. Dopoludnia som pracovala a na obed som jedla polievku. Domov som prišla o šiestej. Večer pršalo, preto som zostala doma. Telefonovala som rodičom a neskôr som čítala. Bol to pokojný deň.",
+      ],
+      table: { headers: ["Часть дня", "Опорные фразы"], rows: [
+        ["начало", "Včera som mal / mala bežný deň."],
+        ["утро", "Vstal som / Vstala som o siedmej. Najprv som sa osprchoval / osprchovala. Potom som raňajkoval / raňajkovala."],
+        ["день", "O ôsmej som išiel / išla do práce. Dopoludnia som pracoval / pracovala. Na obed som jedol / jedla polievku."],
+        ["после работы", "Po práci som išiel / išla do obchodu. Domov som prišiel / prišla o šiestej."],
+        ["вечер", "Večer som varil / varila večeru. Telefonoval som / Telefonovala som rodičom. Neskôr som pozeral / pozerala film."],
+        ["финал", "Bol to pokojný deň."],
+      ] },
+      note: "Хороший рассказ сочетает время, порядок, одну причину или деталь и краткую оценку.",
+    },
+    {
+      title: "Частые ошибки и самопроверка",
+      paragraphs: ["Проверьте порядок som, единый род рассказчика и точный смысл связки. Затем убедитесь, что события идут от утра к вечеру."],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Ráno vstala som o ôsmej.", "Ráno som vstala o ôsmej.", "После маркера ставится som."],
+        ["Bola som doma. Potom som išiel...", "Bola som doma. Potom som išla...", "Род рассказчика не меняется."],
+        ["Pršalo, lebo som zostala doma.", "Pršalo, preto som zostala doma.", "Здесь вводится результат."],
+        ["Včera... Včera... Včera...", "Včera... Ráno... Potom...", "Не повторяйте один маркер."],
+      ] },
+      items: ["Есть ли начало, утро, день, вечер и итог?", "Использованы ли минимум три маркера времени?", "Есть ли минимум две связки порядка?", "Сохраняется ли один род?", "Понятны ли причина и результат?"],
+      note: "На A1 ясная последовательность важнее длинных сложных предложений.",
+    },
+  ],
+  stepPractices: [
+    { id: "m7-yesterday-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите перевод «Утром я встал в семь.»", options: ["Popoludní som pracoval.", "Potom som sa naraňajkoval.", "Ráno som vstal o siedmej."], answer: "Ráno som vstal o siedmej.", hint: "Сверьтесь с основной моделью.", explanation: "Верная фраза: Ráno som vstal o siedmej." },
+    { id: "m7-yesterday-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Потом я позавтракал.»", answer: "Potom som sa naraňajkoval.", hint: "Используйте опорную фразу из таблицы.", explanation: "Верная фраза: Potom som sa naraňajkoval." },
+    { id: "m7-yesterday-step-3", sectionIndex: 2, type: "text", prompt: "Переведите: «Днём я работал.»", answer: "Popoludní som pracoval.", hint: "Сохраните порядок слов и диакритику.", explanation: "Верная фраза: Popoludní som pracoval." },
+    { id: "m7-yesterday-step-4", sectionIndex: 3, type: "pairs", prompt: "Переведите детали связного рассказа.", answer: "Včera som mala bežný deň.; Domov som prišla o šiestej.; Večer pršalo, preto som zostala doma.; Bol to pokojný deň.", pairs: [
+      { prompt: "Вчера у меня был обычный день. (говорит женщина)", answer: "Včera som mala bežný deň.", inputHint: "Введите перевод" },
+      { prompt: "Домой я пришла в шесть.", answer: "Domov som prišla o šiestej.", inputHint: "Введите перевод" },
+      { prompt: "Вечером шёл дождь, поэтому я осталась дома.", answer: "Večer pršalo, preto som zostala doma.", inputHint: "Введите перевод" },
+      { prompt: "Это был спокойный день.", answer: "Bol to pokojný deň.", inputHint: "Введите перевод" },
+    ], hint: "Сохраняйте женский род и нужную связку.", explanation: "Фразы образуют начало, деталь, причину с результатом и итог." },
+    { id: "m7-yesterday-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки в рассказе женщины.", answer: "Ráno som vstala o ôsmej.; Potom som išla do obchodu.; Pršalo, preto som zostala doma.", pairs: [
+      { prompt: "Ráno vstala som o ôsmej.", answer: "Ráno som vstala o ôsmej.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Potom som išiel do obchodu.", answer: "Potom som išla do obchodu.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Pršalo, lebo som zostala doma.", answer: "Pršalo, preto som zostala doma.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Проверьте порядок som, род и значение связки.", explanation: "Правильно: som vstala, išla и preto для результата." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 3",
+  reinforcementPractices: [
+    { id: "reinforcement:yesterday:1", sectionIndex: 1, type: "pairs", prompt: "Выберите подходящую связку.", answer: "najprv; preto; lebo; nakoniec", pairs: [
+      { prompt: "___ som raňajkoval, potom som išiel do práce.", answer: "najprv", options: ["najprv", "preto", "lebo", "nakoniec"] },
+      { prompt: "Pršalo, ___ som zostala doma.", answer: "preto", options: ["najprv", "preto", "lebo", "nakoniec"] },
+      { prompt: "Zostala som doma, ___ pršalo.", answer: "lebo", options: ["najprv", "preto", "lebo", "nakoniec"] },
+      { prompt: "Večer som čítala a ___ som spala.", answer: "nakoniec", options: ["najprv", "preto", "lebo", "nakoniec"] },
+    ], hint: "Различайте порядок, результат и причину.", explanation: "Ответы: najprv, preto, lebo, nakoniec." },
+    { id: "reinforcement:yesterday:2", sectionIndex: 1, type: "order", prompt: "Расставьте события от утра к вечеру.", tokens: ["Večer som oddychoval.", "Ráno som vstal o siedmej.", "Na obed som jedol polievku.", "Potom som išiel do práce."], answer: "Ráno som vstal o siedmej. Potom som išiel do práce. Na obed som jedol polievku. Večer som oddychoval.", hint: "Начните с ráno, затем найдите obed и večer.", explanation: "Порядок: утро → работа → обед → вечер." },
+    { id: "reinforcement:yesterday:3", sectionIndex: 0, type: "pairs", prompt: "Вставьте форму прошедшего времени.", answer: "vstala; išiel; jedli; prišli", pairs: [
+      { prompt: "Ráno som ___ o siedmej. (vstať, женщина)", answer: "vstala", inputHint: "Введите форму" },
+      { prompt: "Potom som ___ do práce. (ísť, мужчина)", answer: "išiel", inputHint: "Введите форму" },
+      { prompt: "Na obed sme ___ polievku. (jesť)", answer: "jedli", inputHint: "Введите форму" },
+      { prompt: "Domov ___ o šiestej. (prísť, они)", answer: "prišli", inputHint: "Введите форму" },
+    ], hint: "Определите род или число участника.", explanation: "Формы: vstala, išiel, jedli, prišli." },
+    { id: "reinforcement:yesterday:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте рассказ женщины построчно.", answer: "Ráno som vstala o ôsmej.; Potom som išla do obchodu.; Pršalo, preto som zostala doma.", pairs: [
+      { prompt: "Ráno vstala som o ôsmej.", answer: "Ráno som vstala o ôsmej.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Potom som išiel do obchodu.", answer: "Potom som išla do obchodu.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Pršalo, lebo som zostala doma.", answer: "Pršalo, preto som zostala doma.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Исправьте только ошибочный элемент, но введите всю фразу.", explanation: "После ráno ставится som; женщина говорит išla; preto вводит результат." },
+    { id: "reinforcement:yesterday:5", sectionIndex: 3, type: "pairs", prompt: "Переведите на словацкий.", answer: "Včera som mal bežný deň.; Najprv som raňajkoval.; Potom sme išli do práce.; Večer pršalo, preto som zostal doma.", pairs: [
+      { prompt: "Вчера у меня был обычный день.", answer: "Včera som mal bežný deň.", acceptableAnswers: ["Včera som mala bežný deň."], inputHint: "Введите вариант по своему роду" },
+      { prompt: "Сначала я позавтракал / позавтракала.", answer: "Najprv som raňajkoval.", acceptableAnswers: ["Najprv som raňajkovala."], inputHint: "Введите вариант по своему роду" },
+      { prompt: "Потом мы пошли на работу.", answer: "Potom sme išli do práce.", acceptableAnswers: ["Potom sme šli do práce."], inputHint: "Введите перевод" },
+      { prompt: "Вечером шёл дождь, поэтому я остался / осталась дома.", answer: "Večer pršalo, preto som zostal doma.", acceptableAnswers: ["Večer pršalo, preto som zostala doma."], inputHint: "Введите вариант по своему роду" },
+    ], hint: "Сохраняйте связку и выбранный род.", explanation: "Переводы используют mal/mala, najprv, potom и preto." },
+    { id: "reinforcement:yesterday:6", sectionIndex: 3, type: "pairs", prompt: "Соберите согласованный рассказ мужчины.", answer: "Včera som mal bežný deň.; Ráno som vstal o siedmej.; Potom som išiel do práce.; Na obed som jedol s kolegom.; Domov som prišiel o šiestej.; Večer som nevaril, lebo som bol unavený.; Neskôr som pozeral film.; Bol to pokojný deň.", pairs: [
+      { prompt: "1 · начало", answer: "Včera som mal bežný deň.", options: ["Včera som mal bežný deň.", "Včera som mala bežný deň."] },
+      { prompt: "2 · утро", answer: "Ráno som vstal o siedmej.", options: ["Ráno som vstala o siedmej.", "Ráno som vstal o siedmej."] },
+      { prompt: "3 · дорога", answer: "Potom som išiel do práce.", options: ["Potom som išiel do práce.", "Potom som išla do práce."] },
+      { prompt: "4 · обед", answer: "Na obed som jedol s kolegom.", options: ["Na obed som jedla s kolegom.", "Na obed som jedol s kolegom."] },
+      { prompt: "5 · возвращение", answer: "Domov som prišiel o šiestej.", options: ["Domov som prišiel o šiestej.", "Domov som prišla o šiestej."] },
+      { prompt: "6 · причина", answer: "Večer som nevaril, lebo som bol unavený.", options: ["Večer som nevarila, lebo som bola unavená.", "Večer som nevaril, lebo som bol unavený."] },
+      { prompt: "7 · позже", answer: "Neskôr som pozeral film.", options: ["Neskôr som pozerala film.", "Neskôr som pozeral film."] },
+      { prompt: "8 · итог", answer: "Bol to pokojný deň.", options: ["Bol to pokojný deň.", "Bola to pokojná noc."] },
+    ], hint: "Во всех строках выберите мужскую форму и сохраните хронологию.", explanation: "Получается рассказ из восьми фраз с единым мужским родом." },
+  ],
+  chatPrompt: "Расскажите по-словацки о вчерашнем дне в 6–8 коротких фразах. Используйте минимум три маркера времени, две связки порядка, одну причину или отрицание и сохраняйте один род.",
+  chatSuggestions: ["Včera som mal bežný deň.", "Najprv som sa osprchoval.", "Potom som išiel do práce.", "Večer pršalo, preto som zostal doma."],
+  knowledgeChecks: [
+    { id: "m7-yesterday-check-1", question: "Как по-словацки: «Утром я встал в семь.»?", options: ["Popoludní som pracoval.", "Potom som sa naraňajkoval.", "Ráno som vstal o siedmej."], answer: "Ráno som vstal o siedmej.", explanation: "Правильная модель: Ráno som vstal o siedmej." },
+    { id: "m7-yesterday-check-2", question: "Как по-словацки: «Потом я позавтракал.»?", options: ["Popoludní som pracoval.", "Potom som sa naraňajkoval.", "Ráno som vstal o siedmej."], answer: "Potom som sa naraňajkoval.", explanation: "Правильная модель: Potom som sa naraňajkoval." },
+  ],
+  finalChecks: [
+    { id: "m7-yesterday-final-1", question: "Выберите перевод «Днём я работал.».", options: ["Popoludní som pracoval.", "Potom som sa naraňajkoval.", "Ráno som vstal o siedmej."], answer: "Popoludní som pracoval.", explanation: "Правильный ответ: Popoludní som pracoval." },
+  ],
+} satisfies CourseLesson;

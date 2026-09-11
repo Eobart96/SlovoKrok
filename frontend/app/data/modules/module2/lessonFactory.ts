@@ -3,13 +3,15 @@ import type { CourseLesson, KnowledgeCheck, LessonSection, StepPractice } from "
 type Example = CourseLesson["theory"]["examples"][number];
 type PracticeSeed = Omit<StepPractice, "id">;
 type CheckSeed = Omit<KnowledgeCheck, "id">;
-export type LessonSeed = Omit<CourseLesson, "order" | "stepPractices" | "knowledgeChecks" | "finalChecks"> & {
+export type LessonSeed = Omit<CourseLesson, "order" | "stepPractices" | "reinforcementPractices" | "knowledgeChecks" | "finalChecks"> & {
   practices: PracticeSeed[];
+  reinforcementPractices?: PracticeSeed[];
   checks: CheckSeed[];
   finals: CheckSeed[];
 };
 
 export const defineModule2Lesson = (seed: LessonSeed): CourseLesson => ({
+  vocabulary: seed.vocabulary,
   slug: seed.slug,
   order: 0,
   title: seed.title,
@@ -21,7 +23,12 @@ export const defineModule2Lesson = (seed: LessonSeed): CourseLesson => ({
   sections: seed.sections,
   chatPrompt: seed.chatPrompt,
   chatSuggestions: seed.chatSuggestions,
+  assessmentMode: seed.assessmentMode,
+  materialAssessmentStep: seed.materialAssessmentStep,
+  reinforcementLabel: seed.reinforcementLabel,
+  reinforcementTitle: seed.reinforcementTitle,
   stepPractices: seed.practices.map((practice, index) => ({ ...practice, id: `m2-${seed.slug}-step-${index + 1}` })),
+  reinforcementPractices: seed.reinforcementPractices?.map((practice, index) => ({ ...practice, id: `reinforcement:${seed.slug}:${index + 1}` })),
   knowledgeChecks: seed.checks.map((check, index) => ({ ...check, id: `m2-${seed.slug}-check-${index + 1}` })),
   finalChecks: seed.finals.map((check, index) => ({ ...check, id: `m2-${seed.slug}-final-${index + 1}` })),
 });

@@ -1,32 +1,134 @@
-import { defineModule5Lesson } from "../lessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const musietInfinitiveLesson = defineModule5Lesson("musiet-infinitive", 6, {
-  "title": "musieť + infinitív",
-  "slovakTitle": "Musieť s infinitívom",
-  "outcome": "Выражать простую необходимость.",
-  "summary": "После урока вы сможете выражать простую необходимость в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Musieť сообщает необходимость: musím, musíš, musí, musíme, musíte, musia. Nemusím означает «мне не нужно», а не строгий запрет.",
-  "examples": [
-    {
-      "slovak": "Musím ísť do práce.",
-      "russian": "Я должен идти на работу."
-    },
-    {
-      "slovak": "Musíte mať lístok.",
-      "russian": "Вы должны иметь билет."
-    },
-    {
-      "slovak": "Dnes nemusíme variť.",
-      "russian": "Сегодня нам не нужно готовить."
-    },
-    {
-      "slovak": "Kedy musíš odísť?",
-      "russian": "Когда тебе нужно уйти?"
-    }
+export const musietInfinitiveLesson = {
+  vocabulary: [
+    {"word":"Musím prísť o ôsmej.","translation":"Мне нужно прийти в восемь.","example":"Musím prísť o ôsmej."},
+    {"word":"V práci musíme nosiť kartu.","translation":"На работе мы должны носить пропуск.","example":"V práci musíme nosiť kartu."},
+    {"word":"Dnes nemusím variť.","translation":"Сегодня мне не нужно готовить.","example":"Dnes nemusím variť."},
+    {"word":"Tu nesmiete fajčiť.","translation":"Здесь нельзя курить.","example":"Tu nesmiete fajčiť."},
+    {"word":"Kedy musíš odísť?","translation":"Когда тебе нужно уйти?","example":"Kedy musíš odísť?"},
+    {"word":"Musím si kúpiť lístok.","translation":"Мне нужно купить себе билет.","example":"Musím si kúpiť lístok."},
   ],
-  "mistake": "Не переводите nemusím как «мне нельзя»; запрет обычно выражается nesmiem.",
-  "task": "Назовите три дела, которые вы должны сделать, и одно, которое делать не нужно."
-}, {
-    rules: ["Musieť + infinitív выражает необходимость.", "Частотные формы: musím, musíš, musí, musíme, musíte, musia.", "После musieť используется инфинитив: Musím pracovať.", "Nemusím означает «мне не нужно/не обязательно», а не всегда «мне нельзя»."],
-    contrasts: ["Musím ísť — мне нужно идти.", "Musíme pracovať — нам нужно работать.", "Nemusíš čakať — тебе не обязательно ждать."], prompt: "Переведите: «Нам нужно идти».", answer: "Musíme ísť.", hint: "Форма для my — musíme.",
-  });
+  slug: "musiet-infinitive",
+  order: 7,
+  title: "musieť + infinitív",
+  slovakTitle: "Musieť s infinitívom",
+  description: "Говорить об обязанности, необходимости и отсутствии обязанности.",
+  duration: "35–40 мин",
+  goals: ["Выбирать форму musieť по лицу", "Объяснять практическую необходимость и обязанность", "Различать chcieť, môcť и musieť", "Не смешивать nemusieť и nesmieť", "Строить вопросы и модели с sa/si"],
+  theory: {
+    summary: "Musieť + infinitív сообщает, что действие требуется из-за правила, расписания, ситуации или важной личной потребности. По-русски модель часто переводится как «нужно» или «приходится».",
+    rules: [
+      "Формы нужно запомнить: musím, musíš, musí, musíme, musíte, musia.",
+      "Изменяется только musieť; второй глагол остаётся инфинитивом: Musím pracovať.",
+      "Источник необходимости подсказывает контекст: правило, расписание, практическая ситуация или личная потребность.",
+      "Сравнивайте смысл: chcem — хочу, môžem — могу, musím — мне нужно / я обязан.",
+      "Nemusieť означает отсутствие обязанности: nemusím = мне не нужно, можно не делать.",
+      "Nesmieť выражает запрет: nesmiem = мне нельзя, действие запрещено.",
+      "В коротком ответе меняется лицо: Musíš pracovať? — Áno, musím. / Nie, nemusím.",
+      "Sa/si стоит рядом с личной формой: Musím sa učiť. Ráno si musím kúpiť lístok.",
+    ],
+    examples: [
+      { slovak: "Musím prísť o ôsmej.", russian: "Мне нужно прийти в восемь.", explanation: "Необходимость задаёт расписание." },
+      { slovak: "V práci musíme nosiť kartu.", russian: "На работе мы должны носить пропуск.", explanation: "Обязанность следует из правила." },
+      { slovak: "Dnes nemusím variť.", russian: "Сегодня мне не нужно готовить.", explanation: "Обязанности нет; готовить всё же можно." },
+      { slovak: "Tu nesmiete fajčiť.", russian: "Здесь нельзя курить.", explanation: "Nesmieť обозначает явный запрет." },
+      { slovak: "Kedy musíš odísť?", russian: "Когда тебе нужно уйти?", explanation: "Вопросительное слово стоит первым, второй глагол остаётся инфинитивом." },
+      { slovak: "Musím si kúpiť lístok.", russian: "Мне нужно купить себе билет.", explanation: "Si занимает раннюю позицию рядом с musím." },
+    ],
+  },
+  sections: [
+    {
+      title: "Формы musieť и инфинитив",
+      paragraphs: ["Musieť — частотный особый глагол. Учите весь ряд и две опоры: musím — musia."],
+      table: { headers: ["ja", "ty", "on / ona", "my", "vy", "oni / ony"], rows: [["musím", "musíš", "musí", "musíme", "musíte", "musia"]] },
+      items: ["Musím odísť. — Мне нужно уйти.", "Musíte počkať. — Вам нужно подождать.", "Musia prísť načas. — Они должны прийти вовремя."],
+      note: "Ошибка: Musím pracujem. Правильно: Musím pracovať. Личное окончание получает только musieť.",
+    },
+    {
+      title: "Обязанность и источник необходимости",
+      paragraphs: ["Причиной может быть правило, расписание, практическая ситуация или личная потребность. Выбирайте естественный русский перевод по контексту."],
+      table: { headers: ["Источник", "Пример", "Перевод"], rows: [["работа", "Musím prísť o ôsmej.", "Мне нужно прийти в восемь."], ["правило", "V práci musíme nosiť kartu.", "На работе мы должны носить пропуск."], ["расписание", "Vlak musí odísť načas.", "Поезд должен отправиться вовремя."], ["ситуация", "Musíme kúpiť jedlo.", "Нам нужно купить еду."], ["учёба", "Musím sa učiť.", "Мне нужно учиться."], ["усталость", "Musíš si oddýchnuť.", "Тебе нужно отдохнуть."]] },
+      items: ["Chcem ísť. — Я хочу идти.", "Môžem ísť. — Я могу идти.", "Musím ísť. — Мне нужно идти."],
+      note: "Musíš si oddýchnuť может быть не приказом, а заботливым советом; значение задают ситуация и интонация.",
+    },
+    {
+      title: "Nemusieť и nesmieť",
+      paragraphs: ["Ne- присоединяется к форме musieť. Получается отсутствие обязанности, а не запрет. Для запрета используется nesmieť."],
+      table: { headers: ["Нет обязанности", "Запрет"], rows: [["Nemusíš tu čakať. — Тебе необязательно ждать.", "Nesmieš tu fajčiť. — Здесь нельзя курить."], ["Nemusíte platiť. — Вам не нужно платить.", "Nesmiete tu parkovať. — Здесь нельзя парковаться."]] },
+      items: ["Dnes nemusím variť. — Сегодня мне не нужно готовить.", "Nemusíme vstávať skoro. — Нам не нужно рано вставать.", "Nemusia prísť. — Им необязательно приходить."],
+      note: "Главная ловушка: nemusieť = можно не делать; nesmieť = нельзя делать.",
+    },
+    {
+      title: "Вопросы, ответы и sa/si",
+      paragraphs: ["Вопрос не требует вспомогательного глагола. Начните с вопросительного слова либо с личной формы musieť; sa/si поставьте рядом с ней."],
+      table: { headers: ["Задача", "Пример", "Короткий ответ"], rows: [["да / нет", "Musíš dnes pracovať?", "Áno, musím. / Nie, nemusím."], ["что", "Čo musíme urobiť?", "Musíme kúpiť lístky."], ["когда", "Kedy musíš odísť?", "Musím odísť o siedmej."], ["почему", "Prečo musíte čakať?", "—"], ["сколько", "Koľko musím zaplatiť?", "—"]] },
+      items: ["Musím sa učiť. / Dnes sa musím učiť.", "Musím si kúpiť lístok. / Ráno si musím kúpiť lístok."],
+      note: "Вопрос с ty получает ответ от ja. Вежливое vy одному человеку также получает ответ Áno, musím; группа отвечает Áno, musíme.",
+    },
+    {
+      title: "Готовые фразы, ошибки и самопроверка",
+      paragraphs: ["Найдите форму musieť, определите источник необходимости и проверьте инфинитив, отрицание и положение sa/si."],
+      table: { headers: ["Ситуация", "Словацкий пример", "Перевод"], rows: [["работа", "Dnes musím pracovať doma.", "Сегодня мне нужно работать дома."], ["утро", "Ráno musím skoro vstávať.", "Утром мне нужно рано вставать."], ["дела", "Musím ísť do banky.", "Мне нужно пойти в банк."], ["врач", "Eva musí ísť k lekárovi.", "Еве нужно пойти к врачу."], ["ожидание", "Musíte čakať desať minút.", "Вам нужно ждать десять минут."], ["учёба", "Musím sa učiť slovenčinu.", "Мне нужно учить словацкий."], ["бесплатно", "Nemusíš platiť.", "Тебе не нужно платить."], ["запрет", "Tu nesmiete fajčiť.", "Здесь нельзя курить."]] },
+      items: ["Musím pracujem. → Musím pracovať.", "Ja musíš odísť. → Ja musím odísť.", "Ne musím čakať. → Nemusím čakať.", "Musím učiť sa. → Musím sa učiť.", "Nemusíte tu parkovať. (нельзя) → Nesmiete tu parkovať."],
+      note: "Самопроверка: форма совпадает с лицом; второй глагол — инфинитив; nemusieť означает «не нужно»; nesmieť означает «нельзя».",
+    },
+  ],
+  stepPractices: [
+    { id: "m5-musiet-infinitive-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите форму для oni / ony.", options: ["musí", "musíte", "musia"], answer: "musia", hint: "Вспомните вторую опорную форму после musím.", explanation: "Oni / ony musia." },
+    { id: "m5-musiet-infinitive-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Нам нужно купить билеты».", answer: "Musíme kúpiť lístky.", hint: "Используйте форму для my, а второй глагол оставьте в инфинитиве.", explanation: "Musíme kúpiť lístky." },
+    { id: "m5-musiet-infinitive-step-3", sectionIndex: 2, type: "choice", prompt: "Как сказать «Здесь нельзя парковаться»?", options: ["Nemusíte tu parkovať.", "Nesmiete tu parkovať.", "Musíte tu parkovať."], answer: "Nesmiete tu parkovať.", hint: "Речь о запрете, а не об отсутствии обязанности.", explanation: "Запрет выражает nesmieť: Nesmiete tu parkovať." },
+    { id: "m5-musiet-infinitive-step-4", sectionIndex: 3, type: "text", prompt: "Переведите: «Сегодня мне нужно учиться».", answer: "Dnes sa musím učiť.", acceptableAnswers: ["Musím sa dnes učiť."], hint: "Поставьте sa в раннюю позицию рядом с личной формой.", explanation: "Нейтрально: Dnes sa musím učiť." },
+    { id: "m5-musiet-infinitive-step-5", sectionIndex: 4, type: "text", prompt: "Исправьте запрет: Nemusíte tu fajčiť.", answer: "Nesmiete tu fajčiť.", hint: "Для «нельзя» нужна форма nesmieť.", explanation: "Правильно: Nesmiete tu fajčiť." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 7",
+  reinforcementPractices: [
+    { id: "reinforcement:musiet-infinitive:1", sectionIndex: 0, type: "pairs", prompt: "Выберите форму musieť.", answer: "musím; musíš; musí; musíme; musíte; musia", pairs: [
+      { prompt: "Ja ___ odísť.", answer: "musím", options: ["musím", "musíš", "musí", "musíme", "musíte", "musia"] }, { prompt: "Ty ___ čakať.", answer: "musíš", options: ["musím", "musíš", "musí", "musíme", "musíte", "musia"] },
+      { prompt: "Eva ___ zavolať.", answer: "musí", options: ["musím", "musíš", "musí", "musíme", "musíte", "musia"] }, { prompt: "My ___ zaplatiť.", answer: "musíme", options: ["musím", "musíš", "musí", "musíme", "musíte", "musia"] },
+      { prompt: "Vy ___ prísť.", answer: "musíte", options: ["musím", "musíš", "musí", "musíme", "musíte", "musia"] }, { prompt: "Oni ___ pracovať.", answer: "musia", options: ["musím", "musíš", "musí", "musíme", "musíte", "musia"] },
+    ], hint: "Определите лицо подлежащего.", explanation: "Полный ряд: musím, musíš, musí, musíme, musíte, musia." },
+    { id: "reinforcement:musiet-infinitive:2", sectionIndex: 0, type: "pairs", prompt: "Поставьте второй глагол в инфинитив.", answer: "vstať; ísť; kúpiť; prísť; čakať", pairs: [
+      { prompt: "Musím ___ skoro. (vstanem)", answer: "vstať", inputHint: "Введите инфинитив" }, { prompt: "Musíš ___ domov. (ideš)", answer: "ísť", inputHint: "Введите инфинитив" },
+      { prompt: "Musíme ___ lístky. (kúpime)", answer: "kúpiť", inputHint: "Введите инфинитив" }, { prompt: "Musia ___ načas. (prídu)", answer: "prísť", inputHint: "Введите инфинитив" },
+      { prompt: "Musíte ___ desať minút. (čakáte)", answer: "čakať", inputHint: "Введите инфинитив" },
+    ], hint: "Личное окончание уже находится в форме musieť.", explanation: "После musieť смысловой глагол остаётся в инфинитиве." },
+    { id: "reinforcement:musiet-infinitive:3", sectionIndex: 1, type: "pairs", prompt: "Выберите chcieť, môcť или musieť.", answer: "musím; chcem; môžem; musíme; môžem", pairs: [
+      { prompt: "Dnes ___ pracovať, mám dôležitú úlohu. · необходимость", answer: "musím", options: ["musím", "chcem", "môžem", "musíme"] },
+      { prompt: "___ piť kávu, mám na ňu chuť. · желание", answer: "chcem", options: ["musím", "chcem", "môžem", "musíme"] },
+      { prompt: "Dnes ___ prísť, mám čas. · возможность", answer: "môžem", options: ["musím", "chcem", "môžem", "musíme"] },
+      { prompt: "V práci ___ nosiť kartu. · правило для нас", answer: "musíme", options: ["musím", "chcem", "môžem", "musíme"] },
+      { prompt: "___ otvoriť okno? · разрешение", answer: "môžem", options: ["musím", "chcem", "môžem", "musíme"] },
+    ], hint: "Желание — chcieť; возможность — môcť; необходимость — musieť.", explanation: "Контекст определяет точный модальный смысл." },
+    { id: "reinforcement:musiet-infinitive:4", sectionIndex: 2, type: "pairs", prompt: "Выберите nemusieť или nesmieť.", answer: "nemusím; nesmiete; nemusia; nesmiete", pairs: [
+      { prompt: "Zajtra ___ vstávať skoro, mám voľno. · нет обязанности", answer: "nemusím", options: ["nemusím", "nemusíš", "nemusia", "nesmieš", "nesmiete"] },
+      { prompt: "Tu ___ fajčiť, je to zakázané. · запрет для vy", answer: "nesmiete", options: ["nemusím", "nemusíš", "nemusia", "nesmieš", "nesmiete"] },
+      { prompt: "Deti ___ platiť, vstup je zdarma. · нет обязанности", answer: "nemusia", options: ["nemusím", "nemusíš", "nemusia", "nesmieš", "nesmiete"] },
+      { prompt: "Tu ___ parkovať. · запрет для vy", answer: "nesmiete", options: ["nemusím", "nemusíš", "nemusia", "nesmieš", "nesmiete"] },
+    ], hint: "Nemusieť — можно не делать; nesmieť — нельзя делать.", explanation: "Отсутствие обязанности и запрет — разные смыслы." },
+    { id: "reinforcement:musiet-infinitive:5", sectionIndex: 3, type: "pairs", prompt: "Ответьте или переведите.", answer: "Áno, musím.; Nie, nemusíme.; Musíme kúpiť lístky.; Tu nesmiete fajčiť.; Kedy musíte prísť?", pairs: [
+      { prompt: "Musíš dnes pracovať? · да", answer: "Áno, musím.", inputHint: "Введите краткий ответ" }, { prompt: "Musíte prísť? · нет, отвечают двое", answer: "Nie, nemusíme.", inputHint: "Введите краткий ответ" },
+      { prompt: "Нам нужно купить билеты.", answer: "Musíme kúpiť lístky.", inputHint: "Введите перевод" }, { prompt: "Здесь нельзя курить.", answer: "Tu nesmiete fajčiť.", acceptableAnswers: ["Nesmiete tu fajčiť."], inputHint: "Введите перевод" },
+      { prompt: "Когда вам нужно прийти?", answer: "Kedy musíte prísť?", inputHint: "Введите перевод" },
+    ], hint: "Проверьте перспективу ответа, форму лица, инфинитив и диакритику.", explanation: "Ответы объединяют обязанность, отсутствие обязанности, запрет и вопрос." },
+    { id: "reinforcement:musiet-infinitive:6", sectionIndex: 4, type: "pairs", prompt: "Соберите диалог об обязанностях.", answer: "Čo musíš urobiť dnes?; Musím pracovať a potom si musím kúpiť lístok.; Musíš variť večeru?; Nie, nemusím. Ale v práci nesmiem prísť neskoro.; Kedy musíš odísť?; Musím odísť o siedmej.", pairs: [
+      { prompt: "1 · вопрос о делах", answer: "Čo musíš urobiť dnes?", options: ["Čo musíš urobiť dnes?", "Čo musím urobiť dnes?", "Kedy musíš dnes?"] },
+      { prompt: "2 · работа и билет", answer: "Musím pracovať a potom si musím kúpiť lístok.", options: ["Musím pracovať a potom si musím kúpiť lístok.", "Musím pracujem a potom musím kúpiť si lístok.", "Musíš pracovať a potom sa musím kúpiť lístok."] },
+      { prompt: "3 · вопрос об ужине", answer: "Musíš variť večeru?", options: ["Musíš variť večeru?", "Musíš varíš večeru?", "Musím variť večeru?"] },
+      { prompt: "4 · нет обязанности, но есть правило", answer: "Nie, nemusím. Ale v práci nesmiem prísť neskoro.", options: ["Nie, nemusím. Ale v práci nesmiem prísť neskoro.", "Nie, nesmiem. Ale v práci nemusím prísť neskoro.", "Nie, ne musím. Ale v práci nesmiem prídem neskoro."] },
+      { prompt: "5 · вопрос о времени ухода", answer: "Kedy musíš odísť?", options: ["Kedy musíš odísť?", "Koľko musíš odísť?", "Kedy musím odísť?"] },
+      { prompt: "6 · ответ о времени", answer: "Musím odísť o siedmej.", options: ["Musím odísť o siedmej.", "Musím odídem o siedmej.", "Musíš odísť o siedmej."] },
+    ], hint: "Следите за лицом, инфинитивом и разницей nemusím / nesmiem.", explanation: "Шесть реплик объединяют обязанность, отсутствие обязанности, запрет и вопрос." },
+  ],
+  knowledgeChecks: [
+    { id: "m5-musiet-infinitive-check-1", question: "Какая модель нормативна?", options: ["Musím pracovať.", "Musím pracujem.", "Musí pracovať ja."], answer: "Musím pracovať.", explanation: "После личной формы musím нужен инфинитив." },
+    { id: "m5-musiet-infinitive-check-2", question: "Как правильно сказать «Нам не нужно ждать»?", options: ["Nemusíme čakať.", "Nesmieme čakať.", "Ne musíme čakáme."], answer: "Nemusíme čakať.", explanation: "Nemusíme означает отсутствие обязанности." },
+    { id: "m5-musiet-infinitive-check-3", question: "Как выразить запрет?", options: ["Tu nesmiete parkovať.", "Tu nemusíte parkovať.", "Tu musíte parkovať."], answer: "Tu nesmiete parkovať.", explanation: "Nesmieť означает «нельзя»." },
+  ],
+  finalChecks: [{ id: "m5-musiet-infinitive-final-1", question: "Как спросить «Когда тебе нужно уйти?»", options: ["Kedy musíš odísť?", "Kedy musíš odídeš?", "Kedy musím odísť?"], answer: "Kedy musíš odísť?", explanation: "Kedy стоит первым, musíš согласуется с ty, odísť остаётся инфинитивом." }],
+  chatPrompt: "Назовите две обязанности, одно необязательное действие и один запрет. Затем задайте вопрос с musieť и ответьте со сменой лица.",
+  chatSuggestions: ["Dnes musím pracovať.", "Nemusím čakať.", "Tu nesmiem parkovať."],
+} satisfies CourseLesson;

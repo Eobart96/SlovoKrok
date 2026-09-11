@@ -40,6 +40,8 @@ export type KnowledgeCheck = {
 };
 
 export type CourseLesson = {
+  vocabulary?: Array<{ word: string; translation: string; example?: string | null }>;
+  listening?: Array<{ id: string; audio: string; transcript: string; question: string; options: string[]; answer: string; explanation: string }>;
   slug: string;
   order: number;
   title: string;

@@ -1,29 +1,225 @@
-import { defineModule6Lesson } from "../lessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const familyLesson = defineModule6Lesson("family", 0, {
-  "title": "Семья",
-  "slovakTitle": "Rodina",
-  "outcome": "Представлять членов семьи и сообщать сведения о них.",
-  "summary": "После урока вы сможете представлять членов семьи и сообщать сведения о них в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Используйте mám, volať sa, byť и притяжательные слова для описания семьи. Возраст выражается через mať: Má tridsať rokov.",
-  "examples": [
-    {
-      "slovak": "Toto je moja sestra Anna.",
-      "russian": "Это моя сестра Анна."
-    },
-    {
-      "slovak": "Mám jedného brata.",
-      "russian": "У меня один брат."
-    },
-    {
-      "slovak": "Moji rodičia bývajú v Košiciach.",
-      "russian": "Мои родители живут в Кошице."
-    },
-    {
-      "slovak": "Otec je učiteľ.",
-      "russian": "Отец - учитель."
-    }
+export const familyLesson = {
+  vocabulary: [
+    {"word":"Toto je moja sestra Anna.","translation":"Это моя сестра Анна.","example":"Toto je moja sestra Anna."},
+    {"word":"Mám jedného brata.","translation":"У меня один брат.","example":"Mám jedného brata."},
+    {"word":"Moji rodičia bývajú v Košiciach.","translation":"Мои родители живут в Кошице.","example":"Moji rodičia bývajú v Košiciach."},
+    {"word":"Otec je učiteľ.","translation":"Отец — учитель.","example":"Otec je učiteľ."},
+    {"word":"Moja mama má štyridsať rokov.","translation":"Моей маме сорок лет.","example":"Moja mama má štyridsať rokov."},
+    {"word":"Volá sa Peter a pracuje v škole.","translation":"Его зовут Петер, и он работает в школе.","example":"Volá sa Peter a pracuje v škole."},
+    {"word":"mama / matka","translation":"мама / мать","example":"mama / matka"},
+    {"word":"rodičia","translation":"родители","example":"rodičia"},
+    {"word":"brat","translation":"брат","example":"brat"},
+    {"word":"syn","translation":"сын","example":"syn"},
+    {"word":"manžel","translation":"муж","example":"manžel"},
+    {"word":"starý otec","translation":"дедушка","example":"starý otec"},
   ],
-  "mistake": "Не говорите je tridsať rokov; правильно má tridsať rokov.",
-  "task": "Представьте трёх членов семьи и сообщите имя, возраст или занятие каждого."
-}, { focus: "Представляйте членов семьи через volať sa, byť, mať и притяжательные формы.", interaction: "Структура: кто это → имя/родство → один факт о человеке.", boundary: "Не требуется подробная биография или сложные родственные связи.", prompt: "Переведите: «Это моя сестра. Её зовут Анна».", answer: "To je moja sestra. Volá sa Anna.", hint: "Используйте moja sestra и Volá sa." });
+  slug: "family",
+  order: 1,
+  title: "Семья",
+  slovakTitle: "Rodina",
+  description: "Представляйте близких и сообщайте их имя, возраст, место жительства и занятие.",
+  duration: "35–40 мин",
+  goals: [
+    "Называть ближайших членов семьи",
+    "Согласовывать môj, moja, moje и moji с названием родственника",
+    "Говорить, кто есть в семье и сколько человеку лет",
+    "Сообщать имя, место жительства, работу или учёбу родственника",
+    "Представлять семью в нескольких связанных фразах",
+  ],
+  theory: {
+    summary: "Чтобы представить семью, достаточно пяти опор: кто это, как его или её зовут, сколько человеку лет, где он или она живёт и чем занимается. Используйте короткие знакомые модели и меняйте в них по одному факту.",
+    rules: [
+      "Ближайшие родственники: mama/matka, otec, rodičia, brat, sestra, syn, dcéra, manžel, manželka, dieťa/deti, starý otec и stará mama.",
+      "Притяжательная форма согласуется с существительным: môj otec, moja sestra, moje dieťa, moji rodičia.",
+      "Наличие выражается глаголом mať: Mám brata. Mám jednu sestru. Nemám deti.",
+      "Возраст выражается через mať, а не byť: Má tridsať rokov. С числами 2–4 употребляется roky: Má dva roky.",
+      "Имя сообщается моделью volať sa: Volá sa Anna. Для места и занятия подходят bývať, pracovať и študovať.",
+      "В связном представлении не обязательно повторять местоимение: Toto je moja sestra. Volá sa Anna. Býva v Žiline a študuje.",
+    ],
+    examples: [
+      { slovak: "Toto je moja sestra Anna.", russian: "Это моя сестра Анна.", explanation: "Moja согласуется с существительным sestra." },
+      { slovak: "Mám jedného brata.", russian: "У меня один брат.", explanation: "После mám используется объектная форма jedného brata." },
+      { slovak: "Moji rodičia bývajú v Košiciach.", russian: "Мои родители живут в Кошице.", explanation: "Moji и bývajú стоят во множественном числе." },
+      { slovak: "Otec je učiteľ.", russian: "Отец — учитель.", explanation: "В настоящем времени словацкий требует форму je." },
+      { slovak: "Moja mama má štyridsať rokov.", russian: "Моей маме сорок лет.", explanation: "Возраст выражается формой má ... rokov." },
+      { slovak: "Volá sa Peter a pracuje v škole.", russian: "Его зовут Петер, и он работает в школе.", explanation: "После первого упоминания имя можно не заменять местоимением." },
+    ],
+  },
+  sections: [
+    {
+      title: "Кто входит в семью",
+      paragraphs: [
+        "Начните с ближайших родственников. Слова mama и otec нейтральны в обычной речи; matka — более официальное слово. Во множественном числе rodičia означает обоих родителей, а deti — детей.",
+        "Для представления человека используйте Toto je ...: Toto je môj otec. Toto je moja sestra. Перед именем можно сказать одним предложением: Toto je moja sestra Anna.",
+      ],
+      table: { headers: ["Словацкий", "Русский", "Словацкий", "Русский"], rows: [
+        ["mama / matka", "мама / мать", "otec", "отец"],
+        ["rodičia", "родители", "dieťa / deti", "ребёнок / дети"],
+        ["brat", "брат", "sestra", "сестра"],
+        ["syn", "сын", "dcéra", "дочь"],
+        ["manžel", "муж", "manželka", "жена"],
+        ["starý otec", "дедушка", "stará mama", "бабушка"],
+      ] },
+      items: ["Toto je môj brat Tomáš.", "Toto je moja dcéra Eva.", "Toto sú moji rodičia."],
+      note: "Toto je — для одного человека; Toto sú — для нескольких людей.",
+    },
+    {
+      title: "Môj, moja, moje, moji",
+      paragraphs: [
+        "Форма «мой/моя/моё/мои» зависит от рода и числа слова после неё. Учите сочетание целиком, а не отдельное притяжательное слово.",
+        "Для нескольких людей мужского личного рода используется moji: moji rodičia, moji bratia. С формой deti употребляется moje: moje deti.",
+      ],
+      table: { headers: ["Форма", "С чем", "Примеры"], rows: [
+        ["môj", "мужской род, один человек", "môj otec, môj brat, môj syn"],
+        ["moja", "женский род", "moja mama, moja sestra, moja dcéra"],
+        ["moje", "средний род или deti", "moje dieťa, moje deti"],
+        ["moji", "несколько мужчин или смешанная группа людей", "moji rodičia, moji bratia"],
+      ] },
+      items: ["Jeho — его: Toto je jeho brat.", "Jej — её: Toto je jej sestra.", "Ich — их: Toto je ich dcéra."],
+      note: "Не смешивайте формы: môj otec, но moja mama; moji rodičia, но moje deti.",
+    },
+    {
+      title: "Кто у вас есть и сколько ему лет",
+      paragraphs: [
+        "Глагол mať сообщает и о составе семьи, и о возрасте. После mám названия некоторых родственников меняют форму: mám brata, mám sestru, mám dcéru. Эти частотные сочетания запоминайте как готовые модели.",
+        "В словацком человеку не «есть» столько-то лет — он их «имеет»: Má tridsať rokov. В вопросе используется Koľko rokov má ...?",
+      ],
+      table: { headers: ["Задача", "Модель", "Перевод"], rows: [
+        ["состав семьи", "Mám jedného brata.", "У меня один брат."],
+        ["состав семьи", "Mám jednu sestru a dve deti.", "У меня одна сестра и двое детей."],
+        ["отсутствие", "Nemám deti.", "У меня нет детей."],
+        ["возраст", "Moja mama má štyridsať rokov.", "Моей маме сорок лет."],
+        ["вопрос", "Koľko rokov má tvoj brat?", "Сколько лет твоему брату?"],
+      ] },
+      items: ["1 rok", "2–4 roky", "5 и больше: rokov", "Má jeden rok. Má dva roky. Má päť rokov."],
+      note: "Ошибка: Je tridsať rokov. Правильно: Má tridsať rokov.",
+    },
+    {
+      title: "Имя, место и занятие",
+      paragraphs: [
+        "После родства добавьте один-два понятных факта. Формы volá sa, býva, pracuje и študuje относятся к одному человеку; для rodičia нужны volajú sa, bývajú, pracujú.",
+        "Профессию после byť обычно называют без артикля: Otec je učiteľ. Mama je lekárka. Для A1 достаточно знакомой профессии или общего študuje/pracuje.",
+      ],
+      table: { headers: ["Факт", "Один человек", "Несколько людей"], rows: [
+        ["имя", "Volá sa Anna.", "Volajú sa Anna a Peter."],
+        ["место", "Býva v Žiline.", "Bývajú v Košiciach."],
+        ["работа", "Pracuje v škole.", "Pracujú v nemocnici."],
+        ["учёба", "Študuje v Bratislave.", "Študujú na univerzite."],
+      ] },
+      items: ["Toto je môj otec. Volá sa Peter.", "Má päťdesiat rokov a býva v Prešove.", "Je učiteľ a pracuje v škole."],
+      note: "Согласуйте глагол с одним человеком или группой: býva — bývajú, pracuje — pracujú.",
+    },
+    {
+      title: "Связное представление и частые ошибки",
+      paragraphs: [
+        "Стройте рассказ по одному маршруту: кто это → имя → возраст → место → занятие. Не обязательно сообщать каждый факт о каждом человеке; трёх-четырёх коротких фраз достаточно.",
+        "Перед ответом проверьте форму притяжательного слова, má для возраста, je при профессии и единственное или множественное число глагола.",
+      ],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["moja otec", "môj otec", "Otec — мужской род."],
+        ["moji deti", "moje deti", "Слово deti сочетается с moje."],
+        ["Mama je štyridsať rokov.", "Mama má štyridsať rokov.", "Возраст выражается через mať."],
+        ["Rodičia býva v Košiciach.", "Rodičia bývajú v Košiciach.", "Rodičia — множественное число."],
+        ["Otec učiteľ.", "Otec je učiteľ.", "В словацком нужна форма byť."],
+      ] },
+      items: ["Toto je moja sestra. Volá sa Anna.", "Má dvadsať rokov a býva v Žiline.", "Študuje na univerzite."],
+      note: "Финальный рассказ можно составить из изученных моделей без сложной биографии и дальних степеней родства.",
+    },
+  ],
+  stepPractices: [
+    { id: "m6-family-step-1", sectionIndex: 0, type: "pairs", prompt: "Выберите словацкое название родственника.", answer: "otec; sestra; dcéra; rodičia; stará mama", pairs: [
+      { prompt: "отец", answer: "otec", options: ["otec", "syn", "brat"] },
+      { prompt: "сестра", answer: "sestra", options: ["mama", "dcéra", "sestra"] },
+      { prompt: "дочь", answer: "dcéra", options: ["manželka", "sestra", "dcéra"] },
+      { prompt: "родители", answer: "rodičia", options: ["rodičia", "deti", "bratia"] },
+      { prompt: "бабушка", answer: "stará mama", options: ["stará mama", "starý otec", "mama"] },
+    ], hint: "Сначала определите поколение и пол родственника.", explanation: "Отец — otec, сестра — sestra, дочь — dcéra, родители — rodičia, бабушка — stará mama." },
+    { id: "m6-family-step-2", sectionIndex: 1, type: "pairs", prompt: "Выберите форму «мой/моя/моё/мои».", answer: "môj; moja; moje; moji; moje", pairs: [
+      { prompt: "___ otec", answer: "môj", options: ["môj", "moja", "moje", "moji"] },
+      { prompt: "___ sestra", answer: "moja", options: ["môj", "moja", "moje", "moji"] },
+      { prompt: "___ dieťa", answer: "moje", options: ["môj", "moja", "moje", "moji"] },
+      { prompt: "___ rodičia", answer: "moji", options: ["môj", "moja", "moje", "moji"] },
+      { prompt: "___ deti", answer: "moje", options: ["môj", "moja", "moje", "moji"] },
+    ], hint: "Смотрите на род и число существительного.", explanation: "Правильно: môj otec, moja sestra, moje dieťa, moji rodičia, moje deti." },
+    { id: "m6-family-step-3", sectionIndex: 2, type: "pairs", prompt: "Выберите правильную модель наличия или возраста.", answer: "Mám jedného brata.; Mám jednu sestru.; Nemám deti.; Má dva roky.; Má tridsať rokov.", pairs: [
+      { prompt: "У меня один брат.", answer: "Mám jedného brata.", options: ["Mám jedného brata.", "Som jeden brat."] },
+      { prompt: "У меня одна сестра.", answer: "Mám jednu sestru.", options: ["Mám jedna sestra.", "Mám jednu sestru."] },
+      { prompt: "У меня нет детей.", answer: "Nemám deti.", options: ["Nie mám deti.", "Nemám deti."] },
+      { prompt: "Ему/ей два года.", answer: "Má dva roky.", options: ["Je dva roky.", "Má dva roky."] },
+      { prompt: "Ему/ей тридцать лет.", answer: "Má tridsať rokov.", options: ["Má tridsať rokov.", "Je tridsať rokov."] },
+    ], hint: "И наличие, и возраст выражаются глаголом mať.", explanation: "Mám сообщает о составе семьи; má ... roky/rokov — о возрасте." },
+    { id: "m6-family-step-4", sectionIndex: 3, type: "pairs", prompt: "Переведите короткие факты о родственнике.", answer: "Volá sa Peter.; Býva v Žiline.; Otec je učiteľ.; Študuje v Bratislave.", pairs: [
+      { prompt: "Его зовут Петер.", answer: "Volá sa Peter.", inputHint: "Введите перевод" },
+      { prompt: "Он/она живёт в Жилине.", answer: "Býva v Žiline.", inputHint: "Введите перевод" },
+      { prompt: "Отец — учитель.", answer: "Otec je učiteľ.", inputHint: "Введите перевод" },
+      { prompt: "Он/она учится в Братиславе.", answer: "Študuje v Bratislave.", inputHint: "Введите перевод" },
+    ], hint: "Используйте одну личную форму для одного человека и сохраните диакритику.", explanation: "Опорные формы: volá sa, býva, je učiteľ, študuje." },
+    { id: "m6-family-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте каждую фразу.", answer: "Môj otec býva v Nitre.; Moje deti študujú.; Mama má štyridsať rokov.; Rodičia bývajú v Košiciach.; Otec je učiteľ.", pairs: [
+      { prompt: "Moja otec býva v Nitre.", answer: "Môj otec býva v Nitre.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Moji deti študujú.", answer: "Moje deti študujú.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Mama je štyridsať rokov.", answer: "Mama má štyridsať rokov.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Rodičia býva v Košiciach.", answer: "Rodičia bývajú v Košiciach.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Otec učiteľ.", answer: "Otec je učiteľ.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Проверьте согласование, возраст, число глагола и форму byť.", explanation: "Нормативные модели используют môj/moje, má для возраста, множественное bývajú и обязательное je." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 1",
+  reinforcementPractices: [
+    { id: "reinforcement:family:1", sectionIndex: 0, type: "pairs", prompt: "Выберите перевод названия родственника.", answer: "брат; дочь; муж; дети; дедушка", pairs: [
+      { prompt: "brat", answer: "брат", options: ["брат", "сын", "отец"] },
+      { prompt: "dcéra", answer: "дочь", options: ["сестра", "жена", "дочь"] },
+      { prompt: "manžel", answer: "муж", options: ["муж", "брат", "дедушка"] },
+      { prompt: "deti", answer: "дети", options: ["родители", "дети", "братья"] },
+      { prompt: "starý otec", answer: "дедушка", options: ["отец", "дедушка", "бабушка"] },
+    ], showSlovakKeyboard: false, hint: "Различайте поколение и семейную роль.", explanation: "Brat — брат, dcéra — дочь, manžel — муж, deti — дети, starý otec — дедушка." },
+    { id: "reinforcement:family:2", sectionIndex: 1, type: "pairs", prompt: "Выберите согласованную притяжательную форму.", answer: "môj; moja; moje; moji; moje", pairs: [
+      { prompt: "___ brat", answer: "môj", options: ["môj", "moja", "moje", "moji"] },
+      { prompt: "___ dcéra", answer: "moja", options: ["môj", "moja", "moje", "moji"] },
+      { prompt: "___ dieťa", answer: "moje", options: ["môj", "moja", "moje", "moji"] },
+      { prompt: "___ rodičia", answer: "moji", options: ["môj", "moja", "moje", "moji"] },
+      { prompt: "___ deti", answer: "moje", options: ["môj", "moja", "moje", "moji"] },
+    ], hint: "Согласуйте форму со словом справа.", explanation: "Môj — мужской род, moja — женский, moje — средний род и deti, moji — личное множественное число." },
+    { id: "reinforcement:family:3", sectionIndex: 2, type: "pairs", prompt: "Дополните модели состава семьи и возраста.", answer: "brata; sestru; deti; roky; rokov", pairs: [
+      { prompt: "Mám jedného ___. · brat", answer: "brata", inputHint: "Введите форму" },
+      { prompt: "Mám jednu ___. · sestra", answer: "sestru", inputHint: "Введите форму" },
+      { prompt: "Nemám ___. · deti", answer: "deti", inputHint: "Введите форму" },
+      { prompt: "Má dva ___.", answer: "roky", inputHint: "Введите слово" },
+      { prompt: "Má tridsať ___.", answer: "rokov", inputHint: "Введите слово" },
+    ], hint: "Вспомните готовые модели mám ... и má ... roky/rokov.", explanation: "Правильно: brata, sestru, deti, dva roky, tridsať rokov." },
+    { id: "reinforcement:family:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки в представлении семьи.", answer: "Toto je môj otec.; Moje deti bývajú v Nitre.; Sestra má dvadsať rokov.; Moji rodičia pracujú.; Mama je lekárka.", pairs: [
+      { prompt: "Toto je moja otec.", answer: "Toto je môj otec.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Moji deti býva v Nitre.", answer: "Moje deti bývajú v Nitre.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Sestra je dvadsať rokov.", answer: "Sestra má dvadsať rokov.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Moji rodičia pracuje.", answer: "Moji rodičia pracujú.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Mama lekárka.", answer: "Mama je lekárka.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Исправьте всю фразу; не теряйте словацкую диакритику.", explanation: "Проверьте форму môj/moje, множественное число, má для возраста и je для профессии." },
+    { id: "reinforcement:family:5", sectionIndex: 3, type: "pairs", prompt: "Переведите на словацкий.", answer: "Toto je moja sestra Anna.; Mám jedného brata.; Moji rodičia majú päťdesiat rokov.; Moja dcéra býva v Žiline.; Otec pracuje v škole.", pairs: [
+      { prompt: "Это моя сестра Анна.", answer: "Toto je moja sestra Anna.", acceptableAnswers: ["To je moja sestra Anna."], inputHint: "Введите перевод" },
+      { prompt: "У меня один брат.", answer: "Mám jedného brata.", inputHint: "Введите перевод" },
+      { prompt: "Моим родителям пятьдесят лет.", answer: "Moji rodičia majú päťdesiat rokov.", inputHint: "Введите перевод" },
+      { prompt: "Моя дочь живёт в Жилине.", answer: "Moja dcéra býva v Žiline.", inputHint: "Введите перевод" },
+      { prompt: "Отец работает в школе.", answer: "Otec pracuje v škole.", inputHint: "Введите перевод" },
+    ], hint: "Соберите фразу из изученных моделей и проверьте диакритику.", explanation: "Переводы используют toto je, mám, majú ... rokov, býva и pracuje." },
+    { id: "reinforcement:family:6", sectionIndex: 4, type: "pairs", prompt: "Соберите связное представление сестры: выберите подходящую фразу для каждого шага.", answer: "Toto je moja sestra.; Volá sa Anna.; Má dvadsať rokov.; Býva v Žiline.; Študuje na univerzite.", pairs: [
+      { prompt: "1 · кто это", answer: "Toto je moja sestra.", options: ["Toto je moja sestra.", "Toto sú moja sestra.", "Toto je môj sestra."] },
+      { prompt: "2 · имя", answer: "Volá sa Anna.", options: ["Volám sa Anna.", "Volá sa Anna.", "Volajú sa Anna."] },
+      { prompt: "3 · возраст", answer: "Má dvadsať rokov.", options: ["Je dvadsať rokov.", "Má dvadsať rokov.", "Majú dvadsať rokov."] },
+      { prompt: "4 · место", answer: "Býva v Žiline.", options: ["Bývam v Žiline.", "Bývajú v Žiline.", "Býva v Žiline."] },
+      { prompt: "5 · занятие", answer: "Študuje na univerzite.", options: ["Študuje na univerzite.", "Študujem na univerzite.", "Študujú na univerzite."] },
+    ], hint: "Все пять фраз описывают одну сестру в третьем лице.", explanation: "Связный профиль: Toto je moja sestra. Volá sa Anna. Má dvadsať rokov. Býva v Žiline. Študuje na univerzite." },
+  ],
+  knowledgeChecks: [
+    { id: "m6-family-check-1", question: "Как правильно сказать «Это моя сестра Анна»?", options: ["Toto je moja sestra Anna.", "Toto je môj sestra Anna.", "Toto sú moja sestra Anna."], answer: "Toto je moja sestra Anna.", explanation: "Moja согласуется с sestra, а для одного человека используется je." },
+    { id: "m6-family-check-2", question: "Как сказать «У меня один брат»?", options: ["Mám jedného brata.", "Som jedného brata.", "Mám jeden brat."], answer: "Mám jedného brata.", explanation: "Состав семьи выражается через mať; готовая объектная форма — jedného brata." },
+    { id: "m6-family-check-3", question: "Какая фраза правильно сообщает возраст?", options: ["Mama má štyridsať rokov.", "Mama je štyridsať rokov.", "Mama ma štyridsať rokov."], answer: "Mama má štyridsať rokov.", explanation: "Возраст выражается глаголом mať; форма má сохраняет долготу." },
+  ],
+  finalChecks: [
+    { id: "m6-family-final-1", question: "Выберите нормативное представление сестры.", options: ["To je moja sestra. Volá sa Anna.", "To je môj sestra. Volám sa Anna.", "To sú moja sestra. Volajú sa Anna."], answer: "To je moja sestra. Volá sa Anna.", explanation: "Для одной сестры нужны moja, je и форма третьего лица volá sa." },
+  ],
+  chatPrompt: "Представьте двух-трёх членов семьи по-словацки. Для каждого назовите родство и добавьте один факт: имя, возраст, место жительства, работа или учёба.",
+  chatSuggestions: ["Toto je moja sestra Anna.", "Môj otec má päťdesiat rokov.", "Moji rodičia bývajú v Košiciach."],
+} satisfies CourseLesson;

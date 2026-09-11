@@ -1,30 +1,191 @@
-import type { CompactLessonContent } from "../../plannedLessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const pastRegularContent: CompactLessonContent = {
-  "slug": "past-regular",
-  "title": "Прошедшее время: правильные глаголы",
-  "slovakTitle": "Minulý čas pravidelných slovies",
-  "outcome": "Образовывать базовые формы с согласованием по роду.",
-  "summary": "После урока вы сможете образовывать базовые формы с согласованием по роду в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Прошедшее время строится из l-формы и som/si/sme/ste; в 3-м лице вспомогательная форма отсутствует. L-форма согласуется по роду и числу.",
-  "examples": [
-    {
-      "slovak": "Včera som pracoval.",
-      "russian": "Вчера я работал."
-    },
-    {
-      "slovak": "Včera som pracovala.",
-      "russian": "Вчера я работала."
-    },
-    {
-      "slovak": "Večer sme pozerali film.",
-      "russian": "Вечером мы смотрели фильм."
-    },
-    {
-      "slovak": "Anna sa učila doma.",
-      "russian": "Анна училась дома."
-    }
+export const pastRegularContent = {
+  vocabulary: [
+    {"word":"Včera som pracoval.","translation":"Вчера я работал.","example":"Včera som pracoval."},
+    {"word":"Včera som pracovala.","translation":"Вчера я работала.","example":"Včera som pracovala."},
+    {"word":"Eva včera pracovala.","translation":"Ева вчера работала.","example":"Eva včera pracovala."},
+    {"word":"Večer sme varili večeru.","translation":"Вечером мы готовили ужин.","example":"Večer sme varili večeru."},
+    {"word":"Deti sa hrali v parku.","translation":"Дети играли в парке.","example":"Deti sa hrali v parku."},
+    {"word":"Kde ste bývali?","translation":"Где вы жили?","example":"Kde ste bývali?"},
+    {"word":"Ráno som raňajkoval / raňajkovala.","translation":"Утром я завтракал / завтракала.","example":"Ráno som raňajkoval / raňajkovala."},
+    {"word":"Dopoludnia som pracoval / pracovala.","translation":"До обеда я работал / работала.","example":"Dopoludnia som pracoval / pracovala."},
+    {"word":"Včera sme študovali slovenčinu.","translation":"Вчера мы учили словацкий.","example":"Včera sme študovali slovenčinu."},
+    {"word":"Po práci som upratoval / upratovala.","translation":"После работы я убирал / убирала.","example":"Po práci som upratoval / upratovala."},
+    {"word":"Telefonovali ste rodičom?","translation":"Вы звонили родителям?","example":"Telefonovali ste rodičom?"},
+    {"word":"Pozerali sme film doma.","translation":"Мы смотрели фильм дома.","example":"Pozerali sme film doma."},
+    {"word":"Večer sme sa prechádzali.","translation":"Вечером мы гуляли.","example":"Večer sme sa prechádzali."},
+    {"word":"Včera som neštudoval.","translation":"Вчера я не учился.","example":"Včera som neštudoval."},
   ],
-  "mistake": "Не добавляйте je в 3-м лице: On pracoval, не On je pracoval.",
-  "task": "Расскажите о трёх вчерашних действиях, выбрав правильную родовую форму."
-};
+  slug: "past-regular",
+  order: 1,
+  title: "Прошедшее время: правильные глаголы",
+  slovakTitle: "Minulý čas pravidelných slovies",
+  description: "Образовывать базовые формы с согласованием по роду.",
+  duration: "35–40 мин",
+  goals: [
+    "Образовывать прошедшую форму знакомых правильных глаголов",
+    "Выбирать -l, -la, -lo или -li по роду и числу",
+    "Использовать som, si, sme, ste и нулевую связку в 3-м лице",
+    "Рассказывать о вчерашнем дне в нескольких связанных фразах",
+  ],
+  theory: {
+    summary: "Прошедшее время знакомых правильных глаголов строится из l-формы и, в 1-м или 2-м лице, вспомогательной формы byť. L-форма показывает род в единственном числе и принимает -li во множественном; в 3-м лице je и sú не добавляются.",
+    rules: [
+      "Для глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.",
+      "Единственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.",
+      "Формы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.",
+      "В 3-м лице вспомогательной формы нет: On pracoval. Anna čítala. Deti sa hrali. Формы je и sú здесь не ставятся.",
+      "Отрицание ne- присоединяется к смысловому глаголу: nepracoval som, nečítala si, neštudovali sme.",
+      "Частица sa сохраняется рядом с глагольным блоком: Učil som sa. Deti sa hrali. Pozerali ste sa na film?",
+    ],
+    examples: [
+      { slovak: "Včera som pracoval.", russian: "Вчера я работал.", explanation: "Говорящий мужчина использует -l и форму som." },
+      { slovak: "Včera som pracovala.", russian: "Вчера я работала.", explanation: "Говорящая женщина использует -la и форму som." },
+      { slovak: "Eva včera pracovala.", russian: "Ева вчера работала.", explanation: "В 3-м лице форма je не нужна." },
+      { slovak: "Večer sme varili večeru.", russian: "Вечером мы готовили ужин.", explanation: "Во множественном числе используется -li, для my — sme." },
+      { slovak: "Deti sa hrali v parku.", russian: "Дети играли в парке.", explanation: "В 3-м лице множественного числа связки нет, sa сохраняется." },
+      { slovak: "Kde ste bývali?", russian: "Где вы жили?", explanation: "Вопросительное слово стоит перед формой ste и l-формой." },
+    ],
+  },
+  sections: [
+    {
+      title: "Основа на -l и время в контексте",
+      paragraphs: [
+        "Для знакомых правильных глаголов этой темы уберите конечное -ť и добавьте -l. Так получается мужская форма единственного числа: pracovať → pracoval, robiť → robil.",
+        "Маркеры včera, predvčerom, minulý týždeň, cez víkend, ráno и večer сразу задают прошлый контекст. Учите форму в целой фразе, а не как отдельное окончание.",
+      ],
+      table: { headers: ["Инфинитив", "Основа", "Форма на -l", "Перевод"], rows: [
+        ["pracovať", "pracova-", "pracoval", "работал"], ["čítať", "číta-", "čítal", "читал"],
+        ["robiť", "robi-", "robil", "делал"], ["variť", "vari-", "varil", "готовил"],
+        ["bývať", "býva-", "býval", "жил"], ["študovať", "študova-", "študoval", "учился"],
+        ["počúvať", "počúva-", "počúval", "слушал"], ["upratovať", "upratova-", "upratoval", "убирал"],
+      ] },
+      note: "Модель с удалением -ť работает для глаголов из таблицы, но не заменяет изучение частотных неправильных глаголов.",
+    },
+    {
+      title: "Род, число, вспомогательные формы и порядок слов",
+      paragraphs: [
+        "L-форма согласуется с тем, кто выполняет действие. В единственном числе различайте -l, -la и -lo; для множественного числа на уровне A1 используйте -li.",
+        "В 1-м и 2-м лице добавьте som, si, sme или ste. В 3-м лице вспомогательной формы нет. Нейтральный порядок: Včera som pracoval. Возможен и Pracoval som včera, но короткое som или si обычно не начинает сообщение.",
+      ],
+      table: { headers: ["Кто?", "Форма", "Пример"], rows: [
+        ["он / мужчина", "-l", "Peter včera pracoval."], ["она / женщина", "-la", "Eva včera pracovala."],
+        ["оно / средний род", "-lo", "Dieťa sa hralo."], ["мы / вы / они", "-li", "Rodičia pracovali."],
+      ] },
+      items: ["ja: pracoval som / pracovala som", "ty: pracoval si / pracovala si", "my: pracovali sme", "vy: pracovali ste", "on/ona/oni: pracoval / pracovala / pracovali"],
+      note: "Не добавляйте je или sú в 3-м лице: On pracoval. Oni pracovali.",
+    },
+    {
+      title: "Отрицание, вопросы и возвратные глаголы",
+      paragraphs: [
+        "Отрицание приклеивается к смысловому глаголу, а вспомогательная форма остаётся без ne-: Nepracoval som. Nečítala si. Neštudovali sme.",
+        "В вопросе сохраняйте нужную личную форму: Pracoval si? Čo ste robili? Kedy si študovala? Kde bývali? Частица sa не исчезает в прошедшем времени.",
+      ],
+      table: { headers: ["Задача", "Модель", "Пример"], rows: [
+        ["отрицание", "ne- + l-форма", "Nepracoval som."], ["вопрос да / нет", "l-форма + si / ste?", "Pracoval si?"],
+        ["вопрос о факте", "Čo + личная форма?", "Čo ste robili?"], ["вопрос о времени", "Kedy + личная форма?", "Kedy si študovala?"],
+        ["вопрос о месте", "Kde + личная форма?", "Kde bývali?"],
+      ] },
+      items: ["Učil som sa. / Učila som sa.", "Deti sa hrali.", "Prechádzali sme sa.", "Pozerali ste sa na film?"],
+      note: "Запоминайте ритм целой фразы: učil som sa, učila si sa, učili sme sa.",
+    },
+    {
+      title: "Банк фраз и короткий рассказ",
+      paragraphs: [
+        "Читайте фразу вслух, затем заменяйте один элемент: время, место или действие. В строках с двумя родовыми формами выбирайте вариант, который соответствует говорящему.",
+        "Связки najprv, potom, neskôr и večer превращают отдельные предложения в короткую историю.",
+      ],
+      table: { headers: ["Ситуация", "Словацкий", "Русский"], rows: [
+        ["утро", "Ráno som raňajkoval / raňajkovala.", "Утром я завтракал / завтракала."],
+        ["работа", "Dopoludnia som pracoval / pracovala.", "До обеда я работал / работала."],
+        ["учёба", "Včera sme študovali slovenčinu.", "Вчера мы учили словацкий."],
+        ["дом", "Po práci som upratoval / upratovala.", "После работы я убирал / убирала."],
+        ["еда", "Večer sme varili večeru.", "Вечером мы готовили ужин."],
+        ["телефон", "Telefonovali ste rodičom?", "Вы звонили родителям?"],
+        ["фильм", "Pozerali sme film doma.", "Мы смотрели фильм дома."],
+        ["прогулка", "Večer sme sa prechádzali.", "Вечером мы гуляли."],
+        ["дети", "Deti sa hrali v parku.", "Дети играли в парке."],
+        ["отрицание", "Včera som neštudoval.", "Вчера я не учился."],
+      ] },
+      items: ["Včera som pracovala doma.", "Po práci som varila večeru.", "Potom som telefonovala rodičom.", "Večer som čítala a počúvala hudbu.", "Neskôr som oddychovala."],
+      note: "Для связного рассказа достаточно 5–6 коротких фраз с согласованной родовой формой.",
+    },
+    {
+      title: "Частые ошибки и самопроверка",
+      paragraphs: ["Перед ответом проверьте две части: l-форму и, если она нужна, som, si, sme или ste. Затем проверьте род, число, отрицание и положение sa."],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Ja som pracovať.", "Pracoval som.", "Нужна форма на -l."], ["Anna pracoval.", "Anna pracovala.", "Женский род требует -la."],
+        ["On je pracoval.", "On pracoval.", "В 3-м лице нет je."], ["My pracoval sme.", "My sme pracovali.", "Для my нужна форма на -li и sme."],
+        ["Som nepracoval.", "Nepracoval som.", "ne- относится к смысловому глаголу."], ["Učil som slovenčinu sa.", "Učil som sa slovenčinu.", "Sa стоит рядом с глагольным блоком."],
+      ] },
+      items: ["Кто выполняет действие?", "Какой род или число требуется?", "Нужна ли форма som / si / sme / ste?", "Не добавлена ли связка в 3-м лице?", "Стоят ли ne- и sa на своём месте?"],
+      note: "Произносите исправленную фразу целиком, чтобы закрепить порядок слов.",
+    },
+  ],
+  stepPractices: [
+    { id: "m7-past-regular-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите перевод «Вчера я работал.»", options: ["Včera som pracoval.", "Včera som pracovala.", "Večer sme pozerali film."], answer: "Včera som pracoval.", hint: "Сверьтесь с основной моделью.", explanation: "Верная фраза: Včera som pracoval." },
+    { id: "m7-past-regular-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Вчера я работала.»", answer: "Včera som pracovala.", hint: "Используйте опорную фразу из таблицы.", explanation: "Верная фраза: Včera som pracovala." },
+    { id: "m7-past-regular-step-3", sectionIndex: 2, type: "text", prompt: "Переведите: «Вечером мы смотрели фильм.»", answer: "Večer sme pozerali film.", hint: "Сохраните порядок слов и диакритику.", explanation: "Верная фраза: Večer sme pozerali film." },
+    { id: "m7-past-regular-step-4", sectionIndex: 3, type: "pairs", prompt: "Переведите опорные фразы.", answer: "Včera som pracoval.; Varili sme večeru.; Anna nečítala.; Kde ste bývali?; Deti sa hrali v parku.", pairs: [
+      { prompt: "Вчера я работал / работала.", answer: "Včera som pracoval.", acceptableAnswers: ["Včera som pracovala."], inputHint: "Введите один вариант по своему роду" },
+      { prompt: "Мы готовили ужин.", answer: "Varili sme večeru.", acceptableAnswers: ["My sme varili večeru."], inputHint: "Введите перевод" },
+      { prompt: "Анна не читала.", answer: "Anna nečítala.", inputHint: "Введите перевод" }, { prompt: "Где вы жили?", answer: "Kde ste bývali?", inputHint: "Введите перевод" },
+      { prompt: "Дети играли в парке.", answer: "Deti sa hrali v parku.", inputHint: "Введите перевод" },
+    ], hint: "Проверьте род, вспомогательную форму, ne- и sa.", explanation: "Нормативные модели: Včera som pracoval/pracovala; varili sme; Anna nečítala; kde ste bývali; deti sa hrali." },
+    { id: "m7-past-regular-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки в целых предложениях.", answer: "Anna čítala.; Oni pracovali.; My sme pracovali.; Nevarila som.; Učil som sa slovenčinu.", pairs: [
+      { prompt: "Anna čítal.", answer: "Anna čítala.", inputHint: "Введите исправленную фразу" }, { prompt: "Oni sú pracovali.", answer: "Oni pracovali.", acceptableAnswers: ["Pracovali."], inputHint: "Введите исправленную фразу" },
+      { prompt: "My pracoval sme.", answer: "My sme pracovali.", acceptableAnswers: ["Pracovali sme."], inputHint: "Введите исправленную фразу" }, { prompt: "Som nevarila.", answer: "Nevarila som.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Učil som slovenčinu sa.", answer: "Učil som sa slovenčinu.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Исправьте род, число, связку, отрицание или положение sa.", explanation: "В исправленных фразах l-форма согласована, 3-е лицо не получает sú, а ne- и sa стоят рядом с глагольным блоком." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 1",
+  reinforcementPractices: [
+    { id: "reinforcement:past-regular:1", sectionIndex: 0, type: "pairs", prompt: "Выберите форму по роду и числу.", answer: "pracoval; čítala; hralo; študovali; varili", pairs: [
+      { prompt: "Peter", answer: "pracoval", options: ["pracovala", "pracoval", "pracovali"] }, { prompt: "Anna", answer: "čítala", options: ["čítala", "čítal", "čítali"] },
+      { prompt: "Dieťa sa", answer: "hralo", options: ["hrali", "hralo", "hrala"] }, { prompt: "Rodičia", answer: "študovali", options: ["študoval", "študovala", "študovali"] },
+      { prompt: "My sme", answer: "varili", options: ["varila", "varili", "varil"] },
+    ], hint: "Определите род в единственном числе или выберите -li во множественном.", explanation: "Правильно: Peter pracoval, Anna čítala, dieťa sa hralo, rodičia študovali, my sme varili." },
+    { id: "reinforcement:past-regular:2", sectionIndex: 1, type: "pairs", prompt: "Образуйте l-форму.", answer: "počúval; upratovala; robilo; bývali; telefonovali", pairs: [
+      { prompt: "otec · počúvať", answer: "počúval", inputHint: "Введите форму" }, { prompt: "mama · upratovať", answer: "upratovala", inputHint: "Введите форму" },
+      { prompt: "dieťa · robiť", answer: "robilo", inputHint: "Введите форму" }, { prompt: "ženy · bývať", answer: "bývali", inputHint: "Введите форму" },
+      { prompt: "rodičia · telefonovať", answer: "telefonovali", inputHint: "Введите форму" },
+    ], hint: "Для глаголов темы уберите -ť и согласуйте окончание.", explanation: "Формы: počúval, upratovala, robilo, bývali, telefonovali." },
+    { id: "reinforcement:past-regular:3", sectionIndex: 1, type: "pairs", prompt: "Выберите вспомогательную форму.", answer: "som; si; sme; ste; Ø", pairs: [
+      { prompt: "Včera ___ pracovala. · я", answer: "som", options: ["som", "si", "sme", "ste", "Ø"] }, { prompt: "Čo ___ robil? · ты", answer: "si", options: ["som", "si", "sme", "ste", "Ø"] },
+      { prompt: "My ___ čítali.", answer: "sme", options: ["som", "si", "sme", "ste", "Ø"] }, { prompt: "Kde ___ bývali? · вы", answer: "ste", options: ["som", "si", "sme", "ste", "Ø"] },
+      { prompt: "Eva ___ varila.", answer: "Ø", options: ["som", "si", "sme", "ste", "Ø"] },
+    ], hint: "В 3-м лице выберите Ø.", explanation: "Последовательность по лицам: som, si, sme, ste, Ø." },
+    { id: "reinforcement:past-regular:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте каждую ошибку.", answer: "Pracoval som.; Eva varila.; On čítal.; My sme študovali.; Nepracovala som.; Učila som sa.", pairs: [
+      { prompt: "Ja som pracovať.", answer: "Pracoval som.", acceptableAnswers: ["Pracovala som."], inputHint: "Введите исправленную фразу" }, { prompt: "Eva varil.", answer: "Eva varila.", inputHint: "Введите исправленную фразу" },
+      { prompt: "On je čítal.", answer: "On čítal.", acceptableAnswers: ["Čítal."], inputHint: "Введите исправленную фразу" }, { prompt: "My študoval sme.", answer: "My sme študovali.", acceptableAnswers: ["Študovali sme."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Som nepracovala.", answer: "Nepracovala som.", inputHint: "Введите исправленную фразу" }, { prompt: "Učila som slovenčinu sa.", answer: "Učila som sa.", acceptableAnswers: ["Učila som sa slovenčinu."], inputHint: "Введите исправленную фразу" },
+    ], hint: "Исправляйте всё предложение, сохраняя словацкую диакритику.", explanation: "Проверьте l-форму, род, число, отсутствие je в 3-м лице, отрицание и место sa." },
+    { id: "reinforcement:past-regular:5", sectionIndex: 3, type: "pairs", prompt: "Переведите на словацкий.", answer: "Včera som pracoval.; Večer sme varili večeru.; Anna nečítala.; Kde ste bývali?; Deti sa hrali v parku.", pairs: [
+      { prompt: "Вчера я работал / работала.", answer: "Včera som pracoval.", acceptableAnswers: ["Včera som pracovala."], inputHint: "Введите один вариант по своему роду" },
+      { prompt: "Вечером мы готовили ужин.", answer: "Večer sme varili večeru.", acceptableAnswers: ["Večer sme varili.", "Varili sme večeru."], inputHint: "Введите перевод" },
+      { prompt: "Анна не читала.", answer: "Anna nečítala.", inputHint: "Введите перевод" }, { prompt: "Где вы жили?", answer: "Kde ste bývali?", inputHint: "Введите перевод" },
+      { prompt: "Дети играли в парке.", answer: "Deti sa hrali v parku.", inputHint: "Введите перевод" },
+    ], hint: "Воспроизведите целую модель и сохраните диакритику.", explanation: "Правильные формы используют som/sme/ste, женское -la, множественное -li, ne- и sa." },
+    { id: "reinforcement:past-regular:6", sectionIndex: 3, type: "pairs", prompt: "Соберите рассказ о вчерашнем дне женщины.", answer: "Včera som pracovala doma.; Ráno som telefonovala kolegovi.; Potom som študovala slovenčinu.; Po práci som varila večeru.; Nepozerala som film.; Večer som čítala a oddychovala.", pairs: [
+      { prompt: "1 · работа дома", answer: "Včera som pracovala doma.", options: ["Včera som pracoval doma.", "Včera som pracovala doma.", "Včera pracovala som doma."] },
+      { prompt: "2 · звонок утром", answer: "Ráno som telefonovala kolegovi.", options: ["Ráno telefonovala som kolegovi.", "Ráno som telefonoval kolegovi.", "Ráno som telefonovala kolegovi."] },
+      { prompt: "3 · затем учёба", answer: "Potom som študovala slovenčinu.", options: ["Potom som študovala slovenčinu.", "Potom študovala som slovenčinu.", "Potom som študoval slovenčinu."] },
+      { prompt: "4 · ужин после работы", answer: "Po práci som varila večeru.", options: ["Po práci som varil večeru.", "Po práci som varila večeru.", "Po práci varila som večeru."] },
+      { prompt: "5 · отрицание", answer: "Nepozerala som film.", options: ["Som nepozerala film.", "Nepozeral som film.", "Nepozerala som film."] },
+      { prompt: "6 · вечер", answer: "Večer som čítala a oddychovala.", options: ["Večer som čítala a oddychovala.", "Večer čítala som a oddychovala.", "Večer som čítal a oddychoval."] },
+    ], hint: "Все предложения говорит одна женщина; сохраняйте -la и естественный порядок слов.", explanation: "Рассказ последовательно использует včera, ráno, potom, po práci и večer, а все l-формы согласованы в женском роде." },
+  ],
+  knowledgeChecks: [
+    { id: "m7-past-regular-check-1", question: "Как мужчина скажет «Вчера я работал»?", options: ["Včera som pracovala.", "Včera som pracoval.", "Včera pracoval som."], answer: "Včera som pracoval.", explanation: "Мужская l-форма — pracoval; нейтральный порядок после včera: som pracoval." },
+    { id: "m7-past-regular-check-2", question: "Как правильно сказать об Анне?", options: ["Anna čítal.", "Anna je čítala.", "Anna čítala."], answer: "Anna čítala.", explanation: "Женская форма получает -la, а в 3-м лице je не ставится." },
+  ],
+  finalChecks: [
+    { id: "m7-past-regular-final-1", question: "Выберите нормативный перевод «Вечером мы смотрели фильм».", options: ["Večer sme pozerali film.", "Večer pozerali sme film.", "Večer sme pozeral film."], answer: "Večer sme pozerali film.", explanation: "Для my нужны множественная l-форма pozerali и вспомогательная форма sme." },
+  ],
+  chatPrompt: "Расскажите о вчерашнем дне в 5–6 коротких фразах. Используйте včera, potom и večer, согласуйте l-формы со своим родом и добавьте одно отрицание.",
+  chatSuggestions: ["Včera som pracoval / pracovala doma.", "Potom som varil / varila večeru.", "Večer som čítal / čítala."],
+} satisfies CourseLesson;

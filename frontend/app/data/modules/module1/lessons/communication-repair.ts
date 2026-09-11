@@ -1,6 +1,19 @@
 import { defineModule1Lesson } from "../lessonFactory";
 
 export const communicationRepairLesson = defineModule1Lesson({
+  vocabulary: [
+    {"word":"Prepáčte, nerozumiem. Ešte raz, prosím.","translation":"Извините, я не понимаю. Ещё раз, пожалуйста.","example":"Prepáčte, nerozumiem. Ešte raz, prosím."},
+    {"word":"Môžete hovoriť pomalšie?","translation":"Можете говорить медленнее?","example":"Môžete hovoriť pomalšie?"},
+    {"word":"Čo znamená „účet“?","translation":"Что означает «účet»?","example":"Čo znamená „účet“?"},
+    {"word":"Ako sa to píše?","translation":"Как это пишется?","example":"Ako sa to píše?"},
+    {"word":"Správne rozumiem, že stretnutie je o desiatej?","translation":"Я правильно понимаю, что встреча в десять?","example":"Správne rozumiem, že stretnutie je o desiatej?"},
+    {"word":"Prepáčte, nerozumiem.","translation":"Извините, я не понимаю.","example":"Prepáčte, nerozumiem."},
+    {"word":"Nerozumiem tomu.","translation":"Я этого не понимаю.","example":"Nerozumiem tomu."},
+    {"word":"Nerozumel som.","translation":"Я не понял.","example":"Nerozumel som."},
+    {"word":"Nerozumela som.","translation":"Я не поняла.","example":"Nerozumela som."},
+    {"word":"Nepočul som.","translation":"Я не расслышал.","example":"Nepočul som."},
+    {"word":"Nepočula som.","translation":"Я не расслышала.","example":"Nepočula som."},
+  ],
   slug: "communication-repair",
   title: "Коммуникативное уточнение",
   slovakTitle: "Komunikačné upresnenie",

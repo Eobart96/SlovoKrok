@@ -24,11 +24,12 @@ Do not load broad project reports for a progress-only update.
 Treat the stages as an ordered flow:
 
 1. `📝 Документ: доделать` — the source study document is incomplete.
-2. `🟠 В софт: пересобрать` — the source is ready, but the lesson still needs to
-   be assembled or revised in the application.
-3. `🔵 Загружено — проверить` — the lesson is present in the project and awaits
+2. `📝 Переделать` — the topic material still needs to be assembled or revised.
+3. `🟠 Материал готов — загрузить` — the source material is ready, but the
+   lesson has not yet been transferred into the application.
+4. `🔵 Загружено — проверить` — the lesson is present in the project and awaits
    the owner's manual review.
-4. `✅ Проверено и согласовано` — the owner manually checked and approved it.
+5. `✅ Проверено и согласовано` — the owner manually checked and approved it.
 
 Never infer approval from automated tests, file presence, or another agent's
 review. Only the owner's report can move a topic to the green stage.
@@ -40,8 +41,11 @@ review. Only the owner's report can move a topic to the green stage.
 - Interpret «проверил до темы N» as topics through N being green.
 - Explicit exceptions override a range. Example: «проверил до 9, но 9 проверю
   позже» means topics 1–8 are green and topic 9 remains blue.
-- «Документ готов» moves the named topic from the document stage to orange;
-  it does not mean the topic is loaded into the application.
+- «Материал/документ готов к загрузке» moves the named topic or module to
+  `🟠 Материал готов — загрузить`; it does not mean the topic is loaded into
+  the application.
+- «Переделать/пересобрать» moves the named topic to `📝 Переделать` unless the
+  owner also says the revised material is ready to upload.
 - Preserve later topics and other modules unless the report clearly changes
   them.
 - If two plausible readings would change different topics and no explicit

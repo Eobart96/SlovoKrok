@@ -1,6 +1,14 @@
 import { defineModule1Lesson } from "../lessonFactory";
 
 export const wordStressLesson = defineModule1Lesson({
+  vocabulary: [
+    {"word":"rodina","translation":"семья","example":"rodina"},
+    {"word":"Slovensko","translation":"Словакия","example":"Slovensko"},
+    {"word":"dobrý","translation":"хороший","example":"dobrý"},
+    {"word":"učiteľ","translation":"учитель","example":"učiteľ"},
+    {"word":"na stole","translation":"на столе","example":"na stole"},
+    {"word":"do školy","translation":"в школу","example":"do školy"},
+  ],
   slug: "word-stress",
   title: "Ударение и ритм слова",
   slovakTitle: "Prízvuk a rytmus slova",

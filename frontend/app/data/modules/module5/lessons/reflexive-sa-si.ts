@@ -1,32 +1,175 @@
-import { defineModule5Lesson } from "../lessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const reflexiveSaSiLesson = defineModule5Lesson("reflexive-sa-si", 2, {
-  "title": "Возвратные глаголы sa и si",
-  "slovakTitle": "Zvratné slovesá sa a si",
-  "outcome": "Использовать частотные возвратные модели.",
-  "summary": "После урока вы сможете использовать частотные возвратные модели в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Sa и si входят в словарную модель глагола: volať sa, učiť sa, obliekať sa, dať si. Они обычно стоят после первого смыслового элемента фразы.",
-  "examples": [
-    {
-      "slovak": "Volám sa Nina.",
-      "russian": "Меня зовут Нина."
-    },
-    {
-      "slovak": "Učím sa po slovensky.",
-      "russian": "Я учу словацкий."
-    },
-    {
-      "slovak": "Ráno sa obliekam.",
-      "russian": "Утром я одеваюсь."
-    },
-    {
-      "slovak": "Dám si čaj.",
-      "russian": "Я возьму чай."
-    }
+export const reflexiveSaSiLesson = {
+  vocabulary: [
+    {"word":"Volám sa Ari.","translation":"Меня зовут Ари.","example":"Volám sa Ari."},
+    {"word":"Učím sa slovenčinu.","translation":"Я изучаю словацкий.","example":"Učím sa slovenčinu."},
+    {"word":"Umývam si ruky.","translation":"Я мою руки.","example":"Umývam si ruky."},
+    {"word":"Stretávame sa večer.","translation":"Мы встречаемся вечером.","example":"Stretávame sa večer."},
+    {"word":"Dám si kávu.","translation":"Я закажу кофе.","example":"Dám si kávu."},
+    {"word":"Môžeme sa stretnúť zajtra?","translation":"Мы можем встретиться завтра?","example":"Môžeme sa stretnúť zajtra?"},
   ],
-  "mistake": "Не опускайте sa/si, если оно является частью глагольной модели.",
-  "task": "Составьте четыре фразы с volať sa, učiť sa, obliekať sa и dať si."
-}, {
-    rules: ["Sa и si являются частью многих частотных глагольных моделей.", "Sa встречается в volať sa, učiť sa, stretnúť sa; si — в dať si, kúpiť si.", "Клитика обычно занимает раннюю позицию: Volám sa Anna; Dám si kávu.", "Не переводите sa/si отдельным русским словом и не опускайте их из словарной модели."],
-    contrasts: ["Volám sa Peter — меня зовут Петер.", "Učím sa po slovensky — я учу словацкий.", "Dám si čaj — я возьму чай."], prompt: "Переведите: «Я учу словацкий».", answer: "Učím sa po slovensky.", hint: "Глагол učiť sa сохраняет sa.",
-  });
+  slug: "reflexive-sa-si",
+  order: 3,
+  title: "Возвратные глаголы sa и si",
+  slovakTitle: "Zvratné slovesá sa a si",
+  description: "Используйте sa и si в знакомстве, привычках, уходе за собой, встречах и заказах.",
+  duration: "35–40 мин",
+  goals: ["Узнавать три основные роли sa и практическую роль si", "Различать Umývam sa и Umývam si ruky", "Ставить sa/si в естественное раннее место простой фразы", "Сохранять sa/si рядом с личной формой модального глагола", "Говорить о себе, привычках, встречах и заказах"],
+  theory: {
+    summary: "Sa и si — короткие безударные частицы, которые запоминаются вместе с глаголом. Sa может обозначать действие на себя, взаимность или входить в словарную форму; si часто сопровождает действие для себя с предметом или частью тела.",
+    rules: [
+      "Записывайте глагол целиком: volať sa, učiť sa, báť sa, dať si. Без частицы значение может измениться.",
+      "Sa имеет три частые роли: действие на себя — Umývam sa; взаимность — Stretávame sa; часть словарной формы — Bojím sa.",
+      "Si часто указывает на предмет или часть тела для себя: Umývam si ruky, Obliekam si bundu, Dám si čaj.",
+      "Сравните человека целиком и часть тела: Umývam sa — я моюсь; Umývam si ruky — я мою руки. С частью тела обычно не добавляют притяжательное местоимение.",
+      "В нейтральной фразе sa/si стремится к ранней позиции после первого ударного элемента: Učím sa. Ja sa učím. Dnes sa učím doma.",
+      "После модального глагола смысловой глагол остаётся в инфинитиве, а sa/si стоит рядом с личной формой: Chcem sa učiť. Musím si kúpiť lístok.",
+      "Отрицание присоединяется к глаголу, частица остаётся отдельно: Neučím sa. Dnes sa neučím. Nedám si kávu.",
+    ],
+    examples: [
+      { slovak: "Volám sa Ari.", russian: "Меня зовут Ари.", explanation: "Volať sa — словарная модель знакомства." },
+      { slovak: "Učím sa slovenčinu.", russian: "Я изучаю словацкий.", explanation: "Učiť sa означает учиться; без sa значение меняется." },
+      { slovak: "Umývam si ruky.", russian: "Я мою руки.", explanation: "Si сопровождает действие с частью тела для себя." },
+      { slovak: "Stretávame sa večer.", russian: "Мы встречаемся вечером.", explanation: "Sa выражает взаимное действие." },
+      { slovak: "Dám si kávu.", russian: "Я закажу кофе.", explanation: "Dať si — готовая модель заказа." },
+      { slovak: "Môžeme sa stretnúť zajtra?", russian: "Мы можем встретиться завтра?", explanation: "Sa стоит рядом с личной формой môžeme, а stretnúť остаётся инфинитивом." },
+    ],
+  },
+  sections: [
+    {
+      title: "Три роли sa",
+      paragraphs: ["Sa — короткое безударное слово, которое не меняется по лицам. Оно не всегда переводится русским «себя»: роль определяет вся словарная модель."],
+      table: { headers: ["Роль sa", "Как понять", "Пример", "Перевод"], rows: [
+        ["действие на себя", "действие возвращается к человеку", "Umývam sa.", "Я умываюсь / моюсь."],
+        ["взаимное действие", "люди делают это друг с другом", "Stretávame sa.", "Мы встречаемся."],
+        ["часть словарной формы", "отдельно sa не переводится", "Bojím sa.", "Я боюсь."],
+      ] },
+      items: ["volať sa — называться: Volám sa Ari.", "učiť sa — учиться: Učím sa slovenčinu.", "pýtať sa — спрашивать: Pýtam sa na cenu.", "báť sa — бояться: Nebojím sa.", "tešiť sa — радоваться, ждать: Teším sa na víkend.", "smiať sa — смеяться: Deti sa smejú.", "stretnúť sa — встретиться: Chcem sa stretnúť.", "poznať sa — быть знакомыми: Poznáme sa?"],
+      note: "Меняется глагол, а не частица: volám sa, voláš sa, volá sa, voláme sa, voláte sa, volajú sa.",
+    },
+    {
+      title: "Модели с si",
+      paragraphs: ["Si часто передаёт смысл «себе / для себя» и сопровождает предмет или часть тела. Это полезная подсказка A1, но устойчивую модель всё равно учите целиком."],
+      table: { headers: ["Человек целиком: sa", "Предмет / часть тела для себя: si"], rows: [
+        ["Umývam sa. — Я моюсь.", "Umývam si ruky. — Я мою руки."],
+        ["Obliekam sa. — Я одеваюсь.", "Obliekam si bundu. — Я надеваю куртку."],
+        ["Pripravujem sa. — Я готовлюсь.", "Pripravujem si raňajky. — Я готовлю себе завтрак."],
+      ] },
+      items: ["dať si — взять / заказать себе: Dám si čaj.", "kupovať si — покупать себе: Kupujem si lístok.", "brať si — брать себе / с собой: Beriem si vodu.", "umývať si — мыть часть тела: Umývam si zuby.", "obliekať si — надевать вещь: Obliekam si kabát.", "pripravovať si — готовить себе: Pripravujem si kávu.", "oddýchnuť si — отдохнуть: Chcem si oddýchnuť."],
+      note: "Частица меняет смысл: Dám vodu — дам воду; Dám si vodu — возьму воду себе. Umyjem auto — вымою машину; Umyjem si ruky — вымою руки.",
+    },
+    {
+      title: "Порядок слов: где стоят sa и si",
+      paragraphs: ["Sa и si безударны и в нейтральной фразе стремятся к началу — обычно после первого ударного элемента. Если фраза начинается с личной формы глагола, частица идёт сразу после неё."],
+      table: { headers: ["Первый элемент", "Естественная модель", "Перевод"], rows: [
+        ["глагол", "Učím sa slovenčinu.", "Я учу словацкий."], ["местоимение", "Ja sa učím slovenčinu.", "Я учу словацкий."],
+        ["время", "Dnes sa učím doma.", "Сегодня я учусь дома."], ["обстоятельство", "Ráno si umývam zuby.", "Утром я чищу зубы."],
+        ["вопросительное слово", "Ako sa voláte?", "Как вас зовут?"],
+      ] },
+      items: ["Chcem sa učiť. — Я хочу учиться.", "Môžeme sa stretnúť? — Мы можем встретиться?", "Musím si kúpiť lístok. — Я должен купить себе билет.", "Chcem si oddýchnuť. — Я хочу отдохнуть.", "Neučím sa dnes. / Dnes sa neučím. — Я сегодня не учусь.", "Nedám si kávu. — Я не буду заказывать кофе.", "Čo si dáte? — Что будете заказывать?"],
+      note: "Не начинайте нейтральную фразу с *Sa učím или *Si dávam. С модальным глаголом говорите Chcem sa učiť, не *chcem učiť sa.",
+    },
+    {
+      title: "Готовые фразы для вашей речи",
+      paragraphs: ["Закройте перевод, найдите sa или si и назовите словарную форму глагола. Затем замените в модели один элемент."],
+      table: { headers: ["Ситуация", "Словацкий пример", "Перевод"], rows: [
+        ["знакомство", "Volám sa Ari.", "Меня зовут Ари."], ["знакомство", "Ako sa voláte?", "Как вас зовут?"],
+        ["учёба", "Učím sa slovenčinu každý deň.", "Я учу словацкий каждый день."], ["учёба", "Dnes sa neučím doma.", "Сегодня я не учусь дома."],
+        ["вопрос", "Pýtam sa na cenu.", "Я спрашиваю о цене."], ["эмоция", "Nebojím sa.", "Я не боюсь."],
+        ["ожидание", "Teším sa na víkend.", "Я жду выходных."], ["эмоция", "Deti sa smejú.", "Дети смеются."],
+        ["встреча", "Stretávame sa večer.", "Мы встречаемся вечером."], ["взаимность", "Poznáme sa?", "Мы знакомы?"],
+        ["утро", "Zobúdzam sa o siedmej.", "Я просыпаюсь в семь."], ["одежда", "Obliekam sa rýchlo.", "Я быстро одеваюсь."],
+        ["гигиена", "Ráno si umývam zuby.", "Утром я чищу зубы."], ["гигиена", "Umývaš si ruky?", "Ты моешь руки?"],
+        ["одежда", "Obliekam si bundu.", "Я надеваю куртку."], ["покупка", "Kupujem si lístok.", "Я покупаю себе билет."],
+        ["с собой", "Beriem si dáždnik.", "Я беру с собой зонт."], ["кафе", "Dám si kávu.", "Я закажу кофе."],
+        ["отдых", "Chcem si oddýchnuť.", "Я хочу отдохнуть."], ["план", "Môžeme sa stretnúť zajtra?", "Мы можем встретиться завтра?"],
+      ] },
+      items: ["Знакомство: Ahoj, ako sa voláš? — Volám sa Ari. A ty? — Ja sa volám Nina. Učíš sa slovenčinu?", "В кафе: Čo si dáte? — Dám si čaj. A vy? — Ja si dám kávu."],
+      note: "Сохраняйте частицу при отрицании, вопросе и после модального глагола.",
+    },
+    {
+      title: "Частые ошибки и самопроверка",
+      paragraphs: ["Проверьте словарную форму, выбор sa/si и раннюю позицию частицы."],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Sa učím slovenčinu.", "Učím sa slovenčinu.", "Sa не начинает нейтральную фразу."], ["Ja volám sa Ari.", "Ja sa volám Ari.", "Частица идёт после первого элемента."],
+        ["Umývam sa ruky.", "Umývam si ruky.", "С частью тела и действием для себя используется si."], ["Chcem učiť sa.", "Chcem sa učiť.", "Sa стоит рядом с личной формой."],
+        ["Dám kávu si.", "Dám si kávu.", "Si не уходит в конец."],
+      ] },
+      items: ["Глагол сохранён вместе с sa/si?", "Для человека целиком выбрано sa, а для предмета или части тела — si?", "Частица стоит после первого ударного элемента?", "При модальном глаголе sa/si находится рядом с личной формой?", "Отрицание присоединено к глаголу, а частица осталась отдельной?"],
+      note: "Устойчивую модель произносите целиком: učiť sa, dať si, stretnúť sa.",
+    },
+  ],
+  stepPractices: [
+    { id: "m5-reflexive-sa-si-step-1", sectionIndex: 0, type: "pairs", prompt: "Определите роль sa.", answer: "действие на себя; взаимность; часть словарной формы; действие на себя", pairs: [
+      { prompt: "Umývam sa.", answer: "действие на себя", options: ["действие на себя", "взаимность", "часть словарной формы"] }, { prompt: "Poznáme sa.", answer: "взаимность", options: ["действие на себя", "взаимность", "часть словарной формы"] },
+      { prompt: "Bojím sa.", answer: "часть словарной формы", options: ["действие на себя", "взаимность", "часть словарной формы"] }, { prompt: "Obliekam sa.", answer: "действие на себя", options: ["действие на себя", "взаимность", "часть словарной формы"] },
+    ], showSlovakKeyboard: false, hint: "Смотрите, направлено ли действие на человека, взаимно ли оно или sa входит в словарную модель.", explanation: "Sa может обозначать действие на себя, взаимность или быть частью значения глагола." },
+    { id: "m5-reflexive-sa-si-step-2", sectionIndex: 1, type: "pairs", prompt: "Выберите sa или si.", answer: "sa; si; si; sa", pairs: [
+      { prompt: "Umývam ___ . · я моюсь", answer: "sa", options: ["sa", "si"] }, { prompt: "Umývam ___ ruky.", answer: "si", options: ["sa", "si"] },
+      { prompt: "Obliekam ___ bundu.", answer: "si", options: ["sa", "si"] }, { prompt: "Pripravujem ___ . · я готовлюсь", answer: "sa", options: ["sa", "si"] },
+    ], hint: "Человек целиком обычно сочетается с sa; предмет или часть тела для себя — с si.", explanation: "Umývam sa / pripravujem sa, но umývam si ruky / obliekam si bundu." },
+    { id: "m5-reflexive-sa-si-step-3", sectionIndex: 2, type: "pairs", prompt: "Соберите естественные предложения.", answer: "Dnes sa učím doma.; Ráno si umývam zuby.; Volám sa Ari.; Môžeme sa stretnúť zajtra?", pairs: [
+      { prompt: "dnes / sa / učím / doma", answer: "Dnes sa učím doma.", inputHint: "Введите предложение" }, { prompt: "si / ráno / umývam / zuby", answer: "Ráno si umývam zuby.", inputHint: "Введите предложение" },
+      { prompt: "volám / Ari / sa", answer: "Volám sa Ari.", inputHint: "Введите предложение" }, { prompt: "stretnúť / môžeme / sa / zajtra", answer: "Môžeme sa stretnúť zajtra?", inputHint: "Введите предложение" },
+    ], hint: "Поставьте sa/si после первого ударного элемента или рядом с личной формой.", explanation: "Естественные модели: Dnes sa učím; Ráno si umývam; Volám sa; Môžeme sa stretnúť." },
+    { id: "m5-reflexive-sa-si-step-4", sectionIndex: 3, type: "pairs", prompt: "Переведите готовые фразы.", answer: "Volám sa Ari.; Stretávame sa večer.; Umývam si zuby.; Čo si dáte?", pairs: [
+      { prompt: "Меня зовут Ари.", answer: "Volám sa Ari.", inputHint: "Введите перевод" }, { prompt: "Мы встречаемся вечером.", answer: "Stretávame sa večer.", inputHint: "Введите перевод" },
+      { prompt: "Я чищу зубы.", answer: "Umývam si zuby.", inputHint: "Введите перевод" }, { prompt: "Что вы будете заказывать?", answer: "Čo si dáte?", inputHint: "Введите перевод" },
+    ], hint: "Воспроизведите словарную модель и словацкую диакритику.", explanation: "Фразы используют volať sa, stretávať sa, umývať si и dať si." },
+    { id: "m5-reflexive-sa-si-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки.", answer: "Učím sa slovenčinu.; Ja sa volám Ari.; Umývam si ruky.; Chcem sa učiť.; Dám si kávu.", pairs: [
+      { prompt: "Sa učím slovenčinu.", answer: "Učím sa slovenčinu.", inputHint: "Введите исправленную фразу" }, { prompt: "Ja volám sa Ari.", answer: "Ja sa volám Ari.", acceptableAnswers: ["Volám sa Ari."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Umývam sa ruky.", answer: "Umývam si ruky.", inputHint: "Введите исправленную фразу" }, { prompt: "Chcem učiť sa.", answer: "Chcem sa učiť.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Dám kávu si.", answer: "Dám si kávu.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Проверьте выбор частицы и её раннюю позицию.", explanation: "Правильно: učím sa; ja sa volám; umývam si ruky; chcem sa učiť; dám si kávu." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 3",
+  reinforcementPractices: [
+    { id: "reinforcement:reflexive-sa-si:1", sectionIndex: 1, type: "pairs", prompt: "Выберите sa или si.", answer: "sa; si; sa; si; sa; si", pairs: [
+      { prompt: "Volám ___ Ari.", answer: "sa", options: ["sa", "si"] }, { prompt: "Umývam ___ ruky.", answer: "si", options: ["sa", "si"] },
+      { prompt: "Učím ___ slovenčinu.", answer: "sa", options: ["sa", "si"] }, { prompt: "Dám ___ čaj.", answer: "si", options: ["sa", "si"] },
+      { prompt: "Deti ___ smejú.", answer: "sa", options: ["sa", "si"] }, { prompt: "Obliekam ___ bundu.", answer: "si", options: ["sa", "si"] },
+    ], hint: "Сверьте словарную модель и наличие предмета или части тела для себя.", explanation: "Ответы: sa, si, sa, si, sa, si." },
+    { id: "reinforcement:reflexive-sa-si:2", sectionIndex: 0, type: "pairs", prompt: "Определите роль частицы.", answer: "действие на себя; взаимность; часть словарной формы; действие для себя", pairs: [
+      { prompt: "Umývam sa.", answer: "действие на себя", options: ["действие на себя", "взаимность", "часть словарной формы", "действие для себя"] },
+      { prompt: "Poznáme sa.", answer: "взаимность", options: ["действие на себя", "взаимность", "часть словарной формы", "действие для себя"] },
+      { prompt: "Bojím sa.", answer: "часть словарной формы", options: ["действие на себя", "взаимность", "часть словарной формы", "действие для себя"] },
+      { prompt: "Kupujem si lístok.", answer: "действие для себя", options: ["действие на себя", "взаимность", "часть словарной формы", "действие для себя"] },
+    ], showSlovakKeyboard: false, hint: "Определите, что частица добавляет к смыслу всей модели.", explanation: "Sa передаёт действие на себя, взаимность или часть значения; si — действие для себя." },
+    { id: "reinforcement:reflexive-sa-si:3", sectionIndex: 2, type: "pairs", prompt: "Соберите предложения.", answer: "Dnes sa učím doma.; Ráno si umývam zuby.; Volám sa Ari.; Môžeme sa stretnúť zajtra.", pairs: [
+      { prompt: "dnes / sa / učím / doma", answer: "Dnes sa učím doma.", inputHint: "Введите предложение" }, { prompt: "si / ráno / umývam / zuby", answer: "Ráno si umývam zuby.", inputHint: "Введите предложение" },
+      { prompt: "volám / Ari / sa", answer: "Volám sa Ari.", inputHint: "Введите предложение" }, { prompt: "stretnúť / môžeme / sa / zajtra", answer: "Môžeme sa stretnúť zajtra.", acceptableAnswers: ["Môžeme sa stretnúť zajtra?"], inputHint: "Введите предложение" },
+    ], hint: "Соберите нейтральный порядок слов; в последней строке точка и вопросительный знак допустимы.", explanation: "Sa/si занимает раннюю позицию, а после модального глагола стоит рядом с личной формой." },
+    { id: "reinforcement:reflexive-sa-si:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки.", answer: "Dávam si kávu.; Ja sa učím slovenčinu.; Chcem si oddýchnuť.; Dnes sa neučím.; Umývam si zuby.", pairs: [
+      { prompt: "Si dávam kávu.", answer: "Dávam si kávu.", inputHint: "Введите исправленную фразу" }, { prompt: "Ja učím sa slovenčinu.", answer: "Ja sa učím slovenčinu.", acceptableAnswers: ["Učím sa slovenčinu."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Chcem oddýchnuť si.", answer: "Chcem si oddýchnuť.", inputHint: "Введите исправленную фразу" }, { prompt: "Ne sa učím dnes.", answer: "Dnes sa neučím.", acceptableAnswers: ["Neučím sa dnes."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Umývam sa zuby.", answer: "Umývam si zuby.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Исправьте раннюю позицию, отрицание или выбор sa/si.", explanation: "Нормативно: dávam si; ja sa učím; chcem si oddýchnuť; dnes sa neučím; umývam si zuby." },
+    { id: "reinforcement:reflexive-sa-si:5", sectionIndex: 3, type: "pairs", prompt: "Переведите на словацкий.", answer: "Volám sa Ari.; Stretávame sa večer.; Umývam si zuby.; Čo si dáte?; Chcem sa učiť slovenčinu.", pairs: [
+      { prompt: "Меня зовут Ари.", answer: "Volám sa Ari.", inputHint: "Введите перевод" }, { prompt: "Мы встречаемся вечером.", answer: "Stretávame sa večer.", inputHint: "Введите перевод" },
+      { prompt: "Я чищу зубы.", answer: "Umývam si zuby.", inputHint: "Введите перевод" }, { prompt: "Что вы будете заказывать?", answer: "Čo si dáte?", inputHint: "Введите перевод" },
+      { prompt: "Я хочу учить словацкий.", answer: "Chcem sa učiť slovenčinu.", inputHint: "Введите перевод" },
+    ], hint: "Проверьте словарную модель, положение частицы и диакритику.", explanation: "Пять фраз используют volať sa, stretávať sa, umývať si, dať si и chcieť sa učiť." },
+    { id: "reinforcement:reflexive-sa-si:6", sectionIndex: 3, type: "pairs", prompt: "Соберите диалог о себе, привычке и встрече.", answer: "Ahoj, ako sa voláš?; Volám sa Ari. Každý deň sa učím slovenčinu.; Čo robíš ráno?; Ráno si umývam zuby a obliekam sa.; Chceš sa stretnúť večer?; Dnes nemôžem, ale môžeme sa stretnúť zajtra.", pairs: [
+      { prompt: "1 · знакомство", answer: "Ahoj, ako sa voláš?", options: ["Ahoj, ako sa voláš?", "Ahoj, ako voláš sa?", "Ahoj, ako si voláš?"] },
+      { prompt: "2 · имя и учёба", answer: "Volám sa Ari. Každý deň sa učím slovenčinu.", options: ["Volám sa Ari. Každý deň sa učím slovenčinu.", "Sa volám Ari. Každý deň učím sa slovenčinu.", "Volám si Ari. Každý deň učím slovenčinu."] },
+      { prompt: "3 · вопрос о привычке", answer: "Čo robíš ráno?", options: ["Čo robíš ráno?", "Čo sa robíš ráno?", "Čo si robíš ráno?"] },
+      { prompt: "4 · уход за собой", answer: "Ráno si umývam zuby a obliekam sa.", options: ["Ráno sa umývam zuby a obliekam si.", "Ráno si umývam zuby a obliekam sa.", "Ráno umývam si zuby a sa obliekam."] },
+      { prompt: "5 · предложение встретиться", answer: "Chceš sa stretnúť večer?", options: ["Chceš sa stretnúť večer?", "Chceš stretnúť sa večer?", "Sa chceš stretnúť večer?"] },
+      { prompt: "6 · отрицание и новый план", answer: "Dnes nemôžem, ale môžeme sa stretnúť zajtra.", options: ["Dnes nemôžem, ale môžeme sa stretnúť zajtra.", "Dnes nemôžem, ale môžeme stretnúť sa zajtra.", "Dnes ne môžem, ale sa môžeme stretnúť zajtra."] },
+    ], hint: "Следите за sa/si после первого ударного элемента и рядом с личной формой модального глагола.", explanation: "Диалог объединяет знакомство, привычку с si, возвратное действие, встречу и отрицание." },
+  ],
+  knowledgeChecks: [
+    { id: "m5-reflexive-sa-si-check-1", question: "Как различаются фразы о мытье?", options: ["Umývam sa — моюсь; Umývam si ruky — мою руки", "Umývam si — моюсь; Umývam sa ruky — мою руки", "Обе фразы требуют только sa"], answer: "Umývam sa — моюсь; Umývam si ruky — мою руки", explanation: "Sa относится к человеку целиком, si — к действию с частью тела для себя." },
+    { id: "m5-reflexive-sa-si-check-2", question: "Какая нейтральная фраза правильна?", options: ["Dnes sa učím doma.", "Dnes učím sa doma.", "Sa dnes učím doma."], answer: "Dnes sa učím doma.", explanation: "После первого ударного элемента dnes ставится sa." },
+    { id: "m5-reflexive-sa-si-check-3", question: "Как правильно сказать «Я хочу учиться»?", options: ["Chcem sa učiť.", "Chcem učiť sa.", "Sa chcem učiť."], answer: "Chcem sa učiť.", explanation: "Sa стоит рядом с личной формой chcem, а učiť остаётся инфинитивом." },
+  ],
+  finalChecks: [
+    { id: "m5-reflexive-sa-si-final-1", question: "Выберите нормативную фразу «Утром я чищу зубы».", options: ["Ráno si umývam zuby.", "Ráno sa umývam zuby.", "Ráno umývam si zuby."], answer: "Ráno si umývam zuby.", explanation: "С частью тела используется si, и частица стоит после первого ударного элемента ráno." },
+  ],
+  chatPrompt: "Представьтесь, скажите, что изучаете, назовите утреннее действие с si, договоритесь о встрече и сделайте заказ в 5–6 коротких фразах.",
+  chatSuggestions: ["Volám sa Ari.", "Ráno si umývam zuby.", "Môžeme sa stretnúť zajtra?"],
+} satisfies CourseLesson;

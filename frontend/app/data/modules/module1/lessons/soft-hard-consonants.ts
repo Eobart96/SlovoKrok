@@ -1,6 +1,26 @@
 import { defineModule1Lesson } from "../lessonFactory";
 
 export const softHardConsonantsLesson = defineModule1Lesson({
+  vocabulary: [
+    {"word":"ďakujem","translation":"спасибо","example":"ďakujem"},
+    {"word":"päť","translation":"пять","example":"päť"},
+    {"word":"kôň","translation":"конь","example":"kôň"},
+    {"word":"ľudia","translation":"люди","example":"ľudia"},
+    {"word":"deti","translation":"дети","example":"deti"},
+    {"word":"nie","translation":"нет","example":"nie"},
+    {"word":"lietadlo","translation":"самолёт","example":"lietadlo"},
+    {"word":"telefón","translation":"телефон","example":"telefón"},
+    {"word":"deň","translation":"день","example":"deň"},
+    {"word":"ticho","translation":"тихо","example":"ticho"},
+    {"word":"dieťa","translation":"ребёнок","example":"dieťa"},
+    {"word":"nič","translation":"ничего","example":"nič"},
+    {"word":"list","translation":"лист","example":"list"},
+    {"word":"čaj","translation":"чай","example":"čaj"},
+    {"word":"žena","translation":"женщина","example":"žena"},
+    {"word":"škola","translation":"школа","example":"škola"},
+    {"word":"chyba","translation":"ошибка","example":"chyba"},
+    {"word":"ryba","translation":"рыба","example":"ryba"},
+  ],
   slug: "soft-hard-consonants",
   title: "Мягкие и твёрдые согласные",
   slovakTitle: "Mäkké a tvrdé spoluhlásky",

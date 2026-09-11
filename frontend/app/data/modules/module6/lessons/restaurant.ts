@@ -1,29 +1,220 @@
-import { defineModule6Lesson } from "../lessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const restaurantLesson = defineModule6Lesson("restaurant", 4, {
-  "title": "Ресторан и кафе",
-  "slovakTitle": "Reštaurácia a kaviareň",
-  "outcome": "Понимать меню, делать заказ и просить счёт.",
-  "summary": "После урока вы сможете понимать меню, делать заказ и просить счёт в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Вежливый заказ строится через Prosím si или Chcel/chcela by som. Уточняйте ингредиенты с obsahuje и ограничения через bez + Genitív.",
-  "examples": [
-    {
-      "slovak": "Prosím si denné menu.",
-      "russian": "Мне, пожалуйста, дневное меню."
-    },
-    {
-      "slovak": "Čo obsahuje táto polievka?",
-      "russian": "Что входит в этот суп?"
-    },
-    {
-      "slovak": "Kávu bez cukru, prosím.",
-      "russian": "Кофе без сахара, пожалуйста."
-    },
-    {
-      "slovak": "Môžeme dostať účet?",
-      "russian": "Можно нам счёт?"
-    }
+export const restaurantLesson = {
+  vocabulary: [
+    {"word":"Prosím si denné menu.","translation":"Мне, пожалуйста, дневное меню.","example":"Prosím si denné menu."},
+    {"word":"Čo obsahuje táto polievka?","translation":"Что входит в этот суп?","example":"Čo obsahuje táto polievka?"},
+    {"word":"Kávu bez cukru, prosím.","translation":"Кофе без сахара, пожалуйста.","example":"Kávu bez cukru, prosím."},
+    {"word":"Môžeme dostať účet?","translation":"Можно нам счёт?","example":"Môžeme dostať účet?"},
+    {"word":"Zaplatím kartou.","translation":"Я заплачу картой.","example":"Zaplatím kartou."},
+    {"word":"Všetko je v poriadku.","translation":"Всё в порядке.","example":"Všetko je v poriadku."},
   ],
-  "mistake": "Не переводите русский заказ прямым Chcem… в вежливой сервисной ситуации, если уже изучены более мягкие формулы.",
-  "task": "Закажите суп, основное блюдо и напиток, уточните ингредиент и попросите счёт."
-}, { focus: "Понимайте простое меню, заказывайте блюдо/напиток и просите счёт.", interaction: "Структура: заказ → уточнение → благодарность → счёт.", boundary: "Сложные жалобы и диетические консультации не вводятся.", prompt: "Переведите от лица женщины: «Я хотела бы кофе и счёт».", answer: "Chcela by som kávu a účet.", hint: "Женская вежливая форма — chcela by som." });
+  slug: "restaurant",
+  order: 5,
+  title: "Ресторан и кафе",
+  slovakTitle: "Reštaurácia a kaviareň",
+  description: "Понимайте простое меню, делайте заказ и просите счёт.",
+  duration: "35–40 мин",
+  goals: [
+    "Различать основные разделы меню",
+    "Вежливо заказывать блюдо и напиток",
+    "Уточнять простой состав блюда",
+    "Просить вариант без одного ингредиента",
+    "Просить счёт и называть способ оплаты",
+  ],
+  theory: {
+    summary: "Ресторанный разговор уровня A1 проходит по короткому маршруту: понять раздел меню, заказать блюдо и напиток, уточнить один ингредиент, ответить официанту и попросить счёт.",
+    rules: [
+      "В меню ищите разделы predjedlo, polievka, hlavné jedlo, dezert и nápoj; цены обычно указаны рядом с названием.",
+      "Вежливый заказ строится через Prosím si ... или Chcel/chcela by som ...: Prosím si denné menu. Chcela by som kávu.",
+      "Состав уточняется вопросами Čo obsahuje ...? и Je v tom ...?: Čo obsahuje táto polievka? Je v tom mäso?",
+      "Простой отказ от ингредиента выражается через bez + готовая форма: bez cukru, bez mlieka, bez mäsa.",
+      "Во время еды достаточно коротких реплик: Ešte vodu, prosím. Všetko je v poriadku. Ďakujem.",
+      "В конце попросите účet и назовите оплату: Môžeme dostať účet? Zaplatím kartou. Spolu, prosím.",
+    ],
+    examples: [
+      { slovak: "Prosím si denné menu.", russian: "Мне, пожалуйста, дневное меню.", explanation: "Prosím si — нейтральная вежливая модель заказа." },
+      { slovak: "Čo obsahuje táto polievka?", russian: "Что входит в этот суп?", explanation: "Čo содержательно уточняет состав одного блюда." },
+      { slovak: "Kávu bez cukru, prosím.", russian: "Кофе без сахара, пожалуйста.", explanation: "После bez используется готовая форма cukru." },
+      { slovak: "Môžeme dostať účet?", russian: "Можно нам счёт?", explanation: "Вежливый вопрос подходит посетителям за одним столом." },
+      { slovak: "Zaplatím kartou.", russian: "Я заплачу картой.", explanation: "Kartou — готовая форма способа оплаты." },
+      { slovak: "Všetko je v poriadku.", russian: "Всё в порядке.", explanation: "Короткий ответ официанту во время еды." },
+    ],
+  },
+  sections: [
+    {
+      title: "Простое меню",
+      paragraphs: [
+        "Не переводите меню слово за словом. Сначала найдите нужный раздел, затем название блюда, напитка и цену.",
+        "Denné menu обычно объединяет предложение дня. Jedálny lístok означает меню с едой, nápojový lístok — список напитков.",
+      ],
+      table: { headers: ["Раздел", "Пример", "Перевод"], rows: [
+        ["predjedlo", "šalát", "закуска: салат"],
+        ["polievka", "cesnaková polievka", "чесночный суп"],
+        ["hlavné jedlo", "kurací rezeň", "основное блюдо: куриная отбивная"],
+        ["dezert", "palacinky", "десерт: блинчики"],
+        ["nápoj", "minerálna voda", "напиток: минеральная вода"],
+      ] },
+      items: ["denné menu — дневное меню", "jedálny lístok — меню", "cena — цена"],
+      note: "Для заказа достаточно распознать раздел и название; полный перевод описания блюда на A1 не требуется.",
+    },
+    {
+      title: "Вежливый заказ",
+      paragraphs: [
+        "Начните с Prosím si, если заказ уже выбран. Модель Chcel by som использует мужчина, Chcela by som — женщина.",
+        "Блюдо после этих моделей часто стоит в знакомой объектной форме: polievku, kávu, vodu. Мужские и средние формы могут не меняться: čaj, menu.",
+      ],
+      table: { headers: ["Кто", "Реплика", "Перевод"], rows: [
+        ["любой посетитель", "Prosím si denné menu.", "Мне, пожалуйста, дневное меню."],
+        ["мужчина", "Chcel by som polievku.", "Я хотел бы суп."],
+        ["женщина", "Chcela by som kávu.", "Я хотела бы кофе."],
+        ["добавление", "Ešte minerálnu vodu, prosím.", "Ещё минеральную воду, пожалуйста."],
+      ] },
+      items: ["Prosím si polievku a čaj.", "Chcel by som hlavné jedlo.", "Chcela by som šalát."],
+      note: "Прямое Chcem ... грамматически возможно, но Prosím si и chcel/chcela by som звучат мягче в сервисной ситуации.",
+    },
+    {
+      title: "Состав блюда и просьба без ингредиента",
+      paragraphs: [
+        "Если важен один ингредиент, задайте один короткий вопрос: Čo obsahuje ...? или Je v tom ...? Ответ может быть Áno, je. / Nie, nie je.",
+        "Для простого ограничения используйте готовые блоки с bez. Подробное обсуждение аллергии и медицинской диеты выходит за рамки темы.",
+      ],
+      table: { headers: ["Задача", "Реплика", "Перевод"], rows: [
+        ["спросить состав", "Čo obsahuje táto polievka?", "Что входит в этот суп?"],
+        ["проверить ингредиент", "Je v tom mäso?", "В этом есть мясо?"],
+        ["без сахара", "Kávu bez cukru, prosím.", "Кофе без сахара, пожалуйста."],
+        ["без молока", "Čaj bez mlieka, prosím.", "Чай без молока, пожалуйста."],
+        ["найти вариант", "Máte niečo bez mäsa?", "У вас есть что-нибудь без мяса?"],
+      ] },
+      items: ["bez cukru", "bez mlieka", "bez mäsa"],
+      note: "Запоминайте формы после bez целиком: cukor → bez cukru, mlieko → bez mlieka, mäso → bez mäsa.",
+    },
+    {
+      title: "Во время еды",
+      paragraphs: [
+        "Официант может задать короткий вопрос Chutí vám? или Je všetko v poriadku? Ответьте одним предложением и при необходимости попросите ещё напиток.",
+        "Форма vám — вежливое обращение к одному посетителю или обращение к группе. Посетитель может ответить Áno, ďakujem.",
+      ],
+      table: { headers: ["Официант", "Посетитель", "Перевод ответа"], rows: [
+        ["Chutí vám?", "Áno, veľmi mi chutí.", "Да, мне очень нравится."],
+        ["Je všetko v poriadku?", "Áno, všetko je v poriadku.", "Да, всё в порядке."],
+        ["Ešte niečo?", "Ešte vodu, prosím.", "Ещё воды, пожалуйста."],
+        ["Ešte niečo?", "Nie, ďakujem.", "Нет, спасибо."],
+      ] },
+      items: ["Áno, ďakujem.", "Všetko je v poriadku.", "Ešte minerálnu vodu, prosím."],
+      note: "Сложную жалобу не моделируйте: на A1 достаточно сообщить Nie je to v poriadku и попросить помощь.",
+    },
+    {
+      title: "Счёт, оплата и частые ошибки",
+      paragraphs: [
+        "Завершите контакт просьбой об účet. Если официант спрашивает Spolu alebo osobitne?, ответьте Spolu, prosím или Osobitne, prosím.",
+        "Перед ответом проверьте вежливую форму, объектное окончание, bez, инфинитив после môžeme и словацкую диакритику.",
+      ],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Prosím káva.", "Prosím si kávu.", "Нужны si и объектная форма kávu."],
+        ["Chcela by som káva.", "Chcela by som kávu.", "После модели нужна форма kávu."],
+        ["Kávu bez cukor.", "Kávu bez cukru.", "После bez используется cukru."],
+        ["Môžeme dostaneme účet?", "Môžeme dostať účet?", "После môžeme нужен инфинитив."],
+        ["Zaplatim kartou.", "Zaplatím kartou.", "Нужна долгота í."],
+      ] },
+      items: ["Môžeme dostať účet?", "Účet, prosím.", "Zaplatím kartou.", "Spolu, prosím."],
+      note: "Сложные жалобы и диетические консультации не вводятся.",
+    },
+  ],
+  stepPractices: [
+    { id: "m6-restaurant-step-1", sectionIndex: 0, type: "pairs", prompt: "Определите раздел меню.", answer: "predjedlo; polievka; hlavné jedlo; dezert; nápoj", pairs: [
+      { prompt: "šalát", answer: "predjedlo", options: ["predjedlo", "polievka", "hlavné jedlo", "dezert", "nápoj"] },
+      { prompt: "cesnaková polievka", answer: "polievka", options: ["predjedlo", "polievka", "hlavné jedlo", "dezert", "nápoj"] },
+      { prompt: "kurací rezeň", answer: "hlavné jedlo", options: ["predjedlo", "polievka", "hlavné jedlo", "dezert", "nápoj"] },
+      { prompt: "palacinky", answer: "dezert", options: ["predjedlo", "polievka", "hlavné jedlo", "dezert", "nápoj"] },
+      { prompt: "minerálna voda", answer: "nápoj", options: ["predjedlo", "polievka", "hlavné jedlo", "dezert", "nápoj"] },
+    ], showSlovakKeyboard: false, hint: "Сначала определите тип блюда или напитка.", explanation: "Пять примеров соответствуют закуске, супу, основному блюду, десерту и напитку." },
+    { id: "m6-restaurant-step-2", sectionIndex: 1, type: "pairs", prompt: "Выберите вежливую форму заказа.", answer: "Prosím si denné menu.; Chcel by som polievku.; Chcela by som kávu.; Ešte vodu, prosím.; Prosím si čaj.", pairs: [
+      { prompt: "Мне, пожалуйста, дневное меню.", answer: "Prosím si denné menu.", options: ["Prosím si denné menu.", "Som denné menu."] },
+      { prompt: "Мужчина: Я хотел бы суп.", answer: "Chcel by som polievku.", options: ["Chcel by som polievku.", "Chcela by som polievku."] },
+      { prompt: "Женщина: Я хотела бы кофе.", answer: "Chcela by som kávu.", options: ["Chcel by som kávu.", "Chcela by som kávu."] },
+      { prompt: "Ещё воды, пожалуйста.", answer: "Ešte vodu, prosím.", options: ["Ešte voda, prosím.", "Ešte vodu, prosím."] },
+      { prompt: "Мне, пожалуйста, чай.", answer: "Prosím si čaj.", options: ["Prosím si čaj.", "Prosím som čaj."] },
+    ], hint: "Проверьте вежливую модель и форму блюда.", explanation: "Заказ строится через Prosím si или chcel/chcela by som; добавление — Ešte ..., prosím." },
+    { id: "m6-restaurant-step-3", sectionIndex: 2, type: "pairs", prompt: "Выберите реплику о составе блюда.", answer: "Čo obsahuje táto polievka?; Je v tom mäso?; Kávu bez cukru, prosím.; Čaj bez mlieka, prosím.; Máte niečo bez mäsa?", pairs: [
+      { prompt: "Что входит в этот суп?", answer: "Čo obsahuje táto polievka?", options: ["Čo obsahuje táto polievka?", "Kde býva táto polievka?"] },
+      { prompt: "В этом есть мясо?", answer: "Je v tom mäso?", options: ["Je v tom mäso?", "Je to mäsa?"] },
+      { prompt: "Кофе без сахара, пожалуйста.", answer: "Kávu bez cukru, prosím.", options: ["Kávu bez cukor, prosím.", "Kávu bez cukru, prosím."] },
+      { prompt: "Чай без молока, пожалуйста.", answer: "Čaj bez mlieka, prosím.", options: ["Čaj bez mlieko, prosím.", "Čaj bez mlieka, prosím."] },
+      { prompt: "У вас есть что-нибудь без мяса?", answer: "Máte niečo bez mäsa?", options: ["Máte niečo bez mäso?", "Máte niečo bez mäsa?"] },
+    ], hint: "Различите вопрос о составе и готовые формы после bez.", explanation: "Нормативно: obsahuje, je v tom и bez cukru/mlieka/mäsa." },
+    { id: "m6-restaurant-step-4", sectionIndex: 3, type: "pairs", prompt: "Ответьте официанту.", answer: "Áno, veľmi mi chutí.; Všetko je v poriadku.; Ešte vodu, prosím.; Nie, ďakujem.; Áno, ďakujem.", pairs: [
+      { prompt: "Chutí vám? · да, очень", answer: "Áno, veľmi mi chutí.", options: ["Áno, veľmi mi chutí.", "Áno, veľmi vám chutí."] },
+      { prompt: "Je všetko v poriadku? · да", answer: "Všetko je v poriadku.", options: ["Všetko je v poriadku.", "Všetko som v poriadku."] },
+      { prompt: "Ešte niečo? · ещё воды", answer: "Ešte vodu, prosím.", options: ["Ešte vodu, prosím.", "Ešte voda, prosím."] },
+      { prompt: "Ešte niečo? · нет", answer: "Nie, ďakujem.", options: ["Nie, ďakujem.", "Nie, prosím si."] },
+      { prompt: "Je všetko v poriadku? · короткое подтверждение", answer: "Áno, ďakujem.", options: ["Áno, ďakujem.", "Áno, prosím si."] },
+    ], hint: "Выберите короткий ответ, который соответствует вопросу.", explanation: "Ответ сообщает вкус, состояние заказа, дополнительную просьбу или отказ." },
+    { id: "m6-restaurant-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте каждую реплику.", answer: "Chcela by som kávu a účet.; Prosím si kávu.; Kávu bez cukru.; Môžeme dostať účet?; Zaplatím kartou.", pairs: [
+      { prompt: "Переведите от лица женщины: «Я хотела бы кофе и счёт».", answer: "Chcela by som kávu a účet.", inputHint: "Введите перевод" },
+      { prompt: "Prosím káva.", answer: "Prosím si kávu.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Kávu bez cukor.", answer: "Kávu bez cukru.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Môžeme dostaneme účet?", answer: "Môžeme dostať účet?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Zaplatim kartou.", answer: "Zaplatím kartou.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Проверьте chcela, объектную форму, bez, инфинитив и диакритику.", explanation: "Нормативны chcela by som kávu, prosím si, bez cukru, môžeme dostať и zaplatím." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 5",
+  reinforcementPractices: [
+    { id: "reinforcement:restaurant:1", sectionIndex: 0, type: "pairs", prompt: "Распределите позиции меню.", answer: "predjedlo; polievka; hlavné jedlo; dezert; nápoj", pairs: [
+      { prompt: "zeleninový šalát", answer: "predjedlo", options: ["predjedlo", "polievka", "hlavné jedlo", "dezert", "nápoj"] },
+      { prompt: "paradajková polievka", answer: "polievka", options: ["predjedlo", "polievka", "hlavné jedlo", "dezert", "nápoj"] },
+      { prompt: "ryba so zemiakmi", answer: "hlavné jedlo", options: ["predjedlo", "polievka", "hlavné jedlo", "dezert", "nápoj"] },
+      { prompt: "koláč", answer: "dezert", options: ["predjedlo", "polievka", "hlavné jedlo", "dezert", "nápoj"] },
+      { prompt: "čaj", answer: "nápoj", options: ["predjedlo", "polievka", "hlavné jedlo", "dezert", "nápoj"] },
+    ], showSlovakKeyboard: false, hint: "Используйте разделы простого меню.", explanation: "Салат — закуска, затем суп, основное блюдо, десерт и напиток." },
+    { id: "reinforcement:restaurant:2", sectionIndex: 1, type: "pairs", prompt: "Определите функцию реплики.", answer: "заказ; состав; без ингредиента; счёт; оплата", pairs: [
+      { prompt: "Prosím si denné menu.", answer: "заказ", options: ["заказ", "состав", "без ингредиента", "счёт", "оплата"] },
+      { prompt: "Čo obsahuje táto polievka?", answer: "состав", options: ["заказ", "состав", "без ингредиента", "счёт", "оплата"] },
+      { prompt: "Kávu bez cukru, prosím.", answer: "без ингредиента", options: ["заказ", "состав", "без ингредиента", "счёт", "оплата"] },
+      { prompt: "Môžeme dostať účet?", answer: "счёт", options: ["заказ", "состав", "без ингредиента", "счёт", "оплата"] },
+      { prompt: "Zaplatím kartou.", answer: "оплата", options: ["заказ", "состав", "без ингредиента", "счёт", "оплата"] },
+    ], showSlovakKeyboard: false, hint: "Определите этап ресторанного контакта.", explanation: "Реплики последовательно покрывают заказ, состав, ограничение, счёт и оплату." },
+    { id: "reinforcement:restaurant:3", sectionIndex: 1, type: "pairs", prompt: "Выберите ключевую форму.", answer: "Prosím si; Chcel; Chcela; Môžeme; Zaplatím", pairs: [
+      { prompt: "___ polievku. · нейтральный заказ", answer: "Prosím si", options: ["Prosím si", "Chcel", "Chcela", "Môžeme", "Zaplatím"] },
+      { prompt: "___ by som čaj. · мужчина", answer: "Chcel", options: ["Prosím si", "Chcel", "Chcela", "Môžeme", "Zaplatím"] },
+      { prompt: "___ by som kávu. · женщина", answer: "Chcela", options: ["Prosím si", "Chcel", "Chcela", "Môžeme", "Zaplatím"] },
+      { prompt: "___ dostať účet?", answer: "Môžeme", options: ["Prosím si", "Chcel", "Chcela", "Môžeme", "Zaplatím"] },
+      { prompt: "___ kartou.", answer: "Zaplatím", options: ["Prosím si", "Chcel", "Chcela", "Môžeme", "Zaplatím"] },
+    ], hint: "Смотрите на модель заказа, пол говорящего, просьбу и оплату.", explanation: "Prosím si, chcel/chcela by som, môžeme dostať и zaplatím решают разные задачи." },
+    { id: "reinforcement:restaurant:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки посетителя.", answer: "Prosím si polievku.; Chcela by som kávu.; Čaj bez mlieka, prosím.; Môžeme dostať účet?; Zaplatím kartou.", pairs: [
+      { prompt: "Prosím polievka.", answer: "Prosím si polievku.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Женщина: Chcel by som kávu.", answer: "Chcela by som kávu.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Čaj bez mlieko, prosím.", answer: "Čaj bez mlieka, prosím.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Môžeme dostaneme účet?", answer: "Môžeme dostať účet?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Zaplatim kartou.", answer: "Zaplatím kartou.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Исправьте всю строку: модель, окончание, bez, инфинитив и долготу.", explanation: "Правильные формы: prosím si polievku, chcela, bez mlieka, dostať, zaplatím." },
+    { id: "reinforcement:restaurant:5", sectionIndex: 4, type: "pairs", prompt: "Переведите на словацкий.", answer: "Prosím si denné menu.; Čo obsahuje táto polievka?; Kávu bez cukru, prosím.; Môžeme dostať účet?; Zaplatím kartou.", pairs: [
+      { prompt: "Мне, пожалуйста, дневное меню.", answer: "Prosím si denné menu.", inputHint: "Введите перевод" },
+      { prompt: "Что входит в этот суп?", answer: "Čo obsahuje táto polievka?", inputHint: "Введите перевод" },
+      { prompt: "Кофе без сахара, пожалуйста.", answer: "Kávu bez cukru, prosím.", acceptableAnswers: ["Prosím si kávu bez cukru."], inputHint: "Введите перевод" },
+      { prompt: "Можно нам счёт?", answer: "Môžeme dostať účet?", acceptableAnswers: ["Účet, prosím."], inputHint: "Введите перевод" },
+      { prompt: "Я заплачу картой.", answer: "Zaplatím kartou.", inputHint: "Введите перевод" },
+    ], hint: "Используйте модели урока и сохраните диакритику.", explanation: "Переводы покрывают заказ, состав, bez, счёт и оплату." },
+    { id: "reinforcement:restaurant:6", sectionIndex: 4, type: "pairs", prompt: "Соберите короткий диалог в ресторане.", answer: "Dobrý deň. Prosím si denné menu.; Čo obsahuje táto polievka?; Ešte vodu, prosím.; Všetko je v poriadku.; Môžeme dostať účet?; Zaplatím kartou.", pairs: [
+      { prompt: "1 · заказ", answer: "Dobrý deň. Prosím si denné menu.", options: ["Dobrý deň. Prosím si denné menu.", "Dobrý deň. Som denné menu.", "Dobrý deň. Denné menu som."] },
+      { prompt: "2 · состав", answer: "Čo obsahuje táto polievka?", options: ["Kde obsahuje táto polievka?", "Čo obsahuje táto polievka?", "Čo táto polievku obsahujem?"] },
+      { prompt: "3 · напиток", answer: "Ešte vodu, prosím.", options: ["Ešte voda, prosím.", "Ešte vodu, prosím.", "Ešte vody som."] },
+      { prompt: "4 · ответ официанту", answer: "Všetko je v poriadku.", options: ["Všetko je v poriadku.", "Všetko som v poriadku.", "Všetko sú v poriadku."] },
+      { prompt: "5 · счёт", answer: "Môžeme dostať účet?", options: ["Môžeme dostaneme účet?", "Môžeme dostať účet?", "Môžeme účet dostali?"] },
+      { prompt: "6 · оплата", answer: "Zaplatím kartou.", options: ["Zaplatím karta.", "Zaplatim kartou.", "Zaplatím kartou."] },
+    ], hint: "Следуйте маршруту от заказа до оплаты.", explanation: "Диалог проверяет заказ, состав, дополнительную просьбу, ответ, счёт и карту." },
+  ],
+  knowledgeChecks: [
+    { id: "m6-restaurant-check-1", question: "Какая реплика подходит для вежливого заказа дневного меню?", options: ["Prosím si denné menu.", "Som denné menu.", "Chcem byť menu."], answer: "Prosím si denné menu.", explanation: "Prosím si — короткая вежливая модель заказа." },
+    { id: "m6-restaurant-check-2", question: "Как спросить, что входит в этот суп?", options: ["Čo obsahuje táto polievka?", "Kde býva táto polievka?", "Čo obsahujem polievku?"], answer: "Čo obsahuje táto polievka?", explanation: "Блюдо является субъектом формы obsahuje: táto polievka obsahuje." },
+    { id: "m6-restaurant-check-3", question: "Какая граница соответствует уровню A1?", options: ["Сложные жалобы и диетические консультации не вводятся.", "Нужно подробно обсуждать медицинскую диету.", "Нужно составлять официальную жалобу."], answer: "Сложные жалобы и диетические консультации не вводятся.", explanation: "A1 ограничивается коротким заказом, одним уточнением и счётом." },
+  ],
+  finalChecks: [
+    { id: "m6-restaurant-final-1", question: "Переведите от лица женщины: «Я хотела бы кофе и счёт».", options: ["Chcela by som kávu a účet.", "Chcel by som kávu a účet.", "Chcela by som káva a účet."], answer: "Chcela by som kávu a účet.", explanation: "Женская вежливая форма — chcela by som; káva получает объектную форму kávu." },
+  ],
+  chatPrompt: "Разыграйте короткий разговор в ресторане: закажите блюдо и напиток, уточните один ингредиент, ответьте официанту и попросите счёт.",
+  chatSuggestions: ["Prosím si denné menu.", "Čo obsahuje táto polievka?", "Môžeme dostať účet?"],
+} satisfies CourseLesson;

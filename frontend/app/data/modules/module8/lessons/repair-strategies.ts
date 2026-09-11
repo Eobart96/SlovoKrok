@@ -1,30 +1,185 @@
-import type { CompactLessonContent } from "../../plannedLessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const repairStrategiesContent: CompactLessonContent = {
-  "slug": "repair-strategies",
-  "title": "Стратегии при непонимании",
-  "slovakTitle": "Stratégie pri neporozumení",
-  "outcome": "Просить повторить или переформулировать.",
-  "summary": "После урока вы сможете просить повторить или переформулировать в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Коммуникация A1 предполагает помощь собеседника. Используйте Nerozumiem, Zopakujte to, prosím, Pomalšie, prosím, Čo znamená…? и проверку Rozumiem správne, že…?.",
-  "examples": [
-    {
-      "slovak": "Prepáčte, nerozumiem.",
-      "russian": "Извините, я не понимаю."
-    },
-    {
-      "slovak": "Môžete to zopakovať?",
-      "russian": "Можете это повторить?"
-    },
-    {
-      "slovak": "Pomalšie, prosím.",
-      "russian": "Помедленнее, пожалуйста."
-    },
-    {
-      "slovak": "Ako sa to píše?",
-      "russian": "Как это пишется?"
-    }
+export const repairStrategiesContent = {
+  vocabulary: [
+    {"word":"Prepáčte, nerozumiem. Môžete to zopakovať?","translation":"Извините, я не понимаю. Можете повторить?","example":"Prepáčte, nerozumiem. Môžete to zopakovať?"},
+    {"word":"Môžete hovoriť pomalšie?","translation":"Можете говорить медленнее?","example":"Môžete hovoriť pomalšie?"},
+    {"word":"Čo znamená toto slovo?","translation":"Что означает это слово?","example":"Čo znamená toto slovo?"},
+    {"word":"Povedali ste pätnásť alebo päťdesiat?","translation":"Вы сказали пятнадцать или пятьдесят?","example":"Povedali ste pätnásť alebo päťdesiat?"},
+    {"word":"Rozumiem správne: rovno a potom doľava?","translation":"Я правильно понимаю: прямо, а затем налево?","example":"Rozumiem správne: rovno a potom doľava?"},
+    {"word":"Dobre, už rozumiem. Ďakujem za pomoc.","translation":"Хорошо, теперь понимаю. Спасибо за помощь.","example":"Dobre, už rozumiem. Ďakujem za pomoc."},
   ],
-  "mistake": "Не делайте вид, что поняли важную дату, цену или направление; запросите повтор.",
-  "task": "Отработайте четыре сбоя: незнакомое слово, слишком быстрая речь, непонятное имя и сомнение в числе."
-};
+  slug: "repair-strategies",
+  order: 8,
+  title: "Стратегии при непонимании",
+  slovakTitle: "Čo povedať, keď nerozumiem",
+  description: "Просить повторить или переформулировать.",
+  duration: "35–40 мин",
+  goals: [
+    "Спокойно сообщать, что вы не поняли",
+    "Просить повторить, говорить медленнее, написать или показать",
+    "Уточнять одно слово, число, время, место или направление",
+    "Проверять понятый смысл и продолжать разговор",
+  ],
+  theory: {
+    summary: "Формула восстановления разговора: сигнал → просьба → точное уточнение → подтверждение. Не угадывайте: начинайте с короткой фразы и постепенно уточняйте только то, что мешает выполнить задачу.",
+    rules: [
+      "Минимальный набор: Nerozumiem. Ešte raz, prosím. Pomalšie, prosím.",
+      "Neviem означает «не знаю», а Nerozumiem — «не понимаю сказанное».",
+      "С незнакомым взрослым используйте vy: Môžete...?; с другом — ty: Môžeš...? Не смешивайте формы.",
+      "Просите одну помощь за раз: повторить → говорить медленнее → уточнить слово или число.",
+      "Проверяйте понятую часть вопросительной интонацией: Takže vlak ide o šiestej?",
+      "Когда смысл восстановлен, подтвердите: Dobre, už rozumiem. Ďakujem.",
+    ],
+    examples: [
+      { slovak: "Prepáčte, nerozumiem. Môžete to zopakovať?", russian: "Извините, я не понимаю. Можете повторить?", explanation: "Сигнал сразу сообщает о проблеме, просьба сохраняет разговор." },
+      { slovak: "Môžete hovoriť pomalšie?", russian: "Можете говорить медленнее?", explanation: "Вежливая форма vy подходит для незнакомого взрослого." },
+      { slovak: "Čo znamená toto slovo?", russian: "Что означает это слово?", explanation: "Вопрос локализует проблему до одного слова." },
+      { slovak: "Povedali ste pätnásť alebo päťdesiat?", russian: "Вы сказали пятнадцать или пятьдесят?", explanation: "Альтернатива быстро проверяет похожие числа." },
+      { slovak: "Rozumiem správne: rovno a potom doľava?", russian: "Я правильно понимаю: прямо, а затем налево?", explanation: "Повтор понятой части проверяет направление." },
+      { slovak: "Dobre, už rozumiem. Ďakujem za pomoc.", russian: "Хорошо, теперь понимаю. Спасибо за помощь.", explanation: "Фраза подтверждает восстановление смысла и завершает эпизод." },
+    ],
+  },
+  sections: [
+    {
+      title: "Лестница помощи: от общего к точному",
+      paragraphs: ["Не пытайтесь угадывать. Начните с короткого сигнала и постепенно уточняйте только то, что мешает выполнить задачу."],
+      table: { headers: ["Шаг", "Фраза", "Результат"], rows: [
+        ["1. Сигнал", "Prepáčte, nerozumiem.", "собеседник знает о проблеме"],
+        ["2. Повтор", "Môžete to zopakovať?", "вы слышите фразу ещё раз"],
+        ["3. Темп", "Môžete hovoriť pomalšie?", "речь становится медленнее"],
+        ["4. Точка", "Čo znamená toto slovo?", "вы уточняете конкретное слово"],
+        ["5. Проверка", "Takže stretnutie je zajtra?", "вы подтверждаете итоговый смысл"],
+      ] },
+      items: ["Nerozumiem. — Не понимаю.", "Ešte raz, prosím. — Ещё раз, пожалуйста.", "Pomalšie, prosím. — Медленнее, пожалуйста."],
+      note: "Neviem — не знаю ответа или факта; Nerozumiem — не понимаю сказанное.",
+    },
+    {
+      title: "Вежливо, неофициально и точно",
+      paragraphs: ["С незнакомым взрослым используйте формы vy, с другом — ty. Не смешивайте их в одной просьбе."],
+      table: { headers: ["vy — вежливо", "ty — неофициально"], rows: [
+        ["Prepáčte, nerozumiem.", "Prepáč, nerozumiem."],
+        ["Môžete to zopakovať?", "Môžeš to zopakovať?"],
+        ["Môžete hovoriť pomalšie?", "Môžeš hovoriť pomalšie?"],
+        ["Môžete mi to napísať?", "Môžeš mi to napísať?"],
+        ["Povedali ste pätnásť?", "Povedal si pätnásť? / Povedala si pätnásť?"],
+      ] },
+      items: ["не услышали: Nepočul som. / Nepočula som.", "не поняли слово: Čo znamená „pokladňa“?", "не знаете слово: Ako sa povie „вокзал“ po slovensky?", "не знаете написание: Ako sa to píše?", "нужна запись: Môžete mi to napísať?", "нужен показ: Môžete mi to ukázať?"],
+      note: "Одна просьба за раз: повтор → более медленный темп → конкретное слово или число.",
+    },
+    {
+      title: "Проверяем смысл, числа и направление",
+      paragraphs: ["Подтверждение помогает избежать ошибки. Повторите понятую часть вопросительной интонацией."],
+      table: { headers: ["Что проверяем", "Фраза"], rows: [
+        ["общий смысл", "Rozumiem správne, že kurz je zajtra?"],
+        ["время", "Takže vlak ide o šiestej?"],
+        ["число", "Povedali ste pätnásť alebo päťdesiat?"],
+        ["место", "Je to pri stanici?"],
+        ["направление", "Mám ísť vpravo?"],
+        ["выбор", "Myslíte tento autobus?"],
+      ] },
+      items: [
+        "Вокзал: Prepáčte, pomalšie, prosím. Nástupište číslo štyri? — Áno, štyri.",
+        "Курс: Ešte raz, prosím. Na strane pätnásť? — Áno, presne tak.",
+        "Улица: Rozumiem správne: rovno a potom doľava? — Áno.",
+      ],
+      note: "Когда смысл восстановлен, скажите Dobre, už rozumiem или подтвердите Áno, presne tak.",
+    },
+    {
+      title: "Банк спасательных фраз",
+      paragraphs: ["Выберите пять основных фраз и произнесите их несколько раз без чтения."],
+      table: { headers: ["Функция", "Фраза", "Перевод"], rows: [
+        ["сигнал", "Prepáčte, nerozumiem.", "Извините, я не понимаю."],
+        ["частично", "Rozumiem len trochu.", "Я понимаю только немного."],
+        ["повтор", "Môžete to zopakovať?", "Можете повторить?"],
+        ["короткий повтор", "Ešte raz, prosím.", "Ещё раз, пожалуйста."],
+        ["темп", "Pomalšie, prosím.", "Медленнее, пожалуйста."],
+        ["значение", "Čo znamená toto slovo?", "Что означает это слово?"],
+        ["написание", "Ako sa to píše?", "Как это пишется?"],
+        ["запись", "Môžete mi to napísať?", "Можете мне это написать?"],
+        ["показ", "Môžete mi to ukázať?", "Можете мне это показать?"],
+        ["число", "Povedali ste pätnásť?", "Вы сказали пятнадцать?"],
+        ["альтернатива", "Dnes alebo zajtra?", "Сегодня или завтра?"],
+        ["место", "Pri stanici?", "У вокзала?"],
+        ["проверка", "Rozumiem správne: o piatej?", "Я правильно понимаю: в пять?"],
+        ["результат", "Už rozumiem.", "Теперь понимаю."],
+        ["благодарность", "Ďakujem za pomoc.", "Спасибо за помощь."],
+      ] },
+      note: "Карточка-минимум: Nerozumiem. Ešte raz, prosím. Pomalšie, prosím. Čo znamená...? Rozumiem správne...?",
+    },
+    {
+      title: "Типичные ошибки и самопроверка",
+      paragraphs: ["Не молчите и не угадывайте важную деталь: короткий точный запрос помогает продолжить разговор."],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Neviem, когда не поняли речь", "Nerozumiem.", "Neviem означает отсутствие знания."],
+        ["Môžeš..., prosím vás", "Môžete..., prosím vás", "Не смешиваем ty и vy."],
+        ["Просто молчать", "Ešte raz, prosím.", "Короткий сигнал сохраняет разговор."],
+        ["Угадывать число", "Pätnásť alebo päťdesiat?", "Альтернатива быстро устраняет ошибку."],
+      ] },
+      items: ["Я сразу обозначаю непонимание.", "Я прошу повторить или изменить темп.", "Я уточняю одно слово, число или направление.", "Я повторяю понятый смысл.", "Я подтверждаю, что теперь понял."],
+      note: "Непонимание — нормальная часть разговора A1; важнее уметь восстановить смысл.",
+    },
+  ],
+  stepPractices: [
+    { id: "m8-repair-strategies-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите перевод «Извините, я не понимаю».", options: ["Prepáčte, nerozumiem.", "Neviem adresu.", "Už rozumiem."], answer: "Prepáčte, nerozumiem.", hint: "Нужны вежливый сигнал и nerozumiem.", explanation: "Верная фраза: Prepáčte, nerozumiem." },
+    { id: "m8-repair-strategies-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Можете это повторить?»", answer: "Môžete to zopakovať?", hint: "Используйте вежливую форму vy.", explanation: "Верная фраза: Môžete to zopakovať?" },
+    { id: "m8-repair-strategies-step-3", sectionIndex: 2, type: "text", prompt: "Переведите: «Помедленнее, пожалуйста.»", answer: "Pomalšie, prosím.", hint: "Сохраните диакритику в обоих словах.", explanation: "Верная фраза: Pomalšie, prosím." },
+    { id: "m8-repair-strategies-step-4", sectionIndex: 3, type: "pairs", prompt: "Определите функцию спасательных фраз.", answer: "повтор; значение; проверка; результат", showSlovakKeyboard: false, pairs: [
+      { prompt: "Ešte raz, prosím.", answer: "повтор", options: ["повтор", "значение", "проверка", "результат"] },
+      { prompt: "Čo znamená toto slovo?", answer: "значение", options: ["повтор", "значение", "проверка", "результат"] },
+      { prompt: "Rozumiem správne: o piatej?", answer: "проверка", options: ["повтор", "значение", "проверка", "результат"] },
+      { prompt: "Už rozumiem.", answer: "результат", options: ["повтор", "значение", "проверка", "результат"] },
+    ], hint: "Смотрите, на каком этапе восстановления разговора нужна фраза.", explanation: "Фразы запрашивают повтор, уточняют значение, проверяют смысл и подтверждают результат." },
+    { id: "m8-repair-strategies-step-5", sectionIndex: 4, type: "choice", prompt: "Что делать, если вы не поняли важное число?", options: ["Назвать два услышанных варианта и переспросить", "Угадать по контексту", "Промолчать и продолжить"], answer: "Назвать два услышанных варианта и переспросить", showSlovakKeyboard: false, hint: "Используйте точечное уточнение.", explanation: "Вопрос Pätnásť alebo päťdesiat? быстро устраняет неоднозначность." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 8",
+  reinforcementPractices: [
+    { id: "reinforcement:repair-strategies:1", sectionIndex: 0, type: "pairs", prompt: "Выберите подходящую фразу.", answer: "Nerozumiem.; Neviem.; Pomalšie, prosím.", pairs: [
+      { prompt: "Не поняли речь", answer: "Nerozumiem.", options: ["Nerozumiem.", "Neviem.", "Pomalšie, prosím."] },
+      { prompt: "Не знаете адрес", answer: "Neviem.", options: ["Nerozumiem.", "Neviem.", "Pomalšie, prosím."] },
+      { prompt: "Просите говорить медленнее", answer: "Pomalšie, prosím.", options: ["Nerozumiem.", "Neviem.", "Pomalšie, prosím."] },
+    ], hint: "Различайте отсутствие знания, непонимание речи и просьбу изменить темп.", explanation: "Nerozumiem — не понимаю речь; Neviem — не знаю; Pomalšie, prosím — просьба говорить медленнее." },
+    { id: "reinforcement:repair-strategies:2", sectionIndex: 0, type: "pairs", prompt: "Вставьте одно пропущенное слово.", answer: "raz; znamená; píše; rozumiem", pairs: [
+      { prompt: "Ešte ___, prosím.", answer: "raz", inputHint: "Введите одно слово." },
+      { prompt: "Čo ___ toto slovo?", answer: "znamená", inputHint: "Введите одно слово." },
+      { prompt: "Ako sa to ___?", answer: "píše", inputHint: "Введите одно слово." },
+      { prompt: "Už ___.", answer: "rozumiem", inputHint: "Введите одно слово." },
+    ], hint: "Восстановите знакомые спасательные фразы.", explanation: "Получаются Ešte raz, Čo znamená, Ako sa to píše и Už rozumiem." },
+    { id: "reinforcement:repair-strategies:3", sectionIndex: 1, type: "pairs", prompt: "Выберите форму ty или vy по ситуации.", answer: "Môžete to zopakovať?; Povedal si desať?; Prepáčte, nerozumiem.", pairs: [
+      { prompt: "Незнакомому сотруднику", answer: "Môžete to zopakovať?", options: ["Môžeš to zopakovať?", "Môžete to zopakovať?"] },
+      { prompt: "Другу-мужчине", answer: "Povedal si desať?", options: ["Povedal si desať?", "Povedali ste desať?"] },
+      { prompt: "Преподавателю", answer: "Prepáčte, nerozumiem.", options: ["Prepáč, nerozumiem.", "Prepáčte, nerozumiem."] },
+    ], hint: "Ty стоит в первом столбце, vy — во втором.", explanation: "Сотруднику и преподавателю нужны формы vy, другу — ty." },
+    { id: "reinforcement:repair-strategies:4", sectionIndex: 2, type: "pairs", prompt: "Собеседник сказал: Stretneme sa zajtra o pätnástej pri stanici. Переспросите отдельно каждую деталь.", answer: "Zajtra?; O pätnástej?; Pri stanici?", pairs: [
+      { prompt: "День", answer: "Zajtra?", inputHint: "Коротко переспросите день." },
+      { prompt: "Время", answer: "O pätnástej?", inputHint: "Коротко переспросите время." },
+      { prompt: "Место", answer: "Pri stanici?", inputHint: "Коротко переспросите место." },
+    ], hint: "Повторите только понятую деталь с вопросительной интонацией.", explanation: "Точечные вопросы: Zajtra? O pätnástej? Pri stanici?" },
+    { id: "reinforcement:repair-strategies:5", sectionIndex: 3, type: "pairs", prompt: "Переведите спасательные фразы.", answer: "Môžete to zopakovať pomalšie?; Čo znamená toto slovo?; Rozumiem správne: vlak ide o šiestej?; Už rozumiem, ďakujem.", pairs: [
+      { prompt: "Можете повторить медленнее?", answer: "Môžete to zopakovať pomalšie?", inputHint: "Введите вежливую просьбу." },
+      { prompt: "Что означает это слово?", answer: "Čo znamená toto slovo?", inputHint: "Введите точечный вопрос." },
+      { prompt: "Я правильно понимаю: поезд отправляется в шесть?", answer: "Rozumiem správne: vlak ide o šiestej?", inputHint: "Введите вопрос-проверку." },
+      { prompt: "Теперь понимаю, спасибо.", answer: "Už rozumiem, ďakujem.", inputHint: "Введите завершение." },
+    ], hint: "Сохраняйте вежливую форму, вопросительный знак и диакритику.", explanation: "Фразы последовательно просят помощь, уточняют слово, проверяют смысл и подтверждают результат." },
+    { id: "reinforcement:repair-strategies:6", sectionIndex: 4, type: "pairs", prompt: "Постройте мини-диалог: сотрудник быстро объясняет путь, вы просите помощи, уточняете направление и подтверждаете результат.", answer: "Choďte rovno a potom doprava.; Prepáčte, nerozumiem. Môžete hovoriť pomalšie?; Áno. Najprv rovno, potom doprava.; Rozumiem správne: najprv rovno a potom doprava?; Áno, presne tak.; Dobre, už rozumiem. Ďakujem.", pairs: [
+      { prompt: "1. Объяснение", answer: "Choďte rovno a potom doprava.", options: ["Choďte rovno a potom doprava.", "Neviem, kde je doprava."] },
+      { prompt: "2. Сигнал и просьба", answer: "Prepáčte, nerozumiem. Môžete hovoriť pomalšie?", options: ["Prepáčte, nerozumiem. Môžete hovoriť pomalšie?", "Áno, všetko je jasné."] },
+      { prompt: "3. Медленный повтор", answer: "Áno. Najprv rovno, potom doprava.", options: ["Áno. Najprv rovno, potom doprava.", "Pätnásť alebo päťdesiat?"] },
+      { prompt: "4. Проверка", answer: "Rozumiem správne: najprv rovno a potom doprava?", options: ["Rozumiem správne: najprv rovno a potom doprava?", "Ako sa povie vlak po slovensky?"] },
+      { prompt: "5. Подтверждение", answer: "Áno, presne tak.", options: ["Áno, presne tak.", "Nie, nerozumiem."] },
+      { prompt: "6. Результат", answer: "Dobre, už rozumiem. Ďakujem.", options: ["Dobre, už rozumiem. Ďakujem.", "Pomalšie, prosím vás ty."] },
+    ], hint: "Соберите сигнал, просьбу, медленный повтор, проверку, подтверждение и завершение.", explanation: "Диалог восстанавливается по формуле: непонимание → помощь → точное уточнение → подтверждение." },
+  ],
+  chatPrompt: "Разыграем сбой общения: сообщите, что не поняли, попросите одну помощь, уточните деталь и подтвердите итоговый смысл.",
+  chatSuggestions: ["Prepáčte, nerozumiem.", "Ešte raz, prosím.", "Pomalšie, prosím.", "Čo znamená...?", "Rozumiem správne...?"],
+  knowledgeChecks: [
+    { id: "m8-repair-strategies-check-1", question: "Как по-словацки: «Извините, я не понимаю»?", options: ["Prepáčte, nerozumiem.", "Neviem adresu.", "Už rozumiem."], answer: "Prepáčte, nerozumiem.", explanation: "Правильная фраза: Prepáčte, nerozumiem." },
+    { id: "m8-repair-strategies-check-2", question: "Как по-словацки: «Можете это повторить»?", options: ["Môžete to zopakovať?", "Môžete mi to ukázať?", "Pomalšie, prosím."], answer: "Môžete to zopakovať?", explanation: "Правильная фраза: Môžete to zopakovať?" },
+  ],
+  finalChecks: [
+    { id: "m8-repair-strategies-final-1", question: "Выберите перевод «Помедленнее, пожалуйста».", options: ["Pomalšie, prosím.", "Ešte raz, prosím.", "Už rozumiem."], answer: "Pomalšie, prosím.", explanation: "Правильный ответ: Pomalšie, prosím." },
+  ],
+} satisfies CourseLesson;

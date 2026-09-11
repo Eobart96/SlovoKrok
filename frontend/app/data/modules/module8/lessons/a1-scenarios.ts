@@ -1,30 +1,177 @@
-import type { CompactLessonContent } from "../../plannedLessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const a1ScenariosContent: CompactLessonContent = {
-  "slug": "a1-scenarios",
-  "title": "Итоговые сценарии A1",
-  "slovakTitle": "Záverečné scenáre A1",
-  "outcome": "Демонстрировать основные виды речевой деятельности.",
-  "summary": "После урока вы сможете демонстрировать основные виды речевой деятельности в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Итог объединяет понимание короткой речи и текста, устное описание, диалог и короткое письмо. Оценивается выполнение задачи и понятность, а не абсолютная безошибочность.",
-  "examples": [
-    {
-      "slovak": "Predstavte sa a položte dve otázky.",
-      "russian": "Представьтесь и задайте два вопроса."
-    },
-    {
-      "slovak": "Objednajte si jedlo a nápoj.",
-      "russian": "Закажите еду и напиток."
-    },
-    {
-      "slovak": "Nájdite čas odchodu v cestovnom poriadku.",
-      "russian": "Найдите время отправления в расписании."
-    },
-    {
-      "slovak": "Napíšte krátku správu o stretnutí.",
-      "russian": "Напишите короткое сообщение о встрече."
-    }
+export const a1ScenariosContent = {
+  vocabulary: [
+    {"word":"Dobrý deň. Potrebujem pomoc.","translation":"Добрый день. Мне нужна помощь.","example":"Dobrý deň. Potrebujem pomoc."},
+    {"word":"Môžeme si tykať?","translation":"Мы можем перейти на ты?","example":"Môžeme si tykať?"},
+    {"word":"Chcela by som lístok do Nitry.","translation":"Я хотела бы билет до Нитры.","example":"Chcela by som lístok do Nitry."},
+    {"word":"Rozumiem správne: o 15:20?","translation":"Я правильно понимаю: в 15:20?","example":"Rozumiem správne: o 15:20?"},
+    {"word":"Katka píše, že dnes kurz nie je.","translation":"Катка пишет, что сегодня занятия нет.","example":"Katka píše, že dnes kurz nie je."},
+    {"word":"Dobre, to mi vyhovuje. Ďakujem.","translation":"Хорошо, мне это подходит. Спасибо.","example":"Dobre, to mi vyhovuje. Ďakujem."},
   ],
-  "mistake": "Не сводите итог к грамматическому тесту: необходимо проверить реальное действие в нескольких форматах.",
-  "task": "Выполните четыре сценария: знакомство, бытовая задача, извлечение информации и короткое сообщение."
-};
+  slug: "a1-scenarios",
+  order: 9,
+  title: "Итоговые сценарии A1",
+  slovakTitle: "Záverečné scenáre A1",
+  description: "Демонстрировать основные виды речевой деятельности.",
+  duration: "45–50 мин",
+  goals: [
+    "Проходить короткий разговор от приветствия до результата",
+    "Объединять знакомство, просьбу, уточнение и подтверждение",
+    "Понимать сообщение и точно передавать его другому человеку",
+    "Создавать понятный устный или письменный ответ уровня A1",
+  ],
+  theory: {
+    summary: "Формула полного сценария: контакт → цель → детали → уточнение → результат → завершение. В итоговой ситуации важнее выполнить задачу, сохранить точные детали и обозначить следующий шаг, чем использовать сложную грамматику без ошибок.",
+    rules: [
+      "Сначала выберите регистр: Dobrý deň и формы vy — с незнакомым взрослым; Ahoj и формы ty — после согласованного перехода.",
+      "Сразу назовите цель: Potrebujem pomoc или Chcel/Chcela by som lístok.",
+      "Сохраняйте обязательные детали: когда, где, сколько и кто.",
+      "Если не поняли, управляйте разговором: Nerozumiem. Ešte raz, prosím. Rozumiem správne...?",
+      "Подтвердите результат: Dobre, to mi vyhovuje или Dobre, vezmem si ho.",
+      "В сообщении не искажайте числа, место и отрицание; сравните ответ с исходным текстом.",
+    ],
+    examples: [
+      { slovak: "Dobrý deň. Potrebujem pomoc.", russian: "Добрый день. Мне нужна помощь.", explanation: "Контакт и цель сразу задают направление разговора." },
+      { slovak: "Môžeme si tykať?", russian: "Мы можем перейти на ты?", explanation: "Переход от vy к ty должен быть явно согласован." },
+      { slovak: "Chcela by som lístok do Nitry.", russian: "Я хотела бы билет до Нитры.", explanation: "Женская форма вежливо формулирует бытовую цель." },
+      { slovak: "Rozumiem správne: o 15:20?", russian: "Я правильно понимаю: в 15:20?", explanation: "Повтор времени защищает важную деталь от ошибки." },
+      { slovak: "Katka píše, že dnes kurz nie je.", russian: "Катка пишет, что сегодня занятия нет.", explanation: "При передаче сохраняется отрицание и источник сообщения." },
+      { slovak: "Dobre, to mi vyhovuje. Ďakujem.", russian: "Хорошо, мне это подходит. Спасибо.", explanation: "Фраза подтверждает результат и завершает сценарий." },
+    ],
+  },
+  sections: [
+    {
+      title: "Универсальный план A1",
+      paragraphs: ["В разных ситуациях меняется словарь, но логика общения остаётся одинаковой. Переходите к следующему шагу, когда предыдущая задача выполнена."],
+      table: { headers: ["Шаг", "Задача", "Полезная модель"], rows: [
+        ["1. Контакт", "выбрать ty/vy и начать", "Dobrý deň. / Ahoj."],
+        ["2. Цель", "сказать, зачем вы говорите", "Potrebujem pomoc. / Chcem sa opýtať."],
+        ["3. Детали", "дать время, место или число", "Zajtra o piatej pri stanici."],
+        ["4. Уточнение", "восстановить смысл", "Môžete to zopakovať?"],
+        ["5. Результат", "подтвердить решение", "Dobre, to mi vyhovuje."],
+        ["6. Конец", "вежливо завершить", "Ďakujem. Dovidenia."],
+      ] },
+      items: ["С кем я говорю: ty или vy?", "Какой результат мне нужен?", "Какие детали обязательны?", "Что я скажу, если не понял?", "Как подтвержу завершение?"],
+      note: "Аварийный набор: Nerozumiem. Ešte raz, prosím. Pomalšie, prosím. Rozumiem správne...?",
+    },
+    {
+      title: "Сценарий: знакомство и короткий разговор",
+      paragraphs: ["На курсе начните вежливо, обменяйтесь базовой информацией, задайте встречный вопрос и только затем предложите перейти на ty."],
+      table: { headers: ["Функция", "Реплика"], rows: [
+        ["вежливый контакт", "Dobrý deň, ja som Ari. Ako sa voláte?"],
+        ["ответ с деталью", "Som zo Slovenska, z Nitry."],
+        ["встречный вопрос", "A vy?"],
+        ["контраст", "Som z Ruska, ale bývam v Bratislave."],
+        ["занятие", "Pracujem v IT. A vy?"],
+        ["переход на ty", "Môžeme si tykať?"],
+      ] },
+      items: ["Пауза: верните вопрос A vy?", "Реакция: Aha. To je zaujímavé.", "Интересы: Čo rád/rada robíte vo voľnom čase?", "Ответ: Rád/Rada čítam a chodím na prechádzky."],
+      note: "В своей вариации замените имя, страну, город и занятие, но сохраните функции реплик.",
+    },
+    {
+      title: "Сценарий: решить бытовую задачу",
+      paragraphs: ["На вокзале назовите цель, восстановите непонятую деталь, уточните время и подтвердите покупку."],
+      table: { headers: ["Навык", "Фраза"], rows: [
+        ["назвать цель", "Chcel by som lístok do Trnavy."],
+        ["обозначить непонимание", "Prepáčte, nerozumiem."],
+        ["попросить повтор", "Ešte raz, prosím."],
+        ["уточнить время", "Rozumiem správne: o 14:40?"],
+        ["подтвердить выбор", "Dobre, vezmem si ho."],
+      ] },
+      items: ["Вопрос продавца: Jednosmerný alebo spiatočný?", "Время: O štrnástej štyridsať.", "Цена: Lístok stojí sedem eur.", "Женская форма: Chcela by som lístok..."],
+      note: "Не угадывайте число, время или платформу: Sedem eur? O 14:40? Nástupište číslo tri?",
+    },
+    {
+      title: "Сценарии с сообщениями",
+      paragraphs: ["Исходное сообщение: Ahoj, Ari! Dnes kurz nie je. Stretneme sa zajtra o 17:30 v miestnosti 8. Prines si učebnicu. Daj mi vedieť, či môžeš prísť. Katka"],
+      table: { headers: ["Задача", "Модель"], rows: [
+        ["понять", "сегодня курса нет; завтра в 17:30, аудитория 8; принести учебник и ответить"],
+        ["ответить", "Ahoj, Katka! Áno, môžem prísť. Zajtra o 17:30 mi vyhovuje. Učebnicu prinesiem."],
+        ["передать", "Katka píše, že dnes kurz nie je. Stretneme sa zajtra o 17:30 v miestnosti 8."],
+        ["голосовое сообщение", "Ahoj, tu je Ari. Volám kvôli zajtrajšiemu kurzu. Prídem o 17:30."],
+      ] },
+      items: ["Сохраняются три детали: zajtra, 17:30, miestnosť 8.", "Меняется ваша задача: понять, ответить, передать или произнести вслух.", "Перед отправкой сравните числа, место и отрицание с источником."],
+      note: "Точный ответ не должен превращать Dnes kurz nie je в утверждение, что занятие сегодня состоится.",
+    },
+    {
+      title: "Финальные опоры и самопроверка",
+      paragraphs: ["Завершённый сценарий показывает собеседнику вашу цель и следующий шаг. Проверьте каркас до ответа."],
+      table: { headers: ["Опора", "Проверка"], rows: [
+        ["цель", "Я начинаю с задачи, а не со сложной грамматики."],
+        ["точность", "Я сохраняю время, место, число и отрицание."],
+        ["восстановление", "При непонимании использую готовую фразу."],
+        ["результат", "Я обозначаю решение и следующий шаг."],
+      ] },
+      items: ["Есть контакт.", "Есть ясная цель.", "Есть две точные детали.", "Есть вопрос или стратегия помощи.", "Есть подтверждённый результат.", "Есть завершение."],
+      note: "Готовность A1 — самостоятельно познакомиться, решить бытовую задачу, понять и передать сообщение, оставить голосовое сообщение, восстановить разговор и написать короткий текст.",
+    },
+  ],
+  stepPractices: [
+    { id: "m8-a1-scenarios-step-1", sectionIndex: 0, type: "choice", prompt: "Какой порядок превращает реплики в полный сценарий?", options: ["контакт → цель → детали → уточнение → результат → завершение", "детали → завершение → контакт → цель", "уточнение → контакт → завершение → детали"], answer: "контакт → цель → детали → уточнение → результат → завершение", showSlovakKeyboard: false, hint: "Начните с установления контакта и закончите вежливым завершением.", explanation: "Полный маршрут: контакт → цель → детали → уточнение → результат → завершение." },
+    { id: "m8-a1-scenarios-step-2", sectionIndex: 1, type: "choice", prompt: "Как вежливо предложить перейти на ty?", options: ["Môžeme si tykať?", "Ako sa voláš?", "Ahoj, môžete mi pomôcť?"], answer: "Môžeme si tykať?", hint: "Переход должен быть явно согласован.", explanation: "Фраза Môžeme si tykať? означает «Мы можем перейти на ты?»." },
+    { id: "m8-a1-scenarios-step-3", sectionIndex: 2, type: "text", prompt: "Переведите: «Я хотела бы билет до Нитры».", answer: "Chcela by som lístok do Nitry.", hint: "Используйте женскую вежливую форму и сохраните диакритику.", explanation: "Верная фраза: Chcela by som lístok do Nitry." },
+    { id: "m8-a1-scenarios-step-4", sectionIndex: 3, type: "pairs", prompt: "Определите действие с одним сообщением.", answer: "понять; ответить; передать; произнести", showSlovakKeyboard: false, pairs: [
+      { prompt: "Найти изменение и новый план", answer: "понять", options: ["понять", "ответить", "передать", "произнести"] },
+      { prompt: "Сообщить Katka, что вы придёте", answer: "ответить", options: ["понять", "ответить", "передать", "произнести"] },
+      { prompt: "Рассказать другу слова Katka", answer: "передать", options: ["понять", "ответить", "передать", "произнести"] },
+      { prompt: "Оставить hlasová správa", answer: "произнести", options: ["понять", "ответить", "передать", "произнести"] },
+    ], hint: "Смотрите, кому адресован результат каждого действия.", explanation: "Одно сообщение можно понять, на него ответить, передать его или превратить в голосовое сообщение." },
+    { id: "m8-a1-scenarios-step-5", sectionIndex: 4, type: "choice", prompt: "Когда итоговый сценарий можно считать завершённым?", options: ["Собеседник понимает вашу цель и следующий шаг", "Вы использовали сложную грамматику без единой ошибки", "Вы произнесли не менее двадцати реплик"], answer: "Собеседник понимает вашу цель и следующий шаг", showSlovakKeyboard: false, hint: "Оценивайте результат общения.", explanation: "На A1 критерием успеха служат выполненная задача и понятный следующий шаг." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть итоговых заданий A1",
+  reinforcementPractices: [
+    { id: "reinforcement:a1-scenarios:1", sectionIndex: 0, type: "pairs", prompt: "Выберите уместную реплику.", answer: "Dobrý deň.; Nerozumiem.; To mi vyhovuje.", pairs: [
+      { prompt: "Незнакомому сотруднику", answer: "Dobrý deň.", options: ["Ahoj.", "Dobrý deň."] },
+      { prompt: "Вы не поняли речь", answer: "Nerozumiem.", options: ["Neviem.", "Nerozumiem."] },
+      { prompt: "Новое время подходит", answer: "To mi vyhovuje.", options: ["Kde bývate?", "To mi vyhovuje."] },
+    ], hint: "Выберите реплику по функции и ситуации.", explanation: "Незнакомого человека приветствуют Dobrý deň; непонимание обозначают Nerozumiem; согласие со временем — To mi vyhovuje." },
+    { id: "reinforcement:a1-scenarios:2", sectionIndex: 0, type: "pairs", prompt: "Вставьте одну форму.", answer: "voláte; zopakovať; príde; že", pairs: [
+      { prompt: "Ako sa ___? (vy)", answer: "voláte", inputHint: "Введите одну форму." },
+      { prompt: "Môžete to ___?", answer: "zopakovať", inputHint: "Введите инфинитив." },
+      { prompt: "Eva ___ o šiestej.", answer: "príde", inputHint: "Введите форму для Eva." },
+      { prompt: "Peter píše, ___ kurz je zajtra.", answer: "že", inputHint: "Введите связующее слово." },
+    ], hint: "Восстановите знакомые модели общения и передачи информации.", explanation: "Правильные формы: voláte, zopakovať, príde, že." },
+    { id: "reinforcement:a1-scenarios:3", sectionIndex: 3, type: "pairs", prompt: "Извлеките детали: Stretnutie je v piatok o 16:15 pri stanici. Prineste doklady.", answer: "v piatok; o 16:15; pri stanici; priniesť doklady", showSlovakKeyboard: false, pairs: [
+      { prompt: "День", answer: "v piatok", options: ["v piatok", "o 16:15", "pri stanici", "priniesť doklady"] },
+      { prompt: "Время", answer: "o 16:15", options: ["v piatok", "o 16:15", "pri stanici", "priniesť doklady"] },
+      { prompt: "Место", answer: "pri stanici", options: ["v piatok", "o 16:15", "pri stanici", "priniesť doklady"] },
+      { prompt: "Действие", answer: "priniesť doklady", options: ["v piatok", "o 16:15", "pri stanici", "priniesť doklady"] },
+    ], hint: "Найдите отдельно день, время, место и требуемое действие.", explanation: "Встреча назначена на пятницу, 16:15, у вокзала; нужно принести документы." },
+    { id: "reinforcement:a1-scenarios:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки и запишите полные фразы.", answer: "Vy máte čas?; Môžete mi pomôcť, prosím vás?; Eva príde o piatej.; Potrebujem lístok.", pairs: [
+      { prompt: "Vy máš čas?", answer: "Vy máte čas?", inputHint: "Исправьте согласование с vy." },
+      { prompt: "Môžeš mi pomôcť, prosím vás?", answer: "Môžete mi pomôcť, prosím vás?", inputHint: "Согласуйте всю просьбу в одном регистре." },
+      { prompt: "Eva prídem o piatej.", answer: "Eva príde o piatej.", inputHint: "Исправьте лицо глагола." },
+      { prompt: "Ja potrebovať lístok.", answer: "Potrebujem lístok.", acceptableAnswers: ["Ja potrebujem lístok."], inputHint: "Поставьте глагол в форме ja." },
+    ], hint: "Проверьте ty/vy, лицо глагола и диакритику.", explanation: "Нормативные фразы согласованы по регистру и лицу: máte, môžete, príde, potrebujem." },
+    { id: "reinforcement:a1-scenarios:5", sectionIndex: 4, type: "pairs", prompt: "Переведите итоговые фразы.", answer: "Trochu hovorím po slovensky.; Môžete to zopakovať pomalšie?; Peter píše, že stretnutie je zajtra.; Dobre, vezmem si lístok.", pairs: [
+      { prompt: "Я немного говорю по-словацки.", answer: "Trochu hovorím po slovensky.", inputHint: "Введите полное предложение." },
+      { prompt: "Можете повторить медленнее?", answer: "Môžete to zopakovať pomalšie?", inputHint: "Введите вежливую просьбу." },
+      { prompt: "Петер пишет, что встреча завтра.", answer: "Peter píše, že stretnutie je zajtra.", inputHint: "Передайте источник и факт." },
+      { prompt: "Хорошо, я возьму билет.", answer: "Dobre, vezmem si lístok.", inputHint: "Подтвердите результат покупки." },
+    ], hint: "Сохраняйте регистр общения, связку že и словацкую диакритику.", explanation: "Фразы проверяют самопрезентацию, восстановление разговора, передачу информации и завершение покупки." },
+    { id: "reinforcement:a1-scenarios:6", sectionIndex: 4, type: "pairs", prompt: "Соберите финальный сценарий B: покупка билета, непонимание одной детали, уточнение и завершение.", answer: "Dobrý deň. Chcela by som lístok do Nitry.; Jednosmerný alebo spiatočný?; Prepáčte, nerozumiem. Môžete to zopakovať pomalšie?; Jednosmerný alebo spiatočný?; Jednosmerný. Kedy ide najbližší vlak?; O pätnástej dvadsať.; Rozumiem správne: o 15:20?; Áno. Stojí deväť eur.; Dobre, vezmem si ho. Ďakujem.", pairs: [
+      { prompt: "1. Контакт и цель", answer: "Dobrý deň. Chcela by som lístok do Nitry.", options: ["Dobrý deň. Chcela by som lístok do Nitry.", "Ahoj. Neviem vlak."] },
+      { prompt: "2. Уточнение продавца", answer: "Jednosmerný alebo spiatočný?", options: ["Jednosmerný alebo spiatočný?", "Kde pracujete?"] },
+      { prompt: "3. Непонимание и просьба", answer: "Prepáčte, nerozumiem. Môžete to zopakovať pomalšie?", options: ["Prepáčte, nerozumiem. Môžete to zopakovať pomalšie?", "Dobre, všetko viem."] },
+      { prompt: "4. Повтор", answer: "Jednosmerný alebo spiatočný?", options: ["Jednosmerný alebo spiatočný?", "Som zo Slovenska."] },
+      { prompt: "5. Выбор и вопрос", answer: "Jednosmerný. Kedy ide najbližší vlak?", options: ["Jednosmerný. Kedy ide najbližší vlak?", "Spiatočný. Dovidenia."] },
+      { prompt: "6. Время", answer: "O pätnástej dvadsať.", options: ["O pätnástej dvadsať.", "Pri stanici v piatok."] },
+      { prompt: "7. Проверка детали", answer: "Rozumiem správne: o 15:20?", options: ["Rozumiem správne: o 15:20?", "Môžeme si tykať?"] },
+      { prompt: "8. Подтверждение и цена", answer: "Áno. Stojí deväť eur.", options: ["Áno. Stojí deväť eur.", "Nie. Kurz dnes nie je."] },
+      { prompt: "9. Результат и конец", answer: "Dobre, vezmem si ho. Ďakujem.", options: ["Dobre, vezmem si ho. Ďakujem.", "Nerozumiem. Ahoj."] },
+    ], hint: "Соберите контакт, цель, сбой, восстановление, точную проверку, результат и завершение.", explanation: "Диалог выполняет полный маршрут A1 и сохраняет важные детали: направление билета, 15:20 и девять евро." },
+  ],
+  chatPrompt: "Выберите итоговый сценарий A1: знакомство, покупка билета или сообщение об изменении курса. Пройдите путь от контакта и цели до точного результата и завершения.",
+  chatSuggestions: ["Dobrý deň. Chcela by som lístok...", "Prepáčte, nerozumiem.", "Rozumiem správne...?", "Dobre, to mi vyhovuje.", "Ďakujem. Dovidenia."],
+  knowledgeChecks: [
+    { id: "m8-a1-scenarios-check-1", question: "Что следует после контакта в универсальном сценарии?", options: ["Ясно назвать цель", "Сразу завершить разговор", "Перечислить всю изученную грамматику"], answer: "Ясно назвать цель", explanation: "После контакта собеседнику нужно понять, зачем вы говорите." },
+    { id: "m8-a1-scenarios-check-2", question: "Как проверить важное время?", options: ["Rozumiem správne: o 15:20?", "Neviem, dovidenia.", "A vy?"], answer: "Rozumiem správne: o 15:20?", explanation: "Повтор точной детали вопросом предотвращает ошибку." },
+  ],
+  finalChecks: [
+    { id: "m8-a1-scenarios-final-1", question: "Когда сценарий A1 достиг результата?", options: ["Собеседник понял цель и следующий шаг", "В нём нет ни одной грамматической ошибки", "Он содержит не менее двадцати реплик"], answer: "Собеседник понял цель и следующий шаг", explanation: "Критерий успеха — выполненная коммуникативная задача и понятный следующий шаг." },
+  ],
+} satisfies CourseLesson;

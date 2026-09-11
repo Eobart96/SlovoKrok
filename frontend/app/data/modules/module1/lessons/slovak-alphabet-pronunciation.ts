@@ -1,6 +1,20 @@
 import { defineModule1Lesson } from "../lessonFactory";
 
 export const slovakAlphabetPronunciationLesson = defineModule1Lesson({
+  vocabulary: [
+    {"word":"dobrý deň","translation":"добрый день","example":"dobrý deň"},
+    {"word":"ďakujem","translation":"спасибо","example":"ďakujem"},
+    {"word":"chlieb","translation":"хлеб","example":"chlieb"},
+    {"word":"kôň","translation":"конь","example":"kôň"},
+    {"word":"päť","translation":"пять","example":"päť"},
+    {"word":"džús","translation":"сок","example":"džús"},
+    {"word":"prosím","translation":"пожалуйста","example":"prosím"},
+    {"word":"dovidenia","translation":"до свидания","example":"dovidenia"},
+    {"word":"Slovensko","translation":"Словакия","example":"Slovensko"},
+    {"word":"mlieko","translation":"молоко","example":"mlieko"},
+    {"word":"študent","translation":"студент","example":"študent"},
+    {"word":"žena","translation":"женщина","example":"žena"},
+  ],
   slug: "slovak-alphabet-pronunciation", title: "Словацкий алфавит и произношение", slovakTitle: "Slovenská abeceda a výslovnosť",
   description: "Пройдите путь от 46 букв и диакритики к долгим гласным, дифтонгам, мягким согласным и самостоятельному чтению слов.", duration: "35–45 мин",
   goals: ["Узнавать и называть 46 букв словацкого алфавита", "Читать долгие гласные, дифтонги и мягкие согласные", "Правильно произносить ch, dz, dž, ľ, ŕ и ĺ", "Читать незнакомые слова по простому алгоритму A1"],

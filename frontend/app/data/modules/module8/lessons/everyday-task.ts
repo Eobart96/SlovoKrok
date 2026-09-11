@@ -1,30 +1,185 @@
-import type { CompactLessonContent } from "../../plannedLessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const everydayTaskContent: CompactLessonContent = {
-  "slug": "everyday-task",
-  "title": "Решение бытовой задачи",
-  "slovakTitle": "Každodenná situácia",
-  "outcome": "Проходить полный знакомый бытовой сценарий.",
-  "summary": "После урока вы сможете проходить полный знакомый бытовой сценарий в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Задача считается выполненной, когда получен практический результат: товар куплен, заказ сделан, билет выбран или место найдено. Используйте уточнения цены, количества, времени и направления.",
-  "examples": [
-    {
-      "slovak": "Máte minerálnu vodu?",
-      "russian": "У вас есть минеральная вода?"
-    },
-    {
-      "slovak": "Prosím si dve fľaše.",
-      "russian": "Мне две бутылки, пожалуйста."
-    },
-    {
-      "slovak": "Koľko to stojí?",
-      "russian": "Сколько это стоит?"
-    },
-    {
-      "slovak": "Môžem platiť kartou?",
-      "russian": "Можно оплатить картой?"
-    }
+export const everydayTaskContent = {
+  vocabulary: [
+    {"word":"Máte minerálnu vodu?","translation":"У вас есть минеральная вода?","example":"Máte minerálnu vodu?"},
+    {"word":"Prosím si dve fľaše.","translation":"Мне две бутылки, пожалуйста.","example":"Prosím si dve fľaše."},
+    {"word":"Koľko to stojí?","translation":"Сколько это стоит?","example":"Koľko to stojí?"},
+    {"word":"Môžem platiť kartou?","translation":"Можно оплатить картой?","example":"Môžem platiť kartou?"},
+    {"word":"Mám problém s kúrením.","translation":"У меня проблема с отоплением.","example":"Mám problém s kúrením."},
+    {"word":"Dobre, to mi vyhovuje.","translation":"Хорошо, мне это подходит.","example":"Dobre, to mi vyhovuje."},
   ],
-  "mistake": "Не заканчивайте сценарий до подтверждения ключевой детали или результата.",
-  "task": "Пройдите один полный сценарий магазина, кафе, транспорта или поиска учреждения."
-};
+  slug: "everyday-task",
+  order: 3,
+  title: "Решение бытовой задачи",
+  slovakTitle: "Každodenná situácia",
+  description: "Проходить полный знакомый бытовой сценарий.",
+  duration: "35–40 мин",
+  goals: [
+    "Кратко называть потребность или простую проблему",
+    "Вежливо просить незнакомого взрослого о помощи",
+    "Уточнять место, время, цену или подходящий вариант",
+    "Повторять ключевую деталь и подтверждать решение",
+  ],
+  theory: {
+    summary: "Универсальная схема бытовой задачи: цель → просьба → уточнение → подтверждение. Задача выполнена, когда вы ясно назвали нужный результат, проверили важную деталь и подтвердили решение.",
+    rules: [
+      "Назовите цель готовой моделью Potrebujem…, Hľadám…, Chcem… или Mám problém s…",
+      "С незнакомым взрослым используйте вежливую рамку Dobrý deň. Prosím vás, môžete mi…?",
+      "Уточните одну важную деталь вопросом kde, kedy, koľko, ktorý / ktorá / ktoré или ako.",
+      "Повторите услышанное как вопрос: O desiatej? / Dvadsať eur? — затем скажите Dobre, rozumiem.",
+      "Завершите практическим результатом: Vezmem si to, To mi vyhovuje, Kúpim si lístok или Budem doma.",
+      "Chcel by som говорит мужчина, Chcela by som — женщина; нейтральное Potrebujem подходит всем.",
+    ],
+    examples: [
+      { slovak: "Máte minerálnu vodu?", russian: "У вас есть минеральная вода?", explanation: "Вежливый вопрос о наличии товара." },
+      { slovak: "Prosím si dve fľaše.", russian: "Мне две бутылки, пожалуйста.", explanation: "Короткая готовая модель заказа." },
+      { slovak: "Koľko to stojí?", russian: "Сколько это стоит?", explanation: "Уточнение цены перед решением." },
+      { slovak: "Môžem platiť kartou?", russian: "Можно оплатить картой?", explanation: "Вопрос о способе оплаты." },
+      { slovak: "Mám problém s kúrením.", russian: "У меня проблема с отоплением.", explanation: "Готовый блок для сообщения о неисправности." },
+      { slovak: "Dobre, to mi vyhovuje.", russian: "Хорошо, мне это подходит.", explanation: "Подтверждение подходящего решения." },
+    ],
+  },
+  sections: [
+    {
+      title: "Четыре шага к результату",
+      paragraphs: [
+        "В бытовой ситуации важна понятная последовательность. Назовите цель, попросите действие, уточните одну деталь и подтвердите решение.",
+        "Сложные формы после предлога запоминайте готовыми блоками: do Trnavy, v Bratislave, s kúrením.",
+      ],
+      table: { headers: ["Шаг", "Модель", "Пример"], rows: [
+        ["1. Цель", "Potrebujem… / Hľadám…", "Potrebujem lístok do Trnavy."],
+        ["2. Просьба", "Môžete mi pomôcť?", "Môžete mi ukázať cestu?"],
+        ["3. Уточнение", "Kde? Kedy? Koľko?", "Koľko to stojí?"],
+        ["4. Решение", "Dobre. / To mi vyhovuje.", "Dobre, vezmem si to."],
+      ] },
+      items: [
+        "Potrebujem pomoc. / Potrebujem zaplatiť.", "Chcem kúpiť lístok.",
+        "Chcel by som / Chcela by som lístok.", "Mám problém s kúrením.",
+      ],
+      note: "В быстрой ситуации нейтральное Potrebujem… подходит и мужчине, и женщине.",
+    },
+    {
+      title: "Вежливая просьба и точное уточнение",
+      paragraphs: [
+        "Начните с Dobrý deň и Prosím vás, затем назовите действие. Форма môžete сохраняет правильный тон со взрослым незнакомым человеком.",
+        "Проверьте понимание повтором ключевой детали: O desiatej? — Dobre, rozumiem.",
+      ],
+      table: { headers: ["Просьба", "Перевод"], rows: [
+        ["Prosím vás, môžete mi pomôcť?", "Скажите, пожалуйста, вы можете мне помочь?"],
+        ["Môžete mi to ukázať?", "Можете мне это показать?"],
+        ["Môžete to zopakovať?", "Можете это повторить?"],
+        ["Môžete mi dať iný termín?", "Можете дать другое время или дату?"],
+        ["Prosím, napíšte mi to.", "Пожалуйста, напишите мне это."],
+      ] },
+      items: ["kde — место: Kde môžem zaplatiť?", "kedy — время: Kedy môže prísť technik?", "koľko — цена или количество: Koľko stojí lístok?", "ktorý — выбор: Ktorý autobus ide do centra?", "ako — способ: Ako to môžem zaplatiť?"],
+      note: "После ответа повторите главную цифру или время как короткий вопрос.",
+    },
+    {
+      title: "Три бытовых сценария",
+      paragraphs: [
+        "Магазин: Dobrý deň. Potrebujem väčšiu veľkosť. — Akú veľkosť potrebujete? — Veľkosť L. Máte túto košeľu v modrej farbe? — Áno, tu je. — Ďakujem, vezmem si ju.",
+        "Вокзал: Prosím vás, chcel by som lístok do Trnavy. — Jednosmerný alebo spiatočný? — Jednosmerný. Kedy ide najbližší vlak? — O štrnástej tridsať. — Dobre. Koľko stojí lístok?",
+        "Квартира: Dobrý deň. V byte nefunguje kúrenie. — Od kedy? — Od rána. Môžete poslať technika? — Áno. Môže prísť zajtra o desiatej. — O desiatej? Dobre, budem doma.",
+      ],
+      table: { headers: ["Цель", "Уточнение", "Результат"], rows: [
+        ["нужен размер L", "цвет", "беру рубашку"],
+        ["нужен билет", "тип, время, цена", "покупаю билет"],
+        ["не работает отопление", "с какого времени", "техник придёт в 10:00"],
+      ] },
+      note: "В каждом разговоре произнесите результат: Vezmem si to. / Dobre, kúpim si lístok. / Budem doma.",
+    },
+    {
+      title: "Банк фраз для бытовой задачи",
+      paragraphs: ["Читайте слева направо: начало → цель → уточнение → подтверждение. Запоминайте частотные фразы готовыми блоками."],
+      table: { headers: ["Функция", "Фраза"], rows: [
+        ["начать", "Dobrý deň. / Prosím vás…"], ["попросить помощь", "Môžete mi pomôcť?"],
+        ["назвать цель", "Potrebujem pomoc."], ["купить", "Chcem kúpiť lístok."],
+        ["найти", "Hľadám pokladňu."], ["сообщить проблему", "Mám problém. / Nefunguje výťah."],
+        ["спросить место", "Kde je zastávka?"], ["спросить время", "Kedy to bude hotové?"],
+        ["спросить цену", "Koľko to stojí?"], ["выбрать", "Máte iný model?"],
+        ["попросить показать", "Môžete mi to ukázať?"], ["переспросить", "O piatej? / Tridsať eur?"],
+        ["подтвердить", "Dobre, rozumiem. / To mi vyhovuje."], ["завершить", "Vezmem si to. Ďakujem za pomoc."],
+      ] },
+      note: "Опорные блоки: prosím vás, môžete mi…; koľko to stojí; to mi vyhovuje.",
+    },
+    {
+      title: "Типичные ошибки и самопроверка",
+      paragraphs: ["Проверяйте личную форму глагола, вежливое vy, согласование со словом to и завершённость действия."],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Ja potrebovať pomoc.", "Potrebujem pomoc.", "Глагол нужен в личной форме."],
+        ["Môžeš mi pomôcť?", "Môžete mi pomôcť?", "С незнакомым взрослым используем vy."],
+        ["Koľko to stojíš?", "Koľko to stojí?", "Подлежащее to требует stojí."],
+        ["Kde môžem platiť?", "Kde môžem zaplatiť?", "Для одного завершённого платежа естественно zaplatiť."],
+      ] },
+      items: ["Я могу назвать потребность.", "Я могу попросить помощь.", "Я задаю два уточняющих вопроса.", "Я повторяю ключевую деталь.", "Я подтверждаю решение."],
+      note: "Сначала цель или проблема, затем Prosím vás, môžete…, одно важное уточнение и явный результат.",
+    },
+  ],
+  stepPractices: [
+    { id: "m8-everyday-task-step-1", sectionIndex: 0, type: "choice", prompt: "Как вежливо спросить о минеральной воде?", options: ["Máte minerálnu vodu?", "Máš minerálnu vodu?", "Potrebujete minerálnu vodu?"], answer: "Máte minerálnu vodu?", hint: "Используйте вежливую форму máte.", explanation: "Верный вопрос: Máte minerálnu vodu?" },
+    { id: "m8-everyday-task-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Мне две бутылки, пожалуйста.»", answer: "Prosím si dve fľaše.", hint: "Начните с готовой модели Prosím si…",
+      explanation: "Верная фраза: Prosím si dve fľaše." },
+    { id: "m8-everyday-task-step-3", sectionIndex: 2, type: "text", prompt: "Переведите: «Сколько это стоит?»", answer: "Koľko to stojí?", hint: "Используйте koľko и форму stojí.", explanation: "Верный вопрос: Koľko to stojí?" },
+    { id: "m8-everyday-task-step-4", sectionIndex: 3, type: "pairs", prompt: "Выберите функцию каждой фразы.", answer: "назвать цель; спросить место; спросить цену; подтвердить решение", showSlovakKeyboard: false, pairs: [
+      { prompt: "Potrebujem pomoc.", answer: "назвать цель", options: ["назвать цель", "спросить место", "спросить цену", "подтвердить решение"] },
+      { prompt: "Kde je zastávka?", answer: "спросить место", options: ["назвать цель", "спросить место", "спросить цену", "подтвердить решение"] },
+      { prompt: "Koľko to stojí?", answer: "спросить цену", options: ["назвать цель", "спросить место", "спросить цену", "подтвердить решение"] },
+      { prompt: "To mi vyhovuje.", answer: "подтвердить решение", options: ["назвать цель", "спросить место", "спросить цену", "подтвердить решение"] },
+    ], hint: "Определите место фразы в схеме задачи.", explanation: "Маршрут: цель → уточнение → подтверждение." },
+    { id: "m8-everyday-task-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте типичные ошибки.", answer: "Potrebujem pomoc.; Môžete mi pomôcť?; Koľko to stojí?; Kde môžem zaplatiť?", pairs: [
+      { prompt: "Ja potrebovať pomoc.", answer: "Potrebujem pomoc.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Môžeš mi pomôcť?", answer: "Môžete mi pomôcť?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Koľko to stojíš?", answer: "Koľko to stojí?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Kde môžem platiť?", answer: "Kde môžem zaplatiť?", inputHint: "Введите исправленную фразу" },
+    ], hint: "Проверьте глагольную форму и вежливое обращение.", explanation: "Каждая строка исправляется независимо." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 3",
+  reinforcementPractices: [
+    { id: "reinforcement:everyday-task:1", sectionIndex: 0, type: "pairs", prompt: "Выберите подходящий вариант.", answer: "Potrebujem; Môžete; stojí", pairs: [
+      { prompt: "В магазине: … veľkosť L.", answer: "Potrebujem", options: ["Potrebujem", "Potrebuješ"] },
+      { prompt: "Вежливая просьба: … mi pomôcť?", answer: "Môžete", options: ["Môžete", "Môžeš"] },
+      { prompt: "Цена: Koľko to …?", answer: "stojí", options: ["stojí", "stojíte"] },
+    ], hint: "Определите говорящего, тон и подлежащее.", explanation: "Правильно: Potrebujem; Môžete; stojí." },
+    { id: "reinforcement:everyday-task:2", sectionIndex: 1, type: "pairs", prompt: "Выберите вопросительное слово.", answer: "Kde; Kedy; Koľko; Ktorý", pairs: [
+      { prompt: "… je pokladňa?", answer: "Kde", options: ["Kde", "Kedy", "Koľko", "Ktorý"] },
+      { prompt: "… ide vlak?", answer: "Kedy", options: ["Kde", "Kedy", "Koľko", "Ktorý"] },
+      { prompt: "… to stojí?", answer: "Koľko", options: ["Kde", "Kedy", "Koľko", "Ktorý"] },
+      { prompt: "… autobus ide do centra?", answer: "Ktorý", options: ["Kde", "Kedy", "Koľko", "Ktorý"] },
+    ], hint: "Место, время, цена и выбор требуют разных слов.", explanation: "Правильно: Kde; Kedy; Koľko; Ktorý." },
+    { id: "reinforcement:everyday-task:3", sectionIndex: 2, type: "order", prompt: "Расставьте шаги покупки в правильном порядке.", tokens: ["Dobre, vezmem si to.", "Koľko to stojí?", "Dobrý deň, potrebujem veľkosť L.", "Môžete mi pomôcť?"], answer: "Dobrý deň, potrebujem veľkosť L. Môžete mi pomôcť? Koľko to stojí? Dobre, vezmem si to.", hint: "Сначала цель, затем просьба, уточнение и решение.", explanation: "Правильный маршрут: цель → просьба → цена → решение." },
+    { id: "reinforcement:everyday-task:4", sectionIndex: 3, type: "pairs", prompt: "Исправьте ошибки.", answer: "Potrebujem lístok.; Môžete mi pomôcť, prosím vás?; Koľko to stojí?; Kedy môže technik prísť?", pairs: [
+      { prompt: "Ja potrebovať lístok.", answer: "Potrebujem lístok.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Môžeš mi pomôcť, prosím vás?", answer: "Môžete mi pomôcť, prosím vás?", acceptableAnswers: ["Prosím vás, môžete mi pomôcť?"], inputHint: "Введите исправленную фразу" },
+      { prompt: "Koľko to stojíš?", answer: "Koľko to stojí?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Kedy technik môže prísť?", answer: "Kedy môže technik prísť?", inputHint: "Введите исправленную фразу" },
+    ], hint: "Проверьте личную форму, vy и нейтральный порядок слов.", explanation: "Исправленные фразы используют личный глагол и последовательную вежливую форму." },
+    { id: "reinforcement:everyday-task:5", sectionIndex: 3, type: "pairs", prompt: "Переведите на словацкий.", answer: "Potrebujem pomoc.; Kde môžem zaplatiť?; Kedy ide najbližší vlak?; Dobre, to mi vyhovuje.", pairs: [
+      { prompt: "Мне нужна помощь.", answer: "Potrebujem pomoc.", inputHint: "Введите перевод" },
+      { prompt: "Где я могу заплатить?", answer: "Kde môžem zaplatiť?", inputHint: "Введите перевод" },
+      { prompt: "Когда отправляется ближайший поезд?", answer: "Kedy ide najbližší vlak?", inputHint: "Введите перевод" },
+      { prompt: "Хорошо, мне это подходит.", answer: "Dobre, to mi vyhovuje.", inputHint: "Введите перевод" },
+    ], hint: "Используйте готовые блоки из банка фраз.", explanation: "Переводы называют цель, уточняют место и время и подтверждают решение." },
+    { id: "reinforcement:everyday-task:6", sectionIndex: 4, type: "pairs", prompt: "Соберите сценарий о неисправности дома.", answer: "Dobrý deň. V byte nefunguje teplá voda.; Od kedy?; Od včera. Môžete mi pomôcť?; Technik môže prísť zajtra poobede.; O tretej?; Áno, o tretej.; Dobre, to mi vyhovuje. Ďakujem.", pairs: [
+      { prompt: "1 · сообщить проблему", answer: "Dobrý deň. V byte nefunguje teplá voda.", options: ["Dobrý deň. V byte nefunguje teplá voda.", "Dobrý deň. Kde je zastávka?"] },
+      { prompt: "2 · спросить о начале проблемы", answer: "Od kedy?", options: ["Od kedy?", "Koľko to stojí?"] },
+      { prompt: "3 · назвать время и попросить помощь", answer: "Od včera. Môžete mi pomôcť?", options: ["Od včera. Môžete mi pomôcť?", "Včera. Môžeš mi pomôcť?"] },
+      { prompt: "4 · предложить визит", answer: "Technik môže prísť zajtra poobede.", options: ["Technik môže prísť zajtra poobede.", "Technik býva v Bratislave."] },
+      { prompt: "5 · переспросить время", answer: "O tretej?", options: ["O tretej?", "Tri eurá?"] },
+      { prompt: "6 · подтвердить время", answer: "Áno, o tretej.", options: ["Áno, o tretej.", "Nie, ďakujem."] },
+      { prompt: "7 · принять решение", answer: "Dobre, to mi vyhovuje. Ďakujem.", options: ["Dobre, to mi vyhovuje. Ďakujem.", "Prosím vás, kde je pošta?"] },
+    ], hint: "Нужны проблема, просьба, уточнение времени и подтверждение.", explanation: "Сценарий завершён договорённостью о визите техника в три часа." },
+  ],
+  chatPrompt: "Разыграйте бытовой сценарий из 5–7 реплик: назовите потребность или проблему, попросите помощь, уточните время или цену, повторите ключевую деталь и подтвердите решение.",
+  chatSuggestions: ["Dobrý deň. Potrebujem pomoc.", "Môžete mi pomôcť?", "Kedy to bude hotové?", "Dobre, to mi vyhovuje."],
+  knowledgeChecks: [
+    { id: "m8-everyday-task-check-1", question: "Как вежливо спросить: «У вас есть минеральная вода?»", options: ["Máte minerálnu vodu?", "Máš minerálnu vodu?", "Potrebujete minerálnu vodu?"], answer: "Máte minerálnu vodu?", explanation: "Правильная фраза: Máte minerálnu vodu?" },
+    { id: "m8-everyday-task-check-2", question: "Как по-словацки: «Мне две бутылки, пожалуйста»?", options: ["Prosím si dve fľaše.", "Potrebujem veľkosť L.", "Dobre, vezmem si to."], answer: "Prosím si dve fľaše.", explanation: "Правильная модель: Prosím si dve fľaše." },
+  ],
+  finalChecks: [
+    { id: "m8-everyday-task-final-1", question: "Выберите перевод «Сколько это стоит?»", options: ["Koľko to stojí?", "Kedy to bude hotové?", "Kde môžem zaplatiť?"], answer: "Koľko to stojí?", explanation: "Правильный ответ: Koľko to stojí?" },
+  ],
+} satisfies CourseLesson;

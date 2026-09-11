@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Body, Depends, HTTPException
+from typing import Literal
 from sqlalchemy import select
 from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 from sqlalchemy.orm import Session
@@ -176,16 +177,23 @@ def list_vocabulary(db: Session = Depends(get_db)) -> list[CourseVocabularyRespo
 
 
 @router.post("/vocabulary/{item_id}/review", response_model=CourseVocabularyResponse)
-def review_vocabulary(item_id: int, db: Session = Depends(get_db)) -> CourseVocabularyResponse:
+def review_vocabulary(item_id: int, rating: Literal["again", "hard", "easy"] | None = Body(default=None, embed=True), db: Session = Depends(get_db)) -> CourseVocabularyResponse:
     item = db.get(CourseVocabularyItem, item_id)
     if item is None:
         raise HTTPException(status_code=404, detail="Module 1 vocabulary item not found")
     now = datetime.now(timezone.utc)
     intervals = (1, 3, 7, 14, 30)
     item.review_count += 1
-    item.interval_days = intervals[min(item.review_count - 1, len(intervals) - 1)]
+    if rating == "again":
+        item.interval_days = 0
+    elif rating == "hard":
+        item.interval_days = max(1, min(30, item.interval_days // 2))
+    elif rating == "easy":
+        item.interval_days = min(30, max(3, item.interval_days * 2))
+    else:
+        item.interval_days = intervals[min(item.review_count - 1, len(intervals) - 1)]
     item.last_reviewed_at = now
-    item.next_review_at = now + timedelta(days=item.interval_days)
+    item.next_review_at = now + (timedelta(minutes=10) if rating == "again" else timedelta(days=item.interval_days))
     db.commit(); db.refresh(item)
     return _vocabulary_response(item)
 

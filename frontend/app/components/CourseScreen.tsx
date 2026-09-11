@@ -11,12 +11,14 @@ import { CourseExercises } from "./CourseExercises";
 import { CourseReading } from "./CourseReading";
 import { CourseVocabulary } from "./CourseVocabulary";
 import { CourseHomework } from "./CourseHomework";
+import { CourseBackupPanel } from "./CourseBackupPanel";
+import { CourseListening } from "./CourseListening";
 import { CourseMaterialView } from "./CourseMaterialView";
 import { CourseReinforcementView } from "./CourseReinforcementView";
 import { CourseTopicsView } from "./CourseTopicsView";
 import { CourseFinalView, CourseReviewView, CourseStatsView } from "./CourseProgressViews";
 
-type CourseView = "topics" | "material" | "exercises" | "reading" | "vocabulary" | "homework" | "reinforcement" | "review" | "final" | "stats";
+type CourseView = "topics" | "material" | "listening" | "exercises" | "reading" | "vocabulary" | "homework" | "reinforcement" | "review" | "final" | "stats";
 type ModuleArea = "learning" | "exercises" | "reading" | "vocabulary" | "homework" | "review";
 
 export function CourseScreen({ requestedArea = "learning", onAreaChange }: { requestedArea?: ModuleArea; onAreaChange?: (area: ModuleArea) => void }) {
@@ -61,7 +63,9 @@ export function CourseScreen({ requestedArea = "learning", onAreaChange }: { req
     else setView("final");
   };
   return (
-    <section className="course" data-font-size={fontSize} aria-labelledby="course-title">
+    <>
+    {session.readOnly && <div role="status" className="course-persistence-error"><p>{persistenceError || "Курс занят другой вкладкой или сохраняет данные. Дождитесь завершения операции либо закройте другую вкладку курса."}</p>{persistenceError && <button type="button" onClick={() => window.location.reload()}>Перезагрузить страницу</button>}</div>}
+    <section className="course" inert={session.readOnly} data-font-size={fontSize} aria-labelledby="course-title">
       <header className="course-hero">
         <div>
           <label className="course-module-switcher">
@@ -87,6 +91,7 @@ export function CourseScreen({ requestedArea = "learning", onAreaChange }: { req
         </fieldset>
       </header>
       {persistenceError && <p className="course-persistence-error" role="alert">Данные временно не синхронизированы с базой: {persistenceError}</p>}
+      <CourseBackupPanel session={session} onRestored={() => { setView("topics"); onAreaChange?.("learning"); }} />
 
       {requestedArea === "learning" && <nav className="course-breadcrumbs" aria-label={`Навигация обучения ${activeCourseModule.title}`}>
         <button type="button" className={view === "topics" ? "active" : ""} onClick={() => setView("topics")}>Темы</button>
@@ -115,6 +120,8 @@ export function CourseScreen({ requestedArea = "learning", onAreaChange }: { req
       {view === "vocabulary" && <CourseVocabulary completedLessonSlugs={allA1Lessons.filter((lesson) => progress[lesson.slug] === "completed").map((lesson) => lesson.slug)} />}
       {view === "homework" && <CourseHomework completedLessonSlugs={allA1Lessons.filter((lesson) => progress[lesson.slug] === "completed").map((lesson) => lesson.slug)} mistakeHints={Object.values(mistakes).filter((mistake) => !mistake.mastered).map((mistake) => ({ lessonSlug: mistake.lessonSlug, text: `${mistake.prompt}: ${mistake.answer}` }))} />}
 
+      {view === "listening" && <CourseListening key={selectedLesson.slug} lesson={selectedLesson} back={() => setView("material")} />}
+      {view === "material" && selectedLesson.listening?.length && <button type="button" className="course-listening-launch" onClick={() => setView("listening")}>Послушать сообщения</button>}
       {view === "material" && <CourseMaterialView
         model={{ activeModule: activeCourseModule, lessons: orderedModuleLessons, selectedLesson, progress, lessonStep: lessonSteps[selectedLesson.slug] ?? 0, practiceAnswers, practiceResults, checkSelections, reinforcementPractices }}
         actions={{
@@ -160,5 +167,6 @@ export function CourseScreen({ requestedArea = "learning", onAreaChange }: { req
         }}
       />}
     </section>
+    </>
   );
 }

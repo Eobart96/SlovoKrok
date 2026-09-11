@@ -1,32 +1,141 @@
-import { defineModule5Lesson } from "../lessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const basicImperativeLesson = defineModule5Lesson("basic-imperative", 10, {
-  "title": "Базовый императив",
-  "slovakTitle": "Základný rozkazovací spôsob",
-  "outcome": "Понимать и давать короткие инструкции.",
-  "summary": "После урока вы сможете понимать и давать короткие инструкции в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "На A1 императив осваивается через частотные формы: poď/poďte, čakaj/čakajte, povedz/povedzte, daj/dajte, choď/choďte. Форма на -te вежливая или множественная.",
-  "examples": [
-    {
-      "slovak": "Počkajte chvíľu, prosím.",
-      "russian": "Подождите минуту, пожалуйста."
-    },
-    {
-      "slovak": "Povedzte mi vaše meno.",
-      "russian": "Скажите мне ваше имя."
-    },
-    {
-      "slovak": "Choďte rovno.",
-      "russian": "Идите прямо."
-    },
-    {
-      "slovak": "Daj mi vodu, prosím.",
-      "russian": "Дай мне воду, пожалуйста."
-    }
+export const basicImperativeLesson = {
+  vocabulary: [
+    {"word":"Čítaj text.","translation":"Читай текст.","example":"Čítaj text."},
+    {"word":"Čítajte text, prosím.","translation":"Прочитайте текст, пожалуйста.","example":"Čítajte text, prosím."},
+    {"word":"Nechoď tam.","translation":"Не ходи туда.","example":"Nechoď tam."},
+    {"word":"Sadnite si, prosím.","translation":"Садитесь, пожалуйста.","example":"Sadnite si, prosím."},
+    {"word":"Choďte rovno.","translation":"Идите прямо.","example":"Choďte rovno."},
+    {"word":"Nakoniec skontrolujte odpovede.","translation":"В конце проверьте ответы.","example":"Nakoniec skontrolujte odpovede."},
   ],
-  "mistake": "В обращении к незнакомому взрослому не используйте форму на ty без контекста.",
-  "task": "Дайте четыре вежливые инструкции: подождать, сказать имя, идти прямо и открыть дверь."
-}, {
-    rules: ["Императив выражает короткую инструкцию или просьбу.", "На A1 учите частотные формы целиком: poď, choďte, počkaj, povedzte, otvorte.", "Форма на vy часто служит вежливой инструкцией: Počkajte, prosím.", "Отрицательная инструкция использует ne-: Nechoďte tam; не создавайте форму механически без образца."],
-    contrasts: ["Poď sem! — иди сюда (ты).", "Počkajte, prosím. — подождите, пожалуйста.", "Otvorte knihu. — откройте книгу."], prompt: "Переведите вежливо: «Подождите, пожалуйста».", answer: "Počkajte, prosím.", hint: "Используйте форму vy и prosím.",
-  });
+  slug: "basic-imperative",
+  order: 11,
+  title: "Базовый императив",
+  slovakTitle: "Základný rozkazovací spôsob",
+  description: "Понимать и давать короткие команды, вежливые просьбы, запреты и пошаговые инструкции.",
+  duration: "35–40 мин",
+  goals: ["Выбирать форму для ty или vy/Vy", "Запоминать частотные пары императива", "Строить запреты с ne-", "Правильно ставить sa/si", "Связывать команды словами najprv, potom, nakoniec"],
+  theory: {
+    summary: "На A1 важно выбрать адресата, вспомнить готовую пару форм и добавить предмет, место или время. Одному знакомому говорите короткой формой ty; группе или незнакомому взрослому — формой vy/Vy на -te, обычно с prosím.",
+    rules: [
+      "Ty — один знакомый человек; vy — несколько людей; Vy — вежливое обращение к одному человеку.",
+      "Местоимение обычно не произносится: Počkaj!, а не Ty počkaj!",
+      "Форму vy/Vy часто узнаём по -te: čítaj — čítajte, otvor — otvorte.",
+      "Это только ориентир: choď, príď, buď, vezmi и jedz учите как готовые формы.",
+      "Запрет образуется с ne- и пишется слитно: nechoď, nerobte, nebuďte.",
+      "В короткой команде sa/si стоит после глагола: postavte sa, sadnite si.",
+      "С незнакомым взрослым используйте Vy и prosím: Sadnite si, prosím.",
+      "Najprv, potom и nakoniec связывают команды в последовательность.",
+    ],
+    examples: [
+      { slovak: "Čítaj text.", russian: "Читай текст.", explanation: "Короткая форма для одного знакомого." },
+      { slovak: "Čítajte text, prosím.", russian: "Прочитайте текст, пожалуйста.", explanation: "Вежливая форма Vy." },
+      { slovak: "Nechoď tam.", russian: "Не ходи туда.", explanation: "Ne- пишется слитно." },
+      { slovak: "Sadnite si, prosím.", russian: "Садитесь, пожалуйста.", explanation: "Si стоит после формы императива." },
+      { slovak: "Choďte rovno.", russian: "Идите прямо.", explanation: "Неправильную форму choďte учим целиком." },
+      { slovak: "Nakoniec skontrolujte odpovede.", russian: "В конце проверьте ответы.", explanation: "Nakoniec завершает последовательность." },
+    ],
+  },
+  sections: [
+    {
+      title: "Один человек, группа или вежливое Vy",
+      paragraphs: ["Сначала решите, кому говорите. Форма vy и вежливое Vy совпадают, но вежливую инструкцию смягчает prosím."],
+      table: { headers: ["Адресат", "Форма", "Пример", "Перевод"], rows: [["ty — один знакомый", "короткая", "Čítaj text.", "Читай текст."], ["vy — несколько", "на -te", "Čítajte text.", "Читайте текст."], ["Vy — вежливо", "та же форма на -te", "Čítajte text, prosím.", "Прочитайте текст, пожалуйста."]] },
+      items: ["čakať: čakaj — čakajte", "pracovať: pracuj — pracujte", "robiť: rob — robte", "otvoriť: otvor — otvorte", "napísať: napíš — napíšte"],
+      note: "Ориентиры -aj, -uj и -te не универсальны. Надёжнее учить готовые пары.",
+    },
+    {
+      title: "Частотные формы: учим парами",
+      paragraphs: ["Сначала запомните пару ty — vy/Vy, затем добавляйте деталь ситуации."],
+      table: { headers: ["Инфинитив", "ty", "vy / Vy", "Пример"], rows: [["byť", "buď", "buďte", "Buďte ticho."], ["ísť", "choď", "choďte", "Choďte rovno."], ["prísť", "príď", "príďte", "Príď zajtra."], ["dať", "daj", "dajte", "Dajte mi účet."], ["jesť", "jedz", "jedzte", "Jedzte pomaly."], ["piť", "pi", "pite", "Pite vodu."], ["vziať", "vezmi", "vezmite", "Vezmite si lístok."], ["povedať", "povedz", "povedzte", "Povedzte to znova."], ["napísať", "napíš", "napíšte", "Napíšte meno."], ["čítať", "čítaj", "čítajte", "Čítajte nahlas."]] },
+      items: ["pozrieť sa: pozri sa — pozrite sa", "sadnúť si: sadni si — sadnite si", "otvoriť: otvor — otvorte", "zatvoriť: zatvor — zatvorte"],
+      note: "Choď, príď, buď, vezmi и jedz не пытайтесь угадывать по инфинитиву.",
+    },
+    {
+      title: "Запрет, sa/si и вежливость",
+      paragraphs: ["Поставьте ne- перед формой императива и пишите слитно. Sa/si в короткой команде идёт после глагола."],
+      table: { headers: ["Утверждение", "Запрет", "Перевод"], rows: [["Čakaj tu.", "Nečakaj tu.", "Не жди здесь."], ["Choď tam.", "Nechoď tam.", "Не ходи туда."], ["Hovorte rýchlo.", "Nehovorte rýchlo.", "Не говорите быстро."], ["Otvorte okno.", "Neotvorte okno.", "Не открывайте окно."], ["Buď smutný.", "Nebuď smutný.", "Не грусти."]] },
+      items: ["Postav sa. — Postavte sa.", "Sadni si. — Sadnite si.", "Pozri sa sem. — Pozrite sa sem.", "Daj si vodu. — Dajte si vodu.", "Neboj sa. — Nebojte sa."],
+      note: "Незнакомому взрослому: Sadnite si, prosím. Форма ty без контекста может звучать резко.",
+    },
+    {
+      title: "Команды и инструкции в жизни",
+      paragraphs: ["Читайте каждую форму как готовую реплику и замечайте предмет, направление или обстоятельство после глагола."],
+      table: { headers: ["Ситуация", "Инструкция", "Перевод"], rows: [["учебник", "Otvorte učebnicu.", "Откройте учебник."], ["чтение", "Čítajte text nahlas.", "Читайте текст вслух."], ["письмо", "Napíšte odpoveď.", "Напишите ответ."], ["компьютер", "Zapnite počítač.", "Включите компьютер."], ["анкета", "Vyplňte formulár.", "Заполните формуляр."], ["ожидание", "Počkajte chvíľu.", "Подождите минуту."], ["маршрут", "Choďte rovno.", "Идите прямо."], ["поворот", "Odbočte doprava.", "Поверните направо."], ["приём", "Sadnite si, prosím.", "Садитесь, пожалуйста."]] },
+      items: ["Povedzte to ešte raz, prosím.", "Poďte ďalej, prosím.", "Pozrite sa sem.", "Dajte si vodu."],
+      note: "Команда может заканчиваться !, а спокойная вежливая инструкция — точкой. Форма глагола не меняется.",
+    },
+    {
+      title: "Последовательность, ошибки и самопроверка",
+      paragraphs: ["Najprv, potom и nakoniec превращают отдельные команды в понятную последовательность."],
+      table: { headers: ["Шаг", "Инструкция", "Перевод"], rows: [["najprv", "Najprv otvorte formulár.", "Сначала откройте формуляр."], ["potom", "Potom napíšte meno a adresu.", "Затем напишите имя и адрес."], ["nakoniec", "Nakoniec skontrolujte odpovede.", "В конце проверьте ответы."]] },
+      items: ["Čítaťte text. → Čítajte text.", "Idite rovno. → Choďte rovno.", "Ne choď tam. → Nechoď tam.", "Sa postavte. → Postavte sa.", "Sadni si, prosím. (незнакомому) → Sadnite si, prosím."],
+      note: "Самопроверка: адресат выбран верно; ty и vy/Vy не смешаны; ne- слитно; sa/si рядом с глаголом.",
+    },
+  ],
+  stepPractices: [
+    { id: "m5-basic-imperative-step-1", sectionIndex: 0, type: "choice", prompt: "Как вежливо попросить незнакомого человека прочитать текст?", options: ["Čítajte text, prosím.", "Čítaj text.", "Čítaťte text, prosím."], answer: "Čítajte text, prosím.", hint: "Выберите форму Vy и добавьте prosím.", explanation: "Čítajte text, prosím." },
+    { id: "m5-basic-imperative-step-2", sectionIndex: 1, type: "text", prompt: "Образуйте форму Vy от ísť и добавьте rovno.", answer: "Choďte rovno.", hint: "Эту неправильную форму нужно помнить целиком.", explanation: "Choďte rovno." },
+    { id: "m5-basic-imperative-step-3", sectionIndex: 2, type: "text", prompt: "Исправьте: Ne choď tam.", answer: "Nechoď tam.", hint: "Напишите ne- слитно.", explanation: "Nechoď tam." },
+    { id: "m5-basic-imperative-step-4", sectionIndex: 3, type: "text", prompt: "Исправьте порядок слов: Sa pozrite sem.", answer: "Pozrite sa sem.", hint: "Поставьте sa после императива.", explanation: "Pozrite sa sem." },
+    { id: "m5-basic-imperative-step-5", sectionIndex: 4, type: "choice", prompt: "Как завершить последовательность?", options: ["Nakoniec skontrolujte odpovede.", "Najprv skontrolujte odpovede.", "Potom skontroluje odpovede."], answer: "Nakoniec skontrolujte odpovede.", hint: "Выберите маркер последнего шага и форму Vy.", explanation: "Nakoniec обозначает завершение последовательности." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 11",
+  reinforcementPractices: [
+    { id: "reinforcement:basic-imperative:1", sectionIndex: 0, type: "pairs", prompt: "Выберите форму ty или vy/Vy.", answer: "Počkaj; Povedzte; Čítajte; Nechoď; Sadnite si; Zavolaj", pairs: [
+      { prompt: "другу: ___ tu.", answer: "Počkaj", options: ["Počkaj", "Počkajte"] },
+      { prompt: "врачу: ___ to znova.", answer: "Povedzte", options: ["Povedz", "Povedzte"] },
+      { prompt: "группе: ___ text.", answer: "Čítajte", options: ["Čítaj", "Čítajte"] },
+      { prompt: "ребёнку: ___ tam.", answer: "Nechoď", options: ["Nechoď", "Nechoďte"] },
+      { prompt: "клиенту: ___, prosím.", answer: "Sadnite si", options: ["Sadni si", "Sadnite si"] },
+      { prompt: "коллеге на ty: ___ večer.", answer: "Zavolaj", options: ["Zavolaj", "Zavolajte"] },
+    ], hint: "Левая кнопка — ty, правая — vy/Vy.", explanation: "Адресат определяет короткую форму или форму на -te." },
+    { id: "reinforcement:basic-imperative:2", sectionIndex: 1, type: "pairs", prompt: "Образуйте императив.", answer: "čakaj; pracujte; otvorte; napíš; buďte; daj", pairs: [
+      { prompt: "čakať, ty", answer: "čakaj", inputHint: "Введите форму" },
+      { prompt: "pracovať, Vy", answer: "pracujte", inputHint: "Введите форму" },
+      { prompt: "otvoriť, vy", answer: "otvorte", inputHint: "Введите форму" },
+      { prompt: "napísať, ty", answer: "napíš", inputHint: "Введите форму" },
+      { prompt: "byť, Vy", answer: "buďte", inputHint: "Введите форму" },
+      { prompt: "dať, ty", answer: "daj", inputHint: "Введите форму" },
+    ], hint: "Вспомните готовую пару для каждого инфинитива.", explanation: "Формы проверяются отдельно по адресату." },
+    { id: "reinforcement:basic-imperative:3", sectionIndex: 2, type: "pairs", prompt: "Сделайте запрет.", answer: "Nechoď tam.; Nerobte to.; Nebuď smutný.; Neotvorte dvere.; Nečakaj vonku.", pairs: [
+      { prompt: "Choď tam.", answer: "Nechoď tam.", inputHint: "Введите запрет" },
+      { prompt: "Robte to.", answer: "Nerobte to.", inputHint: "Введите запрет" },
+      { prompt: "Buď smutný.", answer: "Nebuď smutný.", inputHint: "Введите запрет" },
+      { prompt: "Otvorte dvere.", answer: "Neotvorte dvere.", inputHint: "Введите запрет" },
+      { prompt: "Čakaj vonku.", answer: "Nečakaj vonku.", inputHint: "Введите запрет" },
+    ], hint: "Добавьте ne- слитно перед формой императива.", explanation: "Лицо и остальная часть команды не меняются." },
+    { id: "reinforcement:basic-imperative:4", sectionIndex: 2, type: "pairs", prompt: "Соберите фразу.", answer: "Sadnite si, prosím.; Pozrite sa sem.; Daj si vodu.; Nebojte sa.", pairs: [
+      { prompt: "prosím / si / sadnite", answer: "Sadnite si, prosím.", acceptableAnswers: ["Prosím, sadnite si."], inputHint: "Введите фразу" },
+      { prompt: "sa / sem / pozrite", answer: "Pozrite sa sem.", inputHint: "Введите фразу" },
+      { prompt: "vodu / si / daj", answer: "Daj si vodu.", inputHint: "Введите фразу" },
+      { prompt: "nebojte / sa", answer: "Nebojte sa.", inputHint: "Введите фразу" },
+    ], hint: "Sa/si следует за короткой командой; prosím возможно в начале или конце.", explanation: "Частицы стоят рядом с глаголом." },
+    { id: "reinforcement:basic-imperative:5", sectionIndex: 3, type: "pairs", prompt: "Переведите на словацкий.", answer: "Choďte rovno.; Napíšte svoje meno.; Neotvorte okno.; Počkajte chvíľu, prosím.; Pozrite sa sem.", pairs: [
+      { prompt: "Идите прямо.", answer: "Choďte rovno.", inputHint: "Введите перевод" },
+      { prompt: "Напишите своё имя.", answer: "Napíšte svoje meno.", inputHint: "Введите перевод" },
+      { prompt: "Не открывайте окно.", answer: "Neotvorte okno.", inputHint: "Введите перевод" },
+      { prompt: "Подождите минуту, пожалуйста.", answer: "Počkajte chvíľu, prosím.", acceptableAnswers: ["Prosím, počkajte chvíľu."], inputHint: "Введите перевод" },
+      { prompt: "Посмотрите сюда.", answer: "Pozrite sa sem.", inputHint: "Введите перевод" },
+    ], hint: "Используйте vy/Vy, слитное ne- и нормативную диакритику.", explanation: "Переводы охватывают маршрут, форму Vy, запрет и sa." },
+    { id: "reinforcement:basic-imperative:6", sectionIndex: 4, type: "pairs", prompt: "Соберите пошаговую инструкцию.", answer: "Najprv zapnite počítač.; Potom otvorte formulár.; Napíšte svoje meno a adresu.; Nezatvorte okno.; Nakoniec skontrolujte odpovede a kliknite sem.", pairs: [
+      { prompt: "1 · начало", answer: "Najprv zapnite počítač.", options: ["Najprv zapnite počítač.", "Najprv zapnúť počítač.", "Potom zapni počítač."] },
+      { prompt: "2 · следующий шаг", answer: "Potom otvorte formulár.", options: ["Potom otvorte formulár.", "Potom otvor formulár.", "Nakoniec otvoríte formulár."] },
+      { prompt: "3 · данные", answer: "Napíšte svoje meno a adresu.", options: ["Napíšte svoje meno a adresu.", "Napísať svoje meno a adresu.", "Napíš svoje meno a adresu."] },
+      { prompt: "4 · запрет", answer: "Nezatvorte okno.", options: ["Nezatvorte okno.", "Ne zatvorte okno.", "Nezatvor okno."] },
+      { prompt: "5 · завершение", answer: "Nakoniec skontrolujte odpovede a kliknite sem.", options: ["Nakoniec skontrolujte odpovede a kliknite sem.", "Najprv skontroluj odpovede a klikni sem.", "Nakoniec kontrolovať odpovede a kliknúť sem."] },
+    ], hint: "Сохраняйте форму vy/Vy и маркеры последовательности.", explanation: "Пять команд образуют инструкцию для работы с формуляром." },
+  ],
+  knowledgeChecks: [
+    { id: "m5-basic-imperative-check-1", question: "Как вежливо сказать незнакомому человеку «Садитесь»?", options: ["Sadnite si, prosím.", "Sadni si, prosím.", "Sa sadnite, prosím."], answer: "Sadnite si, prosím.", explanation: "Для Vy нужна форма на -te, si стоит после глагола." },
+    { id: "m5-basic-imperative-check-2", question: "Как образовать запрет «Не ходи туда»?", options: ["Nechoď tam.", "Ne choď tam.", "Nechodiť tam."], answer: "Nechoď tam.", explanation: "Ne- пишется слитно с формой императива." },
+    { id: "m5-basic-imperative-check-3", question: "Какая форма ísť подходит для vy/Vy?", options: ["choďte", "idite", "ísťte"], answer: "choďte", explanation: "Неправильную пару choď — choďte учат целиком." },
+  ],
+  finalChecks: [{ id: "m5-basic-imperative-final-1", question: "Как вежливо сказать «Подождите минуту, пожалуйста»?", options: ["Počkajte chvíľu, prosím.", "Počkaj chvíľu, prosím.", "Čakaťte chvíľu, prosím."], answer: "Počkajte chvíľu, prosím.", explanation: "Для Vy используется Počkajte; prosím смягчает инструкцию." }],
+  chatPrompt: "Составьте короткую инструкцию для анкеты, рецепта, маршрута или компьютера: используйте vy/Vy, один запрет и najprv, potom, nakoniec.",
+  chatSuggestions: ["Najprv otvorte formulár.", "Nezatvorte okno.", "Nakoniec skontrolujte odpovede."],
+} satisfies CourseLesson;

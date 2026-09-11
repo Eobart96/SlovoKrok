@@ -1,29 +1,219 @@
-import { defineModule6Lesson } from "../lessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const shoppingLesson = defineModule6Lesson("shopping", 2, {
-  "title": "Магазин и покупки",
-  "slovakTitle": "Obchod a nakupovanie",
-  "outcome": "Спрашивать цену, количество, размер и наличие.",
-  "summary": "После урока вы сможете спрашивать цену, количество, размер и наличие в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Покупатель использует Máte…?, Koľko to stojí?, Prosím si… и нужные формы количества. Для размера и цвета: Máte to vo veľkosti M/v modrej farbe?.",
-  "examples": [
-    {
-      "slovak": "Máte čerstvý chlieb?",
-      "russian": "У вас есть свежий хлеб?"
-    },
-    {
-      "slovak": "Koľko to stojí?",
-      "russian": "Сколько это стоит?"
-    },
-    {
-      "slovak": "Prosím si dve jablká.",
-      "russian": "Мне, пожалуйста, два яблока."
-    },
-    {
-      "slovak": "Môžem platiť kartou?",
-      "russian": "Можно оплатить картой?"
-    }
+export const shoppingLesson = {
+  vocabulary: [
+    {"word":"Máte čerstvý chlieb?","translation":"У вас есть свежий хлеб?","example":"Máte čerstvý chlieb?"},
+    {"word":"Koľko to stojí?","translation":"Сколько это стоит?","example":"Koľko to stojí?"},
+    {"word":"Prosím si dve jablká.","translation":"Мне, пожалуйста, два яблока.","example":"Prosím si dve jablká."},
+    {"word":"Môžem platiť kartou?","translation":"Можно оплатить картой?","example":"Môžem platiť kartou?"},
+    {"word":"Máte toto tričko vo veľkosti M?","translation":"У вас есть эта футболка размера M?","example":"Máte toto tričko vo veľkosti M?"},
+    {"word":"Dám si jednu fľašu vody.","translation":"Я возьму одну бутылку воды.","example":"Dám si jednu fľašu vody."},
   ],
-  "mistake": "После 2 используйте dve для женского и среднего рода: dve fľaše, dve jablká.",
-  "task": "Разыграйте покупку хлеба и фруктов: наличие, количество, цена и способ оплаты."
-}, { focus: "Спрашивайте цену, размер, цвет, количество и наличие товара.", interaction: "Структура: приветствие → запрос → уточнение → цена → завершение.", boundary: "Возвраты, гарантии и сложные претензии остаются за границей A1.", prompt: "Переведите: «Сколько стоит эта футболка?».", answer: "Koľko stojí toto tričko?", hint: "Используйте Koľko stojí и toto tričko." });
+  slug: "shopping",
+  order: 3,
+  title: "Магазин и покупки",
+  slovakTitle: "Obchod a nakupovanie",
+  description: "Спрашивайте о товаре, количестве, цене, размере и способе оплаты.",
+  duration: "35–40 мин",
+  goals: [
+    "Начинать короткий разговор с продавцом и называть нужный товар",
+    "Спрашивать о наличии, размере и цвете",
+    "Заказывать простое количество или упаковку товара",
+    "Понимать цену и уточнять способ оплаты",
+    "Проходить короткий диалог покупки от приветствия до прощания",
+  ],
+  theory: {
+    summary: "Покупка на уровне A1 строится по устойчивому маршруту: приветствие → нужный товар → количество или размер → цена → оплата. Короткие вежливые модели позволяют решить задачу без сложного обсуждения.",
+    rules: [
+      "Товар можно запросить через Máte ...? или Hľadám ...: Máte čerstvý chlieb? Hľadám čierne nohavice.",
+      "Вежливый заказ строится с Prosím si ...: Prosím si dve jablká. Одно слово prosím также можно поставить в конце реплики.",
+      "Количество согласуется с названием: jeden chlieb, jednu fľašu, dva rožky, dve jablká, päť eur.",
+      "Цена: Koľko to stojí? Для одного товара также Koľko stojí toto tričko? Ответ: Stojí to dve eurá päťdesiat centov.",
+      "Размер и цвет уточняются готовыми блоками: vo veľkosti M, v modrej farbe. Вопрос: Máte to aj vo veľkosti M?",
+      "Оплата: Môžem platiť kartou? / Môžem zaplatiť kartou? — Áno. V hotovosti означает наличными.",
+    ],
+    examples: [
+      { slovak: "Máte čerstvý chlieb?", russian: "У вас есть свежий хлеб?", explanation: "Máte ...? — нейтральный вопрос продавцу о наличии." },
+      { slovak: "Koľko to stojí?", russian: "Сколько это стоит?", explanation: "To заменяет уже выбранный товар." },
+      { slovak: "Prosím si dve jablká.", russian: "Мне, пожалуйста, два яблока.", explanation: "Dve согласуется с jablká среднего рода." },
+      { slovak: "Môžem platiť kartou?", russian: "Можно оплатить картой?", explanation: "Kartou — готовая форма способа оплаты." },
+      { slovak: "Máte toto tričko vo veľkosti M?", russian: "У вас есть эта футболка размера M?", explanation: "Размер сообщается блоком vo veľkosti M." },
+      { slovak: "Dám si jednu fľašu vody.", russian: "Я возьму одну бутылку воды.", explanation: "Jednu согласуется с fľašu." },
+    ],
+  },
+  sections: [
+    {
+      title: "Начало покупки и нужный товар",
+      paragraphs: [
+        "Начните с Dobrý deň и сразу назовите практическую цель. В продуктовом магазине подходит Máte ...? или Prosím si ...; в магазине одежды — Hľadám ... или Chcel/chcela by som ...",
+        "Для A1 достаточно нескольких групп товаров: pečivo, ovocie, nápoje, oblečenie и drogéria. Не нужно знать весь ассортимент магазина.",
+      ],
+      table: { headers: ["Задача", "Реплика", "Перевод"], rows: [
+        ["спросить наличие", "Máte čerstvý chlieb?", "У вас есть свежий хлеб?"],
+        ["назвать поиск", "Hľadám čierne nohavice.", "Я ищу чёрные брюки."],
+        ["попросить товар", "Prosím si minerálnu vodu.", "Мне, пожалуйста, минеральную воду."],
+        ["вежливое желание", "Chcela by som toto tričko.", "Я хотела бы эту футболку."],
+      ] },
+      items: ["Dobrý deň. Máte chlieb?", "Prosím si vodu.", "Hľadám modrú košeľu."],
+      note: "Вопрос Máte ...? обращён к продавцу в форме вежливого vy.",
+    },
+    {
+      title: "Наличие, размер и цвет",
+      paragraphs: [
+        "После общего запроса уточните только один признак: размер, цвет или другой вариант товара. Слово aj добавляет значение «также»: Máte to aj v čiernej farbe?",
+        "Короткий ответ продавца может быть Áno, máme. / Nie, nemáme. Если товара нет, покупатель может спросить другую форму или цвет.",
+      ],
+      table: { headers: ["Что уточнить", "Вопрос", "Ответ"], rows: [
+        ["наличие", "Máte minerálnu vodu?", "Áno, máme."],
+        ["размер", "Máte to vo veľkosti M?", "Máme veľkosť M."],
+        ["цвет", "Máte to v modrej farbe?", "Máme modrú a čiernu."],
+        ["другой вариант", "Máte aj menšie balenie?", "Áno, tu je."],
+      ] },
+      items: ["Máte toto tričko vo veľkosti M?", "Máte ho aj v čiernej farbe?", "Nie, túto veľkosť nemáme."],
+      note: "Учите блоки целиком: vo veľkosti M, v modrej farbe, menšie balenie.",
+    },
+    {
+      title: "Количество и упаковка",
+      paragraphs: [
+        "Перед товаром можно назвать число, вес или упаковку. Для привычных покупок запоминайте сочетания целиком: dva rožky, dve jablká, kilo zemiakov, fľašu vody.",
+        "После Prosím si и Dám si товар часто стоит в объектной форме: jednu fľašu, minerálnu vodu. Эти частотные блоки уже знакомы по Akuzatívу.",
+      ],
+      table: { headers: ["Количество", "Модель", "Перевод"], rows: [
+        ["1, мужской род", "jeden chlieb", "один хлеб"],
+        ["1, женский род", "jednu fľašu vody", "одну бутылку воды"],
+        ["2, мужской род", "dva rožky", "две булочки"],
+        ["2, женский/средний", "dve fľaše / dve jablká", "две бутылки / два яблока"],
+        ["вес", "kilo zemiakov / pol kila syra", "килограмм картофеля / полкило сыра"],
+        ["5+", "päť jabĺk", "пять яблок"],
+      ] },
+      items: ["Prosím si dve jablká.", "Dám si dva rožky.", "Prosím si kilo zemiakov a jednu fľašu vody."],
+      note: "После 2 используйте dva с мужским родом, dve — с женским и средним: dva rožky, dve fľaše, dve jablká.",
+    },
+    {
+      title: "Цена и оплата",
+      paragraphs: [
+        "Когда товар выбран, спросите общую цену или цену конкретного предмета. Числа с валютой лучше воспринимать как готовые блоки: jedno euro, dve eurá, päť eur; jeden cent, dva centy, desať centov.",
+        "Перед оплатой достаточно уточнить kartou или v hotovosti. Глаголы platiť и zaplatiť оба встречаются в обычном вопросе покупателя.",
+      ],
+      table: { headers: ["Шаг", "Реплика", "Перевод"], rows: [
+        ["общая цена", "Koľko to stojí?", "Сколько это стоит?"],
+        ["конкретный товар", "Koľko stojí toto tričko?", "Сколько стоит эта футболка?"],
+        ["ответ", "Stojí to dve eurá päťdesiat centov.", "Это стоит два евро пятьдесят центов."],
+        ["карта", "Môžem platiť kartou?", "Можно оплатить картой?"],
+        ["наличные", "Zaplatím v hotovosti.", "Я заплачу наличными."],
+      ] },
+      items: ["Spolu je to päť eur.", "Tu je karta.", "Prosím si účet."],
+      note: "Не теряйте долготу и мягкость: koľko, môžem, päť, eurá.",
+    },
+    {
+      title: "Диалог покупки и частые ошибки",
+      paragraphs: [
+        "Соберите разговор по маршруту: приветствие → наличие → количество или размер → цена → оплата → ďakujem. Каждая реплика может состоять из одного короткого предложения.",
+        "Перед ответом проверьте форму числа, вопросительное Koľko, инфинитив после môžem и готовую форму kartou.",
+      ],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["dva jablká", "dve jablká", "Jablká — средний род."],
+        ["jedna fľaša, prosím", "jednu fľašu, prosím", "После просьбы нужна объектная форма."],
+        ["Kolko to stojí?", "Koľko to stojí?", "Нужна буква ľ."],
+        ["Môžem platím kartou?", "Môžem platiť kartou?", "После môžem нужен инфинитив."],
+        ["Koľko stoja toto tričko?", "Koľko stojí toto tričko?", "Tričko — один предмет."],
+      ] },
+      items: ["Dobrý deň. Máte čerstvý chlieb?", "Áno. Koľko si prosíte?", "Prosím si jeden chlieb.", "Koľko to stojí? — Dve eurá.", "Môžem platiť kartou? — Áno. Ďakujem."],
+      note: "Возвраты, гарантии и сложные претензии остаются за границей этой темы A1.",
+    },
+  ],
+  stepPractices: [
+    { id: "m6-shopping-step-1", sectionIndex: 0, type: "pairs", prompt: "Выберите подходящую первую реплику покупателя.", answer: "Máte čerstvý chlieb?; Hľadám čierne nohavice.; Prosím si minerálnu vodu.; Chcela by som toto tričko.", pairs: [
+      { prompt: "У вас есть свежий хлеб?", answer: "Máte čerstvý chlieb?", options: ["Máte čerstvý chlieb?", "Koľko to stojí?"] },
+      { prompt: "Я ищу чёрные брюки.", answer: "Hľadám čierne nohavice.", options: ["Platím čierne nohavice.", "Hľadám čierne nohavice."] },
+      { prompt: "Мне, пожалуйста, минеральную воду.", answer: "Prosím si minerálnu vodu.", options: ["Prosím si minerálnu vodu.", "Som minerálna voda."] },
+      { prompt: "Я хотела бы эту футболку.", answer: "Chcela by som toto tričko.", options: ["Chcela by som toto tričko.", "Chcel by som toto tričko."] },
+    ], hint: "Определите: наличие, поиск, просьба или вежливое желание.", explanation: "Подходят Máte...?, Hľadám..., Prosím si... и Chcela by som..." },
+    { id: "m6-shopping-step-2", sectionIndex: 1, type: "pairs", prompt: "Выберите вопрос или ответ о товаре.", answer: "Koľko to stojí?; vo veľkosti M; v modrej farbe; Áno, máme.; Nie, nemáme.", pairs: [
+      { prompt: "Сколько это стоит?", answer: "Koľko to stojí?", options: ["Koľko to stojí?", "Kde to býva?"] },
+      { prompt: "Máte to ___? · размер M", answer: "vo veľkosti M", options: ["vo veľkosti M", "v hotovosti"] },
+      { prompt: "Máte to ___? · синий цвет", answer: "v modrej farbe", options: ["v modrej farbe", "vo veľkosti M"] },
+      { prompt: "Máte vodu? · да", answer: "Áno, máme.", options: ["Áno, máme.", "Áno, máte."] },
+      { prompt: "Máte veľkosť S? · нет", answer: "Nie, nemáme.", options: ["Nie, nemáte.", "Nie, nemáme."] },
+    ], hint: "Сверьте цель вопроса и лицо ответа продавца.", explanation: "Продавец отвечает máme/nemáme; размер — vo veľkosti, цвет — v ... farbe." },
+    { id: "m6-shopping-step-3", sectionIndex: 2, type: "pairs", prompt: "Выберите нормативное количество.", answer: "Prosím si dve jablká.; jeden; jednu; dva; dve", pairs: [
+      { prompt: "Мне, пожалуйста, два яблока.", answer: "Prosím si dve jablká.", options: ["Prosím si dva jablká.", "Prosím si dve jablká."] },
+      { prompt: "___ chlieb", answer: "jeden", options: ["jeden", "jednu", "dva", "dve"] },
+      { prompt: "___ fľašu", answer: "jednu", options: ["jeden", "jednu", "dva", "dve"] },
+      { prompt: "___ rožky", answer: "dva", options: ["jeden", "jednu", "dva", "dve"] },
+      { prompt: "___ jablká", answer: "dve", options: ["jeden", "jednu", "dva", "dve"] },
+    ], hint: "Согласуйте число с родом и формой товара.", explanation: "Правильно: jeden chlieb, jednu fľašu, dva rožky, dve jablká." },
+    { id: "m6-shopping-step-4", sectionIndex: 3, type: "pairs", prompt: "Переведите реплики о цене и оплате.", answer: "Môžem platiť kartou?; Koľko stojí toto tričko?; Stojí to päť eur.; Zaplatím v hotovosti.", pairs: [
+      { prompt: "Можно оплатить картой?", answer: "Môžem platiť kartou?", acceptableAnswers: ["Môžem zaplatiť kartou?"], inputHint: "Введите перевод" },
+      { prompt: "Сколько стоит эта футболка?", answer: "Koľko stojí toto tričko?", inputHint: "Введите перевод" },
+      { prompt: "Это стоит пять евро.", answer: "Stojí to päť eur.", acceptableAnswers: ["To stojí päť eur."], inputHint: "Введите перевод" },
+      { prompt: "Я заплачу наличными.", answer: "Zaplatím v hotovosti.", inputHint: "Введите перевод" },
+    ], hint: "Используйте koľko/stojí и готовые формы kartou или v hotovosti.", explanation: "После môžem нужен инфинитив; конкретный один товар требует stojí." },
+    { id: "m6-shopping-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте каждую реплику.", answer: "Koľko stojí toto tričko?; Dve jablká, prosím.; Prosím si jednu fľašu vody.; Môžem platiť kartou?; Koľko to stojí?", pairs: [
+      { prompt: "Сколько стоит эта футболка?", answer: "Koľko stojí toto tričko?", inputHint: "Введите перевод" },
+      { prompt: "Dva jablká, prosím.", answer: "Dve jablká, prosím.", inputHint: "Введите исправленную реплику" },
+      { prompt: "Prosím si jedna fľaša vody.", answer: "Prosím si jednu fľašu vody.", inputHint: "Введите исправленную реплику" },
+      { prompt: "Môžem platím kartou?", answer: "Môžem platiť kartou?", inputHint: "Введите исправленную реплику" },
+      { prompt: "Kolko to stojí?", answer: "Koľko to stojí?", inputHint: "Введите исправленную реплику" },
+    ], hint: "Проверьте количество, объектную форму, инфинитив и диакритику.", explanation: "Нормативно: dve jablká, jednu fľašu, môžem platiť, koľko." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 3",
+  reinforcementPractices: [
+    { id: "reinforcement:shopping:1", sectionIndex: 0, type: "pairs", prompt: "Определите функцию реплики.", answer: "наличие; поиск; количество; цена; оплата", pairs: [
+      { prompt: "Máte čerstvý chlieb?", answer: "наличие", options: ["наличие", "поиск", "количество", "цена", "оплата"] },
+      { prompt: "Hľadám čierne nohavice.", answer: "поиск", options: ["наличие", "поиск", "количество", "цена", "оплата"] },
+      { prompt: "Prosím si dve jablká.", answer: "количество", options: ["наличие", "поиск", "количество", "цена", "оплата"] },
+      { prompt: "Koľko to stojí?", answer: "цена", options: ["наличие", "поиск", "количество", "цена", "оплата"] },
+      { prompt: "Môžem platiť kartou?", answer: "оплата", options: ["наличие", "поиск", "количество", "цена", "оплата"] },
+    ], showSlovakKeyboard: false, hint: "Определите, какую часть покупки решает реплика.", explanation: "Пять реплик последовательно проверяют наличие, поиск, количество, цену и оплату." },
+    { id: "reinforcement:shopping:2", sectionIndex: 1, type: "pairs", prompt: "Выберите подходящее уточнение или ответ.", answer: "vo veľkosti M; v modrej farbe; Áno, máme.; Nie, nemáme.; menšie balenie", pairs: [
+      { prompt: "размер M", answer: "vo veľkosti M", options: ["vo veľkosti M", "v modrej farbe", "menšie balenie"] },
+      { prompt: "синий цвет", answer: "v modrej farbe", options: ["vo veľkosti M", "v modrej farbe", "menšie balenie"] },
+      { prompt: "Máte vodu? · да", answer: "Áno, máme.", options: ["Áno, máme.", "Nie, nemáme.", "Máte vodu?"] },
+      { prompt: "Máte veľkosť S? · нет", answer: "Nie, nemáme.", options: ["Áno, máme.", "Nie, nemáme.", "Máte vodu?"] },
+      { prompt: "меньшая упаковка", answer: "menšie balenie", options: ["vo veľkosti M", "v modrej farbe", "menšie balenie"] },
+    ], hint: "Смотрите на размер, цвет, наличие и упаковку.", explanation: "Размер — vo veľkosti, цвет — v ... farbe, продавец отвечает máme/nemáme." },
+    { id: "reinforcement:shopping:3", sectionIndex: 2, type: "pairs", prompt: "Выберите форму количества.", answer: "jeden; jednu; dva; dve; päť", pairs: [
+      { prompt: "___ chlieb", answer: "jeden", options: ["jeden", "jednu", "dva", "dve", "päť"] },
+      { prompt: "___ fľašu", answer: "jednu", options: ["jeden", "jednu", "dva", "dve", "päť"] },
+      { prompt: "___ rožky", answer: "dva", options: ["jeden", "jednu", "dva", "dve", "päť"] },
+      { prompt: "___ jablká", answer: "dve", options: ["jeden", "jednu", "dva", "dve", "päť"] },
+      { prompt: "___ eur", answer: "päť", options: ["jeden", "jednu", "dva", "dve", "päť"] },
+    ], hint: "Согласуйте число с товаром; eur уже задаёт форму 5+.", explanation: "Jeden chlieb, jednu fľašu, dva rožky, dve jablká, päť eur." },
+    { id: "reinforcement:shopping:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки покупателя.", answer: "Dve jablká, prosím.; Prosím si jednu fľašu vody.; Koľko to stojí?; Môžem platiť kartou?; Toto tričko stojí desať eur.", pairs: [
+      { prompt: "Dva jablká, prosím.", answer: "Dve jablká, prosím.", inputHint: "Введите исправленную реплику" },
+      { prompt: "Prosím si jedna fľaša vody.", answer: "Prosím si jednu fľašu vody.", inputHint: "Введите исправленную реплику" },
+      { prompt: "Kolko to stojí?", answer: "Koľko to stojí?", inputHint: "Введите исправленную реплику" },
+      { prompt: "Môžem platím kartou?", answer: "Môžem platiť kartou?", inputHint: "Введите исправленную реплику" },
+      { prompt: "Toto tričko stoja desať eur.", answer: "Toto tričko stojí desať eur.", inputHint: "Введите исправленную реплику" },
+    ], hint: "Исправьте всю реплику и сохраните диакритику.", explanation: "Проверьте dve, jednu fľašu, koľko, инфинитив platiť и единственное stojí." },
+    { id: "reinforcement:shopping:5", sectionIndex: 3, type: "pairs", prompt: "Переведите на словацкий.", answer: "Máte čerstvý chlieb?; Prosím si dve jablká.; Koľko stojí toto tričko?; Môžem platiť kartou?; Ďakujem.", pairs: [
+      { prompt: "У вас есть свежий хлеб?", answer: "Máte čerstvý chlieb?", inputHint: "Введите перевод" },
+      { prompt: "Мне, пожалуйста, два яблока.", answer: "Prosím si dve jablká.", acceptableAnswers: ["Dve jablká, prosím."], inputHint: "Введите перевод" },
+      { prompt: "Сколько стоит эта футболка?", answer: "Koľko stojí toto tričko?", inputHint: "Введите перевод" },
+      { prompt: "Можно оплатить картой?", answer: "Môžem platiť kartou?", acceptableAnswers: ["Môžem zaplatiť kartou?"], inputHint: "Введите перевод" },
+      { prompt: "Спасибо.", answer: "Ďakujem.", inputHint: "Введите перевод" },
+    ], hint: "Используйте готовые реплики и проверьте диакритику.", explanation: "Переводы покрывают наличие, количество, цену, оплату и завершение разговора." },
+    { id: "reinforcement:shopping:6", sectionIndex: 4, type: "pairs", prompt: "Соберите короткий диалог покупки.", answer: "Dobrý deň. Máte čerstvý chlieb?; Áno, máme.; Prosím si jeden chlieb.; Koľko to stojí?; Dve eurá.; Môžem platiť kartou?", pairs: [
+      { prompt: "1 · запрос", answer: "Dobrý deň. Máte čerstvý chlieb?", options: ["Dobrý deň. Máte čerstvý chlieb?", "Dobrý deň. Som čerstvý chlieb.", "Dobrý deň. Platím chlieb?"] },
+      { prompt: "2 · продавец", answer: "Áno, máme.", options: ["Áno, máte.", "Áno, máme.", "Áno, mám."] },
+      { prompt: "3 · количество", answer: "Prosím si jeden chlieb.", options: ["Prosím si jednu chlieb.", "Prosím si jeden chlieb.", "Prosím si jedno chlieb."] },
+      { prompt: "4 · цена", answer: "Koľko to stojí?", options: ["Kde to stojí?", "Koľko to stojí?", "Kedy to stojí?"] },
+      { prompt: "5 · ответ", answer: "Dve eurá.", options: ["Dva euro.", "Dve eurá.", "Dve eur."] },
+      { prompt: "6 · оплата", answer: "Môžem platiť kartou?", options: ["Môžem platím kartou?", "Môžem platiť kartou?", "Môžem platiť karta?"] },
+    ], hint: "Следуйте маршруту покупки от запроса до оплаты.", explanation: "Диалог использует наличие, количество, цену и оплату картой." },
+  ],
+  knowledgeChecks: [
+    { id: "m6-shopping-check-1", question: "Как спросить «У вас есть свежий хлеб?»", options: ["Máte čerstvý chlieb?", "Máš čerstvého chleba?", "Ste čerstvý chlieb?"], answer: "Máte čerstvý chlieb?", explanation: "К продавцу обращаются в форме вежливого vy: Máte...?" },
+    { id: "m6-shopping-check-2", question: "Как спросить общую цену?", options: ["Koľko to stojí?", "Kde to stojí?", "Koľko to býva?"], answer: "Koľko to stojí?", explanation: "Koľko to stojí? — универсальный вопрос о цене выбранного товара." },
+    { id: "m6-shopping-check-3", question: "Какая форма количества нормативна?", options: ["dve jablká", "dva jablká", "dve jablko"], answer: "dve jablká", explanation: "Со средним родом во множественном числе используется dve: dve jablká." },
+  ],
+  finalChecks: [
+    { id: "m6-shopping-final-1", question: "Выберите нормативный вопрос о цене футболки.", options: ["Koľko stojí toto tričko?", "Koľko stoja toto tričko?", "Koľko stojí táto tričko?"], answer: "Koľko stojí toto tričko?", explanation: "Tričko — средний род и один предмет: toto tričko stojí." },
+  ],
+  chatPrompt: "Разыграйте короткую покупку хлеба и фруктов: поздоровайтесь, спросите о наличии, назовите количество, уточните цену и оплату картой.",
+  chatSuggestions: ["Dobrý deň. Máte čerstvý chlieb?", "Prosím si dve jablká.", "Môžem platiť kartou?"],
+} satisfies CourseLesson;

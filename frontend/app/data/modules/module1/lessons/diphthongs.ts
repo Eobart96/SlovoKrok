@@ -1,6 +1,26 @@
 import { defineModule1Lesson } from "../lessonFactory";
 
 export const diphthongsLesson = defineModule1Lesson({
+  vocabulary: [
+    {"word":"piatok","translation":"пятница","example":"piatok"},
+    {"word":"mlieko","translation":"молоко","example":"mlieko"},
+    {"word":"tretiu ulicu","translation":"третью улицу","example":"tretiu ulicu"},
+    {"word":"stôl","translation":"стол","example":"stôl"},
+    {"word":"idea","translation":"идея","example":"idea"},
+    {"word":"biely","translation":"белый","example":"biely"},
+    {"word":"piaty","translation":"пятый","example":"piaty"},
+    {"word":"riad","translation":"посуда; ряд","example":"riad"},
+    {"word":"priateľ","translation":"друг","example":"priateľ"},
+    {"word":"chlieb","translation":"хлеб","example":"chlieb"},
+    {"word":"dieťa","translation":"ребёнок","example":"dieťa"},
+    {"word":"lietadlo","translation":"самолёт","example":"lietadlo"},
+    {"word":"nie","translation":"нет","example":"nie"},
+    {"word":"cudziu reč","translation":"чужую речь","example":"cudziu reč"},
+    {"word":"kôň","translation":"конь","example":"kôň"},
+    {"word":"vôňa","translation":"запах","example":"vôňa"},
+    {"word":"môj","translation":"мой","example":"môj"},
+    {"word":"môžem","translation":"я могу","example":"môžem"},
+  ],
   slug: "diphthongs",
   title: "Дифтонги",
   slovakTitle: "Dvojhlásky",

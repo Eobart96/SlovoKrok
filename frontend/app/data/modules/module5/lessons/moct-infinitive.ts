@@ -1,32 +1,132 @@
-import { defineModule5Lesson } from "../lessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const moctInfinitiveLesson = defineModule5Lesson("moct-infinitive", 5, {
-  "title": "môcť + infinitív",
-  "slovakTitle": "Môcť s infinitívom",
-  "outcome": "Спрашивать о возможности и разрешении.",
-  "summary": "После урока вы сможете спрашивать о возможности и разрешении в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Môcť выражает возможность или разрешение: môžem, môžeš, môže, môžeme, môžete, môžu + infinitív. Вежливый вопрос часто начинается Môžem…? или Môžete…?.",
-  "examples": [
-    {
-      "slovak": "Môžem platiť kartou?",
-      "russian": "Можно оплатить картой?"
-    },
-    {
-      "slovak": "Môžete mi pomôcť?",
-      "russian": "Вы можете мне помочь?"
-    },
-    {
-      "slovak": "Dnes nemôžeme prísť.",
-      "russian": "Сегодня мы не можем прийти."
-    },
-    {
-      "slovak": "Môžeš tu počkať.",
-      "russian": "Ты можешь подождать здесь."
-    }
+export const moctInfinitiveLesson = {
+  vocabulary: [
+    {"word":"Dnes môžem prísť.","translation":"Сегодня я могу прийти.","example":"Dnes môžem prísť."},
+    {"word":"Môžem tu sedieť?","translation":"Можно мне здесь сидеть?","example":"Môžem tu sedieť?"},
+    {"word":"Môžete mi pomôcť?","translation":"Вы можете мне помочь?","example":"Môžete mi pomôcť?"},
+    {"word":"Zajtra môže pršať.","translation":"Завтра может пойти дождь.","example":"Zajtra môže pršať."},
+    {"word":"Dnes nemôžeme prísť.","translation":"Сегодня мы не можем прийти.","example":"Dnes nemôžeme prísť."},
+    {"word":"Viem plávať.","translation":"Я умею плавать.","example":"Viem plávať."},
   ],
-  "mistake": "Не смешивайте могу и умею: физическая/ситуативная возможность - môcť, освоенное умение - vedieť.",
-  "task": "Спросите разрешение войти, оплатить картой и задать вопрос."
-}, {
-    rules: ["Môcť + infinitív выражает возможность или разрешение.", "Частотные формы: môžem, môžeš, môže, môžeme, môžete, môžu.", "Вежливый вопрос часто начинается Môžem…? или Môžete…?", "Отрицание: nemôžem, nemôžeš; пишется слитно."],
-    contrasts: ["Môžem vojsť? — можно войти?", "Môžete hovoriť pomalšie? — можете говорить медленнее?", "Dnes nemôžem prísť — сегодня я не могу прийти."], prompt: "Переведите: «Можно войти?».", answer: "Môžem vojsť?", hint: "Используйте môžem + инфинитив.",
-  });
+  slug: "moct-infinitive",
+  order: 6,
+  title: "môcť + infinitív",
+  slovakTitle: "Môcť s infinitívom",
+  description: "Говорить о возможности, спрашивать разрешение и вежливо просить.",
+  duration: "35–40 мин",
+  goals: ["Выбирать форму môcť по лицу", "Различать возможность, разрешение, просьбу и вероятность", "Оставлять второй глагол в инфинитиве", "Строить отрицание, вопросы и модели с sa/si", "Отличать môcť от vedieť и nesmieť"],
+  theory: {
+    summary: "Môcť + infinitív сообщает, что действие возможно или разрешено. В вопросе môžem часто просит разрешения, а môžete может быть вежливой просьбой к собеседнику.",
+    rules: [
+      "Формы нужно запомнить: môžem, môžeš, môže, môžeme, môžete, môžu.",
+      "Изменяется только môcť; второй глагол остаётся инфинитивом: Môžeme zaplatiť.",
+      "Môžem…? обычно спрашивает разрешение: Môžem tu sedieť?",
+      "Môžete…? часто выражает вежливую просьбу: Môžete mi pomôcť?",
+      "Отрицание пишется слитно: nemôžem, nemôžeš, nemôže, nemôžeme, nemôžete, nemôžu.",
+      "В ответе на просьбу о разрешении меняется перспектива: Môžem otvoriť okno? — Áno, môžete.",
+      "Sa/si стоит рядом с личной формой: Môžem sa opýtať? Môžem si objednať čaj?",
+      "Выбирайте смысл точно: môcť — условия/разрешение, vedieť — навык, nesmieť — запрет.",
+    ],
+    examples: [
+      { slovak: "Dnes môžem prísť.", russian: "Сегодня я могу прийти.", explanation: "Обстоятельства позволяют выполнить действие." },
+      { slovak: "Môžem tu sedieť?", russian: "Можно мне здесь сидеть?", explanation: "Вопрос с môžem просит разрешение." },
+      { slovak: "Môžete mi pomôcť?", russian: "Вы можете мне помочь?", explanation: "Môžete + mi образует вежливую просьбу." },
+      { slovak: "Zajtra môže pršať.", russian: "Завтра может пойти дождь.", explanation: "Môže также выражает вероятность события." },
+      { slovak: "Dnes nemôžeme prísť.", russian: "Сегодня мы не можем прийти.", explanation: "Nemôžeme пишется слитно." },
+      { slovak: "Viem plávať.", russian: "Я умею плавать.", explanation: "Для освоенного навыка выбирайте vedieť, а не môcť." },
+    ],
+  },
+  sections: [
+    {
+      title: "Формы môcť и инфинитив",
+      paragraphs: ["Формы môcť заметно отличаются от инфинитива. Учите весь ряд и две опоры: môžem — môžu."],
+      table: { headers: ["ja", "ty", "on / ona", "my", "vy", "oni / ony"], rows: [["môžem", "môžeš", "môže", "môžeme", "môžete", "môžu"]] },
+      items: ["Môžem prísť. — Я могу прийти.", "Môžete začať. — Вы можете начать.", "Môžu zostať. — Они могут остаться."],
+      note: "Ошибка: Môžem idem. Правильно: Môžem ísť. Личное окончание получает только môcť.",
+    },
+    {
+      title: "Возможность, разрешение и просьба",
+      paragraphs: ["Точный смысл определяют ситуация и интонация. Одна форма может описывать условия, спрашивать разрешение, просить другого человека или выражать вероятность."],
+      table: { headers: ["Роль", "Пример", "Перевод"], rows: [["возможность", "Dnes môžem prísť.", "Сегодня я могу прийти."], ["разрешение", "Môžem tu sedieť?", "Можно мне здесь сидеть?"], ["просьба", "Môžete mi pomôcť?", "Вы можете мне помочь?"], ["вероятность", "Zajtra môže pršať.", "Завтра может пойти дождь."]] },
+      items: ["Môžete počkať? — Вы можете подождать?", "Prosím, môžete hovoriť pomaly? — Пожалуйста, говорите медленно.", "Môžem prísť означает «я могу прийти», но не обещание. Для договорённости: Áno, prídem o šiestej."],
+      note: "В просьбе mi и prosím делают фразу яснее и мягче; важна также доброжелательная интонация.",
+    },
+    {
+      title: "Отрицание, вопросы и смена перспективы",
+      paragraphs: ["Присоедините ne- к личной форме môcť. Вопросительное слово ставится первым, а инфинитив остаётся без изменения."],
+      table: { headers: ["Модель", "Пример", "Ответ / смысл"], rows: [["отрицание", "Môžem čakať. → Nemôžem čakať.", "Я не могу ждать."], ["да / нет", "Môžeš prísť?", "Nie, nemôžem."], ["что", "Čo môžem robiť?", "Что я могу делать?"], ["когда", "Kedy môžete prísť?", "Когда вы можете прийти?"], ["почему / как", "Prečo nemôže čakať? / Ako môžeme zaplatiť?", "Почему / как?"]] },
+      items: ["Môžem otvoriť okno? — Áno, môžete.", "Môžeme tu zostať? — Áno, môžete.", "Môže Peter prísť? — Áno, môže."],
+      note: "Короткое Áno возможно, но полная форма лучше закрепляет смену перспективы.",
+    },
+    {
+      title: "Sa/si и точный выбор глагола",
+      paragraphs: ["Sa/si ставится ближе к личной форме môcť. Отдельно проверяйте, говорится ли об условиях, освоенном навыке или явном запрете."],
+      table: { headers: ["Модель", "Смысл", "Пример"], rows: [["môcť", "условия / разрешение", "Dnes môžem plávať."], ["vedieť", "выученный навык", "Viem plávať."], ["nesmieť", "явный запрет", "Tu nesmiem parkovať."]] },
+      items: ["Môžem sa opýtať? — Можно спросить?", "Môžeme sa stretnúť. — Мы можем встретиться.", "Môžete si sadnúť. — Вы можете сесть.", "Môžem si objednať čaj? — Можно мне заказать чай?"],
+      note: "Нейтрально: Môžem sa opýtať?, а не Môžem opýtať sa.",
+    },
+    {
+      title: "Готовые фразы, ошибки и самопроверка",
+      paragraphs: ["Найдите форму môcť, определите её роль и проверьте инфинитив, отрицание и положение sa/si."],
+      table: { headers: ["Ситуация", "Словацкий пример", "Перевод"], rows: [["встреча", "Môžeme sa stretnúť o šiestej.", "Мы можем встретиться в шесть."], ["транспорт", "Môžeme ísť vlakom.", "Мы можем поехать поездом."], ["ожидание", "Môžete chvíľu počkať?", "Вы можете немного подождать?"], ["оплата", "Môžem zaplatiť kartou?", "Можно оплатить картой?"], ["заказ", "Môžem si objednať kávu?", "Можно мне заказать кофе?"], ["ограничение", "Nemôžu prísť cez víkend.", "Они не могут прийти на выходных."], ["вопрос", "Kedy môžeš prísť?", "Когда ты можешь прийти?"], ["вероятность", "Zajtra môže pršať.", "Завтра может пойти дождь."]] },
+      items: ["Môžem idem. → Môžem ísť.", "Ja môžeš prísť. → Ja môžem prísť.", "Ne môžem čakať. → Nemôžem čakať.", "Môžem opýtať sa? → Môžem sa opýtať?", "Môžem plávať. (умею) → Viem plávať."],
+      note: "Самопроверка: môcť согласовано с лицом; второй глагол — инфинитив; nemôžem написано слитно; для навыка выбрано vedieť.",
+    },
+  ],
+  stepPractices: [
+    { id: "m5-moct-infinitive-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите форму для oni / ony.", options: ["môže", "môžete", "môžu"], answer: "môžu", hint: "Вспомните вторую опорную форму после môžem.", explanation: "Oni / ony môžu." },
+    { id: "m5-moct-infinitive-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Вы можете мне помочь?»", answer: "Môžete mi pomôcť?", hint: "Используйте вежливую форму, mi и инфинитив.", explanation: "Môžete mi pomôcť?" },
+    { id: "m5-moct-infinitive-step-3", sectionIndex: 2, type: "choice", prompt: "Как ответить на Môžem otvoriť okno?", options: ["Áno, môžem.", "Áno, môžete.", "Áno, môžeš."], answer: "Áno, môžete.", hint: "Говорящий спрашивает разрешения у собеседника.", explanation: "Разрешающий отвечает формой vy: Áno, môžete." },
+    { id: "m5-moct-infinitive-step-4", sectionIndex: 3, type: "text", prompt: "Переведите: «Можно спросить?»", answer: "Môžem sa opýtať?", hint: "Sa стоит рядом с môžem.", explanation: "Môžem sa opýtať?" },
+    { id: "m5-moct-infinitive-step-5", sectionIndex: 4, type: "choice", prompt: "Как сказать «Я умею плавать»?", options: ["Môžem plávať.", "Viem plávať.", "Nesmiem plávať."], answer: "Viem plávať.", hint: "Речь об освоенном навыке.", explanation: "Для умения выбирайте vedieť: Viem plávať." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 6",
+  reinforcementPractices: [
+    { id: "reinforcement:moct-infinitive:1", sectionIndex: 0, type: "pairs", prompt: "Выберите форму môcť.", answer: "môžem; môžeš; môže; môžeme; môžete; môžu", pairs: [
+      { prompt: "Ja ___ prísť.", answer: "môžem", options: ["môžem", "môžeš", "môže", "môžeme", "môžete", "môžu"] }, { prompt: "Ty ___ čakať.", answer: "môžeš", options: ["môžem", "môžeš", "môže", "môžeme", "môžete", "môžu"] },
+      { prompt: "Eva ___ zostať.", answer: "môže", options: ["môžem", "môžeš", "môže", "môžeme", "môžete", "môžu"] }, { prompt: "My ___ zaplatiť.", answer: "môžeme", options: ["môžem", "môžeš", "môže", "môžeme", "môžete", "môžu"] },
+      { prompt: "Vy ___ začať.", answer: "môžete", options: ["môžem", "môžeš", "môže", "môžeme", "môžete", "môžu"] }, { prompt: "Oni ___ pomôcť.", answer: "môžu", options: ["môžem", "môžeš", "môže", "môžeme", "môžete", "môžu"] },
+    ], hint: "Определите лицо подлежащего.", explanation: "Полный ряд: môžem, môžeš, môže, môžeme, môžete, môžu." },
+    { id: "reinforcement:moct-infinitive:2", sectionIndex: 0, type: "pairs", prompt: "Поставьте второй глагол в инфинитив.", answer: "ísť; prísť; zaplatiť; zostať; hovoriť", pairs: [
+      { prompt: "Môžem ___ domov. (idem)", answer: "ísť", inputHint: "Введите инфинитив" }, { prompt: "Môžeš ___ zajtra. (prídeš)", answer: "prísť", inputHint: "Введите инфинитив" },
+      { prompt: "Môžeme ___ kartou. (platíme)", answer: "zaplatiť", inputHint: "Введите инфинитив" }, { prompt: "Môžu ___ doma. (zostanú)", answer: "zostať", inputHint: "Введите инфинитив" },
+      { prompt: "Môžete ___ pomaly. (hovoríte)", answer: "hovoriť", inputHint: "Введите инфинитив" },
+    ], hint: "Личное окончание уже находится в форме môcť.", explanation: "После môcť смысловой глагол остаётся в инфинитиве." },
+    { id: "reinforcement:moct-infinitive:3", sectionIndex: 3, type: "pairs", prompt: "Выберите точный глагол.", answer: "môžem; viem; nesmiem; vie; nemôžem", pairs: [
+      { prompt: "Dnes ___ prísť o šiestej. · условия позволяют", answer: "môžem", options: ["môžem", "viem", "nesmiem", "vie", "nemôžem"] },
+      { prompt: "___ plávať, učil som sa to. · навык", answer: "viem", options: ["môžem", "viem", "nesmiem", "vie", "nemôžem"] },
+      { prompt: "Tu ___ parkovať: je to zakázané. · запрет", answer: "nesmiem", options: ["môžem", "viem", "nesmiem", "vie", "nemôžem"] },
+      { prompt: "Anna ___ dobre variť. · навык", answer: "vie", options: ["môžem", "viem", "nesmiem", "vie", "nemôžem"] },
+      { prompt: "Teraz ___ hovoriť. · обстоятельства не позволяют", answer: "nemôžem", options: ["môžem", "viem", "nesmiem", "vie", "nemôžem"] },
+    ], hint: "Условия или разрешение — môcť; навык — vedieť; запрет — nesmieť.", explanation: "Смысл ситуации определяет выбор модального глагола." },
+    { id: "reinforcement:moct-infinitive:4", sectionIndex: 2, type: "pairs", prompt: "Соберите предложение.", answer: "Dnes sa môžeme stretnúť.; Môžem si objednať čaj?; Nemôžu prísť cez víkend.; Kedy môžete začať?", pairs: [
+      { prompt: "dnes / môžeme / stretnúť / sa", answer: "Dnes sa môžeme stretnúť.", acceptableAnswers: ["Môžeme sa dnes stretnúť."], inputHint: "Введите предложение" },
+      { prompt: "môžem / si / objednať / čaj", answer: "Môžem si objednať čaj?", inputHint: "Введите предложение" },
+      { prompt: "nemôžu / cez víkend / prísť", answer: "Nemôžu prísť cez víkend.", acceptableAnswers: ["Cez víkend nemôžu prísť."], inputHint: "Введите предложение" },
+      { prompt: "kedy / môžete / začať", answer: "Kedy môžete začať?", inputHint: "Введите предложение" },
+    ], hint: "Следите за инфинитивом, ранней позицией sa/si и слитным отрицанием.", explanation: "Четыре модели объединяют возможность, вопрос, отрицание и sa/si." },
+    { id: "reinforcement:moct-infinitive:5", sectionIndex: 2, type: "pairs", prompt: "Ответьте или переведите.", answer: "Áno, môžete.; Nie, nemôže.; Nemôžeme čakať.; Môžete mi pomôcť?; Kedy môžeš prísť?", pairs: [
+      { prompt: "Môžem otvoriť okno? · да", answer: "Áno, môžete.", inputHint: "Введите краткий ответ" }, { prompt: "Môže Peter prísť? · нет", answer: "Nie, nemôže.", inputHint: "Введите краткий ответ" },
+      { prompt: "Мы не можем ждать.", answer: "Nemôžeme čakať.", inputHint: "Введите перевод" }, { prompt: "Вы можете мне помочь?", answer: "Môžete mi pomôcť?", inputHint: "Введите перевод" },
+      { prompt: "Когда ты можешь прийти?", answer: "Kedy môžeš prísť?", inputHint: "Введите перевод" },
+    ], hint: "Проверьте перспективу ответа, форму лица, инфинитив и диакритику.", explanation: "Ответы используют можете, не может, не можем и два вопроса." },
+    { id: "reinforcement:moct-infinitive:6", sectionIndex: 4, type: "pairs", prompt: "Соберите диалог о встрече и помощи.", answer: "Môžeš sa dnes stretnúť?; Dnes nemôžem. Môžem prísť zajtra o šiestej.; Dobre. Môžeš mi ešte pomôcť s úlohou?; Áno, môžem. Potom si môžeme dať kávu.", pairs: [
+      { prompt: "1 · вопрос о встрече", answer: "Môžeš sa dnes stretnúť?", options: ["Môžeš sa dnes stretnúť?", "Môžeš dnes stretnúť sa?", "Môžem sa dnes stretnúť?"] },
+      { prompt: "2 · ограничение и новая возможность", answer: "Dnes nemôžem. Môžem prísť zajtra o šiestej.", options: ["Dnes nemôžem. Môžem prísť zajtra o šiestej.", "Dnes ne môžem. Môžem prídem zajtra o šiestej.", "Dnes nemôžeš. Môže prísť zajtra o šiestej."] },
+      { prompt: "3 · просьба о помощи", answer: "Dobre. Môžeš mi ešte pomôcť s úlohou?", options: ["Dobre. Môžeš mi ešte pomôcť s úlohou?", "Dobre. Môžem mi ešte pomôcť s úlohou?", "Dobre. Môžeš ešte pomáhaš mi s úlohou?"] },
+      { prompt: "4 · согласие и предложение кофе", answer: "Áno, môžem. Potom si môžeme dať kávu.", options: ["Áno, môžem. Potom si môžeme dať kávu.", "Áno, môžeš. Potom môžeme dať si kávu.", "Áno, viem. Potom si môžeme dáme kávu."] },
+    ], hint: "Проверьте лицо, инфинитив, отрицание и положение sa/si.", explanation: "Четыре реплики следуют возможному диалогу из источника." },
+  ],
+  knowledgeChecks: [
+    { id: "m5-moct-infinitive-check-1", question: "Какая модель нормативна?", options: ["Môžem ísť.", "Môžem idem.", "Môže ísť ja."], answer: "Môžem ísť.", explanation: "После личной формы môžem нужен инфинитив." },
+    { id: "m5-moct-infinitive-check-2", question: "Как правильно сказать «Мы не можем ждать»?", options: ["Nemôžeme čakať.", "Ne môžeme čakáme.", "Nie môžeme čakať."], answer: "Nemôžeme čakať.", explanation: "Nemôžeme пишется слитно, а čakať остаётся инфинитивом." },
+    { id: "m5-moct-infinitive-check-3", question: "Как сказать об освоенном навыке плавания?", options: ["Viem plávať.", "Môžem plávať.", "Nesmiem plávať."], answer: "Viem plávať.", explanation: "Для навыка выбирайте vedieť." },
+  ],
+  finalChecks: [{ id: "m5-moct-infinitive-final-1", question: "Как вежливо спросить «Вы можете мне помочь?»", options: ["Môžete mi pomôcť?", "Môžem mi pomôcť?", "Môžete mi pomáhate?"], answer: "Môžete mi pomôcť?", explanation: "Môžete обращено к собеседнику, mi означает «мне», pomôcť остаётся инфинитивом." }],
+  chatPrompt: "Скажите, что вы можете и не можете сделать сегодня, спросите разрешение и вежливо попросите о помощи. Добавьте одну фразу о навыке с vedieť.",
+  chatSuggestions: ["Dnes môžem prísť.", "Môžem sa opýtať?", "Viem plávať."],
+} satisfies CourseLesson;

@@ -1,32 +1,199 @@
-import { defineModule5Lesson } from "../lessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const presentTenseLesson = defineModule5Lesson("present-tense", 0, {
-  "title": "Настоящее время",
-  "slovakTitle": "Prítomný čas",
-  "outcome": "Сообщать о привычных и текущих действиях.",
-  "summary": "После урока вы сможете сообщать о привычных и текущих действиях в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Настоящее время образуется личными окончаниями; на A1 формы лучше учить сериями: robím/robíš/robí/robíme/robíte/robia. Местоимение часто опускается.",
-  "examples": [
-    {
-      "slovak": "Pracujem doma.",
-      "russian": "Я работаю дома."
-    },
-    {
-      "slovak": "Bývaš v meste?",
-      "russian": "Ты живёшь в городе?"
-    },
-    {
-      "slovak": "Učíme sa po slovensky.",
-      "russian": "Мы учим словацкий."
-    },
-    {
-      "slovak": "Deti čítajú knihu.",
-      "russian": "Дети читают книгу."
-    }
+export const presentTenseLesson = {
+  vocabulary: [
+    {"word":"Teraz čítam.","translation":"Сейчас я читаю.","example":"Teraz čítam."},
+    {"word":"Každý deň pracujem.","translation":"Я работаю каждый день.","example":"Každý deň pracujem."},
+    {"word":"Bývam v Košiciach.","translation":"Я живу в Кошице.","example":"Bývam v Košiciach."},
+    {"word":"Som doma.","translation":"Я дома.","example":"Som doma."},
+    {"word":"Dnes sa učíme doma.","translation":"Сегодня мы учимся дома.","example":"Dnes sa učíme doma."},
+    {"word":"Kde bývate?","translation":"Где вы живёте?","example":"Kde bývate?"},
+    {"word":"Ráno vstávam o siedmej.","translation":"Утром я встаю в семь.","example":"Ráno vstávam o siedmej."},
+    {"word":"Pijem kávu a jem raňajky.","translation":"Я пью кофе и завтракаю.","example":"Pijem kávu a jem raňajky."},
+    {"word":"Idem do práce autobusom.","translation":"Я еду на работу автобусом.","example":"Idem do práce autobusom."},
+    {"word":"Pracujem od ôsmej.","translation":"Я работаю с восьми.","example":"Pracujem od ôsmej."},
+    {"word":"Píšem krátke e-maily.","translation":"Я пишу короткие письма.","example":"Píšem krátke e-maily."},
+    {"word":"Učím sa nové slová.","translation":"Я учу новые слова.","example":"Učím sa nové slová."},
+    {"word":"Rozumiem trochu.","translation":"Я немного понимаю.","example":"Rozumiem trochu."},
+    {"word":"Na obed mám polievku.","translation":"На обед у меня суп.","example":"Na obed mám polievku."},
+    {"word":"Teraz telefonujem.","translation":"Сейчас я разговариваю по телефону.","example":"Teraz telefonujem."},
+    {"word":"Bývame blízko centra.","translation":"Мы живём недалеко от центра.","example":"Bývame blízko centra."},
+    {"word":"Moja sestra študuje.","translation":"Моя сестра учится.","example":"Moja sestra študuje."},
+    {"word":"Večer varíme večeru.","translation":"Вечером мы готовим ужин.","example":"Večer varíme večeru."},
+    {"word":"Potom pozeráme film.","translation":"Потом мы смотрим фильм.","example":"Potom pozeráme film."},
+    {"word":"Často počúvam hudbu.","translation":"Я часто слушаю музыку.","example":"Často počúvam hudbu."},
+    {"word":"Cez víkend cestujú.","translation":"По выходным они путешествуют.","example":"Cez víkend cestujú."},
+    {"word":"Dnes nemám veľa času.","translation":"Сегодня у меня мало времени.","example":"Dnes nemám veľa času."},
+    {"word":"Nie sme unavení.","translation":"Мы не устали.","example":"Nie sme unavení."},
+    {"word":"Kedy končíte?","translation":"Когда вы заканчиваете?","example":"Kedy končíte?"},
   ],
-  "mistake": "Не ставьте инфинитив вместо личной формы: ja pracujem, не ja pracovať.",
-  "task": "Проспрягайте robiť и bývať в шести лицах и составьте три фразы о распорядке."
-}, {
-    rules: ["Настоящее время сообщает о привычном или происходящем сейчас действии.", "Личная форма меняется по лицу: pracujem, pracuješ, pracuje, pracujeme, pracujete, pracujú.", "Местоимение часто опускается, потому что лицо видно по окончанию.", "Учите глагол через несколько частотных личных форм, а не через одно универсальное окончание."],
-    contrasts: ["Pracujem doma — я работаю дома.", "Pracuješ dnes? — ты сегодня работаешь?", "Rodičia pracujú — родители работают."], prompt: "Переведите: «Мы работаем дома».", answer: "Pracujeme doma.", hint: "Форма для my обычно имеет -me.",
-  });
+  slug: "present-tense",
+  order: 1,
+  title: "Настоящее время",
+  slovakTitle: "Prítomný čas",
+  description: "Говорите о том, что происходит сейчас, повторяется регулярно или является фактом.",
+  duration: "35–40 мин",
+  goals: [
+    "Выбирать личную форму глагола по действующему лицу",
+    "Различать действие сейчас, привычку и факт по контексту",
+    "Использовать частые формы byť, mať и трёх моделей спряжения",
+    "Строить отрицание, вопрос и короткие фразы с sa",
+    "Рассказывать о своём дне в нескольких связанных предложениях",
+  ],
+  theory: {
+    summary: "В словацком одно настоящее время описывает действие сейчас, привычку и факт. Сначала определите лицо, затем вспомните опорную пару infinitív + ja и только после этого выбирайте личную форму.",
+    rules: [
+      "Временной маркер уточняет смысл: teraz — сейчас, každý deň — регулярно; без маркера контекст может сообщать факт или состояние.",
+      "Окончание обычно показывает лицо, поэтому ja, ty, my и другие местоимения часто опускаются.",
+      "Глагол надёжнее учить вместе с формой ja: robiť — robím, bývať — bývam, pracovať — pracujem, mať — mám.",
+      "Обычное отрицание образуется слитно с ne-: pracujem — nepracujem; у byť отрицание пишется отдельно: som — nie som.",
+      "Нейтральный вопрос сохраняет порядок слов утверждения и отличается интонацией: Pracuješ dnes? Вопросительное слово обычно ставится в начале: Kde bývate?",
+      "Короткое sa стоит рядом с глаголом: Učím sa slovenčinu. Dnes sa učíme doma.",
+    ],
+    examples: [
+      { slovak: "Teraz čítam.", russian: "Сейчас я читаю.", explanation: "Teraz показывает действие в этот момент." },
+      { slovak: "Každý deň pracujem.", russian: "Я работаю каждый день.", explanation: "Každý deň показывает регулярное действие." },
+      { slovak: "Bývam v Košiciach.", russian: "Я живу в Кошице.", explanation: "Контекст сообщает устойчивый факт." },
+      { slovak: "Som doma.", russian: "Я дома.", explanation: "В словацком форма byť обязательна, хотя в русском настоящем времени её часто нет." },
+      { slovak: "Dnes sa učíme doma.", russian: "Сегодня мы учимся дома.", explanation: "Sa остаётся рядом с личной формой." },
+      { slovak: "Kde bývate?", russian: "Где вы живёте?", explanation: "Вопросительное слово стоит в начале, затем идёт личная форма." },
+    ],
+  },
+  sections: [
+    {
+      title: "Смысл и действующее лицо",
+      paragraphs: [
+        "В словацком нет отдельной формы вроде английского Present Continuous. Одна личная форма подходит для действия сейчас, регулярного действия и факта; точное значение даёт контекст.",
+        "Формула: кто? → личная форма глагола → когда / где / что. Сначала найдите действующее лицо, затем выбирайте форму.",
+      ],
+      table: { headers: ["Значение", "Маркер", "Пример", "Перевод"], rows: [
+        ["сейчас", "teraz", "Teraz čítam.", "Сейчас я читаю."],
+        ["регулярно", "každý deň", "Každý deň pracujem.", "Я работаю каждый день."],
+        ["факт / состояние", "—", "Bývam v Košiciach.", "Я живу в Кошице."],
+      ] },
+      items: ["1-е лицо: ja — я, my — мы", "2-е лицо: ty — ты, vy — вы", "3-е лицо: on/ona/ono — он/она/оно, oni/ony — они", "Robím večeru уже означает «я готовлю ужин»; ja добавляют для контраста: Ja pracujem, ale on študuje."],
+      note: "Окончание уже показывает лицо, поэтому местоимение часто не требуется.",
+    },
+    {
+      title: "Четыре опорные модели",
+      paragraphs: ["Недостаточно просто убрать -ť: основа и окончания зависят от модели. Запоминайте инфинитив вместе с формой ja, а затем сравнивайте всю серию."],
+      table: { headers: ["Модель", "ja", "ty", "on/ona", "my", "vy", "oni/ony"], rows: [
+        ["robiť", "robím", "robíš", "robí", "robíme", "robíte", "robia"],
+        ["bývať", "bývam", "bývaš", "býva", "bývame", "bývate", "bývajú"],
+        ["pracovať", "pracujem", "pracuješ", "pracuje", "pracujeme", "pracujete", "pracujú"],
+        ["mať", "mám", "máš", "má", "máme", "máte", "majú"],
+      ] },
+      items: ["robiť — robím; podobne hovoriť — hovorím, variť — varím", "bývať — bývam; podobne čakať — čakám, pozerať — pozerám", "pracovať — pracujem; podobne študovať — študujem, cestovať — cestujem", "mať — mám — частый глагол, его формы лучше учить отдельно", "Частые piť — pijem, jesť — jem и ísť — idem тоже учите готовыми парами; они не выводятся из одной универсальной схемы."],
+      note: "Сигнальные окончания помогают узнавать лицо, но не заменяют опорную пару: ja часто имеет -m, ty — -š, my — -me, vy — -te.",
+    },
+    {
+      title: "Byť, отрицание, вопрос и sa",
+      paragraphs: ["По-русски «быть» в настоящем времени часто не слышно, но по-словацки личная форма обязательна: Som doma. Sme v práci.", "С обычным глаголом ne- присоединяется слитно. С byť используется отдельное nie. Нейтральный вопрос может сохранить порядок слов утверждения."],
+      table: { headers: ["ja", "ty", "on/ona/ono", "my", "vy", "oni/ony"], rows: [["som", "si", "je", "sme", "ste", "sú"]] },
+      items: ["Pracujem doma. → Nepracujem doma.", "Mám čas. → Nemám čas.", "Som unavený. → Nie som unavený.", "Sú v škole. → Nie sú v škole.", "Pracuješ dnes? — Ты сегодня работаешь?", "Čo robíš? / Kde bývate? / Kedy pracuješ?", "Učím sa slovenčinu. / Ako sa voláš? / Dnes sa učíme doma."],
+      note: "Обычный глагол: nepracujem. Byť: nie som. Sa ставьте рядом с глаголом.",
+    },
+    {
+      title: "Готовые фразы для вашего дня",
+      paragraphs: ["Читайте словацкую строку вслух, затем закройте перевод и восстановите смысл. После этого замените время, место или одно действие."],
+      table: { headers: ["Когда", "Словацкий", "По-русски"], rows: [
+        ["утро", "Ráno vstávam o siedmej.", "Утром я встаю в семь."], ["утро", "Pijem kávu a jem raňajky.", "Я пью кофе и завтракаю."],
+        ["дорога", "Idem do práce autobusom.", "Я еду на работу автобусом."], ["работа", "Pracujem od ôsmej.", "Я работаю с восьми."],
+        ["работа", "Píšem krátke e-maily.", "Я пишу короткие письма."], ["учёба", "Učím sa nové slová.", "Я учу новые слова."],
+        ["учёба", "Rozumiem trochu.", "Я немного понимаю."], ["обед", "Na obed mám polievku.", "На обед у меня суп."],
+        ["сейчас", "Teraz telefonujem.", "Сейчас я разговариваю по телефону."], ["дом", "Bývame blízko centra.", "Мы живём недалеко от центра."],
+        ["семья", "Moja sestra študuje.", "Моя сестра учится."], ["вечер", "Večer varíme večeru.", "Вечером мы готовим ужин."],
+        ["вечер", "Potom pozeráme film.", "Потом мы смотрим фильм."], ["досуг", "Často počúvam hudbu.", "Я часто слушаю музыку."],
+        ["выходные", "Cez víkend cestujú.", "По выходным они путешествуют."], ["отрицание", "Dnes nemám veľa času.", "Сегодня у меня мало времени."],
+        ["отрицание", "Nie sme unavení.", "Мы не устали."], ["вопрос", "Kedy končíte?", "Когда вы заканчиваете?"],
+      ] },
+      items: ["teraz — сейчас; dnes — сегодня; každý deň — каждый день", "často — часто; niekedy — иногда; ráno — утром; večer — вечером", "Ahoj, čo teraz robíš? — Učím sa slovenčinu. A ty? — Pracujem doma."],
+      note: "Меняйте в готовой модели только один элемент, пока личная форма не станет привычной.",
+    },
+    {
+      title: "Частые ошибки и самопроверка",
+      paragraphs: ["Перед ответом проверьте четыре опоры: лицо, модель глагола, отрицание и положение sa."],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Ja doma.", "Som doma.", "Нужна форма byť."], ["Ne som doma.", "Nie som doma.", "С byť отрицание раздельное."],
+        ["Ty pracujem.", "Ty pracuješ.", "Форма должна совпадать с лицом."], ["Oni pracuje.", "Oni pracujú.", "Для oni нужна форма множественного числа."],
+        ["Učím slovenčinu sa.", "Učím sa slovenčinu.", "Короткое sa стоит рядом с глаголом."],
+      ] },
+      items: ["Кто выполняет действие?", "Какова опорная пара infinitív + ja?", "Нужно ли ne- или отдельное nie с byť?", "Есть ли sa и стоит ли оно рядом с глаголом?", "Что уточняет смысл: teraz, každý deň, место или контекст?"],
+      note: "Произносите исправленную фразу целиком, а не только заменённое слово.",
+    },
+  ],
+  stepPractices: [
+    { id: "m5-present-tense-step-1", sectionIndex: 0, type: "pairs", prompt: "Определите смысл настоящего времени по контексту.", answer: "сейчас; регулярно; факт; сейчас", pairs: [
+      { prompt: "Teraz čítam.", answer: "сейчас", options: ["сейчас", "регулярно", "факт"] },
+      { prompt: "Každý deň pracujem.", answer: "регулярно", options: ["сейчас", "регулярно", "факт"] },
+      { prompt: "Bývam v Košiciach.", answer: "факт", options: ["сейчас", "регулярно", "факт"] },
+      { prompt: "Teraz telefonujem.", answer: "сейчас", options: ["сейчас", "регулярно", "факт"] },
+    ], showSlovakKeyboard: false, hint: "Ищите временной маркер или устойчивое состояние.", explanation: "Teraz указывает на действие сейчас, každý deň — на регулярность, а место жительства сообщается как факт." },
+    { id: "m5-present-tense-step-2", sectionIndex: 1, type: "pairs", prompt: "Выберите личную форму для каждого лица.", answer: "robím; bývaš; pracujeme; majú", pairs: [
+      { prompt: "ja · robiť", answer: "robím", options: ["robím", "robíš", "robia"] }, { prompt: "ty · bývať", answer: "bývaš", options: ["bývam", "bývaš", "bývajú"] },
+      { prompt: "my · pracovať", answer: "pracujeme", options: ["pracujem", "pracujeme", "pracujú"] }, { prompt: "oni · mať", answer: "majú", options: ["mám", "máte", "majú"] },
+    ], hint: "Сначала определите лицо, затем найдите его форму в модели.", explanation: "Правильно: ja robím, ty bývaš, my pracujeme, oni majú." },
+    { id: "m5-present-tense-step-3", sectionIndex: 2, type: "pairs", prompt: "Выберите нормативную отрицательную или вопросительную модель.", answer: "Nepracujem doma.; Nie som unavený.; Pracuješ dnes?; Dnes sa učíme doma.", pairs: [
+      { prompt: "Я не работаю дома.", answer: "Nepracujem doma.", options: ["Nepracujem doma.", "Nie pracujem doma."] }, { prompt: "Я не устал.", answer: "Nie som unavený.", options: ["Ne som unavený.", "Nie som unavený."] },
+      { prompt: "Ты сегодня работаешь?", answer: "Pracuješ dnes?", options: ["Pracuješ dnes?", "Pracujem dnes?"] }, { prompt: "Сегодня мы учимся дома.", answer: "Dnes sa učíme doma.", options: ["Dnes učíme doma sa.", "Dnes sa učíme doma."] },
+    ], hint: "Сверьте ne-/nie, лицо и положение sa.", explanation: "Обычный глагол получает ne-, byť — отдельное nie; вопрос сохраняет личную форму, а sa стоит рядом с глаголом." },
+    { id: "m5-present-tense-step-4", sectionIndex: 3, type: "pairs", prompt: "Переведите готовые фразы для распорядка дня.", answer: "Ráno vstávam o siedmej.; Pracujem od ôsmej.; Teraz telefonujem.; Často počúvam hudbu.", pairs: [
+      { prompt: "Утром я встаю в семь.", answer: "Ráno vstávam o siedmej.", inputHint: "Введите перевод" }, { prompt: "Я работаю с восьми.", answer: "Pracujem od ôsmej.", inputHint: "Введите перевод" },
+      { prompt: "Сейчас я разговариваю по телефону.", answer: "Teraz telefonujem.", inputHint: "Введите перевод" }, { prompt: "Я часто слушаю музыку.", answer: "Často počúvam hudbu.", inputHint: "Введите перевод" },
+    ], hint: "Воспроизведите готовую фразу и сохраните словацкую диакритику.", explanation: "Маркеры ráno, teraz и často уточняют, когда или как часто происходит действие." },
+    { id: "m5-present-tense-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки в целых предложениях.", answer: "Som doma.; Nie som doma.; Ty pracuješ.; Oni pracujú.; Učím sa slovenčinu.", pairs: [
+      { prompt: "Ja doma.", answer: "Som doma.", acceptableAnswers: ["Ja som doma."], inputHint: "Введите исправленную фразу" }, { prompt: "Ne som doma.", answer: "Nie som doma.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Ty pracujem.", answer: "Ty pracuješ.", acceptableAnswers: ["Pracuješ."], inputHint: "Введите исправленную фразу" }, { prompt: "Oni pracuje.", answer: "Oni pracujú.", acceptableAnswers: ["Pracujú."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Učím slovenčinu sa.", answer: "Učím sa slovenčinu.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Проверьте форму byť, согласование с лицом и место sa.", explanation: "Правильно: Som doma; Nie som doma; Ty pracuješ; Oni pracujú; Učím sa slovenčinu." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 1",
+  reinforcementPractices: [
+    { id: "reinforcement:present-tense:1", sectionIndex: 1, type: "pairs", prompt: "Выберите правильную личную форму.", answer: "som; robíš; študujeme; majú; bývate", pairs: [
+      { prompt: "Ja (som / je) doma.", answer: "som", options: ["som", "je"] }, { prompt: "Ty (robím / robíš) večeru.", answer: "robíš", options: ["robím", "robíš"] },
+      { prompt: "My (študujeme / študujú) slovenčinu.", answer: "študujeme", options: ["študujeme", "študujú"] }, { prompt: "Oni (má / majú) čas.", answer: "majú", options: ["má", "majú"] },
+      { prompt: "Vy (bývate / bývajú) tu?", answer: "bývate", options: ["bývate", "bývajú"] },
+    ], hint: "Сопоставьте подлежащее с личной формой.", explanation: "Ответы: som, robíš, študujeme, majú, bývate." },
+    { id: "reinforcement:present-tense:2", sectionIndex: 1, type: "pairs", prompt: "Поставьте глагол в нужную форму.", answer: "pracuje; bývame; máte; hovorím; varia", pairs: [
+      { prompt: "Eva ___ doma. · pracovať", answer: "pracuje", inputHint: "Введите форму" }, { prompt: "My ___ v centre. · bývať", answer: "bývame", inputHint: "Введите форму" },
+      { prompt: "Vy ___ otázku. · mať", answer: "máte", inputHint: "Введите форму" }, { prompt: "Ja ___ po slovensky. · hovoriť", answer: "hovorím", inputHint: "Введите форму" },
+      { prompt: "Peter a Jana ___ večeru. · variť", answer: "varia", inputHint: "Введите форму" },
+    ], hint: "Вспомните опорную пару и лицо; вводите только личную форму.", explanation: "Формы: Eva pracuje, my bývame, vy máte, ja hovorím, Peter a Jana varia." },
+    { id: "reinforcement:present-tense:3", sectionIndex: 2, type: "pairs", prompt: "Сделайте отрицание.", answer: "Nie som unavený.; Nemáme čas.; Nepracuje dnes.; Nie sú doma.; Neučím sa večer.", pairs: [
+      { prompt: "Som unavený.", answer: "Nie som unavený.", inputHint: "Введите отрицание" }, { prompt: "Máme čas.", answer: "Nemáme čas.", inputHint: "Введите отрицание" },
+      { prompt: "Pracuje dnes.", answer: "Nepracuje dnes.", inputHint: "Введите отрицание" }, { prompt: "Sú doma.", answer: "Nie sú doma.", inputHint: "Введите отрицание" },
+      { prompt: "Učím sa večer.", answer: "Neučím sa večer.", inputHint: "Введите отрицание" },
+    ], hint: "Обычный глагол получает ne-, а byť — отдельное nie.", explanation: "С byť: nie som, nie sú. С остальными формами: nemáme, nepracuje, neučím sa." },
+    { id: "reinforcement:present-tense:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки.", answer: "My pracujeme doma.; Nemám kávu.; Ty študuješ slovenčinu.; Oni sú v práci.; Učíme sa slovenčinu.", pairs: [
+      { prompt: "My pracuje doma.", answer: "My pracujeme doma.", acceptableAnswers: ["Pracujeme doma."], inputHint: "Введите исправленную фразу" }, { prompt: "Nie mám kávu.", answer: "Nemám kávu.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Ty študujem slovenčinu.", answer: "Ty študuješ slovenčinu.", acceptableAnswers: ["Študuješ slovenčinu."], inputHint: "Введите исправленную фразу" }, { prompt: "Oni je v práci.", answer: "Oni sú v práci.", acceptableAnswers: ["Sú v práci."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Učíme slovenčinu sa.", answer: "Učíme sa slovenčinu.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Исправьте всю фразу и сохраните диакритику.", explanation: "Форма согласуется с лицом; mať получает слитное ne-; sa стоит рядом с глаголом." },
+    { id: "reinforcement:present-tense:5", sectionIndex: 3, type: "pairs", prompt: "Переведите на словацкий.", answer: "Bývam v Bratislave.; Teraz pracujeme.; Učíš sa slovenčinu?; Nemám čas.; Kde bývate?", pairs: [
+      { prompt: "Я живу в Братиславе.", answer: "Bývam v Bratislave.", inputHint: "Введите перевод" }, { prompt: "Мы сейчас работаем.", answer: "Teraz pracujeme.", acceptableAnswers: ["Pracujeme teraz."], inputHint: "Введите перевод" },
+      { prompt: "Ты учишь словацкий?", answer: "Učíš sa slovenčinu?", inputHint: "Введите перевод" }, { prompt: "У меня нет времени.", answer: "Nemám čas.", inputHint: "Введите перевод" },
+      { prompt: "Где вы живёте?", answer: "Kde bývate?", inputHint: "Введите перевод" },
+    ], hint: "Проверьте лицо, диакритику, вопросительный знак и sa.", explanation: "Нормативные формы соответствуют пяти моделям из материала." },
+    { id: "reinforcement:present-tense:6", sectionIndex: 3, type: "pairs", prompt: "Соберите рассказ об обычном дне: выберите подходящее предложение для каждого шага.", answer: "Ráno vstávam o siedmej.; Som doma a pijem kávu.; Potom pracujem.; Na obed mám polievku.; Večer sa učím slovenčinu.; Dnes nepozerám televíziu.", pairs: [
+      { prompt: "1 · утро", answer: "Ráno vstávam o siedmej.", options: ["Ráno vstávam o siedmej.", "Ráno vstávaš o siedmej.", "Ráno vstávajú o siedmej."] },
+      { prompt: "2 · дома и кофе", answer: "Som doma a pijem kávu.", options: ["Je doma a pijem kávu.", "Som doma a pijem kávu.", "Som doma a piješ kávu."] },
+      { prompt: "3 · работа", answer: "Potom pracujem.", options: ["Potom pracuješ.", "Potom pracujem.", "Potom pracujú."] },
+      { prompt: "4 · обед", answer: "Na obed mám polievku.", options: ["Na obed mám polievku.", "Na obed máš polievku.", "Na obed majú polievku."] },
+      { prompt: "5 · учёба вечером", answer: "Večer sa učím slovenčinu.", options: ["Večer učím slovenčinu sa.", "Večer sa učíš slovenčinu.", "Večer sa učím slovenčinu."] },
+      { prompt: "6 · отрицание сегодня", answer: "Dnes nepozerám televíziu.", options: ["Dnes nie pozerám televíziu.", "Dnes nepozerám televíziu.", "Dnes nepozeráš televíziu."] },
+    ], hint: "Все шесть предложений рассказывает один человек от первого лица.", explanation: "Рассказ использует маркеры времени, byť, mať, форму на -ovať, sa и обычное отрицание." },
+  ],
+  knowledgeChecks: [
+    { id: "m5-present-tense-check-1", question: "Какая форма соответствует my + pracovať?", options: ["pracujem", "pracujeme", "pracujú"], answer: "pracujeme", explanation: "Форма для my оканчивается на -me: pracujeme." },
+    { id: "m5-present-tense-check-2", question: "Как правильно отрицать Som doma?", options: ["Ne som doma.", "Nie som doma.", "Nesom doma."], answer: "Nie som doma.", explanation: "С глаголом byť отрицание nie пишется отдельно." },
+    { id: "m5-present-tense-check-3", question: "Где правильно стоит sa?", options: ["Učím sa slovenčinu.", "Učím slovenčinu sa.", "Sa slovenčinu učím."], answer: "Učím sa slovenčinu.", explanation: "В простой нейтральной фразе короткое sa стоит рядом с глаголом." },
+  ],
+  finalChecks: [
+    { id: "m5-present-tense-final-1", question: "Выберите нормативную фразу «Сегодня мы учимся дома».", options: ["Dnes sa učíme doma.", "Dnes učíme doma sa.", "Dnes sa učia doma."], answer: "Dnes sa učíme doma.", explanation: "Učíme согласуется с my, а sa стоит рядом с глаголом." },
+  ],
+  chatPrompt: "Расскажите о своём обычном дне в 5–6 коротких фразах: когда вы встаёте, где бываете, что делаете сейчас и чего сегодня не делаете.",
+  chatSuggestions: ["Ráno vstávam o siedmej.", "Teraz pracujem doma.", "Večer sa učím slovenčinu."],
+} satisfies CourseLesson;

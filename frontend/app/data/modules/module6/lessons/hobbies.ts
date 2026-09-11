@@ -1,29 +1,221 @@
-import { defineModule6Lesson } from "../lessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const hobbiesLesson = defineModule6Lesson("hobbies", 7, {
-  "title": "Хобби",
-  "slovakTitle": "Záľuby",
-  "outcome": "Рассказывать о предпочтениях и предлагать занятие.",
-  "summary": "После урока вы сможете рассказывать о предпочтениях и предлагать совместное занятие в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Используйте vo voľnom čase, rád/rada + глагол и часто повторяющиеся занятия. Предложение строится через Chceš…? или Môžeme…?.",
-  "examples": [
-    {
-      "slovak": "Vo voľnom čase čítam.",
-      "russian": "В свободное время я читаю."
-    },
-    {
-      "slovak": "Rada počúvam hudbu.",
-      "russian": "Я люблю слушать музыку."
-    },
-    {
-      "slovak": "Dvakrát týždenne športujem.",
-      "russian": "Я занимаюсь спортом дважды в неделю."
-    },
-    {
-      "slovak": "Chceš ísť do kina?",
-      "russian": "Хочешь пойти в кино?"
-    }
+export const hobbiesLesson = {
+  vocabulary: [
+    {"word":"Vo voľnom čase čítam.","translation":"В свободное время я читаю.","example":"Vo voľnom čase čítam."},
+    {"word":"Rada počúvam hudbu.","translation":"Я люблю слушать музыку. (говорит женщина)","example":"Rada počúvam hudbu."},
+    {"word":"Dvakrát týždenne športujem.","translation":"Я занимаюсь спортом дважды в неделю.","example":"Dvakrát týždenne športujem."},
+    {"word":"Chceš ísť do kina?","translation":"Хочешь пойти в кино?","example":"Chceš ísť do kina?"},
+    {"word":"Prepáč, nemôžem.","translation":"Извини, я не могу.","example":"Prepáč, nemôžem."},
+    {"word":"Môžeme hrať tenis v sobotu.","translation":"Мы можем поиграть в теннис в субботу.","example":"Môžeme hrať tenis v sobotu."},
   ],
-  "mistake": "После rád/rada используется личная форма или инфинитив в зависимости от конструкции; не смешивайте модели в одной фразе.",
-  "task": "Расскажите о двух хобби, частотности и предложите собеседнику совместное занятие."
-}, { focus: "Говорите о любимых занятиях и предлагайте совместное действие.", interaction: "Структура: хобби → частота → предложение → согласие/отказ.", boundary: "Обоснование мнения ограничивается одной простой причиной.", prompt: "Переведите: «Я люблю читать и слушать музыку».", answer: "Rád čítam a počúvam hudbu.", hint: "Мужская форма rád; занятия соедините через a." });
+  slug: "hobbies",
+  order: 8,
+  title: "Хобби",
+  slovakTitle: "Záľuby",
+  description: "Рассказывайте о досуге, частоте занятий и предлагайте совместное действие.",
+  duration: "35–40 мин",
+  goals: [
+    "Называть основные занятия в свободное время",
+    "Говорить о любимом действии через rád/rada",
+    "Сообщать простую частоту занятия",
+    "Предлагать совместное действие",
+    "Соглашаться или вежливо отказываться",
+  ],
+  theory: {
+    summary: "Рассказ о хобби уровня A1 отвечает на три вопроса: что вы делаете, как часто и хотите ли сделать это вместе с собеседником. Достаточно нескольких знакомых глаголов и коротких моделей.",
+    rules: [
+      "Свободное время вводится готовым блоком vo voľnom čase: Vo voľnom čase čítam.",
+      "Любимое действие: мужчина говорит Rád čítam, женщина — Rada čítam. После rád/rada здесь используется личная форма глагола.",
+      "Не смешивайте две модели: mám rád + существительное (Mám rád hudbu), но rád/rada + личный глагол (Rád počúvam hudbu).",
+      "Частота: často, niekedy, zriedka, nikdy; точнее — každý deň, raz týždenne, dvakrát týždenne, cez víkend.",
+      "Предложение: Chceš ísť do kina? / Môžeme hrať tenis? После chceš и môžeme нужен инфинитив.",
+      "Ответ: Áno, rád/rada. / Dobre, kedy? Вежливый отказ: Prepáč, nemôžem. Затем можно предложить другое время.",
+    ],
+    examples: [
+      { slovak: "Vo voľnom čase čítam.", russian: "В свободное время я читаю.", explanation: "Vo voľnom čase — готовый блок времени." },
+      { slovak: "Rada počúvam hudbu.", russian: "Я люблю слушать музыку. (говорит женщина)", explanation: "Rada зависит от говорящей; počúvam — личная форма." },
+      { slovak: "Dvakrát týždenne športujem.", russian: "Я занимаюсь спортом дважды в неделю.", explanation: "Dvakrát týždenne точно сообщает частоту." },
+      { slovak: "Chceš ísť do kina?", russian: "Хочешь пойти в кино?", explanation: "После chceš используется инфинитив ísť." },
+      { slovak: "Prepáč, nemôžem.", russian: "Извини, я не могу.", explanation: "Короткий вежливый отказ без сложного объяснения." },
+      { slovak: "Môžeme hrať tenis v sobotu.", russian: "Мы можем поиграть в теннис в субботу.", explanation: "После môžeme используется инфинитив hrať." },
+    ],
+  },
+  sections: [
+    {
+      title: "Занятия в свободное время",
+      paragraphs: [
+        "Сначала выучите несколько действий, которые действительно можете использовать в разговоре. Говорите в форме ja: čítam, počúvam, športujem.",
+        "Существительное záľuba означает увлечение, а voľný čas — свободное время. В вопросе можно использовать Čo robíš vo voľnom čase?",
+      ],
+      table: { headers: ["Действие", "Пример", "Перевод"], rows: [
+        ["čítať", "Čítam knihy.", "Я читаю книги."],
+        ["počúvať", "Počúvam hudbu.", "Я слушаю музыку."],
+        ["športovať", "Športujem.", "Я занимаюсь спортом."],
+        ["variť", "Varím.", "Я готовлю."],
+        ["fotografovať", "Fotografujem.", "Я фотографирую."],
+      ] },
+      items: ["Pozerám filmy.", "Hrám futbal.", "Chodím na turistiku.", "Tancujem."],
+      note: "Отвечайте действием, а не только названием предмета: Čítam. Počúvam hudbu. Hrám futbal.",
+    },
+    {
+      title: "Что я люблю делать: rád и rada",
+      paragraphs: [
+        "Rád использует мужчина, rada — женщина. Форма показывает говорящего и не зависит от слова hudba, kniha или tenis.",
+        "После rád/rada ставьте личную форму: Rád čítam, Rada športujem. Инфинитив появляется после модальных глаголов: Chcem čítať, Môžem športovať.",
+      ],
+      table: { headers: ["Говорящий", "Любимое действие", "Отрицание"], rows: [
+        ["мужчина", "Rád čítam.", "Nerád varím."],
+        ["женщина", "Rada počúvam hudbu.", "Nerada športujem."],
+      ] },
+      items: ["Rád hrám futbal.", "Rada tancujem.", "Mám rád hudbu.", "Rada počúvam hudbu."],
+      note: "Сравните: Mám rád hudbu — люблю музыку; Rád počúvam hudbu — люблю слушать музыку.",
+    },
+    {
+      title: "Как часто",
+      paragraphs: [
+        "Добавьте одно слово частоты или один точный период. Обычно показатель частоты удобно поставить в начале: Cez víkend športujem.",
+        "Nikdy уже содержит отрицательное значение, поэтому в простой учебной модели используйте Nikdy nešportujem.",
+      ],
+      table: { headers: ["Частота", "Пример", "Перевод"], rows: [
+        ["každý deň", "Každý deň čítam.", "Я читаю каждый день."],
+        ["často", "Často počúvam hudbu.", "Я часто слушаю музыку."],
+        ["raz týždenne", "Raz týždenne tancujem.", "Я танцую раз в неделю."],
+        ["dvakrát týždenne", "Dvakrát týždenne športujem.", "Я занимаюсь спортом дважды в неделю."],
+        ["cez víkend", "Cez víkend chodím na turistiku.", "На выходных я хожу в поход."],
+        ["nikdy", "Nikdy nehrám tenis.", "Я никогда не играю в теннис."],
+      ] },
+      items: ["niekedy — иногда", "zriedka — редко", "každý večer — каждый вечер"],
+      note: "Týždenne пишется с ý и ž: raz týždenne, dvakrát týždenne.",
+    },
+    {
+      title: "Предложение, согласие и отказ",
+      paragraphs: [
+        "Предложите конкретное действие через Chceš ...? или Môžeme ...? Затем уточните время знакомой короткой репликой.",
+        "Согласие может быть очень коротким. При отказе скажите Prepáč, nemôžem и при желании предложите другой день.",
+      ],
+      table: { headers: ["Шаг", "Реплика", "Перевод"], rows: [
+        ["предложение", "Chceš ísť do kina?", "Хочешь пойти в кино?"],
+        ["другое предложение", "Môžeme hrať tenis?", "Можем поиграть в теннис?"],
+        ["согласие мужчины", "Áno, rád.", "Да, с удовольствием."],
+        ["согласие женщины", "Áno, rada.", "Да, с удовольствием."],
+        ["уточнение", "Dobre, kedy?", "Хорошо, когда?"],
+        ["отказ", "Prepáč, nemôžem.", "Извини, я не могу."],
+      ] },
+      items: ["V sobotu o šiestej.", "Dobre, teším sa.", "Môžeme v nedeľu?"],
+      note: "После chceš и môžeme нужен инфинитив: chceš ísť, môžeme hrať.",
+    },
+    {
+      title: "Короткий диалог и частые ошибки",
+      paragraphs: [
+        "Соберите сообщение из любимого занятия, частоты и приглашения. В ответе согласитесь или вежливо откажитесь.",
+        "Перед ответом проверьте rád/rada, личную форму после них, инфинитив после chceš/môžeme и словацкую диакритику.",
+      ],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Женщина: Rád čítam.", "Rada čítam.", "Форма зависит от говорящей."],
+        ["Rád čítať.", "Rád čítam.", "После rád в этой модели нужна личная форма."],
+        ["Chceš ideš do kina?", "Chceš ísť do kina?", "После chceš нужен инфинитив."],
+        ["Dvakrat tyzdenne športujem.", "Dvakrát týždenne športujem.", "Нужна словацкая диакритика."],
+        ["Vo volnom čase čítam.", "Vo voľnom čase čítam.", "Нужна буква ľ."],
+      ] },
+      items: ["Vo voľnom čase rád čítam.", "Dvakrát týždenne športujem.", "Chceš ísť do kina?", "Áno, rada. Kedy?"],
+      note: "Обоснование мнения ограничивается одной простой причиной.",
+    },
+  ],
+  stepPractices: [
+    { id: "m6-hobbies-step-1", sectionIndex: 0, type: "pairs", prompt: "Выберите действие в свободное время.", answer: "čítam; počúvam; športujem; varím; fotografujem", pairs: [
+      { prompt: "Я читаю.", answer: "čítam", options: ["čítam", "počúvam", "športujem", "varím", "fotografujem"] },
+      { prompt: "Я слушаю.", answer: "počúvam", options: ["čítam", "počúvam", "športujem", "varím", "fotografujem"] },
+      { prompt: "Я занимаюсь спортом.", answer: "športujem", options: ["čítam", "počúvam", "športujem", "varím", "fotografujem"] },
+      { prompt: "Я готовлю.", answer: "varím", options: ["čítam", "počúvam", "športujem", "varím", "fotografujem"] },
+      { prompt: "Я фотографирую.", answer: "fotografujem", options: ["čítam", "počúvam", "športujem", "varím", "fotografujem"] },
+    ], showSlovakKeyboard: false, hint: "Сопоставьте русское действие с формой ja.", explanation: "Пять ответов — личные формы частотных глаголов досуга." },
+    { id: "m6-hobbies-step-2", sectionIndex: 1, type: "pairs", prompt: "Выберите нормативную форму предпочтения.", answer: "Rád čítam.; Rada počúvam hudbu.; Nerád varím.; Nerada športujem.; Mám rád hudbu.", pairs: [
+      { prompt: "Мужчина: Я люблю читать.", answer: "Rád čítam.", options: ["Rád čítam.", "Rada čítam."] },
+      { prompt: "Женщина: Я люблю слушать музыку.", answer: "Rada počúvam hudbu.", options: ["Rád počúvam hudbu.", "Rada počúvam hudbu."] },
+      { prompt: "Мужчина: Я не люблю готовить.", answer: "Nerád varím.", options: ["Nerád varím.", "Nerada varím."] },
+      { prompt: "Женщина: Я не люблю заниматься спортом.", answer: "Nerada športujem.", options: ["Nerád športujem.", "Nerada športujem."] },
+      { prompt: "Мужчина: Я люблю музыку.", answer: "Mám rád hudbu.", options: ["Mám rád hudbu.", "Rád hudbu."] },
+    ], hint: "Проверьте пол говорящего и различие действия с существительным.", explanation: "Rád/rada + личный глагол; mám rád + существительное." },
+    { id: "m6-hobbies-step-3", sectionIndex: 2, type: "pairs", prompt: "Выберите показатель частоты.", answer: "každý deň; často; raz týždenne; dvakrát týždenne; cez víkend", pairs: [
+      { prompt: "___ čítam. · ежедневно", answer: "každý deň", options: ["každý deň", "často", "raz týždenne", "dvakrát týždenne", "cez víkend"] },
+      { prompt: "___ počúvam hudbu. · часто", answer: "často", options: ["každý deň", "často", "raz týždenne", "dvakrát týždenne", "cez víkend"] },
+      { prompt: "___ tancujem. · раз в неделю", answer: "raz týždenne", options: ["každý deň", "často", "raz týždenne", "dvakrát týždenne", "cez víkend"] },
+      { prompt: "___ športujem. · дважды в неделю", answer: "dvakrát týždenne", options: ["každý deň", "často", "raz týždenne", "dvakrát týždenne", "cez víkend"] },
+      { prompt: "___ chodím na turistiku. · по выходным", answer: "cez víkend", options: ["každý deň", "často", "raz týždenne", "dvakrát týždenne", "cez víkend"] },
+    ], hint: "Сопоставьте общую или точную частоту.", explanation: "Každý deň, často, raz/dvakrát týždenne и cez víkend отвечают на ako často." },
+    { id: "m6-hobbies-step-4", sectionIndex: 3, type: "pairs", prompt: "Выберите подходящую реплику приглашения или ответа.", answer: "Chceš ísť do kina?; Môžeme hrať tenis?; Áno, rada.; Dobre, kedy?; Prepáč, nemôžem.", pairs: [
+      { prompt: "Хочешь пойти в кино?", answer: "Chceš ísť do kina?", options: ["Chceš ísť do kina?", "Chceš ideš do kina?"] },
+      { prompt: "Можем поиграть в теннис?", answer: "Môžeme hrať tenis?", options: ["Môžeme hrať tenis?", "Môžeme hráme tenis?"] },
+      { prompt: "Женщина: Да, с удовольствием.", answer: "Áno, rada.", options: ["Áno, rád.", "Áno, rada."] },
+      { prompt: "Хорошо, когда?", answer: "Dobre, kedy?", options: ["Dobre, kedy?", "Dobre, kde som?"] },
+      { prompt: "Извини, я не могу.", answer: "Prepáč, nemôžem.", options: ["Prepáč, nemôžem.", "Prepáč, nechcem môžem."] },
+    ], hint: "Определите предложение, согласие, уточнение или отказ.", explanation: "После chceš/môžeme нужен инфинитив; согласие зависит от говорящего." },
+    { id: "m6-hobbies-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте каждую реплику.", answer: "Rád čítam a počúvam hudbu.; Rada čítam.; Rád čítam.; Chceš ísť do kina?; Dvakrát týždenne športujem.", pairs: [
+      { prompt: "Переведите от лица мужчины: «Я люблю читать и слушать музыку».", answer: "Rád čítam a počúvam hudbu.", inputHint: "Введите перевод" },
+      { prompt: "Женщина: Rád čítam.", answer: "Rada čítam.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Rád čítať.", answer: "Rád čítam.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Chceš ideš do kina?", answer: "Chceš ísť do kina?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Dvakrat tyzdenne športujem.", answer: "Dvakrát týždenne športujem.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Проверьте rád/rada, личную форму, инфинитив и диакритику.", explanation: "Нормативны rád/rada + личный глагол, chceš ísť и dvakrát týždenne." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 8",
+  reinforcementPractices: [
+    { id: "reinforcement:hobbies:1", sectionIndex: 0, type: "pairs", prompt: "Выберите действие для каждого хобби.", answer: "čítam; počúvam; športujem; varím; fotografujem", pairs: [
+      { prompt: "книги", answer: "čítam", options: ["čítam", "počúvam", "športujem", "varím", "fotografujem"] },
+      { prompt: "музыка", answer: "počúvam", options: ["čítam", "počúvam", "športujem", "varím", "fotografujem"] },
+      { prompt: "спорт", answer: "športujem", options: ["čítam", "počúvam", "športujem", "varím", "fotografujem"] },
+      { prompt: "готовка", answer: "varím", options: ["čítam", "počúvam", "športujem", "varím", "fotografujem"] },
+      { prompt: "фотография", answer: "fotografujem", options: ["čítam", "počúvam", "športujem", "varím", "fotografujem"] },
+    ], showSlovakKeyboard: false, hint: "Выберите личную форму действия.", explanation: "Каждому виду досуга соответствует один частотный глагол." },
+    { id: "reinforcement:hobbies:2", sectionIndex: 2, type: "pairs", prompt: "Дополните рассказ о частоте.", answer: "každý deň; často; niekedy; dvakrát týždenne; cez víkend", pairs: [
+      { prompt: "___ čítam. · каждый день", answer: "každý deň", options: ["každý deň", "často", "niekedy", "dvakrát týždenne", "cez víkend"] },
+      { prompt: "___ počúvam hudbu. · часто", answer: "často", options: ["každý deň", "často", "niekedy", "dvakrát týždenne", "cez víkend"] },
+      { prompt: "___ varím. · иногда", answer: "niekedy", options: ["každý deň", "často", "niekedy", "dvakrát týždenne", "cez víkend"] },
+      { prompt: "___ športujem. · дважды в неделю", answer: "dvakrát týždenne", options: ["každý deň", "často", "niekedy", "dvakrát týždenne", "cez víkend"] },
+      { prompt: "___ chodím na turistiku. · по выходным", answer: "cez víkend", options: ["každý deň", "často", "niekedy", "dvakrát týždenne", "cez víkend"] },
+    ], hint: "Смотрите на русский показатель частоты.", explanation: "Пять моделей отвечают на вопрос ako často." },
+    { id: "reinforcement:hobbies:3", sectionIndex: 3, type: "pairs", prompt: "Выберите ключевую форму диалога.", answer: "Chceš; Môžeme; Áno; Kedy; Prepáč", pairs: [
+      { prompt: "___ ísť do kina?", answer: "Chceš", options: ["Chceš", "Môžeme", "Áno", "Kedy", "Prepáč"] },
+      { prompt: "___ hrať tenis?", answer: "Môžeme", options: ["Chceš", "Môžeme", "Áno", "Kedy", "Prepáč"] },
+      { prompt: "___, rada.", answer: "Áno", options: ["Chceš", "Môžeme", "Áno", "Kedy", "Prepáč"] },
+      { prompt: "___? V sobotu.", answer: "Kedy", options: ["Chceš", "Môžeme", "Áno", "Kedy", "Prepáč"] },
+      { prompt: "___, nemôžem.", answer: "Prepáč", options: ["Chceš", "Môžeme", "Áno", "Kedy", "Prepáč"] },
+    ], hint: "Определите предложение, согласие, вопрос о времени и отказ.", explanation: "Chceš/Môžeme предлагают, Áno соглашается, Kedy уточняет, Prepáč смягчает отказ." },
+    { id: "reinforcement:hobbies:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки в рассказе о досуге.", answer: "Vo voľnom čase čítam.; Rada počúvam hudbu.; Dvakrát týždenne športujem.; Chceš ísť do kina?; Môžeme hrať tenis?", pairs: [
+      { prompt: "Vo volnom čase čítam.", answer: "Vo voľnom čase čítam.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Женщина: Rád počúvam hudbu.", answer: "Rada počúvam hudbu.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Dvakrat tyzdenne športujem.", answer: "Dvakrát týždenne športujem.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Chceš ideš do kina?", answer: "Chceš ísť do kina?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Môžeme hráme tenis?", answer: "Môžeme hrať tenis?", inputHint: "Введите исправленную фразу" },
+    ], hint: "Исправьте всю строку: диакритику, род и форму глагола.", explanation: "Нормативны voľnom, rada, dvakrát týždenne и инфинитивы ísť/hrať." },
+    { id: "reinforcement:hobbies:5", sectionIndex: 4, type: "pairs", prompt: "Переведите на словацкий.", answer: "Vo voľnom čase čítam.; Rada počúvam hudbu.; Dvakrát týždenne športujem.; Chceš ísť do kina?; Prepáč, nemôžem.", pairs: [
+      { prompt: "В свободное время я читаю.", answer: "Vo voľnom čase čítam.", inputHint: "Введите перевод" },
+      { prompt: "Я люблю слушать музыку. (говорит женщина)", answer: "Rada počúvam hudbu.", acceptableAnswers: ["Hudbu počúvam rada."], inputHint: "Введите перевод" },
+      { prompt: "Я занимаюсь спортом дважды в неделю.", answer: "Dvakrát týždenne športujem.", acceptableAnswers: ["Športujem dvakrát týždenne."], inputHint: "Введите перевод" },
+      { prompt: "Хочешь пойти в кино?", answer: "Chceš ísť do kina?", inputHint: "Введите перевод" },
+      { prompt: "Извини, я не могу.", answer: "Prepáč, nemôžem.", inputHint: "Введите перевод" },
+    ], hint: "Используйте модели урока и сохраните словацкую диакритику.", explanation: "Переводы проверяют досуг, предпочтение, частоту, приглашение и отказ." },
+    { id: "reinforcement:hobbies:6", sectionIndex: 4, type: "pairs", prompt: "Соберите короткий диалог о хобби.", answer: "Vo voľnom čase rada športujem.; Ako často športuješ?; Dvakrát týždenne.; Chceš hrať tenis v sobotu?; Áno, rada.; Dobre, o šiestej.", pairs: [
+      { prompt: "1 · хобби женщины", answer: "Vo voľnom čase rada športujem.", options: ["Vo voľnom čase rada športujem.", "Vo voľnom čase rád športujem.", "Vo voľný čas rada športovať."] },
+      { prompt: "2 · частота", answer: "Ako často športuješ?", options: ["Ako často športuješ?", "Kde často športujem?", "Čo čas športuješ?"] },
+      { prompt: "3 · ответ", answer: "Dvakrát týždenne.", options: ["Dvakrat tyzdenne.", "Dvakrát týždenne.", "Dva týždeň."] },
+      { prompt: "4 · приглашение", answer: "Chceš hrať tenis v sobotu?", options: ["Chceš hráš tenis v sobotu?", "Chceš hrať tenis v sobotu?", "Chceš tenis hrám sobota?"] },
+      { prompt: "5 · согласие", answer: "Áno, rada.", options: ["Áno, rád.", "Áno, rada.", "Áno, radá."] },
+      { prompt: "6 · время", answer: "Dobre, o šiestej.", options: ["Dobre, v šesť.", "Dobre, o šiestej.", "Dobre, na šiesta."] },
+    ], hint: "Следуйте маршруту: хобби, частота, приглашение, согласие, время.", explanation: "Диалог использует женскую форму rada, точную частоту и инфинитив после chceš." },
+  ],
+  knowledgeChecks: [
+    { id: "m6-hobbies-check-1", question: "Как сказать «В свободное время я читаю»?", options: ["Vo voľnom čase čítam.", "V voľný čas čítať.", "Do voľnom čase čítam."], answer: "Vo voľnom čase čítam.", explanation: "Устойчивый блок — vo voľnom čase; действие стоит в форме čítam." },
+    { id: "m6-hobbies-check-2", question: "Как женщина скажет «Я люблю слушать музыку»?", options: ["Rada počúvam hudbu.", "Rád počúvam hudbu.", "Rada počúvať hudbu."], answer: "Rada počúvam hudbu.", explanation: "Женщина использует rada, затем личную форму počúvam." },
+    { id: "m6-hobbies-check-3", question: "Какая граница соответствует уровню A1?", options: ["Обоснование мнения ограничивается одной простой причиной.", "Нужно подробно анализировать культурные предпочтения.", "Нужно доказывать пользу каждого хобби."], answer: "Обоснование мнения ограничивается одной простой причиной.", explanation: "A1 требует короткого факта, частоты и простого приглашения." },
+  ],
+  finalChecks: [
+    { id: "m6-hobbies-final-1", question: "Переведите от лица мужчины: «Я люблю читать и слушать музыку».", options: ["Rád čítam a počúvam hudbu.", "Rada čítam a počúvam hudbu.", "Rád čítať a počúvať hudbu."], answer: "Rád čítam a počúvam hudbu.", explanation: "Мужская форма — rád; оба действия стоят в личной форме." },
+  ],
+  chatPrompt: "Расскажите о двух хобби и их частоте, затем предложите собеседнику одно совместное занятие.",
+  chatSuggestions: ["Vo voľnom čase rád čítam.", "Dvakrát týždenne športujem.", "Chceš ísť do kina?"],
+} satisfies CourseLesson;

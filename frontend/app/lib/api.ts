@@ -89,6 +89,11 @@ export type CourseStateResponse = { exists: boolean; schema_version: number; sta
 export function getCourseState(): Promise<CourseStateResponse> { return request<CourseStateResponse>("/course/state"); }
 export function saveCourseState(state: CourseState): Promise<CourseStateResponse> { return request<CourseStateResponse>("/course/state", { method: "PUT", body: JSON.stringify(state) }); }
 
+export type CourseBackupSummary = { exported_at: string; has_state: boolean; completed_topics: number; counts: Record<string, number> };
+export function getCourseBackup(): Promise<unknown> { return request<unknown>("/course/backup"); }
+export function validateCourseBackup(backup: string): Promise<CourseBackupSummary> { return request<CourseBackupSummary>("/course/backup/validate", { method: "POST", body: backup }); }
+export function restoreCourseBackup(backup: string): Promise<{ restored: boolean; state: CourseState | null }> { return request<{ restored: boolean; state: CourseState | null }>("/course/backup/restore", { method: "POST", body: backup }); }
+
 export type CourseExerciseAttempt = { id: number; answer: string; is_correct: boolean; score: number; corrected_answer: string; explanation: string; next_exercise: string; created_at: string };
 export type CourseExercise = { id: number; lesson_slug: string; lesson_title: string; question: string; instruction: string; created_at: string; latest_attempt: CourseExerciseAttempt | null };
 export function getCourseExercises(lessonSlug?: string): Promise<CourseExercise[]> { const query = lessonSlug ? `?lesson_slug=${encodeURIComponent(lessonSlug)}` : ""; return request<CourseExercise[]>(`/course/exercises${query}`); }
@@ -107,7 +112,8 @@ export type CourseVocabularyItem = { id: number; lesson_slug: string; lesson_tit
 export type CourseVocabularySeed = Omit<CourseVocabularyItem, "id" | "review_count" | "interval_days" | "next_review_at" | "is_due">;
 export function syncCourseVocabulary(items: CourseVocabularySeed[]): Promise<CourseVocabularyItem[]> { return request<CourseVocabularyItem[]>("/course/vocabulary/sync", { method: "PUT", body: JSON.stringify({ items }) }); }
 export function getCourseVocabulary(): Promise<CourseVocabularyItem[]> { return request<CourseVocabularyItem[]>("/course/vocabulary"); }
-export function reviewCourseVocabulary(itemId: number): Promise<CourseVocabularyItem> { return request<CourseVocabularyItem>(`/course/vocabulary/${itemId}/review`, { method: "POST" }); }
+export type VocabularyRating = "again" | "hard" | "easy";
+export function reviewCourseVocabulary(itemId: number, rating?: VocabularyRating): Promise<CourseVocabularyItem> { return request<CourseVocabularyItem>(`/course/vocabulary/${itemId}/review`, { method: "POST", ...(rating ? { body: JSON.stringify({ rating }) } : {}) }); }
 
 export type CourseHomeworkAttempt = { id: number; answer: string; is_correct: boolean; score: number; corrected_answer: string; explanation: string; next_exercise: string; created_at: string };
 export type CourseHomework = { id: number; lesson_slug: string; lesson_title: string; title: string; description: string; focus_category: string; created_at: string; latest_attempt: CourseHomeworkAttempt | null };

@@ -1,6 +1,23 @@
 import type { CourseLesson } from "../../../courseTypes";
 
 export const greetingsLesson: CourseLesson = {
+  vocabulary: [
+    {"word":"Dobrý deň. Ako sa máte?","translation":"Здравствуйте. Как вы?","example":"Dobrý deň. Ako sa máte?"},
+    {"word":"Ahoj! Ako sa máš?","translation":"Привет! Как ты?","example":"Ahoj! Ako sa máš?"},
+    {"word":"Dobre, ďakujem. A vy?","translation":"Хорошо, спасибо. А вы?","example":"Dobre, ďakujem. A vy?"},
+    {"word":"Volám sa Ari. Teší ma.","translation":"Меня зовут Ари. Очень приятно.","example":"Volám sa Ari. Teší ma."},
+    {"word":"Dovidenia.","translation":"До свидания.","example":"Dovidenia."},
+    {"word":"Maj sa. Do zajtra.","translation":"Счастливо. До завтра.","example":"Maj sa. Do zajtra."},
+    {"word":"Volám sa Ari.","translation":"Меня зовут Ари.","example":"Volám sa Ari."},
+    {"word":"Som Ari.","translation":"Я Ари.","example":"Som Ari."},
+    {"word":"Teší ma.","translation":"Очень приятно.","example":"Teší ma."},
+    {"word":"Aj mňa teší.","translation":"Мне тоже приятно.","example":"Aj mňa teší."},
+    {"word":"Majte sa.","translation":"Всего доброго.","example":"Majte sa."},
+    {"word":"Maj sa.","translation":"Счастливо.","example":"Maj sa."},
+    {"word":"Ahoj! / Čau!","translation":"Пока!","example":"Ahoj! / Čau!"},
+    {"word":"Dobrú noc.","translation":"Спокойной ночи.","example":"Dobrú noc."},
+    {"word":"Do zajtra.","translation":"До завтра.","example":"Do zajtra."},
+  ],
   slug: "greetings",
   order: 1,
   title: "Приветствия",

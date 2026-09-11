@@ -6,7 +6,8 @@ import { a1CourseModules, findA1Lesson, getA1Module } from "../data/a1Course";
 import { buildInitialProgress } from "../data/courseEngine";
 import { type LessonSummary, type MistakeRecord } from "../data/courseProgress";
 import { type LessonStatus } from "../data/courseTypes";
-import { getCourseState, saveCourseState, type CourseState } from "../lib/api";
+import { type CourseState } from "../lib/api";
+import { CoursePersistence } from "../lib/coursePersistence";
 
 export type ProgressMap = Record<string, LessonStatus>;
 export type ChatInteractionKind = "answer" | "clarification" | "continue";
@@ -48,15 +49,14 @@ export type CourseSessionActions = {
   setLessonSummaries: SessionSetter<"lessonSummaries">;
 };
 
-export type CourseSession = CourseSessionState & CourseSessionActions & { persistenceError: string };
+export type CourseSession = CourseSessionState & CourseSessionActions & { persistenceError: string; readOnly: boolean; maintenance: (operation: () => Promise<CourseState | void>) => Promise<void> };
 
-type PersistedCourseSession = Partial<CourseSessionState> & { finalCompleted?: boolean };
+type PersistedCourseSession = Partial<CourseSessionState> & { finalCompleted?: boolean; _sync?: { dirty?: boolean } };
 
 // These legacy keys are a compatibility boundary until a dedicated migration is approved.
 const progressStorageKey = "slovak-module-1-beta-progress";
 const sessionStorageKey = "slovak-module-1-beta-session-v1";
 const fontSizeStorageKey = "slovak-module-1-beta-font-size";
-const persistenceRetryDelayMs = 1_500;
 
 function initialProgress(): ProgressMap {
   return buildInitialProgress(a1CourseModules);
@@ -74,12 +74,13 @@ function readJsonObject(key: string): Record<string, unknown> {
 }
 
 function readLegacySession(): PersistedCourseSession {
+  const cached = readJsonObject(sessionStorageKey) as PersistedCourseSession;
   const storedFontSize = window.localStorage.getItem(fontSizeStorageKey);
   const fontSize: FontSize = storedFontSize === "normal" || storedFontSize === "large" || storedFontSize === "extra-large" ? storedFontSize : "large";
   return {
-    ...readJsonObject(sessionStorageKey),
-    progress: { ...initialProgress(), ...readJsonObject(progressStorageKey) } as ProgressMap,
-    fontSize,
+    ...cached,
+    progress: { ...initialProgress(), ...readJsonObject(progressStorageKey), ...(cached.progress ?? {}) } as ProgressMap,
+    fontSize: cached._sync ? cached.fontSize ?? fontSize : fontSize,
   };
 }
 
@@ -108,8 +109,8 @@ function toCourseState(session: CourseSessionState): CourseState {
   return { ...session, finalCompleted: Boolean(session.finalCompletedModules["1"]) };
 }
 
-function writeLegacySession(session: CourseSessionState): void {
-  window.localStorage.setItem(sessionStorageKey, JSON.stringify(toCourseState(session)));
+function writeLegacySession(session: CourseSessionState, dirty: boolean): void {
+  window.localStorage.setItem(sessionStorageKey, JSON.stringify({ ...toCourseState(session), _sync: { dirty } }));
   window.localStorage.setItem(progressStorageKey, JSON.stringify(session.progress));
   window.localStorage.setItem(fontSizeStorageKey, session.fontSize);
 }
@@ -129,15 +130,11 @@ export function useCourseSession(): CourseSession {
   const [chatHistories, setChatHistories] = useState<Record<string, ChatMessage[]>>({});
   const [lessonSummaries, setLessonSummaries] = useState<Record<string, LessonSummary>>({});
   const [storageReady, setStorageReady] = useState(false);
+  const [readOnly, setReadOnly] = useState(true);
   const [persistenceError, setPersistenceError] = useState("");
-  const sessionRef = useRef<CourseSessionState>({ activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries });
-  const serverReadyRef = useRef(false);
-  const offlineBaselineRef = useRef("");
-  const offlineDirtyRef = useRef(false);
-  const scheduleRetryRef = useRef<() => void>(() => undefined);
+  const persistenceRef = useRef<CoursePersistence | null>(null);
 
   const applySession = (session: CourseSessionState) => {
-    sessionRef.current = session;
     setActiveModule(session.activeModule);
     setSelectedSlug(session.selectedSlug);
     setFontSize(session.fontSize);
@@ -154,84 +151,51 @@ export function useCourseSession(): CourseSession {
   };
 
   useEffect(() => {
-    let cancelled = false;
-    let retryTimer: number | null = null;
-    let synchronizing = false;
-
-    const scheduleRetry = () => {
-      if (cancelled || retryTimer !== null) return;
-      retryTimer = window.setTimeout(() => {
-        retryTimer = null;
-        void synchronize();
-      }, persistenceRetryDelayMs);
-    };
-
-    const synchronize = async () => {
-      if (cancelled || synchronizing) return;
-      synchronizing = true;
+    const abort = new AbortController();
+    let release = () => {};
+    const ownSession = async () => {
+      if (abort.signal.aborted) return;
+      const released = new Promise<void>((resolve) => { release = resolve; });
       try {
-        if (!serverReadyRef.current) {
-          const server = await getCourseState();
-          if (cancelled) return;
-          if (server.exists && server.state && !offlineDirtyRef.current) {
-            const serverSession = resolveSession(server.state as PersistedCourseSession);
-            applySession(serverSession);
-            writeLegacySession(serverSession);
-            offlineBaselineRef.current = JSON.stringify(toCourseState(serverSession));
-          } else {
-            await saveCourseState(toCourseState(sessionRef.current));
-          }
-          serverReadyRef.current = true;
-          offlineDirtyRef.current = false;
-        } else {
-          await saveCourseState(toCourseState(sessionRef.current));
-        }
-        if (!cancelled) setPersistenceError("");
-      } catch (cause) {
-        if (!cancelled) {
-          setPersistenceError(cause instanceof Error ? cause.message : "Не удалось синхронизировать данные курса с сервером.");
-          scheduleRetry();
-        }
-      } finally {
-        synchronizing = false;
+        const local = readLegacySession();
+        const resolved = resolveSession(local);
+        applySession(resolved);
+        const persistence = new CoursePersistence(
+          toCourseState(resolved), Boolean(local._sync?.dirty),
+          (state, dirty) => writeLegacySession(resolveSession(state as PersistedCourseSession), dirty),
+          (state) => applySession(resolveSession(state as PersistedCourseSession)),
+          setPersistenceError,
+        );
+        persistenceRef.current = persistence;
+        setStorageReady(true);
+        setReadOnly(false);
+        persistence.start();
+        await released;
+        persistence.stop();
+      } catch {
+        setPersistenceError("Не удалось прочитать локальный прогресс. Проверьте доступ браузера к хранилищу.");
       }
     };
-
-    scheduleRetryRef.current = scheduleRetry;
-    const localSession = resolveSession(readLegacySession());
-    applySession(localSession);
-    writeLegacySession(localSession);
-    offlineBaselineRef.current = JSON.stringify(toCourseState(localSession));
-    setStorageReady(true);
-    void synchronize();
-
-    return () => {
-      cancelled = true;
-      if (retryTimer !== null) window.clearTimeout(retryTimer);
-      scheduleRetryRef.current = () => undefined;
-    };
+    if (navigator.locks) {
+      void navigator.locks.request("slovokrok-course-editor", { signal: abort.signal }, ownSession)
+        .catch(() => { if (!abort.signal.aborted) setPersistenceError("Не удалось открыть сеанс курса."); });
+    } else {
+      setPersistenceError("Откройте курс через localhost в браузере с поддержкой Web Locks.");
+    }
+    return () => { abort.abort(); persistenceRef.current?.stop(); release(); };
   }, []);
 
   useEffect(() => {
-    if (!storageReady) return;
-    const session = { activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries };
-    sessionRef.current = session;
-    writeLegacySession(session);
-    const serialized = JSON.stringify(toCourseState(session));
-    if (!serverReadyRef.current) {
-      if (serialized !== offlineBaselineRef.current) offlineDirtyRef.current = true;
-      return;
-    }
-    const timer = window.setTimeout(() => {
-      void saveCourseState(toCourseState(sessionRef.current))
-        .then(() => setPersistenceError(""))
-        .catch((cause) => {
-          setPersistenceError(cause instanceof Error ? cause.message : "Не удалось сохранить данные курса.");
-          scheduleRetryRef.current();
-        });
-    }, 350);
-    return () => window.clearTimeout(timer);
-  }, [storageReady, activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries]);
+    if (!storageReady || readOnly) return;
+    persistenceRef.current?.update(toCourseState({ activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries }));
+  }, [storageReady, readOnly, activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries]);
 
-  return { activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries, setActiveModule, setSelectedSlug, setFontSize, setProgress, setLessonSteps, setCheckSelections, setPracticeAnswers, setPracticeResults, setMistakes, setFinalSelections, setFinalCompletedModules, setChatHistories, setLessonSummaries, persistenceError };
+  const maintenance = async (operation: () => Promise<CourseState | void>) => {
+    if (!persistenceRef.current || readOnly) throw new Error("Сеанс курса ещё не готов.");
+    setReadOnly(true);
+    try { await persistenceRef.current.maintenance(operation); }
+    finally { setReadOnly(persistenceRef.current.needsRecovery()); }
+  };
+
+  return { activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries, setActiveModule, setSelectedSlug, setFontSize, setProgress, setLessonSteps, setCheckSelections, setPracticeAnswers, setPracticeResults, setMistakes, setFinalSelections, setFinalCompletedModules, setChatHistories, setLessonSummaries, persistenceError, readOnly, maintenance };
 }

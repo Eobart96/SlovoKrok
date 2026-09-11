@@ -1,32 +1,133 @@
-import { defineModule5Lesson } from "../lessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const vedietInfinitiveLesson = defineModule5Lesson("vediet-infinitive", 7, {
-  "title": "vedieť + infinitív",
-  "slovakTitle": "Vedieť s infinitívom",
-  "outcome": "Сообщать об освоенном умении.",
-  "summary": "После урока вы сможете сообщать об освоенном умении в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Vedieť + infinitív выражает умение, основанное на знании: viem, vieš, vie, vieme, viete, vedia. Для знания факта vedieť употребляется без инфинитива.",
-  "examples": [
-    {
-      "slovak": "Viem hovoriť po rusky.",
-      "russian": "Я умею говорить по-русски."
-    },
-    {
-      "slovak": "Vieš plávať?",
-      "russian": "Ты умеешь плавать?"
-    },
-    {
-      "slovak": "Neviem variť.",
-      "russian": "Я не умею готовить."
-    },
-    {
-      "slovak": "Viete, kde je stanica?",
-      "russian": "Вы знаете, где вокзал?"
-    }
+export const vedietInfinitiveLesson = {
+  vocabulary: [
+    {"word":"Viem plávať.","translation":"Я умею плавать.","example":"Viem plávať."},
+    {"word":"Ešte neviem šoférovať.","translation":"Я ещё не умею водить.","example":"Ešte neviem šoférovať."},
+    {"word":"Vieme hovoriť po anglicky.","translation":"Мы умеем говорить по-английски.","example":"Vieme hovoriť po anglicky."},
+    {"word":"Viem odpoveď.","translation":"Я знаю ответ.","example":"Viem odpoveď."},
+    {"word":"Ako dobre viete hovoriť po slovensky?","translation":"Насколько хорошо вы говорите по-словацки?","example":"Ako dobre viete hovoriť po slovensky?"},
+    {"word":"Dnes nemôžem plávať.","translation":"Сегодня я не могу плавать.","example":"Dnes nemôžem plávať."},
   ],
-  "mistake": "Не заменяйте vedieť глаголом môcť, когда речь именно об освоенном навыке.",
-  "task": "Скажите о двух умениях и одном неосвоенном навыке; задайте вопрос собеседнику."
-}, {
-    rules: ["Vedieť + infinitív сообщает об освоенном умении или знании, как выполнить действие.", "Частотные формы: viem, vieš, vie, vieme, viete, vedia.", "Сравните viem plávať «умею плавать» и poznám mesto «знаю город».", "Отрицание neviem пишется слитно и часто означает «не знаю»."],
-    contrasts: ["Viem plávať — я умею плавать.", "Vieš variť? — ты умеешь готовить?", "Neviem odpovedať — я не умею/не знаю, как ответить."], prompt: "Переведите: «Мы умеем готовить».", answer: "Vieme variť.", hint: "Форма для my — vieme.",
-  });
+  slug: "vediet-infinitive",
+  order: 8,
+  title: "vedieť + infinitív",
+  slovakTitle: "Vedieť s infinitívom",
+  description: "Говорить об освоенных навыках, прогрессе и том, чего пока не умеете.",
+  duration: "35–40 мин",
+  goals: ["Выбирать форму vedieť по лицу", "Говорить об освоенных и ещё не освоенных навыках", "Строить вопросы и краткие ответы со сменой лица", "Правильно ставить sa/si", "Отличать навык с vedieť от возможности с môcť"],
+  theory: {
+    summary: "Vedieť + infinitív сообщает, что человек знает, как выполнить действие благодаря учёбе, опыту или тренировке. Это освоенный навык, а не просто возможность сейчас.",
+    rules: [
+      "Формы нужно запомнить: viem, vieš, vie, vieme, viete, vedia.",
+      "Изменяется только vedieť; второй глагол остаётся инфинитивом: Viem variť.",
+      "Для прогресса используйте už, ešte ne-, dobre и trochu: Už viem čítať. Ešte neviem šoférovať.",
+      "Ne- присоединяется к личной форме: neviem, nevieš, nevie, nevieme, neviete, nevedia.",
+      "Без инфинитива vedieť означает знание факта или ответа: Viem odpoveď. / Neviem.",
+      "В ответе меняется лицо: Vieš variť? — Áno, viem. / Nie, neviem.",
+      "Sa/si стоит рядом с личной формой: Viem sa predstaviť. Vieš si objednať jedlo?",
+      "Vedieť обозначает навык; môcť — возможность или разрешение в конкретной ситуации.",
+    ],
+    examples: [
+      { slovak: "Viem plávať.", russian: "Я умею плавать.", explanation: "Навык освоен благодаря обучению или практике." },
+      { slovak: "Ešte neviem šoférovať.", russian: "Я ещё не умею водить.", explanation: "Ešte ne- показывает, что навык пока не освоен." },
+      { slovak: "Vieme hovoriť po anglicky.", russian: "Мы умеем говорить по-английски.", explanation: "Vieme согласуется с my, hovoriť остаётся инфинитивом." },
+      { slovak: "Viem odpoveď.", russian: "Я знаю ответ.", explanation: "Без инфинитива vedieť выражает знание факта или информации." },
+      { slovak: "Ako dobre viete hovoriť po slovensky?", russian: "Насколько хорошо вы говорите по-словацки?", explanation: "Ako dobre уточняет степень владения навыком." },
+      { slovak: "Dnes nemôžem plávať.", russian: "Сегодня я не могу плавать.", explanation: "Навык может быть освоен, но обстоятельства сейчас не позволяют." },
+    ],
+  },
+  sections: [
+    {
+      title: "Формы vedieť и инфинитив",
+      paragraphs: ["Основа инфинитива меняется, поэтому учите весь ряд и две крайние опоры: viem — vedia."],
+      table: { headers: ["ja", "ty", "on / ona", "my", "vy", "oni / ony"], rows: [["viem", "vieš", "vie", "vieme", "viete", "vedia"]] },
+      items: ["Viem variť. — Я умею готовить.", "Viete plávať. — Вы умеете плавать.", "Vedia šoférovať. — Они умеют водить."],
+      note: "Ошибка: Viem varím. Правильно: Viem variť. Личное окончание получает только vedieť.",
+    },
+    {
+      title: "Навык, прогресс и значение «знать»",
+      paragraphs: ["Vedieť + infinitív подходит для освоенного способа действия. Маркеры прогресса помогают рассказать, что уже получается и чему вы ещё учитесь."],
+      table: { headers: ["Опора", "Пример", "Перевод"], rows: [["už — уже", "Už viem čítať po slovensky.", "Я уже умею читать по-словацки."], ["ešte ne- — ещё не", "Ešte neviem šoférovať.", "Я ещё не умею водить."], ["dobre — хорошо", "Vie dobre plávať.", "Он хорошо плавает."], ["trochu — немного", "Viem trochu variť.", "Я немного умею готовить."]] },
+      items: ["Viem variť. — Я умею готовить.", "Viem odpoveď. — Я знаю ответ.", "Neviem plávať. — Я не умею плавать.", "Neviem. — Я не знаю."],
+      note: "В этой теме главное значение — «уметь». Значение «знать факт, ответ, информацию» запоминайте как второй частотный смысл.",
+    },
+    {
+      title: "Отрицание, вопросы и короткие ответы",
+      paragraphs: ["Ne- пишется слитно с личной формой, а инфинитив не меняется. Вопросительное слово ставится первым; ответ отражает лицо говорящего."],
+      table: { headers: ["Задача", "Пример", "Ответ"], rows: [["да / нет", "Vieš variť?", "Áno, viem. / Nie, neviem."], ["что", "Čo vieš uvariť?", "Viem pripraviť polievku."], ["кто", "Kto vie opraviť bicykel?", "Peter vie."], ["насколько хорошо", "Ako dobre vieš hovoriť po slovensky?", "Viem trochu hovoriť."]] },
+      items: ["Viem plávať. → Neviem plávať.", "Vie variť. → Nevie variť.", "Vieme šoférovať. → Nevieme šoférovať.", "Vedia tancovať. → Nevedia tancovať."],
+      note: "Вежливое vy одному человеку получает ответ viem; группа отвечает vieme.",
+    },
+    {
+      title: "Sa/si и различие vedieť/môcť",
+      paragraphs: ["Sa/si стоит рядом с личной формой. Для выбора модального глагола спросите: человек освоил действие или только может выполнить его сейчас?"],
+      table: { headers: ["Vedieť: навык", "Môcť: возможность / разрешение"], rows: [["Viem plávať. — Я умею плавать.", "Dnes môžem plávať. — Сегодня я могу поплавать."], ["Nevie šoférovať. — Он не умеет водить.", "Dnes nemôže šoférovať. — Сегодня он не может вести машину."], ["Vie opraviť bicykel. — Он умеет чинить велосипед.", "Dnes môže opraviť bicykel. — Сегодня он может починить велосипед."]] },
+      items: ["Viem sa predstaviť. — Я умею представиться.", "Vieš si objednať jedlo? — Ты умеешь заказать себе еду?", "Neviem opraviť bicykel. — Я не умею чинить велосипед.", "Dnes nemôžem opraviť bicykel. — Сегодня я не могу починить велосипед из-за обстоятельств."],
+      note: "Главная пара: vedieť = знать как / уметь; môcť = иметь возможность или разрешение.",
+    },
+    {
+      title: "Готовые фразы, ошибки и самопроверка",
+      paragraphs: ["Назовите лицо формы vedieť, найдите инфинитив и определите: это освоенный навык, прогресс или знание факта."],
+      table: { headers: ["Ситуация", "Словацкий пример", "Перевод"], rows: [["готовка", "Vieš variť?", "Ты умеешь готовить?"], ["вождение", "Peter vie šoférovať.", "Петер умеет водить."], ["язык", "Vieme hovoriť po anglicky.", "Мы умеем говорить по-английски."], ["компьютер", "Viete používať počítač.", "Вы умеете пользоваться компьютером."], ["спорт", "Vedia hrať futbal.", "Они умеют играть в футбол."], ["письмо", "Viem napísať e-mail.", "Я умею написать электронное письмо."], ["прогресс", "Ešte nevie čítať.", "Он ещё не умеет читать."], ["уровень", "Ako dobre viete hovoriť po slovensky?", "Насколько хорошо вы говорите по-словацки?"]] },
+      items: ["Viem varím. → Viem variť.", "Ja vieš plávať. → Ja viem plávať.", "Ne viem šoférovať. → Neviem šoférovať.", "Viem predstaviť sa. → Viem sa predstaviť.", "Môžem plávať. (умею) → Viem plávať."],
+      note: "Самопроверка: форма совпадает с лицом; второй глагол — инфинитив; ne- написано слитно; навык выражен через vedieť, возможность — через môcť.",
+    },
+  ],
+  stepPractices: [
+    { id: "m5-vediet-infinitive-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите форму для oni / ony.", options: ["vie", "viete", "vedia"], answer: "vedia", hint: "Вспомните вторую опорную форму после viem.", explanation: "Oni / ony vedia." },
+    { id: "m5-vediet-infinitive-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Мы уже умеем читать по-словацки».", answer: "Už vieme čítať po slovensky.", hint: "Используйте už, форму для my и инфинитив.", explanation: "Už vieme čítať po slovensky." },
+    { id: "m5-vediet-infinitive-step-3", sectionIndex: 2, type: "text", prompt: "Ответьте отрицательно: Viete plávať? · отвечают двое", answer: "Nie, nevieme.", hint: "Группа отвечает формой my; ne- пишется слитно.", explanation: "Nie, nevieme." },
+    { id: "m5-vediet-infinitive-step-4", sectionIndex: 3, type: "choice", prompt: "Как сказать об освоенном навыке?", options: ["Viem plávať.", "Dnes môžem plávať.", "Dnes nemôžem plávať."], answer: "Viem plávať.", hint: "Выберите глагол со значением «знать как».", explanation: "Освоенный навык выражает vedieť." },
+    { id: "m5-vediet-infinitive-step-5", sectionIndex: 4, type: "text", prompt: "Исправьте: Viem predstaviť sa.", answer: "Viem sa predstaviť.", hint: "Поставьте sa рядом с личной формой.", explanation: "Правильно: Viem sa predstaviť." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 8",
+  reinforcementPractices: [
+    { id: "reinforcement:vediet-infinitive:1", sectionIndex: 0, type: "pairs", prompt: "Выберите форму vedieť.", answer: "viem; vieš; vie; vieme; viete; vedia", pairs: [
+      { prompt: "Ja ___ plávať.", answer: "viem", options: ["viem", "vieš", "vie", "vieme", "viete", "vedia"] }, { prompt: "Ty ___ variť.", answer: "vieš", options: ["viem", "vieš", "vie", "vieme", "viete", "vedia"] },
+      { prompt: "Eva ___ písať.", answer: "vie", options: ["viem", "vieš", "vie", "vieme", "viete", "vedia"] }, { prompt: "My ___ šoférovať.", answer: "vieme", options: ["viem", "vieš", "vie", "vieme", "viete", "vedia"] },
+      { prompt: "Vy ___ tancovať.", answer: "viete", options: ["viem", "vieš", "vie", "vieme", "viete", "vedia"] }, { prompt: "Oni ___ čítať.", answer: "vedia", options: ["viem", "vieš", "vie", "vieme", "viete", "vedia"] },
+    ], hint: "Определите лицо подлежащего.", explanation: "Полный ряд: viem, vieš, vie, vieme, viete, vedia." },
+    { id: "reinforcement:vediet-infinitive:2", sectionIndex: 0, type: "pairs", prompt: "Поставьте второй глагол в инфинитив.", answer: "čítať; variť; písať; hrať; používať", pairs: [
+      { prompt: "Viem ___ po slovensky. (čítam)", answer: "čítať", inputHint: "Введите инфинитив" }, { prompt: "Vieš ___ večeru. (varíš)", answer: "variť", inputHint: "Введите инфинитив" },
+      { prompt: "Vieme ___ e-mail. (píšeme)", answer: "písať", inputHint: "Введите инфинитив" }, { prompt: "Vedia ___ futbal. (hrajú)", answer: "hrať", inputHint: "Введите инфинитив" },
+      { prompt: "Viete ___ počítač. (používate)", answer: "používať", inputHint: "Введите инфинитив" },
+    ], hint: "Личное окончание уже находится в форме vedieť.", explanation: "После vedieť смысловой глагол остаётся в инфинитиве." },
+    { id: "reinforcement:vediet-infinitive:3", sectionIndex: 3, type: "pairs", prompt: "Выберите vedieť или môcť.", answer: "viem; môžem; môžem; vie; nemôžem", pairs: [
+      { prompt: "___ plávať, učil som sa to. · навык", answer: "viem", options: ["viem", "môžem", "vie", "nemôžem"] },
+      { prompt: "Dnes ___ plávať, bazén je otvorený. · возможность", answer: "môžem", options: ["viem", "môžem", "vie", "nemôžem"] },
+      { prompt: "___ otvoriť okno? · разрешение", answer: "môžem", options: ["viem", "môžem", "vie", "nemôžem"] },
+      { prompt: "Peter ___ dobre variť. · навык", answer: "vie", options: ["viem", "môžem", "vie", "nemôžem"] },
+      { prompt: "Dnes ___ prísť, nemám čas. · обстоятельства", answer: "nemôžem", options: ["viem", "môžem", "vie", "nemôžem"] },
+    ], hint: "Навык — vedieť; возможность или разрешение — môcť.", explanation: "Ситуация определяет точный модальный смысл." },
+    { id: "reinforcement:vediet-infinitive:4", sectionIndex: 2, type: "pairs", prompt: "Исправьте порядок слов.", answer: "Viem sa predstaviť.; Vieš si objednať jedlo?; Ešte nevieme dobre písať.; Ako dobre viete hovoriť po slovensky?", pairs: [
+      { prompt: "viem / sa / predstaviť", answer: "Viem sa predstaviť.", inputHint: "Введите предложение" }, { prompt: "si / vieš / objednať / jedlo", answer: "Vieš si objednať jedlo?", inputHint: "Введите предложение" },
+      { prompt: "ešte / nevieme / dobre / písať", answer: "Ešte nevieme dobre písať.", acceptableAnswers: ["Ešte dobre nevieme písať."], inputHint: "Введите предложение" },
+      { prompt: "viete / ako dobre / po slovensky / hovoriť", answer: "Ako dobre viete hovoriť po slovensky?", inputHint: "Введите предложение" },
+    ], hint: "Sa/si стоит рядом с личной формой, вопросительное сочетание — в начале.", explanation: "Четыре строки закрепляют порядок слов и слитное отрицание." },
+    { id: "reinforcement:vediet-infinitive:5", sectionIndex: 2, type: "pairs", prompt: "Ответьте или переведите.", answer: "Áno, viem.; Nie, nevieme.; Nevie šoférovať.; Už vieme čítať po slovensky.; Čo vieš uvariť?", pairs: [
+      { prompt: "Vieš variť? · да", answer: "Áno, viem.", inputHint: "Введите краткий ответ" }, { prompt: "Viete plávať? · нет, отвечают двое", answer: "Nie, nevieme.", inputHint: "Введите краткий ответ" },
+      { prompt: "Он не умеет водить.", answer: "Nevie šoférovať.", acceptableAnswers: ["On nevie šoférovať."], inputHint: "Введите перевод" },
+      { prompt: "Мы уже умеем читать по-словацки.", answer: "Už vieme čítať po slovensky.", inputHint: "Введите перевод" }, { prompt: "Что ты умеешь приготовить?", answer: "Čo vieš uvariť?", inputHint: "Введите перевод" },
+    ], hint: "Проверьте перспективу ответа, слитное ne-, инфинитив и диакритику.", explanation: "Ответы объединяют навык, прогресс, отрицание и вопрос." },
+    { id: "reinforcement:vediet-infinitive:6", sectionIndex: 4, type: "pairs", prompt: "Соберите диалог о навыках.", answer: "Čo už vieš robiť po slovensky?; Viem sa predstaviť a viem trochu čítať.; Vieš aj písať?; Ešte neviem dobre písať, ale viem napísať krátky e-mail.; Môžeš dnes trénovať?; Áno, môžem.", pairs: [
+      { prompt: "1 · вопрос о навыках", answer: "Čo už vieš robiť po slovensky?", options: ["Čo už vieš robiť po slovensky?", "Čo už môžeš robiť po slovensky?", "Čo už vieš robíš po slovensky?"] },
+      { prompt: "2 · представление и чтение", answer: "Viem sa predstaviť a viem trochu čítať.", options: ["Viem sa predstaviť a viem trochu čítať.", "Viem predstaviť sa a viem trochu čítam.", "Môžem sa predstaviť a môže trochu čítať."] },
+      { prompt: "3 · вопрос о письме", answer: "Vieš aj písať?", options: ["Vieš aj písať?", "Vieš aj píšeš?", "Viem aj písať?"] },
+      { prompt: "4 · прогресс и освоенная часть", answer: "Ešte neviem dobre písať, ale viem napísať krátky e-mail.", options: ["Ešte neviem dobre písať, ale viem napísať krátky e-mail.", "Ešte ne viem dobre písať, ale viem napíšem krátky e-mail.", "Ešte nemôžem dobre písať, ale môže napísať krátky e-mail."] },
+      { prompt: "5 · вопрос о возможности", answer: "Môžeš dnes trénovať?", options: ["Môžeš dnes trénovať?", "Vieš dnes trénovať?", "Môžeš dnes trénuješ?"] },
+      { prompt: "6 · краткий ответ", answer: "Áno, môžem.", options: ["Áno, môžem.", "Áno, viem.", "Áno, môžeš."] },
+    ], hint: "Различайте навык vedieť и сегодняшнюю возможность môcť.", explanation: "Шесть реплик объединяют навык, прогресс, отрицание и возможность." },
+  ],
+  knowledgeChecks: [
+    { id: "m5-vediet-infinitive-check-1", question: "Какая модель нормативна?", options: ["Viem variť.", "Viem varím.", "Vie variť ja."], answer: "Viem variť.", explanation: "После личной формы viem нужен инфинитив." },
+    { id: "m5-vediet-infinitive-check-2", question: "Как правильно сказать «Мы ещё не умеем водить»?", options: ["Ešte nevieme šoférovať.", "Ešte ne vieme šoférujeme.", "Ešte nemôžeme šoférovať."], answer: "Ešte nevieme šoférovať.", explanation: "Nevieme пишется слитно и обозначает неосвоенный навык." },
+    { id: "m5-vediet-infinitive-check-3", question: "Как сказать об освоенном навыке?", options: ["Vie opraviť bicykel.", "Dnes môže opraviť bicykel.", "Dnes nemôže opraviť bicykel."], answer: "Vie opraviť bicykel.", explanation: "Vedieť означает «знать как / уметь»." },
+  ],
+  finalChecks: [{ id: "m5-vediet-infinitive-final-1", question: "Как спросить «Что ты умеешь приготовить?»", options: ["Čo vieš uvariť?", "Čo vieš uvaríš?", "Čo môžeš uvariť?"], answer: "Čo vieš uvariť?", explanation: "Čo стоит первым, vieš согласуется с ty, uvariť остаётся инфинитивом." }],
+  chatPrompt: "Расскажите о двух освоенных навыках, одном ещё не освоенном навыке и степени умения. Затем задайте вопрос собеседнику и добавьте одну фразу с môcť для контраста.",
+  chatSuggestions: ["Viem plávať.", "Ešte neviem šoférovať.", "Čo vieš uvariť?"],
+} satisfies CourseLesson;

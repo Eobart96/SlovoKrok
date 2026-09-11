@@ -1,11 +1,18 @@
-import { check, choice, defineModule3Lesson, order, text } from "../lessonFactory";
+import { check, choice, defineModule3Lesson, text } from "../lessonFactory";
 
 export const choiceContrastLesson = defineModule3Lesson({
-    slug: "choice-contrast",
+    vocabulary: [
+    {"word":"Je auto nové alebo staré?","translation":"Машина новая или старая?","example":"Je auto nové alebo staré?"},
+    {"word":"Dom je veľký a biely.","translation":"Дом большой и белый.","example":"Dom je veľký a biely."},
+    {"word":"Byt je malý, ale pekný.","translation":"Квартира маленькая, но красивая.","example":"Byt je malý, ale pekný."},
+    {"word":"Nie červené, ale modré.","translation":"Не красное, а синее.","example":"Nie červené, ale modré."},
+    {"word":"Knihy nie sú staré, ale nové.","translation":"Книги не старые, а новые.","example":"Knihy nie sú staré, ale nové."},
+  ],
+  slug: "choice-contrast",
     title: "Простой выбор и контраст",
     slovakTitle: "Výber a kontrast",
     description: "Предлагайте выбор, соединяйте совместимые признаки, выражайте контраст и исправляйте неверное предположение.",
-    duration: "25–30 мин",
+    duration: "30–35 мин",
     goals: ["Предлагать выбор через alebo", "Соединять совместимые признаки через a", "Выражать контраст через ale", "Уточнять через nie A, ale B"],
     theory: {
       summary: "Четыре короткие модели помогают управлять смыслом: A alebo B? предлагает выбор; A a B соединяет совместимое; A, ale B противопоставляет; nie A, ale B исправляет неверное предположение.",
@@ -25,18 +32,115 @@ export const choiceContrastLesson = defineModule3Lesson({
       ],
     },
     sections: [
-      { title: "Выбор с alebo", table: { headers: ["Род или число", "Вопрос", "Короткий ответ"], rows: [["мужской", "Je dom veľký alebo malý?", "Veľký."], ["женский", "Je kniha nová alebo stará?", "Nová."], ["средний", "Je auto modré alebo biele?", "Modré."], ["множественное", "Sú knihy nové alebo staré?", "Nové."]] }, note: "Оба прилагательных согласуются с одним существительным; перед alebo запятая не нужна." },
-      { title: "Соединение с a", table: { headers: ["Что соединяем", "Пример"], rows: [["два признака", "Dom je veľký a biely."], ["два предмета", "Kniha a zošit sú nové."], ["два человека", "Peter a Anna sú doma."], ["три признака", "Auto je nové, malé a lacné."]] }, note: "Перед одиночным a в простом перечислении запятая не ставится." },
-      { title: "Контраст с ale", table: { headers: ["Модель", "Пример"], rows: [["A, ale B", "Dom je starý, ale pekný."], ["A, ale nie B", "Izba je veľká, ale nie čistá."], ["je A, ale je B", "Auto je malé, ale je drahé."], ["sú A, ale B", "Knihy sú staré, ale zaujímavé."]] }, items: ["malý, ale priestranný", "pekný, ale drahý", "lacný, ale kvalitný", "ťažký, ale dôležitý"], note: "Перед ale в письменной речи обычно ставится запятая." },
-      { title: "Уточнение nie A, ale B", table: { headers: ["Что исправляем", "Модель", "Пример"], rows: [["вариант", "Nie A, ale B", "Nie červené, ale modré."], ["признак, ед. ч.", "nie je A, ale B", "Dom nie je nový, ale starý."], ["признак, мн. ч.", "nie sú A, ale B", "Autá nie sú lacné, ale drahé."], ["предмет", "Nie A, ale B", "Nie káva, ale čaj."]] }, note: "Nie je относится к единственному числу, nie sú — к множественному." },
-      { title: "Выбираем смысл и проверяем форму", table: { headers: ["Задача", "Связка", "Пример"], rows: [["выбор", "alebo", "nový alebo starý"], ["соединение", "a", "nový a moderný"], ["контраст", "ale", "starý, ale dobrý"], ["исправление", "nie..., ale...", "nie nový, ale starý"]] }, paragraphs: ["После выбора связки проверьте согласование каждого прилагательного и форму je/sú."], note: "Типичные исправления: nový alebo starý kniha → nová alebo stará kniha; auto nie nové → auto nie je nové." },
+      {
+        title: "Выбор с alebo",
+        paragraphs: ["Alebo — «или». Оно ставится между вариантами: A alebo B? В коротком вопросе выбора перед одиночным alebo запятая не нужна. Два прилагательных относятся к одному существительному и оба согласуются с ним."],
+        table: { headers: ["Род или число", "Вопрос", "Короткий ответ"], rows: [
+          ["мужской", "Je dom veľký alebo malý?", "Veľký. — Большой."],
+          ["женский", "Je kniha nová alebo stará?", "Nová. — Новая."],
+          ["средний", "Je auto modré alebo biele?", "Modré. — Синее."],
+          ["множественное", "Sú knihy nové alebo staré?", "Nové. — Новые."],
+          ["мужской одушевлённый, мн. ч.", "Sú študenti mladí alebo starí?", "Mladí. — Молодые."],
+        ] },
+        items: ["Je dom nový alebo starý? — Дом новый или старый?", "Je auto nové alebo staré? — Автомобиль новый или старый?", "Ktoré auto: modré alebo biele? — Какой автомобиль: синий или белый?", "Čaj alebo káva? — Чай или кофе?", "Бытовой вопрос как готовый блок: Chceš čaj alebo kávu? — Ты хочешь чай или кофе?"],
+        note: "Короткий ответ может быть одним словом: Veľký. Malá. Modré. Его окончание зависит от названного предмета. Форму kávu после Chceš здесь запоминаем только в готовом вопросе; самостоятельные задания остаются в именительном падеже.",
+      },
+      {
+        title: "Соединение с a",
+        paragraphs: ["A — «и». Оно соединяет признаки, предметы и людей, о которых мы сообщаем вместе. Союз не отменяет согласование: izba je malá a čistá; auto je malé a čisté."],
+        table: { headers: ["Что соединяем", "Пример", "Перевод"], rows: [
+          ["два признака", "Dom je veľký a biely.", "Дом большой и белый."],
+          ["два предмета", "Kniha a zošit sú nové.", "Книга и тетрадь новые."],
+          ["два человека", "Peter a Anna sú doma.", "Петер и Анна дома."],
+          ["две характеристики", "Izba je malá a čistá.", "Комната маленькая и чистая."],
+          ["три признака", "Auto je nové, malé a lacné.", "Автомобиль новый, маленький и дешёвый."],
+        ] },
+        items: ["nový a pekný dom — nová a pekná kniha — nové a pekné auto", "veľký a lacný stôl — veľká a lacná izba — veľké a lacné stoly", "mladý a dobrý učiteľ — mladá a dobrá učiteľka — mladí a dobrí učitelia", "Готовая фраза с обладанием: Mám knihu a zošit. — У меня есть книга и тетрадь."],
+        note: "Перед одиночным a в простом перечислении запятая не ставится. При трёх признаках запятая разделяет первые элементы: nové, malé a lacné. Форму knihu в готовой фразе с Mám не используем как новое задание на падежи.",
+      },
+      {
+        title: "Контраст с ale",
+        paragraphs: ["Ale — «но». Говорящий противопоставляет два признака или отмечает неожиданное сочетание. Например, маленькая квартира всё же может быть красивой: Byt je malý, ale pekný."],
+        table: { headers: ["Модель", "Пример", "Перевод"], rows: [
+          ["A, ale B", "Dom je starý, ale pekný.", "Дом старый, но красивый."],
+          ["A, ale nie B", "Izba je veľká, ale nie čistá.", "Комната большая, но не чистая."],
+          ["je A, ale je B", "Auto je malé, ale je drahé.", "Автомобиль маленький, но дорогой."],
+          ["sú A, ale B", "Knihy sú staré, ale zaujímavé.", "Книги старые, но интересные."],
+        ] },
+        items: ["malý, ale priestranný — маленький, но просторный", "starý, ale dobrý — старый, но хороший", "pekný, ale drahý — красивый, но дорогой", "lacný, ale kvalitný — дешёвый, но качественный", "jednoduchý, ale zaujímavý — простой, но интересный", "ťažký, ale dôležitý — трудный, но важный", "mladý, ale skúsený — молодой, но опытный", "studený, ale chutný — холодный, но вкусный"],
+        note: "Перед ale в этих конструкциях ставится запятая. При переходе ко множественному числу меняются и связка, и признаки: Dom je starý, ale pekný. → Domy sú staré, ale pekné.",
+      },
+      {
+        title: "Уточнение nie A, ale B",
+        paragraphs: ["Nie A, ale B — «не A, а B». Сначала отрицается неверный вариант, затем называется правильный. В коротком ответе можно отрицать только признак; в полном предложении сохраняйте связку nie je или nie sú."],
+        table: { headers: ["Что исправляем", "Модель", "Пример"], rows: [
+          ["вариант в коротком ответе", "Nie A, ale B", "Nie červené, ale modré. — Не красное, а синее."],
+          ["признак, ед. ч.", "nie je A, ale B", "Dom nie je nový, ale starý. — Дом не новый, а старый."],
+          ["признак, мн. ч.", "nie sú A, ale B", "Autá nie sú lacné, ale drahé. — Автомобили не дешёвые, а дорогие."],
+          ["называемый предмет", "Nie A, ale B", "Nie káva, ale čaj. — Не кофе, а чай."],
+        ] },
+        items: ["Veľký alebo malý? — Большой или маленький?", "Červená alebo modrá? — Красная или синяя?", "Nové alebo staré auto? — Новый или старый автомобиль?", "Dom je veľký a biely. — Дом большой и белый.", "Kniha je nová a zaujímavá. — Книга новая и интересная.", "Dom je starý, ale pekný. — Дом старый, но красивый.", "Auto je malé, ale drahé. — Автомобиль маленький, но дорогой.", "Izba je stará, ale čistá. — Комната старая, но чистая.", "Nie zelené, ale modré. — Не зелёное, а синее.", "Nie sú lacné, ale kvalitné. — Не дешёвые, а качественные."],
+        note: "Auto nie je nové. — Автомобиль не новый. Knihy nie sú nové. — Книги не новые. Nie je — единственное число; nie sú — множественное. В готовом ответе на Chceš čaj alebo kávu? используется Nie kávu, ale čaj; при простом назывании — Nie káva, ale čaj.",
+      },
+      {
+        title: "Выбираем смысл и проверяем форму",
+        paragraphs: ["Мини-диалог о сумке использует знакомые формы именительного падежа. Je taška čierna alebo hnedá? — Сумка чёрная или коричневая? Hnedá. Je malá, ale pekná. — Коричневая. Она маленькая, но красивая. Je lacná? — Она дешёвая? Nie, nie je lacná, ale drahá. — Нет, она не дешёвая, а дорогая."],
+        table: { headers: ["Задача", "Связка", "Пример"], rows: [
+          ["выбор", "alebo", "nový alebo starý"],
+          ["соединение", "a", "nový a moderný"],
+          ["контраст", "ale", "starý, ale dobrý"],
+          ["исправление", "nie..., ale...", "nie nový, ale starý"],
+        ] },
+        items: ["nový alebo starý kniha → nová alebo stará kniha: оба признака женского рода", "malý ale pekný → malý, ale pekný: запятая перед ale", "Auto nie nové. → Auto nie je nové.: нужна связка je", "Knihy nie je nové. → Knihy nie sú nové.: множественное число требует sú"],
+        note: "Сначала выберите смысл: выбор, добавление, контраст или исправление. Затем проверьте каждое окончание, je/sú и пунктуацию. В текстовых ответах теста проверяются формы и слова; место запятой проверяется отдельным выбором.",
+      },
     ],
     practices: [
       choice(0, "Выберите согласованный вопрос о книге.", ["Je kniha nová alebo stará?", "Je kniha nový alebo starý?", "Je kniha nové alebo staré?"], "Je kniha nová alebo stará?", "Оба варианта относятся к слову kniha.", "Оба прилагательных получают женское окончание -á."),
-      text(1, "Соедините признаки без контраста: Dom je veľký. Dom je biely.", "Dom je veľký a biely.", "Используйте союз a.", "Совместимые признаки соединяются без запятой перед a."),
+      text(1, "Соедините признаки без контраста: Dom je veľký. Dom je biely.", "Dom je veľký a biely.", "Используйте союз a.", "Совместимые признаки соединяются без запятой перед a.", ["Dom je biely a veľký."]),
       choice(2, "Расставьте смысл и пунктуацию: Byt je malý ___ pekný.", ["Byt je malý, ale pekný.", "Byt je malý alebo pekný.", "Byt je malý a, pekný."], "Byt je malý, ale pekný.", "Здесь контраст.", "Ale вводит контраст и требует запятой."),
       text(3, "Исправьте неверный цвет: «Не красное, а синее».", "Nie červené, ale modré.", "Используйте nie A, ale B.", "Оба цвета стоят в форме среднего рода."),
       text(4, "Исправьте: Knihy nie je drahé.", "Knihy nie sú drahé.", "Knihy — множественное число.", "Во множественном числе используется nie sú."),
+    ],
+    assessmentMode: "interactive",
+    materialAssessmentStep: false,
+    reinforcementLabel: "Финальный тест темы",
+    reinforcementTitle: "Выполните шесть заданий темы 5",
+    reinforcementPractices: [
+      { id: "reinforcement:choice-contrast:1", sectionIndex: 0, type: "pairs", prompt: "Вставьте a, ale или alebo по указанному смыслу.", answer: "alebo; a; ale; alebo", pairs: [
+        { prompt: "Veľký ___ malý? — выбор одного из двух", answer: "alebo", options: ["a", "ale", "alebo"] },
+        { prompt: "Dom je veľký ___ biely. — два признака вместе", answer: "a", options: ["a", "ale", "alebo"] },
+        { prompt: "Auto je staré, ___ dobré. — контраст", answer: "ale", options: ["a", "ale", "alebo"] },
+        { prompt: "Čaj ___ káva? — выбор напитка", answer: "alebo", options: ["a", "ale", "alebo"] },
+      ], hint: "Соотнесите смысл строки с одной из трёх моделей.", explanation: "Alebo предлагает выбор, a соединяет признаки, ale показывает контраст." },
+      { id: "reinforcement:choice-contrast:2", sectionIndex: 0, type: "pairs", prompt: "Согласуйте оба прилагательных и соедините их через alebo. Введите всё сочетание в исходном порядке.", answer: "nová alebo stará kniha; červené alebo modré auto; mladí alebo starí muži", pairs: [
+        { prompt: "(nový / starý) kniha", answer: "nová alebo stará kniha", inputHint: "Введите сочетание с alebo" },
+        { prompt: "(červený / modrý) auto", answer: "červené alebo modré auto", inputHint: "Введите сочетание с alebo" },
+        { prompt: "(mladý / starý) muži", answer: "mladí alebo starí muži", inputHint: "Введите сочетание с alebo" },
+      ], hint: "Существительное определяет форму обоих вариантов.", explanation: "Kniha → nová/stará; auto → červené/modré; muži → mladí/starí. Союз alebo не меняет согласование." },
+      { id: "reinforcement:choice-contrast:3", sectionIndex: 4, type: "pairs", prompt: "Исправьте три предложения, затем выберите место запятой в модели контраста.", answer: "Izba je malá, ale čistá.; Auto nie je nové, ale staré.; Knihy nie sú drahé.; перед ale", pairs: [
+        { prompt: "Izba je malý ale čistý.", answer: "Izba je malá, ale čistá.", acceptableAnswers: ["Izba je malá, ale je čistá."], inputHint: "Введите исправленное предложение" },
+        { prompt: "Auto nie nové ale staré.", answer: "Auto nie je nové, ale staré.", acceptableAnswers: ["Auto nie je nové, ale je staré."], inputHint: "Введите исправленное предложение" },
+        { prompt: "Knihy nie je drahé.", answer: "Knihy nie sú drahé.", inputHint: "Введите исправленное предложение" },
+        { prompt: "Где нужна запятая в модели A ale B?", answer: "перед ale", options: ["после ale", "перед ale", "запятая не нужна"] },
+      ], hint: "Проверьте род, число, отрицательную связку и правило пунктуации.", explanation: "Izba — malá/čistá; Auto nie je nové, ale staré; Knihy nie sú drahé. В модели контраста запятая ставится перед ale." },
+      { id: "reinforcement:choice-contrast:4", sectionIndex: 3, type: "pairs", prompt: "Выберите je или sú.", answer: "je; sú; je", pairs: [
+        { prompt: "Dom ___ starý, ale pekný.", answer: "je", options: ["je", "sú"] },
+        { prompt: "Knihy ___ nové a zaujímavé.", answer: "sú", options: ["je", "sú"] },
+        { prompt: "Auto nie ___ lacné.", answer: "je", options: ["je", "sú"] },
+      ], hint: "Союз не меняет число существительного; отрицательная связка тоже зависит от числа.", explanation: "Dom je; Knihy sú; Auto nie je. Один предмет требует je, несколько — sú." },
+      { id: "reinforcement:choice-contrast:5", sectionIndex: 4, type: "pairs", prompt: "Переведите на словацкий.", answer: "Veľký alebo malý?; Dom je starý, ale pekný.; Nie červená, ale modrá.; Auto je nové a lacné.", pairs: [
+        { prompt: "Большой или маленький? — о доме", answer: "Veľký alebo malý?", inputHint: "Введите вопрос по-словацки" },
+        { prompt: "Дом старый, но красивый.", answer: "Dom je starý, ale pekný.", acceptableAnswers: ["Dom je starý, ale je pekný."], inputHint: "Введите предложение по-словацки" },
+        { prompt: "Не красная, а синяя. — о сумке", answer: "Nie červená, ale modrá.", inputHint: "Введите короткое исправление" },
+        { prompt: "Автомобиль новый и дешёвый.", answer: "Auto je nové a lacné.", acceptableAnswers: ["Auto je lacné a nové."], inputHint: "Введите предложение по-словацки" },
+      ], hint: "Сохраните смысл союза и согласуйте признаки с домом, сумкой или автомобилем.", explanation: "О доме — veľký/malý; о сумке — červená/modrá; об автомобиле — nové/lacné. Alebo выражает выбор, ale — контраст или исправление, a — добавление." },
+      { id: "reinforcement:choice-contrast:6", sectionIndex: 4, type: "pairs", prompt: "Соберите мини-диалог о комнате: выберите реплику для каждой ситуации.", answer: "Je izba veľká alebo malá?; Malá.; Je malá, ale pekná.; Nie biela, ale modrá.", pairs: [
+        { prompt: "1. Спросите, большая комната или маленькая.", answer: "Je izba veľká alebo malá?", options: ["Je izba veľká a malá?", "Je izba veľká alebo malá?", "Je izba veľký alebo malý?"] },
+        { prompt: "2. Ответьте одним словом: маленькая.", answer: "Malá.", options: ["Malá.", "Malý.", "Malé."] },
+        { prompt: "3. Уточните: она маленькая, но красивая.", answer: "Je malá, ale pekná.", options: ["Je malá alebo pekná.", "Je malý, ale pekný.", "Je malá, ale pekná."] },
+        { prompt: "4. Исправьте предположение о цвете: не белая, а синяя.", answer: "Nie biela, ale modrá.", options: ["Nie biela, ale modrá.", "Biela alebo modrá.", "Nie biele, ale modré."] },
+      ], hint: "Вопрос, короткий ответ, контраст и исправление относятся к слову izba.", explanation: "Четыре закрытые реплики сохраняют маршрут свободного диалога и не требуют новых падежных форм или проверки по единственному образцу." },
     ],
     checks: [
       check("Какой союз выражает выбор?", ["alebo", "ale", "potom"], "alebo", "Alebo соответствует русскому «или»."),

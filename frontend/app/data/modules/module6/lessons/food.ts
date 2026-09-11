@@ -1,29 +1,216 @@
-import { defineModule6Lesson } from "../lessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const foodLesson = defineModule6Lesson("food", 3, {
-  "title": "Еда",
-  "slovakTitle": "Jedlo",
-  "outcome": "Называть продукты и сообщать предпочтения.",
-  "summary": "После урока вы сможете называть продукты и сообщать предпочтения в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Предпочтения выражаются mám rád/rada, chutí mi, nechutí mi. Говорящий выбирает rád или rada по своему полу; объект после jesť/chcieť обычно стоит в Akuzatív.",
-  "examples": [
-    {
-      "slovak": "Mám rád zeleninu.",
-      "russian": "Я люблю овощи."
-    },
-    {
-      "slovak": "Chutí mi táto polievka.",
-      "russian": "Мне нравится этот суп на вкус."
-    },
-    {
-      "slovak": "Na raňajky jem chlieb a syr.",
-      "russian": "На завтрак я ем хлеб и сыр."
-    },
-    {
-      "slovak": "Nepijem mlieko.",
-      "russian": "Я не пью молоко."
-    }
+export const foodLesson = {
+  vocabulary: [
+    {"word":"Mám rád zeleninu.","translation":"Я люблю овощи. (говорит мужчина)","example":"Mám rád zeleninu."},
+    {"word":"Mám rada kávu.","translation":"Я люблю кофе. (говорит женщина)","example":"Mám rada kávu."},
+    {"word":"Chutí mi táto polievka.","translation":"Мне нравится этот суп на вкус.","example":"Chutí mi táto polievka."},
+    {"word":"Na raňajky jem chlieb a syr.","translation":"На завтрак я ем хлеб и сыр.","example":"Na raňajky jem chlieb a syr."},
+    {"word":"Nepijem mlieko.","translation":"Я не пью молоко.","example":"Nepijem mlieko."},
+    {"word":"Nechutí mi toto mäso.","translation":"Мне не нравится это мясо на вкус.","example":"Nechutí mi toto mäso."},
   ],
-  "mistake": "Не используйте rád/rada по роду еды: форма зависит от говорящего.",
-  "task": "Назовите завтрак, два любимых продукта и один продукт, который вы не едите."
-}, { focus: "Называйте продукты, вкусы и простые предпочтения через mám rád/rada и chutí mi.", interaction: "Структура: продукт → нравится/не нравится → простой выбор.", boundary: "Рецепты ограничиваются коротким списком ингредиентов и действий.", prompt: "Скажите от лица мужчины: «Я люблю хлеб и сыр».", answer: "Mám rád chlieb a syr.", hint: "Мужская форма — rád." });
+  slug: "food",
+  order: 4,
+  title: "Еда",
+  slovakTitle: "Jedlo",
+  description: "Называйте продукты, приёмы пищи и простые предпочтения.",
+  duration: "35–40 мин",
+  goals: [
+    "Называть основные продукты и напитки",
+    "Говорить, что вы едите и пьёте в течение дня",
+    "Выражать предпочтения через mám rád/rada",
+    "Различать mám rád/rada и chutí mi",
+    "Кратко описывать свои пищевые привычки",
+  ],
+  theory: {
+    summary: "На уровне A1 достаточно назвать продукт, связать его с приёмом пищи и сообщить простое предпочтение. Основные модели темы: jem/pijem, mám rád/rada, chutí mi и их отрицательные формы.",
+    rules: [
+      "Продукты удобно учить группами: pečivo, mliečne výrobky, ovocie, zelenina и nápoje.",
+      "О приёме пищи говорят с na: Na raňajky jem chlieb. Na obed mám polievku. Na večeru jem šalát.",
+      "Jem означает «я ем», pijem — «я пью»: Jem ovocie. Pijem vodu. Отрицание: nejem, nepijem.",
+      "Mám rád говорит мужчина, mám rada — женщина. Форма зависит от говорящего, а не от рода продукта: Mám rád syr. Mám rada kávu.",
+      "Chutí mi означает «мне вкусно / мне нравится на вкус»: Chutí mi táto polievka. Отрицание — Nechutí mi toto mäso.",
+      "После jem, pijem и mám rád/rada используются уже изученные объектные формы: polievku, kávu, vodu, zeleninu.",
+    ],
+    examples: [
+      { slovak: "Mám rád zeleninu.", russian: "Я люблю овощи. (говорит мужчина)", explanation: "Rád согласуется с говорящим-мужчиной." },
+      { slovak: "Mám rada kávu.", russian: "Я люблю кофе. (говорит женщина)", explanation: "Rada согласуется с говорящей-женщиной." },
+      { slovak: "Chutí mi táto polievka.", russian: "Мне нравится этот суп на вкус.", explanation: "Еда является тем, что нравится: polievka chutí." },
+      { slovak: "Na raňajky jem chlieb a syr.", russian: "На завтрак я ем хлеб и сыр.", explanation: "Na raňajky — готовое обозначение приёма пищи." },
+      { slovak: "Nepijem mlieko.", russian: "Я не пью молоко.", explanation: "Отрицательная форма от pijem — nepijem." },
+      { slovak: "Nechutí mi toto mäso.", russian: "Мне не нравится это мясо на вкус.", explanation: "Nechutí mi выражает отрицательную оценку вкуса." },
+    ],
+  },
+  sections: [
+    {
+      title: "Основные продукты и напитки",
+      paragraphs: [
+        "Сначала распределите частотные слова по небольшим группам. Это помогает быстро понять список покупок, меню или рассказ о еде.",
+        "Названия общих групп тоже полезны: jedlo — еда, nápoj — напиток, ovocie — фрукты, zelenina — овощи.",
+      ],
+      table: { headers: ["Группа", "Словацкий", "Перевод"], rows: [
+        ["pečivo", "chlieb, rožok", "хлеб, булочка"],
+        ["mliečne výrobky", "mlieko, syr, jogurt", "молоко, сыр, йогурт"],
+        ["ovocie", "jablko, banán", "яблоко, банан"],
+        ["zelenina", "paradajka, mrkva", "помидор, морковь"],
+        ["nápoje", "voda, čaj, káva", "вода, чай, кофе"],
+      ] },
+      items: ["mäso — мясо", "ryba — рыба", "vajce — яйцо", "polievka — суп", "šalát — салат"],
+      note: "Формы в словаре и после глагола могут различаться: káva → pijem kávu, polievka → jem polievku.",
+    },
+    {
+      title: "Приёмы пищи: что я ем и пью",
+      paragraphs: [
+        "Свяжите еду со временем дня через три готовых блока: na raňajky, na obed, na večeru. Затем добавьте jem, pijem или mám.",
+        "Глагол mám здесь сообщает, что блюдо входит в ваш приём пищи: Na obed mám polievku. Для прямого действия используйте jem или pijem.",
+      ],
+      table: { headers: ["Когда", "Пример", "Перевод"], rows: [
+        ["na raňajky", "Na raňajky jem chlieb a syr.", "На завтрак я ем хлеб и сыр."],
+        ["na obed", "Na obed mám polievku a ryžu.", "На обед у меня суп и рис."],
+        ["na večeru", "Na večeru jem šalát.", "На ужин я ем салат."],
+        ["утром", "Ráno pijem čaj.", "Утром я пью чай."],
+      ] },
+      items: ["Jem ovocie.", "Pijem vodu.", "Na obed mám rybu a zemiaky."],
+      note: "Raňajky употребляется как устойчивое множественное число: na raňajky.",
+    },
+    {
+      title: "Предпочтения: mám rád и mám rada",
+      paragraphs: [
+        "Чтобы сказать «я люблю», выберите форму по полу говорящего. Мужчина говорит mám rád, женщина — mám rada. Род продукта на этот выбор не влияет.",
+        "После модели назовите продукт в подходящей объектной форме. Некоторые слова внешне не меняются: mám rád syr, chlieb, ovocie; другие меняются: káva → kávu, zelenina → zeleninu.",
+      ],
+      table: { headers: ["Говорящий", "Утверждение", "Отрицание"], rows: [
+        ["мужчина", "Mám rád syr.", "Nemám rád mäso."],
+        ["женщина", "Mám rada kávu.", "Nemám rada rybu."],
+      ] },
+      items: ["Mám rád ovocie.", "Mám rada zeleninu.", "Nemám rád mlieko.", "Nemám rada mäso."],
+      note: "Не выбирайте rád/rada по слову káva, syr или mäso: выбор показывает пол говорящего.",
+    },
+    {
+      title: "Вкус: chutí mi и nechutí mi",
+      paragraphs: [
+        "Mám rád/rada говорит об общем предпочтении, а chutí mi — о вкусе конкретной еды. Поэтому можно сказать Mám rád polievky и отдельно Chutí mi táto polievka.",
+        "В модели chutí mi форма продукта остаётся формой субъекта: táto polievka, toto mäso. Частица mi означает «мне».",
+      ],
+      table: { headers: ["Значение", "Модель", "Пример"], rows: [
+        ["люблю вообще", "mám rád/rada + объект", "Mám rada polievku."],
+        ["нравится на вкус", "chutí mi + продукт", "Chutí mi táto polievka."],
+        ["не люблю вообще", "nemám rád/rada + объект", "Nemám rád mäso."],
+        ["не нравится вкус", "nechutí mi + продукт", "Nechutí mi toto mäso."],
+      ] },
+      items: ["Chutí mi tento syr.", "Chutí mi toto jablko.", "Nechutí mi táto káva."],
+      note: "Не говорите chutím mi: в этой модели форму chutí получает еда, а не говорящий.",
+    },
+    {
+      title: "Короткий рассказ и частые ошибки",
+      paragraphs: [
+        "Соберите рассказ из четырёх фактов: завтрак, любимая еда, любимый напиток и то, что вы не едите или не пьёте. Одного короткого предложения на каждый факт достаточно.",
+        "Перед ответом проверьте форму rád/rada, объектные окончания, различие jem/pijem и словацкую диакритику.",
+      ],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Mám rád káva.", "Mám rád kávu.", "После mám rád нужна объектная форма."],
+        ["Žena: Mám rád syr.", "Žena: Mám rada syr.", "Форма зависит от говорящей."],
+        ["Chutím mi polievka.", "Chutí mi polievka.", "Еда является субъектом формы chutí."],
+        ["Pijem chlieb.", "Jem chlieb.", "Хлеб едят, а не пьют."],
+        ["Na ranajky jem syr.", "Na raňajky jem syr.", "Нужна буква ň."],
+      ] },
+      items: ["Na raňajky jem chlieb a syr.", "Mám rád zeleninu.", "Najradšej pijem vodu.", "Nepijem mlieko."],
+      note: "Рецепты и подробное приготовление еды не входят в эту тему; здесь важны названия, привычки и предпочтения.",
+    },
+  ],
+  stepPractices: [
+    { id: "m6-food-step-1", sectionIndex: 0, type: "pairs", prompt: "Определите группу продукта.", answer: "pečivo; mliečne výrobky; ovocie; zelenina; nápoje", pairs: [
+      { prompt: "chlieb", answer: "pečivo", options: ["pečivo", "mliečne výrobky", "ovocie", "zelenina", "nápoje"] },
+      { prompt: "syr", answer: "mliečne výrobky", options: ["pečivo", "mliečne výrobky", "ovocie", "zelenina", "nápoje"] },
+      { prompt: "jablko", answer: "ovocie", options: ["pečivo", "mliečne výrobky", "ovocie", "zelenina", "nápoje"] },
+      { prompt: "mrkva", answer: "zelenina", options: ["pečivo", "mliečne výrobky", "ovocie", "zelenina", "nápoje"] },
+      { prompt: "voda", answer: "nápoje", options: ["pečivo", "mliečne výrobky", "ovocie", "zelenina", "nápoje"] },
+    ], showSlovakKeyboard: false, hint: "Распределите хлеб, молочный продукт, фрукт, овощ и напиток.", explanation: "Chlieb — pečivo, syr — mliečny výrobok, jablko — ovocie, mrkva — zelenina, voda — nápoj." },
+    { id: "m6-food-step-2", sectionIndex: 1, type: "pairs", prompt: "Выберите подходящее обозначение времени или действие.", answer: "na raňajky; na obed; na večeru; jem; pijem", pairs: [
+      { prompt: "___ jem chlieb a syr. · на завтрак", answer: "na raňajky", options: ["na raňajky", "na obed", "na večeru", "jem", "pijem"] },
+      { prompt: "___ mám polievku. · на обед", answer: "na obed", options: ["na raňajky", "na obed", "na večeru", "jem", "pijem"] },
+      { prompt: "___ jem šalát. · на ужин", answer: "na večeru", options: ["na raňajky", "na obed", "na večeru", "jem", "pijem"] },
+      { prompt: "___ ovocie. · я ем", answer: "jem", options: ["na raňajky", "na obed", "na večeru", "jem", "pijem"] },
+      { prompt: "___ vodu. · я пью", answer: "pijem", options: ["na raňajky", "na obed", "na večeru", "jem", "pijem"] },
+    ], hint: "Отделите три приёма пищи от двух действий.", explanation: "Na raňajky/obed/večeru называют время; jem и pijem — действие." },
+    { id: "m6-food-step-3", sectionIndex: 2, type: "pairs", prompt: "Выберите нормативную форму предпочтения.", answer: "Mám rád zeleninu.; Mám rada kávu.; Nemám rád mäso.; Nemám rada rybu.; Mám rád chlieb a syr.", pairs: [
+      { prompt: "Мужчина: Я люблю овощи.", answer: "Mám rád zeleninu.", options: ["Mám rád zeleninu.", "Mám rada zeleninu."] },
+      { prompt: "Женщина: Я люблю кофе.", answer: "Mám rada kávu.", options: ["Mám rád kávu.", "Mám rada kávu."] },
+      { prompt: "Мужчина: Я не люблю мясо.", answer: "Nemám rád mäso.", options: ["Nemám rád mäso.", "Nemám rada mäso."] },
+      { prompt: "Женщина: Я не люблю рыбу.", answer: "Nemám rada rybu.", options: ["Nemám rád rybu.", "Nemám rada rybu."] },
+      { prompt: "Мужчина: Я люблю хлеб и сыр.", answer: "Mám rád chlieb a syr.", options: ["Mám rád chlieb a syr.", "Mám rada chlieb a syr."] },
+    ], hint: "Смотрите на пол говорящего, а не на род продукта.", explanation: "Мужчина использует rád, женщина — rada; отрицание добавляет nemám." },
+    { id: "m6-food-step-4", sectionIndex: 3, type: "pairs", prompt: "Различите общее предпочтение и оценку вкуса.", answer: "Mám rada polievku.; Chutí mi táto polievka.; Nemám rád mäso.; Nechutí mi toto mäso.; Chutí mi tento syr.", pairs: [
+      { prompt: "Женщина: Я вообще люблю суп.", answer: "Mám rada polievku.", options: ["Mám rada polievku.", "Chutí mi táto polievka."] },
+      { prompt: "Мне нравится вкус этого супа.", answer: "Chutí mi táto polievka.", options: ["Mám rada polievku.", "Chutí mi táto polievka."] },
+      { prompt: "Мужчина: Я вообще не люблю мясо.", answer: "Nemám rád mäso.", options: ["Nemám rád mäso.", "Nechutí mi toto mäso."] },
+      { prompt: "Мне не нравится вкус этого мяса.", answer: "Nechutí mi toto mäso.", options: ["Nemám rád mäso.", "Nechutí mi toto mäso."] },
+      { prompt: "Мне нравится вкус этого сыра.", answer: "Chutí mi tento syr.", options: ["Chutí mi tento syr.", "Mám rád syr."] },
+    ], hint: "Mám rád/rada — общее отношение; chutí mi — конкретный вкус.", explanation: "Конкретная оценка вкуса строится с chutí/nechutí mi." },
+    { id: "m6-food-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте каждую реплику.", answer: "Mám rád kávu.; Mám rada syr.; Chutí mi polievka.; Jem chlieb.; Na raňajky jem syr.", pairs: [
+      { prompt: "Mám rád káva.", answer: "Mám rád kávu.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Женщина: Mám rád syr.", answer: "Mám rada syr.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Chutím mi polievka.", answer: "Chutí mi polievka.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Pijem chlieb.", answer: "Jem chlieb.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Na ranajky jem syr.", answer: "Na raňajky jem syr.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Проверьте объектную форму, rád/rada, chutí, jem/pijem и диакритику.", explanation: "Нормативны kávu, rada, chutí, jem chlieb и raňajky." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 4",
+  reinforcementPractices: [
+    { id: "reinforcement:food:1", sectionIndex: 0, type: "pairs", prompt: "Распределите продукты по группам.", answer: "pečivo; mliečne výrobky; ovocie; zelenina; nápoje", pairs: [
+      { prompt: "rožok", answer: "pečivo", options: ["pečivo", "mliečne výrobky", "ovocie", "zelenina", "nápoje"] },
+      { prompt: "jogurt", answer: "mliečne výrobky", options: ["pečivo", "mliečne výrobky", "ovocie", "zelenina", "nápoje"] },
+      { prompt: "banán", answer: "ovocie", options: ["pečivo", "mliečne výrobky", "ovocie", "zelenina", "nápoje"] },
+      { prompt: "paradajka", answer: "zelenina", options: ["pečivo", "mliečne výrobky", "ovocie", "zelenina", "nápoje"] },
+      { prompt: "čaj", answer: "nápoje", options: ["pečivo", "mliečne výrobky", "ovocie", "zelenina", "nápoje"] },
+    ], showSlovakKeyboard: false, hint: "В каждой строке выберите одну из пяти групп.", explanation: "Rožok — pečivo, jogurt — mliečny výrobok, banán — ovocie, paradajka — zelenina, čaj — nápoj." },
+    { id: "reinforcement:food:2", sectionIndex: 1, type: "pairs", prompt: "Дополните фразы о приёмах пищи.", answer: "raňajky; obed; večeru; jem; pijem", pairs: [
+      { prompt: "Na ___ jem chlieb.", answer: "raňajky", options: ["raňajky", "obed", "večeru", "jem", "pijem"] },
+      { prompt: "Na ___ mám polievku.", answer: "obed", options: ["raňajky", "obed", "večeru", "jem", "pijem"] },
+      { prompt: "Na ___ jem šalát.", answer: "večeru", options: ["raňajky", "obed", "večeru", "jem", "pijem"] },
+      { prompt: "Ráno ___ jogurt.", answer: "jem", options: ["raňajky", "obed", "večeru", "jem", "pijem"] },
+      { prompt: "Ráno ___ čaj.", answer: "pijem", options: ["raňajky", "obed", "večeru", "jem", "pijem"] },
+    ], hint: "Проверьте форму после na и различите еду и напиток.", explanation: "Устойчиво: na raňajky, na obed, na večeru; jedlo jem, nápoj pijem." },
+    { id: "reinforcement:food:3", sectionIndex: 2, type: "pairs", prompt: "Выберите ключевую форму.", answer: "rád; rada; chutí; nechutí; nepijem", pairs: [
+      { prompt: "Мужчина: Mám ___ syr.", answer: "rád", options: ["rád", "rada", "chutí", "nechutí", "nepijem"] },
+      { prompt: "Женщина: Mám ___ kávu.", answer: "rada", options: ["rád", "rada", "chutí", "nechutí", "nepijem"] },
+      { prompt: "___ mi táto polievka.", answer: "chutí", options: ["rád", "rada", "chutí", "nechutí", "nepijem"] },
+      { prompt: "___ mi toto mäso.", answer: "nechutí", options: ["rád", "rada", "chutí", "nechutí", "nepijem"] },
+      { prompt: "___ mlieko. · я не пью", answer: "nepijem", options: ["rád", "rada", "chutí", "nechutí", "nepijem"] },
+    ], hint: "Определите пол говорящего, вкус и отрицание действия.", explanation: "Rád/rada зависят от говорящего; chutí/nechutí — от оценки вкуса; nepijem отрицает pijem." },
+    { id: "reinforcement:food:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки в рассказе о еде.", answer: "Mám rada kávu.; Mám rád zeleninu.; Chutí mi táto polievka.; Nejem mäso.; Na raňajky pijem čaj.", pairs: [
+      { prompt: "Женщина: Mám rád káva.", answer: "Mám rada kávu.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Мужчина: Mám rada zeleninu.", answer: "Mám rád zeleninu.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Chutím mi táto polievka.", answer: "Chutí mi táto polievka.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Nepijem mäso.", answer: "Nejem mäso.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Na ranajky jem čaj.", answer: "Na raňajky pijem čaj.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Исправьте всю строку, включая диакритику и выбор jem/pijem.", explanation: "Рассказ требует rada kávu, rád zeleninu, chutí, nejem mäso и pijem čaj." },
+    { id: "reinforcement:food:5", sectionIndex: 4, type: "pairs", prompt: "Переведите на словацкий.", answer: "Na raňajky jem chlieb a syr.; Mám rád zeleninu.; Chutí mi táto polievka.; Nepijem mlieko.; Mám rada kávu.", pairs: [
+      { prompt: "На завтрак я ем хлеб и сыр.", answer: "Na raňajky jem chlieb a syr.", inputHint: "Введите перевод" },
+      { prompt: "Я люблю овощи. (говорит мужчина)", answer: "Mám rád zeleninu.", acceptableAnswers: ["Zeleninu mám rád."], inputHint: "Введите перевод" },
+      { prompt: "Мне нравится этот суп на вкус.", answer: "Chutí mi táto polievka.", inputHint: "Введите перевод" },
+      { prompt: "Я не пью молоко.", answer: "Nepijem mlieko.", acceptableAnswers: ["Mlieko nepijem."], inputHint: "Введите перевод" },
+      { prompt: "Я люблю кофе. (говорит женщина)", answer: "Mám rada kávu.", acceptableAnswers: ["Kávu mám rada."], inputHint: "Введите перевод" },
+    ], hint: "Используйте модели урока и сохраните словацкую диакритику.", explanation: "Переводы проверяют приём пищи, rád/rada, chutí mi и отрицание." },
+    { id: "reinforcement:food:6", sectionIndex: 4, type: "pairs", prompt: "Соберите короткий рассказ о пищевых привычках мужчины.", answer: "Na raňajky jem chlieb a syr.; Na obed mám polievku.; Mám rád zeleninu.; Najradšej pijem vodu.; Nepijem mlieko.", pairs: [
+      { prompt: "1 · завтрак", answer: "Na raňajky jem chlieb a syr.", options: ["Na raňajky jem chlieb a syr.", "Na raňajky pijem chlieb a syr.", "Na raňajky jem chlieb a syra."] },
+      { prompt: "2 · обед", answer: "Na obed mám polievku.", options: ["Na obede mám polievku.", "Na obed mám polievku.", "Na obed mám polievka."] },
+      { prompt: "3 · любимая группа", answer: "Mám rád zeleninu.", options: ["Mám rada zeleninu.", "Mám rád zelenina.", "Mám rád zeleninu."] },
+      { prompt: "4 · любимый напиток", answer: "Najradšej pijem vodu.", options: ["Najradšej jem vodu.", "Najradšej pijem vodu.", "Najradšej pijem voda."] },
+      { prompt: "5 · отрицание", answer: "Nepijem mlieko.", options: ["Nejem mlieko.", "Nepijem mlieko.", "Nepijem mlieka."] },
+    ], hint: "Выберите нормативную строку для каждого факта.", explanation: "Рассказ последовательно называет завтрак, обед, предпочтение, напиток и отрицание." },
+  ],
+  knowledgeChecks: [
+    { id: "m6-food-check-1", question: "Как мужчина скажет «Я люблю овощи»?", options: ["Mám rád zeleninu.", "Mám rada zeleninu.", "Chutím zeleninu."], answer: "Mám rád zeleninu.", explanation: "Мужчина использует форму rád; zelenina получает объектную форму zeleninu." },
+    { id: "m6-food-check-2", question: "Как сказать «Мне нравится этот суп на вкус»?", options: ["Chutí mi táto polievka.", "Chutím mi túto polievku.", "Mám rád táto polievka."], answer: "Chutí mi táto polievka.", explanation: "В модели chutí mi продукт остаётся субъектом: táto polievka." },
+    { id: "m6-food-check-3", question: "Какая граница соответствует этой теме уровня A1?", options: ["Рецепты ограничиваются коротким списком ингредиентов и действий.", "Нужно подробно объяснять приготовление сложного блюда.", "Нужно обсуждать пищевые технологии."], answer: "Рецепты ограничиваются коротким списком ингредиентов и действий.", explanation: "Тема тренирует продукты, привычки и предпочтения; подробные рецепты выходят за её границу." },
+  ],
+  finalChecks: [
+    { id: "m6-food-final-1", question: "Мужчина говорит: «Я люблю хлеб и сыр». Выберите нормативную фразу.", options: ["Mám rád chlieb a syr.", "Mám rada chlieb a syr.", "Mám rád chlieb a syra."], answer: "Mám rád chlieb a syr.", explanation: "Мужчина использует rád; chlieb и syr сохраняют эту форму после mám rád." },
+  ],
+  chatPrompt: "Кратко расскажите о своей еде: что вы едите на завтрак, что любите и чего не едите или не пьёте.",
+  chatSuggestions: ["Na raňajky jem chlieb a syr.", "Mám rád zeleninu.", "Nepijem mlieko."],
+} satisfies CourseLesson;

@@ -1,6 +1,27 @@
 import { defineModule1Lesson } from "../lessonFactory";
 
 export const rhythmicLawLesson = defineModule1Lesson({
+  vocabulary: [
+    {"word":"dobrý muž","translation":"хороший мужчина","example":"dobrý muž"},
+    {"word":"krásny muž","translation":"красивый мужчина","example":"krásny muž"},
+    {"word":"biely dom","translation":"белый дом","example":"biely dom"},
+    {"word":"piaty deň","translation":"пятый день","example":"piaty deň"},
+    {"word":"spievam","translation":"я пою","example":"spievam"},
+    {"word":"chválim","translation":"я хвалю","example":"chválim"},
+    {"word":"dobrý","translation":"хороший","example":"dobrý"},
+    {"word":"krásny","translation":"красивый","example":"krásny"},
+    {"word":"krátky","translation":"короткий","example":"krátky"},
+    {"word":"múdry","translation":"мудрый","example":"múdry"},
+    {"word":"nový","translation":"новый","example":"nový"},
+    {"word":"biely","translation":"белый","example":"biely"},
+    {"word":"mliečny","translation":"молочный","example":"mliečny"},
+    {"word":"prvý","translation":"первый","example":"prvý"},
+    {"word":"piaty","translation":"пятый","example":"piaty"},
+    {"word":"volám","translation":"я звоню","example":"volám"},
+    {"word":"robím","translation":"я делаю","example":"robím"},
+    {"word":"krásna žena","translation":"красивая женщина","example":"krásna žena"},
+    {"word":"biele auto","translation":"белая машина","example":"biele auto"},
+  ],
   slug: "rhythmic-law",
   title: "Rytmický zákon: базовый уровень",
   slovakTitle: "Rytmický zákon",

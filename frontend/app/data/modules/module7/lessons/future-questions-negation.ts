@@ -1,30 +1,201 @@
-import type { CompactLessonContent } from "../../plannedLessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const futureQuestionsNegationContent: CompactLessonContent = {
-  "slug": "future-questions-negation",
-  "title": "Будущие планы: вопрос и отрицание",
-  "slovakTitle": "Plány, otázky a zápor",
-  "outcome": "Спрашивать о планах и давать краткие ответы.",
-  "summary": "После урока вы сможете спрашивать о планах и давать краткие ответы в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Вопрос использует будущую форму byť перед инфинитивом; отрицание пишется слитно: nebudem, nebudeš, nebude. Краткий ответ повторяет эту форму.",
-  "examples": [
-    {
-      "slovak": "Budeš zajtra pracovať?",
-      "russian": "Ты будешь завтра работать?"
-    },
-    {
-      "slovak": "Nie, nebudem pracovať.",
-      "russian": "Нет, не буду работать."
-    },
-    {
-      "slovak": "Kde budete bývať?",
-      "russian": "Где вы будете жить?"
-    },
-    {
-      "slovak": "Nebudeme dlho čakať.",
-      "russian": "Мы не будем долго ждать."
-    }
+export const futureQuestionsNegationContent = {
+  vocabulary: [
+    {"word":"Budeš zajtra pracovať?","translation":"Ты будешь завтра работать?","example":"Budeš zajtra pracovať?"},
+    {"word":"Nie, nebudem pracovať.","translation":"Нет, не буду работать.","example":"Nie, nebudem pracovať."},
+    {"word":"Kde budete bývať?","translation":"Где вы будете жить?","example":"Kde budete bývať?"},
+    {"word":"Nebudeme dlho čakať.","translation":"Мы не будем долго ждать.","example":"Nebudeme dlho čakať."},
+    {"word":"Ešte neviem. Možno budem pracovať.","translation":"Я ещё не знаю. Возможно, буду работать.","example":"Ešte neviem. Možno budem pracovať."},
+    {"word":"Kedy budeš mať čas?","translation":"Когда у тебя будет время?","example":"Kedy budeš mať čas?"},
   ],
-  "mistake": "Не пишите nie budem в будущем: правильно nebudem.",
-  "task": "Задайте три вопроса о планах и ответьте одним утверждением, отрицанием и местом."
-};
+  slug: "future-questions-negation",
+  order: 5,
+  title: "Будущие планы: вопрос и отрицание",
+  slovakTitle: "Plány, otázky a zápor",
+  description: "Спрашивать о планах и давать краткие ответы.",
+  duration: "35–40 мин",
+  goals: [
+    "Задавать вопросы да / нет о будущих планах",
+    "Спрашивать что, где, куда, когда, с кем и как долго",
+    "Отрицать планы и отвечать, если решение ещё не принято",
+    "Согласовывать совместный план в коротком диалоге",
+  ],
+  theory: {
+    summary: "Знакомые формы budem, budeš, bude, budeme, budete и budú помогают не только сообщать план, но и получать информацию, отрицать и договариваться. Важно отвечать от лица говорящего: на Budete pracovať? один человек отвечает Áno, budem, а группа — Áno, budeme.",
+    rules: [
+      "В вопросе да/нет порядок слов можно сохранить или поставить форму первой: Zajtra budeš pracovať? / Budeš zajtra pracovať?",
+      "Короткий ответ повторяет только форму byť и согласуется с отвечающим: Áno, budem. Nie, nebudeme.",
+      "Уточняющий вопрос строится: вопросительное слово + budeš/budete + инфинитив + детали: Kedy budete pracovať doma?",
+      "Kde спрашивает о месте, а kam — о направлении: Kde budete bývať? Kam budeš cestovať?",
+      "Отрицание входит в форму: nebudem + infinitív; с sa используйте nebudem sa učiť, а после времени — Zajtra sa nebudem učiť.",
+      "Неуверенность выражают asi, možno и ešte neviem; nebudem môcť означает «не смогу», а nebudem pracovať — «не буду работать».",
+    ],
+    examples: [
+      { slovak: "Budeš zajtra pracovať?", russian: "Ты будешь завтра работать?", explanation: "Вопрос да/нет можно начать с budeš." },
+      { slovak: "Nie, nebudem pracovať.", russian: "Нет, не буду работать.", explanation: "Ответ строится от первого лица говорящего." },
+      { slovak: "Kde budete bývať?", russian: "Где вы будете жить?", explanation: "Kde задаёт цель вопроса, после budete стоит инфинитив." },
+      { slovak: "Nebudeme dlho čakať.", russian: "Мы не будем долго ждать.", explanation: "Ne- присоединяется к budeme." },
+      { slovak: "Ešte neviem. Možno budem pracovať.", russian: "Я ещё не знаю. Возможно, буду работать.", explanation: "Две короткие фразы сообщают, что план пока не точный." },
+      { slovak: "Kedy budeš mať čas?", russian: "Когда у тебя будет время?", explanation: "Вопрос помогает перейти к согласованию времени." },
+    ],
+  },
+  sections: [
+    {
+      title: "Вопросы да / нет и короткие ответы",
+      paragraphs: [
+        "Вопрос отличается интонацией и знаком вопроса. Можно сохранить порядок утверждения или поставить форму byť первой.",
+        "Инфинитив в коротком ответе не повторяется. Добавляйте его только для полезной детали: Áno, budem pracovať do piatej.",
+      ],
+      table: { headers: ["К кому", "Вопрос", "Короткий ответ"], rows: [
+        ["ty", "Budeš zajtra pracovať?", "Áno, budem. / Nie, nebudem."],
+        ["on / ona", "Bude Peter variť?", "Áno, bude. / Nie, nebude."],
+        ["my", "Budeme večer študovať?", "Áno, budeme. / Nie, nebudeme."],
+        ["vy", "Budete cez víkend cestovať?", "Áno, budem / budeme. Nie, nebudem / nebudeme."],
+        ["oni", "Budú deti spať doma?", "Áno, budú. / Nie, nebudú."],
+      ] },
+      items: ["Áno, budem.", "Nie, nebudem. Budem doma.", "Ešte neviem. Možno budem pracovať.", "Budeš — другу; budete — вежливо одному человеку или группе."],
+      note: "Не отвечайте формой вопроса автоматически: Budete pracovať? — Áno, budem / budeme.",
+    },
+    {
+      title: "Уточняем: čo, kde, kedy, s kým",
+      paragraphs: [
+        "Вопросительное слово показывает, какую информацию вы хотите получить. После него поставьте форму byť, инфинитив и детали.",
+        "После общего ответа задайте естественное уточнение: Budem cestovať. — Kam budeš cestovať? Budem čakať. — Ako dlho budeš čakať?",
+      ],
+      table: { headers: ["Что узнаём", "Вопрос", "Пример ответа"], rows: [
+        ["что", "Čo budeš robiť zajtra?", "Budem pracovať doma."],
+        ["где", "Kde budete bývať?", "Budeme bývať v Nitre."],
+        ["когда", "Kedy budeš telefonovať?", "Budem telefonovať večer."],
+        ["с кем", "S kým bude cestovať?", "Bude cestovať s rodinou."],
+        ["как долго", "Ako dlho budete čakať?", "Budeme čakať desať minút."],
+        ["почему", "Prečo nebudeš pracovať?", "Lebo budem mať voľno."],
+      ] },
+      items: ["1 · Kedy", "2 · budeš", "3 · pracovať", "4 · doma", "Kde? — место; Kam? — направление."],
+      note: "Надёжная схема: вопросительное слово + форма byť + инфинитив + детали?",
+    },
+    {
+      title: "Отрицание и степень уверенности",
+      paragraphs: [
+        "Отрицательная форма пишется слитно и согласуется с лицом. Возвратная частица сохраняется: nebudem sa učiť; Zajtra sa nebudem učiť.",
+        "Если решения ещё нет, не нужно отвечать только да или нет. Используйте шкалу от určite áno до určite nie.",
+      ],
+      table: { headers: ["Ответ", "Смысл", "Пример"], rows: [
+        ["určite áno", "точно да", "Určite budem doma."],
+        ["asi áno", "вероятно да", "Asi budem pracovať."],
+        ["možno", "возможно", "Možno budeme cestovať."],
+        ["ešte neviem", "ещё не знаю", "Ešte neviem, čo budem robiť."],
+        ["asi nie", "вероятно нет", "Asi nebudem mať čas."],
+        ["určite nie", "точно нет", "Určite nebudem pracovať."],
+      ] },
+      items: ["Nebudem môcť prísť. — Я не смогу прийти.", "Budem musieť pracovať. — Мне придётся работать.", "Nebudeme musieť čakať. — Нам не придётся ждать."],
+      note: "Не путайте nebudem pracovať — не буду работать и nebudem môcť pracovať — не смогу работать.",
+    },
+    {
+      title: "Банк фраз и два диалога",
+      paragraphs: [
+        "Для договорённости спросите о занятии, времени и месте; затем согласитесь, откажитесь или покажите неуверенность и завершите разговор.",
+        "План подтверждён: A: Čo budeš robiť v sobotu? B: Dopoludnia budem pracovať, ale poobede budem mať čas. A: Budeme sa učiť o štvrtej? B: Áno, budeme. Kde? A: V centre.",
+        "План неясен: A: Budeš zajtra doma? B: Ešte neviem. Možno budem musieť pracovať. A: Dobre. Budeme si písať.",
+      ],
+      table: { headers: ["Задача", "Фраза", "Перевод"], rows: [
+        ["узнать время", "Kedy budeš mať čas?", "Когда у тебя будет время?"],
+        ["узнать занятие", "Čo budeš robiť v sobotu?", "Что ты будешь делать в субботу?"],
+        ["узнать место", "Kde sa budeme stretávať?", "Где мы будем встречаться?"],
+        ["отказаться", "Nie, nebudem môcť prísť.", "Нет, я не смогу прийти."],
+        ["не уверен", "Ešte neviem.", "Я ещё не знаю."],
+        ["предложить другое", "Možno budeme mať čas zajtra.", "Возможно, завтра у нас будет время."],
+        ["завершить", "Dobre, budeme si písať.", "Хорошо, будем переписываться."],
+      ] },
+      note: "Форма ответа зависит от того, кто говорит, а не от формы вопроса.",
+    },
+    {
+      title: "Частые ошибки и самопроверка",
+      paragraphs: ["Проверьте один вопросительный знак, отсутствие лишнего ty, лицо короткого ответа, место ne- и инфинитив после budete."],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Budeš pracovať. ?", "Budeš pracovať?", "Нужен один вопросительный знак."],
+        ["Čo ty budeš robiť?", "Čo budeš robiť?", "Ty обычно не нужно."],
+        ["Nie, nebudeš.", "Nie, nebudem.", "Говорящий отвечает от своего лица."],
+        ["Budem nepracovať.", "Nebudem pracovať.", "Ne- стоит перед budem."],
+        ["Kde budete bývate?", "Kde budete bývať?", "После budete нужен инфинитив."],
+      ] },
+      items: ["Понятно ли, что спрашивается?", "Соответствует ли форма адресату?", "Соответствует ли ответ говорящему?", "Верны ли ne- и инфинитив?", "Есть ли завершённая договорённость?"],
+      note: "Четыре опоры: да/нет, уточнение, отрицание и неопределённый ответ.",
+    },
+  ],
+  stepPractices: [
+    { id: "m7-future-questions-negation-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите перевод «Ты будешь завтра работать?»", options: ["Budeš zajtra pracovať?", "Kde budete bývať?", "Nie, nebudem pracovať."], answer: "Budeš zajtra pracovať?", hint: "Сверьтесь с основной моделью.", explanation: "Верная фраза: Budeš zajtra pracovať?" },
+    { id: "m7-future-questions-negation-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Нет, не буду работать.»", answer: "Nie, nebudem pracovať.", hint: "Используйте опорную фразу из таблицы.", explanation: "Верная фраза: Nie, nebudem pracovať." },
+    { id: "m7-future-questions-negation-step-3", sectionIndex: 2, type: "text", prompt: "Переведите: «Где вы будете жить?»", answer: "Kde budete bývať?", hint: "Сохраните порядок слов и диакритику.", explanation: "Верная фраза: Kde budete bývať?" },
+    { id: "m7-future-questions-negation-step-4", sectionIndex: 3, type: "pairs", prompt: "Подберите реплики для согласования плана.", answer: "Kedy budeš mať čas?; Ešte neviem.; Možno budeme mať čas zajtra.; Dobre, budeme si písať.", pairs: [
+      { prompt: "Когда у тебя будет время?", answer: "Kedy budeš mať čas?", inputHint: "Введите перевод" },
+      { prompt: "Я ещё не знаю.", answer: "Ešte neviem.", inputHint: "Введите перевод" },
+      { prompt: "Возможно, завтра у нас будет время.", answer: "Možno budeme mať čas zajtra.", inputHint: "Введите перевод" },
+      { prompt: "Хорошо, будем переписываться.", answer: "Dobre, budeme si písať.", inputHint: "Введите перевод" },
+    ], hint: "Используйте вопрос, неопределённость, альтернативу и завершение.", explanation: "Четыре реплики помогают довести неясный план до следующего контакта." },
+    { id: "m7-future-questions-negation-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки в вопросах и ответах.", answer: "Budeš doma?; Čo budeš robiť?; Nie, nebudem.; Nebudeme pracovať.; Kde budete bývať?", pairs: [
+      { prompt: "Budeš doma. ?", answer: "Budeš doma?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Čo ty budeš robiť?", answer: "Čo budeš robiť?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Nie, nebudeš. (ответ о себе)", answer: "Nie, nebudem.", inputHint: "Введите исправленный ответ" },
+      { prompt: "My budeme nepracovať.", answer: "Nebudeme pracovať.", acceptableAnswers: ["My nebudeme pracovať."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Kde budete bývate?", answer: "Kde budete bývať?", inputHint: "Введите исправленную фразу" },
+    ], hint: "Проверьте пунктуацию, лицо, ne- и инфинитив.", explanation: "Правильные модели используют один знак вопроса, ответ от первого лица и nebudem + infinitív." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 5",
+  reinforcementPractices: [
+    { id: "reinforcement:future-questions-negation:1", sectionIndex: 1, type: "pairs", prompt: "Выберите вопросительное слово.", answer: "Čo; Kde; Kedy; Ako dlho", pairs: [
+      { prompt: "___ budeš robiť? — Budem pracovať doma.", answer: "Čo", options: ["Čo", "Kde", "Kedy", "Ako dlho"] },
+      { prompt: "___ budeš pracovať? — Doma.", answer: "Kde", options: ["Čo", "Kde", "Kedy", "Ako dlho"] },
+      { prompt: "___ budeš telefonovať? — Večer.", answer: "Kedy", options: ["Čo", "Kde", "Kedy", "Ako dlho"] },
+      { prompt: "___ budeš čakať? — Desať minút.", answer: "Ako dlho", options: ["Čo", "Kde", "Kedy", "Ako dlho"] },
+    ], hint: "Определите, сообщает ли ответ действие, место, время или длительность.", explanation: "Ответы: Čo, Kde, Kedy, Ako dlho." },
+    { id: "reinforcement:future-questions-negation:2", sectionIndex: 0, type: "pairs", prompt: "Дайте короткий ответ от лица говорящего.", answer: "Áno, budem.; Nie, nebudeme.; Áno, budú.; Nie, nebude.", pairs: [
+      { prompt: "Budeš zajtra doma? (да)", answer: "Áno, budem.", options: ["Áno, budem.", "Nie, nebudeme.", "Áno, budú.", "Nie, nebude."] },
+      { prompt: "Budete večer pracovať? (мы — нет)", answer: "Nie, nebudeme.", options: ["Áno, budem.", "Nie, nebudeme.", "Áno, budú.", "Nie, nebude."] },
+      { prompt: "Budú deti spať? (да)", answer: "Áno, budú.", options: ["Áno, budem.", "Nie, nebudeme.", "Áno, budú.", "Nie, nebude."] },
+      { prompt: "Bude Peter variť? (нет)", answer: "Nie, nebude.", options: ["Áno, budem.", "Nie, nebudeme.", "Áno, budú.", "Nie, nebude."] },
+    ], hint: "Сначала определите, кто отвечает.", explanation: "Ответы согласованы с ja, my, deti и Peter." },
+    { id: "reinforcement:future-questions-negation:3", sectionIndex: 2, type: "pairs", prompt: "Сделайте отрицание.", answer: "Nebudem mať čas.; Nebudeš cestovať.; Nebudeme čakať.; Nebudú sa učiť.", pairs: [
+      { prompt: "Budem mať čas.", answer: "Nebudem mať čas.", inputHint: "Введите отрицание" },
+      { prompt: "Budeš cestovať.", answer: "Nebudeš cestovať.", inputHint: "Введите отрицание" },
+      { prompt: "Budeme čakať.", answer: "Nebudeme čakať.", inputHint: "Введите отрицание" },
+      { prompt: "Budú sa učiť.", answer: "Nebudú sa učiť.", inputHint: "Введите отрицание" },
+    ], hint: "Присоедините ne- к форме byť и сохраните sa.", explanation: "Отрицательные формы: nebudem, nebudeš, nebudeme, nebudú." },
+    { id: "reinforcement:future-questions-negation:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте каждую ошибку.", answer: "Čo budeš robiť?; Nie, nebudem.; My nebudeme pracovať.; Kde budete bývať?; Zajtra sa nebudem učiť.", pairs: [
+      { prompt: "Čo budeš robíš?", answer: "Čo budeš robiť?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Nie, nebudeš. (ответ о себе)", answer: "Nie, nebudem.", inputHint: "Введите исправленный ответ" },
+      { prompt: "My budeme nepracovať.", answer: "My nebudeme pracovať.", acceptableAnswers: ["Nebudeme pracovať."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Kde budete bývate?", answer: "Kde budete bývať?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Zajtra nebudem sa učiť.", answer: "Zajtra sa nebudem učiť.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Введите всю нормативную фразу с диакритикой.", explanation: "Проверьте инфинитив, лицо ответа, ne- и место sa." },
+    { id: "reinforcement:future-questions-negation:5", sectionIndex: 3, type: "pairs", prompt: "Переведите на словацкий.", answer: "Čo budeš robiť zajtra?; Kde sa budeme stretávať?; Večer nebudem pracovať.; Možno budú cestovať.; Ešte neviem.", pairs: [
+      { prompt: "Что ты будешь делать завтра?", answer: "Čo budeš robiť zajtra?", acceptableAnswers: ["Čo budeš zajtra robiť?"], inputHint: "Введите перевод" },
+      { prompt: "Где мы будем встречаться?", answer: "Kde sa budeme stretávať?", inputHint: "Введите перевод" },
+      { prompt: "Я не буду работать вечером.", answer: "Večer nebudem pracovať.", acceptableAnswers: ["Nebudem pracovať večer."], inputHint: "Введите перевод" },
+      { prompt: "Возможно, они будут путешествовать.", answer: "Možno budú cestovať.", inputHint: "Введите перевод" },
+      { prompt: "Я ещё не знаю.", answer: "Ešte neviem.", inputHint: "Введите перевод" },
+    ], hint: "Сохраните вопрос, отрицание и слова неопределённости.", explanation: "Переводы используют čo, kde, nebudem, možno и ešte neviem." },
+    { id: "reinforcement:future-questions-negation:6", sectionIndex: 3, type: "pairs", prompt: "Соберите диалог о плане на субботу.", answer: "Čo budeš robiť v sobotu?; Ráno budem pracovať.; Budeš mať čas poobede?; Ešte neviem. Možno budem musieť pracovať do piatej.; Budeme spolu večer?; Áno. Budem mať čas o siedmej.; Dobre. Kde budeme?; V centre.", pairs: [
+      { prompt: "1 · занятие", answer: "Čo budeš robiť v sobotu?", options: ["Čo budeš robiť v sobotu?", "Kde budeš robiť v sobotu?"] },
+      { prompt: "2 · ответ", answer: "Ráno budem pracovať.", options: ["Ráno budeš pracovať.", "Ráno budem pracovať."] },
+      { prompt: "3 · время", answer: "Budeš mať čas poobede?", options: ["Budeš mať čas poobede?", "Budem mať čas poobede?"] },
+      { prompt: "4 · неуверенность", answer: "Ešte neviem. Možno budem musieť pracovať do piatej.", options: ["Ešte neviem. Možno budem musieť pracovať do piatej.", "Určite nie. Ty nebudeš pracovať do piatej."] },
+      { prompt: "5 · предложение", answer: "Budeme spolu večer?", options: ["Budete spolu večer?", "Budeme spolu večer?"] },
+      { prompt: "6 · согласие", answer: "Áno. Budem mať čas o siedmej.", options: ["Áno. Budeš mať čas o siedmej.", "Áno. Budem mať čas o siedmej."] },
+      { prompt: "7 · место", answer: "Dobre. Kde budeme?", options: ["Dobre. Kde budeme?", "Dobre. Kedy budeme?"] },
+      { prompt: "8 · завершение", answer: "V centre.", options: ["Do centra.", "V centre."] },
+    ], hint: "Следите, кто спрашивает и кто отвечает, затем согласуйте время и место.", explanation: "Диалог содержит вопрос о занятии, время, неопределённость, предложение, согласие и место." },
+  ],
+  chatPrompt: "Составьте диалог о планах на 6–8 реплик: спросите о занятии, времени и месте; дайте отрицательный или неопределённый ответ; предложите другой вариант и завершите договорённостью.",
+  chatSuggestions: ["Čo budeš robiť v sobotu?", "Ešte neviem.", "Budeš mať čas poobede?", "Dobre, budeme si písať."],
+  knowledgeChecks: [
+    { id: "m7-future-questions-negation-check-1", question: "Как по-словацки: «Ты будешь завтра работать?»?", options: ["Budeš zajtra pracovať?", "Kde budete bývať?", "Nie, nebudem pracovať."], answer: "Budeš zajtra pracovať?", explanation: "Правильная модель: Budeš zajtra pracovať?" },
+    { id: "m7-future-questions-negation-check-2", question: "Как по-словацки: «Нет, не буду работать.»?", options: ["Budeš zajtra pracovať?", "Kde budete bývať?", "Nie, nebudem pracovať."], answer: "Nie, nebudem pracovať.", explanation: "Правильная модель: Nie, nebudem pracovať." },
+  ],
+  finalChecks: [
+    { id: "m7-future-questions-negation-final-1", question: "Выберите перевод «Где вы будете жить?».", options: ["Budeš zajtra pracovať?", "Kde budete bývať?", "Nie, nebudem pracovať."], answer: "Kde budete bývať?", explanation: "Правильный ответ: Kde budete bývať?" },
+  ],
+} satisfies CourseLesson;

@@ -1,30 +1,220 @@
-import type { CompactLessonContent } from "../../plannedLessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const pastFrequentContent: CompactLessonContent = {
-  "slug": "past-frequent",
-  "title": "Прошедшее время: частотные глаголы",
-  "slovakTitle": "Minulý čas častých slovies",
-  "outcome": "Сообщать о завершённых действиях.",
-  "summary": "После урока вы сможете сообщать о завершённых действиях частотными глаголами в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Частотные l-формы запоминаются отдельно: bol, mal, išiel, jedol, pil, videl, chcel. Женские формы: bola, mala, išla, jedla, pila, videla, chcela.",
-  "examples": [
-    {
-      "slovak": "Bol som doma.",
-      "russian": "Я был дома."
-    },
-    {
-      "slovak": "Mala som veľa práce.",
-      "russian": "У меня было много работы."
-    },
-    {
-      "slovak": "Išli sme do kina.",
-      "russian": "Мы пошли в кино."
-    },
-    {
-      "slovak": "Peter pil kávu.",
-      "russian": "Петер пил кофе."
-    }
+export const pastFrequentContent = {
+  vocabulary: [
+    {"word":"Včera som bol doma.","translation":"Вчера я был дома.","example":"Včera som bol doma."},
+    {"word":"Mala som veľa práce.","translation":"У меня было много работы.","example":"Mala som veľa práce."},
+    {"word":"Večer sme išli do kina.","translation":"Вечером мы пошли в кино.","example":"Večer sme išli do kina."},
+    {"word":"Anna prišla o ôsmej.","translation":"Анна пришла в восемь.","example":"Anna prišla o ôsmej."},
+    {"word":"Nemohla prísť.","translation":"Она не смогла прийти.","example":"Nemohla prísť."},
+    {"word":"Deti jedli a pili.","translation":"Дети ели и пили.","example":"Deti jedli a pili."},
+    {"word":"Včera som bol / bola doma.","translation":"Вчера я был / была дома.","example":"Včera som bol / bola doma."},
+    {"word":"Mal som veľa práce.","translation":"У меня было много работы.","example":"Mal som veľa práce."},
+    {"word":"Ráno som išla do mesta.","translation":"Утром я пошла в город.","example":"Ráno som išla do mesta."},
+    {"word":"Prišli sme načas.","translation":"Мы пришли вовремя.","example":"Prišli sme načas."},
+    {"word":"Chceli sme vidieť centrum.","translation":"Мы хотели увидеть центр.","example":"Chceli sme vidieť centrum."},
+    {"word":"Nemohol som telefonovať.","translation":"Я не мог позвонить.","example":"Nemohol som telefonovať."},
+    {"word":"Musela som pracovať.","translation":"Мне пришлось работать.","example":"Musela som pracovať."},
+    {"word":"Jedli sme chlieb a syr.","translation":"Мы ели хлеб и сыр.","example":"Jedli sme chlieb a syr."},
+    {"word":"Vzala si modrú tašku.","translation":"Она взяла синюю сумку.","example":"Vzala si modrú tašku."},
+    {"word":"Videli sme krásny park.","translation":"Мы увидели красивый парк.","example":"Videli sme krásny park."},
+    {"word":"Povedal pravdu.","translation":"Он сказал правду.","example":"Povedal pravdu."},
   ],
-  "mistake": "Не образуйте išiel механически от ísť; запомните пару ísť - išiel/išla.",
-  "task": "Используйте bol, mal, išiel и jedol в коротком рассказе о выходном."
-};
+  slug: "past-frequent",
+  order: 2,
+  title: "Прошедшее время: частотные глаголы",
+  slovakTitle: "Minulý čas častých slovies",
+  description: "Сообщать о завершённых действиях.",
+  duration: "35–40 мин",
+  goals: [
+    "Узнавать прошедшие формы 15 частотных глаголов",
+    "Использовать bol, mal, išiel, chcel, mohol и musel",
+    "Согласовывать частотные формы по роду и числу",
+    "Соединять действия и обстоятельства в рассказе о прошлом",
+  ],
+  theory: {
+    summary: "Частотные глаголы сохраняют правила рода, числа и вспомогательных форм из темы 1, но часто меняют основу. Поэтому запоминайте инфинитив, мужскую и женскую форму вместе с коротким примером: ísť — išiel — išla, jesť — jedol — jedla.",
+    rules: [
+      "Четыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.",
+      "Личные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.",
+      "После chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.",
+      "Отрицания nemohol и nemusel различаются: nemohol — не смог, nemusel — не должен был, не было необходимости.",
+      "Ещё семь форм учите тройками: jesť — jedol/jedla, piť — pil/pila, spať — spal/spala, dať — dal/dala, vziať — vzal/vzala, vidieť — videl/videla, povedať — povedal/povedala.",
+      "В модели vziať si частица si сохраняется: Vzal som si kávu. Vzala si modrú tašku.",
+    ],
+    examples: [
+      { slovak: "Včera som bol doma.", russian: "Вчера я был дома.", explanation: "Мужская форма byť — bol, для ja добавляется som." },
+      { slovak: "Mala som veľa práce.", russian: "У меня было много работы.", explanation: "Говорящая женщина использует mala som." },
+      { slovak: "Večer sme išli do kina.", russian: "Вечером мы пошли в кино.", explanation: "Форма для my — išli sme." },
+      { slovak: "Anna prišla o ôsmej.", russian: "Анна пришла в восемь.", explanation: "Женская форма prísť — prišla; в 3-м лице связки нет." },
+      { slovak: "Nemohla prísť.", russian: "Она не смогла прийти.", explanation: "Nemohla выражает невозможность, prísť остаётся инфинитивом." },
+      { slovak: "Deti jedli a pili.", russian: "Дети ели и пили.", explanation: "Во множественном числе используются jedli и pili." },
+    ],
+  },
+  sections: [
+    {
+      title: "Bol, mal, išiel и prišiel",
+      paragraphs: [
+        "У этих частотных глаголов прошедшая основа не получается простой заменой -ť на -l. Учите строку целиком вместе со значением и примером.",
+        "Правила темы 1 сохраняются: выберите род или число, затем добавьте som, si, sme или ste, если этого требует лицо.",
+      ],
+      table: { headers: ["Инфинитив", "Он", "Она", "Они", "Значение"], rows: [
+        ["byť", "bol", "bola", "boli", "быть"],
+        ["mať", "mal", "mala", "mali", "иметь"],
+        ["ísť", "išiel", "išla", "išli", "идти / пойти"],
+        ["prísť", "prišiel", "prišla", "prišli", "прийти"],
+      ] },
+      items: ["bol som / bola som", "mal si / mala si", "išli sme", "prišli ste", "Peter bol doma. / Deti boli v škole."],
+      note: "В 3-м лице нет je или sú: Peter bol doma, Anna prišla, deti boli v škole.",
+    },
+    {
+      title: "Chcel, mohol, musel и vedel",
+      paragraphs: [
+        "Формы chcel, mohol, musel и vedel часто стоят перед другим действием. Следующий смысловой глагол остаётся в инфинитиве.",
+        "Отрицание присоединяется к первой форме: nechcel ísť, nemohla prísť, nemuseli pracovať, nevedel variť.",
+      ],
+      table: { headers: ["Инфинитив", "Он", "Она", "Они", "Модель"], rows: [
+        ["chcieť", "chcel", "chcela", "chceli", "Chcel som oddychovať."],
+        ["môcť", "mohol", "mohla", "mohli", "Mohla som prísť."],
+        ["musieť", "musel", "musela", "museli", "Museli sme pracovať."],
+        ["vedieť", "vedel", "vedela", "vedeli", "Vedel variť."],
+      ] },
+      items: ["Chcel si ísť?", "Mohli ste prísť?", "Prečo si musela pracovať?", "Nemohol som prísť. ≠ Nemusel som prísť."],
+      note: "Nemohol означает «не смог», а nemusel — «не должен был / не было необходимости».",
+    },
+    {
+      title: "Ещё семь форм для повседневного рассказа",
+      paragraphs: [
+        "Эти формы важнее быстро вспомнить, чем вывести по универсальному правилу. Учите тройку: инфинитив — мужская форма — женская форма.",
+        "Короткие опоры памяти: piť — pil и spať — spal сохраняют короткую основу; jesť меняется на jedol; vidieť и vedieť теряют -ie-.",
+      ],
+      table: { headers: ["Инфинитив", "Он", "Она", "Они", "Перевод"], rows: [
+        ["jesť", "jedol", "jedla", "jedli", "есть"],
+        ["piť", "pil", "pila", "pili", "пить"],
+        ["spať", "spal", "spala", "spali", "спать"],
+        ["dať", "dal", "dala", "dali", "дать"],
+        ["vziať", "vzal", "vzala", "vzali", "взять"],
+        ["vidieť", "videl", "videla", "videli", "видеть"],
+        ["povedať", "povedal", "povedala", "povedali", "сказать"],
+      ] },
+      items: ["Ráno som jedla chlieb a pila čaj.", "V noci sme dobre spali.", "Dal mi kľúč.", "Vzala som si tašku.", "Čo povedal?"],
+      note: "В форме vziať si сохраняйте частицу: Vzal som si kávu.",
+    },
+    {
+      title: "Банк фраз и связный рассказ",
+      paragraphs: [
+        "Закройте перевод и восстановите смысл, затем поменяйте лицо или род: bol som → bola som → boli sme.",
+        "Связки najprv, potom, preto, ale и nakoniec помогают соединить место, движение, желание, возможность и впечатление.",
+      ],
+      table: { headers: ["Ситуация", "Словацкий", "Русский"], rows: [
+        ["место", "Včera som bol / bola doma.", "Вчера я был / была дома."],
+        ["дела", "Mal som veľa práce.", "У меня было много работы."],
+        ["дорога", "Ráno som išla do mesta.", "Утром я пошла в город."],
+        ["прибытие", "Prišli sme načas.", "Мы пришли вовремя."],
+        ["желание", "Chceli sme vidieť centrum.", "Мы хотели увидеть центр."],
+        ["возможность", "Nemohol som telefonovať.", "Я не мог позвонить."],
+        ["необходимость", "Musela som pracovať.", "Мне пришлось работать."],
+        ["завтрак", "Jedli sme chlieb a syr.", "Мы ели хлеб и сыр."],
+        ["выбор", "Vzala si modrú tašku.", "Она взяла синюю сумку."],
+        ["впечатление", "Videli sme krásny park.", "Мы увидели красивый парк."],
+        ["речь", "Povedal pravdu.", "Он сказал правду."],
+      ] },
+      items: ["V sobotu som bola v meste.", "Najprv som išla do kaviarne.", "Chcela som si dať kávu, ale nemohla som zostať dlho.", "Potom som videla kamarátku.", "Nakoniec sme išli do kina."],
+      note: "В короткой истории достаточно 5–6 предложений и пяти разных частотных форм.",
+    },
+    {
+      title: "Частые ошибки и самопроверка",
+      paragraphs: [
+        "Сначала вспоминайте изменённую основу: iš-, jed-, ved-, moh-. Затем добавляйте род и число, а только после этого som, si, sme или ste.",
+      ],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Včera som byť doma.", "Včera som bol doma.", "byť → bol"],
+        ["Anna išiel do práce.", "Anna išla do práce.", "женская форма išla"],
+        ["On je mal čas.", "On mal čas.", "в 3-м лице нет je"],
+        ["Nemohol som musieť ísť.", "Nemusel som ísť.", "не было необходимости"],
+        ["Jedil som obed.", "Jedol som obed.", "jesť → jedol"],
+        ["Deti spala dobre.", "Deti spali dobre.", "множественное число"],
+      ] },
+      items: ["Верна ли изменённая основа?", "Согласована ли форма по роду и числу?", "Нужна ли вспомогательная форма?", "Остаётся ли второй глагол в инфинитиве?", "Точно ли различены nemohol и nemusel?"],
+      note: "Проверяйте всю глагольную группу, а не только последнее окончание.",
+    },
+  ],
+  stepPractices: [
+    { id: "m7-past-frequent-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите перевод «Я был дома.»", options: ["Bol som doma.", "Išli sme do kina.", "Mala som veľa práce."], answer: "Bol som doma.", hint: "Сверьтесь с основной моделью.", explanation: "Верная фраза: Bol som doma." },
+    { id: "m7-past-frequent-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «У меня было много работы.»", answer: "Mala som veľa práce.", hint: "Используйте опорную фразу из таблицы.", explanation: "Верная фраза: Mala som veľa práce." },
+    { id: "m7-past-frequent-step-3", sectionIndex: 2, type: "text", prompt: "Переведите: «Мы пошли в кино.»", answer: "Išli sme do kina.", hint: "Сохраните порядок слов и диакритику.", explanation: "Верная фраза: Išli sme do kina." },
+    { id: "m7-past-frequent-step-4", sectionIndex: 3, type: "pairs", prompt: "Переведите опорные фразы.", answer: "Včera som bol doma.; Chceli sme ísť do kina.; Nemohla prísť.; Čo povedal?; Deti jedli a pili.", pairs: [
+      { prompt: "Вчера я был / была дома.", answer: "Včera som bol doma.", acceptableAnswers: ["Včera som bola doma."], inputHint: "Введите один вариант по своему роду" },
+      { prompt: "Мы хотели пойти в кино.", answer: "Chceli sme ísť do kina.", acceptableAnswers: ["My sme chceli ísť do kina."], inputHint: "Введите перевод" },
+      { prompt: "Она не смогла прийти.", answer: "Nemohla prísť.", acceptableAnswers: ["Ona nemohla prísť."], inputHint: "Введите перевод" },
+      { prompt: "Что он сказал?", answer: "Čo povedal?", acceptableAnswers: ["Čo povedal on?"], inputHint: "Введите перевод" },
+      { prompt: "Дети ели и пили.", answer: "Deti jedli a pili.", inputHint: "Введите перевод" },
+    ], hint: "Проверьте изменённую основу, род, число и диакритику.", explanation: "Нормативные формы: bol/bola, chceli, nemohla, povedal, jedli и pili." },
+    { id: "m7-past-frequent-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки в целых предложениях.", answer: "Anna bola doma.; My sme išli do kina.; Peter chcel kávu.; Včera som jedol polievku.; Deti spali dobre.", pairs: [
+      { prompt: "Anna bol doma.", answer: "Anna bola doma.", inputHint: "Введите исправленную фразу" },
+      { prompt: "My sme išiel do kina.", answer: "My sme išli do kina.", acceptableAnswers: ["Išli sme do kina."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Peter je chcel kávu.", answer: "Peter chcel kávu.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Včera som jedil polievku.", answer: "Včera som jedol polievku.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Deti spala dobre.", answer: "Deti spali dobre.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Исправьте основу, род, число или лишнюю форму byť.", explanation: "Правильно: bola, išli sme, chcel без je, jedol и deti spali." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 2",
+  reinforcementPractices: [
+    { id: "reinforcement:past-frequent:1", sectionIndex: 0, type: "pairs", prompt: "Выберите форму по роду и числу.", answer: "bola; išiel; spali; mali; jedla", pairs: [
+      { prompt: "Eva ___ doma.", answer: "bola", options: ["bol", "bola", "boli"] },
+      { prompt: "Peter ___ do práce.", answer: "išiel", options: ["išla", "išli", "išiel"] },
+      { prompt: "Deti ___.", answer: "spali", options: ["spali", "spala", "spal"] },
+      { prompt: "My sme ___ čas.", answer: "mali", options: ["mal", "mala", "mali"] },
+      { prompt: "Anna ___ obed.", answer: "jedla", options: ["jedol", "jedla", "jedli"] },
+    ], hint: "Сначала определите род или число участника.", explanation: "Ответы: bola, išiel, spali, mali, jedla." },
+    { id: "reinforcement:past-frequent:2", sectionIndex: 2, type: "pairs", prompt: "Восстановите частотную форму.", answer: "bol; išla; mohli; jedol; videla; vzali", pairs: [
+      { prompt: "byť → on", answer: "bol", inputHint: "Введите форму" },
+      { prompt: "ísť → ona", answer: "išla", inputHint: "Введите форму" },
+      { prompt: "môcť → oni", answer: "mohli", inputHint: "Введите форму" },
+      { prompt: "jesť → on", answer: "jedol", inputHint: "Введите форму" },
+      { prompt: "vidieť → ona", answer: "videla", inputHint: "Введите форму" },
+      { prompt: "vziať → oni", answer: "vzali", inputHint: "Введите форму" },
+    ], hint: "Вспомните изменённую основу и затем согласуйте форму.", explanation: "Формы: bol, išla, mohli, jedol, videla, vzali." },
+    { id: "reinforcement:past-frequent:3", sectionIndex: 1, type: "pairs", prompt: "Вставьте подходящий частотный глагол.", answer: "bol; mala; prišli; chcel; museli", pairs: [
+      { prompt: "Peter ___ doma.", answer: "bol", options: ["bol", "mala", "prišli", "chcel", "museli"] },
+      { prompt: "Eva ___ veľa práce.", answer: "mala", options: ["bol", "mala", "prišli", "chcel", "museli"] },
+      { prompt: "Hostia ___ večer.", answer: "prišli", options: ["bol", "mala", "prišli", "chcel", "museli"] },
+      { prompt: "Tomáš ___ spať.", answer: "chcel", options: ["bol", "mala", "prišli", "chcel", "museli"] },
+      { prompt: "My sme ___ ísť.", answer: "museli", options: ["bol", "mala", "prišli", "chcel", "museli"] },
+    ], hint: "Сопоставьте участника и смысл предложения.", explanation: "Peter bol, Eva mala, hostia prišli, Tomáš chcel, my sme museli." },
+    { id: "reinforcement:past-frequent:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте каждую ошибку.", answer: "Anna bola doma.; My sme išli do kina.; Peter chcel kávu.; Včera som jedol polievku.; Deti spali dobre.", pairs: [
+      { prompt: "Anna bol doma.", answer: "Anna bola doma.", inputHint: "Введите исправленную фразу" },
+      { prompt: "My sme išiel do kina.", answer: "My sme išli do kina.", acceptableAnswers: ["Išli sme do kina."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Peter je chcel kávu.", answer: "Peter chcel kávu.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Včera som jedil polievku.", answer: "Včera som jedol polievku.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Deti spala dobre.", answer: "Deti spali dobre.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Исправляйте всё предложение и сохраняйте диакритику.", explanation: "Проверьте основу, род, число и отсутствие je в 3-м лице." },
+    { id: "reinforcement:past-frequent:5", sectionIndex: 3, type: "pairs", prompt: "Переведите на словацкий.", answer: "Včera som bol doma.; Chceli sme ísť do kina.; Nemohla prísť.; Čo povedal?; Deti jedli a pili.", pairs: [
+      { prompt: "Вчера я был / была дома.", answer: "Včera som bol doma.", acceptableAnswers: ["Včera som bola doma."], inputHint: "Введите один вариант по своему роду" },
+      { prompt: "Мы хотели пойти в кино.", answer: "Chceli sme ísť do kina.", acceptableAnswers: ["My sme chceli ísť do kina."], inputHint: "Введите перевод" },
+      { prompt: "Она не могла прийти.", answer: "Nemohla prísť.", acceptableAnswers: ["Ona nemohla prísť."], inputHint: "Введите перевод" },
+      { prompt: "Что он сказал?", answer: "Čo povedal?", acceptableAnswers: ["Čo povedal on?"], inputHint: "Введите перевод" },
+      { prompt: "Дети ели и пили.", answer: "Deti jedli a pili.", inputHint: "Введите перевод" },
+    ], hint: "Воспроизведите целую модель, включая диакритику.", explanation: "Переводы используют bol/bola, chceli, nemohla, povedal, jedli и pili." },
+    { id: "reinforcement:past-frequent:6", sectionIndex: 3, type: "pairs", prompt: "Соберите историю о прошлом мужчины.", answer: "Včera som bol doma.; Mal som veľa práce a musel som telefonovať.; Potom som chcel ísť von.; Nemohol som ísť.; Večer som jedol polievku a pil čaj.; Neskôr som videl dobrý film.", pairs: [
+      { prompt: "1 · место", answer: "Včera som bol doma.", options: ["Včera som bola doma.", "Včera bol som doma.", "Včera som bol doma."] },
+      { prompt: "2 · работа и необходимость", answer: "Mal som veľa práce a musel som telefonovať.", options: ["Mala som veľa práce a musela som telefonovať.", "Mal som veľa práce a musel som telefonovať.", "Mal som veľa práce a musela som telefonovať."] },
+      { prompt: "3 · желание", answer: "Potom som chcel ísť von.", options: ["Potom som chcel ísť von.", "Potom chcel som ísť von.", "Potom som chcela ísť von."] },
+      { prompt: "4 · невозможность", answer: "Nemohol som ísť.", options: ["Nemusel som ísť.", "Som nemohol ísť.", "Nemohol som ísť."] },
+      { prompt: "5 · еда и напиток", answer: "Večer som jedol polievku a pil čaj.", options: ["Večer som jedla polievku a pila čaj.", "Večer som jedol polievku a pil čaj.", "Večer som jedil polievku a pil čaj."] },
+      { prompt: "6 · впечатление", answer: "Neskôr som videl dobrý film.", options: ["Neskôr som videl dobrý film.", "Neskôr videl som dobrý film.", "Neskôr som videla dobrý film."] },
+    ], hint: "Все предложения говорит один мужчина; сохраняйте мужские формы и естественный порядок слов.", explanation: "История использует bol, mal, musel, chcel, nemohol, jedol, pil и videl в согласованных формах." },
+  ],
+  knowledgeChecks: [
+    { id: "m7-past-frequent-check-1", question: "Как по-словацки: «Я был дома»?", options: ["Bol som doma.", "Mala som veľa práce.", "Išli sme do kina."], answer: "Bol som doma.", explanation: "Правильная модель: Bol som doma." },
+    { id: "m7-past-frequent-check-2", question: "Как по-словацки: «У меня было много работы»?", options: ["Bol som doma.", "Mala som veľa práce.", "Išli sme do kina."], answer: "Mala som veľa práce.", explanation: "Правильная модель: Mala som veľa práce." },
+  ],
+  finalChecks: [
+    { id: "m7-past-frequent-final-1", question: "Выберите перевод «Мы пошли в кино».", options: ["Bol som doma.", "Mala som veľa práce.", "Išli sme do kina."], answer: "Išli sme do kina.", explanation: "Правильный ответ: Išli sme do kina." },
+  ],
+  chatPrompt: "Расскажите о прошлом выходном в 5–6 фразах: где вы были, куда пошли, чего хотели, что смогли или должны были сделать и что увидели.",
+  chatSuggestions: ["Včera som bol / bola doma.", "Potom som chcel / chcela ísť von.", "Neskôr som videl / videla film."],
+} satisfies CourseLesson;

@@ -1,6 +1,28 @@
 import { defineModule1Lesson } from "../lessonFactory";
 
 export const longShortVowelsLesson = defineModule1Lesson({
+  vocabulary: [
+    {"word":"rad — rád","translation":"совет — рад / охотно","example":"rad — rád"},
+    {"word":"sud — súd","translation":"бочка — суд","example":"sud — súd"},
+    {"word":"dom — dóm","translation":"дом — собор","example":"dom — dóm"},
+    {"word":"muka — múka","translation":"мука, мучение — мука (продукт)","example":"muka — múka"},
+    {"word":"učiteľ","translation":"учитель","example":"učiteľ"},
+    {"word":"krásny","translation":"красивый","example":"krásny"},
+    {"word":"mám","translation":"у меня есть","example":"mám"},
+    {"word":"máš","translation":"у тебя есть","example":"máš"},
+    {"word":"ráno","translation":"утро","example":"ráno"},
+    {"word":"káva","translation":"кофе","example":"káva"},
+    {"word":"mlieko","translation":"молоко","example":"mlieko"},
+    {"word":"dobrý","translation":"хороший","example":"dobrý"},
+    {"word":"malý","translation":"маленький","example":"malý"},
+    {"word":"Slovák","translation":"словак","example":"Slovák"},
+    {"word":"súd","translation":"суд","example":"súd"},
+    {"word":"múka","translation":"мука (продукт)","example":"múka"},
+    {"word":"dóm","translation":"собор","example":"dóm"},
+    {"word":"mliečny","translation":"молочный","example":"mliečny"},
+    {"word":"vŕba","translation":"ива","example":"vŕba"},
+    {"word":"stĺp","translation":"столб","example":"stĺp"},
+  ],
   slug: "long-short-vowels", title: "Долгие и краткие гласные", slovakTitle: "Dlhé a krátke samohlásky",
   description: "Различайте краткие и долгие гласные на слух и письме, удерживайте долгий звук без переноса ударения и применяйте простое ритмическое сокращение.", duration: "35–45 мин",
   goals: ["Различать a/á, e/é, i/í, o/ó, u/ú, y/ý на слух и в письме", "Удерживать долгий звук, не перенося ударение", "Понимать, когда долгота различает слова и формы", "Применять простое правило ритмического сокращения"],

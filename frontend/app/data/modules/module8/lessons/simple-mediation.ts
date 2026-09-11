@@ -1,30 +1,180 @@
-import type { CompactLessonContent } from "../../plannedLessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const simpleMediationContent: CompactLessonContent = {
-  "slug": "simple-mediation",
-  "title": "Передача простой информации",
-  "slovakTitle": "Odovzdanie informácie",
-  "outcome": "Передавать число, время, место или инструкцию.",
-  "summary": "После урока вы сможете передавать число, время, место или инструкцию в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Передавайте только понятую информацию и сохраняйте точность имён, чисел, времени и места. При сомнении уточните или сообщите, что деталь непонятна.",
-  "examples": [
-    {
-      "slovak": "Peter príde o šiestej.",
-      "russian": "Петер придёт в шесть."
-    },
-    {
-      "slovak": "Stretnutie je v banke na Hlavnej ulici.",
-      "russian": "Встреча в банке на Главной улице."
-    },
-    {
-      "slovak": "Autobus má číslo dvanásť.",
-      "russian": "Номер автобуса - двенадцать."
-    },
-    {
-      "slovak": "Máme čakať pri vchode.",
-      "russian": "Нам нужно ждать у входа."
-    }
+export const simpleMediationContent = {
+  vocabulary: [
+    {"word":"Peter píše, že stretnutie je zajtra o piatej.","translation":"Петер пишет, что встреча завтра в пять.","example":"Peter píše, že stretnutie je zajtra o piatej."},
+    {"word":"Máme priniesť doklady.","translation":"Нам нужно принести документы.","example":"Máme priniesť doklady."},
+    {"word":"Mária je doma. Peter má čas.","translation":"Мария дома. У Петера есть время.","example":"Mária je doma. Peter má čas."},
+    {"word":"Katka dnes nepríde. Navrhuje stretnutie zajtra o desiatej.","translation":"Катка сегодня не придёт. Она предлагает встречу завтра в десять.","example":"Katka dnes nepríde. Navrhuje stretnutie zajtra o desiatej."},
+    {"word":"Lístok stojí osem eur.","translation":"Билет стоит восемь евро.","example":"Lístok stojí osem eur."},
+    {"word":"Rozumiem správne: miestnosť dvanásť?","translation":"Я правильно понял: аудитория двенадцать?","example":"Rozumiem správne: miestnosť dvanásť?"},
   ],
-  "mistake": "Не меняйте время или число при пересказе; повторите цифры для проверки.",
-  "task": "Прослушайте сообщение и передайте партнёру имя, номер, время, место и требуемое действие."
-};
+  slug: "simple-mediation",
+  order: 7,
+  title: "Передача простой информации",
+  slovakTitle: "Ako presne odovzdať jednoduchú informáciu",
+  description: "Передавать число, время, место или инструкцию.",
+  duration: "35–40 мин",
+  goals: [
+    "Передавать другому человеку короткий факт или сообщение",
+    "Называть источник, время, место, число и нужное действие",
+    "Преобразовывать частые реплики от первого лица к третьему",
+    "Проверять критические детали и избегать искажения смысла",
+  ],
+  theory: {
+    summary: "Формула точной передачи: кто сообщил → что произошло → когда и где → что нужно сделать. Передавайте не каждое слово, а обязательные элементы и отдельно проверяйте отрицание и числа.",
+    rules: [
+      "Сначала выделите источник, главный факт, точные детали и действие получателя.",
+      "Используйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.",
+      "При смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.",
+      "Не перестраивайте длинные фразы: два коротких факта точнее, например Eva nepríde. Je chorá.",
+      "Сохраняйте без изменений имя, отрицание, время, адрес, номер, сумму, количество и просьбу.",
+      "Если деталь неясна, переспросите: Rozumiem správne: zajtra o piatej?",
+    ],
+    examples: [
+      { slovak: "Peter píše, že stretnutie je zajtra o piatej.", russian: "Петер пишет, что встреча завтра в пять.", explanation: "Названы источник, главный факт и точное время." },
+      { slovak: "Máme priniesť doklady.", russian: "Нам нужно принести документы.", explanation: "Короткая фраза передаёт следующий шаг." },
+      { slovak: "Mária je doma. Peter má čas.", russian: "Мария дома. У Петера есть время.", explanation: "Som и mám изменены на формы третьего лица je и má." },
+      { slovak: "Katka dnes nepríde. Navrhuje stretnutie zajtra o desiatej.", russian: "Катка сегодня не придёт. Она предлагает встречу завтра в десять.", explanation: "Отрицание и новое время сохранены в двух коротких фразах." },
+      { slovak: "Lístok stojí osem eur.", russian: "Билет стоит восемь евро.", explanation: "Цена — критическая деталь, её нельзя округлять или заменять." },
+      { slovak: "Rozumiem správne: miestnosť dvanásť?", russian: "Я правильно понял: аудитория двенадцать?", explanation: "Уточнение помогает проверить номер до передачи." },
+    ],
+  },
+  sections: [
+    {
+      title: "Сначала выделите четыре опоры",
+      paragraphs: [
+        "Исходное сообщение: Ahoj, Ari! Tu je Peter. Zajtrajšie stretnutie je o 17:00 v škole, v miestnosti 12. Prosím, prines doklady.",
+        "Готовая передача: Peter píše, že stretnutie je zajtra o piatej v škole, v miestnosti 12. Máme priniesť doklady.",
+      ],
+      table: { headers: ["Опора", "Что найдено", "Как передать"], rows: [
+        ["источник", "Peter", "Peter hovorí... / Peter píše..."],
+        ["главный факт", "zajtrajšie stretnutie", "Stretnutie je zajtra."],
+        ["точные детали", "17:00, škola, miestnosť 12", "O piatej v škole, v miestnosti 12."],
+        ["действие", "prines doklady", "Máme priniesť doklady."],
+      ] },
+      items: ["Имя источника", "отрицание", "новое время", "адрес или номер", "сумма или количество", "просьба"],
+      note: "Если критическая деталь неясна, сначала переспросите: Rozumiem správne: zajtra o piatej?",
+    },
+    {
+      title: "Полезные модели и смена лица",
+      paragraphs: ["Для A1 достаточно нескольких готовых рамок. При недословной передаче чужих слов часто меняется форма глагола."],
+      table: { headers: ["Источник", "Модель", "Пример"], rows: [
+        ["человек говорит", "X hovorí, že...", "Anna hovorí, že kurz je dnes."],
+        ["человек пишет", "X píše, že...", "Peter píše, že príde neskôr."],
+        ["человек просит", "X prosí, aby...", "Mama prosí, aby sme kúpili chlieb."],
+        ["сообщение", "V správe je...", "V správe je nový termín."],
+        ["без источника", "Прямой факт", "Obchod je zatvorený."],
+      ] },
+      items: ["Som doma. → Mária je doma.", "Mám čas. → Peter má čas.", "Prídem o šiestej. → Eva príde o šiestej.", "Nemôžem prísť. → Ján nemôže prísť.", "Bývam v Nitre. → Lucia býva v Nitre."],
+      note: "A1-упрощение: вместо длинного пересказа скажите Eva nepríde. Je chorá.",
+    },
+    {
+      title: "Три ситуации и точность деталей",
+      paragraphs: [
+        "Изменение встречи: Dnes neprídem. Stretnime sa zajtra o desiatej. → Katka dnes nepríde. Navrhuje stretnutie zajtra o desiatej.",
+        "Инструкция: Kúp, prosím, chlieb a dve fľaše vody. → Mama prosí, aby sme kúpili chlieb a dve fľaše vody.",
+        "Объявление: Obchod je dnes otvorený do 18:00. Zajtra je zatvorený. → Obchod je dnes otvorený do šiestej. Zajtra je zatvorený.",
+      ],
+      table: { headers: ["Деталь", "Как сказать", "Как проверить"], rows: [
+        ["время", "o 16:30 / o pol piatej", "O šestnástej tridsať?"],
+        ["номер", "miestnosť 24", "Dvadsaťštyri?"],
+        ["цена", "stojí to 15 eur", "Pätnásť eur?"],
+        ["адрес", "Hlavná ulica 8", "Číslo osem?"],
+        ["количество", "dve fľaše vody", "Dve fľaše?"],
+      ] },
+      note: "Получатель должен понять следующий шаг: Máme tam byť o desiatej. / Máme kúpiť dve fľaše. / Zajtra tam nechoď.",
+    },
+    {
+      title: "Банк фраз и проверка перед отправкой",
+      paragraphs: ["Собирайте короткое сообщение из готовых блоков и сравнивайте его с исходником."],
+      table: { headers: ["Функция", "Фраза", "Перевод"], rows: [
+        ["источник", "Peter hovorí, že...", "Петер говорит, что..."],
+        ["текст", "Anna píše, že...", "Анна пишет, что..."],
+        ["просьба", "Prosí, aby sme prišli.", "Просит, чтобы мы пришли."],
+        ["изменение", "Nový termín je v piatok.", "Новое время — в пятницу."],
+        ["отмена", "Stretnutie dnes nie je.", "Сегодня встречи нет."],
+        ["задержка", "Vlak mešká desať minút.", "Поезд опаздывает на десять минут."],
+        ["прибытие", "Eva príde o šiestej.", "Ева придёт в шесть."],
+        ["невозможность", "Ján nemôže prísť.", "Ян не может прийти."],
+        ["место", "Stretneme sa pri stanici.", "Встретимся у вокзала."],
+        ["номер", "Je to miestnosť 12.", "Это аудитория 12."],
+        ["цена", "Lístok stojí 8 eur.", "Билет стоит 8 евро."],
+        ["действие", "Máme priniesť doklady.", "Нам нужно принести документы."],
+        ["проверка", "Rozumiem správne: o piatej?", "Я правильно понял: в пять?"],
+        ["подтверждение", "Áno, presne tak.", "Да, именно так."],
+      ] },
+      note: "Перед отправкой проверьте: кто? когда? где? сколько? что делать? Особенно внимательно — ne- и все числа.",
+    },
+    {
+      title: "Типичные ошибки и самопроверка",
+      paragraphs: ["Сверьте передачу с исходником и убедитесь, что форма лица, отрицание и числа не изменили смысл."],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Peter hovorím, že...", "Peter hovorí, že...", "Для Peter нужна форма третьего лица."],
+        ["Eva prídem o piatej.", "Eva príde o piatej.", "Prídem меняется на príde."],
+        ["Потерять ne-", "Ján nemôže prísť.", "Отрицание меняет смысл."],
+        ["Передать приблизительный номер", "miestnosť 14", "Номер и время должны быть точными."],
+      ] },
+      items: ["Назван источник и главный факт.", "Сохранены время, место, номер и количество.", "Форма глагола соответствует третьему лицу.", "Отрицание не потеряно.", "Получателю понятен следующий шаг."],
+      note: "Точность важнее дословности: при сомнении разбейте сообщение на два коротких факта.",
+    },
+  ],
+  stepPractices: [
+    { id: "m8-simple-mediation-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите перевод «Петер придёт в шесть».", options: ["Peter príde o šiestej.", "Peter píše o šiestej.", "Peter nemôže prísť."], answer: "Peter príde o šiestej.", hint: "Нужны имя, форма príde и точное время.", explanation: "Верная фраза: Peter príde o šiestej." },
+    { id: "m8-simple-mediation-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Встреча в банке на Главной улице.»", answer: "Stretnutie je v banke na Hlavnej ulici.", hint: "Сохраните место и название улицы.", explanation: "Верная фраза: Stretnutie je v banke na Hlavnej ulici." },
+    { id: "m8-simple-mediation-step-3", sectionIndex: 2, type: "text", prompt: "Переведите: «Номер автобуса — двенадцать.»", answer: "Autobus má číslo dvanásť.", hint: "Передайте число точно и сохраните диакритику.", explanation: "Верная фраза: Autobus má číslo dvanásť." },
+    { id: "m8-simple-mediation-step-4", sectionIndex: 3, type: "pairs", prompt: "Определите функцию готовых блоков.", answer: "источник; число; действие; проверка", showSlovakKeyboard: false, pairs: [
+      { prompt: "Anna píše, že...", answer: "источник", options: ["источник", "число", "действие", "проверка"] },
+      { prompt: "Je to miestnosť 12.", answer: "число", options: ["источник", "число", "действие", "проверка"] },
+      { prompt: "Máme priniesť doklady.", answer: "действие", options: ["источник", "число", "действие", "проверка"] },
+      { prompt: "Rozumiem správne: o piatej?", answer: "проверка", options: ["источник", "число", "действие", "проверка"] },
+    ], hint: "Смотрите, какую задачу выполняет каждая фраза.", explanation: "Блоки называют источник, передают номер, обозначают действие и уточняют время." },
+    { id: "m8-simple-mediation-step-5", sectionIndex: 4, type: "choice", prompt: "Что защищает сообщение от искажения?", options: ["Сверить источник, ne-, время, место, числа и действие", "Передать только приблизительный смысл", "Заменить сложные числа знакомыми"], answer: "Сверить источник, ne-, время, место, числа и действие", showSlovakKeyboard: false, hint: "Вспомните список критических деталей.", explanation: "Именно источник, отрицание, точные детали и следующий шаг определяют смысл передачи." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 7",
+  reinforcementPractices: [
+    { id: "reinforcement:simple-mediation:1", sectionIndex: 1, type: "pairs", prompt: "Выберите форму третьего лица.", answer: "hovorí; príde; nemôže", pairs: [
+      { prompt: "Peter ___, že kurz je dnes.", answer: "hovorí", options: ["hovorím", "hovorí", "hovoríš"] },
+      { prompt: "Eva ___ o šiestej.", answer: "príde", options: ["prídem", "príde", "prídeš"] },
+      { prompt: "Ján ___ prísť.", answer: "nemôže", options: ["nemôžem", "nemôže", "nemôžeš"] },
+    ], hint: "Имена Peter, Eva и Ján требуют третьего лица.", explanation: "Нужны формы hovorí, príde и nemôže." },
+    { id: "reinforcement:simple-mediation:2", sectionIndex: 1, type: "pairs", prompt: "Передайте реплики, начав с имени.", answer: "Mária je doma.; Peter má čas.; Lucia býva v Nitre.", pairs: [
+      { prompt: "Mária: Som doma.", answer: "Mária je doma.", inputHint: "Измените форму лица." },
+      { prompt: "Peter: Mám čas.", answer: "Peter má čas.", inputHint: "Измените форму лица." },
+      { prompt: "Lucia: Bývam v Nitre.", answer: "Lucia býva v Nitre.", inputHint: "Измените форму лица." },
+    ], hint: "Используйте пары som → je, mám → má, bývam → býva.", explanation: "В передаче получаются Mária je, Peter má и Lucia býva." },
+    { id: "reinforcement:simple-mediation:3", sectionIndex: 0, type: "pairs", prompt: "Найдите обязательные детали: Kurz je v piatok o 17:30 v miestnosti 8. Prineste si učebnicu.", answer: "v piatok; o 17:30; v miestnosti 8; priniesť si učebnicu", pairs: [
+      { prompt: "День", answer: "v piatok", options: ["v piatok", "o 17:30", "v miestnosti 8", "priniesť si učebnicu"] },
+      { prompt: "Время", answer: "o 17:30", options: ["v piatok", "o 17:30", "v miestnosti 8", "priniesť si učebnicu"] },
+      { prompt: "Место", answer: "v miestnosti 8", options: ["v piatok", "o 17:30", "v miestnosti 8", "priniesť si učebnicu"] },
+      { prompt: "Действие", answer: "priniesť si učebnicu", options: ["v piatok", "o 17:30", "v miestnosti 8", "priniesť si učebnicu"] },
+    ], hint: "Отдельно найдите день, время, место и действие.", explanation: "Курс в пятницу в 17:30 в аудитории 8; нужно принести учебник." },
+    { id: "reinforcement:simple-mediation:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте искажение, сверившись с исходником.", answer: "Eva zajtra nepríde.; Lístok stojí 18 eur.", pairs: [
+      { prompt: "Исходник: Zajtra neprídem. Ошибка: Eva zajtra príde.", answer: "Eva zajtra nepríde.", inputHint: "Сохраните отрицание." },
+      { prompt: "Исходник: Lístok stojí 18 eur. Ошибка: Lístok stojí 80 eur.", answer: "Lístok stojí 18 eur.", inputHint: "Сохраните точное число." },
+    ], hint: "Проверьте ne- и число.", explanation: "Правильно: Eva zajtra nepríde. Lístok stojí 18 eur." },
+    { id: "reinforcement:simple-mediation:5", sectionIndex: 3, type: "pairs", prompt: "Переведите точные сообщения.", answer: "Peter píše, že stretnutie je zajtra.; Eva príde o siedmej.; Máme priniesť doklady.; Rozumiem správne: miestnosť 12?", pairs: [
+      { prompt: "Петер пишет, что встреча завтра.", answer: "Peter píše, že stretnutie je zajtra.", inputHint: "Введите словацкую фразу." },
+      { prompt: "Ева придёт в семь.", answer: "Eva príde o siedmej.", inputHint: "Введите словацкую фразу." },
+      { prompt: "Нам нужно принести документы.", answer: "Máme priniesť doklady.", inputHint: "Введите словацкую фразу." },
+      { prompt: "Я правильно понял: аудитория 12?", answer: "Rozumiem správne: miestnosť 12?", inputHint: "Введите вопрос-проверку." },
+    ], hint: "Сохраняйте формы третьего лица, время, действие и диакритику.", explanation: "Фразы точно передают источник, прибытие, действие и проверку номера." },
+    { id: "reinforcement:simple-mediation:6", sectionIndex: 4, type: "pairs", prompt: "Передайте сообщение Анны тремя короткими предложениями: сегодня магазин закрыт; завтра открыт с девяти до шести; нужно прийти завтра утром.", answer: "Anna hovorí, že obchod je dnes zatvorený.; Zajtra je otvorený od deviatej do šiestej.; Máme prísť zajtra ráno.", pairs: [
+      { prompt: "Источник и сегодняшний факт", answer: "Anna hovorí, že obchod je dnes zatvorený.", options: ["Anna hovorí, že obchod je dnes zatvorený.", "Anna hovorím, že obchod je otvorený."] },
+      { prompt: "Завтрашние часы", answer: "Zajtra je otvorený od deviatej do šiestej.", options: ["Zajtra je otvorený od deviatej do šiestej.", "Zajtra je otvorený od šiestej do deviatej."] },
+      { prompt: "Следующий шаг", answer: "Máme prísť zajtra ráno.", options: ["Máme prísť zajtra ráno.", "Máme prísť dnes večer."] },
+    ], hint: "Сохраните источник, отрицание, часы и время действия.", explanation: "Точная передача: Anna hovorí, že obchod je dnes zatvorený. Zajtra je otvorený od deviatej do šiestej. Máme prísť zajtra ráno." },
+  ],
+  chatPrompt: "Передайте короткое сообщение по четырём опорам: источник, факт, точные детали и действие. Я помогу проверить смену лица, ne- и числа.",
+  chatSuggestions: ["Peter hovorí, že...", "Anna píše, že...", "Máme priniesť...", "Rozumiem správne: ...?"],
+  knowledgeChecks: [
+    { id: "m8-simple-mediation-check-1", question: "Как по-словацки: «Петер придёт в шесть»?", options: ["Peter príde o šiestej.", "Peter píše o šiestej.", "Peter nemôže prísť."], answer: "Peter príde o šiestej.", explanation: "Правильная фраза: Peter príde o šiestej." },
+    { id: "m8-simple-mediation-check-2", question: "Как по-словацки: «Встреча в банке на Главной улице»?", options: ["Stretnutie je v banke na Hlavnej ulici.", "Stretnutie je pri stanici.", "Banka je dnes zatvorená."], answer: "Stretnutie je v banke na Hlavnej ulici.", explanation: "Правильная фраза: Stretnutie je v banke na Hlavnej ulici." },
+  ],
+  finalChecks: [
+    { id: "m8-simple-mediation-final-1", question: "Выберите перевод «Номер автобуса — двенадцать».", options: ["Autobus má číslo dvanásť.", "Autobus príde o dvanástej.", "Potrebujeme dvanásť lístkov."], answer: "Autobus má číslo dvanásť.", explanation: "Правильный ответ: Autobus má číslo dvanásť." },
+  ],
+} satisfies CourseLesson;

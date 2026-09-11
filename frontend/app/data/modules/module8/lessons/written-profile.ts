@@ -1,30 +1,195 @@
-import type { CompactLessonContent } from "../../plannedLessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const writtenProfileContent: CompactLessonContent = {
-  "slug": "written-profile",
-  "title": "Письменная самопрезентация",
-  "slovakTitle": "Písomné predstavenie",
-  "outcome": "Писать короткий профиль из простых предложений.",
-  "summary": "После урока вы сможете писать короткий профиль из простых предложений в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Профиль A1 включает имя, происхождение, место проживания, язык, занятие и интерес. Каждая фраза должна добавлять один проверяемый факт.",
-  "examples": [
-    {
-      "slovak": "Volám sa Marina.",
-      "russian": "Меня зовут Марина."
-    },
-    {
-      "slovak": "Som z Ukrajiny a bývam v Bratislave.",
-      "russian": "Я из Украины и живу в Братиславе."
-    },
-    {
-      "slovak": "Pracujem v obchode.",
-      "russian": "Я работаю в магазине."
-    },
-    {
-      "slovak": "Vo voľnom čase rada čítam.",
-      "russian": "В свободное время я люблю читать."
-    }
+export const writtenProfileContent = {
+  vocabulary: [
+    {"word":"Volám sa Ari. Som z Ruska a bývam v Bratislave.","translation":"Меня зовут Ари. Я из России и живу в Братиславе.","example":"Volám sa Ari. Som z Ruska a bývam v Bratislave."},
+    {"word":"Pracujem v IT. Hovorím po rusky a po anglicky.","translation":"Я работаю в IT. Я говорю по-русски и по-английски.","example":"Pracujem v IT. Hovorím po rusky a po anglicky."},
+    {"word":"Teraz sa učím po slovensky.","translation":"Сейчас я учу словацкий.","example":"Teraz sa učím po slovensky."},
+    {"word":"Vo voľnom čase rada čítam a počúvam hudbu.","translation":"В свободное время я люблю читать и слушать музыку.","example":"Vo voľnom čase rada čítam a počúvam hudbu."},
+    {"word":"Chcem lepšie hovoriť po slovensky.","translation":"Хочу лучше говорить по-словацки.","example":"Chcem lepšie hovoriť po slovensky."},
+    {"word":"Teším sa na nové kontakty.","translation":"Буду рад или рада новым знакомствам.","example":"Teším sa na nové kontakty."},
   ],
-  "mistake": "Не копируйте русскую пунктуацию и транслитерацию вместо словацких букв.",
-  "task": "Напишите профиль из 6-8 простых предложений и проверьте формы рода и глагола."
-};
+  slug: "written-profile",
+  order: 6,
+  title: "Письменная самопрезентация",
+  slovakTitle: "Ako sa stručne predstaviť písomne",
+  description: "Писать короткий профиль из простых предложений.",
+  duration: "35–40 мин",
+  goals: [
+    "Писать связный текст о себе из 6–8 предложений",
+    "Сообщать происхождение, место жительства, работу и языки",
+    "Кратко описывать интересы и цель изучения словацкого",
+    "Проверять формы первого лица, род и порядок информации",
+  ],
+  theory: {
+    summary: "Формула профиля: имя → откуда и где живёте → работа или учёба → языки → интересы → цель. Каждый блок оформляйте одним коротким предложением и соединяйте только соседние мысли.",
+    rules: [
+      "Используйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.",
+      "Местоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.",
+      "Страну запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.",
+      "О языке говорите по модели po + наречие: po rusky, po anglicky, po slovensky.",
+      "Связывайте идеи словами a, ale, tiež, teraz, vo voľnom čase и preto.",
+      "Род отмечайте только там, где форма меняется: študent/študentka, rád/rada; при желании выбирайте нейтральную модель.",
+    ],
+    examples: [
+      { slovak: "Volám sa Ari. Som z Ruska a bývam v Bratislave.", russian: "Меня зовут Ари. Я из России и живу в Братиславе.", explanation: "Профиль начинается с имени, происхождения и места жительства." },
+      { slovak: "Pracujem v IT. Hovorím po rusky a po anglicky.", russian: "Я работаю в IT. Я говорю по-русски и по-английски.", explanation: "Формы pracujem и hovorím показывают первое лицо без ja." },
+      { slovak: "Teraz sa učím po slovensky.", russian: "Сейчас я учу словацкий.", explanation: "Teraz обозначает текущий процесс, po slovensky — язык." },
+      { slovak: "Vo voľnom čase rada čítam a počúvam hudbu.", russian: "В свободное время я люблю читать и слушать музыку.", explanation: "Фраза сообщает интерес; rada показывает женский род." },
+      { slovak: "Chcem lepšie hovoriť po slovensky.", russian: "Хочу лучше говорить по-словацки.", explanation: "Последний блок формулирует личную цель." },
+      { slovak: "Teším sa na nové kontakty.", russian: "Буду рад или рада новым знакомствам.", explanation: "Нейтральная заключительная фраза подходит разным авторам." },
+    ],
+  },
+  sections: [
+    {
+      title: "Каркас самопрезентации",
+      paragraphs: [
+        "Хороший текст A1 короткий и предсказуемый: каждое предложение отвечает на один вопрос, а порядок помогает читателю быстро понять главное.",
+        "Короткий образец: Volám sa Ari. Som z Ruska a bývam v Bratislave. Pracujem v IT. Hovorím po rusky a po anglicky. Teraz sa učím po slovensky. Vo voľnom čase rád alebo rada čítam a chodím na prechádzky. Chcem lepšie hovoriť po slovensky.",
+      ],
+      table: { headers: ["Блок", "Вопрос", "Модель"], rows: [
+        ["1. Имя", "Ako sa voláte?", "Volám sa Ari."],
+        ["2. Происхождение", "Odkiaľ ste?", "Som z Ruska."],
+        ["3. Место", "Kde bývate?", "Bývam v Bratislave."],
+        ["4. Работа / учёба", "Čo robíte?", "Pracujem v IT."],
+        ["5. Языки", "Akými jazykmi hovoríte?", "Hovorím po rusky a po anglicky."],
+        ["6. Интересы", "Čo rád alebo rada robíte?", "Rád čítam. / Rada čítam."],
+        ["7. Цель", "Prečo sa učíte po slovensky?", "Chcem žiť na Slovensku."],
+      ] },
+      note: "Один блок = одно короткое предложение. Соседние мысли можно соединить с a, ale или tiež.",
+    },
+    {
+      title: "Надёжные модели и формы",
+      paragraphs: [
+        "Текст написан от вашего имени, поэтому нужны формы первого лица. Окончание глагола уже показывает говорящего, и повторять ja обычно не нужно.",
+        "Выбирайте только сведения, которые действительно хотите сообщить: возраст, семейное положение и точный адрес необязательны.",
+      ],
+      table: { headers: ["Функция", "Правильная модель", "Комментарий"], rows: [
+        ["назвать имя", "Volám sa... / Som...", "обе модели естественны"],
+        ["сказать откуда", "Som z Ruska / z Ukrajiny.", "страна употребляется вместе с z"],
+        ["назвать город", "Bývam v Bratislave.", "после v используется форма места"],
+        ["работа", "Pracujem v škole / v banke.", "место работы"],
+        ["профессия", "Som programátor / programátorka.", "форма зависит от рода"],
+        ["учёба", "Študujem ekonómiu.", "что изучаете"],
+        ["язык", "Hovorím po rusky.", "po + наречие языка"],
+        ["процесс", "Učím sa po slovensky.", "учу словацкий"],
+      ] },
+      items: ["Som študent. / Som študentka. / Študujem na univerzite.", "Rád cestujem. / Rada cestujem. / Veľa cestujem.", "Som ženatý. / Som vydatá. / Mám rodinu."],
+      note: "Нейтральная формулировка помогает не указывать род или личную деталь, если вы этого не хотите.",
+    },
+    {
+      title: "Как сделать текст связным",
+      paragraphs: [
+        "Связность — это понятный порядок и несколько простых соединителей. Длинные сложные предложения на A1 не нужны.",
+        "Проверка логики: прочитайте только начала предложений — Volám sa... Som z... Bývam... Pracujem... Hovorím... Vo voľnom čase... Chcem...",
+      ],
+      table: { headers: ["Связка", "Значение", "Пример"], rows: [
+        ["a", "и", "Bývam v Nitre a pracujem v škole."],
+        ["ale", "но", "Som z Ruska, ale bývam na Slovensku."],
+        ["tiež", "также", "Tiež hovorím po anglicky."],
+        ["teraz", "сейчас", "Teraz sa učím po slovensky."],
+        ["vo voľnom čase", "в свободное время", "Vo voľnom čase športujem."],
+        ["preto", "поэтому", "Žijem na Slovensku, preto sa učím po slovensky."],
+      ] },
+      items: ["Ja Ari. Rusko. Bratislava. → Volám sa Ari. Som z Ruska a bývam v Bratislave.", "Ja pracovať IT. → Pracujem v IT.", "Ja hovoriť rusky anglicky. → Hovorím po rusky a po anglicky.", "Slovenčina teraz. → Teraz sa učím po slovensky."],
+      note: "Не повторяйте ja перед каждой фразой: Bývam... Pracujem... Hovorím... звучит естественнее.",
+    },
+    {
+      title: "Банк фраз для профиля",
+      paragraphs: ["Выберите 6–8 строк, которые подходят именно вам, и расположите их по плану."],
+      table: { headers: ["Тема", "Фраза", "Перевод"], rows: [
+        ["имя", "Volám sa Ari.", "Меня зовут Ари."],
+        ["страна", "Som z Ruska.", "Я из России."],
+        ["город", "Bývam v Bratislave.", "Я живу в Братиславе."],
+        ["работа", "Pracujem v IT.", "Я работаю в IT."],
+        ["учёба", "Študujem na univerzite.", "Я учусь в университете."],
+        ["русский", "Hovorím po rusky.", "Я говорю по-русски."],
+        ["английский", "Hovorím aj po anglicky.", "Я также говорю по-английски."],
+        ["словацкий", "Učím sa po slovensky.", "Я учу словацкий."],
+        ["чтение", "Rád / Rada čítam.", "Я люблю читать."],
+        ["музыка", "Rád / Rada počúvam hudbu.", "Я люблю слушать музыку."],
+        ["спорт", "Vo voľnom čase športujem.", "В свободное время занимаюсь спортом."],
+        ["прогулки", "Chodím na prechádzky.", "Я хожу на прогулки."],
+        ["цель", "Chcem lepšie hovoriť po slovensky.", "Хочу лучше говорить по-словацки."],
+        ["финал", "Teším sa na nové kontakty.", "Буду рад или рада новым знакомствам."],
+      ] },
+      note: "Для анкеты или учебного профиля достаточно 50–80 слов: сначала напишите шесть предложений, затем добавьте одну полезную деталь.",
+    },
+    {
+      title: "Типичные ошибки и самопроверка",
+      paragraphs: ["Перед отправкой проверьте порядок блоков, формы первого лица, предлоги, язык и род там, где он выражен."],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Ja volať Ari.", "Volám sa Ari.", "Нужна личная форма глагола."],
+        ["Som z Rusko.", "Som z Ruska.", "Страна употребляется в форме после z."],
+        ["Bývam Bratislava.", "Bývam v Bratislave.", "Нужны предлог и форма города."],
+        ["Hovorím slovenský.", "Hovorím po slovensky.", "Для языка используется po slovensky."],
+      ] },
+      items: ["Есть 6–8 коротких предложений.", "Названы работа или учёба и языки.", "Есть один интерес и личная цель.", "Формы bývam, pracujem и hovorím стоят в первом лице.", "Словацкая диакритика сохранена."],
+      note: "Личный профиль не обязан раскрывать возраст, семейное положение или точный адрес.",
+    },
+  ],
+  stepPractices: [
+    { id: "m8-written-profile-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите перевод «Меня зовут Марина».", options: ["Volám sa Marina.", "Pracujem v obchode.", "Bývam v Bratislave."], answer: "Volám sa Marina.", hint: "Используйте модель с volám sa.", explanation: "Верная фраза: Volám sa Marina." },
+    { id: "m8-written-profile-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Я из Украины и живу в Братиславе.»", answer: "Som z Ukrajiny a bývam v Bratislave.", hint: "Соедините происхождение и место жительства словом a.", explanation: "Верная фраза: Som z Ukrajiny a bývam v Bratislave." },
+    { id: "m8-written-profile-step-3", sectionIndex: 2, type: "text", prompt: "Переведите: «Я работаю в магазине.»", answer: "Pracujem v obchode.", hint: "Используйте форму первого лица pracujem.", explanation: "Верная фраза: Pracujem v obchode." },
+    { id: "m8-written-profile-step-4", sectionIndex: 3, type: "pairs", prompt: "Определите функцию фраз профиля.", answer: "имя; язык; интерес; цель", showSlovakKeyboard: false, pairs: [
+      { prompt: "Volám sa Ari.", answer: "имя", options: ["имя", "язык", "интерес", "цель"] },
+      { prompt: "Hovorím po rusky.", answer: "язык", options: ["имя", "язык", "интерес", "цель"] },
+      { prompt: "Vo voľnom čase športujem.", answer: "интерес", options: ["имя", "язык", "интерес", "цель"] },
+      { prompt: "Chcem lepšie hovoriť po slovensky.", answer: "цель", options: ["имя", "язык", "интерес", "цель"] },
+    ], hint: "Смотрите, какой блок профиля заполняет фраза.", explanation: "Фразы называют имя, язык, интерес и цель." },
+    { id: "m8-written-profile-step-5", sectionIndex: 4, type: "choice", prompt: "Что нужно проверить перед отправкой профиля?", options: ["Порядок, первое лицо, предлоги, язык, род и диакритику", "Только количество слов", "Обязательно возраст, семью и точный адрес"], answer: "Порядок, первое лицо, предлоги, язык, род и диакритику", showSlovakKeyboard: false, hint: "Личные подробности необязательны, а языковые формы должны быть точными.", explanation: "Самопроверка охватывает структуру и формы, не требуя лишних личных данных." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 6",
+  reinforcementPractices: [
+    { id: "reinforcement:written-profile:1", sectionIndex: 1, type: "pairs", prompt: "Выберите правильную форму первого лица.", answer: "Volám sa Nina.; Bývam v Košiciach.; Hovorím po slovensky.", pairs: [
+      { prompt: "Меня зовут Нина.", answer: "Volám sa Nina.", options: ["Volám sa Nina.", "Bývam v Košiciach.", "Hovorím po slovensky."] },
+      { prompt: "Я живу в Кошице.", answer: "Bývam v Košiciach.", options: ["Volám sa Nina.", "Bývam v Košiciach.", "Hovorím po slovensky."] },
+      { prompt: "Я говорю по-словацки.", answer: "Hovorím po slovensky.", options: ["Volám sa Nina.", "Bývam v Košiciach.", "Hovorím po slovensky."] },
+    ], hint: "Выберите полную фразу с формой первого лица.", explanation: "Нужны формы Volám sa, Bývam и Hovorím po slovensky." },
+    { id: "reinforcement:written-profile:2", sectionIndex: 2, type: "pairs", prompt: "Вставьте подходящую связку.", answer: "ale; a; preto", pairs: [
+      { prompt: "Som z Ukrajiny, ___ bývam v Bratislave.", answer: "ale", options: ["ale", "a", "preto"] },
+      { prompt: "Hovorím po rusky ___ po anglicky.", answer: "a", options: ["ale", "a", "preto"] },
+      { prompt: "Žijem na Slovensku, ___ sa učím po slovensky.", answer: "preto", options: ["ale", "a", "preto"] },
+    ], hint: "Различайте противопоставление, добавление и следствие.", explanation: "Ale означает «но», a — «и», preto — «поэтому»." },
+    { id: "reinforcement:written-profile:3", sectionIndex: 0, type: "pairs", prompt: "Поставьте блоки профиля на логичные места.", answer: "4; 1; 3; 2; 5", showSlovakKeyboard: false, pairs: [
+      { prompt: "Vo voľnom čase športujem.", answer: "4", options: ["1", "2", "3", "4", "5"] },
+      { prompt: "Volám sa Peter.", answer: "1", options: ["1", "2", "3", "4", "5"] },
+      { prompt: "Pracujem v banke.", answer: "3", options: ["1", "2", "3", "4", "5"] },
+      { prompt: "Som z Česka a bývam v Trnave.", answer: "2", options: ["1", "2", "3", "4", "5"] },
+      { prompt: "Chcem lepšie hovoriť po slovensky.", answer: "5", options: ["1", "2", "3", "4", "5"] },
+    ], hint: "Начните с имени и места, затем работа, интерес и цель.", explanation: "Логичный порядок: имя → происхождение и город → работа → интерес → цель." },
+    { id: "reinforcement:written-profile:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки в профиле.", answer: "Volám sa Eva.; Som zo Slovenska.; Pracujem v škole.; Hovorím po anglicky.; Rád čítam.", pairs: [
+      { prompt: "Ja volať sa Eva.", answer: "Volám sa Eva.", inputHint: "Напишите исправленную фразу." },
+      { prompt: "Som z Slovensko.", answer: "Som zo Slovenska.", inputHint: "Напишите исправленную фразу." },
+      { prompt: "Pracovať v škole.", answer: "Pracujem v škole.", inputHint: "Напишите исправленную фразу." },
+      { prompt: "Hovorím anglický.", answer: "Hovorím po anglicky.", inputHint: "Напишите исправленную фразу." },
+      { prompt: "Ja rád čítať.", answer: "Rád čítam.", acceptableAnswers: ["Rada čítam."], inputHint: "Выберите подходящую форму рода." },
+    ], hint: "Используйте первое лицо, правильный предлог и модель языка.", explanation: "Исправленный текст использует volám sa, zo Slovenska, pracujem, po anglicky и rád или rada čítam." },
+    { id: "reinforcement:written-profile:5", sectionIndex: 3, type: "pairs", prompt: "Переведите фразы профиля.", answer: "Bývam v Nitre a pracujem v banke.; Teraz sa učím po slovensky.; Vo voľnom čase rád čítam a počúvam hudbu.", pairs: [
+      { prompt: "Я живу в Нитре и работаю в банке.", answer: "Bývam v Nitre a pracujem v banke.", inputHint: "Введите словацкую фразу." },
+      { prompt: "Сейчас я учу словацкий.", answer: "Teraz sa učím po slovensky.", inputHint: "Введите словацкую фразу." },
+      { prompt: "В свободное время люблю читать и слушать музыку.", answer: "Vo voľnom čase rád čítam a počúvam hudbu.", acceptableAnswers: ["Vo voľnom čase rada čítam a počúvam hudbu."], inputHint: "Используйте подходящую форму rád или rada." },
+    ], hint: "Сохраняйте первое лицо, порядок слов и словацкую диакритику.", explanation: "Модели называют место и работу, процесс учёбы и интерес." },
+    { id: "reinforcement:written-profile:6", sectionIndex: 4, type: "pairs", prompt: "Соберите связный учебный профиль по шести блокам, затем напишите собственный вариант без точного копирования образца.", answer: "Volám sa Ari.; Som z Ruska, ale teraz bývam v Bratislave.; Pracujem v IT.; Hovorím po rusky a po anglicky.; Vo voľnom čase rád čítam a chodím na prechádzky.; Chcem lepšie hovoriť po slovensky.", pairs: [
+      { prompt: "Имя", answer: "Volám sa Ari.", options: ["Volám sa Ari.", "Ari Bratislava."] },
+      { prompt: "Происхождение и город", answer: "Som z Ruska, ale teraz bývam v Bratislave.", options: ["Som z Ruska, ale teraz bývam v Bratislave.", "Ja Rusko a Bratislava."] },
+      { prompt: "Работа", answer: "Pracujem v IT.", options: ["Pracujem v IT.", "Ja pracovať IT."] },
+      { prompt: "Языки", answer: "Hovorím po rusky a po anglicky.", options: ["Hovorím po rusky a po anglicky.", "Hovorím ruský anglický."] },
+      { prompt: "Интерес", answer: "Vo voľnom čase rád čítam a chodím na prechádzky.", acceptableAnswers: ["Vo voľnom čase rada čítam a chodím na prechádzky."], options: ["Vo voľnom čase rád čítam a chodím na prechádzky.", "Vo voľnom čase rada čítam a chodím na prechádzky.", "Ja rád čítať a prechádzky."] },
+      { prompt: "Цель", answer: "Chcem lepšie hovoriť po slovensky.", options: ["Chcem lepšie hovoriť po slovensky.", "Chcem slovenský lepšie."] },
+    ], hint: "Выберите нормативную фразу для каждого блока; в своём тексте замените личные сведения.", explanation: "Связный профиль идёт от имени и места к работе, языкам, интересу и цели." },
+  ],
+  chatPrompt: "Напишите короткий профиль о себе из 6–8 предложений. Я проверю порядок, формы первого лица, связки и диакритику, не требуя лишних личных данных.",
+  chatSuggestions: ["Volám sa...", "Som z... a bývam v...", "Hovorím po...", "Vo voľnom čase...", "Chcem..."],
+  knowledgeChecks: [
+    { id: "m8-written-profile-check-1", question: "Как по-словацки: «Меня зовут Марина»?", options: ["Volám sa Marina.", "Pracujem v obchode.", "Bývam v Bratislave."], answer: "Volám sa Marina.", explanation: "Правильная фраза: Volám sa Marina." },
+    { id: "m8-written-profile-check-2", question: "Как по-словацки: «Я из Украины и живу в Братиславе»?", options: ["Som z Ukrajiny a bývam v Bratislave.", "Hovorím po ukrajinsky.", "Študujem v Bratislave."], answer: "Som z Ukrajiny a bývam v Bratislave.", explanation: "Правильная фраза: Som z Ukrajiny a bývam v Bratislave." },
+  ],
+  finalChecks: [
+    { id: "m8-written-profile-final-1", question: "Выберите перевод «Я работаю в магазине».", options: ["Pracujem v obchode.", "Bývam v obchode.", "Nakupujem v obchode."], answer: "Pracujem v obchode.", explanation: "Правильный ответ: Pracujem v obchode." },
+  ],
+} satisfies CourseLesson;

@@ -1,30 +1,195 @@
-import type { CompactLessonContent } from "../../plannedLessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const yesterdayTodayTomorrowContent: CompactLessonContent = {
-  "slug": "yesterday-today-tomorrow",
-  "title": "Вчера — сегодня — завтра",
-  "slovakTitle": "Včera — dnes — zajtra",
-  "outcome": "Различать три временные перспективы.",
-  "summary": "После урока вы сможете различать три временные перспективы в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Временные указатели помогают выбрать форму: včera + minulý čas, dnes + prítomný čas, zajtra + budúci čas. Сопоставляйте одно действие во всех трёх перспективах.",
-  "examples": [
-    {
-      "slovak": "Včera som pracoval doma.",
-      "russian": "Вчера я работал дома."
-    },
-    {
-      "slovak": "Dnes pracujem v kancelárii.",
-      "russian": "Сегодня я работаю в офисе."
-    },
-    {
-      "slovak": "Zajtra budem pracovať v meste.",
-      "russian": "Завтра я буду работать в городе."
-    },
-    {
-      "slovak": "Minulý týždeň som bol chorý.",
-      "russian": "На прошлой неделе я болел."
-    }
+export const yesterdayTodayTomorrowContent = {
+  vocabulary: [
+    {"word":"Včera som pracoval doma.","translation":"Вчера я работал дома.","example":"Včera som pracoval doma."},
+    {"word":"Dnes pracujem v kancelárii.","translation":"Сегодня я работаю в офисе.","example":"Dnes pracujem v kancelárii."},
+    {"word":"Zajtra budem pracovať v meste.","translation":"Завтра я буду работать в городе.","example":"Zajtra budem pracovať v meste."},
+    {"word":"Minulý týždeň som bol chorý.","translation":"На прошлой неделе я болел.","example":"Minulý týždeň som bol chorý."},
+    {"word":"Včera som bol doma, ale dnes pracujem.","translation":"Вчера я был дома, но сегодня работаю.","example":"Včera som bol doma, ale dnes pracujem."},
+    {"word":"Včera som veľa pracoval, preto dnes oddychujem.","translation":"Вчера я много работал, поэтому сегодня отдыхаю.","example":"Včera som veľa pracoval, preto dnes oddychujem."},
   ],
-  "mistake": "Не используйте budem + прошедшую l-форму; после budem нужен инфинитив.",
-  "task": "Опишите одно занятие вчера, сегодня и завтра, затем задайте собеседнику три вопроса."
-};
+  slug: "yesterday-today-tomorrow",
+  order: 6,
+  title: "Вчера — сегодня — завтра",
+  slovakTitle: "Včera — dnes — zajtra",
+  description: "Различать три временные перспективы.",
+  duration: "35–40 мин",
+  goals: [
+    "Различать прошедшее, настоящее и будущее по форме",
+    "Менять одно действие по схеме вчера — сегодня — завтра",
+    "Использовать временные маркеры и правильный порядок слов",
+    "Рассказывать о трёх днях в 6–9 связанных фразах",
+  ],
+  theory: {
+    summary: "Маркеры včera, dnes и zajtra помогают быстро выбрать форму: прошедшую на -l с som, личную форму настоящего или budem + infinitív. Полезно учить одно действие горизонтально: pracoval som — pracujem — budem pracovať.",
+    rules: [
+      "Včera в учебном контрасте требует завершённого прошлого: Včera som pracoval/pracovala.",
+      "Dnes обычно описывает текущее действие личной формой: Dnes pracujem. В реальной речи сегодня возможно и прошлое или будущее: Dnes som už pracoval; Dnes budem pracovať večer.",
+      "Zajtra вводит явное будущее: Zajtra budem pracovať; после budem нужен инфинитив.",
+      "Временной маркер часто стоит первым; в прошлом после него идёт som, в будущем — budem.",
+      "Sa сохраняется во всех временах: Včera som sa učil, dnes sa učím, zajtra sa budem učiť.",
+      "Связки a, ale, tiež и preto показывают продолжение, контраст или причину между днями.",
+    ],
+    examples: [
+      { slovak: "Včera som pracoval doma.", russian: "Вчера я работал дома.", explanation: "Včera и завершённое действие требуют формы pracoval som." },
+      { slovak: "Dnes pracujem v kancelárii.", russian: "Сегодня я работаю в офисе.", explanation: "Dnes сочетается с личной формой настоящего pracujem." },
+      { slovak: "Zajtra budem pracovať v meste.", russian: "Завтра я буду работать в городе.", explanation: "Zajtra вводит budem + infinitív." },
+      { slovak: "Minulý týždeň som bol chorý.", russian: "На прошлой неделе я болел.", explanation: "Составной маркер minulý týždeň задаёт прошлое." },
+      { slovak: "Včera som bol doma, ale dnes pracujem.", russian: "Вчера я был дома, но сегодня работаю.", explanation: "Ale подчёркивает изменение между днями." },
+      { slovak: "Včera som veľa pracoval, preto dnes oddychujem.", russian: "Вчера я много работал, поэтому сегодня отдыхаю.", explanation: "Preto связывает причину в прошлом с результатом сегодня." },
+    ],
+  },
+  sections: [
+    {
+      title: "Линия времени и три вопроса",
+      paragraphs: [
+        "Сначала найдите временной маркер, затем выберите форму. Одна основа выглядит по-разному: pracoval som — pracujem — budem pracovať.",
+        "Временной маркер часто стоит первым: Včera som čítala. Dnes čítam. Zajtra budem čítať.",
+      ],
+      table: { headers: ["Время", "Маркер", "Формула", "Пример"], rows: [
+        ["прошлое", "včera", "-l + som", "Včera som pracoval / pracovala."],
+        ["настоящее", "dnes", "личная форма", "Dnes pracujem."],
+        ["будущее", "zajtra", "budem + infinitív", "Zajtra budem pracovať."],
+      ] },
+      items: ["Čo si robil / robila včera?", "Čo robíš dnes?", "Čo budeš robiť zajtra?"],
+      note: "Ошибка Včera pracujem смешивает завершённое вчера действие с настоящим временем.",
+    },
+    {
+      title: "Одна мысль в трёх временах",
+      paragraphs: [
+        "Учите формы горизонтально: читайте строку слева направо, затем закрывайте один столбец и восстанавливайте его по двум другим.",
+        "В прошедшем выберите род; в настоящем и будущем род не выражается.",
+      ],
+      table: { headers: ["Инфинитив", "Вчера", "Сегодня", "Завтра"], rows: [
+        ["pracovať", "pracoval som / pracovala som", "pracujem", "budem pracovať"],
+        ["študovať", "študoval som / študovala som", "študujem", "budem študovať"],
+        ["čítať", "čítal som / čítala som", "čítam", "budem čítať"],
+        ["variť", "varil som / varila som", "varím", "budem variť"],
+        ["oddychovať", "oddychoval som / oddychovala som", "oddychujem", "budem oddychovať"],
+        ["učiť sa", "učil som sa / učila som sa", "učím sa", "budem sa učiť"],
+        ["byť", "bol / bola som", "som", "budem"],
+        ["mať", "mal / mala som", "mám", "budem mať"],
+      ] },
+      note: "Возвратная тройка: Včera som sa učila. Dnes sa učím. Zajtra sa budem učiť.",
+    },
+    {
+      title: "Маркеры и связи между днями",
+      paragraphs: [
+        "Учите двухсловные маркеры целиком: minulý týždeň — tento týždeň — budúci týždeň.",
+        "Связки показывают отношение между днями, а не просто порядок действий.",
+      ],
+      table: { headers: ["Прошлое", "Настоящее", "Будущее"], rows: [
+        ["včera — вчера", "dnes — сегодня", "zajtra — завтра"],
+        ["predvčerom — позавчера", "teraz — сейчас", "pozajtra — послезавтра"],
+        ["minulý týždeň", "tento týždeň", "budúci týždeň"],
+        ["ráno som...", "dnes ráno...", "zajtra ráno..."],
+      ] },
+      items: ["Изменение: Včera som bol doma, ale dnes pracujem.", "Продолжение: Včera som študovala a dnes tiež študujem.", "План: Dnes oddychujem, ale zajtra budem pracovať.", "Причина: Včera som veľa pracoval, preto dnes oddychujem."],
+      note: "Полезные связки: a — и; ale — но; tiež — тоже; preto — поэтому.",
+    },
+    {
+      title: "Банк фраз и рассказ о трёх днях",
+      paragraphs: [
+        "Стройте рассказ блоками: 2–3 завершённых действия вчера, 2–3 текущих действия или факта сегодня и 2–3 плана завтра.",
+        "Образец: Včera som mal veľa práce. Ráno som pracoval doma a večer som telefonoval kolegom. Dnes mám voľno. Oddychujem, čítam a učím sa slovenčinu. Zajtra budem znovu pracovať. Poobede budem variť a večer sa budem prechádzať.",
+      ],
+      table: { headers: ["Действие", "Вчера", "Сегодня", "Завтра"], rows: [
+        ["работать", "Včera som pracoval.", "Dnes pracujem.", "Zajtra budem pracovať."],
+        ["читать", "Včera som čítal.", "Dnes čítam.", "Zajtra budem čítať."],
+        ["готовить", "Včera som varila.", "Dnes varím.", "Zajtra budem variť."],
+        ["учиться с sa", "Včera som sa učila.", "Dnes sa učím.", "Zajtra sa budem učiť."],
+        ["быть дома", "Včera som bol doma.", "Dnes som doma.", "Zajtra budem doma."],
+        ["иметь время", "Včera som mal čas.", "Dnes mám čas.", "Zajtra budem mať čas."],
+      ] },
+      note: "Добавьте минимум одну логическую связь ale, preto или tiež.",
+    },
+    {
+      title: "Частые ошибки и самопроверка",
+      paragraphs: ["Проверяйте каждый временной блок отдельно: včera → -l + som; dnes → личная форма; zajtra → budem + infinitív."],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Včera pracujem.", "Včera som pracoval.", "Нужно завершённое прошлое."],
+        ["Teraz som pracoval.", "Teraz pracujem.", "Действие происходит сейчас."],
+        ["Zajtra pracujem.", "Zajtra budem pracovať.", "Учебная модель явного будущего."],
+        ["Včera som pracovať.", "Včera som pracoval.", "В прошлом нужна форма на -l."],
+        ["Zajtra budem pracujem.", "Zajtra budem pracovať.", "После budem нужен инфинитив."],
+      ] },
+      items: ["Узнаётся ли время по форме?", "Согласован ли род в прошлом?", "Есть ли инфинитив после budem?", "Сохранено ли sa?", "Логична ли связь между днями?"],
+      note: "Главная задача — выбирать форму по смыслу, а не переводить слово за словом.",
+    },
+  ],
+  stepPractices: [
+    { id: "m7-yesterday-today-tomorrow-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите перевод «Вчера я работал дома.»", options: ["Dnes pracujem v kancelárii.", "Včera som pracoval doma.", "Zajtra budem pracovať v meste."], answer: "Včera som pracoval doma.", hint: "Сверьтесь с основной моделью.", explanation: "Верная фраза: Včera som pracoval doma." },
+    { id: "m7-yesterday-today-tomorrow-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Сегодня я работаю в офисе.»", answer: "Dnes pracujem v kancelárii.", hint: "Используйте опорную фразу из таблицы.", explanation: "Верная фраза: Dnes pracujem v kancelárii." },
+    { id: "m7-yesterday-today-tomorrow-step-3", sectionIndex: 2, type: "text", prompt: "Переведите: «Завтра я буду работать в городе.»", answer: "Zajtra budem pracovať v meste.", hint: "Сохраните порядок слов и диакритику.", explanation: "Верная фраза: Zajtra budem pracovať v meste." },
+    { id: "m7-yesterday-today-tomorrow-step-4", sectionIndex: 3, type: "pairs", prompt: "Восстановите тройку для čítať.", answer: "Včera som čítal.; Dnes čítam.; Zajtra budem čítať.", pairs: [
+      { prompt: "вчера · мужчина", answer: "Včera som čítal.", acceptableAnswers: ["Včera som čítala."], inputHint: "Введите одну форму по своему роду" },
+      { prompt: "сегодня", answer: "Dnes čítam.", inputHint: "Введите форму" },
+      { prompt: "завтра", answer: "Zajtra budem čítať.", inputHint: "Введите форму" },
+    ], hint: "Сначала определите время, затем форму čítať.", explanation: "Тройка: čítal/čítala som — čítam — budem čítať." },
+    { id: "m7-yesterday-today-tomorrow-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте смешение времён.", answer: "Včera som čítal.; Teraz varím.; Zajtra budem študovať.; Včera som sa učil.; Zajtra budem doma.", pairs: [
+      { prompt: "Včera čítam.", answer: "Včera som čítal.", acceptableAnswers: ["Včera som čítala."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Teraz som varila.", answer: "Teraz varím.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Zajtra budem študujem.", answer: "Zajtra budem študovať.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Včera som sa učiť.", answer: "Včera som sa učil.", acceptableAnswers: ["Včera som sa učila."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Zajtra budem som doma.", answer: "Zajtra budem doma.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Исправьте только временную модель, но введите всю фразу.", explanation: "Прошлое требует -l, настоящее — личную форму, будущее — budem + infinitív." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 6",
+  reinforcementPractices: [
+    { id: "reinforcement:yesterday-today-tomorrow:1", sectionIndex: 0, type: "pairs", prompt: "Определите время каждой фразы.", answer: "настоящее; будущее; прошедшее; настоящее; прошедшее", pairs: [
+      { prompt: "Dnes čítam.", answer: "настоящее", options: ["прошедшее", "настоящее", "будущее"] },
+      { prompt: "Zajtra budeme variť.", answer: "будущее", options: ["прошедшее", "настоящее", "будущее"] },
+      { prompt: "Včera som pracovala.", answer: "прошедшее", options: ["прошедшее", "настоящее", "будущее"] },
+      { prompt: "Teraz sa učím.", answer: "настоящее", options: ["прошедшее", "настоящее", "будущее"] },
+      { prompt: "Minulý týždeň sme oddychovali.", answer: "прошедшее", options: ["прошедшее", "настоящее", "будущее"] },
+    ], hint: "Ищите маркер и форму глагола.", explanation: "Ответы: настоящее, будущее, прошедшее, настоящее, прошедшее." },
+    { id: "reinforcement:yesterday-today-tomorrow:2", sectionIndex: 1, type: "pairs", prompt: "Выберите форму для указанного времени.", answer: "čítal; varím; budem študovať; oddychujem", pairs: [
+      { prompt: "Včera som ___ .", answer: "čítal", options: ["čítal", "čítam"] },
+      { prompt: "Dnes ___ .", answer: "varím", options: ["varím", "budem variť"] },
+      { prompt: "Zajtra ___ .", answer: "budem študovať", options: ["študoval som", "budem študovať"] },
+      { prompt: "Teraz ___ .", answer: "oddychujem", options: ["oddychujem", "oddychoval som"] },
+    ], hint: "Сопоставьте маркер с прошлой, настоящей или будущей моделью.", explanation: "Нужны čítal, varím, budem študovať и oddychujem." },
+    { id: "reinforcement:yesterday-today-tomorrow:3", sectionIndex: 1, type: "pairs", prompt: "Постройте две временные тройки.", answer: "Včera som pracoval.; Dnes pracujem.; Zajtra budem pracovať.; Včera som sa učila.; Dnes sa učím.; Zajtra sa budem učiť.", pairs: [
+      { prompt: "pracovať · вчера, мужчина", answer: "Včera som pracoval.", inputHint: "Введите фразу" },
+      { prompt: "pracovať · сегодня", answer: "Dnes pracujem.", inputHint: "Введите фразу" },
+      { prompt: "pracovať · завтра", answer: "Zajtra budem pracovať.", inputHint: "Введите фразу" },
+      { prompt: "učiť sa · вчера, женщина", answer: "Včera som sa učila.", inputHint: "Введите фразу" },
+      { prompt: "učiť sa · сегодня", answer: "Dnes sa učím.", inputHint: "Введите фразу" },
+      { prompt: "učiť sa · завтра", answer: "Zajtra sa budem učiť.", inputHint: "Введите фразу" },
+    ], hint: "Каждая тройка идёт от прошлого к настоящему и будущему.", explanation: "Формы меняются, а значение pracovať или učiť sa сохраняется." },
+    { id: "reinforcement:yesterday-today-tomorrow:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте каждую временную ошибку.", answer: "Včera som čítal.; Teraz varím.; Zajtra budem študovať.; Včera som sa učil.; Zajtra budem doma.", pairs: [
+      { prompt: "Včera čítam.", answer: "Včera som čítal.", acceptableAnswers: ["Včera som čítala."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Teraz som varila.", answer: "Teraz varím.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Zajtra budem študujem.", answer: "Zajtra budem študovať.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Včera som sa učiť.", answer: "Včera som sa učil.", acceptableAnswers: ["Včera som sa učila."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Zajtra budem som doma.", answer: "Zajtra budem doma.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Введите целую нормативную фразу с диакритикой.", explanation: "Проверьте -l + som, личную форму и budem + infinitív." },
+    { id: "reinforcement:yesterday-today-tomorrow:5", sectionIndex: 3, type: "pairs", prompt: "Переведите на словацкий.", answer: "Včera som pracoval.; Dnes oddychujem.; Zajtra sa budem učiť slovenčinu.; Včera som nemal čas, ale dnes mám čas.", pairs: [
+      { prompt: "Вчера я работал / работала.", answer: "Včera som pracoval.", acceptableAnswers: ["Včera som pracovala."], inputHint: "Введите вариант по своему роду" },
+      { prompt: "Сегодня я отдыхаю.", answer: "Dnes oddychujem.", inputHint: "Введите перевод" },
+      { prompt: "Завтра я буду учить словацкий.", answer: "Zajtra sa budem učiť slovenčinu.", inputHint: "Введите перевод" },
+      { prompt: "Вчера у меня не было времени, но сегодня время есть.", answer: "Včera som nemal čas, ale dnes mám čas.", acceptableAnswers: ["Včera som nemala čas, ale dnes mám čas."], inputHint: "Введите вариант по своему роду" },
+    ], hint: "Выберите правильную модель каждого времени и сохраните ale.", explanation: "Переводы проверяют прошлое, настоящее, будущее и связь двух дней." },
+    { id: "reinforcement:yesterday-today-tomorrow:6", sectionIndex: 3, type: "pairs", prompt: "Соберите согласованный рассказ женщины о трёх днях.", answer: "Včera som bola doma a študovala som slovenčinu.; Večer som varila.; Dnes pracujem, ale mám aj trochu voľna.; Po práci čítam.; Zajtra budem oddychovať.; Budem sa prechádzať a večer budem telefonovať rodičom.", pairs: [
+      { prompt: "1 · вчера", answer: "Včera som bola doma a študovala som slovenčinu.", options: ["Včera som bola doma a študovala som slovenčinu.", "Včera som doma a študujem slovenčinu."] },
+      { prompt: "2 · вчера вечером", answer: "Večer som varila.", options: ["Večer som varila.", "Večer budem variť."] },
+      { prompt: "3 · сегодня", answer: "Dnes pracujem, ale mám aj trochu voľna.", options: ["Dnes som pracovala, ale mala som voľno.", "Dnes pracujem, ale mám aj trochu voľna."] },
+      { prompt: "4 · сегодня после работы", answer: "Po práci čítam.", options: ["Po práci som čítala.", "Po práci čítam."] },
+      { prompt: "5 · завтра", answer: "Zajtra budem oddychovať.", options: ["Zajtra budem oddychovať.", "Zajtra oddychovala som."] },
+      { prompt: "6 · планы", answer: "Budem sa prechádzať a večer budem telefonovať rodičom.", options: ["Prechádzala som sa a telefonovala som rodičom.", "Budem sa prechádzať a večer budem telefonovať rodičom."] },
+    ], hint: "Сохраняйте женский род вчера, настоящее сегодня и budem + infinitív завтра.", explanation: "Рассказ содержит два прошлых, два настоящих и два будущих сообщения." },
+  ],
+  chatPrompt: "Расскажите по-словацки о вчера, сегодня и завтра в 6–9 фразах: по 2–3 фразы на каждый день, минимум четыре глагола, одно отрицание и одну связь ale, preto или tiež.",
+  chatSuggestions: ["Včera som pracoval.", "Dnes oddychujem.", "Zajtra sa budem učiť.", "Včera som bol unavený, preto dnes oddychujem."],
+  knowledgeChecks: [
+    { id: "m7-yesterday-today-tomorrow-check-1", question: "Как по-словацки: «Вчера я работал дома.»?", options: ["Dnes pracujem v kancelárii.", "Včera som pracoval doma.", "Zajtra budem pracovať v meste."], answer: "Včera som pracoval doma.", explanation: "Правильная модель: Včera som pracoval doma." },
+    { id: "m7-yesterday-today-tomorrow-check-2", question: "Как по-словацки: «Сегодня я работаю в офисе.»?", options: ["Dnes pracujem v kancelárii.", "Včera som pracoval doma.", "Zajtra budem pracovať v meste."], answer: "Dnes pracujem v kancelárii.", explanation: "Правильная модель: Dnes pracujem v kancelárii." },
+  ],
+  finalChecks: [
+    { id: "m7-yesterday-today-tomorrow-final-1", question: "Выберите перевод «Завтра я буду работать в городе.».", options: ["Dnes pracujem v kancelárii.", "Včera som pracoval doma.", "Zajtra budem pracovať v meste."], answer: "Zajtra budem pracovať v meste.", explanation: "Правильный ответ: Zajtra budem pracovať v meste." },
+  ],
+} satisfies CourseLesson;

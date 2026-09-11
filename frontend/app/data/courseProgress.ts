@@ -33,6 +33,9 @@ export function resetProgressScope(progress: Record<string, LessonStatus>, scope
 
 export function nextMistakeRecord({ previous, id, lessonSlug, prompt, answer, correct, nowMs }: { previous?: MistakeRecord; id: string; lessonSlug: string; prompt: string; answer: string; correct: boolean; nowMs: number }): MistakeRecord | null {
   if (correct && !previous) return null;
+  // Rechecking a corrected answer before its scheduled review is practice,
+  // not evidence of retention. Preserve the existing schedule and stage.
+  if (correct && previous?.dueAt && Date.parse(previous.dueAt) > nowMs) return { ...previous };
   const nextStage = correct ? Math.min((previous?.reviewStage ?? 0) + 1, 2) : 0;
   return {
     id,

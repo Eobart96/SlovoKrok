@@ -1,32 +1,145 @@
-import { defineModule5Lesson } from "../lessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const modalQuestionsNegationLesson = defineModule5Lesson("modal-questions-negation", 8, {
-  "title": "Модальные вопросы и отрицание",
-  "slovakTitle": "Modálne otázky a zápor",
-  "outcome": "Обсуждать желания, возможности и обязанности.",
-  "summary": "После урока вы сможете обсуждать желания, возможности и обязанности в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Вопросы строятся с личной формой модального глагола, отрицание - nechcem, nemôžem, nemusím, neviem. Краткий ответ повторяет модальный смысл.",
-  "examples": [
-    {
-      "slovak": "Chceš ísť? - Áno, chcem.",
-      "russian": "Ты хочешь пойти? - Да."
-    },
-    {
-      "slovak": "Môžeš prísť? - Nie, nemôžem.",
-      "russian": "Ты можешь прийти? - Нет."
-    },
-    {
-      "slovak": "Musíme čakať? - Nie, nemusíme.",
-      "russian": "Нам нужно ждать? - Нет."
-    },
-    {
-      "slovak": "Vie hovoriť po slovensky? - Áno, vie.",
-      "russian": "Он умеет говорить по-словацки? - Да."
-    }
+const modalOptions = ["chcem", "môžem", "musím", "viem", "nesmiete", "nemusím"];
+const questionWordOptions = ["Čo", "Kedy", "Prečo", "Kto", "Koľko"];
+
+export const modalQuestionsNegationLesson = {
+  vocabulary: [
+    {"word":"Chceš ísť? — Áno, chcem.","translation":"Ты хочешь пойти? — Да, хочу.","example":"Chceš ísť? — Áno, chcem."},
+    {"word":"Kedy sa môžeme stretnúť?","translation":"Когда мы можем встретиться?","example":"Kedy sa môžeme stretnúť?"},
+    {"word":"Nemôžem prísť.","translation":"Я не могу прийти.","example":"Nemôžem prísť."},
+    {"word":"Nemusíte platiť.","translation":"Вам не нужно платить.","example":"Nemusíte platiť."},
+    {"word":"Nesmiete tu parkovať.","translation":"Здесь нельзя парковаться.","example":"Nesmiete tu parkovať."},
+    {"word":"Čo vieš uvariť?","translation":"Что ты умеешь приготовить?","example":"Čo vieš uvariť?"},
   ],
-  "mistake": "Не отвечайте одним áno/nie в учебной практике: повторите ключевой модальный глагол.",
-  "task": "Составьте четыре вопроса с chcieť, môcť, musieť и vedieť и дайте краткие ответы."
-}, {
-    rules: ["В модальном вопросе личная форма стоит перед инфинитивом: Môžeš prísť?", "Отрицательные формы различаются: nechcem, nemôžem, nemusím, neviem.", "Выбирайте модальный глагол по смыслу: желание, возможность, необходимость или умение.", "Краткий ответ должен сохранять нужный глагол: Áno, môžem; Nie, nemôžem."],
-    contrasts: ["Chceš ísť? — желание.", "Môžeš ísť? — возможность.", "Musíš ísť? — необходимость."], prompt: "Ответьте отрицательно: Môžeš dnes prísť?", answer: "Nie, dnes nemôžem prísť.", hint: "Отрицание môcť — nemôžem.",
-  });
+  slug: "modal-questions-negation",
+  order: 9,
+  title: "Модальные вопросы и отрицание",
+  slovakTitle: "Modálne otázky a zápor",
+  description: "Задавать общие и специальные вопросы о желаниях, возможностях, обязанностях и умениях и ясно отвечать на них.",
+  duration: "35–40 мин",
+  goals: ["Выбирать модальный глагол по смыслу", "Строить общие и специальные вопросы", "Менять лицо в коротком ответе", "Писать отрицание слитно", "Правильно ставить sa/si и отличать отсутствие обязанности от запрета"],
+  theory: {
+    summary: "В словацком модальная форма сама строит вопрос. Сначала выберите смысл — желание, возможность, необходимость или умение, затем согласуйте модальный глагол, а второй глагол оставьте в инфинитиве.",
+    rules: [
+      "Желание выражает chcieť, возможность или разрешение — môcť, необходимость — musieť, освоенный навык — vedieť.",
+      "Общий вопрос отличается интонацией и знаком вопроса: Môžeš prísť?",
+      "В ответе меняется лицо: Môžeš? — Áno, môžem. / Nie, nemôžem.",
+      "Специальный вопрос начинается с čo, kam, kedy, prečo, kto или koľko.",
+      "С sa/si нейтральный порядок такой: вопросительное слово + sa/si + модальная форма + инфинитив.",
+      "Ne- пишется слитно: nechcem, nemôžem, nemusím, neviem.",
+      "Nemusieť означает отсутствие обязанности, а nesmieť — запрет.",
+      "После отрицательного вопроса повторяйте модальный глагол, чтобы ответ был ясным.",
+    ],
+    examples: [
+      { slovak: "Chceš ísť? — Áno, chcem.", russian: "Ты хочешь пойти? — Да, хочу.", explanation: "Вопрос к ty получает ответ от ja." },
+      { slovak: "Kedy sa môžeme stretnúť?", russian: "Когда мы можем встретиться?", explanation: "Sa стоит после вопросительного слова." },
+      { slovak: "Nemôžem prísť.", russian: "Я не могу прийти.", explanation: "Ne- присоединено к личной форме." },
+      { slovak: "Nemusíte platiť.", russian: "Вам не нужно платить.", explanation: "Это отсутствие обязанности." },
+      { slovak: "Nesmiete tu parkovať.", russian: "Здесь нельзя парковаться.", explanation: "Nesmiete передаёт запрет." },
+      { slovak: "Čo vieš uvariť?", russian: "Что ты умеешь приготовить?", explanation: "Čo запрашивает действие или предмет." },
+    ],
+  },
+  sections: [
+    {
+      title: "Четыре смысла и общий вопрос",
+      paragraphs: ["Определите смысл и действующее лицо. Личная модальная форма уже строит вопрос, а смысловой глагол остаётся инфинитивом."],
+      table: { headers: ["Смысл", "Инфинитив", "ja", "ty", "vy", "Отрицание ja"], rows: [["хотеть", "chcieť", "chcem", "chceš", "chcete", "nechcem"], ["мочь", "môcť", "môžem", "môžeš", "môžete", "nemôžem"], ["нужно", "musieť", "musím", "musíš", "musíte", "nemusím"], ["уметь", "vedieť", "viem", "vieš", "viete", "neviem"]] },
+      items: ["Chceš cestovať?", "Môžete prísť?", "Musí pracovať?", "Vieš variť?"],
+      note: "Ошибка: Môžeš ideš? Правильно: Môžeš ísť? После модальной формы нужен инфинитив.",
+    },
+    {
+      title: "Короткий ответ и смена лица",
+      paragraphs: ["Вопрос к ty получает ответ от ja. Инфинитив можно опустить, если действие уже названо; после отрицательного вопроса полная модель снимает двусмысленность."],
+      table: { headers: ["Вопрос", "Да", "Нет"], rows: [["Chceš ísť?", "Áno, chcem.", "Nie, nechcem."], ["Môžeš prísť?", "Áno, môžem.", "Nie, nemôžem."], ["Musíš odísť?", "Áno, musím.", "Nie, nemusím."], ["Vieš plávať?", "Áno, viem.", "Nie, neviem."]] },
+      items: ["Môžem sa opýtať? — Áno, môžete.", "Nechceš kávu? — Áno, chcem kávu.", "Nemôžeš prísť? — Nie, nemôžem prísť.", "Nevieš plávať? — Nie, neviem plávať."],
+      note: "Одно áno или nie после отрицательного вопроса может быть непонятно. Повторите модальный глагол.",
+    },
+    {
+      title: "Специальные вопросы и sa/si",
+      paragraphs: ["Поставьте в начало информацию, которую хотите получить. Если есть sa/si, частица следует за вопросительным словом."],
+      table: { headers: ["Слово", "Что узнаём", "Пример"], rows: [["čo", "действие / предмет", "Čo chceš robiť?"], ["kam", "направление", "Kam chcete ísť?"], ["kedy", "время", "Kedy môžeš prísť?"], ["prečo", "причину", "Prečo musíš odísť?"], ["kto", "человека", "Kto vie pomôcť?"], ["koľko", "количество / цену", "Koľko musím zaplatiť?"]] },
+      items: ["Kedy sa môžeme stretnúť?", "Kde si chceš oddýchnuť?", "Prečo sa musíš učiť?", "Ako sa vieš predstaviť?"],
+      note: "Ошибка: Kedy môžeme sa stretnúť? Нейтрально: Kedy sa môžeme stretnúť?",
+    },
+    {
+      title: "Модальное отрицание и запрет",
+      paragraphs: ["Ne- присоединяется к личной форме, инфинитив не меняется. Различайте отсутствие обязанности и запрет."],
+      table: { headers: ["Форма", "Пример", "Смысл"], rows: [["nechcem", "Nechcem pracovať.", "я не хочу"], ["nemôžem", "Nemôžem prísť.", "я не могу"], ["nemusím", "Nemusím čakať.", "мне не нужно"], ["neviem", "Neviem plávať.", "я не умею"]] },
+      items: ["Nemusíš tu čakať. — Тебе необязательно ждать.", "Nesmieš tu fajčiť. — Здесь нельзя курить.", "Nemusíte platiť. — Вам не нужно платить.", "Nesmiete tu parkovať. — Здесь нельзя парковаться."],
+      note: "Nemusím = нет обязанности. Nesmiem = нет разрешения: действие запрещено.",
+    },
+    {
+      title: "Готовые вопросы, ошибки и диалог",
+      paragraphs: ["Перед ответом определите модальный смысл, вопросительное слово и лицо. Затем проверьте инфинитив, слитное ne- и место sa/si."],
+      table: { headers: ["Задача", "Вопрос и ответ", "Перевод"], rows: [["желание", "Chceš dnes pracovať? — Nie, nechcem.", "Хочешь сегодня работать? — Нет."], ["планы", "Čo chceš robiť večer? — Chcem si oddýchnuť.", "Что хочешь делать вечером? — Отдохнуть."], ["возможность", "Môžeš prísť zajtra? — Áno, môžem.", "Можешь прийти завтра? — Да."], ["встреча", "Kedy sa môžeme stretnúť? — O šiestej.", "Когда можем встретиться? — В шесть."], ["обязанность", "Čo musíme urobiť? — Musíme kúpiť lístky.", "Что нам нужно сделать? — Купить билеты."], ["умение", "Vieš plávať? — Áno, viem.", "Ты умеешь плавать? — Да."]] },
+      items: ["Ne chcem pracovať. → Nechcem pracovať.", "Kedy môžeme sa stretnúť? → Kedy sa môžeme stretnúť?", "Nemusíš tu parkovať. (нельзя) → Nesmieš tu parkovať.", "Vieš plávať? — Nie, viem. → Nie, neviem."],
+      note: "Самопроверка: точный смысл; инфинитив; слитное ne-; нейтральное место sa/si.",
+    },
+  ],
+  stepPractices: [
+    { id: "m5-modal-questions-negation-step-1", sectionIndex: 0, type: "choice", prompt: "Как спросить «Ты можешь прийти?»", options: ["Môžeš prísť?", "Môžeš prídeš?", "Vieš prísť?"], answer: "Môžeš prísť?", hint: "Выберите возможность и инфинитив.", explanation: "Môžeš prísť? — модальная форма плюс инфинитив." },
+    { id: "m5-modal-questions-negation-step-2", sectionIndex: 1, type: "text", prompt: "Ответьте отрицательно: Vieš plávať?", answer: "Nie, neviem.", acceptableAnswers: ["Nie, neviem plávať."], hint: "Ответьте от ja.", explanation: "Nie, neviem. Инфинитив можно повторить." },
+    { id: "m5-modal-questions-negation-step-3", sectionIndex: 2, type: "text", prompt: "Исправьте: Kedy môžeme sa stretnúť?", answer: "Kedy sa môžeme stretnúť?", hint: "Поставьте sa после вопросительного слова.", explanation: "Kedy + sa + môžeme + stretnúť." },
+    { id: "m5-modal-questions-negation-step-4", sectionIndex: 3, type: "choice", prompt: "Как выразить запрет парковки?", options: ["Nesmiete tu parkovať.", "Nemusíte tu parkovať.", "Ne môžete tu parkovať."], answer: "Nesmiete tu parkovať.", hint: "Запрет — отсутствие разрешения.", explanation: "Nesmiete выражает «вам нельзя»." },
+    { id: "m5-modal-questions-negation-step-5", sectionIndex: 4, type: "text", prompt: "Переведите: «Когда мы можем встретиться?»", answer: "Kedy sa môžeme stretnúť?", hint: "Начните с вопросительного слова.", explanation: "Kedy sa môžeme stretnúť?" },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 9",
+  reinforcementPractices: [
+    { id: "reinforcement:modal-questions-negation:1", sectionIndex: 0, type: "pairs", prompt: "Выберите модальную форму.", answer: "chcem; môžem; musím; viem; nesmiete; nemusím", pairs: [
+      { prompt: "___ ísť domov, mám chuť oddychovať.", answer: "chcem", options: modalOptions },
+      { prompt: "___ prísť zajtra, mám čas.", answer: "môžem", options: modalOptions },
+      { prompt: "___ pracovať, je to moja povinnosť.", answer: "musím", options: modalOptions },
+      { prompt: "___ plávať, učil som sa to.", answer: "viem", options: modalOptions },
+      { prompt: "Tu ___ parkovať, je to zakázané.", answer: "nesmiete", options: modalOptions },
+      { prompt: "Dnes ___ variť, večeru pripraví Peter.", answer: "nemusím", options: modalOptions },
+    ], hint: "Определите модальный смысл ситуации.", explanation: "Каждая форма соответствует одному смыслу." },
+    { id: "reinforcement:modal-questions-negation:2", sectionIndex: 0, type: "pairs", prompt: "Сделайте общий вопрос.", answer: "Chceš cestovať?; Môžete prísť?; Musí odísť?; Vieš variť?", pairs: [
+      { prompt: "Chceš cestovať.", answer: "Chceš cestovať?", inputHint: "Введите вопрос" },
+      { prompt: "Môžete prísť.", answer: "Môžete prísť?", inputHint: "Введите вопрос" },
+      { prompt: "Musí odísť.", answer: "Musí odísť?", inputHint: "Введите вопрос" },
+      { prompt: "Vieš variť.", answer: "Vieš variť?", inputHint: "Введите вопрос" },
+    ], hint: "Сохраните форму и инфинитив, добавьте знак вопроса.", explanation: "Вспомогательный глагол не нужен." },
+    { id: "reinforcement:modal-questions-negation:3", sectionIndex: 2, type: "pairs", prompt: "Вставьте вопросительное слово.", answer: "Čo; Kedy; Prečo; Kto; Koľko", pairs: [
+      { prompt: "___ chceš robiť? — Chcem spať.", answer: "Čo", options: questionWordOptions },
+      { prompt: "___ môžeš prísť? — Zajtra.", answer: "Kedy", options: questionWordOptions },
+      { prompt: "___ musíš odísť? — Mám prácu.", answer: "Prečo", options: questionWordOptions },
+      { prompt: "___ vie opraviť bicykel? — Peter.", answer: "Kto", options: questionWordOptions },
+      { prompt: "___ musím zaplatiť? — Desať eur.", answer: "Koľko", options: questionWordOptions },
+    ], hint: "Ответ после тире подсказывает тип информации.", explanation: "Вопросительные слова различают действие, время, причину, человека и количество." },
+    { id: "reinforcement:modal-questions-negation:4", sectionIndex: 3, type: "pairs", prompt: "Постройте отрицание.", answer: "Nechcem pracovať.; Nemôžem prísť.; Nemusím čakať.; Neviem šoférovať.; Tu nesmiete parkovať.", pairs: [
+      { prompt: "Chcem pracovať.", answer: "Nechcem pracovať.", inputHint: "Введите отрицание" },
+      { prompt: "Môžem prísť.", answer: "Nemôžem prísť.", inputHint: "Введите отрицание" },
+      { prompt: "Musím čakať.", answer: "Nemusím čakať.", inputHint: "Введите отрицание" },
+      { prompt: "Viem šoférovať.", answer: "Neviem šoférovať.", inputHint: "Введите отрицание" },
+      { prompt: "Tu môžete parkovať. · сделайте запрет", answer: "Tu nesmiete parkovať.", acceptableAnswers: ["Nesmiete tu parkovať."], inputHint: "Введите запрет" },
+    ], hint: "Пишите ne- слитно; для запрета используйте nesmieť.", explanation: "Отрицание относится к личной форме." },
+    { id: "reinforcement:modal-questions-negation:5", sectionIndex: 4, type: "pairs", prompt: "Переведите на словацкий.", answer: "Chceš kávu?; Kedy sa môžeme stretnúť?; Dnes nemusím pracovať.; Nemôžem prísť.; Vieš sa predstaviť?", pairs: [
+      { prompt: "Ты хочешь кофе?", answer: "Chceš kávu?", inputHint: "Введите перевод" },
+      { prompt: "Когда мы можем встретиться?", answer: "Kedy sa môžeme stretnúť?", inputHint: "Введите перевод" },
+      { prompt: "Сегодня мне не нужно работать.", answer: "Dnes nemusím pracovať.", inputHint: "Введите перевод" },
+      { prompt: "Я не могу прийти.", answer: "Nemôžem prísť.", inputHint: "Введите перевод" },
+      { prompt: "Ты умеешь представиться?", answer: "Vieš sa predstaviť?", inputHint: "Введите перевод" },
+    ], hint: "Проверьте смысл, лицо, инфинитив, sa и диакритику.", explanation: "Фразы объединяют вопросы и отрицание." },
+    { id: "reinforcement:modal-questions-negation:6", sectionIndex: 4, type: "pairs", prompt: "Соберите модальный мини-диалог.", answer: "Čo chceš robiť zajtra?; Chcem ísť do mesta. Môžeš ísť so mnou?; Nie, nemôžem. Musím pracovať.; Vieš pracovať z domu?; Áno, viem, ale zajtra musím ísť do kancelárie.; Dobre. Môžeme sa stretnúť večer?; Áno, môžeme.", pairs: [
+      { prompt: "1 · вопрос о планах", answer: "Čo chceš robiť zajtra?", options: ["Čo chceš robiť zajtra?", "Čo chceš robíš zajtra?", "Kto chceš robiť zajtra?"] },
+      { prompt: "2 · план и приглашение", answer: "Chcem ísť do mesta. Môžeš ísť so mnou?", options: ["Chcem ísť do mesta. Môžeš ísť so mnou?", "Chcem idem do mesta. Vieš ísť so mnou?", "Môžem ísť do mesta. Musíš ísť so mnou?"] },
+      { prompt: "3 · невозможность и обязанность", answer: "Nie, nemôžem. Musím pracovať.", options: ["Nie, nemôžem. Musím pracovať.", "Nie, môžem. Chcem pracovať.", "Nie, neviem. Musím pracujem."] },
+      { prompt: "4 · вопрос об умении", answer: "Vieš pracovať z domu?", options: ["Vieš pracovať z domu?", "Môžeš pracuješ z domu?", "Musíš vedieť z domu?"] },
+      { prompt: "5 · навык и обязанность", answer: "Áno, viem, ale zajtra musím ísť do kancelárie.", options: ["Áno, viem, ale zajtra musím ísť do kancelárie.", "Áno, môžem, ale zajtra chcem idem do kancelárie.", "Áno, vieš, ale zajtra musí ísť do kancelárie."] },
+      { prompt: "6 · предложение встречи", answer: "Dobre. Môžeme sa stretnúť večer?", options: ["Dobre. Môžeme sa stretnúť večer?", "Dobre. Môžeme stretnúť sa večer?", "Dobre. Vieme sa stretneme večer?"] },
+      { prompt: "7 · ответ", answer: "Áno, môžeme.", options: ["Áno, môžeme.", "Áno, vieme.", "Áno, môžete."] },
+    ], hint: "Следите за сменой лица, инфинитивом и sa.", explanation: "Диалог использует четыре модальных смысла." },
+  ],
+  knowledgeChecks: [
+    { id: "m5-modal-questions-negation-check-1", question: "Какая модель вопроса нормативна?", options: ["Môžeš prísť?", "Môžeš prídeš?", "Môžeš prísť je?"], answer: "Môžeš prísť?", explanation: "Личная модальная форма сама строит вопрос." },
+    { id: "m5-modal-questions-negation-check-2", question: "Как ответить отрицательно на Vieš plávať?", options: ["Nie, neviem.", "Nie, viem.", "Nie, ne viem."], answer: "Nie, neviem.", explanation: "Ответ идёт от ja, ne- пишется слитно." },
+    { id: "m5-modal-questions-negation-check-3", question: "Как сказать «Вам не нужно платить»?", options: ["Nemusíte platiť.", "Nesmiete platiť.", "Ne musíte platiť."], answer: "Nemusíte platiť.", explanation: "Nemusieť — отсутствие обязанности; nesmieť — запрет." },
+  ],
+  finalChecks: [{ id: "m5-modal-questions-negation-final-1", question: "Как спросить «Когда мы можем встретиться?»", options: ["Kedy sa môžeme stretnúť?", "Kedy môžeme sa stretnúť?", "Kedy sa môžeme stretneme?"], answer: "Kedy sa môžeme stretnúť?", explanation: "После kedy частица sa стоит перед môžeme, затем идёт инфинитив." }],
+  chatPrompt: "Составьте короткий диалог о планах на завтра: используйте chcieť, môcť, musieť, vedieť, одно отрицание и одну модель с sa/si.",
+  chatSuggestions: ["Čo chceš robiť zajtra?", "Môžeš ísť so mnou?", "Môžeme sa stretnúť večer?"],
+} satisfies CourseLesson;

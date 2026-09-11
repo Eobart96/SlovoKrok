@@ -1,6 +1,12 @@
 import { defineModule1Lesson } from "../lessonFactory";
 
 export const questionWordsLesson = defineModule1Lesson({
+  vocabulary: [
+    {"word":"Kto je to? — To je Eva. Čo je to? — To je kniha.","translation":"Кто это? — Это Эва. Что это? — Это книга.","example":"Kto je to? — To je Eva. Čo je to? — To je kniha."},
+    {"word":"Kde si? Kam ideš? Odkiaľ ste?","translation":"Где ты? Куда ты идёшь? Откуда вы?","example":"Kde si? Kam ideš? Odkiaľ ste?"},
+    {"word":"Aká kniha? Ktorý autobus? Čie auto?","translation":"Какая книга? Который автобус? Чья машина?","example":"Aká kniha? Ktorý autobus? Čie auto?"},
+    {"word":"Kde býva Peter? Je Peter doma?","translation":"Где живёт Петер? Петер дома?","example":"Kde býva Peter? Je Peter doma?"},
+  ],
   slug: "question-words",
   title: "Вопросительные слова и порядок слов",
   slovakTitle: "Opytovacie slová a slovosled",

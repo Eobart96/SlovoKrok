@@ -1,30 +1,184 @@
-import type { CompactLessonContent } from "../../plannedLessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const voiceDescriptionContent: CompactLessonContent = {
-  "slug": "voice-description",
-  "title": "Голосовое сообщение и устное описание",
-  "slovakTitle": "Hlasová správa a opis",
-  "outcome": "Сообщать несколько связанных фактов.",
-  "summary": "После урока вы сможете сообщать несколько связанных фактов в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Голосовое сообщение A1 состоит из приветствия, 3-5 фактов в логическом порядке и завершения. Говорите медленно, короткими фразами, связывая их a/potom.",
-  "examples": [
-    {
-      "slovak": "Ahoj, tu je Nina.",
-      "russian": "Привет, это Нина."
-    },
-    {
-      "slovak": "Som na stanici.",
-      "russian": "Я на вокзале."
-    },
-    {
-      "slovak": "Vlak príde o desať minút.",
-      "russian": "Поезд прибудет через десять минут."
-    },
-    {
-      "slovak": "Zavolám ti neskôr. Ahoj.",
-      "russian": "Я позвоню тебе позже. Пока."
-    }
+export const voiceDescriptionContent = {
+  vocabulary: [
+    {"word":"Ahoj, tu je Ari. Volám kvôli stretnutiu.","translation":"Привет, это Ари. Звоню по поводу встречи.","example":"Ahoj, tu je Ari. Volám kvôli stretnutiu."},
+    {"word":"Meškám desať minút. Budem pri stanici o šiestej.","translation":"Я опаздываю на десять минут. Буду у вокзала в шесть.","example":"Meškám desať minút. Budem pri stanici o šiestej."},
+    {"word":"Počkaj na mňa, prosím. Ďakujem, ahoj.","translation":"Подожди меня, пожалуйста. Спасибо, пока.","example":"Počkaj na mňa, prosím. Ďakujem, ahoj."},
+    {"word":"Moja izba je malá, ale svetlá.","translation":"Моя комната маленькая, но светлая.","example":"Moja izba je malá, ale svetlá."},
+    {"word":"Stôl je pri okne a posteľ je vľavo.","translation":"Стол у окна, а кровать слева.","example":"Stôl je pri okne a posteľ je vľavo."},
+    {"word":"Hľadám čierny batoh. Má dve vrecká.","translation":"Я ищу чёрный рюкзак. У него два кармана.","example":"Hľadám čierny batoh. Má dve vrecká."},
   ],
-  "mistake": "Не перегружайте одно предложение несколькими новыми деталями; разделяйте сообщение на короткие фразы.",
-  "task": "Запишите сообщение из 30-40 секунд о месте, времени, причине и следующем действии."
-};
+  slug: "voice-description",
+  order: 5,
+  title: "Голосовое сообщение и устное описание",
+  slovakTitle: "Hlasová správa a krátky ústny opis",
+  description: "Сообщать несколько связанных фактов.",
+  duration: "35–40 мин",
+  goals: [
+    "Строить понятное голосовое сообщение на 20–30 секунд",
+    "Называть причину, время, место и ожидаемое действие",
+    "Описывать человека, место или предмет по четырём опорам",
+    "Соединять короткие фразы без чтения готового текста",
+  ],
+  theory: {
+    summary: "Две рабочие формулы: сообщение — кто → зачем → детали → просьба → конец; описание — кто или что → где → какой → что происходит. На уровне A1 ясный порядок и короткие фразы важнее скорости.",
+    rules: [
+      "Начинайте сообщение с контакта и причины: Ahoj, tu je Ari. Volám kvôli stretnutiu.",
+      "Давайте не больше двух ключевых деталей: время + место или проблема + просьба.",
+      "Произносите числа медленнее и при необходимости повторяйте: O piatej. Ešte raz: o piatej.",
+      "Связывайте короткие мысли словами a, ale, preto, najprv, potom и teraz.",
+      "Описание стройте от общего к частному: кто или что → где → два признака → действие или деталь.",
+      "Согласуйте прилагательное: malý byt, malá izba, malé auto; čierny batoh, modrá taška, nové tričko.",
+    ],
+    examples: [
+      { slovak: "Ahoj, tu je Ari. Volám kvôli stretnutiu.", russian: "Привет, это Ари. Звоню по поводу встречи.", explanation: "Контакт и причина сразу дают слушателю контекст." },
+      { slovak: "Meškám desať minút. Budem pri stanici o šiestej.", russian: "Я опаздываю на десять минут. Буду у вокзала в шесть.", explanation: "Две короткие фразы сообщают задержку, место и время." },
+      { slovak: "Počkaj na mňa, prosím. Ďakujem, ahoj.", russian: "Подожди меня, пожалуйста. Спасибо, пока.", explanation: "Просьба и ясное завершение показывают, что делать слушателю." },
+      { slovak: "Moja izba je malá, ale svetlá.", russian: "Моя комната маленькая, но светлая.", explanation: "Два признака соединены связкой ale; прилагательные согласованы с izba." },
+      { slovak: "Stôl je pri okne a posteľ je vľavo.", russian: "Стол у окна, а кровать слева.", explanation: "Описание добавляет положение предметов." },
+      { slovak: "Hľadám čierny batoh. Má dve vrecká.", russian: "Я ищу чёрный рюкзак. У него два кармана.", explanation: "Предмет назван, описан и дополнен конкретной деталью." },
+    ],
+  },
+  sections: [
+    {
+      title: "Голосовое сообщение: пять частей",
+      paragraphs: [
+        "Слушатель не видит текст, поэтому сначала назовите себя и цель, затем дайте только необходимые детали.",
+        "Модель: Ahoj, Katka, tu je Ari. Volám kvôli nášmu stretnutiu. Dnes meškám asi pätnásť minút. Autobus mešká. Budem pri stanici o 18:15. Počkaj na mňa, prosím. Ďakujem, ahoj.",
+      ],
+      table: { headers: ["Часть", "Фраза", "Функция"], rows: [
+        ["1. Контакт", "Ahoj, Katka, tu je Ari.", "кто говорит и кому"],
+        ["2. Причина", "Volám kvôli nášmu stretnutiu.", "почему вы звоните"],
+        ["3. Детали", "Meškám asi pätnásť minút.", "что произошло"],
+        ["4. Действие", "Počkaj na mňa, prosím.", "что должен сделать слушатель"],
+        ["5. Конец", "Ďakujem, ahoj.", "ясное завершение"],
+      ] },
+      note: "Правило двух деталей: обычно достаточно времени + места или проблемы + просьбы.",
+    },
+    {
+      title: "Как говорить понятно",
+      paragraphs: [
+        "Одна мысль — одна короткая фраза. Делайте маленькую паузу после имени, времени и места.",
+        "Если забыли слово, не останавливайте сообщение: скажите Mám problém. и добавьте конкретную деталь, например Autobus mešká.",
+      ],
+      table: { headers: ["Приём", "Как применить", "Пример"], rows: [
+        ["короткие фразы", "одна мысль — одна фраза", "Dnes neprídem. Som chorý."],
+        ["медленнее на деталях", "чётко произнести число", "o sedemnástej tridsať"],
+        ["повторить главное", "время или адрес — дважды", "O piatej. Ešte raz: o piatej."],
+        ["простые связки", "показать порядок", "Najprv práca, potom kurz."],
+        ["ясный конец", "сказать, нужен ли ответ", "Zavolaj mi, prosím."],
+      ] },
+      items: ["a — и", "ale — но", "preto — поэтому", "najprv — сначала", "potom — потом", "teraz — сейчас"],
+      note: "Понятность важнее скорости: числа, время и место произносите особенно чётко.",
+    },
+    {
+      title: "Устное описание по четырём опорам",
+      paragraphs: ["Начните с общего, затем добавьте место, два признака и одно действие или конкретную деталь."],
+      table: { headers: ["Опора", "Вопрос", "Модель"], rows: [
+        ["кто / что", "Kto alebo čo to je?", "To je môj kamarát. / To je moja izba."],
+        ["где", "Kde je?", "Je pri okne. / Býva v Nitre."],
+        ["какой", "Aký / aká / aké je?", "Je vysoký. / Je malá. / Je nové."],
+        ["действие", "Čo robí?", "Číta knihu. / Pracuje doma."],
+      ] },
+      items: [
+        "Человек: To je môj kamarát Peter. Býva v Nitre. Je vysoký a veselý. Pracuje v banke a rád športuje.",
+        "Место: Moja izba je malá, ale svetlá. Okno je vpravo. Stôl je pri okne a posteľ je vľavo.",
+        "Предмет: Hľadám čierny batoh. Je stredne veľký. Má dve vrecká. Je na stoličke.",
+      ],
+      note: "Согласование: malý byt / malá izba / malé auto; čierny batoh / modrá taška / nové tričko.",
+    },
+    {
+      title: "Банк фраз и тренировка без записи",
+      paragraphs: ["Выберите готовые блоки и соедините их в сообщение или описание."],
+      table: { headers: ["Функция", "Фраза", "Перевод"], rows: [
+        ["назвать себя", "Tu je Ari.", "Это Ари / говорит Ари."],
+        ["назвать причину", "Volám kvôli stretnutiu.", "Звоню по поводу встречи."],
+        ["сообщить задержку", "Meškám desať minút.", "Я опаздываю на десять минут."],
+        ["дать время", "Budem tam o šiestej.", "Я буду там в шесть."],
+        ["дать место", "Čakám pri vchode.", "Я жду у входа."],
+        ["попросить", "Počkaj na mňa, prosím.", "Подожди меня, пожалуйста."],
+        ["попросить ответ", "Daj mi vedieť.", "Дай мне знать."],
+        ["начать описание", "To je môj byt.", "Это моя квартира."],
+        ["размер", "Je malý, ale praktický.", "Он маленький, но практичный."],
+        ["положение", "Stôl je vpravo.", "Стол справа."],
+        ["рядом", "Stolička je vedľa stola.", "Стул рядом со столом."],
+        ["завершить", "To je všetko. Ďakujem.", "Это всё. Спасибо."],
+      ] },
+      note: "Посмотрите на комнату или предмет 10 секунд, отвернитесь и произнесите четыре фразы: что → где → какой → действие или деталь.",
+    },
+    {
+      title: "Типичные ошибки и самопроверка",
+      paragraphs: ["Перед записью быстро проверьте порядок, длину фраз, две ключевые детали и согласование."],
+      table: { headers: ["Ошибка", "Лучше", "Почему"], rows: [
+        ["Сразу начинать с деталей", "Ahoj, tu je Ari. Volám kvôli...", "Слушателю нужен контекст."],
+        ["Одно длинное предложение", "Три-четыре короткие фразы.", "Так легче услышать время и просьбу."],
+        ["Moja izba je malý.", "Moja izba je malá.", "Форма согласуется с izba."],
+        ["Čierna batoh.", "Čierny batoh.", "Batoh — мужского рода."],
+      ] },
+      items: ["Я называю себя и цель.", "Я даю не больше двух ключевых деталей.", "Я произношу числа медленно.", "Я заканчиваю просьбой или ясным завершением.", "Описание идёт от общего к частному."],
+      note: "Сначала проговорите опоры, затем запишите сообщение целиком без чтения готового текста.",
+    },
+  ],
+  stepPractices: [
+    { id: "m8-voice-description-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите перевод «Привет, это Нина».", options: ["Ahoj, tu je Nina.", "Som na stanici.", "Ďakujem, ahoj."], answer: "Ahoj, tu je Nina.", hint: "Нужны приветствие и представление.", explanation: "Верная фраза: Ahoj, tu je Nina." },
+    { id: "m8-voice-description-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Я на вокзале.»", answer: "Som na stanici.", hint: "Используйте короткую фразу с местом.", explanation: "Верная фраза: Som na stanici." },
+    { id: "m8-voice-description-step-3", sectionIndex: 2, type: "text", prompt: "Переведите: «Поезд прибудет через десять минут.»", answer: "Vlak príde o desať minút.", hint: "Сохраните диакритику и выражение времени.", explanation: "Верная фраза: Vlak príde o desať minút." },
+    { id: "m8-voice-description-step-4", sectionIndex: 3, type: "pairs", prompt: "Определите функцию готовых блоков.", answer: "назвать себя; задержка; просьба; завершение", showSlovakKeyboard: false, pairs: [
+      { prompt: "Tu je Ari.", answer: "назвать себя", options: ["назвать себя", "задержка", "просьба", "завершение"] },
+      { prompt: "Meškám desať minút.", answer: "задержка", options: ["назвать себя", "задержка", "просьба", "завершение"] },
+      { prompt: "Daj mi vedieť.", answer: "просьба", options: ["назвать себя", "задержка", "просьба", "завершение"] },
+      { prompt: "To je všetko. Ďakujem.", answer: "завершение", options: ["назвать себя", "задержка", "просьба", "завершение"] },
+    ], hint: "Смотрите, какую задачу выполняет каждая фраза.", explanation: "Блоки представляют говорящего, сообщают задержку, просят ответить и завершают речь." },
+    { id: "m8-voice-description-step-5", sectionIndex: 4, type: "choice", prompt: "Как сделать короткую запись понятнее?", options: ["Назвать себя и цель, дать две детали и ясно закончить", "Начать с подробностей и говорить одним длинным предложением", "Пропустить время, место и просьбу"], answer: "Назвать себя и цель, дать две детали и ясно закончить", showSlovakKeyboard: false, hint: "Вспомните обе рабочие формулы урока.", explanation: "Понятность создают порядок, короткие фразы, две ключевые детали и ясный конец." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 5",
+  reinforcementPractices: [
+    { id: "reinforcement:voice-description:1", sectionIndex: 0, type: "pairs", prompt: "Выберите нужную часть голосового сообщения.", answer: "Tu je Ari.; Počkaj na mňa.; Ďakujem, ahoj.", pairs: [
+      { prompt: "Кто говорит", answer: "Tu je Ari.", options: ["Tu je Ari.", "Počkaj na mňa.", "Ďakujem, ahoj."] },
+      { prompt: "Просьба", answer: "Počkaj na mňa.", options: ["Tu je Ari.", "Počkaj na mňa.", "Ďakujem, ahoj."] },
+      { prompt: "Завершение", answer: "Ďakujem, ahoj.", options: ["Tu je Ari.", "Počkaj na mňa.", "Ďakujem, ahoj."] },
+    ], hint: "Определите функцию каждой реплики.", explanation: "Tu je Ari представляет говорящего, Počkaj na mňa выражает просьбу, Ďakujem, ahoj завершает сообщение." },
+    { id: "reinforcement:voice-description:2", sectionIndex: 0, type: "pairs", prompt: "Расставьте реплики по местам в сообщении.", answer: "3; 4; 1; 2", showSlovakKeyboard: false, pairs: [
+      { prompt: "Počkaj na mňa pri stanici.", answer: "3", options: ["1", "2", "3", "4"] },
+      { prompt: "Ďakujem, ahoj.", answer: "4", options: ["1", "2", "3", "4"] },
+      { prompt: "Ahoj, tu je Eva.", answer: "1", options: ["1", "2", "3", "4"] },
+      { prompt: "Meškám desať minút.", answer: "2", options: ["1", "2", "3", "4"] },
+    ], hint: "Сначала контакт, затем проблема, просьба и конец.", explanation: "Правильный порядок: Ahoj, tu je Eva. → Meškám desať minút. → Počkaj na mňa pri stanici. → Ďakujem, ahoj." },
+    { id: "reinforcement:voice-description:3", sectionIndex: 1, type: "pairs", prompt: "Вставьте подходящую связку.", answer: "ale; preto; potom", pairs: [
+      { prompt: "Prídem, ___ neskôr.", answer: "ale", options: ["ale", "preto", "potom"] },
+      { prompt: "Som chorý, ___ neprídem.", answer: "preto", options: ["ale", "preto", "potom"] },
+      { prompt: "Najprv práca, ___ kurz.", answer: "potom", options: ["ale", "preto", "potom"] },
+    ], hint: "Различайте противопоставление, причину-следствие и порядок.", explanation: "Ale означает «но», preto — «поэтому», potom — «потом»." },
+    { id: "reinforcement:voice-description:4", sectionIndex: 2, type: "pairs", prompt: "Исправьте согласование.", answer: "Moja izba je malá.; To je modrá taška.; Hľadám čierny batoh.; Auto je nové.", pairs: [
+      { prompt: "Moja izba je malý.", answer: "Moja izba je malá.", inputHint: "Напишите исправленную фразу." },
+      { prompt: "To je modrý taška.", answer: "To je modrá taška.", inputHint: "Напишите исправленную фразу." },
+      { prompt: "Hľadám čierna batoh.", answer: "Hľadám čierny batoh.", inputHint: "Напишите исправленную фразу." },
+      { prompt: "Auto je nová.", answer: "Auto je nové.", inputHint: "Напишите исправленную фразу." },
+    ], hint: "Согласуйте окончание прилагательного с существительным.", explanation: "Izba и taška требуют -á, batoh — форму čierny, auto — окончание -é." },
+    { id: "reinforcement:voice-description:5", sectionIndex: 3, type: "pairs", prompt: "Переведите короткие фразы для устной речи.", answer: "Meškám pätnásť minút.; Budem pri vchode o šiestej.; To je moja izba. Je malá, ale svetlá.", pairs: [
+      { prompt: "Я опаздываю на пятнадцать минут.", answer: "Meškám pätnásť minút.", inputHint: "Введите словацкую фразу." },
+      { prompt: "Я буду у входа в шесть.", answer: "Budem pri vchode o šiestej.", inputHint: "Введите словацкую фразу." },
+      { prompt: "Это моя комната. Она маленькая, но светлая.", answer: "To je moja izba. Je malá, ale svetlá.", inputHint: "Введите две короткие фразы." },
+    ], hint: "Используйте готовые блоки урока и сохраняйте диакритику.", explanation: "Правильные модели называют задержку, место и кратко описывают комнату." },
+    { id: "reinforcement:voice-description:6", sectionIndex: 4, type: "pairs", prompt: "Подготовьте запись о задержке: выберите фразы для пяти частей, затем произнесите сообщение вслух без чтения.", answer: "Ahoj, Peter, tu je Ari.; Meškám asi desať minút.; Budem pri stanici o 18:10.; Počkaj na mňa, prosím.; Ďakujem, ahoj.", pairs: [
+      { prompt: "Контакт", answer: "Ahoj, Peter, tu je Ari.", options: ["Ahoj, Peter, tu je Ari.", "Moja izba je svetlá."] },
+      { prompt: "Проблема", answer: "Meškám asi desať minút.", options: ["Meškám asi desať minút.", "Peter číta knihu."] },
+      { prompt: "Место и время", answer: "Budem pri stanici o 18:10.", options: ["Budem pri stanici o 18:10.", "Taška je modrá."] },
+      { prompt: "Просьба", answer: "Počkaj na mňa, prosím.", options: ["Počkaj na mňa, prosím.", "Stôl je vpravo."] },
+      { prompt: "Конец", answer: "Ďakujem, ahoj.", options: ["Ďakujem, ahoj.", "Volám kvôli izbe."] },
+    ], hint: "Соберите контакт, проблему, две детали, просьбу и конец.", explanation: "Получается связное сообщение: Ahoj, Peter, tu je Ari. Meškám asi desať minút. Budem pri stanici o 18:10. Počkaj na mňa, prosím. Ďakujem, ahoj." },
+  ],
+  chatPrompt: "Составьте короткое голосовое сообщение или описание по рабочим опорам. Я помогу сделать фразы понятными и сохранить уровень A1.",
+  chatSuggestions: ["Ahoj, tu je Ari.", "Meškám desať minút.", "To je moja izba.", "To je všetko. Ďakujem."],
+  knowledgeChecks: [
+    { id: "m8-voice-description-check-1", question: "Как по-словацки: «Привет, это Нина»?", options: ["Ahoj, tu je Nina.", "Som na stanici.", "Ďakujem, ahoj."], answer: "Ahoj, tu je Nina.", explanation: "Правильная фраза: Ahoj, tu je Nina." },
+    { id: "m8-voice-description-check-2", question: "Как по-словацки: «Я на вокзале»?", options: ["Som na stanici.", "Ahoj, tu je Nina.", "Zavolám ti neskôr."], answer: "Som na stanici.", explanation: "Правильная фраза: Som na stanici." },
+  ],
+  finalChecks: [
+    { id: "m8-voice-description-final-1", question: "Выберите перевод «Поезд прибудет через десять минут».", options: ["Vlak príde o desať minút.", "Meškám pätnásť minút.", "Budem tam o šiestej."], answer: "Vlak príde o desať minút.", explanation: "Правильный ответ: Vlak príde o desať minút." },
+  ],
+} satisfies CourseLesson;

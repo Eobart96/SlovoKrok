@@ -1,32 +1,142 @@
-import { defineModule5Lesson } from "../lessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const politeRequestsLesson = defineModule5Lesson("polite-requests", 9, {
-  "title": "Просьба и chcel/chcela by som",
-  "slovakTitle": "Zdvorilá prosba",
-  "outcome": "Делать базовую вежливую просьбу или заказ.",
-  "summary": "После урока вы сможете делать базовую вежливую просьбу или заказ в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "В сервисной ситуации используйте Prosím si…, Chcel by som…/Chcela by som… и Môžete…?. Форма chcel/chcela зависит от говорящего.",
-  "examples": [
-    {
-      "slovak": "Prosím si jednu kávu.",
-      "russian": "Мне, пожалуйста, один кофе."
-    },
-    {
-      "slovak": "Chcel by som lístok do Nitry.",
-      "russian": "Я хотел бы билет до Нитры."
-    },
-    {
-      "slovak": "Chcela by som zaplatiť.",
-      "russian": "Я хотела бы заплатить."
-    },
-    {
-      "slovak": "Môžete to zopakovať?",
-      "russian": "Можете это повторить?"
-    }
+const genderOptions = ["chcel", "chcela"];
+
+export const politeRequestsLesson = {
+  vocabulary: [
+    {"word":"Chcel by som kávu.","translation":"Я хотел бы кофе.","example":"Chcel by som kávu."},
+    {"word":"Chcela by som rezervovať izbu.","translation":"Я хотела бы забронировать комнату.","example":"Chcela by som rezervovať izbu."},
+    {"word":"Chcel by som si objednať obed.","translation":"Я хотел бы заказать обед.","example":"Chcel by som si objednať obed."},
+    {"word":"Chcela by som sa opýtať.","translation":"Я хотела бы спросить.","example":"Chcela by som sa opýtať."},
+    {"word":"Prosím, chcel by som účet.","translation":"Мне, пожалуйста, счёт.","example":"Prosím, chcel by som účet."},
+    {"word":"Mohli by ste to zopakovať?","translation":"Не могли бы вы это повторить?","example":"Mohli by ste to zopakovať?"},
   ],
-  "mistake": "Не выбирайте chcel/chcela по роду предмета: форма зависит от пола говорящего.",
-  "task": "Сделайте вежливый заказ из напитка и еды и попросите счёт."
-}, {
-    rules: ["Chcel by som употребляет мужчина, chcela by som — женщина.", "После вежливой формы можно поставить предмет или инфинитив: Chcel by som kávu; Chcela by som zaplatiť.", "Prosím и mohli by ste смягчают просьбу.", "Не смешивайте род говорящего с родом заказываемого предмета."],
-    contrasts: ["Chcel by som čaj — говорит мужчина.", "Chcela by som kávu — говорит женщина.", "Mohli by ste mi pomôcť? — не могли бы вы помочь?"], prompt: "Переведите от лица женщины: «Я хотела бы заплатить».", answer: "Chcela by som zaplatiť.", hint: "Женская форма — chcela by som.",
-  });
+  slug: "polite-requests",
+  order: 10,
+  title: "Просьба и chcel/chcela by som",
+  slovakTitle: "Zdvorilá prosba",
+  description: "Вежливо заказывать, бронировать и просить о помощи в знакомых сервисных ситуациях.",
+  duration: "35–40 мин",
+  goals: ["Выбирать chcel или chcela по полу говорящего", "Использовать устойчивый блок by som", "Просить предмет или действие", "Правильно ставить sa/si", "Поддерживать короткий сервисный диалог"],
+  theory: {
+    summary: "Chcem kávu понятно, но звучит прямо. В кафе, гостинице, магазине или кассе мягче сказать Chcel by som… или Chcela by som… и добавить prosím. Учите chcel/chcela + by som как один речевой блок.",
+    rules: [
+      "Мужчина о себе говорит chcel by som, женщина — chcela by som; форма не зависит от рода предмета.",
+      "Нейтральный порядок: chcel/chcela + by som + предмет или инфинитив.",
+      "После dnes или teraz естественен порядок Dnes by som chcel… / Teraz by som chcela…",
+      "После модели можно поставить предмет: Chcel by som kávu.",
+      "Если просите действие, второй глагол остаётся в инфинитиве: Chcela by som zaplatiť.",
+      "Sa/si ставится после by som: Chcel by som sa opýtať. / Chcela by som si kúpiť lístok.",
+      "Prosím можно поставить в начале или в конце просьбы; после ответа добавьте ďakujem.",
+      "Mohli by ste mi pomôcť? и Mohli by ste to zopakovať? на A1 учите как готовые просьбы к собеседнику.",
+    ],
+    examples: [
+      { slovak: "Chcel by som kávu.", russian: "Я хотел бы кофе.", explanation: "Так говорит мужчина." },
+      { slovak: "Chcela by som rezervovať izbu.", russian: "Я хотела бы забронировать комнату.", explanation: "Так говорит женщина; действие стоит в инфинитиве." },
+      { slovak: "Chcel by som si objednať obed.", russian: "Я хотел бы заказать обед.", explanation: "Si стоит после by som." },
+      { slovak: "Chcela by som sa opýtať.", russian: "Я хотела бы спросить.", explanation: "Sa стоит перед инфинитивом." },
+      { slovak: "Prosím, chcel by som účet.", russian: "Мне, пожалуйста, счёт.", explanation: "Prosím смягчает просьбу." },
+      { slovak: "Mohli by ste to zopakovať?", russian: "Не могли бы вы это повторить?", explanation: "Готовая просьба о действии другого человека." },
+    ],
+  },
+  sections: [
+    {
+      title: "Форма chcel/chcela и блок by som",
+      paragraphs: ["Главный выбор — пол говорящего. Для собственной речи автоматизируйте две формы ja; остальные формы пока нужны для понимания собеседника."],
+      table: { headers: ["Кто говорит", "Форма", "Пример", "Перевод"], rows: [["мужчина", "chcel by som", "Chcel by som čaj.", "Я хотел бы чай."], ["женщина", "chcela by som", "Chcela by som čaj.", "Я хотела бы чай."]] },
+      items: ["ty: chcel by si / chcela by si", "on / ona: chcel by / chcela by", "my: chceli by sme", "vy: chceli by ste"],
+      note: "Ошибки: chcel som by, chcel by ja. Запоминайте блок целиком: chcel/chcela by som.",
+    },
+    {
+      title: "Предмет, действие и порядок после dnes",
+      paragraphs: ["После вежливой модели ставится предмет или инфинитив. Формы частых предметов запоминайте вместе с ситуацией."],
+      table: { headers: ["Что просим", "Модель", "Пример"], rows: [["предмет", "chcel/a by som + predmet", "Chcel by som kávu."], ["действие", "chcel/a by som + infinitív", "Chcela by som zaplatiť."], ["заказ для себя", "chcel/a by som si + infinitív", "Chcel by som si objednať obed."], ["начало вопроса", "chcel/a by som sa + infinitív", "Chcela by som sa opýtať."]] },
+      items: ["Chcel by som zaplatiť kartou.", "Chcela by som rezervovať stôl.", "Dnes by som chcel zaplatiť.", "Teraz by som chcela hovoriť s lekárom."],
+      note: "Ошибка: Chcel by som zaplatím. Правильно: Chcel by som zaplatiť.",
+    },
+    {
+      title: "Sa/si и естественная вежливость",
+      paragraphs: ["Sa/si ставится после by som и перед инфинитивом. Prosím и ďakujem оформляют просьбу как естественную сервисную реплику."],
+      table: { headers: ["Словарная форма", "Вежливая модель", "Перевод"], rows: [["opýtať sa", "Chcel by som sa opýtať.", "Я хотел бы спросить."], ["informovať sa", "Chcela by som sa informovať.", "Я хотела бы узнать."], ["objednať si", "Chcel by som si objednať obed.", "Я хотел бы заказать обед."], ["kúpiť si", "Chcela by som si kúpiť lístok.", "Я хотела бы купить билет."]] },
+      items: ["Chcem kávu. — прямое сообщение о желании.", "Prosím si kávu. — короткий обычный заказ.", "Chcel by som kávu, prosím. — мягкая просьба."],
+      note: "Ошибка: Chcel by som opýtať sa. Правильно: Chcel by som sa opýtať.",
+    },
+    {
+      title: "Сервисные реплики и просьба к собеседнику",
+      paragraphs: ["Узнавайте частые вопросы сотрудника и отвечайте готовой моделью. Если действие должен выполнить другой человек, используйте mohli by ste."],
+      table: { headers: ["Что услышите", "Перевод", "Ваш ответ"], rows: [["Čo by ste si dali?", "Что будете заказывать?", "Chcel by som čaj."], ["Chceli by ste kávu?", "Вы хотели бы кофе?", "Áno, prosím."], ["Ešte niečo?", "Что-нибудь ещё?", "Nie, ďakujem."], ["Ako vám môžem pomôcť?", "Чем могу помочь?", "Chcela by som rezervovať izbu."]] },
+      items: ["Mohli by ste mi pomôcť? — Не могли бы вы мне помочь?", "Mohli by ste to zopakovať? — Не могли бы вы это повторить?"],
+      note: "Формы mohli by ste пока учите целиком. Главная цель — собственная просьба с chcel/chcela by som.",
+    },
+    {
+      title: "Готовые фразы, ошибки и самопроверка",
+      paragraphs: ["Выберите форму по полу говорящего и найдите предмет, инфинитив или частицу sa/si."],
+      table: { headers: ["Ситуация", "Фраза", "Перевод"], rows: [["кофе", "Chcel by som kávu.", "Я хотел бы кофе."], ["суп", "Chcela by som polievku.", "Я хотела бы суп."], ["оплата", "Chcela by som zaplatiť kartou.", "Я хотела бы заплатить картой."], ["счёт", "Chcel by som účet, prosím.", "Я хотел бы счёт."], ["билет", "Chcel by som si kúpiť lístok.", "Я хотел бы купить билет."], ["информация", "Chcela by som sa informovať o kurze.", "Я хотела бы узнать о курсе."]] },
+      items: ["Chcel som by kávu. → Chcel by som kávu.", "Chcel by ja zaplatiť. → Chcel by som zaplatiť.", "Chcela by som čaj. (мужчина) → Chcel by som čaj.", "Chcel by som zaplatím. → Chcel by som zaplatiť.", "Chcel by som opýtať sa. → Chcel by som sa opýtať."],
+      note: "Самопроверка: верная форма chcel/chcela; порядок by som; инфинитив; sa/si после by som.",
+    },
+  ],
+  stepPractices: [
+    { id: "m5-polite-requests-step-1", sectionIndex: 0, type: "choice", prompt: "Как скажет женщина: «Я хотела бы чай»?", options: ["Chcela by som čaj.", "Chcel by som čaj.", "Chcela som by čaj."], answer: "Chcela by som čaj.", hint: "Выберите форму по полу говорящего и сохраните блок by som.", explanation: "Женщина говорит: Chcela by som čaj." },
+    { id: "m5-polite-requests-step-2", sectionIndex: 1, type: "text", prompt: "Исправьте: Dnes chcel by som zaplatiť.", answer: "Dnes by som chcel zaplatiť.", hint: "После dnes блок by som стоит перед chcel.", explanation: "Dnes by som chcel zaplatiť." },
+    { id: "m5-polite-requests-step-3", sectionIndex: 2, type: "text", prompt: "Исправьте: Chcel by som opýtať sa.", answer: "Chcel by som sa opýtať.", hint: "Поставьте sa после by som.", explanation: "Chcel by som sa opýtať." },
+    { id: "m5-polite-requests-step-4", sectionIndex: 3, type: "choice", prompt: "Как вежливо попросить повторить?", options: ["Mohli by ste to zopakovať?", "Chcel by som to zopakovať.", "Môžete to zopakujete?"], answer: "Mohli by ste to zopakovať?", hint: "Действие должен выполнить собеседник.", explanation: "Mohli by ste to zopakovať? — готовая вежливая просьба." },
+    { id: "m5-polite-requests-step-5", sectionIndex: 4, type: "text", prompt: "Переведите от лица женщины: «Я хотела бы купить билет»." , answer: "Chcela by som si kúpiť lístok.", hint: "Используйте женскую форму и si после by som.", explanation: "Chcela by som si kúpiť lístok." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 10",
+  reinforcementPractices: [
+    { id: "reinforcement:polite-requests:1", sectionIndex: 0, type: "pairs", prompt: "Выберите chcel или chcela.", answer: "chcel; chcela; chcel; chcela; chcel; chcela", pairs: [
+      { prompt: "Мужчина: ___ by som kávu.", answer: "chcel", options: genderOptions },
+      { prompt: "Женщина: ___ by som čaj.", answer: "chcela", options: genderOptions },
+      { prompt: "Мужчина: ___ by som zaplatiť.", answer: "chcel", options: genderOptions },
+      { prompt: "Женщина: ___ by som rezervovať izbu.", answer: "chcela", options: genderOptions },
+      { prompt: "Мужчина: ___ by som sa opýtať.", answer: "chcel", options: genderOptions },
+      { prompt: "Женщина: ___ by som si kúpiť lístok.", answer: "chcela", options: genderOptions },
+    ], hint: "Форма зависит от пола говорящего.", explanation: "Мужчина использует chcel, женщина — chcela." },
+    { id: "reinforcement:polite-requests:2", sectionIndex: 0, type: "pairs", prompt: "Вставьте by som и запишите всю фразу.", answer: "Chcel by som kávu.; Chcela by som rezervovať stôl.; Dnes by som chcel zaplatiť.; Prosím, chcel by som účet.; Teraz by som chcela hovoriť s lekárom.", pairs: [
+      { prompt: "Chcel ___ ___ kávu.", answer: "Chcel by som kávu.", inputHint: "Введите полную фразу" },
+      { prompt: "Chcela ___ ___ rezervovať stôl.", answer: "Chcela by som rezervovať stôl.", inputHint: "Введите полную фразу" },
+      { prompt: "Dnes ___ ___ chcel zaplatiť.", answer: "Dnes by som chcel zaplatiť.", inputHint: "Введите полную фразу" },
+      { prompt: "Prosím, chcel ___ ___ účet.", answer: "Prosím, chcel by som účet.", inputHint: "Введите полную фразу" },
+      { prompt: "Teraz ___ ___ chcela hovoriť s lekárom.", answer: "Teraz by som chcela hovoriť s lekárom.", inputHint: "Введите полную фразу" },
+    ], hint: "В нейтральной модели by som следует за chcel/chcela; после dnes/teraz — перед ним.", explanation: "By som образует устойчивый блок условной просьбы." },
+    { id: "reinforcement:polite-requests:3", sectionIndex: 1, type: "pairs", prompt: "Поставьте второй глагол в инфинитив.", answer: "zaplatiť; rezervovať; kúpiť; zostať", pairs: [
+      { prompt: "Chcel by som ___ kartou. (platím)", answer: "zaplatiť", inputHint: "Введите инфинитив" },
+      { prompt: "Chcela by som ___ izbu. (rezervujem)", answer: "rezervovať", inputHint: "Введите инфинитив" },
+      { prompt: "Chcel by som ___ lístok. (kupujem)", answer: "kúpiť", inputHint: "Введите инфинитив" },
+      { prompt: "Chcela by som ___ dve noci. (zostanem)", answer: "zostať", inputHint: "Введите инфинитив" },
+    ], hint: "После by som нужен инфинитив.", explanation: "Личную форму второго глагола заменяет инфинитив." },
+    { id: "reinforcement:polite-requests:4", sectionIndex: 2, type: "pairs", prompt: "Соберите предложение.", answer: "Chcel by som sa opýtať.; Chcela by som si objednať obed.; Prosím, chcel by som účet.; Dnes by som chcela zaplatiť.", pairs: [
+      { prompt: "chcel / by som / sa / opýtať", answer: "Chcel by som sa opýtať.", inputHint: "Введите предложение" },
+      { prompt: "chcela / by som / si / objednať / obed", answer: "Chcela by som si objednať obed.", inputHint: "Введите предложение" },
+      { prompt: "prosím / chcel / by som / účet", answer: "Prosím, chcel by som účet.", acceptableAnswers: ["Chcel by som účet, prosím."], inputHint: "Введите предложение" },
+      { prompt: "dnes / by som / chcela / zaplatiť", answer: "Dnes by som chcela zaplatiť.", inputHint: "Введите предложение" },
+    ], hint: "Sa/si следует за by som; prosím возможно в начале или конце.", explanation: "Четыре строки проверяют порядок слов." },
+    { id: "reinforcement:polite-requests:5", sectionIndex: 4, type: "pairs", prompt: "Переведите на словацкий.", answer: "Chcel by som kávu.; Chcela by som rezervovať izbu.; Chcel by som sa opýtať.; Chcela by som si kúpiť lístok.; Mohli by ste to zopakovať?", pairs: [
+      { prompt: "Я хотел бы кофе.", answer: "Chcel by som kávu.", inputHint: "Введите перевод" },
+      { prompt: "Я хотела бы забронировать комнату.", answer: "Chcela by som rezervovať izbu.", inputHint: "Введите перевод" },
+      { prompt: "Я хотел бы спросить.", answer: "Chcel by som sa opýtať.", inputHint: "Введите перевод" },
+      { prompt: "Я хотела бы купить билет.", answer: "Chcela by som si kúpiť lístok.", inputHint: "Введите перевод" },
+      { prompt: "Не могли бы вы это повторить?", answer: "Mohli by ste to zopakovať?", inputHint: "Введите перевод" },
+    ], hint: "Проверьте пол говорящего, by som/by ste, sa/si и диакритику.", explanation: "Пять фраз охватывают предмет, действие и просьбу к собеседнику." },
+    { id: "reinforcement:polite-requests:6", sectionIndex: 4, type: "pairs", prompt: "Соберите вежливый мини-диалог.", answer: "Dobrý deň. Čo by ste si dali?; Chcela by som si objednať polievku a čaj, prosím.; Ešte niečo?; Áno, chcela by som sa opýtať. Môžem zaplatiť kartou?; Áno, samozrejme.; Ďakujem.", pairs: [
+      { prompt: "1 · приветствие и вопрос", answer: "Dobrý deň. Čo by ste si dali?", options: ["Dobrý deň. Čo by ste si dali?", "Dobrý deň. Čo by som si dal?", "Dobrý deň. Čo ste si dáte?"] },
+      { prompt: "2 · заказ", answer: "Chcela by som si objednať polievku a čaj, prosím.", options: ["Chcela by som si objednať polievku a čaj, prosím.", "Chcel by som objednám polievku a čaj.", "Chcela som by si objednať polievku a čaj."] },
+      { prompt: "3 · уточнение", answer: "Ešte niečo?", options: ["Ešte niečo?", "Nie, ďakujem.", "Ako vám môžem pomôcť?"] },
+      { prompt: "4 · вопрос об оплате", answer: "Áno, chcela by som sa opýtať. Môžem zaplatiť kartou?", options: ["Áno, chcela by som sa opýtať. Môžem zaplatiť kartou?", "Áno, chcela by som opýtať sa. Môžem zaplatím kartou?", "Áno, chcel by som sa opýtať. Musím platiť kartou?"] },
+      { prompt: "5 · ответ сотрудника", answer: "Áno, samozrejme.", options: ["Áno, samozrejme.", "Nie, ďakujem.", "Ešte niečo?"] },
+      { prompt: "6 · завершение", answer: "Ďakujem.", options: ["Ďakujem.", "Prosím si.", "Chcela by som."] },
+    ], hint: "Следите за формой говорящей, инфинитивом и sa/si.", explanation: "Шесть реплик образуют завершённый диалог в кафе." },
+  ],
+  knowledgeChecks: [
+    { id: "m5-polite-requests-check-1", question: "Как скажет мужчина?", options: ["Chcel by som kávu.", "Chcela by som kávu.", "Chcel som by kávu."], answer: "Chcel by som kávu.", explanation: "Мужская форма — chcel by som." },
+    { id: "m5-polite-requests-check-2", question: "Где нормативно стоит sa?", options: ["Chcel by som sa opýtať.", "Chcel by som opýtať sa.", "Chcel sa by som opýtať."], answer: "Chcel by som sa opýtať.", explanation: "Sa ставится после by som." },
+    { id: "m5-polite-requests-check-3", question: "Как попросить собеседника повторить?", options: ["Mohli by ste to zopakovať?", "Chcel by som to zopakovať.", "Mohli ste by to zopakovať?"], answer: "Mohli by ste to zopakovať?", explanation: "Mohli by ste — готовый вежливый блок для просьбы к собеседнику." },
+  ],
+  finalChecks: [{ id: "m5-polite-requests-final-1", question: "Как женщина скажет «Я хотела бы купить билет»?", options: ["Chcela by som si kúpiť lístok.", "Chcel by som si kúpiť lístok.", "Chcela som by kúpiť si lístok."], answer: "Chcela by som si kúpiť lístok.", explanation: "Женская форма chcela; порядок by som + si + infinitív." }],
+  chatPrompt: "Составьте короткий диалог в кафе, гостинице или магазине с chcel/chcela by som, одной моделью с sa/si, prosím и ďakujem.",
+  chatSuggestions: ["Chcel by som kávu, prosím.", "Chcela by som rezervovať izbu.", "Mohli by ste to zopakovať?"],
+} satisfies CourseLesson;

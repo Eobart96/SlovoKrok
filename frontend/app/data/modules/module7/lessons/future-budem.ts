@@ -1,30 +1,208 @@
-import type { CompactLessonContent } from "../../plannedLessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const futureBudemContent: CompactLessonContent = {
-  "slug": "future-budem",
-  "title": "Будущее: budem + infinitív",
-  "slovakTitle": "Budúci čas",
-  "outcome": "Сообщать о будущем действии.",
-  "summary": "После урока вы сможете сообщать о будущем действии в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Будущее несовершенных глаголов строится: budem/budeš/bude/budeme/budete/budú + infinitív. Инфинитив не спрягается.",
-  "examples": [
-    {
-      "slovak": "Zajtra budem pracovať.",
-      "russian": "Завтра я буду работать."
-    },
-    {
-      "slovak": "Budeš sa učiť?",
-      "russian": "Ты будешь учиться?"
-    },
-    {
-      "slovak": "Večer budeme variť.",
-      "russian": "Вечером мы будем готовить."
-    },
-    {
-      "slovak": "Deti budú spať.",
-      "russian": "Дети будут спать."
-    }
+export const futureBudemContent = {
+  vocabulary: [
+    {"word":"Zajtra budem pracovať.","translation":"Завтра я буду работать.","example":"Zajtra budem pracovať."},
+    {"word":"Budeš sa učiť?","translation":"Ты будешь учиться?","example":"Budeš sa učiť?"},
+    {"word":"Večer budeme variť.","translation":"Вечером мы будем готовить.","example":"Večer budeme variť."},
+    {"word":"Deti budú spať.","translation":"Дети будут спать.","example":"Deti budú spať."},
+    {"word":"Nebudeme dlho čakať.","translation":"Мы не будем долго ждать.","example":"Nebudeme dlho čakať."},
+    {"word":"Kde budete bývať?","translation":"Где вы будете жить?","example":"Kde budete bývať?"},
+    {"word":"Zajtra budem pracovať doma.","translation":"Завтра я буду работать дома.","example":"Zajtra budem pracovať doma."},
+    {"word":"Večer sa budem učiť slovenčinu.","translation":"Вечером я буду учить словацкий.","example":"Večer sa budem učiť slovenčinu."},
+    {"word":"Budeme variť večeru.","translation":"Мы будем готовить ужин.","example":"Budeme variť večeru."},
+    {"word":"Pred spaním budem čítať.","translation":"Перед сном я буду читать.","example":"Pred spaním budem čítať."},
+    {"word":"Cez víkend budete oddychovať.","translation":"На выходных вы будете отдыхать.","example":"Cez víkend budete oddychovať."},
+    {"word":"Poobede sa budeme prechádzať.","translation":"После обеда мы будем гулять.","example":"Poobede sa budeme prechádzať."},
+    {"word":"Čo budeš robiť zajtra?","translation":"Что ты будешь делать завтра?","example":"Čo budeš robiť zajtra?"},
   ],
-  "mistake": "Не ставьте личную форму после budem: budem pracovať, не budem pracujem.",
-  "task": "Составьте планы на завтра для себя, другого человека и группы."
-};
+  slug: "future-budem",
+  order: 4,
+  title: "Будущее: budem + infinitív",
+  slovakTitle: "Budúci čas",
+  description: "Сообщать о будущем действии.",
+  duration: "35–40 мин",
+  goals: [
+    "Образовывать будущее с budem + infinitív",
+    "Использовать формы budem, budeš, bude, budeme, budete и budú",
+    "Строить отрицания, вопросы и модели с sa / si",
+    "Рассказывать о планах на завтра в 5–6 фразах",
+  ],
+  theory: {
+    summary: "Будущее длительных и повторяющихся действий строится из будущей формы byť и неизменного инфинитива. Меняется только budem: Zajtra budem pracovať. Эта модель позволяет говорить о планах, задавать вопросы и строить отрицания.",
+    rules: [
+      "Используйте budem, budeš, bude, budeme, budete или budú + инфинитив: budeme variť, nie budeme varíme.",
+      "Форма уже показывает лицо, поэтому местоимение обычно не нужно. Ja употребляется для контраста: Ja budem pracovať, ale Peter bude oddychovať.",
+      "Не добавляйте som или sme: правильно budem pracovať и budeme čítať.",
+      "Отрицайте вспомогательную форму: nebudem pracovať, nie budem nepracovať.",
+      "В вопросе да/нет порядок можно сохранить: Budeš zajtra pracovať? Вопросительное слово ставится первым: Kde budete bývať?",
+      "С возвратным глаголом sa/si стоит рядом с формой byť: budem sa učiť, budeme si písať, deti sa budú hrať.",
+    ],
+    examples: [
+      { slovak: "Zajtra budem pracovať.", russian: "Завтра я буду работать.", explanation: "Для ja используется budem, смысловой глагол остаётся в инфинитиве." },
+      { slovak: "Budeš sa učiť?", russian: "Ты будешь учиться?", explanation: "В вопросе сохраняется budeš, частица sa стоит рядом." },
+      { slovak: "Večer budeme variť.", russian: "Вечером мы будем готовить.", explanation: "Для my используется budeme + variť." },
+      { slovak: "Deti budú spať.", russian: "Дети будут спать.", explanation: "Множественное число требует budú." },
+      { slovak: "Nebudeme dlho čakať.", russian: "Мы не будем долго ждать.", explanation: "Ne- присоединяется к budeme." },
+      { slovak: "Kde budete bývať?", russian: "Где вы будете жить?", explanation: "Вопросительное слово стоит в начале, затем budete + infinitív." },
+    ],
+  },
+  sections: [
+    {
+      title: "Формула и шесть лиц",
+      paragraphs: [
+        "Смысловой глагол остаётся в инфинитиве, а лицо выражает будущая форма byť. Запоминайте шесть форм одной строкой.",
+        "Подлежащее можно не повторять: Zajtra budem pracovať. Местоимение нужно главным образом для контраста.",
+      ],
+      table: { headers: ["Лицо", "Форма byť", "Модель", "Перевод"], rows: [
+        ["ja", "budem", "budem pracovať", "я буду работать"],
+        ["ty", "budeš", "budeš pracovať", "ты будешь работать"],
+        ["on / ona / ono", "bude", "bude pracovať", "он / она будет работать"],
+        ["my", "budeme", "budeme pracovať", "мы будем работать"],
+        ["vy", "budete", "budete pracovať", "вы будете работать"],
+        ["oni / ony", "budú", "budú pracovať", "они будут работать"],
+      ] },
+      items: ["Zajtra budem študovať.", "Anna bude pracovať doma.", "Budeme bývať v Bratislave.", "Cez víkend budete oddychovať.", "Deti sa budú hrať vonku."],
+      note: "Не добавляйте som: budem pracovať, не budem som pracovať.",
+    },
+    {
+      title: "Отрицание и вопросы",
+      paragraphs: [
+        "В отрицании ne- присоединяется к форме byť. Инфинитив не меняется: nebudem čítať.",
+        "Короткий ответ повторяет только форму byť: Budeš variť? — Áno, budem. / Nie, nebudem.",
+      ],
+      table: { headers: ["Утверждение", "Отрицание", "Перевод"], rows: [
+        ["Budem pracovať.", "Nebudem pracovať.", "Я не буду работать."],
+        ["Budeš variť.", "Nebudeš variť.", "Ты не будешь готовить."],
+        ["Bude študovať.", "Nebude študovať.", "Он / она не будет учиться."],
+        ["Budeme čakať.", "Nebudeme čakať.", "Мы не будем ждать."],
+        ["Budete telefonovať.", "Nebudete telefonovať.", "Вы не будете звонить."],
+        ["Budú bývať tu.", "Nebudú bývať tu.", "Они не будут жить здесь."],
+      ] },
+      items: ["Budeš zajtra pracovať?", "Čo budete robiť večer?", "Kde budeš bývať?", "Kedy budú telefonovať?", "Áno, budem. / Nie, nebudem."],
+      note: "В вопросе с вопросительным словом начинайте с него: Kde budete bývať?",
+    },
+    {
+      title: "Sa / si и время",
+      paragraphs: [
+        "С возвратными глаголами sa или si обычно стоит рядом с budem. В нейтральном порядке время часто занимает первое место: Zajtra sa budem učiť doma.",
+        "Совершенные stretnúť sa и dať si обычно выражают будущее простой формой stretnem sa, dám si. Для budem + infinitív используйте процессы stretávať sa и dávať si.",
+      ],
+      table: { headers: ["Инфинитив", "Будущее", "Перевод"], rows: [
+        ["učiť sa", "Budem sa učiť.", "Я буду учиться."],
+        ["hrať sa", "Deti sa budú hrať.", "Дети будут играть."],
+        ["prechádzať sa", "Budeme sa prechádzať.", "Мы будем гулять."],
+        ["stretávať sa", "Kedy sa budete stretávať?", "Когда вы будете встречаться?"],
+        ["písať si", "Budeme si písať.", "Мы будем переписываться."],
+      ] },
+      items: ["zajtra — завтра", "pozajtra — послезавтра", "večer — вечером", "cez víkend — на выходных", "budúci týždeň — на следующей неделе", "o mesiac — через месяц"],
+      note: "Нейтральные модели: Zajtra sa budem učiť doma. Zajtra budem študovať doma.",
+    },
+    {
+      title: "Банк фраз и план на завтра",
+      paragraphs: [
+        "Меняйте время, лицо, место или действие, но после формы byť сохраняйте инфинитив. Связки najprv, potom, neskôr и večer организуют план.",
+        "Образец: Zajtra budem mať veľa práce. Ráno budem pracovať doma. Na obed budem variť. Potom budem telefonovať kolegovi. Poobede sa budem učiť slovenčinu. Večer nebudem pracovať. Budem čítať a oddychovať.",
+      ],
+      table: { headers: ["План", "Словацкий", "По-русски"], rows: [
+        ["работа", "Zajtra budem pracovať doma.", "Завтра я буду работать дома."],
+        ["учёба", "Večer sa budem učiť slovenčinu.", "Вечером я буду учить словацкий."],
+        ["еда", "Budeme variť večeru.", "Мы будем готовить ужин."],
+        ["чтение", "Pred spaním budem čítať.", "Перед сном я буду читать."],
+        ["ожидание", "Nebudeme dlho čakať.", "Мы не будем долго ждать."],
+        ["отдых", "Cez víkend budete oddychovať.", "На выходных вы будете отдыхать."],
+        ["прогулка", "Poobede sa budeme prechádzať.", "После обеда мы будем гулять."],
+        ["вопрос", "Čo budeš robiť zajtra?", "Что ты будешь делать завтра?"],
+      ] },
+      note: "В плане на завтра используйте 5–6 фраз, три указателя времени, разные инфинитивы, отрицание, возвратную модель и вопрос.",
+    },
+    {
+      title: "Частые ошибки и самопроверка",
+      paragraphs: ["Проверяйте каждую глагольную группу: правильное ли лицо у budem, стоит ли после него инфинитив, присоединено ли ne- к форме byť и не потеряно ли sa / si."],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["Ja budem pracujem.", "Budem pracovať.", "После budem нужен инфинитив."],
+        ["Ty budem čítať.", "Ty budeš čítať.", "Для ty используется budeš."],
+        ["Budeme sme variť.", "Budeme variť.", "Sme не добавляется."],
+        ["Budem nepracovať.", "Nebudem pracovať.", "Ne- относится к форме byť."],
+        ["Budem učiť sa.", "Budem sa učiť.", "Sa стоит рядом с budem."],
+      ] },
+      items: ["Выбрано ли правильное лицо?", "Стоит ли после byť инфинитив?", "Нет ли лишнего som / sme?", "Стоит ли ne- перед budem?", "На месте ли sa / si?"],
+      note: "Четыре опоры: шесть лиц, инфинитив, отрицание/вопрос и возвратная модель.",
+    },
+  ],
+  stepPractices: [
+    { id: "m7-future-budem-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите перевод «Завтра я буду работать.»", options: ["Budeš sa učiť?", "Večer budeme variť.", "Zajtra budem pracovať."], answer: "Zajtra budem pracovať.", hint: "Сверьтесь с основной моделью.", explanation: "Верная фраза: Zajtra budem pracovať." },
+    { id: "m7-future-budem-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Ты будешь учиться?»", answer: "Budeš sa učiť?", hint: "Используйте опорную фразу из таблицы.", explanation: "Верная фраза: Budeš sa učiť?" },
+    { id: "m7-future-budem-step-3", sectionIndex: 2, type: "text", prompt: "Переведите: «Вечером мы будем готовить.»", answer: "Večer budeme variť.", hint: "Сохраните порядок слов и диакритику.", explanation: "Верная фраза: Večer budeme variť." },
+    { id: "m7-future-budem-step-4", sectionIndex: 3, type: "pairs", prompt: "Переведите планы на будущее.", answer: "Zajtra budem pracovať doma.; Nebudeme dlho čakať.; Poobede sa budeme prechádzať.; Čo budeš robiť zajtra?", pairs: [
+      { prompt: "Завтра я буду работать дома.", answer: "Zajtra budem pracovať doma.", inputHint: "Введите перевод" },
+      { prompt: "Мы не будем долго ждать.", answer: "Nebudeme dlho čakať.", inputHint: "Введите перевод" },
+      { prompt: "После обеда мы будем гулять.", answer: "Poobede sa budeme prechádzať.", inputHint: "Введите перевод" },
+      { prompt: "Что ты будешь делать завтра?", answer: "Čo budeš robiť zajtra?", inputHint: "Введите перевод" },
+    ], hint: "Проверьте форму byť, инфинитив и место sa.", explanation: "Планы используют утверждение, отрицание, возвратную модель и вопрос." },
+    { id: "m7-future-budem-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки в будущем времени.", answer: "Zajtra budem pracovať.; My budeme čítať.; Anna bude variť.; Nebudem čakať.; Večer sa budem učiť.", pairs: [
+      { prompt: "Zajtra budem pracujem.", answer: "Zajtra budem pracovať.", inputHint: "Введите исправленную фразу" },
+      { prompt: "My budeme sme čítať.", answer: "My budeme čítať.", acceptableAnswers: ["Budeme čítať."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Anna budem variť.", answer: "Anna bude variť.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Budem nečakať.", answer: "Nebudem čakať.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Večer budem učiť sa.", answer: "Večer sa budem učiť.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Исправьте форму, инфинитив, отрицание или место sa.", explanation: "После формы byť нужен инфинитив; som/sme не добавляются; ne- и sa стоят при форме byť." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 4",
+  reinforcementPractices: [
+    { id: "reinforcement:future-budem:1", sectionIndex: 0, type: "pairs", prompt: "Выберите форму byť по лицу.", answer: "budem; budeš; budeme; budú; bude", pairs: [
+      { prompt: "Ja ___ pracovať.", answer: "budem", options: ["budem", "budeš", "bude", "budeme", "budú"] },
+      { prompt: "Ty ___ čítať.", answer: "budeš", options: ["budem", "budeš", "bude", "budeme", "budú"] },
+      { prompt: "My ___ variť.", answer: "budeme", options: ["budem", "budeš", "bude", "budeme", "budú"] },
+      { prompt: "Oni ___ bývať tu.", answer: "budú", options: ["budem", "budeš", "bude", "budeme", "budú"] },
+      { prompt: "Anna ___ študovať.", answer: "bude", options: ["budem", "budeš", "bude", "budeme", "budú"] },
+    ], hint: "Определите лицо подлежащего.", explanation: "Ответы: budem, budeš, budeme, budú, bude." },
+    { id: "reinforcement:future-budem:2", sectionIndex: 0, type: "pairs", prompt: "Выберите инфинитив после формы byť.", answer: "pracovať; variť; čítať; počúvať", pairs: [
+      { prompt: "Zajtra budem ___.", answer: "pracovať", options: ["pracovať", "pracujem"] },
+      { prompt: "Budeme ___ večeru.", answer: "variť", options: ["variť", "varíme"] },
+      { prompt: "Peter bude ___ knihu.", answer: "čítať", options: ["čítať", "číta"] },
+      { prompt: "Budú ___ hudbu.", answer: "počúvať", options: ["počúvať", "počúvajú"] },
+    ], hint: "После формы byť смысловой глагол не спрягается.", explanation: "Нужны инфинитивы pracovať, variť, čítať и počúvať." },
+    { id: "reinforcement:future-budem:3", sectionIndex: 1, type: "pairs", prompt: "Сделайте отрицание.", answer: "Nebudem čakať.; Nebudeš pracovať.; Nebudeme variť.; Nebudú bývať v Nitre.", pairs: [
+      { prompt: "Budem čakať.", answer: "Nebudem čakať.", inputHint: "Введите отрицание" },
+      { prompt: "Budeš pracovať.", answer: "Nebudeš pracovať.", inputHint: "Введите отрицание" },
+      { prompt: "Budeme variť.", answer: "Nebudeme variť.", inputHint: "Введите отрицание" },
+      { prompt: "Budú bývať v Nitre.", answer: "Nebudú bývať v Nitre.", inputHint: "Введите отрицание" },
+    ], hint: "Присоедините ne- к форме byť и сохраните инфинитив.", explanation: "Отрицательные формы: nebudem, nebudeš, nebudeme, nebudú." },
+    { id: "reinforcement:future-budem:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте каждую ошибку.", answer: "Zajtra budem pracovať.; My budeme čítať.; Anna bude variť.; Nebudem čakať.; Večer sa budem učiť.", pairs: [
+      { prompt: "Zajtra budem pracujem.", answer: "Zajtra budem pracovať.", inputHint: "Введите исправленную фразу" },
+      { prompt: "My budeme sme čítať.", answer: "My budeme čítať.", acceptableAnswers: ["Budeme čítať."], inputHint: "Введите исправленную фразу" },
+      { prompt: "Anna budem variť.", answer: "Anna bude variť.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Budem nečakať.", answer: "Nebudem čakať.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Večer budem učiť sa.", answer: "Večer sa budem učiť.", inputHint: "Введите исправленную фразу" },
+    ], hint: "Введите всю нормативную фразу с диакритикой.", explanation: "Проверьте инфинитив, лицо, отсутствие sme, отрицание и место sa." },
+    { id: "reinforcement:future-budem:5", sectionIndex: 3, type: "pairs", prompt: "Переведите на словацкий.", answer: "Zajtra budem pracovať.; Nebudeme dlho čakať.; Kde budete bývať?; Deti sa budú hrať vonku.; Večer budeš čítať?", pairs: [
+      { prompt: "Завтра я буду работать.", answer: "Zajtra budem pracovať.", inputHint: "Введите перевод" },
+      { prompt: "Мы не будем долго ждать.", answer: "Nebudeme dlho čakať.", inputHint: "Введите перевод" },
+      { prompt: "Где вы будете жить?", answer: "Kde budete bývať?", inputHint: "Введите перевод" },
+      { prompt: "Дети будут играть на улице.", answer: "Deti sa budú hrať vonku.", inputHint: "Введите перевод" },
+      { prompt: "Вечером ты будешь читать?", answer: "Večer budeš čítať?", acceptableAnswers: ["Budeš večer čítať?"], inputHint: "Введите перевод" },
+    ], hint: "Сохраните лицо, инфинитив, вопросительный знак и diakritiku.", explanation: "Переводы проверяют утверждение, отрицание, вопрос и sa." },
+    { id: "reinforcement:future-budem:6", sectionIndex: 3, type: "pairs", prompt: "Соберите проверяемый план на завтра.", answer: "Zajtra budem pracovať doma.; Ráno budem telefonovať kolegom.; Na obed budem variť polievku.; Poobede sa budem učiť slovenčinu.; Večer nebudem pracovať.; Budem čítať a počúvať hudbu.; A čo budeš robiť ty?", pairs: [
+      { prompt: "1 · завтра", answer: "Zajtra budem pracovať doma.", options: ["Zajtra budem pracovať doma.", "Zajtra budem pracujem doma."] },
+      { prompt: "2 · утром", answer: "Ráno budem telefonovať kolegom.", options: ["Ráno bude telefonovať kolegom.", "Ráno budem telefonovať kolegom."] },
+      { prompt: "3 · в обед", answer: "Na obed budem variť polievku.", options: ["Na obed budem variť polievku.", "Na obed budem varím polievku."] },
+      { prompt: "4 · после обеда", answer: "Poobede sa budem učiť slovenčinu.", options: ["Poobede budem učiť sa slovenčinu.", "Poobede sa budem učiť slovenčinu."] },
+      { prompt: "5 · вечером", answer: "Večer nebudem pracovať.", options: ["Večer nebudem pracovať.", "Večer budem nepracovať."] },
+      { prompt: "6 · отдых", answer: "Budem čítať a počúvať hudbu.", options: ["Budem čítam a počúvam hudbu.", "Budem čítať a počúvať hudbu."] },
+      { prompt: "7 · вопрос", answer: "A čo budeš robiť ty?", options: ["A čo budem robiť ty?", "A čo budeš robiť ty?"] },
+    ], hint: "Выберите в каждой строке вариант с правильной формой byť и инфинитивом.", explanation: "План содержит время, разные действия, sa, отрицание и вопрос." },
+  ],
+  chatPrompt: "Расскажите по-словацки о планах на завтра в 5–6 фразах. Используйте три указателя времени, разные инфинитивы, одно отрицание, одну возвратную модель и вопрос собеседнику.",
+  chatSuggestions: ["Zajtra budem pracovať doma.", "Poobede sa budem učiť slovenčinu.", "Večer nebudem pracovať.", "A čo budeš robiť ty?"],
+  knowledgeChecks: [
+    { id: "m7-future-budem-check-1", question: "Как по-словацки: «Завтра я буду работать.»?", options: ["Budeš sa učiť?", "Večer budeme variť.", "Zajtra budem pracovať."], answer: "Zajtra budem pracovať.", explanation: "Правильная модель: Zajtra budem pracovať." },
+    { id: "m7-future-budem-check-2", question: "Как по-словацки: «Ты будешь учиться?»?", options: ["Budeš sa učiť?", "Večer budeme variť.", "Zajtra budem pracovať."], answer: "Budeš sa učiť?", explanation: "Правильная модель: Budeš sa učiť?" },
+  ],
+  finalChecks: [
+    { id: "m7-future-budem-final-1", question: "Выберите перевод «Вечером мы будем готовить.».", options: ["Budeš sa učiť?", "Večer budeme variť.", "Zajtra budem pracovať."], answer: "Večer budeme variť.", explanation: "Правильный ответ: Večer budeme variť." },
+  ],
+} satisfies CourseLesson;

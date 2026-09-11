@@ -1,29 +1,222 @@
-import { defineModule6Lesson } from "../lessonFactory";
+import type { CourseLesson } from "../../../courseTypes";
 
-export const transportLesson = defineModule6Lesson("transport", 5, {
-  "title": "Транспорт",
-  "slovakTitle": "Doprava",
-  "outcome": "Спрашивать маршрут, покупать билет и читать расписание.",
-  "summary": "После урока вы сможете спрашивать маршрут, покупать билет и читать расписание в короткой знакомой ситуации. Материал ограничен частотными моделями уровня A1 и рассчитан на понятное практическое употребление.",
-  "model": "Нужны направления do/na, время отправления и транспортные средства с ísť/cestovať. В кассе: Jeden lístok do…, prosím.",
-  "examples": [
-    {
-      "slovak": "Kedy ide vlak do Žiliny?",
-      "russian": "Когда идёт поезд в Жилину?"
-    },
-    {
-      "slovak": "Jeden lístok do Trnavy, prosím.",
-      "russian": "Один билет до Трнавы, пожалуйста."
-    },
-    {
-      "slovak": "Autobus odchádza o 8:15.",
-      "russian": "Автобус отправляется в 8:15."
-    },
-    {
-      "slovak": "Kde je zastávka?",
-      "russian": "Где остановка?"
-    }
+export const transportLesson = {
+  vocabulary: [
+    {"word":"Kedy ide vlak do Žiliny?","translation":"Когда идёт поезд в Жилину?","example":"Kedy ide vlak do Žiliny?"},
+    {"word":"Jeden lístok do Trnavy, prosím.","translation":"Один билет до Трнавы, пожалуйста.","example":"Jeden lístok do Trnavy, prosím."},
+    {"word":"Autobus odchádza o 8:15.","translation":"Автобус отправляется в 8:15.","example":"Autobus odchádza o 8:15."},
+    {"word":"Kde je zastávka?","translation":"Где остановка?","example":"Kde je zastávka?"},
+    {"word":"Z ktorého nástupišťa odchádza vlak?","translation":"С какой платформы отправляется поезд?","example":"Z ktorého nástupišťa odchádza vlak?"},
+    {"word":"Musím prestúpiť?","translation":"Мне нужно сделать пересадку?","example":"Musím prestúpiť?"},
   ],
-  "mistake": "Различайте stanica (вокзал/станция) и zastávka (остановка).",
-  "task": "Купите билет, спросите платформу или остановку и назовите время отправления."
-}, { focus: "Спрашивайте маршрут, время отправления, платформу и покупайте простой билет.", interaction: "Структура: направление → время → билет → платформа.", boundary: "Изменение сложного международного бронирования не входит в A1.", prompt: "Переведите: «Один билет до Братиславы, пожалуйста».", answer: "Jeden lístok do Bratislavy, prosím.", hint: "Направление оформите через do Bratislavy." });
+  slug: "transport",
+  order: 6,
+  title: "Транспорт",
+  slovakTitle: "Doprava",
+  description: "Спрашивайте маршрут, покупайте билет и читайте простое расписание.",
+  duration: "35–40 мин",
+  goals: [
+    "Называть основные виды транспорта и места поездки",
+    "Спрашивать, какой транспорт идёт в нужное место",
+    "Покупать простой билет до города",
+    "Понимать время отправления и прибытия",
+    "Уточнять остановку, платформу и простую пересадку",
+  ],
+  theory: {
+    summary: "Поездка уровня A1 строится из нескольких точных фактов: нужный транспорт, направление, билет, время и место отправления. Для каждого шага достаточно одной короткой реплики.",
+    rules: [
+      "Основные виды транспорта: vlak, autobus, električka, trolejbus и taxík. Stanica — вокзал или станция, zastávka — остановка, nástupište — платформа.",
+      "Направление к городу выражается готовой моделью do + форма города: do Bratislavy, do Trnavy, do Žiliny, do Košíc.",
+      "Для места используйте знакомые пары: na stanicu — на вокзал, zo stanice — с вокзала, na zastávku — на остановку, pri zastávke — у остановки.",
+      "В кассе или у водителя: Jeden lístok do Trnavy, prosím. Можно уточнить jednosmerný lístok или spiatočný lístok.",
+      "Расписание: Kedy ide vlak? / Kedy odchádza autobus? Ответ строится с o: Autobus odchádza o 8:15.",
+      "Место отправления: Z ktorého nástupišťa odchádza vlak? Простая пересадка: Musím prestúpiť?",
+    ],
+    examples: [
+      { slovak: "Kedy ide vlak do Žiliny?", russian: "Когда идёт поезд в Жилину?", explanation: "Kedy спрашивает время, do Žiliny — направление." },
+      { slovak: "Jeden lístok do Trnavy, prosím.", russian: "Один билет до Трнавы, пожалуйста.", explanation: "Город после do дан в готовой форме Trnavy." },
+      { slovak: "Autobus odchádza o 8:15.", russian: "Автобус отправляется в 8:15.", explanation: "Точное время вводится предлогом o." },
+      { slovak: "Kde je zastávka?", russian: "Где остановка?", explanation: "Zastávka — остановка городского транспорта." },
+      { slovak: "Z ktorého nástupišťa odchádza vlak?", russian: "С какой платформы отправляется поезд?", explanation: "Вопрос запоминается как готовый блок." },
+      { slovak: "Musím prestúpiť?", russian: "Мне нужно сделать пересадку?", explanation: "После musím используется инфинитив prestúpiť." },
+    ],
+  },
+  sections: [
+    {
+      title: "Транспорт и места поездки",
+      paragraphs: [
+        "Сначала определите вид транспорта и нужное место. В городе чаще встречаются autobus, električka и trolejbus; между городами — vlak и diaľkový autobus.",
+        "Различайте stanica и zastávka. На stanica обычно начинают междугороднюю поездку, а на zastávka ждут городской транспорт.",
+      ],
+      table: { headers: ["Слово", "Значение", "Пример"], rows: [
+        ["vlak", "поезд", "Vlak ide do Žiliny."],
+        ["autobus", "автобус", "Autobus ide do centra."],
+        ["električka", "трамвай", "Električka číslo 4."],
+        ["stanica", "вокзал / станция", "Kde je stanica?"],
+        ["zastávka", "остановка", "Kde je zastávka?"],
+        ["nástupište", "платформа", "Nástupište číslo 2."],
+      ] },
+      items: ["trolejbus — троллейбус", "taxík — такси", "lístok — билет", "cestovný poriadok — расписание"],
+      note: "Не путайте miesto и транспорт: stanica, zastávka и nástupište обозначают места поездки.",
+    },
+    {
+      title: "Направление и маршрут",
+      paragraphs: [
+        "Чтобы найти транспорт, спросите Ktorý autobus ide do centra? или Ako sa dostanem na stanicu? Ответ может содержать номер и одну пересадку.",
+        "Городские и географические формы лучше запоминать в готовых сочетаниях: do centra, do Bratislavy, na stanicu, zo stanice.",
+      ],
+      table: { headers: ["Задача", "Реплика", "Перевод"], rows: [
+        ["транспорт в центр", "Ktorý autobus ide do centra?", "Какой автобус идёт в центр?"],
+        ["путь на вокзал", "Ako sa dostanem na stanicu?", "Как мне добраться до вокзала?"],
+        ["направление", "Idem do Bratislavy.", "Я еду в Братиславу."],
+        ["от вокзала", "Autobus ide zo stanice.", "Автобус идёт от вокзала."],
+        ["у остановки", "Som pri zastávke.", "Я нахожусь у остановки."],
+      ] },
+      items: ["do Žiliny", "na stanicu", "zo stanice", "pri zastávke"],
+      note: "В этой теме формы направления используются как готовые модели, уже знакомые по падежам.",
+    },
+    {
+      title: "Покупка билета",
+      paragraphs: [
+        "Назовите количество билетов, направление и при необходимости тип поездки. Реплику можно завершить словом prosím.",
+        "Jednosmerný означает билет в одну сторону, spiatočný — туда и обратно. Для A1 достаточно выбрать один из этих двух вариантов.",
+      ],
+      table: { headers: ["Запрос", "Реплика", "Перевод"], rows: [
+        ["один билет", "Jeden lístok do Trnavy, prosím.", "Один билет до Трнавы, пожалуйста."],
+        ["два билета", "Dva lístky do Žiliny, prosím.", "Два билета до Жилины, пожалуйста."],
+        ["в одну сторону", "Jednosmerný lístok, prosím.", "Билет в одну сторону, пожалуйста."],
+        ["туда и обратно", "Spiatočný lístok, prosím.", "Билет туда и обратно, пожалуйста."],
+      ] },
+      items: ["Koľko stojí lístok?", "Môžem platiť kartou?", "Tu je lístok."],
+      note: "Jeden lístok, но dva lístky. После do запоминайте форму города вместе с репликой.",
+    },
+    {
+      title: "Расписание, прибытие и платформа",
+      paragraphs: [
+        "В расписании ищите odchod — отправление, príchod — прибытие, nástupište — платформа. Вопрос Kedy ...? запрашивает время.",
+        "Если транспорт задерживается, можно услышать meškanie. Для простой поездки достаточно понять число минут и новое время.",
+      ],
+      table: { headers: ["Факт", "Вопрос или сообщение", "Перевод"], rows: [
+        ["отправление", "Kedy odchádza autobus?", "Когда отправляется автобус?"],
+        ["ответ", "Autobus odchádza o 8:15.", "Автобус отправляется в 8:15."],
+        ["прибытие", "Vlak prichádza o 10:20.", "Поезд прибывает в 10:20."],
+        ["платформа", "Z ktorého nástupišťa odchádza vlak?", "С какой платформы отправляется поезд?"],
+        ["задержка", "Vlak má desať minút meškanie.", "Поезд задерживается на десять минут."],
+      ] },
+      items: ["odchod o 8:15", "príchod o 10:20", "nástupište číslo 2", "desať minút meškanie"],
+      note: "Время читается по уже изученной модели с o: o ôsmej pätnásť или цифрами 8:15.",
+    },
+    {
+      title: "Диалог поездки и частые ошибки",
+      paragraphs: [
+        "Соберите поездку по маршруту: направление → билет → время → платформа или остановка → пересадка. Каждую задачу решайте отдельной короткой репликой.",
+        "Перед ответом проверьте формы города после do, lístok/lístky, инфинитив после musím и môžem, а также словацкую диакритику.",
+      ],
+      table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [
+        ["do Bratislava", "do Bratislavy", "После do нужна готовая форма Bratislavy."],
+        ["dva lístok", "dva lístky", "После dva нужна форма lístky."],
+        ["Kde je stanica autobusu?", "Kde je autobusová stanica?", "Естественное сочетание — autobusová stanica."],
+        ["Musím prestúpim?", "Musím prestúpiť?", "После musím нужен инфинитив."],
+        ["Kde je zastavka?", "Kde je zastávka?", "Нужна долгота á."],
+      ] },
+      items: ["Ktorý vlak ide do Bratislavy?", "Jeden lístok, prosím.", "Kedy vlak odchádza?", "Z ktorého nástupišťa odchádza?", "Musím prestúpiť?"],
+      note: "Изменение сложного международного бронирования не входит в A1.",
+    },
+  ],
+  stepPractices: [
+    { id: "m6-transport-step-1", sectionIndex: 0, type: "pairs", prompt: "Выберите подходящее транспортное слово.", answer: "vlak; autobus; električka; stanica; zastávka", pairs: [
+      { prompt: "поезд", answer: "vlak", options: ["vlak", "autobus", "električka", "stanica", "zastávka"] },
+      { prompt: "автобус", answer: "autobus", options: ["vlak", "autobus", "električka", "stanica", "zastávka"] },
+      { prompt: "трамвай", answer: "električka", options: ["vlak", "autobus", "električka", "stanica", "zastávka"] },
+      { prompt: "вокзал", answer: "stanica", options: ["vlak", "autobus", "električka", "stanica", "zastávka"] },
+      { prompt: "остановка", answer: "zastávka", options: ["vlak", "autobus", "električka", "stanica", "zastávka"] },
+    ], showSlovakKeyboard: false, hint: "Отделите три вида транспорта от двух мест.", explanation: "Vlak, autobus и električka — транспорт; stanica и zastávka — места." },
+    { id: "m6-transport-step-2", sectionIndex: 1, type: "pairs", prompt: "Выберите предлог в готовой модели.", answer: "do; na; z; zo; pri", pairs: [
+      { prompt: "___ Bratislavy", answer: "do", options: ["do", "na", "z", "zo", "pri"] },
+      { prompt: "___ stanicu", answer: "na", options: ["do", "na", "z", "zo", "pri"] },
+      { prompt: "___ Trnavy", answer: "z", options: ["do", "na", "z", "zo", "pri"] },
+      { prompt: "___ stanice", answer: "zo", options: ["do", "na", "z", "zo", "pri"] },
+      { prompt: "___ zastávke", answer: "pri", options: ["do", "na", "z", "zo", "pri"] },
+    ], hint: "Сверьте направление, исходную точку и положение у остановки.", explanation: "Готовые блоки: do Bratislavy, na stanicu, z Trnavy, zo stanice, pri zastávke." },
+    { id: "m6-transport-step-3", sectionIndex: 2, type: "pairs", prompt: "Выберите нормативную реплику о билете.", answer: "Jeden lístok do Trnavy, prosím.; Dva lístky do Žiliny, prosím.; Jednosmerný lístok, prosím.; Spiatočný lístok, prosím.; Koľko stojí lístok?", pairs: [
+      { prompt: "Один билет до Трнавы, пожалуйста.", answer: "Jeden lístok do Trnavy, prosím.", options: ["Jeden lístok do Trnavy, prosím.", "Jedna lístok do Trnava, prosím."] },
+      { prompt: "Два билета до Жилины, пожалуйста.", answer: "Dva lístky do Žiliny, prosím.", options: ["Dva lístok do Žilina, prosím.", "Dva lístky do Žiliny, prosím."] },
+      { prompt: "Билет в одну сторону, пожалуйста.", answer: "Jednosmerný lístok, prosím.", options: ["Jednosmerný lístok, prosím.", "Spiatočný lístok, prosím."] },
+      { prompt: "Билет туда и обратно, пожалуйста.", answer: "Spiatočný lístok, prosím.", options: ["Jednosmerný lístok, prosím.", "Spiatočný lístok, prosím."] },
+      { prompt: "Сколько стоит билет?", answer: "Koľko stojí lístok?", options: ["Kde stojí lístok?", "Koľko stojí lístok?"] },
+    ], hint: "Проверьте количество, направление и тип билета.", explanation: "Нормативны jeden lístok, dva lístky, jednosmerný/spiatočný и вопрос Koľko stojí...?" },
+    { id: "m6-transport-step-4", sectionIndex: 3, type: "pairs", prompt: "Найдите факт в расписании.", answer: "Kedy ide vlak do Žiliny?; odchod; príchod; nástupište; meškanie", pairs: [
+      { prompt: "Когда идёт поезд в Жилину?", answer: "Kedy ide vlak do Žiliny?", options: ["Kedy ide vlak do Žiliny?", "Kde je vlak zo Žilina?"] },
+      { prompt: "отправление", answer: "odchod", options: ["odchod", "príchod", "nástupište", "meškanie"] },
+      { prompt: "прибытие", answer: "príchod", options: ["odchod", "príchod", "nástupište", "meškanie"] },
+      { prompt: "платформа", answer: "nástupište", options: ["odchod", "príchod", "nástupište", "meškanie"] },
+      { prompt: "задержка", answer: "meškanie", options: ["odchod", "príchod", "nástupište", "meškanie"] },
+    ], showSlovakKeyboard: false, hint: "Распознайте вопрос и четыре слова расписания.", explanation: "Kedy запрашивает время; odchod, príchod, nástupište и meškanie — ключевые сведения." },
+    { id: "m6-transport-step-5", sectionIndex: 4, type: "pairs", prompt: "Исправьте каждую реплику.", answer: "Jeden lístok do Bratislavy, prosím.; Dva lístky do Žiliny.; Kde je zastávka?; Musím prestúpiť?; Z ktorého nástupišťa odchádza vlak?", pairs: [
+      { prompt: "Переведите: «Один билет до Братиславы, пожалуйста».", answer: "Jeden lístok do Bratislavy, prosím.", inputHint: "Введите перевод" },
+      { prompt: "Dva lístok do Žilina.", answer: "Dva lístky do Žiliny.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Kde je zastavka?", answer: "Kde je zastávka?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Musím prestúpim?", answer: "Musím prestúpiť?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Z ktorý nástupište odchádza vlak?", answer: "Z ktorého nástupišťa odchádza vlak?", inputHint: "Введите исправленную фразу" },
+    ], hint: "Проверьте do + город, lístky, диакритику и инфинитив.", explanation: "Исправления используют do Bratislavy/Žiliny, dva lístky, zastávka, prestúpiť и готовый вопрос о платформе." },
+  ],
+  assessmentMode: "interactive",
+  materialAssessmentStep: false,
+  reinforcementLabel: "Финальный тест темы",
+  reinforcementTitle: "Выполните шесть заданий темы 6",
+  reinforcementPractices: [
+    { id: "reinforcement:transport:1", sectionIndex: 0, type: "pairs", prompt: "Соотнесите транспорт и места.", answer: "vlak; autobus; električka; stanica; zastávka", pairs: [
+      { prompt: "междугородний поезд", answer: "vlak", options: ["vlak", "autobus", "električka", "stanica", "zastávka"] },
+      { prompt: "городской автобус", answer: "autobus", options: ["vlak", "autobus", "električka", "stanica", "zastávka"] },
+      { prompt: "трамвай", answer: "električka", options: ["vlak", "autobus", "električka", "stanica", "zastávka"] },
+      { prompt: "вокзал", answer: "stanica", options: ["vlak", "autobus", "električka", "stanica", "zastávka"] },
+      { prompt: "остановка", answer: "zastávka", options: ["vlak", "autobus", "električka", "stanica", "zastávka"] },
+    ], showSlovakKeyboard: false, hint: "Выберите одно из пяти слов.", explanation: "Первые три — транспорт, последние два — места поездки." },
+    { id: "reinforcement:transport:2", sectionIndex: 1, type: "pairs", prompt: "Дополните готовые модели маршрута.", answer: "do; na; z; zo; pri", pairs: [
+      { prompt: "vlak ___ Košíc", answer: "do", options: ["do", "na", "z", "zo", "pri"] },
+      { prompt: "idem ___ stanicu", answer: "na", options: ["do", "na", "z", "zo", "pri"] },
+      { prompt: "vlak ___ Bratislavy", answer: "z", options: ["do", "na", "z", "zo", "pri"] },
+      { prompt: "autobus ___ stanice", answer: "zo", options: ["do", "na", "z", "zo", "pri"] },
+      { prompt: "som ___ zastávke", answer: "pri", options: ["do", "na", "z", "zo", "pri"] },
+    ], hint: "Определите направление, исходную точку или положение.", explanation: "Do/na отвечают на kam, z/zo — odkiaľ, pri — kde." },
+    { id: "reinforcement:transport:3", sectionIndex: 3, type: "pairs", prompt: "Выберите ключевое слово поездки.", answer: "lístok; odchádza; prichádza; nástupišťa; prestúpiť", pairs: [
+      { prompt: "Jeden ___ do Trnavy.", answer: "lístok", options: ["lístok", "odchádza", "prichádza", "nástupišťa", "prestúpiť"] },
+      { prompt: "Autobus ___ o 8:15.", answer: "odchádza", options: ["lístok", "odchádza", "prichádza", "nástupišťa", "prestúpiť"] },
+      { prompt: "Vlak ___ o 10:20.", answer: "prichádza", options: ["lístok", "odchádza", "prichádza", "nástupišťa", "prestúpiť"] },
+      { prompt: "Z ktorého ___ ide vlak?", answer: "nástupišťa", options: ["lístok", "odchádza", "prichádza", "nástupišťa", "prestúpiť"] },
+      { prompt: "Musím ___?", answer: "prestúpiť", options: ["lístok", "odchádza", "prichádza", "nástupišťa", "prestúpiť"] },
+    ], hint: "Смотрите на билет, время, платформу и инфинитив.", explanation: "Каждое слово занимает своё место в типичном сценарии поездки." },
+    { id: "reinforcement:transport:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки пассажира.", answer: "Idem do Bratislavy.; Dva lístky do Žiliny, prosím.; Autobus odchádza o 8:15.; Kde je zastávka?; Musím prestúpiť?", pairs: [
+      { prompt: "Idem do Bratislava.", answer: "Idem do Bratislavy.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Dva lístok do Žilina, prosím.", answer: "Dva lístky do Žiliny, prosím.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Autobus odchádza v 8:15.", answer: "Autobus odchádza o 8:15.", inputHint: "Введите исправленную фразу" },
+      { prompt: "Kde je zastavka?", answer: "Kde je zastávka?", inputHint: "Введите исправленную фразу" },
+      { prompt: "Musím prestúpim?", answer: "Musím prestúpiť?", inputHint: "Введите исправленную фразу" },
+    ], hint: "Исправьте всю строку: город, число, время, диакритику и инфинитив.", explanation: "Нормативны do Bratislavy/Žiliny, dva lístky, o 8:15, zastávka и prestúpiť." },
+    { id: "reinforcement:transport:5", sectionIndex: 4, type: "pairs", prompt: "Переведите на словацкий.", answer: "Jeden lístok do Bratislavy, prosím.; Kedy ide vlak do Žiliny?; Autobus odchádza o 8:15.; Kde je zastávka?; Musím prestúpiť?", pairs: [
+      { prompt: "Один билет до Братиславы, пожалуйста.", answer: "Jeden lístok do Bratislavy, prosím.", acceptableAnswers: ["Prosím si jeden lístok do Bratislavy."], inputHint: "Введите перевод" },
+      { prompt: "Когда идёт поезд в Жилину?", answer: "Kedy ide vlak do Žiliny?", inputHint: "Введите перевод" },
+      { prompt: "Автобус отправляется в 8:15.", answer: "Autobus odchádza o 8:15.", inputHint: "Введите перевод" },
+      { prompt: "Где остановка?", answer: "Kde je zastávka?", inputHint: "Введите перевод" },
+      { prompt: "Мне нужно сделать пересадку?", answer: "Musím prestúpiť?", inputHint: "Введите перевод" },
+    ], hint: "Используйте готовые реплики и сохраните диакритику.", explanation: "Переводы проверяют билет, время, отправление, остановку и пересадку." },
+    { id: "reinforcement:transport:6", sectionIndex: 4, type: "pairs", prompt: "Соберите короткий диалог поездки.", answer: "Dobrý deň. Jeden lístok do Žiliny, prosím.; Kedy ide vlak?; Vlak odchádza o 9:10.; Z ktorého nástupišťa odchádza?; Z druhého nástupišťa.; Ďakujem.", pairs: [
+      { prompt: "1 · билет", answer: "Dobrý deň. Jeden lístok do Žiliny, prosím.", options: ["Dobrý deň. Jeden lístok do Žiliny, prosím.", "Dobrý deň. Jeden lístok do Žilina.", "Dobrý deň. Jedna lístok do Žiliny."] },
+      { prompt: "2 · время", answer: "Kedy ide vlak?", options: ["Kde ide vlak?", "Kedy ide vlak?", "Koľko je vlak?"] },
+      { prompt: "3 · отправление", answer: "Vlak odchádza o 9:10.", options: ["Vlak odchádza v 9:10.", "Vlak odchádza o 9:10.", "Vlak prichádzam o 9:10."] },
+      { prompt: "4 · платформа", answer: "Z ktorého nástupišťa odchádza?", options: ["Z ktorého nástupišťa odchádza?", "Na ktorý nástupište odchádza?", "Z ktoré nástupište odchádza?"] },
+      { prompt: "5 · ответ", answer: "Z druhého nástupišťa.", options: ["Z druhé nástupište.", "Z druhého nástupišťa.", "Na druhého nástupišťa."] },
+      { prompt: "6 · завершение", answer: "Ďakujem.", options: ["Prosím si.", "Ďakujem.", "Kde?"] },
+    ], hint: "Следуйте маршруту от покупки билета до платформы.", explanation: "Диалог содержит направление, время, отправление, платформу и благодарность." },
+  ],
+  knowledgeChecks: [
+    { id: "m6-transport-check-1", question: "Как спросить, когда идёт поезд в Жилину?", options: ["Kedy ide vlak do Žiliny?", "Kde ide vlak zo Žilina?", "Koľko ide vlak Žilina?"], answer: "Kedy ide vlak do Žiliny?", explanation: "Kedy спрашивает время, а do Žiliny задаёт направление." },
+    { id: "m6-transport-check-2", question: "Как купить один билет до Трнавы?", options: ["Jeden lístok do Trnavy, prosím.", "Jedna lístok do Trnava.", "Jeden lístok na Trnava."], answer: "Jeden lístok do Trnavy, prosím.", explanation: "Нормативный готовый блок: jeden lístok do Trnavy." },
+    { id: "m6-transport-check-3", question: "Какая граница соответствует уровню A1?", options: ["Изменение сложного международного бронирования не входит в A1.", "Нужно сравнивать международные тарифы и визовые правила.", "Нужно оформлять сложный возврат билета."], answer: "Изменение сложного международного бронирования не входит в A1.", explanation: "Тема ограничена простой поездкой, билетом, временем и платформой." },
+  ],
+  finalChecks: [
+    { id: "m6-transport-final-1", question: "Переведите: «Один билет до Братиславы, пожалуйста».", options: ["Jeden lístok do Bratislavy, prosím.", "Jedna lístok do Bratislava, prosím.", "Jeden lístok na Bratislavy, prosím."], answer: "Jeden lístok do Bratislavy, prosím.", explanation: "Направление оформляется готовым блоком do Bratislavy." },
+  ],
+  chatPrompt: "Разыграйте короткую поездку: назовите направление, купите билет, спросите время и платформу или остановку.",
+  chatSuggestions: ["Jeden lístok do Bratislavy, prosím.", "Kedy ide vlak?", "Z ktorého nástupišťa odchádza?"],
+} satisfies CourseLesson;

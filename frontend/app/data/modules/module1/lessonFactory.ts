@@ -5,6 +5,7 @@ type PracticeSeed = Omit<StepPractice, "id">;
 type CheckSeed = Omit<KnowledgeCheck, "id">;
 
 export type Module1LessonSeed = {
+  vocabulary?: CourseLesson["vocabulary"];
   slug: string;
   title: string;
   slovakTitle: string;
@@ -28,6 +29,7 @@ export type Module1LessonSeed = {
 };
 
 export const defineModule1Lesson = (seed: Module1LessonSeed): CourseLesson => ({
+  vocabulary: seed.vocabulary,
   slug: seed.slug,
   order: 0,
   title: seed.title,
