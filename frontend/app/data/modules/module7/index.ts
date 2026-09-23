@@ -18,5 +18,42 @@ const registeredLessons = defineLessonsFromPlannedContent(
   (planned, content, index) => definePlannedLesson(7, index + 1, planned, content),
 );
 
-export const module7 = definePlannedModule({ planned: plannedModule, lessons: registeredLessons });
+const lessonBySlug = (slug: string) => {
+  const lesson = registeredLessons.find((candidate) => candidate.slug === slug);
+  if (!lesson) throw new Error(`Module 7 lesson is missing: ${slug}`);
+  return lesson;
+};
+
+const lessonGroups = [
+  {
+    id: "past-tense",
+    title: "Прошедшее время",
+    slovakTitle: "Minulý čas",
+    description: "Правильные и частотные глаголы, согласование по роду и завершённые действия.",
+    lessons: [lessonBySlug("past-regular"), lessonBySlug("past-frequent")],
+  },
+  {
+    id: "future-and-plans",
+    title: "Будущее и планы",
+    slovakTitle: "Budúcnosť a plány",
+    description: "Budem + infinitív, вопросы о планах, краткие ответы и отрицание.",
+    lessons: [lessonBySlug("future-budem"), lessonBySlug("future-questions-negation")],
+  },
+  {
+    id: "three-times",
+    title: "Вчера — сегодня — завтра",
+    slovakTitle: "Včera — dnes — zajtra",
+    description: "Рассказ о вчерашнем дне и переход между прошлым, настоящим и будущим.",
+    lessons: [lessonBySlug("yesterday"), lessonBySlug("yesterday-today-tomorrow")],
+  },
+  {
+    id: "invitation-and-arrangement",
+    title: "Приглашение и договорённость",
+    slovakTitle: "Pozvanie a dohoda",
+    description: "Предложить встречу, принять или отклонить предложение и согласовать детали.",
+    lessons: [lessonBySlug("invitation-arrangement")],
+  },
+];
+
+export const module7 = definePlannedModule({ planned: plannedModule, lessonGroups });
 export const module7Lessons = module7.lessons;

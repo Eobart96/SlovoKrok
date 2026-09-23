@@ -167,18 +167,18 @@ export const foodLesson = {
       { prompt: "paradajka", answer: "zelenina", options: ["pečivo", "mliečne výrobky", "ovocie", "zelenina", "nápoje"] },
       { prompt: "čaj", answer: "nápoje", options: ["pečivo", "mliečne výrobky", "ovocie", "zelenina", "nápoje"] },
     ], showSlovakKeyboard: false, hint: "В каждой строке выберите одну из пяти групп.", explanation: "Rožok — pečivo, jogurt — mliečny výrobok, banán — ovocie, paradajka — zelenina, čaj — nápoj." },
-    { id: "reinforcement:food:2", sectionIndex: 1, type: "pairs", prompt: "Дополните фразы о приёмах пищи.", answer: "raňajky; obed; večeru; jem; pijem", pairs: [
-      { prompt: "Na ___ jem chlieb.", answer: "raňajky", options: ["raňajky", "obed", "večeru", "jem", "pijem"] },
-      { prompt: "Na ___ mám polievku.", answer: "obed", options: ["raňajky", "obed", "večeru", "jem", "pijem"] },
-      { prompt: "Na ___ jem šalát.", answer: "večeru", options: ["raňajky", "obed", "večeru", "jem", "pijem"] },
-      { prompt: "Ráno ___ jogurt.", answer: "jem", options: ["raňajky", "obed", "večeru", "jem", "pijem"] },
-      { prompt: "Ráno ___ čaj.", answer: "pijem", options: ["raňajky", "obed", "večeru", "jem", "pijem"] },
-    ], hint: "Проверьте форму после na и различите еду и напиток.", explanation: "Устойчиво: na raňajky, na obed, na večeru; jedlo jem, nápoj pijem." },
+    { id: "reinforcement:food:2", sectionIndex: 1, type: "pairs", prompt: "Дополните фразы о времени дня и еде.", answer: "Ráno; Na obed; Večer; jem; pijem", pairs: [
+      { prompt: "___ jem jogurt. · утром", answer: "Ráno", options: ["Ráno", "Na obed", "Večer", "jem", "pijem"] },
+      { prompt: "___ mám polievku. · в обед", answer: "Na obed", options: ["Ráno", "Na obed", "Večer", "jem", "pijem"] },
+      { prompt: "___ jem šalát. · вечером", answer: "Večer", options: ["Ráno", "Na obed", "Večer", "jem", "pijem"] },
+      { prompt: "Ráno ___ jogurt. · я ем", answer: "jem", options: ["Ráno", "Na obed", "Večer", "jem", "pijem"] },
+      { prompt: "Večer ___ čaj. · я пью", answer: "pijem", options: ["Ráno", "Na obed", "Večer", "jem", "pijem"] },
+    ], hint: "Сначала выберите время дня, затем различите еду и напиток.", explanation: "Ráno — утром, na obed — в обед, večer — вечером; jedlo jem, nápoj pijem." },
     { id: "reinforcement:food:3", sectionIndex: 2, type: "pairs", prompt: "Выберите ключевую форму.", answer: "rád; rada; chutí; nechutí; nepijem", pairs: [
       { prompt: "Мужчина: Mám ___ syr.", answer: "rád", options: ["rád", "rada", "chutí", "nechutí", "nepijem"] },
       { prompt: "Женщина: Mám ___ kávu.", answer: "rada", options: ["rád", "rada", "chutí", "nechutí", "nepijem"] },
-      { prompt: "___ mi táto polievka.", answer: "chutí", options: ["rád", "rada", "chutí", "nechutí", "nepijem"] },
-      { prompt: "___ mi toto mäso.", answer: "nechutí", options: ["rád", "rada", "chutí", "nechutí", "nepijem"] },
+      { prompt: "___ mi táto polievka. · мне нравится вкус этого супа", answer: "chutí", options: ["rád", "rada", "chutí", "nechutí", "nepijem"] },
+      { prompt: "___ mi toto mäso. · мне не нравится вкус этого мяса", answer: "nechutí", options: ["rád", "rada", "chutí", "nechutí", "nepijem"] },
       { prompt: "___ mlieko. · я не пью", answer: "nepijem", options: ["rád", "rada", "chutí", "nechutí", "nepijem"] },
     ], hint: "Определите пол говорящего, вкус и отрицание действия.", explanation: "Rád/rada зависят от говорящего; chutí/nechutí — от оценки вкуса; nepijem отрицает pijem." },
     { id: "reinforcement:food:4", sectionIndex: 4, type: "pairs", prompt: "Исправьте ошибки в рассказе о еде.", answer: "Mám rada kávu.; Mám rád zeleninu.; Chutí mi táto polievka.; Nejem mäso.; Na raňajky pijem čaj.", pairs: [
@@ -198,7 +198,7 @@ export const foodLesson = {
     { id: "reinforcement:food:6", sectionIndex: 4, type: "pairs", prompt: "Соберите короткий рассказ о пищевых привычках мужчины.", answer: "Na raňajky jem chlieb a syr.; Na obed mám polievku.; Mám rád zeleninu.; Najradšej pijem vodu.; Nepijem mlieko.", pairs: [
       { prompt: "1 · завтрак", answer: "Na raňajky jem chlieb a syr.", options: ["Na raňajky jem chlieb a syr.", "Na raňajky pijem chlieb a syr.", "Na raňajky jem chlieb a syra."] },
       { prompt: "2 · обед", answer: "Na obed mám polievku.", options: ["Na obede mám polievku.", "Na obed mám polievku.", "Na obed mám polievka."] },
-      { prompt: "3 · любимая группа", answer: "Mám rád zeleninu.", options: ["Mám rada zeleninu.", "Mám rád zelenina.", "Mám rád zeleninu."] },
+      { prompt: "3 · любимая группа · мужчина", answer: "Mám rád zeleninu.", options: ["Mám rada zeleninu.", "Mám rád zelenina.", "Mám rád zeleninu."] },
       { prompt: "4 · любимый напиток", answer: "Najradšej pijem vodu.", options: ["Najradšej jem vodu.", "Najradšej pijem vodu.", "Najradšej pijem voda."] },
       { prompt: "5 · отрицание", answer: "Nepijem mlieko.", options: ["Nejem mlieko.", "Nepijem mlieko.", "Nepijem mlieka."] },
     ], hint: "Выберите нормативную строку для каждого факта.", explanation: "Рассказ последовательно называет завтрак, обед, предпочтение, напиток и отрицание." },

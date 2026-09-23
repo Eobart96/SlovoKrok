@@ -5,13 +5,32 @@
 Из `backend/`:
 
 ```powershell
+.venv\Scripts\python.exe -m pip install --require-hashes -r requirements.lock.txt
 .venv\Scripts\python.exe -m pytest -q
 .venv\Scripts\python.exe -m compileall -q app tests
 ```
 
-Активный набор проверяет route boundary, state round-trip, сохранность
+`requirements.lock.txt` фиксирует транзитивное дерево и хеши для Python 3.12.
+После изменения `requirements.txt` lock обновляется и проверяется так:
+
+```powershell
+uv pip compile backend/requirements.txt --output-file backend/requirements.lock.txt --generate-hashes --python-version 3.12
+node scripts/verify-python-lock.mjs
+```
+
+Pytest считает неожиданные warnings ошибками. Единственное точное исключение —
+известное upstream-предупреждение Starlette/AnyIO `BlockingPortal`; его нельзя
+расширять до подавления всех `DeprecationWarning`.
+
+Активный набор проверяет route boundary, строгий state round-trip, чтение
+legacy schema v1, revision/conflict для autosave и backup restore, сохранность
 прогресса после startup, tutor contract и lifecycle упражнений, чтения,
-словаря и домашних заданий.
+словаря и домашних заданий. `test_database_migrations.py` дополнительно
+проверяет SQLite PRAGMA/FK, WAL, upgrade только временной копии, pre-migration
+backup, идемпотентность, отказ на неизвестной истории и полный rollback сбоя.
+`test_route_contracts.py` фиксирует точный набор course/tutor методов и URL, а
+также именованные success response schemas, чтобы внутреннее разбиение router
+и tutor-модулей не меняло публичный API.
 
 ## Frontend
 
@@ -19,12 +38,21 @@
 
 ```powershell
 npm.cmd run validate:a1
-npm.cmd run test:ui
+npm.cmd run test:unit
 npm.cmd run build
+npm.cmd run check:bundle
 ```
 
-`validate:a1` проверяет content invariants и TypeScript. UI-тесты подменяют
-backend/provider и не меняют реальную SQLite.
+`test:unit` быстро проверяет чистую логику сохранения прогресса, подсчёта,
+состояния переводчика, отображения API-ошибок, timeout, caller cancellation и
+отсутствие blind retry в transport layer. `check:bundle` после production
+build контролирует размер начального `/page` chunk и не допускает возврата
+дополнительного словаря в стартовую загрузку. `validate:a1` проверяет content
+invariants и TypeScript. UI-тесты запускаются
+только по прямому запросу владельца командой `npm.cmd run test:ui`; они
+подменяют backend/provider и не меняют реальную SQLite.
+Development server использует `.next-dev`, а production build — `.next`,
+поэтому `npm.cmd run build` не должен повреждать кеш запущенного приложения.
 
 ## Repository
 
@@ -37,21 +65,15 @@ git diff --check
 git status --short
 ```
 
+CI устанавливает Python только из хешированного lock-файла, запускает backend
+tests/compileall, frontend validation/build, production `npm audit`, Python
+`pip-audit` и `git diff --check` только для диапазона изменений.
+
 Read-only dependency checks:
 
 ```powershell
 backend\.venv\Scripts\python.exe -m pip check
+uvx --from pip-audit==2.10.1 pip-audit --require-hashes -r backend/requirements.lock.txt
 Set-Location frontend
 npm.cmd audit --omit=dev --audit-level=high
 ```
-
-Последний полный набор 2026-09-01 после завершения Module 1 и переименования в
-SlovoKrok: backend `11 passed, 1 warning`, Playwright `46 passed`,
-validation/TypeScript — успешно. Next.js production build, Python compileall,
-launcher self-test и repository audit также прошли.
-
-Checkpoint после публикации подтвердил те же 11 backend и 12 Playwright
-тестов, validation/TypeScript, compileall, pip check и launcher self-test.
-GitHub CI для `3214334` прошёл backend tests/compileall и frontend
-validation/build. `npm audit` отдельно сообщил 6 high advisories; результат не
-считается зелёным и вынесен в roadmap без автоматического breaking-fix.

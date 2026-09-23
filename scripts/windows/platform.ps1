@@ -7,12 +7,27 @@ param(
 
 $ErrorActionPreference = "Stop"
 $ProjectRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\.."))
+
+function Get-AppDataRoot([string]$Override = $env:SLOVOKROK_DATA_DIR) {
+    if ($Override) {
+        if (-not [System.IO.Path]::IsPathRooted($Override)) {
+            throw "SLOVOKROK_DATA_DIR must be an absolute path."
+        }
+        return [System.IO.Path]::GetFullPath($Override)
+    }
+    if (-not $env:LocalAppData) {
+        throw "LOCALAPPDATA is unavailable; set an absolute SLOVOKROK_DATA_DIR."
+    }
+    return [System.IO.Path]::GetFullPath((Join-Path $env:LocalAppData "SlovoKrok"))
+}
+
 $BackendRoot = Join-Path $ProjectRoot "backend"
 $FrontendRoot = Join-Path $ProjectRoot "frontend"
 $VenvRoot = Join-Path $BackendRoot ".venv"
 $VenvPython = Join-Path $VenvRoot "Scripts\python.exe"
 $NextCli = Join-Path $FrontendRoot "node_modules\next\dist\bin\next"
-$RuntimeRoot = Join-Path $ProjectRoot ".runtime"
+$AppDataRoot = Get-AppDataRoot
+$RuntimeRoot = Join-Path $AppDataRoot "launcher"
 $StatePath = Join-Path $RuntimeRoot "launcher-state.json"
 $LogRoot = Join-Path $RuntimeRoot "logs"
 $FrontendUrl = "http://127.0.0.1:3000/"
@@ -150,8 +165,11 @@ function Invoke-Install {
     Write-Host "  SlovoKrok - dependency setup"
     Write-Host "==============================================="
 
-    if (-not (Test-Path -LiteralPath (Join-Path $BackendRoot "requirements.txt"))) {
-        throw "backend\requirements.txt was not found."
+    if (-not (Test-Path -LiteralPath (Join-Path $BackendRoot "requirements.lock.txt"))) {
+        throw "backend\requirements.lock.txt was not found."
+    }
+    if (-not (Test-Path -LiteralPath (Join-Path $FrontendRoot "package-lock.json"))) {
+        throw "frontend\package-lock.json was not found."
     }
     if (-not (Test-Path -LiteralPath (Join-Path $FrontendRoot "package.json"))) {
         throw "frontend\package.json was not found."
@@ -178,7 +196,7 @@ function Invoke-Install {
     }
     if ($plan -contains "install-backend") {
         Write-Step "Installing missing backend dependencies..."
-        & $VenvPython -m pip install -r (Join-Path $BackendRoot "requirements.txt")
+        & $VenvPython -m pip install --require-hashes -r (Join-Path $BackendRoot "requirements.lock.txt")
         if ($LASTEXITCODE -ne 0) { throw "Backend dependency installation failed." }
         if (-not (Test-BackendPackages)) { throw "Backend dependencies remain inconsistent after installation." }
         Write-Ok "Backend dependencies are ready."
@@ -189,12 +207,12 @@ function Invoke-Install {
         Write-Step "Installing missing frontend dependencies..."
         Push-Location $FrontendRoot
         try {
-            & $status.NpmPath install
+            & $status.NpmPath ci
             if ($LASTEXITCODE -ne 0) { throw "Frontend dependency installation failed." }
         } finally {
             Pop-Location
         }
-        if (-not (Test-FrontendPackages)) { throw "Next.js is still missing after npm install." }
+        if (-not (Test-FrontendPackages)) { throw "Next.js is still missing after npm ci." }
         Write-Ok "Frontend dependencies are ready."
     } else {
         Write-Ok "Frontend environment is already ready; no reinstall needed."
@@ -347,7 +365,7 @@ function Invoke-Start {
             $state.backend = New-ProcessRecord $startedBackend "backend"
             Save-LauncherState $state
             if (-not (Wait-Until ${function:Test-BackendHealthy} 45 "Backend")) {
-                throw "Backend did not become healthy. See .runtime\logs\backend.err.log."
+                throw "Backend did not become healthy. See $LogRoot\backend.err.log."
             }
         }
         if ($decision -in @("start-frontend", "start-both")) {
@@ -358,7 +376,7 @@ function Invoke-Start {
             $state.frontend = New-ProcessRecord $startedFrontend "frontend"
             Save-LauncherState $state
             if (-not (Wait-Until ${function:Test-FrontendHealthy} 60 "Frontend")) {
-                throw "Frontend did not become ready. See .runtime\logs\frontend.err.log."
+                throw "Frontend did not become ready. See $LogRoot\frontend.err.log."
             }
         }
     } catch {
@@ -399,6 +417,7 @@ function Invoke-Doctor {
     $status = Get-EnvironmentStatus
     Write-Host "SlovoKrok diagnostics"
     Write-Host "Project: $ProjectRoot"
+    Write-Host "Local data: $AppDataRoot"
     if ($status.SystemPython) { Write-Ok "System Python 3.12+ found." } else { Write-Failure "System Python 3.12+ not found." }
     if ($status.NodeSupported -and $status.NpmPath) { Write-Ok "Node.js $($status.NodeVersion) and npm found." } else { Write-Failure "Node.js 20+ with npm not found." }
     if ($status.VenvWorks) { Write-Ok "backend\.venv Python works." } else { Write-Failure "backend\.venv is missing or stale; install.cmd will preserve and replace a stale copy." }
@@ -430,6 +449,7 @@ function Invoke-SelfTest {
     Assert-Equal ((Get-InstallPlan $false $false $false $false) -join ",") "create-venv,install-backend,install-frontend" "clean install plan"
     Assert-Equal ((Get-InstallPlan $true $true $true $true) -join ",") "" "ready environment plan"
     Assert-Equal ((Get-InstallPlan $true $false $false $true) -join ",") "backup-stale-venv,create-venv,install-backend" "stale venv plan"
+    Assert-Equal (Get-AppDataRoot $ProjectRoot) $ProjectRoot "absolute data-root override"
     Write-Ok "Launcher decision self-tests passed."
 }
 

@@ -46,6 +46,11 @@ head_main.py
 tools/auto-improve/results/
 tools/auto-improve/.pytest_cache/
 
+# Local agent verification state is not part of the product snapshot.
+.unlazy/
+GATES.md
+.unlazy-hook-state.json
+
 # Syncthing recovery copies are not canonical project sources.
 *sync-conflict*
 *~syncthing~*

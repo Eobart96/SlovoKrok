@@ -28,9 +28,9 @@ export function useCourseProgressController({ module, lesson, session }: { modul
   const finalScore = finalQuestions.filter((question) => finalSelections[question.id] === question.answer).length;
   const finalPassingScore = Math.ceil(finalQuestions.length * finalPassingPercent / 100);
 
-  const scheduleMistake = (id: string, prompt: string, answer: string, correct: boolean) => {
+  const scheduleMistake = (id: string, prompt: string, answer: string, correct: boolean, lessonSlug = lesson.slug) => {
     setMistakes((current) => {
-      const next = nextMistakeRecord({ previous: current[id], id, lessonSlug: lesson.slug, prompt, answer, correct, nowMs: Date.now() });
+      const next = nextMistakeRecord({ previous: current[id], id, lessonSlug, prompt, answer, correct, nowMs: Date.now() });
       return next ? { ...current, [id]: next } : current;
     });
   };
@@ -90,6 +90,27 @@ export function useCourseProgressController({ module, lesson, session }: { modul
     setProgress((current) => ({ ...current, [lesson.slug]: "completed" }));
   };
 
+  const submitFinal = () => {
+    const nowMs = Date.now();
+    setMistakes((current) => {
+      const next = { ...current };
+      for (const question of finalQuestions) {
+        const record = nextMistakeRecord({
+          previous: next[question.id],
+          id: question.id,
+          lessonSlug: question.lessonSlug,
+          prompt: question.question,
+          answer: question.answer,
+          correct: finalSelections[question.id] === question.answer,
+          nowMs,
+        });
+        if (record) next[question.id] = record;
+      }
+      return next;
+    });
+    setFinalCompletedModules((current) => ({ ...current, [String(activeModule)]: true }));
+  };
+
   return {
     selectors: { completedCount, reinforcementPractices, reinforcementScore, reinforcementPassed, allReinforcementFilled, activeLessonSlugs, activeMistakes, dueMistakes, totalPracticeCount, correctPracticeCount, accuracy, finalQuestions, finalCompleted, finalScore, finalPassed: finalCompleted && finalScore >= finalPassingScore, currentSummary: lessonSummaries[lesson.slug], finalPassingPercent },
     actions: {
@@ -104,7 +125,7 @@ export function useCourseProgressController({ module, lesson, session }: { modul
       resetLesson,
       resetModule,
       selectFinalAnswer: (question: ModuleFinalQuestion, option: string) => { setFinalCompletedModules((current) => ({ ...current, [String(activeModule)]: false })); setFinalSelections((current) => ({ ...current, [question.id]: option })); },
-      submitFinal: () => setFinalCompletedModules((current) => ({ ...current, [String(activeModule)]: true })),
+      submitFinal,
     },
   };
 }

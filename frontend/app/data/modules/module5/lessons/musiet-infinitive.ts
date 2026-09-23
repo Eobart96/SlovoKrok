@@ -109,8 +109,8 @@ export const musietInfinitiveLesson = {
       { prompt: "Deti ___ platiť, vstup je zdarma. · нет обязанности", answer: "nemusia", options: ["nemusím", "nemusíš", "nemusia", "nesmieš", "nesmiete"] },
       { prompt: "Tu ___ parkovať. · запрет для vy", answer: "nesmiete", options: ["nemusím", "nemusíš", "nemusia", "nesmieš", "nesmiete"] },
     ], hint: "Nemusieť — можно не делать; nesmieť — нельзя делать.", explanation: "Отсутствие обязанности и запрет — разные смыслы." },
-    { id: "reinforcement:musiet-infinitive:5", sectionIndex: 3, type: "pairs", prompt: "Ответьте или переведите.", answer: "Áno, musím.; Nie, nemusíme.; Musíme kúpiť lístky.; Tu nesmiete fajčiť.; Kedy musíte prísť?", pairs: [
-      { prompt: "Musíš dnes pracovať? · да", answer: "Áno, musím.", inputHint: "Введите краткий ответ" }, { prompt: "Musíte prísť? · нет, отвечают двое", answer: "Nie, nemusíme.", inputHint: "Введите краткий ответ" },
+    { id: "reinforcement:musiet-infinitive:5", sectionIndex: 3, type: "pairs", prompt: "Дайте полный ответ на вопросы или переведите предложения.", answer: "Áno, musím.; Nie, nemusíme.; Musíme kúpiť lístky.; Tu nesmiete fajčiť.; Kedy musíte prísť?", pairs: [
+      { prompt: "Musíš dnes pracovať? · да", answer: "Áno, musím.", inputHint: "Введите полный ответ" }, { prompt: "Musíte prísť? · нет, отвечают двое", answer: "Nie, nemusíme.", inputHint: "Введите полный ответ" },
       { prompt: "Нам нужно купить билеты.", answer: "Musíme kúpiť lístky.", inputHint: "Введите перевод" }, { prompt: "Здесь нельзя курить.", answer: "Tu nesmiete fajčiť.", acceptableAnswers: ["Nesmiete tu fajčiť."], inputHint: "Введите перевод" },
       { prompt: "Когда вам нужно прийти?", answer: "Kedy musíte prísť?", inputHint: "Введите перевод" },
     ], hint: "Проверьте перспективу ответа, форму лица, инфинитив и диакритику.", explanation: "Ответы объединяют обязанность, отсутствие обязанности, запрет и вопрос." },

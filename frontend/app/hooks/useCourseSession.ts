@@ -6,12 +6,13 @@ import { a1CourseModules, findA1Lesson, getA1Module } from "../data/a1Course";
 import { buildInitialProgress } from "../data/courseEngine";
 import { type LessonSummary, type MistakeRecord } from "../data/courseProgress";
 import { type LessonStatus } from "../data/courseTypes";
-import { type CourseState } from "../lib/api";
+import { mergeProgress } from "../data/progressMerge";
+import { type CourseState, type CourseStateSnapshot, type PersonalCheatSheet } from "../lib/api";
 import { CoursePersistence } from "../lib/coursePersistence";
 
 export type ProgressMap = Record<string, LessonStatus>;
 export type ChatInteractionKind = "answer" | "clarification" | "continue";
-export type ChatMessage = { id: number; role: "assistant" | "user"; text: string; task?: string; suggestions?: string[]; countsAsPractice?: boolean; createdAt?: string; interactionKind?: ChatInteractionKind; diagnostic?: Record<string, unknown> };
+export type ChatMessage = { id: number; role: "assistant" | "user"; text: string; task?: string; suggestions?: string[]; countsAsPractice?: boolean; createdAt?: string; interactionKind?: ChatInteractionKind; diagnostic?: Record<string, string | number | boolean | null> };
 export type FontSize = "normal" | "large" | "extra-large";
 export type { LessonSummary, MistakeRecord } from "../data/courseProgress";
 
@@ -31,6 +32,7 @@ export type CourseSessionState = {
   finalCompletedModules: Record<string, boolean>;
   chatHistories: Record<string, ChatMessage[]>;
   lessonSummaries: Record<string, LessonSummary>;
+  personalCheatSheets: PersonalCheatSheet[];
 };
 
 export type CourseSessionActions = {
@@ -47,11 +49,12 @@ export type CourseSessionActions = {
   setFinalCompletedModules: SessionSetter<"finalCompletedModules">;
   setChatHistories: SessionSetter<"chatHistories">;
   setLessonSummaries: SessionSetter<"lessonSummaries">;
+  setPersonalCheatSheets: SessionSetter<"personalCheatSheets">;
 };
 
-export type CourseSession = CourseSessionState & CourseSessionActions & { persistenceError: string; readOnly: boolean; maintenance: (operation: () => Promise<CourseState | void>) => Promise<void> };
+export type CourseSession = CourseSessionState & CourseSessionActions & { persistenceError: string; readOnly: boolean; canDiscardLocalChanges: boolean; maintenance: (operation: (revision: string | null) => Promise<CourseStateSnapshot | void>) => Promise<void>; discardLocalChanges: () => void };
 
-type PersistedCourseSession = Partial<CourseSessionState> & { finalCompleted?: boolean; _sync?: { dirty?: boolean } };
+type PersistedCourseSession = Partial<CourseSessionState> & { finalCompleted?: boolean; _sync?: { dirty?: boolean; revision?: string | null } };
 
 // These legacy keys are a compatibility boundary until a dedicated migration is approved.
 const progressStorageKey = "slovak-module-1-beta-progress";
@@ -79,7 +82,7 @@ function readLegacySession(): PersistedCourseSession {
   const fontSize: FontSize = storedFontSize === "normal" || storedFontSize === "large" || storedFontSize === "extra-large" ? storedFontSize : "large";
   return {
     ...cached,
-    progress: { ...initialProgress(), ...readJsonObject(progressStorageKey), ...(cached.progress ?? {}) } as ProgressMap,
+    progress: mergeProgress(initialProgress(), readJsonObject(progressStorageKey) as ProgressMap, cached.progress ?? {}),
     fontSize: cached._sync ? cached.fontSize ?? fontSize : fontSize,
   };
 }
@@ -102,6 +105,7 @@ function resolveSession(parsed: PersistedCourseSession): CourseSessionState {
     finalCompletedModules: { ...(parsed.finalCompleted ? { "1": true } : {}), ...(parsed.finalCompletedModules ?? {}) },
     chatHistories: parsed.chatHistories ?? {},
     lessonSummaries: parsed.lessonSummaries ?? {},
+    personalCheatSheets: Array.isArray(parsed.personalCheatSheets) ? parsed.personalCheatSheets : [],
   };
 }
 
@@ -109,8 +113,8 @@ function toCourseState(session: CourseSessionState): CourseState {
   return { ...session, finalCompleted: Boolean(session.finalCompletedModules["1"]) };
 }
 
-function writeLegacySession(session: CourseSessionState, dirty: boolean): void {
-  window.localStorage.setItem(sessionStorageKey, JSON.stringify({ ...toCourseState(session), _sync: { dirty } }));
+function writeLegacySession(session: CourseSessionState, dirty: boolean, revision: string | null): void {
+  window.localStorage.setItem(sessionStorageKey, JSON.stringify({ ...toCourseState(session), _sync: { dirty, revision } }));
   window.localStorage.setItem(progressStorageKey, JSON.stringify(session.progress));
   window.localStorage.setItem(fontSizeStorageKey, session.fontSize);
 }
@@ -129,8 +133,10 @@ export function useCourseSession(): CourseSession {
   const [finalCompletedModules, setFinalCompletedModules] = useState<Record<string, boolean>>({});
   const [chatHistories, setChatHistories] = useState<Record<string, ChatMessage[]>>({});
   const [lessonSummaries, setLessonSummaries] = useState<Record<string, LessonSummary>>({});
+  const [personalCheatSheets, setPersonalCheatSheets] = useState<PersonalCheatSheet[]>([]);
   const [storageReady, setStorageReady] = useState(false);
   const [readOnly, setReadOnly] = useState(true);
+  const [canDiscardLocalChanges, setCanDiscardLocalChanges] = useState(false);
   const [persistenceError, setPersistenceError] = useState("");
   const persistenceRef = useRef<CoursePersistence | null>(null);
 
@@ -148,6 +154,7 @@ export function useCourseSession(): CourseSession {
     setFinalCompletedModules(session.finalCompletedModules);
     setChatHistories(session.chatHistories);
     setLessonSummaries(session.lessonSummaries);
+    setPersonalCheatSheets(session.personalCheatSheets);
   };
 
   useEffect(() => {
@@ -161,10 +168,11 @@ export function useCourseSession(): CourseSession {
         const resolved = resolveSession(local);
         applySession(resolved);
         const persistence = new CoursePersistence(
-          toCourseState(resolved), Boolean(local._sync?.dirty),
-          (state, dirty) => writeLegacySession(resolveSession(state as PersistedCourseSession), dirty),
+          toCourseState(resolved), Boolean(local._sync?.dirty), local._sync?.revision ?? null,
+          (state, dirty, revision) => writeLegacySession(resolveSession(state as PersistedCourseSession), dirty, revision),
           (state) => applySession(resolveSession(state as PersistedCourseSession)),
           setPersistenceError,
+          () => { setReadOnly(true); setCanDiscardLocalChanges(true); },
         );
         persistenceRef.current = persistence;
         setStorageReady(true);
@@ -187,15 +195,24 @@ export function useCourseSession(): CourseSession {
 
   useEffect(() => {
     if (!storageReady || readOnly) return;
-    persistenceRef.current?.update(toCourseState({ activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries }));
-  }, [storageReady, readOnly, activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries]);
+    persistenceRef.current?.update(toCourseState({ activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries, personalCheatSheets }));
+  }, [storageReady, readOnly, activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries, personalCheatSheets]);
 
-  const maintenance = async (operation: () => Promise<CourseState | void>) => {
+  const maintenance = async (operation: (revision: string | null) => Promise<CourseStateSnapshot | void>) => {
     if (!persistenceRef.current || readOnly) throw new Error("Сеанс курса ещё не готов.");
     setReadOnly(true);
     try { await persistenceRef.current.maintenance(operation); }
     finally { setReadOnly(persistenceRef.current.needsRecovery()); }
   };
 
-  return { activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries, setActiveModule, setSelectedSlug, setFontSize, setProgress, setLessonSteps, setCheckSelections, setPracticeAnswers, setPracticeResults, setMistakes, setFinalSelections, setFinalCompletedModules, setChatHistories, setLessonSummaries, persistenceError, readOnly, maintenance };
+  const discardLocalChanges = () => {
+    const cached = readJsonObject(sessionStorageKey);
+    const sync = cached._sync && typeof cached._sync === "object" && !Array.isArray(cached._sync)
+      ? cached._sync as Record<string, unknown>
+      : {};
+    window.localStorage.setItem(sessionStorageKey, JSON.stringify({ ...cached, _sync: { ...sync, dirty: false } }));
+    window.location.reload();
+  };
+
+  return { activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries, personalCheatSheets, setActiveModule, setSelectedSlug, setFontSize, setProgress, setLessonSteps, setCheckSelections, setPracticeAnswers, setPracticeResults, setMistakes, setFinalSelections, setFinalCompletedModules, setChatHistories, setLessonSummaries, setPersonalCheatSheets, persistenceError, readOnly, canDiscardLocalChanges, maintenance, discardLocalChanges };
 }

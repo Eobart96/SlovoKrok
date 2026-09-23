@@ -1,10 +1,18 @@
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, Header, HTTPException, Request
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.services.course_backup import CourseBackup, backup_summary, export_backup, restore_backup
-from app.services.course_state import decode_course_state, load_course_state
+from app.services.course_state import (
+    COURSE_STATE_CONFLICT_DETAIL,
+    COURSE_STATE_REVISION_REQUIRED_DETAIL,
+    CourseStateConflictError,
+    course_state_revision,
+    decode_course_state,
+    load_course_state,
+    parse_course_state_revision,
+)
 
 router = APIRouter(prefix="/api/v1/course/backup", tags=["course"])
 MAX_BACKUP_BYTES = 10 * 1024 * 1024
@@ -33,7 +41,23 @@ def validate_backup(backup: CourseBackup = Depends(read_backup)) -> dict:
 
 
 @router.post("/restore")
-def import_backup(backup: CourseBackup = Depends(read_backup), db: Session = Depends(get_db)) -> dict:
-    restore_backup(db, backup)
+def import_backup(
+    backup: CourseBackup = Depends(read_backup),
+    state_revision: str | None = Header(default=None, alias="X-Course-State-Revision"),
+    db: Session = Depends(get_db),
+) -> dict:
+    if state_revision is None:
+        raise HTTPException(status_code=428, detail=COURSE_STATE_REVISION_REQUIRED_DETAIL)
+    try:
+        expected_revision = parse_course_state_revision(state_revision)
+        restore_backup(db, backup, expected_revision)
+    except ValueError as error:
+        raise HTTPException(status_code=400, detail="Некорректная revision прогресса.") from error
+    except CourseStateConflictError as error:
+        raise HTTPException(status_code=409, detail=COURSE_STATE_CONFLICT_DETAIL) from error
     stored = load_course_state(db)
-    return {"restored": True, "state": decode_course_state(stored) if stored else None}
+    return {
+        "restored": True,
+        "revision": course_state_revision(stored),
+        "state": decode_course_state(stored) if stored else None,
+    }

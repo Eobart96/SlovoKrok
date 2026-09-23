@@ -90,8 +90,63 @@ export function isCorePractice(lesson: CourseLesson, practice: StepPractice): bo
   return lesson.sections[practice.sectionIndex]?.importance !== "extra";
 }
 
+function stableOptionOffset(key: string, optionCount: number): number {
+  let hash = 2166136261;
+  for (const character of key) {
+    hash ^= character.codePointAt(0) ?? 0;
+    hash = Math.imul(hash, 16777619);
+  }
+  return (hash >>> 0) % optionCount;
+}
+
+function moveAnswerToPosition(options: string[], answer: string, position: number): string[] {
+  const answerIndex = options.indexOf(answer);
+  if (answerIndex < 0 || options.length < 2) return [...options];
+  const arranged = [...options];
+  arranged.splice(answerIndex, 1);
+  arranged.splice(position % options.length, 0, answer);
+  return arranged;
+}
+
+function variedOptionPosition(key: string, optionCount: number, previous: number | undefined): number {
+  if (optionCount < 2) return 0;
+  const candidate = stableOptionOffset(key, optionCount);
+  if (candidate !== previous) return candidate;
+  return (candidate + 1 + stableOptionOffset(`${key}:reroll`, optionCount - 1)) % optionCount;
+}
+
+function distributePracticeOptionPositions(lessonSlug: string, practices: StepPractice[]): StepPractice[] {
+  const previousChoicePositions = new Map<number, number>();
+  return practices.map((practice) => {
+    let options = practice.options;
+    if (options?.length) {
+      const position = variedOptionPosition(`${lessonSlug}:${practice.id}`, options.length, previousChoicePositions.get(options.length));
+      previousChoicePositions.set(options.length, position);
+      options = moveAnswerToPosition(options, practice.answer, position);
+    }
+
+    const previousPairPositions = new Map<number, number>();
+    const pairs = practice.pairs?.map((pair, pairIndex) => {
+      if (!pair.options?.length) return { ...pair };
+      const position = variedOptionPosition(
+        `${practice.id}:${pairIndex}:${pair.prompt}`,
+        pair.options.length,
+        previousPairPositions.get(pair.options.length),
+      );
+      previousPairPositions.set(pair.options.length, position);
+      return {
+        ...pair,
+        options: moveAnswerToPosition(pair.options, pair.answer, position),
+      };
+    });
+    return { ...practice, options, pairs };
+  });
+}
+
 export function buildReinforcementPractices(lesson: CourseLesson): StepPractice[] {
-  if (lesson.reinforcementPractices?.length) return lesson.reinforcementPractices;
+  if (lesson.reinforcementPractices?.length) {
+    return distributePracticeOptionPositions(lesson.slug, lesson.reinforcementPractices);
+  }
   const checkAsPractice = (check: CourseLesson["knowledgeChecks"][number]): StepPractice => ({
     id: check.id,
     sectionIndex: 0,
@@ -138,14 +193,14 @@ export function buildReinforcementPractices(lesson: CourseLesson): StepPractice[
       if (selected.length === 6) break;
     }
   }
-  return selected;
+  return distributePracticeOptionPositions(lesson.slug, selected);
 }
 
 export type ModuleFinalQuestion = CourseLesson["knowledgeChecks"][number] & { lessonSlug: string; lessonTitle: string };
 
 export function buildModuleFinalQuestions(lessons: CourseLesson[]): ModuleFinalQuestion[] {
   const usedAnswers = new Set<string>();
-  return lessons.flatMap((lesson) => {
+  const questions = lessons.flatMap((lesson) => {
     const selected: ModuleFinalQuestion[] = [];
     const candidates = [lesson.knowledgeChecks[0], lesson.finalChecks[0], ...lesson.knowledgeChecks.slice(1), ...lesson.finalChecks.slice(1)].filter(Boolean);
     for (const question of candidates) {
@@ -156,5 +211,19 @@ export function buildModuleFinalQuestions(lessons: CourseLesson[]): ModuleFinalQ
       if (selected.length === 2) break;
     }
     return selected;
+  });
+  const previousPositions = new Map<number, number>();
+  const moduleKey = lessons.map((lesson) => lesson.slug).join(":");
+  return questions.map((question) => {
+    const position = variedOptionPosition(
+      `${moduleKey}:${question.id}`,
+      question.options.length,
+      previousPositions.get(question.options.length),
+    );
+    previousPositions.set(question.options.length, position);
+    return {
+      ...question,
+      options: moveAnswerToPosition(question.options, question.answer, position),
+    };
   });
 }

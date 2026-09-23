@@ -3,6 +3,7 @@ param()
 
 $ErrorActionPreference = "Stop"
 $ProjectRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\.."))
+$GitSafeDirectory = $ProjectRoot.Replace("\", "/")
 Set-Location $ProjectRoot
 
 function Normalize-RepositoryPath([string]$Path) {
@@ -14,7 +15,7 @@ function Normalize-RepositoryPath([string]$Path) {
 }
 
 $candidatePaths = @(
-    & git.exe -c core.quotepath=false ls-files --cached --others --exclude-standard |
+    & git.exe -c "safe.directory=$GitSafeDirectory" -c core.quotepath=false ls-files --cached --others --exclude-standard |
         ForEach-Object { Normalize-RepositoryPath $_ } |
         Where-Object { $_ -and (Test-Path -LiteralPath (Join-Path $ProjectRoot $_) -PathType Leaf) } |
         Sort-Object -Unique
@@ -74,7 +75,7 @@ foreach ($relativePath in $candidatePaths) {
     if ($hasSecret) { $secretPaths.Add($normalized) }
 }
 
-$deletedTracked = @(& git.exe -c core.quotepath=false ls-files --deleted)
+$deletedTracked = @(& git.exe -c "safe.directory=$GitSafeDirectory" -c core.quotepath=false ls-files --deleted)
 if ($LASTEXITCODE -ne 0) { throw "git ls-files --deleted failed." }
 
 Write-Host "Repository hygiene audit"

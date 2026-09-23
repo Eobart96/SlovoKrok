@@ -1,31 +1,50 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { a1CourseModules, allA1Lessons, getA1Module } from "../data/a1Course";
 import { orderedModuleLessons as getOrderedModuleLessons } from "../data/courseEngine";
 import { type CourseLesson } from "../data/courseTypes";
+import { learningModeStorageKey, readLearningMode, type LearningMode } from "../data/learningMode";
 import { useCourseProgressController } from "../hooks/useCourseProgressController";
 import { useCourseSession } from "../hooks/useCourseSession";
-import { CourseExercises } from "./CourseExercises";
-import { CourseReading } from "./CourseReading";
-import { CourseVocabulary } from "./CourseVocabulary";
-import { CourseHomework } from "./CourseHomework";
-import { CourseBackupPanel } from "./CourseBackupPanel";
 import { CourseListening } from "./CourseListening";
 import { CourseMaterialView } from "./CourseMaterialView";
 import { CourseReinforcementView } from "./CourseReinforcementView";
 import { CourseTopicsView } from "./CourseTopicsView";
-import { CourseFinalView, CourseReviewView, CourseStatsView } from "./CourseProgressViews";
+import { CourseFinalView, CourseReviewView } from "./CourseProgressViews";
 
-type CourseView = "topics" | "material" | "listening" | "exercises" | "reading" | "vocabulary" | "homework" | "reinforcement" | "review" | "final" | "stats";
-type ModuleArea = "learning" | "exercises" | "reading" | "vocabulary" | "homework" | "review";
+const CourseExercises = dynamic(() => import("./CourseExercises").then((module) => module.CourseExercises));
+const CourseReading = dynamic(() => import("./CourseReading").then((module) => module.CourseReading));
+const CourseVocabulary = dynamic(() => import("./CourseVocabulary").then((module) => module.CourseVocabulary));
+const CourseHomework = dynamic(() => import("./CourseHomework").then((module) => module.CourseHomework));
+const CourseCheatSheets = dynamic(() => import("./CourseCheatSheets").then((module) => module.CourseCheatSheets));
+const CourseStatsPanel = dynamic(() => import("./CourseStatsPanel").then((module) => module.CourseStatsPanel));
+const CourseBackupPanel = dynamic(() => import("./CourseBackupPanel").then((module) => module.CourseBackupPanel));
+const CourseTestPanel = dynamic(() => import("./CourseTestPanel").then((module) => module.CourseTestPanel));
+const CourseAppearanceControls = dynamic(() => import("./CourseAppearanceControls").then((module) => module.CourseAppearanceControls));
+const AiSettingsPanel = dynamic(() => import("./AiSettingsPanel").then((module) => module.AiSettingsPanel));
 
-export function CourseScreen({ requestedArea = "learning", onAreaChange }: { requestedArea?: ModuleArea; onAreaChange?: (area: ModuleArea) => void }) {
+type CourseView = "topics" | "material" | "listening" | "cheats" | "exercises" | "reading" | "vocabulary" | "homework" | "reinforcement" | "review" | "final" | "stats";
+type ModuleArea = "learning" | "cheats" | "exercises" | "reading" | "vocabulary" | "homework" | "review";
+const developmentModeStorageKey = "slovokrok-development-mode-v1";
+const settingsSectionsStorageKey = "slovokrok-settings-sections-v1";
+type SettingsSection = "appearance" | "backup" | "ai" | "development";
+const defaultSettingsSections: Record<SettingsSection, boolean> = { appearance: false, backup: false, ai: true, development: false };
+
+export function CourseScreen({ requestedArea = "learning", onAreaChange, settingsOpen = false, onSettingsClose = () => {} }: { requestedArea?: ModuleArea; onAreaChange?: (area: ModuleArea) => void; settingsOpen?: boolean; onSettingsClose?: () => void }) {
   const [view, setView] = useState<CourseView>("topics");
   const [topicGroup, setTopicGroup] = useState("root");
+  const [manualPreview, setManualPreview] = useState<{ lessonSlug: string; step: number } | null>(null);
+  const [developmentMode, setDevelopmentMode] = useState(false);
+  const [learningMode, setLearningMode] = useState<LearningMode>("online");
+  const [exerciseRevision, setExerciseRevision] = useState(0);
+  const [settingsSections, setSettingsSections] = useState(defaultSettingsSections);
+  const [settingsSectionsReady, setSettingsSectionsReady] = useState(false);
+  const testDestination = useRef<CourseView | null>(null);
   const session = useCourseSession();
-  const { activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, lessonSummaries, setActiveModule, setSelectedSlug, setFontSize, persistenceError } = session;
+  const { activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, lessonSummaries, personalCheatSheets, setActiveModule, setSelectedSlug, setFontSize, setPersonalCheatSheets, persistenceError } = session;
 
   const activeCourseModule = useMemo(() => getA1Module(activeModule), [activeModule]);
   const orderedModuleLessons = useMemo(() => getOrderedModuleLessons(activeCourseModule), [activeCourseModule]);
@@ -37,16 +56,79 @@ export function CourseScreen({ requestedArea = "learning", onAreaChange }: { req
   const progressController = useCourseProgressController({ module: activeCourseModule, lesson: selectedLesson, session });
   const { completedCount, reinforcementPractices, activeLessonSlugs, activeMistakes, dueMistakes, totalPracticeCount, correctPracticeCount, accuracy, finalQuestions, finalCompleted, finalScore, finalPassed, currentSummary, finalPassingPercent } = progressController.selectors;
   const allLessonsCompleted = completedCount === activeCourseModule.lessons.length;
+  const generatedMistakeHints = Object.values(mistakes).filter((mistake) => !mistake.mastered).map((mistake) => ({ lessonSlug: mistake.lessonSlug, text: `${mistake.prompt}: ${mistake.answer}` }));
 
   useEffect(() => {
+    setDevelopmentMode(window.localStorage.getItem(developmentModeStorageKey) === "enabled");
+    setLearningMode(readLearningMode(window.localStorage.getItem(learningModeStorageKey)));
+    try {
+      const saved: unknown = JSON.parse(window.localStorage.getItem(settingsSectionsStorageKey) ?? "{}");
+      if (saved && typeof saved === "object" && !Array.isArray(saved)) {
+        setSettingsSections(Object.fromEntries(Object.entries(defaultSettingsSections).map(([section, fallback]) => [section, typeof (saved as Record<string, unknown>)[section] === "boolean" ? (saved as Record<string, boolean>)[section] : fallback])) as Record<SettingsSection, boolean>);
+      }
+    } catch { /* Invalid saved UI state falls back to the defaults. */ }
+    setSettingsSectionsReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!settingsSectionsReady) return;
+    try { window.localStorage.setItem(settingsSectionsStorageKey, JSON.stringify(settingsSections)); }
+    catch { /* Section state still applies until this tab is closed. */ }
+  }, [settingsSections, settingsSectionsReady]);
+
+  const changeSettingsSection = (section: SettingsSection, open: boolean) => {
+    setSettingsSections((current) => current[section] === open ? current : { ...current, [section]: open });
+  };
+
+  const changeDevelopmentMode = (enabled: boolean) => {
+    setDevelopmentMode(enabled);
+    if (!enabled) {
+      const bypassedCourseGate = manualPreview !== null || (view === "final" && !allLessonsCompleted);
+      setManualPreview(null);
+      testDestination.current = null;
+      if (bypassedCourseGate) {
+        setView("topics");
+        onAreaChange?.("learning");
+      }
+    }
+    try { window.localStorage.setItem(developmentModeStorageKey, enabled ? "enabled" : "disabled"); }
+    catch { /* The setting still applies until this tab is closed. */ }
+  };
+
+  const changeLearningMode = (mode: LearningMode) => {
+    setLearningMode(mode);
+    try { window.localStorage.setItem(learningModeStorageKey, mode); }
+    catch { /* The setting still applies until this tab is closed. */ }
+  };
+
+  useEffect(() => {
+    if (requestedArea === "learning" && testDestination.current) {
+      setView(testDestination.current);
+      testDestination.current = null;
+      return;
+    }
     if (requestedArea === "learning") { setView("topics"); return; }
-    setView(requestedArea === "exercises" ? "exercises" : requestedArea === "reading" ? "reading" : requestedArea === "vocabulary" ? "vocabulary" : requestedArea === "homework" ? "homework" : "review");
+    setView(requestedArea === "cheats" ? "cheats" : requestedArea === "exercises" ? "exercises" : requestedArea === "reading" ? "reading" : requestedArea === "vocabulary" ? "vocabulary" : requestedArea === "homework" ? "homework" : "review");
   }, [requestedArea]);
 
+  const openTestView = (destination: CourseView) => {
+    if (requestedArea !== "learning" && onAreaChange) {
+      testDestination.current = destination;
+      onAreaChange("learning");
+    }
+    setView(destination);
+  };
+
   const openMaterial = (lesson: CourseLesson) => {
+    setManualPreview(null);
     setSelectedSlug(lesson.slug);
     progressController.actions.startLesson(lesson);
     setView("material");
+  };
+  const openManualPreview = (lesson: CourseLesson, step = 0) => {
+    setSelectedSlug(lesson.slug);
+    setManualPreview({ lessonSlug: lesson.slug, step });
+    openTestView("material");
   };
 
   const selectModule = (moduleOrder: number) => {
@@ -64,7 +146,7 @@ export function CourseScreen({ requestedArea = "learning", onAreaChange }: { req
   };
   return (
     <>
-    {session.readOnly && <div role="status" className="course-persistence-error"><p>{persistenceError || "Курс занят другой вкладкой или сохраняет данные. Дождитесь завершения операции либо закройте другую вкладку курса."}</p>{persistenceError && <button type="button" onClick={() => window.location.reload()}>Перезагрузить страницу</button>}</div>}
+    {session.readOnly && <div role="status" className="course-persistence-error"><p>{persistenceError || "Курс занят другой вкладкой или сохраняет данные. Дождитесь завершения операции либо закройте другую вкладку курса."}</p>{persistenceError && (session.canDiscardLocalChanges ? <button type="button" onClick={() => { if (window.confirm("Удалить несохранённые изменения этой вкладки и загрузить более новую сохранённую версию?")) session.discardLocalChanges(); }}>Загрузить сохранённую версию</button> : <button type="button" onClick={() => window.location.reload()}>Перезагрузить страницу</button>)}</div>}
     <section className="course" inert={session.readOnly} data-font-size={fontSize} aria-labelledby="course-title">
       <header className="course-hero">
         <div>
@@ -91,7 +173,6 @@ export function CourseScreen({ requestedArea = "learning", onAreaChange }: { req
         </fieldset>
       </header>
       {persistenceError && <p className="course-persistence-error" role="alert">Данные временно не синхронизированы с базой: {persistenceError}</p>}
-      <CourseBackupPanel session={session} onRestored={() => { setView("topics"); onAreaChange?.("learning"); }} />
 
       {requestedArea === "learning" && <nav className="course-breadcrumbs" aria-label={`Навигация обучения ${activeCourseModule.title}`}>
         <button type="button" className={view === "topics" ? "active" : ""} onClick={() => setView("topics")}>Темы</button>
@@ -115,31 +196,37 @@ export function CourseScreen({ requestedArea = "learning", onAreaChange }: { req
           openStats: () => setView("stats"),
         }}
       />}
-      {view === "exercises" && <CourseExercises completedLessonSlugs={allA1Lessons.filter((lesson) => progress[lesson.slug] === "completed").map((lesson) => lesson.slug)} />}
+      {view === "cheats" && <CourseCheatSheets
+        completedLessonSlugs={allA1Lessons.filter((lesson) => progress[lesson.slug] === "completed").map((lesson) => lesson.slug)}
+        personalCheatSheets={personalCheatSheets}
+        setPersonalCheatSheets={setPersonalCheatSheets}
+        openLesson={(moduleOrder, lesson) => { setActiveModule(moduleOrder); setSelectedSlug(lesson.slug); openTestView("material"); }}
+      />}
+      {view === "exercises" && <CourseExercises key={exerciseRevision} completedLessonSlugs={allA1Lessons.filter((lesson) => progress[lesson.slug] === "completed").map((lesson) => lesson.slug)} mistakeHints={generatedMistakeHints} learningMode={learningMode} />}
       {view === "reading" && <CourseReading completedLessonSlugs={allA1Lessons.filter((lesson) => progress[lesson.slug] === "completed").map((lesson) => lesson.slug)} />}
       {view === "vocabulary" && <CourseVocabulary completedLessonSlugs={allA1Lessons.filter((lesson) => progress[lesson.slug] === "completed").map((lesson) => lesson.slug)} />}
-      {view === "homework" && <CourseHomework completedLessonSlugs={allA1Lessons.filter((lesson) => progress[lesson.slug] === "completed").map((lesson) => lesson.slug)} mistakeHints={Object.values(mistakes).filter((mistake) => !mistake.mastered).map((mistake) => ({ lessonSlug: mistake.lessonSlug, text: `${mistake.prompt}: ${mistake.answer}` }))} />}
+      {view === "homework" && <CourseHomework completedLessonSlugs={allA1Lessons.filter((lesson) => progress[lesson.slug] === "completed").map((lesson) => lesson.slug)} mistakeHints={generatedMistakeHints} />}
 
       {view === "listening" && <CourseListening key={selectedLesson.slug} lesson={selectedLesson} back={() => setView("material")} />}
       {view === "material" && selectedLesson.listening?.length && <button type="button" className="course-listening-launch" onClick={() => setView("listening")}>Послушать сообщения</button>}
       {view === "material" && <CourseMaterialView
-        model={{ activeModule: activeCourseModule, lessons: orderedModuleLessons, selectedLesson, progress, lessonStep: lessonSteps[selectedLesson.slug] ?? 0, practiceAnswers, practiceResults, checkSelections, reinforcementPractices }}
+        model={{ activeModule: activeCourseModule, lessons: orderedModuleLessons, selectedLesson, progress, lessonStep: manualPreview?.lessonSlug === selectedLesson.slug ? manualPreview.step : lessonSteps[selectedLesson.slug] ?? 0, practiceAnswers, practiceResults, checkSelections, reinforcementPractices, manualPreview: manualPreview?.lessonSlug === selectedLesson.slug }}
         actions={{
-          openLesson: openMaterial,
-          setStep: progressController.actions.setLessonStep,
-          updatePractice: progressController.actions.updatePractice,
-          checkPractice: progressController.actions.checkPractice,
-          selectKnowledgeAnswer: progressController.actions.selectKnowledgeAnswer,
-          checkAllReinforcement: progressController.actions.checkAllReinforcement,
+          openLesson: (lesson) => manualPreview ? openManualPreview(lesson) : openMaterial(lesson),
+          setStep: (step) => manualPreview?.lessonSlug === selectedLesson.slug ? setManualPreview({ lessonSlug: selectedLesson.slug, step }) : progressController.actions.setLessonStep(step),
+          updatePractice: manualPreview ? () => {} : progressController.actions.updatePractice,
+          checkPractice: manualPreview ? () => {} : progressController.actions.checkPractice,
+          selectKnowledgeAnswer: manualPreview ? () => {} : progressController.actions.selectKnowledgeAnswer,
+          checkAllReinforcement: manualPreview ? () => {} : progressController.actions.checkAllReinforcement,
           resetLesson: (lesson) => { if (progressController.actions.resetLesson(lesson)) setView("topics"); },
-          backToTopics: () => setView("topics"),
+          backToTopics: () => { setManualPreview(null); setView("topics"); },
           openChat: () => setView("reinforcement"),
           finishInteractiveAssessment: () => { progressController.actions.finishReinforcement(); setView("reinforcement"); },
         }}
       />}
       {view === "review" && <CourseReviewView
-        model={{ mistakes, moduleLessonSlugs: activeLessonSlugs, dueCount: dueMistakes.length, activeCount: activeMistakes.length }}
-        actions={{ openMistake: (lesson, mistake) => { progressController.actions.openMistake(lesson, mistake); setView("material"); }, back: () => { setView("topics"); onAreaChange?.("learning"); } }}
+        model={{ mistakes, modules: a1CourseModules }}
+        actions={{ openMistake: (targetModule, lesson, mistake) => { setManualPreview(null); setActiveModule(targetModule.order); setTopicGroup("root"); progressController.actions.openMistake(lesson, mistake); openTestView("material"); }, back: () => { setView("topics"); onAreaChange?.("learning"); } }}
       />}
       {view === "final" && <CourseFinalView
         model={{ module: activeCourseModule, moduleCount: a1CourseModules.length, lessons: orderedModuleLessons, questions: finalQuestions, selections: finalSelections, completed: finalCompleted, passingPercent: finalPassingPercent }}
@@ -151,9 +238,22 @@ export function CourseScreen({ requestedArea = "learning", onAreaChange }: { req
           nextModule: () => selectModule(activeModule + 1),
         }}
       />}
-      {view === "stats" && <CourseStatsView
-        model={{ module: activeCourseModule, lessons: orderedModuleLessons, progress, practiceResults, checkSelections, summaries: lessonSummaries, completedCount, accuracy, correctPracticeCount, totalPracticeCount, dueCount: dueMistakes.length }}
-        actions={{ back: () => setView("topics"), reset: () => { if (progressController.actions.resetModule()) setView("topics"); } }}
+      {view === "stats" && <CourseStatsPanel
+        modules={a1CourseModules}
+        module={activeCourseModule}
+        lessons={orderedModuleLessons}
+        progress={progress}
+        practiceResults={practiceResults}
+        checkSelections={checkSelections}
+        mistakes={mistakes}
+        summaries={lessonSummaries}
+        completedCount={completedCount}
+        accuracy={accuracy}
+        correctPracticeCount={correctPracticeCount}
+        totalPracticeCount={totalPracticeCount}
+        dueCount={dueMistakes.length}
+        back={() => setView("topics")}
+        reset={() => { if (progressController.actions.resetModule()) setView("topics"); }}
       />}
       {view === "reinforcement" && <CourseReinforcementView
         model={{ lesson: selectedLesson, lessonNumber: displayLessonNumber(selectedLesson), lessonCount: orderedModuleLessons.length, summary: currentSummary, practices: reinforcementPractices, practiceAnswers, practiceResults }}
@@ -167,6 +267,28 @@ export function CourseScreen({ requestedArea = "learning", onAreaChange }: { req
         }}
       />}
     </section>
+    {settingsOpen && <AiSettingsPanel
+      open={settingsOpen}
+      onClose={onSettingsClose}
+      developmentMode={developmentMode}
+      onDevelopmentModeChange={changeDevelopmentMode}
+      learningMode={learningMode}
+      onLearningModeChange={changeLearningMode}
+      settingsSections={{ appearance: settingsSections.appearance, ai: settingsSections.ai }}
+      onSettingsSectionChange={changeSettingsSection}
+      appearance={<div className="course-test-grid course-settings-appearance"><CourseAppearanceControls session={session} showTitle={false} /></div>}
+      backup={<CourseBackupPanel session={session} onRestored={() => { setView("topics"); onAreaChange?.("learning"); }} open={settingsSections.backup} onOpenChange={(open) => changeSettingsSection("backup", open)} />}
+      developmentTools={developmentMode ? <CourseTestPanel session={session} lessons={orderedModuleLessons} lesson={selectedLesson}
+        open={settingsSections.development}
+        onOpenChange={(open) => changeSettingsSection("development", open)}
+        openLesson={(lesson) => { openManualPreview(lesson, lessonSteps[lesson.slug] ?? 0); onSettingsClose(); }}
+        openStep={(step) => { openManualPreview(selectedLesson, step); onSettingsClose(); }}
+        openFinal={() => { openTestView("final"); onSettingsClose(); }}
+        resetLesson={() => { const reset = progressController.actions.resetLesson(selectedLesson); if (reset) setView("topics"); return reset; }}
+        resetModule={() => { const reset = progressController.actions.resetModule(); if (reset) setView("topics"); return reset; }}
+        onExercisesDeleted={() => setExerciseRevision((current) => current + 1)}
+      /> : null}
+    />}
     </>
   );
 }

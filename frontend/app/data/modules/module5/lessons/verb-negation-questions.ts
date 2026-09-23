@@ -138,7 +138,7 @@ export const verbNegationQuestionsLesson = {
       { prompt: "___ ideš?", answer: "Kam", options: ["Ako", "Kde", "Kam", "Kedy", "Prečo", "Koľko"] }, { prompt: "___ pracujete?", answer: "Kedy", options: ["Ako", "Kde", "Kam", "Kedy", "Prečo", "Koľko"] },
       { prompt: "___ sa učíš slovenčinu?", answer: "Prečo", options: ["Ako", "Kde", "Kam", "Kedy", "Prečo", "Koľko"] }, { prompt: "___ to stojí?", answer: "Koľko", options: ["Ako", "Kde", "Kam", "Kedy", "Prečo", "Koľko"] },
     ], hint: "Определите тип недостающей информации.", explanation: "Ответы: Ako, Kde, Kam, Kedy, Prečo, Koľko." },
-    { id: "reinforcement:verb-negation-questions:4", sectionIndex: 2, type: "pairs", prompt: "Дайте короткий ответ.", answer: "Áno, pracujem.; Nie, nie sme doma.; Nie, nemôže.; Áno, učíme sa slovenčinu.", pairs: [
+    { id: "reinforcement:verb-negation-questions:4", sectionIndex: 2, type: "pairs", prompt: "Дайте полный ответ с глаголом.", answer: "Áno, pracujem.; Nie, nie sme doma.; Nie, nemôže.; Áno, učíme sa slovenčinu.", pairs: [
       { prompt: "Pracuješ dnes? · да", answer: "Áno, pracujem.", inputHint: "Введите ответ" }, { prompt: "Ste doma? · нет", answer: "Nie, nie sme doma.", acceptableAnswers: ["Nie, nie sme."], inputHint: "Введите ответ" },
       { prompt: "Môže Peter prísť? · нет", answer: "Nie, nemôže.", inputHint: "Введите ответ" }, { prompt: "Učíte sa slovenčinu? · да, отвечают двое", answer: "Áno, učíme sa slovenčinu.", acceptableAnswers: ["Áno, učíme sa."], inputHint: "Введите ответ" },
     ], hint: "Измените перспективу глагола и не ограничивайтесь одним áno/nie.", explanation: "Ответы используют формы ja, my и третьего лица по ситуации." },
@@ -149,7 +149,7 @@ export const verbNegationQuestionsLesson = {
     ], hint: "Проверьте слитное ne-, двойное отрицание, вопросительное слово и диакритику.", explanation: "Пять строк объединяют исправление отрицания и перевод вопросов." },
     { id: "reinforcement:verb-negation-questions:6", sectionIndex: 3, type: "pairs", prompt: "Соберите мини-диалог о планах.", answer: "Pracuješ dnes?; Nie, nepracujem.; Prečo nepracuješ?; Nie som doma. Som v Bratislave.; Môžeme sa stretnúť večer?; Nie, dnes nemôžem. Môžeme sa stretnúť zajtra.", pairs: [
       { prompt: "1 · общий вопрос", answer: "Pracuješ dnes?", options: ["Pracuješ dnes?", "Pracujem dnes?", "Dnes pracuješ."] },
-      { prompt: "2 · короткий отрицательный ответ", answer: "Nie, nepracujem.", options: ["Nie, nepracujem.", "Nie, nepracuješ.", "Nie pracujem."] },
+      { prompt: "2 · полный отрицательный ответ", answer: "Nie, nepracujem.", options: ["Nie, nepracujem.", "Nie, nepracuješ.", "Nie pracujem."] },
       { prompt: "3 · вопрос о причине", answer: "Prečo nepracuješ?", options: ["Kde nepracuješ?", "Prečo nepracuješ?", "Prečo nepracujem?"] },
       { prompt: "4 · отрицание byť и деталь", answer: "Nie som doma. Som v Bratislave.", options: ["Ne som doma. Som v Bratislave.", "Nie som doma. Som v Bratislave.", "Nie, som doma. Nie v Bratislave."] },
       { prompt: "5 · предложение встречи", answer: "Môžeme sa stretnúť večer?", options: ["Môžeme sa stretnúť večer?", "Môžeme stretnúť sa večer?", "Môžem sa stretnúť večer?"] },

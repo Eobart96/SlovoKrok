@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { allA1Lessons } from "../../app/data/a1Course";
-import { lessonVocabulary } from "../../app/data/courseVocabulary";
+import { buildProgressGenerationContext, exerciseFormats } from "../../app/data/courseGeneration";
+import { learnedVocabularySeeds, lessonVocabulary } from "../../app/data/courseVocabulary";
 import { buildReinforcementPractices, getPracticeMatch } from "../../app/data/coursePractice";
 
 test("offline edits survive closing the tab and a stale server on the next launch", async ({ context, page }) => {
@@ -116,7 +117,7 @@ test("vocabulary hides translations until recall and records difficulty", async 
   });
   await page.goto("/");
   await page.getByRole("button", { name: "Слова", exact: true }).click();
-  await expect(page.getByText("Здравствуйте", { exact: true })).not.toBeVisible();
+  await expect(page.locator(".course-vocabulary-due").getByText("Здравствуйте", { exact: true })).toHaveCount(0);
   await page.getByRole("button", { name: "Показать перевод" }).click();
   await expect(page.locator(".course-vocabulary-due")).toContainText("Здравствуйте");
   await page.getByRole("button", { name: "Не вспомнил", exact: true }).click();
@@ -124,6 +125,274 @@ test("vocabulary hides translations until recall and records difficulty", async 
   await expect(page.getByText("Вернёмся к этой карточке через 10 минут.")).toBeVisible();
   await expect(page.locator(".course-vocabulary-due")).toHaveCount(0);
 });
+
+test("progress-aware exercises use learned vocabulary and relevant mistakes", async ({ page }) => {
+  const greetings = allA1Lessons.find((lesson) => lesson.slug === "greetings")!;
+  const numbers = allA1Lessons.find((lesson) => lesson.slug === "numbers")!;
+  const introductions = allA1Lessons.find((lesson) => lesson.slug === "introductions")!;
+  const fullProgressContext = buildProgressGenerationContext({ mode: "progress", completedLessons: allA1Lessons, mistakeHints: [] });
+  expect(fullProgressContext.length).toBeLessThanOrEqual(12_000);
+  expect(fullProgressContext).toContain(allA1Lessons.at(-1)!.title);
+  const requests: Array<Record<string, string>> = [];
+  await page.route("**/api/v1/course/state", (route) => route.fulfill({ json: { exists: true, state: {
+    selectedSlug: "greetings",
+    progress: { greetings: "completed", numbers: "completed", introductions: "in_progress" },
+    mistakes: {
+      "generated:greetings": { id: "generated:greetings", lessonSlug: "greetings", prompt: "Вежливое приветствие", answer: "Dobrý deň", attempts: 1, mastered: false },
+      "generated:numbers": { id: "generated:numbers", lessonSlug: "numbers", prompt: "Число ноль", answer: "nula", attempts: 1, mastered: false },
+      "generated:introductions": { id: "generated:introductions", lessonSlug: "introductions", prompt: "Будущая ошибка", answer: "Volám sa", attempts: 1, mastered: false },
+    },
+  } } }));
+  await page.route("**/api/v1/course/exercises", async (route) => {
+    if (route.request().method() === "GET") return route.fulfill({ json: [
+      { id: 99, lesson_slug: "course-progress", lesson_title: "Общий прогресс Slovak A1", question: "Сохранённое общее упражнение", instruction: "Ответьте.", created_at: new Date().toISOString(), latest_attempt: null },
+      { id: 98, lesson_slug: "greetings", lesson_title: greetings.title, question: "Сохранённое упражнение темы", instruction: "Ответьте.", created_at: new Date().toISOString(), latest_attempt: null },
+    ] });
+    const request = route.request().postDataJSON() as Record<string, string>;
+    requests.push(request);
+    return route.fulfill({ json: { id: requests.length, lesson_slug: request.lesson_slug, lesson_title: request.lesson_title, question: `Задание ${requests.length}`, instruction: "Ответьте по-словацки.", created_at: new Date().toISOString(), latest_attempt: null } });
+  });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Упражнения", exact: true }).click();
+  await expect(page.locator(".course-exercise-workspace h4")).toHaveText("Сохранённое упражнение темы");
+  await page.getByRole("button", { name: "Создать упражнение", exact: true }).click();
+  await expect.poll(() => requests.length).toBe(1);
+  expect(requests[0].lesson_slug).toBe("greetings");
+  expect(requests[0].theory).toContain(`тема «${greetings.title}»`);
+  expect(requests[0].theory).toContain(greetingVocabularyLine());
+  expect(requests[0].theory).toContain("Вежливое приветствие: Dobrý deň");
+  expect(requests[0].theory).not.toContain("Будущая ошибка");
+
+  await page.getByRole("button", { name: "По общему прогрессу", exact: true }).click();
+  await page.getByRole("button", { name: "Создать упражнение", exact: true }).click();
+  await expect.poll(() => requests.length).toBe(2);
+  expect(requests[1].lesson_slug).toBe("course-progress");
+  expect(requests[1].theory).toContain(numbers.title);
+  expect(requests[1].theory).toContain(`${numbers.vocabulary![0].word} = ${numbers.vocabulary![0].translation}`);
+  expect(requests[1].theory).toContain("Число ноль: nula");
+  expect(requests[1].theory).not.toContain(introductions.title);
+  expect(requests[1].theory).not.toContain("Будущая ошибка");
+});
+
+test("varied exercise formats rotate and use topic test examples", async ({ page }) => {
+  const greetings = allA1Lessons.find((lesson) => lesson.slug === "greetings")!;
+  const numbers = allA1Lessons.find((lesson) => lesson.slug === "numbers")!;
+  const requests: Array<Record<string, string>> = [];
+  await page.route("**/api/v1/course/state", (route) => route.fulfill({ json: { exists: true, state: {
+    selectedSlug: "greetings",
+    progress: { greetings: "completed", numbers: "completed" },
+  } } }));
+  await page.route("**/api/v1/course/exercises", async (route) => {
+    if (route.request().method() === "GET") return route.fulfill({ json: [] });
+    const request = route.request().postDataJSON() as Record<string, string>;
+    requests.push(request);
+    return route.fulfill({ json: {
+      id: requests.length,
+      lesson_slug: request.lesson_slug,
+      lesson_title: request.lesson_title,
+      question: `Разнообразное задание ${requests.length}`,
+      instruction: "Ответьте по-словацки.",
+      created_at: new Date().toISOString(),
+      latest_attempt: null,
+    } });
+  });
+
+  await page.goto("/");
+  await page.getByRole("button", { name: "Упражнения", exact: true }).click();
+  for (const [index, format] of exerciseFormats.entries()) {
+    await expect(page.locator(".course-exercise-create small")).toContainText(format.label);
+    await page.getByRole("button", { name: "Создать упражнение", exact: true }).click();
+    await expect.poll(() => requests.length).toBe(index + 1);
+    expect(requests[index].theory).toContain(`Формат нового упражнения: ${format.label}.`);
+    expect(requests[index].theory).toContain(`Тип интерактива: ${format.interactionType}.`);
+    expect(requests[index].theory).toContain(greetings.knowledgeChecks[0].question);
+    expect(requests[index].theory).toContain(greetings.knowledgeChecks[0].answer);
+    expect(requests[index].theory).not.toContain(numbers.knowledgeChecks[0].question);
+    expect(requests[index].theory.length).toBeLessThanOrEqual(12_000);
+  }
+  await expect(page.locator(".course-exercise-create small")).toContainText(exerciseFormats[0].label);
+  expect(new Set(requests.map((request) => request.theory.match(/Формат нового упражнения: ([^.]+)\./)?.[1])).size).toBe(exerciseFormats.length);
+});
+
+test("interactive exercise mini-games submit choice order matching and text answers", async ({ page }) => {
+  const answers: string[] = [];
+  const createdAt = new Date().toISOString();
+  await page.route("**/api/v1/course/state", (route) => route.fulfill({ json: { exists: true, state: { selectedSlug: "greetings", progress: { greetings: "completed" } } } }));
+  await page.route("**/api/v1/course/exercises/*/answer", async (route) => {
+    answers.push(route.request().postDataJSON().answer);
+    return route.fulfill({ json: { id: answers.length, answer: answers.at(-1), is_correct: true, score: 100, corrected_answer: answers.at(-1), explanation: "Верно.", next_exercise: "Продолжайте.", created_at: createdAt } });
+  });
+  await page.route("**/api/v1/course/exercises", (route) => route.fulfill({ json: [
+    { id: 4, lesson_slug: "greetings", lesson_title: "Приветствия", question: "Соедините пары", instruction: "Подберите перевод.", interaction_type: "match", pair_prompts: ["Dobrý deň", "Dovidenia"], pair_options: ["До свидания", "Здравствуйте"], options: [], tokens: [], created_at: createdAt, latest_attempt: null },
+    { id: 3, lesson_slug: "greetings", lesson_title: "Приветствия", question: "Порядок слов", instruction: "Соберите приветствие.", interaction_type: "order", tokens: ["deň", "Dobrý"], options: [], pair_prompts: [], pair_options: [], created_at: createdAt, latest_attempt: null },
+    { id: 2, lesson_slug: "greetings", lesson_title: "Приветствия", question: "Выберите приветствие", instruction: "Найдите формальную фразу.", interaction_type: "choice", options: ["Ahoj", "Dobrý deň", "Čau"], tokens: [], pair_prompts: [], pair_options: [], created_at: createdAt, latest_attempt: null },
+    { id: 1, lesson_slug: "greetings", lesson_title: "Приветствия", question: "Переведите", instruction: "Напишите «До свидания».", interaction_type: "text", options: [], tokens: [], pair_prompts: [], pair_options: [], created_at: createdAt, latest_attempt: null },
+  ] }));
+
+  await page.goto("/");
+  await page.getByRole("button", { name: "Упражнения", exact: true }).click();
+  const workspace = page.locator(".course-exercise-workspace");
+  await workspace.locator(".course-mini-match label").nth(0).locator("select").selectOption("Здравствуйте");
+  await workspace.locator(".course-mini-match label").nth(1).locator("select").selectOption("До свидания");
+  await workspace.getByRole("button", { name: "Проверить ответ" }).click();
+  await expect.poll(() => answers.at(-1)).toBe("Dobrý deň → Здравствуйте; Dovidenia → До свидания");
+
+  await page.locator(".course-exercise-list article").filter({ hasText: "Порядок слов" }).getByRole("button").first().click();
+  await workspace.getByRole("button", { name: "Добавить Dobrý" }).click();
+  await workspace.getByRole("button", { name: "Добавить deň" }).click();
+  await workspace.getByRole("button", { name: "Проверить ответ" }).click();
+  await expect.poll(() => answers.at(-1)).toBe("Dobrý deň");
+
+  await page.locator(".course-exercise-list article").filter({ hasText: "Выберите приветствие" }).getByRole("button").first().click();
+  await workspace.getByRole("button", { name: "Dobrý deň", exact: true }).click();
+  await expect(workspace.getByRole("button", { name: "Dobrý deň", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await workspace.getByRole("button", { name: "Проверить ответ" }).click();
+  await expect.poll(() => answers.at(-1)).toBe("Dobrý deň");
+
+  await page.locator(".course-exercise-list article").filter({ hasText: "Переведите" }).getByRole("button").first().click();
+  await workspace.getByPlaceholder("Напишите ответ по-словацки…").fill("Dovidenia");
+  await workspace.getByRole("button", { name: "Проверить ответ" }).click();
+  await expect.poll(() => answers.at(-1)).toBe("Dovidenia");
+  expect(answers).toHaveLength(4);
+});
+
+test("offline exercise packs persist mode generate batch and check without AI", async ({ page }) => {
+  const createdAt = new Date().toISOString();
+  const generated: Array<Record<string, unknown>> = [];
+  const generationRequests: Array<Record<string, string>> = [];
+  let submitted: Record<string, string> | null = null;
+  await page.route("**/api/v1/course/state", (route) => route.fulfill({ json: { exists: true, state: { selectedSlug: "greetings", progress: { greetings: "completed" } } } }));
+  await page.route("**/api/v1/tutor/settings", (route) => route.fulfill({ json: {
+    provider: "codex", codex_installed: true, codex_authenticated: true, codex_message: "Codex подключён.",
+    openai_api_key_configured: false, openai_model: "gpt-5", polza_api_key_configured: false,
+    polza_model: "openai/gpt-4o-mini", polza_base_url: "https://polza.ai/api/v1",
+  } }));
+  await page.route("**/api/v1/course/exercises/*/answer", async (route) => {
+    submitted = route.request().postDataJSON() as Record<string, string>;
+    return route.fulfill({ json: { id: 1, answer: submitted.answer, is_correct: true, score: 100, corrected_answer: "Dobrý deň", explanation: "Ответ совпадает с сохранённым эталоном.", next_exercise: "Следующее задание.", created_at: createdAt } });
+  });
+  await page.route("**/api/v1/course/exercises", async (route) => {
+    if (route.request().method() === "GET") return route.fulfill({ json: generated.slice().reverse() });
+    const request = route.request().postDataJSON() as Record<string, string>;
+    generationRequests.push(request);
+    const item = { id: generated.length + 1, lesson_slug: request.lesson_slug, lesson_title: request.lesson_title, question: `Офлайн-задание ${generated.length + 1}`, instruction: "Напишите приветствие.", interaction_type: "text", options: [], tokens: [], pair_prompts: [], pair_options: [], created_at: createdAt, latest_attempt: null };
+    generated.push(item);
+    return route.fulfill({ json: item });
+  });
+
+  await page.goto("/");
+  await page.getByRole("button", { name: "Упражнения", exact: true }).click();
+  await page.getByLabel("Количество заданий").fill("3");
+  await page.getByRole("button", { name: "Создать 3 упражнения", exact: true }).click();
+  await expect.poll(() => generationRequests.length).toBe(3);
+  await expect(page.getByRole("status")).toContainText("Сохранено заданий: 3");
+  expect(generationRequests.map((request) => request.theory.match(/Тип интерактива: (\w+)/)?.[1])).toEqual(["text", "choice", "choice"]);
+
+  await page.getByRole("button", { name: "Открыть настройки" }).click();
+  const dialog = page.getByRole("dialog", { name: "Настройки" });
+  const offlineSwitch = dialog.getByRole("switch", { name: "Офлайн-режим" });
+  await offlineSwitch.click();
+  await expect(offlineSwitch).toHaveAttribute("aria-checked", "true");
+  await dialog.getByRole("button", { name: "Закрыть настройки" }).click();
+
+  await page.reload();
+  await page.getByRole("button", { name: "Упражнения", exact: true }).click();
+  await expect(page.locator(".course-learning-mode")).toContainText("Офлайн");
+  await expect(page.getByLabel("Количество заданий")).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Создать упражнение", exact: true })).toBeDisabled();
+  await page.getByPlaceholder("Напишите ответ по-словацки…").fill("Dobrý deň");
+  await page.getByRole("button", { name: "Проверить ответ" }).click();
+  await expect.poll(() => submitted?.assessment_mode).toBe("offline");
+  await expect(page.locator(".course-exercise-workspace article.correct")).toContainText("100/100");
+});
+
+test("personal statistics summarizes the whole course and recommends next action", async ({ page }) => {
+  const greetings = allA1Lessons.find((lesson) => lesson.slug === "greetings")!;
+  const family = allA1Lessons.find((lesson) => lesson.slug === "family")!;
+  const completedSlugs = [greetings.slug, family.slug];
+  await page.route("**/api/v1/course/state", (route) => route.fulfill({ json: { exists: true, state: {
+    activeModule: 1,
+    selectedSlug: greetings.slug,
+    progress: { [greetings.slug]: "completed", [family.slug]: "completed", numbers: "in_progress" },
+    practiceResults: { [greetings.stepPractices[0].id]: true, [family.stepPractices[0].id]: true },
+    checkSelections: { [greetings.knowledgeChecks[0].id]: greetings.knowledgeChecks[0].answer },
+    mistakes: {
+      "stats-active": { id: "stats-active", lessonSlug: greetings.slug, prompt: "Исправьте приветствие", answer: "Dobrý deň", attempts: 2, mastered: false, dueAt: "2026-09-01T00:00:00.000Z" },
+      "stats-mastered": { id: "stats-mastered", lessonSlug: family.slug, prompt: "Назовите родственника", answer: "sestra", attempts: 1, mastered: true },
+    },
+    lessonSummaries: {
+      [greetings.slug]: { understanding: 90, level: "Уверенное понимание", strengths: [], review: [], userTurns: 6 },
+      [family.slug]: { understanding: 70, level: "Хорошая основа", strengths: [], review: [], userTurns: 6 },
+    },
+  } } }));
+
+  await page.goto("/");
+  await page.getByRole("button", { name: "Статистика", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Мой прогресс" })).toBeVisible();
+  const overview = page.locator(".course-personal-stat-grid");
+  await expect(overview.locator("article").nth(0)).toContainText(`2/${allA1Lessons.length}`);
+  await expect(overview.locator("article").nth(1)).toContainText("40%");
+  await expect(overview.locator("article").nth(2)).toContainText(`${learnedVocabularySeeds(allA1Lessons, completedSlugs).length}`);
+  await expect(overview.locator("article").nth(3)).toContainText("80%");
+  await expect(page.locator(".course-personal-next")).toContainText("Повторите 1 ошибку, доступную сейчас.");
+  await expect(page.locator(".course-personal-next")).toContainText("Активных ошибок: 1 · закреплено: 1 · повторить сейчас: 1");
+  await expect(page.locator(".course-module-stats article")).toHaveCount(8);
+  await expect(page.locator(".course-module-stats")).toContainText("Module 1");
+  await expect(page.locator(".course-module-stats")).toContainText("Module 6");
+  await expect(page.getByRole("heading", { name: "Module 1 — Foundations", exact: true }).last()).toBeVisible();
+  await expect(page.getByRole("button", { name: "Сбросить прогресс модуля" })).toBeVisible();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.getByRole("button", { name: "Включить тёмную тему" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+});
+
+test("progress-aware homework uses learned vocabulary and relevant mistakes", async ({ page }) => {
+  const numbers = allA1Lessons.find((lesson) => lesson.slug === "numbers")!;
+  const introductions = allA1Lessons.find((lesson) => lesson.slug === "introductions")!;
+  const requests: Array<{ lesson_slug: string; lesson_title: string; theory: string; known_mistakes: string[] }> = [];
+  await page.route("**/api/v1/course/state", (route) => route.fulfill({ json: { exists: true, state: {
+    selectedSlug: "greetings",
+    progress: { greetings: "completed", numbers: "completed", introductions: "in_progress" },
+    mistakes: {
+      "generated:greetings": { id: "generated:greetings", lessonSlug: "greetings", prompt: "Вежливое приветствие", answer: "Dobrý deň", attempts: 1, mastered: false },
+      "generated:numbers": { id: "generated:numbers", lessonSlug: "numbers", prompt: "Число ноль", answer: "nula", attempts: 1, mastered: false },
+      "generated:introductions": { id: "generated:introductions", lessonSlug: "introductions", prompt: "Будущая ошибка", answer: "Volám sa", attempts: 1, mastered: false },
+    },
+  } } }));
+  await page.route("**/api/v1/course/homework", async (route) => {
+    if (route.request().method() === "GET") return route.fulfill({ json: [
+      { id: 99, lesson_slug: "course-progress", lesson_title: "Общий прогресс Slovak A1", title: "Сохранённое общее задание", description: "Ответьте.", focus_category: "Общее", created_at: new Date().toISOString(), latest_attempt: null },
+      { id: 98, lesson_slug: "greetings", lesson_title: "Приветствия", title: "Сохранённое задание темы", description: "Ответьте.", focus_category: "Тема", created_at: new Date().toISOString(), latest_attempt: null },
+    ] });
+    const request = route.request().postDataJSON() as typeof requests[number];
+    requests.push(request);
+    return route.fulfill({ json: { id: requests.length, lesson_slug: request.lesson_slug, lesson_title: request.lesson_title, title: `Домашнее задание ${requests.length}`, description: "Напишите короткий ответ.", focus_category: "Прогресс", created_at: new Date().toISOString(), latest_attempt: null } });
+  });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Домашнее задание", exact: true }).click();
+  await expect(page.locator(".course-exercise-workspace h4")).toHaveText("Сохранённое задание темы");
+  await page.getByRole("button", { name: "Создать задание", exact: true }).click();
+  await expect.poll(() => requests.length).toBe(1);
+  expect(requests[0].lesson_slug).toBe("greetings");
+  expect(requests[0].theory).toContain(greetingVocabularyLine());
+  expect(requests[0].known_mistakes).toEqual(["Вежливое приветствие: Dobrý deň"]);
+
+  await page.getByRole("button", { name: "По общему прогрессу", exact: true }).click();
+  await page.getByRole("button", { name: "Создать задание", exact: true }).click();
+  await expect.poll(() => requests.length).toBe(2);
+  expect(requests[1].lesson_slug).toBe("course-progress");
+  expect(requests[1].theory).toContain(numbers.title);
+  expect(requests[1].theory).toContain(`${numbers.vocabulary![0].word} = ${numbers.vocabulary![0].translation}`);
+  expect(requests[1].known_mistakes).toEqual(["Вежливое приветствие: Dobrý deň", "Число ноль: nula"]);
+  expect(requests[1].theory).not.toContain(introductions.title);
+  expect(requests[1].known_mistakes).not.toContain("Будущая ошибка: Volám sa");
+});
+
+function greetingVocabularyLine(): string {
+  const item = allA1Lessons.find((lesson) => lesson.slug === "greetings")!.vocabulary![0];
+  return `${item.word} = ${item.translation}`;
+}
 
 test("backup preview precedes restore and autosave never overwrites restored progress", async ({ page }) => {
   let state = { selectedSlug: "greetings", fontSize: "large", progress: {} };
@@ -140,6 +409,7 @@ test("backup preview precedes restore and autosave never overwrites restored pro
     return route.fulfill({ json: { restored: true, state } });
   });
   await page.goto("/");
+  await page.getByRole("button", { name: "Открыть настройки" }).click();
   await page.locator(".course-backup summary").click();
   const download = page.waitForEvent("download");
   await page.getByRole("button", { name: "Скачать резервную копию" }).click();
@@ -153,6 +423,7 @@ test("backup preview precedes restore and autosave never overwrites restored pro
   expect((await previousBackup).suggestedFilename()).toMatch(/^slovokrok-before-restore-/);
   await expect(page.getByText("Копия восстановлена.", { exact: true })).toBeVisible();
   await expect(page.locator(".course-progress strong")).toHaveText("1/14");
+  await page.getByRole("button", { name: "Закрыть", exact: true }).click();
   await page.getByRole("button", { name: "Обычный размер текста", exact: true }).click();
   await expect.poll(() => state.fontSize).toBe("normal");
   expect(state.progress).toMatchObject({ greetings: "completed" });

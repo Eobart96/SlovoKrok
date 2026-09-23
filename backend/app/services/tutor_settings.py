@@ -18,7 +18,7 @@ _ALLOWED_FIELDS = {
 
 
 def settings_file(settings: "Settings") -> Path:
-    return settings.project_root / "backend" / "data" / "ai_settings.json"
+    return settings.runtime_data_dir / "ai_settings.json"
 
 
 def apply_saved_tutor_settings(settings: "Settings") -> None:

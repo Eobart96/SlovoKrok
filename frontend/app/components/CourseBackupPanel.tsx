@@ -13,7 +13,7 @@ function download(data: unknown, prefix: string) {
   setTimeout(() => URL.revokeObjectURL(url), 10_000);
 }
 
-export function CourseBackupPanel({ session, onRestored }: { session: CourseSession; onRestored: () => void }) {
+export function CourseBackupPanel({ session, onRestored, open, onOpenChange }: { session: CourseSession; onRestored: () => void; open?: boolean; onOpenChange?: (open: boolean) => void }) {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
@@ -40,32 +40,35 @@ export function CourseBackupPanel({ session, onRestored }: { session: CourseSess
       if (ticket === selection.current) setError(cause instanceof Error ? cause.message : "Не удалось проверить копию.");
     } finally { if (ticket === selection.current) setBusy(false); }
   };
-  return <details className="course-backup">
+  return <details className="course-backup" open={open} onToggle={(event) => onOpenChange?.(event.currentTarget.open)}>
     <summary>Резервная копия</summary>
-    <p>Сохраните прогресс, словарь, созданные материалы и ответы в один файл. Настройки ИИ и ключи в него не входят.</p>
-    <div className="course-backup-actions">
-      <button type="button" disabled={busy} onClick={() => void run(async () => {
-        await session.maintenance(async () => { download(await getCourseBackup(), "slovokrok-backup"); });
-        setMessage("Файл резервной копии передан браузеру для скачивания.");
-      })}>Скачать резервную копию</button>
-      <label>Открыть копию <input type="file" accept=".json,application/json" disabled={busy} onChange={(event) => void choose(event.target.files?.[0])} /></label>
-    </div>
-    {preview && <div className="course-backup-preview">
-      <p>Копия от {new Date(preview.exported_at).toLocaleString("ru-RU")}. Завершено тем: {preview.completed_topics}. Слов и фраз: {preview.counts.vocabulary ?? 0}. Созданных материалов: {(preview.counts.exercises ?? 0) + (preview.counts.readings ?? 0) + (preview.counts.homework ?? 0)}.</p>
-      <p>{preview.has_state ? "Прогресс будет заменён данными из файла. " : "В этой копии нет прогресса; текущий прогресс сохранится. "}Материалы добавятся к существующим. История уже имеющихся слов сохранится. Перед восстановлением будет скачана копия текущих данных.</p>
-      <button type="button" disabled={busy} onClick={() => {
-        if (!window.confirm("Восстановить выбранную копию? Если в ней есть прогресс, он заменит текущий.")) return;
-        void run(async () => {
-          await session.maintenance(async () => {
-            download(await getCourseBackup(), "slovokrok-before-restore");
-            return (await restoreCourseBackup(backup)).state ?? undefined;
+    <div className="course-backup-content">
+      <p>Сохраните прогресс, словарь, созданные материалы и ответы в один файл. Настройки подключения ИИ и ключи в него не входят.</p>
+      <div className="course-backup-actions">
+        <button className="course-backup-download" type="button" disabled={busy} onClick={() => void run(async () => {
+          await session.maintenance(async () => { download(await getCourseBackup(), "slovokrok-backup"); });
+          setMessage("Файл резервной копии передан браузеру для скачивания.");
+        })}>Скачать резервную копию</button>
+        <label>Открыть копию <input type="file" accept=".json,application/json" disabled={busy} onChange={(event) => void choose(event.target.files?.[0])} /></label>
+      </div>
+      {preview && <div className="course-backup-preview">
+        <p>Копия от {new Date(preview.exported_at).toLocaleString("ru-RU")}. Завершено тем: {preview.completed_topics}. Слов и фраз: {preview.counts.vocabulary ?? 0}. Созданных материалов: {(preview.counts.exercises ?? 0) + (preview.counts.readings ?? 0) + (preview.counts.homework ?? 0)}.</p>
+        <p>{preview.has_state ? "Прогресс будет заменён данными из файла. " : "В этой копии нет прогресса; текущий прогресс сохранится. "}Материалы добавятся к существующим. История уже имеющихся слов сохранится. Перед восстановлением будет скачана копия текущих данных.</p>
+        <button type="button" disabled={busy} onClick={() => {
+          if (!window.confirm("Восстановить выбранную копию? Если в ней есть прогресс, он заменит текущий.")) return;
+          void run(async () => {
+            await session.maintenance(async (revision) => {
+              download(await getCourseBackup(), "slovokrok-before-restore");
+              const restored = await restoreCourseBackup(backup, revision);
+              return restored.state ? { state: restored.state, revision: restored.revision } : undefined;
+            });
+            setPreview(null); setBackup(""); onRestored(); setMessage("Копия восстановлена.");
           });
-          setPreview(null); setBackup(""); onRestored(); setMessage("Копия восстановлена.");
-        });
-      }}>Восстановить выбранную копию</button>
-    </div>}
-    {busy && <p role="status">Обрабатываю резервную копию…</p>}
-    {message && <p role="status">{message}</p>}
-    {error && <p role="alert">{error}</p>}
+        }}>Восстановить выбранную копию</button>
+      </div>}
+      {busy && <p role="status">Обрабатываю резервную копию…</p>}
+      {message && <p role="status">{message}</p>}
+      {error && <p role="alert">{error}</p>}
+    </div>
   </details>;
 }

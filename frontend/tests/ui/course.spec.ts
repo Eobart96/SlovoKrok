@@ -21,6 +21,20 @@ const module6 = getA1Module(6);
 const module7 = getA1Module(7);
 const module8 = getA1Module(8);
 
+async function openModule7Lesson(page: Page, lesson: CourseLesson) {
+  const group = module7.topicGroups?.find((candidate) => candidate.lessonSlugs.includes(lesson.slug));
+  if (!group) throw new Error(`Module 7 group is missing for ${lesson.slug}`);
+  await page.getByRole("button").filter({ hasText: group.title }).first().click();
+  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+}
+
+async function openModule8Lesson(page: Page, lesson: CourseLesson) {
+  const group = module8.topicGroups?.find((candidate) => candidate.lessonSlugs.includes(lesson.slug));
+  if (!group) throw new Error(`Module 8 group is missing for ${lesson.slug}`);
+  await page.getByRole("button").filter({ hasText: group.title }).first().click();
+  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+}
+
 test("course structure has stable unique identifiers and data-driven ordering", () => {
   const lessonSlugs = allA1Lessons.map((lesson) => lesson.slug);
   const activityIds = allA1Lessons.flatMap((lesson) => [
@@ -39,6 +53,18 @@ test("course structure has stable unique identifiers and data-driven ordering", 
   for (const group of module1.topicGroups ?? []) {
     expect(topicGroupLessons(module1, group.id).map((lesson) => lesson.slug)).toEqual(group.lessonSlugs);
   }
+  expect(module7.topicGroups?.map((group) => group.lessonSlugs)).toEqual([
+    ["past-regular", "past-frequent"],
+    ["future-budem", "future-questions-negation"],
+    ["yesterday", "yesterday-today-tomorrow"],
+    ["invitation-arrangement"],
+  ]);
+  expect(module8.topicGroups?.map((group) => group.lessonSlugs)).toEqual([
+    ["social-etiquette", "supported-dialogue", "repair-strategies"],
+    ["understand-message", "voice-description", "written-profile"],
+    ["everyday-task", "simple-mediation"],
+    ["a1-scenarios"],
+  ]);
 });
 
 test("module registry rejects incomplete or unplanned content", () => {
@@ -127,26 +153,42 @@ test("every Module 1 reinforcement set has six different answers", () => {
   }
 });
 
-test("Themes 1–7 vary correct option positions in closed exercises", () => {
-  for (const lesson of module1.lessons.slice(0, 7)) {
-    const lessonPositions: number[] = [];
+test("every topic assessment and module final varies correct option positions", () => {
+  for (const lesson of allA1Lessons) {
+    const choicePositionsBySize = new Map<number, number[]>();
     for (const practice of buildReinforcementPractices(lesson)) {
       if (practice.type === "choice" && practice.options?.length) {
         const position = practice.options.indexOf(practice.answer);
         expect(position, `${lesson.slug}: ${practice.prompt}`).toBeGreaterThanOrEqual(0);
-        lessonPositions.push(position);
+        choicePositionsBySize.set(practice.options.length, [...(choicePositionsBySize.get(practice.options.length) ?? []), position]);
       }
-      const rowPositions = (practice.pairs ?? [])
-        .filter((pair) => pair.options?.length)
-        .map((pair) => pair.options?.indexOf(pair.answer) ?? -1);
-      for (const position of rowPositions) expect(position, `${lesson.slug}: ${practice.prompt}`).toBeGreaterThanOrEqual(0);
-      const usesFixedSemanticColumns = practice.prompt === "Определите, читать ли сочетание слитно или с паузой."
-        || practice.prompt === "Найдите долгий слог в каждом слове.";
-      if (rowPositions.length >= 3 && !usesFixedSemanticColumns) expect(new Set(rowPositions).size, `${lesson.slug}: ${practice.prompt}`).toBeGreaterThan(1);
-      lessonPositions.push(...rowPositions);
+      const rowPositionsBySize = new Map<number, number[]>();
+      for (const pair of practice.pairs ?? []) {
+        if (!pair.options?.length) continue;
+        const position = pair.options.indexOf(pair.answer);
+        expect(position, `${lesson.slug}: ${practice.prompt}`).toBeGreaterThanOrEqual(0);
+        rowPositionsBySize.set(pair.options.length, [...(rowPositionsBySize.get(pair.options.length) ?? []), position]);
+      }
+      for (const positions of rowPositionsBySize.values()) {
+        if (positions.length >= 2) expect(new Set(positions).size, `${lesson.slug}: ${practice.prompt}`).toBeGreaterThan(1);
+      }
     }
-    expect(lessonPositions.length, lesson.slug).toBeGreaterThan(1);
-    expect(new Set(lessonPositions).size, lesson.slug).toBeGreaterThan(1);
+    for (const positions of choicePositionsBySize.values()) {
+      if (positions.length >= 2) expect(new Set(positions).size, lesson.slug).toBeGreaterThan(1);
+    }
+  }
+
+  for (const module of a1CourseModules) {
+    const questions = buildModuleFinalQuestions(module.lessons);
+    const positionsBySize = new Map<number, number[]>();
+    for (const question of questions) {
+      const position = question.options.indexOf(question.answer);
+      expect(position, `${module.slug}: ${question.id}`).toBeGreaterThanOrEqual(0);
+      positionsBySize.set(question.options.length, [...(positionsBySize.get(question.options.length) ?? []), position]);
+    }
+    for (const positions of positionsBySize.values()) {
+      if (positions.length >= 2) expect(new Set(positions).size, module.slug).toBeGreaterThan(1);
+    }
   }
 });
 
@@ -350,6 +392,58 @@ async function openLesson(page: Page, lesson: CourseLesson): Promise<void> {
   await expect(page.locator(".course-material-heading h3")).toHaveText(lesson.title);
 }
 
+test("review combines mistakes from every module and opens the affected topic", async ({ page }) => {
+  const firstLesson = module1.lessons[0];
+  const priorityLesson = module2.lessons[0];
+  const firstPractice = firstLesson.stepPractices[0];
+  const priorityPractice = priorityLesson.stepPractices[0];
+  await mockStateApi(page, createState({
+    mistakes: {
+      [firstPractice.id]: { id: firstPractice.id, lessonSlug: firstLesson.slug, prompt: firstPractice.prompt, answer: firstPractice.answer, attempts: 1, mastered: false },
+      [priorityPractice.id]: { id: priorityPractice.id, lessonSlug: priorityLesson.slug, prompt: priorityPractice.prompt, answer: priorityPractice.answer, attempts: 3, mastered: false },
+    },
+  }));
+
+  await openCourse(page);
+  await page.getByRole("button", { name: "Ошибки", exact: true }).click();
+
+  await expect(page.getByRole("heading", { name: "Где нужно подтянуть знания" })).toBeVisible();
+  const overview = page.getByLabel("Сводка ошибок по курсу");
+  await expect(overview.getByText("2", { exact: true })).toHaveCount(3);
+  await expect(overview.getByText("1", { exact: true })).toHaveCount(1);
+  await expect(page.locator(".course-review-list").first()).toContainText(firstLesson.title);
+  await expect(page.locator(".course-review-list").first()).toContainText(priorityLesson.title);
+  await expect(page.locator(".course-gap-priorities button").first()).toContainText(priorityLesson.title);
+
+  await page.locator(".course-gap-priorities button").first().click();
+  await expect(page.getByRole("heading", { name: module2.title })).toBeVisible();
+  await expect(page.locator(".course-material-heading h3")).toHaveText(priorityLesson.title);
+  await expect(page.getByRole("button", { name: "Обучение", exact: true })).toHaveClass("active");
+});
+
+test("incorrect final-test answers join the course-wide mistake review", async ({ page }) => {
+  const finalQuestions = buildModuleFinalQuestions(module1.lessons);
+  await mockStateApi(page, createState({
+    progress: Object.fromEntries(module1.lessons.map((lesson) => [lesson.slug, "completed"])),
+  }));
+
+  await openCourse(page);
+  await page.getByRole("button", { name: "Итоговый тест", exact: true }).click();
+  const fields = page.locator(".course-final .course-check-list fieldset");
+  await expect(fields).toHaveCount(finalQuestions.length);
+  for (const [index, question] of finalQuestions.entries()) {
+    const wrongOption = question.options.find((option) => option !== question.answer);
+    if (!wrongOption) throw new Error(`Final question ${question.id} has no wrong option`);
+    await fields.nth(index).getByRole("button", { name: wrongOption, exact: true }).click();
+  }
+  await page.getByRole("button", { name: "Проверить итоговый тест", exact: true }).click();
+  await page.getByRole("button", { name: "Ошибки", exact: true }).click();
+
+  await expect(page.getByRole("heading", { name: "Где нужно подтянуть знания" })).toBeVisible();
+  await expect(page.locator(".course-review-list").first().locator("article")).toHaveCount(finalQuestions.length);
+  await expect(page.getByText(finalQuestions[0].question, { exact: true })).toBeVisible();
+});
+
 test("AI settings switch provider without receiving saved secrets", async ({ page }) => {
   await mockStateApi(page, createState());
   let provider = "codex";
@@ -377,12 +471,12 @@ test("AI settings switch provider without receiving saved secrets", async ({ pag
   });
 
   await openCourse(page);
-  await page.getByRole("button", { name: "Открыть настройки ИИ" }).click();
-  const dialog = page.getByRole("dialog", { name: "Подключение ИИ" });
+  await page.getByRole("button", { name: "Открыть настройки" }).click();
+  const dialog = page.getByRole("dialog", { name: "Настройки" });
   await expect(dialog).toBeVisible();
   await dialog.getByText("Polza API", { exact: true }).click();
   await dialog.getByLabel("API-ключ Polza").fill("temporary-test-key");
-  await dialog.getByRole("button", { name: "Сохранить" }).click();
+  await dialog.getByRole("button", { name: "Сохранить настройки ИИ" }).click();
   await expect(dialog.getByRole("status")).toContainText("Настройки сохранены");
   expect(savedPayload).toMatchObject({ provider: "polza", polza_api_key: "temporary-test-key" });
   await dialog.getByRole("button", { name: "Закрыть настройки" }).click();
@@ -394,11 +488,11 @@ test("tablet header keeps navigation and settings inside the viewport", async ({
   await mockStateApi(page, createState());
   await openCourse(page);
 
-  await expect(page.getByRole("button", { name: "Открыть настройки ИИ" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Открыть настройки" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Включить тёмную тему" })).toBeVisible();
   const dimensions = await page.evaluate(() => {
     const header = document.querySelector<HTMLElement>(".course-route-header");
-    const settings = document.querySelector<HTMLElement>('[aria-label="Открыть настройки ИИ"]');
+    const settings = document.querySelector<HTMLElement>('[aria-label="Открыть настройки"]');
     return {
       clientWidth: document.documentElement.clientWidth,
       scrollWidth: document.documentElement.scrollWidth,
@@ -547,7 +641,8 @@ test("Theme 2 ends after five material steps and moves six exercises to its fina
   await expect(page.getByRole("button", { name: "Открыть шаг 6" })).toHaveCount(0);
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
 
-  await expect(page.locator(".course-current-task")).toContainText("Финальный тест темы");
+  await expect(page.locator(".course-current-task")).toContainText("Выполните шесть заданий темы");
+  await expect(page.getByText("Финальный тест темы", { exact: true })).toHaveCount(0);
   await expect(page.locator(".course-reinforcement fieldset")).toHaveCount(6);
   const matchingTask = page.locator(".course-reinforcement fieldset").nth(5);
   const matchingPractice = buildReinforcementPractices(lesson)[5];
@@ -3068,6 +3163,7 @@ test("Module 5 theme 4 follows the negation and questions source", async ({ page
   expect(optionPositions.every((positions) => positions.length === 6 && positions.every((position, index) => position === optionPositions[0][index]))).toBe(true);
 
   const shortAnswerTask = page.locator(".course-reinforcement fieldset").nth(3);
+  await expect(shortAnswerTask).toContainText("Дайте полный ответ с глаголом.");
   const shortAnswerRows = shortAnswerTask.locator(".course-pair-row");
   const shortAnswerButton = shortAnswerTask.getByRole("button", { name: "Проверить", exact: true });
   await expect(shortAnswerButton).toBeDisabled();
@@ -3182,6 +3278,10 @@ test("Module 5 theme 6 follows the moct plus infinitive source", async ({ page }
   expect(JSON.stringify(lesson)).toContain("môžem, môžeš, môže, môžeme, môžete, môžu");
   expect(JSON.stringify(lesson)).toContain("Môžem sa opýtať?");
   expect(JSON.stringify(lesson)).toContain("Viem plávať.");
+  expect(lesson.stepPractices.find((practice) => practice.id === "m5-moct-infinitive-step-3")?.prompt).toBe(
+    "Ответьте вежливо, обращаясь к собеседнику на «вы»: Môžem otvoriť okno?",
+  );
+  expect(JSON.stringify(lesson.reinforcementPractices)).toContain("да, вежливо на «вы»");
 
   await mockStateApi(page, createState({
     activeModule: 5,
@@ -3229,6 +3329,8 @@ test("Module 5 theme 6 follows the moct plus infinitive source", async ({ page }
   await expect(orderTask).toHaveClass(/correct/);
 
   const responseTask = page.locator(".course-reinforcement fieldset").nth(4);
+  await expect(responseTask).toContainText("Дайте полный ответ на вопросы или переведите предложения.");
+  await expect(responseTask.getByPlaceholder("Введите полный ответ")).toHaveCount(2);
   const responseRows = responseTask.locator(".course-pair-row");
   const responseButton = responseTask.getByRole("button", { name: "Проверить", exact: true });
   await expect(responseButton).toBeDisabled();
@@ -3732,7 +3834,7 @@ test("Module 7 theme 1 teaches regular past forms and checks each answer row", a
   await restored;
 
   await expect(page.getByRole("heading", { name: module7.title })).toBeVisible();
-  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+  await openModule7Lesson(page, lesson);
   await expect(page.locator(".course-stepper")).toContainText("Шаг 5 из 5");
   await expect(page.locator(".course-content-heading h4")).toHaveText("Частые ошибки и самопроверка");
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
@@ -3795,7 +3897,7 @@ test("Module 7 theme 2 teaches frequent past forms and checks each answer row", 
   await restored;
 
   await expect(page.getByRole("heading", { name: module7.title })).toBeVisible();
-  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+  await openModule7Lesson(page, lesson);
   await expect(page.locator(".course-stepper")).toContainText("Шаг 5 из 5");
   await expect(page.locator(".course-content-heading h4")).toHaveText("Частые ошибки и самопроверка");
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
@@ -3858,7 +3960,7 @@ test("Module 7 theme 3 builds a coherent yesterday story and checks each answer 
   await restored;
 
   await expect(page.getByRole("heading", { name: module7.title })).toBeVisible();
-  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+  await openModule7Lesson(page, lesson);
   await expect(page.locator(".course-stepper")).toContainText("Шаг 5 из 5");
   await expect(page.locator(".course-content-heading h4")).toHaveText("Частые ошибки и самопроверка");
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
@@ -3921,7 +4023,7 @@ test("Module 7 theme 4 teaches budem plus infinitive and checks each answer row"
   await restored;
 
   await expect(page.getByRole("heading", { name: module7.title })).toBeVisible();
-  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+  await openModule7Lesson(page, lesson);
   await expect(page.locator(".course-stepper")).toContainText("Шаг 5 из 5");
   await expect(page.locator(".course-content-heading h4")).toHaveText("Частые ошибки и самопроверка");
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
@@ -3989,7 +4091,7 @@ test("Module 7 theme 5 asks about future plans and checks each answer row", asyn
   await restored;
 
   await expect(page.getByRole("heading", { name: module7.title })).toBeVisible();
-  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+  await openModule7Lesson(page, lesson);
   await expect(page.locator(".course-stepper")).toContainText("Шаг 5 из 5");
   await expect(page.locator(".course-content-heading h4")).toHaveText("Частые ошибки и самопроверка");
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
@@ -4052,7 +4154,7 @@ test("Module 7 theme 6 contrasts yesterday today and tomorrow row by row", async
   await restored;
 
   await expect(page.getByRole("heading", { name: module7.title })).toBeVisible();
-  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+  await openModule7Lesson(page, lesson);
   await expect(page.locator(".course-stepper")).toContainText("Шаг 5 из 5");
   await expect(page.locator(".course-content-heading h4")).toHaveText("Частые ошибки и самопроверка");
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
@@ -4115,7 +4217,7 @@ test("Module 7 theme 7 builds a complete invitation and checks each answer row",
   await restored;
 
   await expect(page.getByRole("heading", { name: module7.title })).toBeVisible();
-  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+  await openModule7Lesson(page, lesson);
   await expect(page.locator(".course-stepper")).toContainText("Шаг 5 из 5");
   await expect(page.locator(".course-content-heading h4")).toHaveText("Частые ошибки и самопроверка");
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
@@ -4178,7 +4280,7 @@ test("Module 8 theme 1 teaches ty and vy etiquette with a separate six-task test
   await restored;
 
   await expect(page.getByRole("heading", { name: module8.title })).toBeVisible();
-  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+  await openModule8Lesson(page, lesson);
   await expect(page.locator(".course-stepper")).toContainText("Шаг 5 из 5");
   await expect(page.locator(".course-content-heading h4")).toHaveText("Типичные ошибки и самопроверка");
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
@@ -4231,7 +4333,7 @@ test("Module 8 theme 2 builds a supported introduction and checks dialogue rows"
   await restored;
 
   await expect(page.getByRole("heading", { name: module8.title })).toBeVisible();
-  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+  await openModule8Lesson(page, lesson);
   await expect(page.locator(".course-stepper")).toContainText("Шаг 5 из 5");
   await expect(page.locator(".course-content-heading h4")).toHaveText("Типичные ошибки и самопроверка");
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
@@ -4293,7 +4395,7 @@ test("Module 8 theme 3 completes an everyday task and checks each result row", a
   await restored;
 
   await expect(page.getByRole("heading", { name: module8.title })).toBeVisible();
-  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+  await openModule8Lesson(page, lesson);
   await expect(page.locator(".course-stepper")).toContainText("Шаг 5 из 5");
   await expect(page.locator(".course-content-heading h4")).toHaveText("Типичные ошибки и самопроверка");
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
@@ -4355,7 +4457,7 @@ test("Module 8 theme 4 extracts message details and checks negation row by row",
   await restored;
 
   await expect(page.getByRole("heading", { name: module8.title })).toBeVisible();
-  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+  await openModule8Lesson(page, lesson);
   await expect(page.locator(".course-stepper")).toContainText("Шаг 5 из 5");
   await expect(page.locator(".course-content-heading h4")).toHaveText("Типичные ошибки и самопроверка");
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
@@ -4419,7 +4521,7 @@ test("Module 8 theme 5 structures a voice message and checks description agreeme
   await restored;
 
   await expect(page.getByRole("heading", { name: module8.title })).toBeVisible();
-  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+  await openModule8Lesson(page, lesson);
   await expect(page.locator(".course-stepper")).toContainText("Шаг 5 из 5");
   await expect(page.locator(".course-content-heading h4")).toHaveText("Типичные ошибки и самопроверка");
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
@@ -4487,7 +4589,7 @@ test("Module 8 theme 6 builds a written profile and checks first-person forms ro
   await restored;
 
   await expect(page.getByRole("heading", { name: module8.title })).toBeVisible();
-  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+  await openModule8Lesson(page, lesson);
   await expect(page.locator(".course-stepper")).toContainText("Шаг 5 из 5");
   await expect(page.locator(".course-content-heading h4")).toHaveText("Типичные ошибки и самопроверка");
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
@@ -4556,7 +4658,7 @@ test("Module 8 theme 7 relays exact details and checks third-person forms row by
   await restored;
 
   await expect(page.getByRole("heading", { name: module8.title })).toBeVisible();
-  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+  await openModule8Lesson(page, lesson);
   await expect(page.locator(".course-stepper")).toContainText("Шаг 5 из 5");
   await expect(page.locator(".course-content-heading h4")).toHaveText("Типичные ошибки и самопроверка");
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
@@ -4626,7 +4728,7 @@ test("Module 8 theme 8 repairs misunderstanding and keeps ty-vy requests consist
   await restored;
 
   await expect(page.getByRole("heading", { name: module8.title })).toBeVisible();
-  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+  await openModule8Lesson(page, lesson);
   await expect(page.locator(".course-stepper")).toContainText("Шаг 5 из 5");
   await expect(page.locator(".course-content-heading h4")).toHaveText("Типичные ошибки и самопроверка");
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
@@ -4699,7 +4801,7 @@ test("Module 8 theme 9 completes A1 scenarios and preserves exact details", asyn
   await restored;
 
   await expect(page.getByRole("heading", { name: module8.title })).toBeVisible();
-  await page.getByRole("button").filter({ hasText: lesson.title }).first().click();
+  await openModule8Lesson(page, lesson);
   await expect(page.locator(".course-stepper")).toContainText("Шаг 5 из 5");
   await expect(page.locator(".course-content-heading h4")).toHaveText("Финальные опоры и самопроверка");
   await page.getByRole("button", { name: "Перейти к финальному тесту →" }).click();
@@ -5960,7 +6062,7 @@ test("lesson reinforcement is deterministic and does not call AI", async ({ page
 
   const finish = page.getByRole("button", { name: "Завершить задания и получить итог →" });
   const checkAll = page.getByRole("button", { name: "Проверить всё" });
-  await expect(page.locator(".course-current-task").getByText("Практика из PDF")).toBeVisible();
+  await expect(page.locator(".course-current-task")).toBeHidden();
   await expect(page.locator(".course-reinforcement fieldset")).toHaveCount(6);
   await expect(page.locator(".course-reinforcement fieldset").nth(2).locator(".course-pair-row")).toHaveCount(4);
   await expect(page.locator(".course-reinforcement fieldset").nth(4).locator(".course-pair-row")).toHaveCount(6);

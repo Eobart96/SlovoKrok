@@ -77,7 +77,7 @@ export const moctInfinitiveLesson = {
   stepPractices: [
     { id: "m5-moct-infinitive-step-1", sectionIndex: 0, type: "choice", prompt: "Выберите форму для oni / ony.", options: ["môže", "môžete", "môžu"], answer: "môžu", hint: "Вспомните вторую опорную форму после môžem.", explanation: "Oni / ony môžu." },
     { id: "m5-moct-infinitive-step-2", sectionIndex: 1, type: "text", prompt: "Переведите: «Вы можете мне помочь?»", answer: "Môžete mi pomôcť?", hint: "Используйте вежливую форму, mi и инфинитив.", explanation: "Môžete mi pomôcť?" },
-    { id: "m5-moct-infinitive-step-3", sectionIndex: 2, type: "choice", prompt: "Как ответить на Môžem otvoriť okno?", options: ["Áno, môžem.", "Áno, môžete.", "Áno, môžeš."], answer: "Áno, môžete.", hint: "Говорящий спрашивает разрешения у собеседника.", explanation: "Разрешающий отвечает формой vy: Áno, môžete." },
+    { id: "m5-moct-infinitive-step-3", sectionIndex: 2, type: "choice", prompt: "Ответьте вежливо, обращаясь к собеседнику на «вы»: Môžem otvoriť okno?", options: ["Áno, môžem.", "Áno, môžete.", "Áno, môžeš."], answer: "Áno, môžete.", hint: "Говорящий спрашивает разрешения у собеседника.", explanation: "При обращении на «вы» разрешающий отвечает формой vy: Áno, môžete." },
     { id: "m5-moct-infinitive-step-4", sectionIndex: 3, type: "text", prompt: "Переведите: «Можно спросить?»", answer: "Môžem sa opýtať?", hint: "Sa стоит рядом с môžem.", explanation: "Môžem sa opýtať?" },
     { id: "m5-moct-infinitive-step-5", sectionIndex: 4, type: "choice", prompt: "Как сказать «Я умею плавать»?", options: ["Môžem plávať.", "Viem plávať.", "Nesmiem plávať."], answer: "Viem plávať.", hint: "Речь об освоенном навыке.", explanation: "Для умения выбирайте vedieť: Viem plávať." },
   ],
@@ -110,7 +110,7 @@ export const moctInfinitiveLesson = {
       { prompt: "kedy / môžete / začať", answer: "Kedy môžete začať?", inputHint: "Введите предложение" },
     ], hint: "Следите за инфинитивом, ранней позицией sa/si и слитным отрицанием.", explanation: "Четыре модели объединяют возможность, вопрос, отрицание и sa/si." },
     { id: "reinforcement:moct-infinitive:5", sectionIndex: 2, type: "pairs", prompt: "Ответьте или переведите.", answer: "Áno, môžete.; Nie, nemôže.; Nemôžeme čakať.; Môžete mi pomôcť?; Kedy môžeš prísť?", pairs: [
-      { prompt: "Môžem otvoriť okno? · да", answer: "Áno, môžete.", inputHint: "Введите краткий ответ" }, { prompt: "Môže Peter prísť? · нет", answer: "Nie, nemôže.", inputHint: "Введите краткий ответ" },
+      { prompt: "Môžem otvoriť okno? · да, вежливо на «вы»", answer: "Áno, môžete.", inputHint: "Введите краткий ответ" }, { prompt: "Môže Peter prísť? · нет", answer: "Nie, nemôže.", inputHint: "Введите краткий ответ" },
       { prompt: "Мы не можем ждать.", answer: "Nemôžeme čakať.", inputHint: "Введите перевод" }, { prompt: "Вы можете мне помочь?", answer: "Môžete mi pomôcť?", inputHint: "Введите перевод" },
       { prompt: "Когда ты можешь прийти?", answer: "Kedy môžeš prísť?", inputHint: "Введите перевод" },
     ], hint: "Проверьте перспективу ответа, форму лица, инфинитив и диакритику.", explanation: "Ответы используют можете, не может, не можем и два вопроса." },

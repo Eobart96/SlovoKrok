@@ -108,8 +108,8 @@ export const vedietInfinitiveLesson = {
       { prompt: "ešte / nevieme / dobre / písať", answer: "Ešte nevieme dobre písať.", acceptableAnswers: ["Ešte dobre nevieme písať."], inputHint: "Введите предложение" },
       { prompt: "viete / ako dobre / po slovensky / hovoriť", answer: "Ako dobre viete hovoriť po slovensky?", inputHint: "Введите предложение" },
     ], hint: "Sa/si стоит рядом с личной формой, вопросительное сочетание — в начале.", explanation: "Четыре строки закрепляют порядок слов и слитное отрицание." },
-    { id: "reinforcement:vediet-infinitive:5", sectionIndex: 2, type: "pairs", prompt: "Ответьте или переведите.", answer: "Áno, viem.; Nie, nevieme.; Nevie šoférovať.; Už vieme čítať po slovensky.; Čo vieš uvariť?", pairs: [
-      { prompt: "Vieš variť? · да", answer: "Áno, viem.", inputHint: "Введите краткий ответ" }, { prompt: "Viete plávať? · нет, отвечают двое", answer: "Nie, nevieme.", inputHint: "Введите краткий ответ" },
+    { id: "reinforcement:vediet-infinitive:5", sectionIndex: 2, type: "pairs", prompt: "Дайте полный ответ на вопросы или переведите предложения.", answer: "Áno, viem.; Nie, nevieme.; Nevie šoférovať.; Už vieme čítať po slovensky.; Čo vieš uvariť?", pairs: [
+      { prompt: "Vieš variť? · да", answer: "Áno, viem.", inputHint: "Введите полный ответ" }, { prompt: "Viete plávať? · нет, отвечают двое", answer: "Nie, nevieme.", inputHint: "Введите полный ответ" },
       { prompt: "Он не умеет водить.", answer: "Nevie šoférovať.", acceptableAnswers: ["On nevie šoférovať."], inputHint: "Введите перевод" },
       { prompt: "Мы уже умеем читать по-словацки.", answer: "Už vieme čítať po slovensky.", inputHint: "Введите перевод" }, { prompt: "Что ты умеешь приготовить?", answer: "Čo vieš uvariť?", inputHint: "Введите перевод" },
     ], hint: "Проверьте перспективу ответа, слитное ne-, инфинитив и диакритику.", explanation: "Ответы объединяют навык, прогресс, отрицание и вопрос." },

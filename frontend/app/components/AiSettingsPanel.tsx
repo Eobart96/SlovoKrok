@@ -1,7 +1,8 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, type ReactNode, useEffect, useState } from "react";
 
+import { type LearningMode } from "../data/learningMode";
 import {
   getTutorSettings,
   startCodexLogin,
@@ -10,7 +11,19 @@ import {
   updateTutorSettings,
 } from "../lib/api";
 
-type Props = { open: boolean; onClose: () => void };
+type Props = {
+  open: boolean;
+  onClose: () => void;
+  developmentMode: boolean;
+  onDevelopmentModeChange: (enabled: boolean) => void;
+  learningMode: LearningMode;
+  onLearningModeChange: (mode: LearningMode) => void;
+  appearance: ReactNode;
+  backup: ReactNode;
+  developmentTools: ReactNode;
+  settingsSections: { appearance: boolean; ai: boolean };
+  onSettingsSectionChange: (section: "appearance" | "ai", open: boolean) => void;
+};
 
 const providerLabels: Record<TutorProviderName, { title: string; description: string }> = {
   codex: { title: "Codex CLI", description: "Использует локальный вход Codex без отдельного API-ключа." },
@@ -18,7 +31,7 @@ const providerLabels: Record<TutorProviderName, { title: string; description: st
   polza: { title: "Polza API", description: "OpenAI-совместимый API через сервис Polza." },
 };
 
-export function AiSettingsPanel({ open, onClose }: Props) {
+export function AiSettingsPanel({ open, onClose, developmentMode, onDevelopmentModeChange, learningMode, onLearningModeChange, appearance, backup, developmentTools, settingsSections, onSettingsSectionChange }: Props) {
   const [settings, setSettings] = useState<TutorSettings | null>(null);
   const [provider, setProvider] = useState<TutorProviderName>("codex");
   const [openaiKey, setOpenaiKey] = useState("");
@@ -105,12 +118,63 @@ export function AiSettingsPanel({ open, onClose }: Props) {
 
   return (
     <div className="ai-settings-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
-      <section className="ai-settings-panel" role="dialog" aria-modal="true" aria-labelledby="ai-settings-title">
+      <section className="ai-settings-panel" role="dialog" aria-modal="true" aria-labelledby="settings-title">
         <header>
-          <div><span>Преподаватель</span><h2 id="ai-settings-title">Подключение ИИ</h2></div>
+          <div><span>SlovoKrok</span><h2 id="settings-title">Настройки</h2></div>
           <button type="button" className="ai-settings-close" onClick={onClose} aria-label="Закрыть настройки">×</button>
         </header>
-        <form onSubmit={save}>
+
+        <section className="settings-section settings-development">
+          <div>
+            <strong>Режим разработки</strong>
+            <p>Открывает ручные переходы по материалам и инструменты изменения прогресса для проверки курса.</p>
+          </div>
+          <button
+            type="button"
+            className="settings-switch"
+            role="switch"
+            aria-label="Режим разработки"
+            aria-checked={developmentMode}
+            onClick={() => onDevelopmentModeChange(!developmentMode)}
+          >
+            <span aria-hidden="true" />
+            {developmentMode ? "Включён" : "Выключен"}
+          </button>
+        </section>
+
+        <section className="settings-section settings-development settings-learning-mode">
+          <div>
+            <strong>Режим обучения</strong>
+            <p>{learningMode === "online" ? "Онлайн: ИИ создаёт упражнения и помогает гибко проверять ответы." : "Офлайн для упражнений: генерация отключена, а заранее сохранённые задания проверяются по эталону без обращения к ИИ."}</p>
+          </div>
+          <button
+            type="button"
+            className="settings-switch"
+            role="switch"
+            aria-label="Офлайн-режим"
+            aria-checked={learningMode === "offline"}
+            onClick={() => onLearningModeChange(learningMode === "online" ? "offline" : "online")}
+          >
+            <span aria-hidden="true" />
+            {learningMode === "online" ? "Онлайн" : "Офлайн"}
+          </button>
+        </section>
+
+        {developmentTools}
+
+        <details className="settings-section settings-appearance" open={settingsSections.appearance} onToggle={(event) => onSettingsSectionChange("appearance", event.currentTarget.open)}>
+          <summary>Оформление</summary>
+          {appearance}
+        </details>
+
+        <section className="settings-section settings-backup">
+          {backup}
+        </section>
+
+        <details className="settings-section settings-ai" open={settingsSections.ai} onToggle={(event) => onSettingsSectionChange("ai", event.currentTarget.open)}>
+          <summary>Подключение ИИ</summary>
+          {learningMode === "offline" && <p className="ai-settings-mode-note">Подключение сохранено, но не используется для проверки упражнений, пока включён офлайн-режим.</p>}
+          <form onSubmit={save}>
           <fieldset className="ai-provider-grid" disabled={busy}>
             <legend>Выберите способ подключения</legend>
             {(Object.keys(providerLabels) as TutorProviderName[]).map((name) => (
@@ -141,11 +205,13 @@ export function AiSettingsPanel({ open, onClose }: Props) {
             {settings?.polza_api_key_configured && <label className="ai-clear-key"><input type="checkbox" checked={clearPolza} onChange={(event) => setClearPolza(event.target.checked)} />Удалить сохранённый ключ</label>}
           </div>}
 
-          <p className="ai-settings-security">Ключ хранится только локально на backend и никогда не возвращается в браузер.</p>
+          <p className="ai-settings-security">Ключ хранится только локально на backend и никогда не возвращается в браузер. Персональный профиль ученика по умолчанию не отправляется выбранному ИИ; явное включение возможно только через локальную настройку <code>SHARE_PRIVATE_TUTOR_PROFILE=true</code>.</p>
           {error && <p className="ai-settings-error" role="alert">{error}</p>}
           {notice && <p className="ai-settings-notice" role="status">{notice}</p>}
-          <footer><button type="button" onClick={onClose}>Отмена</button><button type="submit" className="primary" disabled={busy}>{busy ? "Подождите…" : "Сохранить"}</button></footer>
-        </form>
+            <footer><button type="submit" className="primary" disabled={busy}>{busy ? "Подождите…" : "Сохранить настройки ИИ"}</button></footer>
+          </form>
+        </details>
+        <footer className="settings-footer"><button type="button" onClick={onClose}>Закрыть</button></footer>
       </section>
     </div>
   );

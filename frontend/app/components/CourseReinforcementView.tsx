@@ -36,7 +36,7 @@ export function CourseReinforcementView({ model: { lesson, lessonNumber, lessonC
     : summary?.review ?? [];
 
   return <div className="course-chat-layout">
-    <aside className="course-chat-context"><span>{lesson.reinforcementLabel ?? "Закрепление темы"}</span><h3>{lesson.title}</h3><p>{lesson.slovakTitle}</p><div><b>Цели</b>{lesson.goals.map((goal) => <small key={goal}>✓ {goal}</small>)}</div><button type="button" onClick={actions.backToMaterial}>← Вернуться к материалу</button></aside>
+    <aside className="course-chat-context"><h3>{lesson.title}</h3><p>{lesson.slovakTitle}</p><div><b>Цели</b>{lesson.goals.map((goal) => <small key={goal}>✓ {goal}</small>)}</div><button type="button" onClick={actions.backToMaterial}>← Вернуться к материалу</button></aside>
     <div className="course-chat">
       <header><div>Самостоятельная практика</div><small>{summary ? "Тема завершена" : `${score}/${practices.length} верно`}</small></header>
       {summary ? <section className="course-chat-summary" aria-labelledby="course-chat-summary-title">
@@ -44,7 +44,7 @@ export function CourseReinforcementView({ model: { lesson, lessonNumber, lessonC
         <strong aria-label={`Понимание темы ${summary.understanding} процентов`}>{summary.understanding}%<small>понимание темы</small></strong>
         <div className="course-chat-summary-details"><article><h4>Освоенные навыки</h4><ul>{summary.strengths.map((item, index) => <li key={`${index}:${item}`}>{item}</li>)}</ul></article><article><h4>Ошибки и исправления</h4>{summaryMistakes.length ? <ul>{summaryMistakes.map((item, index) => <li key={`${index}:${item}`}>{item}</li>)}</ul> : <p>Активных ошибок в обязательной части не зафиксировано.</p>}</article><article><h4>Что делать дальше</h4><ul>{summaryRecommendations.map((item, index) => <li key={`${index}:${item}`}>{item}</li>)}</ul></article></div>
       </section> : <section className="course-reinforcement course-check" aria-labelledby="course-reinforcement-title">
-        <div className="course-current-task"><span>{lesson.reinforcementLabel ?? "Закрепление темы"}</span><strong id="course-reinforcement-title">{lesson.reinforcementTitle ?? "Выполните все задания самостоятельно"}</strong><small>Ответы проверяются по материалу урока. Неверный вариант можно изменить.</small></div>
+        <h2 className="course-current-task" id="course-reinforcement-title" hidden>{lesson.reinforcementTitle ?? "Выполните все задания самостоятельно"}</h2>
         {practices.map((practice, index) => {
           const answer = practiceAnswers[practice.id] ?? "";
           const checked = practice.id in practiceResults;

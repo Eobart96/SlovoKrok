@@ -97,12 +97,12 @@ export const modalQuestionsNegationLesson = {
       { prompt: "Tu ___ parkovať, je to zakázané.", answer: "nesmiete", options: modalOptions },
       { prompt: "Dnes ___ variť, večeru pripraví Peter.", answer: "nemusím", options: modalOptions },
     ], hint: "Определите модальный смысл ситуации.", explanation: "Каждая форма соответствует одному смыслу." },
-    { id: "reinforcement:modal-questions-negation:2", sectionIndex: 0, type: "pairs", prompt: "Сделайте общий вопрос.", answer: "Chceš cestovať?; Môžete prísť?; Musí odísť?; Vieš variť?", pairs: [
-      { prompt: "Chceš cestovať.", answer: "Chceš cestovať?", inputHint: "Введите вопрос" },
-      { prompt: "Môžete prísť.", answer: "Môžete prísť?", inputHint: "Введите вопрос" },
-      { prompt: "Musí odísť.", answer: "Musí odísť?", inputHint: "Введите вопрос" },
-      { prompt: "Vieš variť.", answer: "Vieš variť?", inputHint: "Введите вопрос" },
-    ], hint: "Сохраните форму и инфинитив, добавьте знак вопроса.", explanation: "Вспомогательный глагол не нужен." },
+    { id: "reinforcement:modal-questions-negation:2", sectionIndex: 0, type: "pairs", prompt: "Переведите общие вопросы на словацкий.", answer: "Chceš cestovať?; Môžete prísť?; Musí odísť?; Vieš variť?", pairs: [
+      { prompt: "Ты хочешь путешествовать?", answer: "Chceš cestovať?", inputHint: "Введите вопрос" },
+      { prompt: "Вы можете прийти? · вежливо", answer: "Môžete prísť?", inputHint: "Введите вопрос" },
+      { prompt: "Он должен уйти?", answer: "Musí odísť?", inputHint: "Введите вопрос" },
+      { prompt: "Ты умеешь готовить?", answer: "Vieš variť?", inputHint: "Введите вопрос" },
+    ], hint: "Выберите смысл и лицо; после модальной формы поставьте инфинитив и знак вопроса.", explanation: "В словацком общий вопрос не требует отдельного вспомогательного глагола." },
     { id: "reinforcement:modal-questions-negation:3", sectionIndex: 2, type: "pairs", prompt: "Вставьте вопросительное слово.", answer: "Čo; Kedy; Prečo; Kto; Koľko", pairs: [
       { prompt: "___ chceš robiť? — Chcem spať.", answer: "Čo", options: questionWordOptions },
       { prompt: "___ môžeš prísť? — Zajtra.", answer: "Kedy", options: questionWordOptions },

@@ -1,16 +1,24 @@
+import atexit
 from collections.abc import Generator
+import os
 from pathlib import Path
+import shutil
+import tempfile
+
+_TEST_RUNTIME_DATA = Path(tempfile.mkdtemp(prefix="slovokrok-tests-"))
+os.environ["SLOVOKROK_DATA_DIR"] = str(_TEST_RUNTIME_DATA)
+os.environ["DATABASE_URL"] = f"sqlite:///{(_TEST_RUNTIME_DATA / 'bootstrap.db').as_posix()}"
+atexit.register(shutil.rmtree, _TEST_RUNTIME_DATA, True)
 
 import pytest
 from fastapi.testclient import TestClient
-from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
 from app.config import get_settings
-from app.database import Base, get_db
+from app.database import create_database_engine, get_db
 from app.dependencies import get_tutor_provider
 import app.services.startup as startup_module
-import app.routers.tutor as tutor_router_module
+import app.routers.tutor_routes.settings as tutor_settings_router_module
 from app.main import app
 from app.tutor import CodexConnectionStatus, TutorContext
 
@@ -37,9 +45,8 @@ class TestTutorProvider:
 @pytest.fixture
 def client(tmp_path: Path) -> Generator[TestClient, None, None]:
     database_url = f"sqlite:///{tmp_path / 'test.db'}"
-    test_engine = create_engine(database_url, connect_args={"check_same_thread": False})
+    test_engine = create_database_engine(database_url)
     test_session = sessionmaker(bind=test_engine, autoflush=False, autocommit=False)
-    Base.metadata.create_all(bind=test_engine)
 
     def override_get_db() -> Generator[Session, None, None]:
         db = test_session()
@@ -62,8 +69,8 @@ def client(tmp_path: Path) -> Generator[TestClient, None, None]:
         settings.polza_model,
     )
     original_engine = startup_module.engine
-    original_codex_status = tutor_router_module.get_codex_connection_status
-    tutor_router_module.get_codex_connection_status = lambda _: CodexConnectionStatus(True, True, "Codex подключён в тесте")
+    original_codex_status = tutor_settings_router_module.get_codex_connection_status
+    tutor_settings_router_module.get_codex_connection_status = lambda _: CodexConnectionStatus(True, True, "Codex подключён в тесте")
     settings.database_url = database_url
     settings.learning_path = Path(__file__).parents[2] / "course-content" / "slovak-a1" / "learning"
     settings.project_root = tmp_path
@@ -81,6 +88,6 @@ def client(tmp_path: Path) -> Generator[TestClient, None, None]:
         settings.polza_model,
     ) = original_tutor_values
     startup_module.engine = original_engine
-    tutor_router_module.get_codex_connection_status = original_codex_status
+    tutor_settings_router_module.get_codex_connection_status = original_codex_status
     app.dependency_overrides.clear()
     test_engine.dispose()

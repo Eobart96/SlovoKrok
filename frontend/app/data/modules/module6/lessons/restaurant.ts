@@ -166,7 +166,7 @@ export const restaurantLesson = {
     { id: "reinforcement:restaurant:1", sectionIndex: 0, type: "pairs", prompt: "Распределите позиции меню.", answer: "predjedlo; polievka; hlavné jedlo; dezert; nápoj", pairs: [
       { prompt: "zeleninový šalát", answer: "predjedlo", options: ["predjedlo", "polievka", "hlavné jedlo", "dezert", "nápoj"] },
       { prompt: "paradajková polievka", answer: "polievka", options: ["predjedlo", "polievka", "hlavné jedlo", "dezert", "nápoj"] },
-      { prompt: "ryba so zemiakmi", answer: "hlavné jedlo", options: ["predjedlo", "polievka", "hlavné jedlo", "dezert", "nápoj"] },
+      { prompt: "ryba so zemiakmi · главное блюдо", answer: "hlavné jedlo", options: ["predjedlo", "polievka", "hlavné jedlo", "dezert", "nápoj"] },
       { prompt: "koláč", answer: "dezert", options: ["predjedlo", "polievka", "hlavné jedlo", "dezert", "nápoj"] },
       { prompt: "čaj", answer: "nápoj", options: ["predjedlo", "polievka", "hlavné jedlo", "dezert", "nápoj"] },
     ], showSlovakKeyboard: false, hint: "Используйте разделы простого меню.", explanation: "Салат — закуска, затем суп, основное блюдо, десерт и напиток." },

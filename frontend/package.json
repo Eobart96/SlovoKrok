@@ -1,12 +1,15 @@
 {
   "name": "ai-learning-platform-frontend",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "validate:a1": "node scripts/validate-a1-content.mjs && tsc --noEmit --incremental false",
+    "test:unit": "node --experimental-strip-types --test tests/unit/course-logic.test.mts tests/unit/api-request.test.mts && node -e \"console.log('FRONTEND_UNIT_TESTS_OK')\"",
+    "check:bundle": "node scripts/check-bundle-budget.mjs",
+    "validate:a1": "node scripts/validate-a1-content.mjs && node scripts/validate-additional-vocabulary.mjs && node scripts/validate-test-option-order.cjs && tsc --noEmit --incremental false",
     "test:ui": "node scripts/run-ui-tests.mjs"
   },
   "dependencies": {

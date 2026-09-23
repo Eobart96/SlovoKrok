@@ -111,3 +111,27 @@ class CourseHomeworkAttempt(Base):
     explanation: Mapped[str] = mapped_column(Text)
     next_exercise: Mapped[str] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utc_now, index=True)
+
+
+class TranslationHistoryEntry(Base):
+    __tablename__ = "translator_history"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    direction: Mapped[str] = mapped_column(String(5), index=True)
+    source_text: Mapped[str] = mapped_column(Text)
+    translation: Mapped[str] = mapped_column(Text)
+    alternatives_json: Mapped[str] = mapped_column(Text, default="[]", nullable=False)
+    note: Mapped[str | None] = mapped_column(Text, nullable=True)
+    provider: Mapped[str] = mapped_column(String(40))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utc_now, index=True)
+
+
+class TranslationHistoryQuestion(Base):
+    __tablename__ = "translator_history_questions"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    translation_id: Mapped[int] = mapped_column(ForeignKey("translator_history.id"), index=True)
+    question: Mapped[str] = mapped_column(Text)
+    answer: Mapped[str] = mapped_column(Text)
+    provider: Mapped[str] = mapped_column(String(40))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utc_now, index=True)

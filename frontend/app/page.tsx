@@ -1,12 +1,14 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
 import { CourseScreen } from "./components/CourseScreen";
-import { AiSettingsPanel } from "./components/AiSettingsPanel";
+
+const FloatingTranslator = dynamic(() => import("./components/FloatingTranslator").then((module) => module.FloatingTranslator));
 
 type Theme = "light" | "dark";
-type ModuleArea = "learning" | "exercises" | "reading" | "vocabulary" | "homework" | "review";
+type ModuleArea = "learning" | "cheats" | "exercises" | "reading" | "vocabulary" | "homework" | "review";
 
 const themeStorageKey = "ai-learning-platform-theme";
 
@@ -43,12 +45,14 @@ export default function HomePage() {
         <nav aria-label="Навигация курса Slovak A1">
           <div className="course-primary-navigation" aria-label="Основные разделы">
             <button type="button" className={activeArea === "learning" ? "active" : ""} onClick={() => setActiveArea("learning")}>Обучение</button>
+            <button type="button" className={activeArea === "cheats" ? "active" : ""} onClick={() => setActiveArea("cheats")}>Шпаргалки</button>
             <button type="button" className={activeArea === "exercises" ? "active" : ""} onClick={() => setActiveArea("exercises")}>Упражнения</button>
             <button type="button" className={activeArea === "reading" ? "active" : ""} onClick={() => setActiveArea("reading")}>Чтение</button>
             <button type="button" className={activeArea === "vocabulary" ? "active" : ""} onClick={() => setActiveArea("vocabulary")}>Слова</button>
             <button type="button" className={activeArea === "homework" ? "active" : ""} onClick={() => setActiveArea("homework")}>Домашнее задание</button>
             <button type="button" className={activeArea === "review" ? "active" : ""} onClick={() => setActiveArea("review")}>Ошибки</button>
           </div>
+          <FloatingTranslator />
           <button
             type="button"
             onClick={() => setTheme(isDark ? "light" : "dark")}
@@ -57,14 +61,13 @@ export default function HomePage() {
             <span aria-hidden="true">{isDark ? "☀" : "☾"}</span>
             {isDark ? "Светлая тема" : "Тёмная тема"}
           </button>
-          <button type="button" onClick={() => setSettingsOpen(true)} aria-label="Открыть настройки ИИ">
+          <button type="button" onClick={() => setSettingsOpen(true)} aria-label="Открыть настройки">
             <span aria-hidden="true">⚙</span>
-            Настройки ИИ
+            Настройки
           </button>
         </nav>
       </header>
-      <CourseScreen requestedArea={activeArea} onAreaChange={setActiveArea} />
-      <AiSettingsPanel open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <CourseScreen requestedArea={activeArea} onAreaChange={setActiveArea} settingsOpen={settingsOpen} onSettingsClose={() => setSettingsOpen(false)} />
     </main>
   );
 }

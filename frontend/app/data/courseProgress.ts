@@ -1,4 +1,5 @@
 import { buildReinforcementPractices, isCorePractice } from "./coursePractice";
+import { scoreLessonUnderstanding } from "./courseScoring";
 import { type CourseLesson, type LessonStatus, type StepPractice } from "./courseTypes";
 
 export type MistakeRecord = { id: string; lessonSlug: string; prompt: string; answer: string; attempts: number; mastered: boolean; reviewStage?: number; dueAt?: string };
@@ -57,7 +58,7 @@ export function buildLessonSummary({ lesson, reinforcementPractices, practiceRes
   const successfulChecks = scoredKnowledgeChecks.filter((check) => checkSelections[check.id] === check.answer);
   const activities = [...corePractices.map((practice) => practiceResults[practice.id] === true), ...scoredKnowledgeChecks.map((check) => checkSelections[check.id] === check.answer), ...reinforcementPractices.map((practice) => practiceResults[practice.id] === true)];
   const lessonMistakes = Object.values(mistakes).filter((mistake) => mistake.lessonSlug === lesson.slug && !mistake.mastered && !optionalIds.has(mistake.id));
-  const understanding = Math.max(0, Math.min(100, Math.round((activities.length ? activities.filter(Boolean).length / activities.length : 0) * 100 - Math.min(15, lessonMistakes.length * 3))));
+  const understanding = scoreLessonUnderstanding(activities, lessonMistakes.length);
   const strengths = [...new Set([...successfulPractices.slice(0, 2).map((practice) => `Самостоятельно выполнено: ${practice.prompt}`), ...successfulChecks.slice(0, 1).map((check) => `Распознана нормативная форма: ${check.answer}`), ...(userTurns > 0 ? [`Выполнено заданий на закрепление: ${userTurns}`] : [])])].slice(0, 3);
   const unfinishedExtraSections = lesson.sections.filter((section, index) => section.importance === "extra" && !lesson.stepPractices.some((practice) => practice.sectionIndex === index && practiceResults[practice.id] === true));
   const review = [...(lessonMistakes.length ? [`Исправьте и повторите: ${lessonMistakes[0].prompt} → ${lessonMistakes[0].answer}`] : []), ...(userTurns < reinforcementPractices.length ? [`Завершите задания на закрепление: осталось ${reinforcementPractices.length - userTurns}.`] : []), "Повторите ключевые формы без подсказки через 3 дня.", ...(unfinishedExtraSections.length ? [`По желанию изучите дополнительный раздел «${unfinishedExtraSections[0].title}».`] : [])].slice(0, 3);

@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useState } from "react";
 
 import { allA1Lessons } from "../data/a1Course";
+import { learnedVocabularyContext, learnedVocabularySeeds } from "../data/courseVocabulary";
 import type { CourseLesson } from "../data/courseTypes";
 import { checkCourseReading, deleteCourseReading, generateCourseReading, getCourseReadings, type CourseReading as Reading, type CourseReadingAttempt } from "../lib/api";
 
@@ -28,6 +29,12 @@ export function CourseReading({ completedLessonSlugs }: { completedLessonSlugs: 
   const storageSlug = mode === "progress" ? "course-progress" : lessonSlug;
   const visible = items.filter((item) => item.lesson_slug === storageSlug);
   const selected = items.find((item) => item.id === selectedId) ?? visible[0];
+  const vocabularyContext = mode === "topic" && lesson
+    ? learnedVocabularyContext([lesson], [lesson.slug])
+    : learnedVocabularyContext(allA1Lessons, completedLessonSlugs);
+  const vocabularyCount = mode === "topic" && lesson
+    ? learnedVocabularySeeds([lesson], [lesson.slug]).length
+    : learnedVocabularySeeds(allA1Lessons, completedLessonSlugs).length;
 
   useEffect(() => { void getCourseReadings().then((readings) => { setItems(readings); setSelectedId(readings[0]?.id ?? null); }).catch((cause) => setError(cause instanceof Error ? cause.message : "Не удалось загрузить тексты.")).finally(() => setLoading(false)); }, []);
 
@@ -36,8 +43,8 @@ export function CourseReading({ completedLessonSlugs }: { completedLessonSlugs: 
     try {
       if (!completedLessons.length || (mode === "topic" && !lesson)) return;
       const item = mode === "topic"
-        ? await generateCourseReading({ lesson_slug: lesson.slug, lesson_title: lesson.title, theory: theoryFor(lesson), completed_theory: "" })
-        : await generateCourseReading({ lesson_slug: "course-progress", lesson_title: "Общий прогресс Slovak A1", theory: completedLessons.map((item) => `Тема: ${item.title}\n${theoryFor(item)}`).join("\n\n").slice(0, 12_000), completed_theory: "" });
+        ? await generateCourseReading({ lesson_slug: lesson.slug, lesson_title: lesson.title, theory: theoryFor(lesson), completed_theory: vocabularyContext })
+        : await generateCourseReading({ lesson_slug: "course-progress", lesson_title: "Общий прогресс Slovak A1", theory: completedLessons.map((item) => `Тема: ${item.title}\n${theoryFor(item)}`).join("\n\n").slice(0, 12_000), completed_theory: vocabularyContext });
       setItems((current) => [item, ...current]); setSelectedId(item.id);
     } catch (cause) { setError(cause instanceof Error ? cause.message : "Не удалось создать текст."); }
     finally { setGenerating(false); }
@@ -62,9 +69,9 @@ export function CourseReading({ completedLessonSlugs }: { completedLessonSlugs: 
   };
 
   return <section className="course-exercises course-reading" aria-labelledby="course-reading-title">
-    <div className="course-section-heading"><div><span>Практика понимания</span><h3 id="course-reading-title">Чтение</h3></div><p>Прочитайте словацкий текст и перескажите его по-русски.</p></div>
+    <div className="course-section-heading"><div><span>Практика понимания</span><h3 id="course-reading-title">Чтение</h3></div><p>Прочитайте словацкий текст и перескажите его по-русски. Генератор учитывает уже открытые слова и фразы.</p></div>
     <div className="course-reading-modes" role="group" aria-label="Режим генерации текста"><button type="button" className={mode === "topic" ? "active" : ""} onClick={() => { setMode("topic"); setSelectedId(null); setResult(null); setRetelling(""); }}>По теме</button><button type="button" className={mode === "progress" ? "active" : ""} onClick={() => { setMode("progress"); setSelectedId(null); setResult(null); setRetelling(""); }}>По общему прогрессу</button></div>
-    <div className="course-exercise-toolbar">{mode === "topic" ? <label><span>Завершённая тема</span><select value={lessonSlug} disabled={!completedLessons.length} onChange={(event) => { setLessonSlug(event.target.value); setSelectedId(null); setResult(null); setRetelling(""); }}>{completedLessons.map((item) => <option value={item.slug} key={item.slug}>{item.title}</option>)}</select></label> : <div className="course-reading-scope"><span>Доступный материал</span><strong>{completedLessons.length} завершённых тем</strong><small>Используются только завершённые темы.</small></div>}<button type="button" onClick={() => void generate()} disabled={generating || !completedLessons.length}>{generating ? "Создаю…" : "Новый текст"}</button></div>
+    <div className="course-exercise-toolbar">{mode === "topic" ? <label><span>Завершённая тема</span><select value={lessonSlug} disabled={!completedLessons.length} onChange={(event) => { setLessonSlug(event.target.value); setSelectedId(null); setResult(null); setRetelling(""); }}>{completedLessons.map((item) => <option value={item.slug} key={item.slug}>{item.title}</option>)}</select><small>{vocabularyCount} открытых слов и фраз по теме.</small></label> : <div className="course-reading-scope"><span>Доступный материал</span><strong>{completedLessons.length} завершённых тем · {vocabularyCount} слов и фраз</strong><small>Используются только завершённые темы.</small></div>}<button type="button" onClick={() => void generate()} disabled={generating || !completedLessons.length}>{generating ? "Создаю…" : "Новый текст"}</button></div>
     {!completedLessons.length && <p className="course-empty">Завершите хотя бы одну тему, чтобы создавать тексты.</p>}
     {error && <p className="course-persistence-error" role="alert">{error}</p>}
     {loading ? <p>Загружаю тексты…</p> : <div className="course-exercise-grid"><aside className="course-exercise-list"><strong>Сохранённые тексты</strong>{visible.length ? visible.map((item) => <article className={selected?.id === item.id ? "active" : ""} key={item.id}><button type="button" onClick={() => { setSelectedId(item.id); setResult(item.latest_attempt); setRetelling(""); }}><span>{item.lesson_title}</span><b>{item.title}</b>{item.latest_attempt && <small>Пересказ: {item.latest_attempt.score}/100</small>}</button><button type="button" className="delete" onClick={() => void remove(item)} aria-label={`Удалить текст: ${item.title}`}>Удалить</button></article>) : <p>Текстов по этой теме пока нет.</p>}</aside><form className="course-exercise-workspace" onSubmit={(event) => void submit(event)}>{selected ? <><span>{selected.lesson_title}</span><h4>{selected.title}</h4><p className="course-reading-text" lang="sk">{selected.text}</p><small>{selected.instruction}</small><textarea rows={6} value={retelling} onChange={(event) => setRetelling(event.target.value)} placeholder="Напишите по-русски, о чём этот текст…" disabled={checking} /><button type="submit" disabled={!retelling.trim() || checking}>{checking ? "Проверяю…" : "Проверить пересказ"}</button>{(result ?? selected.latest_attempt) && (() => { const checked = result ?? selected.latest_attempt!; return <article className={checked.score >= 70 ? "correct" : "incorrect"}><strong>Результат: {checked.score}/100</strong><p>{checked.feedback}</p><p><b>Хороший вариант:</b> {checked.corrected_retelling}</p></article>; })()}</> : <div className="course-empty"><strong>Выберите или создайте текст</strong><p>Текст будет ограничен грамматикой выбранной и предыдущих тем.</p></div>}</form></div>}
