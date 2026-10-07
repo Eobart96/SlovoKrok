@@ -1,12 +1,36 @@
-# SlovoKrok
+<p align="center"><img src="docs/screenshots/banner.svg" alt="SlovoKrok — Slovenčina, krok za krokom" width="100%"></p>
 
-[Русский](README.md) · [English](README.en.md) · **Slovenčina**
-
-[GitHub](https://github.com/Eobart96/SlovoKrok)
+<h1 align="center">Slovenčina, krok za krokom</h1>
+<p align="center">83 tém · 8 modulov · precvičovanie podľa vášho pokroku</p>
+<p align="center">[Русский](README.md) · [English](README.en.md) · **Slovenčina**</p>
+<p align="center"><a href="https://github.com/Eobart96/SlovoKrok">GitHub</a> · <a href="TESTING_START.md">Pre testerov</a> · <a href="UPDATES.md">Novinky</a></p>
 
 Lokálna aplikácia pre jedného používateľa na učenie slovenčiny. Kurz A1 má
 8 modulov a 83 tém, vysvetlenia v ruštine, cvičenia, čítanie, domáce úlohy,
 slovník a precvičovanie chýb. Preklady README nemenia jazyk aplikácie.
+
+![SlovoKrok A1 — Slovenčina, krok za krokom](docs/screenshots/course.jpg)
+
+| Témy A1 | Cvičenia | Texty na čítanie | Domáce úlohy |
+| :---: | :---: | :---: | :---: |
+| **83** | **1660** | **166** | **166** |
+
+Každá téma obsahuje 20 cvičení, 2 texty a 2 domáce úlohy.
+
+## Snímky aplikácie
+
+Tmavý motív. Snímky používajú samostatnú ukážkovú databázu bez osobných odpovedí a profilu. Kliknutím otvoríte snímku v plnej veľkosti.
+
+<table>
+<tr>
+<td width="50%" valign="top"><strong>Cvičenia a uložené zadania</strong><br><br><a href="docs/screenshots/exercises.jpg"><img src="docs/screenshots/exercises.jpg" alt="Cvičenia a uložené zadania" width="100%"></a></td>
+<td width="50%" valign="top"><strong>Čítanie a hlasové prerozprávanie</strong><br><br><a href="docs/screenshots/reading.jpg"><img src="docs/screenshots/reading.jpg" alt="Čítanie a hlasové prerozprávanie" width="100%"></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><strong>Úvodný sprievodca</strong><br><br><a href="docs/screenshots/welcome.jpg"><img src="docs/screenshots/welcome.jpg" alt="Úvodný sprievodca" width="100%"></a></td>
+<td width="50%" valign="top"><strong>Základný balík v nastaveniach</strong><br><br><a href="docs/screenshots/task-pack.jpg"><img src="docs/screenshots/task-pack.jpg" alt="Základný balík v nastaveniach" width="100%"></a></td>
+</tr>
+</table>
 
 ## Inštalácia vo Windows
 

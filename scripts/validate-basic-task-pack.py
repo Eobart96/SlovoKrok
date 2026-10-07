@@ -59,8 +59,18 @@ def main():
             raise ValueError("Missing homework reference")
     # Stable lesson identifiers can contain English "it" (who-what-is-it).
     # Scan learner content, not those compatibility identifiers.
-    serialized = json.dumps([{key: value for key, value in row.items() if key != "lesson_slug"} for kind in ("exercises", "readings", "homework") for row in raw[kind]], ensure_ascii=False)
-    if re.search(r"(?<!\w)(?:Ari|Ари|Eva|Peter|Martin|Lucia|Anna|Jana|Ján|Katka|Mária|Tomáš|Zuzana|Andrej|Michal|Juraj|Lukáš|Adam|Nina|Ema|Marek|Ivan|Адам|Нина|Мария|Иван|Алексей|IT|ИТ)(?!\w)|[\w.+-]+@[\w.-]+\.[a-z]{2,}|\+421[\d\s-]{6,}", serialized, re.I):
+    def content_strings(value):
+        if isinstance(value, str):
+            yield value
+        elif isinstance(value, list):
+            for item in value:
+                yield from content_strings(item)
+        elif isinstance(value, dict):
+            for key, item in value.items():
+                if key != "lesson_slug":
+                    yield from content_strings(item)
+    serialized = "\n".join(content_strings(raw))
+    if re.search(r"(?<!\w)(?:Boris|Marina|Марина|Horváth|Nováková|Novák|Ari|Ари|Eva|Peter|Martin|Lucia|Anna|Jana|Ján|Katka|Mária|Tomáš|Zuzana|Andrej|Michal|Juraj|Lukáš|Adam|Nina|Ema|Marek|Ivan|Адам|Нина|Мария|Иван|Алексей|IT|ИТ)(?!\w)|[\w.+-]+@[\w.-]+\.[a-z]{2,}|\+421[\d\s-]{6,}", serialized, re.I):
         raise ValueError("Personal identity or contact detected")
     engine = create_engine("sqlite://")
     Base.metadata.create_all(engine)

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="280" viewBox="0 0 1200 280" role="img" aria-labelledby="title desc">
+  <title id="title">SlovoKrok</title>
+  <desc id="desc">Slovak, step by step. A1 learning application.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#23101c"/><stop offset=".6" stop-color="#171821"/><stop offset="1" stop-color="#302355"/></linearGradient>
+    <linearGradient id="accent"><stop stop-color="#a777ff"/><stop offset="1" stop-color="#6450ed"/></linearGradient>
+  </defs>
+  <rect width="1200" height="280" rx="28" fill="url(#bg)"/>
+  <circle cx="1100" cy="15" r="175" fill="#7044bb" opacity=".12"/>
+  <path d="M840 205h65v-45h65v-45h65V70h65" fill="none" stroke="url(#accent)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="1100" cy="70" r="11" fill="#bca0ff"/>
+  <text x="64" y="72" fill="#bba5e7" font-family="Segoe UI,Arial,sans-serif" font-size="16" letter-spacing="4">SLOVAK LANGUAGE · A1</text>
+  <text x="60" y="150" fill="#f7f4ff" font-family="Segoe UI,Arial,sans-serif" font-size="64" font-weight="700">SlovoKrok</text>
+  <text x="64" y="198" fill="#c6bfdb" font-family="Segoe UI,Arial,sans-serif" font-size="25">Slovak, step by step.</text>
+  <path d="M64 232h95" stroke="url(#accent)" stroke-width="5" stroke-linecap="round"/>
+</svg>

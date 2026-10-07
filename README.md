@@ -1,12 +1,36 @@
-# SlovoKrok
+<p align="center"><img src="docs/screenshots/banner.svg" alt="SlovoKrok — Словацкий, шаг за шагом" width="100%"></p>
 
-**Русский** · [English](README.en.md) · [Slovenčina](README.sk.md)
-
-[GitHub](https://github.com/Eobart96/SlovoKrok)
+<h1 align="center">Словацкий, шаг за шагом</h1>
+<p align="center">83 темы · 8 модулей · практика по вашему прогрессу</p>
+<p align="center">**Русский** · [English](README.en.md) · [Slovenčina](README.sk.md)</p>
+<p align="center"><a href="https://github.com/Eobart96/SlovoKrok">GitHub</a> · <a href="TESTING_START.md">Тестировщикам</a> · <a href="UPDATES.md">Обновления</a></p>
 
 Локальное приложение для самостоятельного изучения словацкого языка.
 Объяснения на русском, курс A1 из 8 модулей и 83 тем, практика, чтение,
 домашние задания, словарь и работа над ошибками.
+
+![SlovoKrok A1 — Словацкий, шаг за шагом](docs/screenshots/course.jpg)
+
+| Курс A1 | Упражнения | Тексты | Домашние задания |
+| :---: | :---: | :---: | :---: |
+| **83** | **1660** | **166** | **166** |
+
+На каждую тему: 20 упражнений, 2 текста и 2 домашних задания.
+
+## Скриншоты приложения
+
+Тёмная тема. Демонстрационные данные в отдельной базе; личные ответы и профиль не использованы. Нажмите на снимок, чтобы открыть его полностью.
+
+<table>
+<tr>
+<td width="50%" valign="top"><strong>Упражнения с сохранёнными заданиями</strong><br><br><a href="docs/screenshots/exercises.jpg"><img src="docs/screenshots/exercises.jpg" alt="Упражнения с сохранёнными заданиями" width="100%"></a></td>
+<td width="50%" valign="top"><strong>Чтение и голосовой пересказ</strong><br><br><a href="docs/screenshots/reading.jpg"><img src="docs/screenshots/reading.jpg" alt="Чтение и голосовой пересказ" width="100%"></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><strong>Знакомство с приложением</strong><br><br><a href="docs/screenshots/welcome.jpg"><img src="docs/screenshots/welcome.jpg" alt="Знакомство с приложением" width="100%"></a></td>
+<td width="50%" valign="top"><strong>Базовый пакет в настройках</strong><br><br><a href="docs/screenshots/task-pack.jpg"><img src="docs/screenshots/task-pack.jpg" alt="Базовый пакет в настройках" width="100%"></a></td>
+</tr>
+</table>
 
 ## Быстрый запуск на Windows
 

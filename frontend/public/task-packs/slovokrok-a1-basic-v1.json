@@ -1118,9 +1118,9 @@
     {
       "lesson_slug": "greetings",
       "lesson_title": "Приветствия",
-      "question": "[Базовый пакет · 20/20]\nВставьте máte или máš.\nAko sa ___, pán Novák?",
+      "question": "[Базовый пакет · 20/20]\nСоедините прощание с переводом.\nDovidenia",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Приветствия\\nDobrý deň — безопасное формальное приветствие днём; Dobré ráno употребляют утром, Dobrý večer — вечером.\\nAhoj, Čau и Nazdar относятся к неформальному общению; с незнакомым взрослым лучше начать с Dobrý deň.\\nAko sa máte? и A vy? — формальные формы; Ako sa máš? и A ty? — неформальные.\",\"interaction_type\":\"choice\",\"options\":[\"máš\",\"máte\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"máte\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Приветствия\\nDobrý deň — безопасное формальное приветствие днём; Dobré ráno употребляют утром, Dobrý večer — вечером.\\nAhoj, Čau и Nazdar относятся к неформальному общению; с незнакомым взрослым лучше начать с Dobrý deň.\\nAko sa máte? и A vy? — формальные формы; Ako sa máš? и A ty? — неформальные.\",\"interaction_type\":\"choice\",\"options\":[\"пока\",\"спокойной ночи\",\"до завтра\",\"до свидания\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"до свидания\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -1182,9 +1182,9 @@
     {
       "lesson_slug": "introductions",
       "lesson_title": "Представление себя",
-      "question": "[Базовый пакет · 08/20]\nВыберите форму по уровню общения.\nAko sa ___, pán Novák?",
+      "question": "[Базовый пакет · 08/20]\nВставьте недостающую часть каждой модели.\nSom ___ Ruska.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"voláš\",\"voláte\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"voláte\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"z\",\"v\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"z\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -1198,89 +1198,89 @@
     {
       "lesson_slug": "introductions",
       "lesson_title": "Представление себя",
-      "question": "[Базовый пакет · 10/20]\nВставьте недостающую часть каждой модели.\nSom ___ Ruska.",
+      "question": "[Базовый пакет · 10/20]\nВставьте недостающую часть каждой модели.\nBývam ___ Moskve.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"z\",\"v\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"z\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"v\",\"z\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"v\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "introductions",
       "lesson_title": "Представление себя",
-      "question": "[Базовый пакет · 11/20]\nВставьте недостающую часть каждой модели.\nBývam ___ Moskve.",
+      "question": "[Базовый пакет · 11/20]\nВставьте недостающую часть каждой модели.\nHovorím ___ slovensky.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"z\",\"v\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"v\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"po\",\"na\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"po\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "introductions",
       "lesson_title": "Представление себя",
-      "question": "[Базовый пакет · 12/20]\nВставьте недостающую часть каждой модели.\nHovorím ___ slovensky.",
+      "question": "[Базовый пакет · 12/20]\nИсправьте каждую ошибочную фразу.\nSom Rusko.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"na\",\"po\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"po\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Som z Ruska.\",\"Som v Rusko.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Som z Ruska.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "introductions",
       "lesson_title": "Представление себя",
-      "question": "[Базовый пакет · 13/20]\nИсправьте каждую ошибочную фразу.\nSom Rusko.",
+      "question": "[Базовый пакет · 13/20]\nИсправьте каждую ошибочную фразу.\nBývam Moskva.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Som v Rusko.\",\"Som z Ruska.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Som z Ruska.\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Bývam v Moskve.\",\"Bývam z Moskvy.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Bývam v Moskve.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "introductions",
       "lesson_title": "Представление себя",
-      "question": "[Базовый пакет · 14/20]\nИсправьте каждую ошибочную фразу.\nBývam Moskva.",
+      "question": "[Базовый пакет · 14/20]\nИсправьте каждую ошибочную фразу.\nMne je tridsať rokov.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Bývam z Moskvy.\",\"Bývam v Moskve.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Bývam v Moskve.\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Som tridsať rokov.\",\"Mám tridsať rokov.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Mám tridsať rokov.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "introductions",
       "lesson_title": "Представление себя",
-      "question": "[Базовый пакет · 15/20]\nИсправьте каждую ошибочную фразу.\nMne je tridsať rokov.",
+      "question": "[Базовый пакет · 15/20]\nВыберите модель для каждого пункта личной самопрезентации.\nимя",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Mám tridsať rokov.\",\"Som tridsať rokov.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Mám tridsať rokov.\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Bývam v …\",\"Volám sa …\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Volám sa …\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "introductions",
       "lesson_title": "Представление себя",
-      "question": "[Базовый пакет · 16/20]\nВыберите модель для каждого пункта личной самопрезентации.\nимя",
+      "question": "[Базовый пакет · 16/20]\nВыберите модель для каждого пункта личной самопрезентации.\nстрана",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Volám sa …\",\"Bývam v …\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Volám sa …\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Som z / zo …\",\"Hovorím po …\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Som z / zo …\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "introductions",
       "lesson_title": "Представление себя",
-      "question": "[Базовый пакет · 17/20]\nВыберите модель для каждого пункта личной самопрезентации.\nстрана",
+      "question": "[Базовый пакет · 17/20]\nВыберите модель для каждого пункта личной самопрезентации.\nгород",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Hovorím po …\",\"Som z / zo …\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Som z / zo …\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Mám … rokov\",\"Bývam v …\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Bývam v …\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "introductions",
       "lesson_title": "Представление себя",
-      "question": "[Базовый пакет · 18/20]\nВыберите модель для каждого пункта личной самопрезентации.\nгород",
+      "question": "[Базовый пакет · 18/20]\nВыберите модель для каждого пункта личной самопрезентации.\nзанятие",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Bývam v …\",\"Mám … rokov\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Bývam v …\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Som … / Pracujem …\",\"Teší ma.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Som … / Pracujem …\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "introductions",
       "lesson_title": "Представление себя",
-      "question": "[Базовый пакет · 19/20]\nВыберите модель для каждого пункта личной самопрезентации.\nзанятие",
+      "question": "[Базовый пакет · 19/20]\nВыберите модель для каждого пункта личной самопрезентации.\nязыки",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Teší ma.\",\"Som … / Pracujem …\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Som … / Pracujem …\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Som z / zo …\",\"Hovorím po …\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Hovorím po …\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "introductions",
       "lesson_title": "Представление себя",
-      "question": "[Базовый пакет · 20/20]\nВыберите модель для каждого пункта личной самопрезентации.\nязыки",
+      "question": "[Базовый пакет · 20/20]\nВыберите модель для каждого пункта личной самопрезентации.\nзавершение",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Hovorím po …\",\"Som z / zo …\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Hovorím po …\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Представление себя\\nИмя называют моделью Volám sa…; sa — часть всей модели, его не переводят отдельно.\\nНе смешивайте формальные формы voláte, ste, bývate с неформальными voláš, si, bývaš в одном разговоре.\\nПроисхождение выражают Som z / zo…, а место жительства — Bývam v…; названия стран и городов после предлогов меняют форму.\",\"interaction_type\":\"choice\",\"options\":[\"Teší ma.\",\"Ako sa voláte?\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Teší ma.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -1742,25 +1742,25 @@
     {
       "lesson_slug": "personal-pronouns",
       "lesson_title": "Личные местоимения",
-      "question": "[Базовый пакет · 18/20]\nВыберите подходящее личное местоимение.\nPeter",
-      "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Личные местоимения\\nОсновные связки с byť: ja som, ty si, on/ona/ono je, my sme, vy ste, oni/ony sú.\\nOni употребляется для мужчин и смешанной группы людей; ony — для женской группы, предметов и животных, которые не обозначают лиц мужского пола.\\nVy + ste обозначает группу или вежливое обращение к одному человеку; ty + si — неформальное обращение к одному знакомому.\",\"interaction_type\":\"choice\",\"options\":[\"ona\",\"on\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"on\"]}",
-      "created_at": "2026-10-07T00:00:00Z"
-    },
-    {
-      "lesson_slug": "personal-pronouns",
-      "lesson_title": "Личные местоимения",
-      "question": "[Базовый пакет · 19/20]\nВыберите подходящее личное местоимение.\nEva",
-      "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Личные местоимения\\nОсновные связки с byť: ja som, ty si, on/ona/ono je, my sme, vy ste, oni/ony sú.\\nOni употребляется для мужчин и смешанной группы людей; ony — для женской группы, предметов и животных, которые не обозначают лиц мужского пола.\\nVy + ste обозначает группу или вежливое обращение к одному человеку; ty + si — неформальное обращение к одному знакомому.\",\"interaction_type\":\"choice\",\"options\":[\"on\",\"ona\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"ona\"]}",
-      "created_at": "2026-10-07T00:00:00Z"
-    },
-    {
-      "lesson_slug": "personal-pronouns",
-      "lesson_title": "Личные местоимения",
-      "question": "[Базовый пакет · 20/20]\nВыберите подходящее личное местоимение.\ndieťa",
+      "question": "[Базовый пакет · 18/20]\nВыберите подходящее личное местоимение.\ndieťa",
       "instruction": "Выберите один правильный вариант.",
       "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Личные местоимения\\nОсновные связки с byť: ja som, ty si, on/ona/ono je, my sme, vy ste, oni/ony sú.\\nOni употребляется для мужчин и смешанной группы людей; ony — для женской группы, предметов и животных, которые не обозначают лиц мужского пола.\\nVy + ste обозначает группу или вежливое обращение к одному человеку; ty + si — неформальное обращение к одному знакомому.\",\"interaction_type\":\"choice\",\"options\":[\"ony\",\"ono\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"ono\"]}",
+      "created_at": "2026-10-07T00:00:00Z"
+    },
+    {
+      "lesson_slug": "personal-pronouns",
+      "lesson_title": "Личные местоимения",
+      "question": "[Базовый пакет · 19/20]\nВыберите подходящее личное местоимение.\nknihy",
+      "instruction": "Выберите один правильный вариант.",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Личные местоимения\\nОсновные связки с byť: ja som, ty si, on/ona/ono je, my sme, vy ste, oni/ony sú.\\nOni употребляется для мужчин и смешанной группы людей; ony — для женской группы, предметов и животных, которые не обозначают лиц мужского пола.\\nVy + ste обозначает группу или вежливое обращение к одному человеку; ty + si — неформальное обращение к одному знакомому.\",\"interaction_type\":\"choice\",\"options\":[\"oni\",\"ony\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"ony\"]}",
+      "created_at": "2026-10-07T00:00:00Z"
+    },
+    {
+      "lesson_slug": "personal-pronouns",
+      "lesson_title": "Личные местоимения",
+      "question": "[Базовый пакет · 20/20]\nВыберите форму глагола byť.\nja",
+      "instruction": "Выберите один правильный вариант.",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Личные местоимения\\nОсновные связки с byť: ja som, ty si, on/ona/ono je, my sme, vy ste, oni/ony sú.\\nOni употребляется для мужчин и смешанной группы людей; ony — для женской группы, предметов и животных, которые не обозначают лиц мужского пола.\\nVy + ste обозначает группу или вежливое обращение к одному человеку; ty + si — неформальное обращение к одному знакомому.\",\"interaction_type\":\"choice\",\"options\":[\"je\",\"som\",\"si\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"som\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -2230,9 +2230,9 @@
     {
       "lesson_slug": "communication-repair",
       "lesson_title": "Коммуникативное уточнение",
-      "question": "[Базовый пакет · 19/20]\nИсправьте каждую ошибочную фразу.",
+      "question": "[Базовый пакет · 19/20]\nПереведите три фразы уточнения.",
       "instruction": "Соедините слова или фразы с правильными соответствиями.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Коммуникативное уточнение\\nСначала назовите проблему: Nerozumiem — не понимаю смысл; Nepočul som / Nepočula som — не расслышал / не расслышала.\\nПосле сигнала добавьте конкретную просьбу: zopakovať — повторить, hovoriť pomalšie — говорить медленнее, napísať — написать.\\nMôžete — формально или к нескольким людям; môžeš — к одному знакомому. Не смешивайте уровни общения.\",\"interaction_type\":\"match\",\"options\":[],\"tokens\":[],\"pairs\":[{\"prompt\":\"Môžete hovoriť pomalyšie?\",\"answer\":\"Môžete hovoriť pomalšie?\"},{\"prompt\":\"Čo „účet“ znamená?\",\"answer\":\"Čo znamená „účet“?\"},{\"prompt\":\"Môžeš to zopakovať, pán Novák?\",\"answer\":\"Môžete to zopakovať, pán Novák?\"}],\"accepted_answers\":[]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Коммуникативное уточнение\\nСначала назовите проблему: Nerozumiem — не понимаю смысл; Nepočul som / Nepočula som — не расслышал / не расслышала.\\nПосле сигнала добавьте конкретную просьбу: zopakovať — повторить, hovoriť pomalšie — говорить медленнее, napísať — написать.\\nMôžete — формально или к нескольким людям; môžeš — к одному знакомому. Не смешивайте уровни общения.\",\"interaction_type\":\"match\",\"options\":[],\"tokens\":[],\"pairs\":[{\"prompt\":\"Извините, я не понимаю.\",\"answer\":\"Prepáčte, nerozumiem.\"},{\"prompt\":\"Ещё раз, пожалуйста.\",\"answer\":\"Ešte raz, prosím.\"},{\"prompt\":\"Что означает это слово?\",\"answer\":\"Čo znamená toto slovo?\"}],\"accepted_answers\":[]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -5174,9 +5174,9 @@
     {
       "lesson_slug": "genitive-absence",
       "lesson_title": "Genitív отсутствия",
-      "question": "[Базовый пакет · 07/20]\nВыберите правильную форму.\nPeter tu…",
+      "question": "[Базовый пакет · 07/20]\nВыберите правильную форму.\nDeti tu…",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Genitív отсутствия\\nФормула: niet + существительное в Genitíve. Частотные модели: Niet času. Niet vody. Niet peňazí.\\nNiet не меняется по лицам и числам и не сочетается с je/sú: Niet vody. Niet ľudí.\\nМесто можно уточнить словами doma, tu, nikde: Doma niet chleba. Tu niet miesta. Nikde niet ľudí.\",\"interaction_type\":\"choice\",\"options\":[\"nie je\",\"nie sú\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"nie je\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Genitív отсутствия\\nФормула: niet + существительное в Genitíve. Частотные модели: Niet času. Niet vody. Niet peňazí.\\nNiet не меняется по лицам и числам и не сочетается с je/sú: Niet vody. Niet ľudí.\\nМесто можно уточнить словами doma, tu, nikde: Doma niet chleba. Tu niet miesta. Nikde niet ľudí.\",\"interaction_type\":\"choice\",\"options\":[\"nie je\",\"nie sú\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"nie sú\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -5190,9 +5190,9 @@
     {
       "lesson_slug": "genitive-absence",
       "lesson_title": "Genitív отсутствия",
-      "question": "[Базовый пакет · 09/20]\nВыберите правильную форму.\nDeti tu…",
+      "question": "[Базовый пакет · 09/20]\nОпределите падеж выделенной формы.\nNemám vodu.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Genitív отсутствия\\nФормула: niet + существительное в Genitíve. Частотные модели: Niet času. Niet vody. Niet peňazí.\\nNiet не меняется по лицам и числам и не сочетается с je/sú: Niet vody. Niet ľudí.\\nМесто можно уточнить словами doma, tu, nikde: Doma niet chleba. Tu niet miesta. Nikde niet ľudí.\",\"interaction_type\":\"choice\",\"options\":[\"nie je\",\"nie sú\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"nie sú\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Genitív отсутствия\\nФормула: niet + существительное в Genitíve. Частотные модели: Niet času. Niet vody. Niet peňazí.\\nNiet не меняется по лицам и числам и не сочетается с je/sú: Niet vody. Niet ľudí.\\nМесто можно уточнить словами doma, tu, nikde: Doma niet chleba. Tu niet miesta. Nikde niet ľudí.\",\"interaction_type\":\"choice\",\"options\":[\"G\",\"A\",\"N\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"A\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -5206,9 +5206,9 @@
     {
       "lesson_slug": "genitive-absence",
       "lesson_title": "Genitív отсутствия",
-      "question": "[Базовый пакет · 11/20]\nОпределите падеж выделенной формы.\nNemám vodu.",
+      "question": "[Базовый пакет · 11/20]\nОпределите падеж выделенной формы.\nNiet vody.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Genitív отсутствия\\nФормула: niet + существительное в Genitíve. Частотные модели: Niet času. Niet vody. Niet peňazí.\\nNiet не меняется по лицам и числам и не сочетается с je/sú: Niet vody. Niet ľudí.\\nМесто можно уточнить словами doma, tu, nikde: Doma niet chleba. Tu niet miesta. Nikde niet ľudí.\",\"interaction_type\":\"choice\",\"options\":[\"N\",\"G\",\"A\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"A\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Genitív отсутствия\\nФормула: niet + существительное в Genitíve. Частотные модели: Niet času. Niet vody. Niet peňazí.\\nNiet не меняется по лицам и числам и не сочетается с je/sú: Niet vody. Niet ľudí.\\nМесто можно уточнить словами doma, tu, nikde: Doma niet chleba. Tu niet miesta. Nikde niet ľudí.\",\"interaction_type\":\"choice\",\"options\":[\"N\",\"G\",\"A\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"G\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -5222,9 +5222,9 @@
     {
       "lesson_slug": "genitive-absence",
       "lesson_title": "Genitív отсутствия",
-      "question": "[Базовый пакет · 13/20]\nОпределите падеж выделенной формы.\nNiet vody.",
+      "question": "[Базовый пакет · 13/20]\nОпределите падеж выделенной формы.\nTu nie je voda.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Genitív отсутствия\\nФормула: niet + существительное в Genitíve. Частотные модели: Niet času. Niet vody. Niet peňazí.\\nNiet не меняется по лицам и числам и не сочетается с je/sú: Niet vody. Niet ľudí.\\nМесто можно уточнить словами doma, tu, nikde: Doma niet chleba. Tu niet miesta. Nikde niet ľudí.\",\"interaction_type\":\"choice\",\"options\":[\"A\",\"N\",\"G\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"G\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Genitív отсутствия\\nФормула: niet + существительное в Genitíve. Частотные модели: Niet času. Niet vody. Niet peňazí.\\nNiet не меняется по лицам и числам и не сочетается с je/sú: Niet vody. Niet ľudí.\\nМесто можно уточнить словами doma, tu, nikde: Doma niet chleba. Tu niet miesta. Nikde niet ľudí.\",\"interaction_type\":\"choice\",\"options\":[\"A\",\"N\",\"G\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"N\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -5238,7 +5238,7 @@
     {
       "lesson_slug": "genitive-absence",
       "lesson_title": "Genitív отсутствия",
-      "question": "[Базовый пакет · 15/20]\nОпределите падеж выделенной формы.\nTu nie je voda.",
+      "question": "[Базовый пакет · 15/20]\nОпределите падеж выделенной формы.\nDeti tu nie sú.",
       "instruction": "Выберите один правильный вариант.",
       "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Genitív отсутствия\\nФормула: niet + существительное в Genitíve. Частотные модели: Niet času. Niet vody. Niet peňazí.\\nNiet не меняется по лицам и числам и не сочетается с je/sú: Niet vody. Niet ľudí.\\nМесто можно уточнить словами doma, tu, nikde: Doma niet chleba. Tu niet miesta. Nikde niet ľudí.\",\"interaction_type\":\"choice\",\"options\":[\"G\",\"A\",\"N\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"N\"]}",
       "created_at": "2026-10-07T00:00:00Z"
@@ -5254,9 +5254,9 @@
     {
       "lesson_slug": "genitive-absence",
       "lesson_title": "Genitív отсутствия",
-      "question": "[Базовый пакет · 17/20]\nОпределите падеж выделенной формы.\nDeti tu nie sú.",
+      "question": "[Базовый пакет · 17/20]\nВыберите форму.\nNiet (voda)",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Genitív отсутствия\\nФормула: niet + существительное в Genitíve. Частотные модели: Niet času. Niet vody. Niet peňazí.\\nNiet не меняется по лицам и числам и не сочетается с je/sú: Niet vody. Niet ľudí.\\nМесто можно уточнить словами doma, tu, nikde: Doma niet chleba. Tu niet miesta. Nikde niet ľudí.\",\"interaction_type\":\"choice\",\"options\":[\"N\",\"G\",\"A\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"N\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Genitív отсутствия\\nФормула: niet + существительное в Genitíve. Частотные модели: Niet času. Niet vody. Niet peňazí.\\nNiet не меняется по лицам и числам и не сочетается с je/sú: Niet vody. Niet ľudí.\\nМесто можно уточнить словами doma, tu, nikde: Doma niet chleba. Tu niet miesta. Nikde niet ľudí.\",\"interaction_type\":\"choice\",\"options\":[\"voda\",\"vody\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"vody\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -5270,9 +5270,9 @@
     {
       "lesson_slug": "genitive-absence",
       "lesson_title": "Genitív отсутствия",
-      "question": "[Базовый пакет · 19/20]\nВыберите форму.\nNiet (voda)",
+      "question": "[Базовый пакет · 19/20]\nВыберите форму.\nNemám (kniha)",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Genitív отсутствия\\nФормула: niet + существительное в Genitíve. Частотные модели: Niet času. Niet vody. Niet peňazí.\\nNiet не меняется по лицам и числам и не сочетается с je/sú: Niet vody. Niet ľudí.\\nМесто можно уточнить словами doma, tu, nikde: Doma niet chleba. Tu niet miesta. Nikde niet ľudí.\",\"interaction_type\":\"choice\",\"options\":[\"voda\",\"vody\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"vody\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Genitív отсутствия\\nФормула: niet + существительное в Genitíve. Частотные модели: Niet času. Niet vody. Niet peňazí.\\nNiet не меняется по лицам и числам и не сочетается с je/sú: Niet vody. Niet ľudí.\\nМесто можно уточнить словами doma, tu, nikde: Doma niet chleba. Tu niet miesta. Nikde niet ľudí.\",\"interaction_type\":\"choice\",\"options\":[\"knihu\",\"kníh\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"knihu\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -6814,9 +6814,9 @@
     {
       "lesson_slug": "chciet-infinitive",
       "lesson_title": "chcieť + infinitív",
-      "question": "[Базовый пакет · 12/20]\nВыберите форму chcieť.\nEva ___ ísť.",
+      "question": "[Базовый пакет · 12/20]\nВыберите форму chcieť.\nMy ___ jesť.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: chcieť + infinitív\\nФормы нужно запомнить целиком: chcem, chceš, chce, chceme, chcete, chcú.\\nПосле личной формы ставится инфинитив: Chcem pracovať. Chceme cestovať.\\nОтрицание пишется слитно: nechcem, nechceš, nechce, nechceme, nechcete, nechcú.\",\"interaction_type\":\"choice\",\"options\":[\"chcú\",\"chcem\",\"chceš\",\"chce\",\"chceme\",\"chcete\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"chce\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: chcieť + infinitív\\nФормы нужно запомнить целиком: chcem, chceš, chce, chceme, chcete, chcú.\\nПосле личной формы ставится инфинитив: Chcem pracovať. Chceme cestovať.\\nОтрицание пишется слитно: nechcem, nechceš, nechce, nechceme, nechcete, nechcú.\",\"interaction_type\":\"choice\",\"options\":[\"chcú\",\"chcem\",\"chceš\",\"chce\",\"chceme\",\"chcete\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"chceme\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -6830,9 +6830,9 @@
     {
       "lesson_slug": "chciet-infinitive",
       "lesson_title": "chcieť + infinitív",
-      "question": "[Базовый пакет · 14/20]\nВыберите форму chcieť.\nMy ___ jesť.",
+      "question": "[Базовый пакет · 14/20]\nВыберите форму chcieť.\nVy ___ začať.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: chcieť + infinitív\\nФормы нужно запомнить целиком: chcem, chceš, chce, chceme, chcete, chcú.\\nПосле личной формы ставится инфинитив: Chcem pracovať. Chceme cestovať.\\nОтрицание пишется слитно: nechcem, nechceš, nechce, nechceme, nechcete, nechcú.\",\"interaction_type\":\"choice\",\"options\":[\"chceš\",\"chce\",\"chceme\",\"chcete\",\"chcú\",\"chcem\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"chceme\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: chcieť + infinitív\\nФормы нужно запомнить целиком: chcem, chceš, chce, chceme, chcete, chcú.\\nПосле личной формы ставится инфинитив: Chcem pracovať. Chceme cestovať.\\nОтрицание пишется слитно: nechcem, nechceš, nechce, nechceme, nechcete, nechcú.\",\"interaction_type\":\"choice\",\"options\":[\"chceš\",\"chce\",\"chceme\",\"chcete\",\"chcú\",\"chcem\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"chcete\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -6846,9 +6846,9 @@
     {
       "lesson_slug": "chciet-infinitive",
       "lesson_title": "chcieť + infinitív",
-      "question": "[Базовый пакет · 16/20]\nВыберите форму chcieť.\nVy ___ začať.",
+      "question": "[Базовый пакет · 16/20]\nВыберите форму chcieť.\nOni ___ cestovať.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: chcieť + infinitív\\nФормы нужно запомнить целиком: chcem, chceš, chce, chceme, chcete, chcú.\\nПосле личной формы ставится инфинитив: Chcem pracovať. Chceme cestovať.\\nОтрицание пишется слитно: nechcem, nechceš, nechce, nechceme, nechcete, nechcú.\",\"interaction_type\":\"choice\",\"options\":[\"chceme\",\"chcete\",\"chcú\",\"chcem\",\"chceš\",\"chce\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"chcete\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: chcieť + infinitív\\nФормы нужно запомнить целиком: chcem, chceš, chce, chceme, chcete, chcú.\\nПосле личной формы ставится инфинитив: Chcem pracovať. Chceme cestovať.\\nОтрицание пишется слитно: nechcem, nechceš, nechce, nechceme, nechcete, nechcú.\",\"interaction_type\":\"choice\",\"options\":[\"chceme\",\"chcete\",\"chcú\",\"chcem\",\"chceš\",\"chce\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"chcú\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -6862,9 +6862,9 @@
     {
       "lesson_slug": "chciet-infinitive",
       "lesson_title": "chcieť + infinitív",
-      "question": "[Базовый пакет · 18/20]\nВыберите форму chcieť.\nOni ___ cestovať.",
+      "question": "[Базовый пакет · 18/20]\nСоберите диалог о сегодняшнем дне и выходных.\n1 · вопрос о сегодняшних желаниях",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: chcieť + infinitív\\nФормы нужно запомнить целиком: chcem, chceš, chce, chceme, chcete, chcú.\\nПосле личной формы ставится инфинитив: Chcem pracovať. Chceme cestovať.\\nОтрицание пишется слитно: nechcem, nechceš, nechce, nechceme, nechcete, nechcú.\",\"interaction_type\":\"choice\",\"options\":[\"chcú\",\"chcem\",\"chceš\",\"chce\",\"chceme\",\"chcete\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"chcú\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: chcieť + infinitív\\nФормы нужно запомнить целиком: chcem, chceš, chce, chceme, chcete, chcú.\\nПосле личной формы ставится инфинитив: Chcem pracovať. Chceme cestovať.\\nОтрицание пишется слитно: nechcem, nechceš, nechce, nechceme, nechcete, nechcú.\",\"interaction_type\":\"choice\",\"options\":[\"Kam chceš dnes?\",\"Čo chceš robiť dnes?\",\"Čo chcem robiť dnes?\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Čo chceš robiť dnes?\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -6878,9 +6878,9 @@
     {
       "lesson_slug": "chciet-infinitive",
       "lesson_title": "chcieť + infinitív",
-      "question": "[Базовый пакет · 20/20]\nСоберите диалог о сегодняшнем дне и выходных.\n1 · вопрос о сегодняшних желаниях",
+      "question": "[Базовый пакет · 20/20]\nСоберите диалог о сегодняшнем дне и выходных.\n2 · работа и отдых",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: chcieť + infinitív\\nФормы нужно запомнить целиком: chcem, chceš, chce, chceme, chcete, chcú.\\nПосле личной формы ставится инфинитив: Chcem pracovať. Chceme cestovať.\\nОтрицание пишется слитно: nechcem, nechceš, nechce, nechceme, nechcete, nechcú.\",\"interaction_type\":\"choice\",\"options\":[\"Čo chcem robiť dnes?\",\"Kam chceš dnes?\",\"Čo chceš robiť dnes?\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Čo chceš robiť dnes?\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: chcieť + infinitív\\nФормы нужно запомнить целиком: chcem, chceš, chce, chceme, chcete, chcú.\\nПосле личной формы ставится инфинитив: Chcem pracovať. Chceme cestovať.\\nОтрицание пишется слитно: nechcem, nechceš, nechce, nechceme, nechcete, nechcú.\",\"interaction_type\":\"choice\",\"options\":[\"Dnes chcem pracujem doma. Večer chcem oddýchnuť si.\",\"Dnes chceš pracovať doma. Večer sa chcem oddýchnuť.\",\"Dnes chcem pracovať doma. Večer si chcem oddýchnuť.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Dnes chcem pracovať doma. Večer si chcem oddýchnuť.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -6990,9 +6990,9 @@
     {
       "lesson_slug": "moct-infinitive",
       "lesson_title": "môcť + infinitív",
-      "question": "[Базовый пакет · 14/20]\nВыберите форму môcť.\nEva ___ zostať.",
+      "question": "[Базовый пакет · 14/20]\nВыберите форму môcť.\nMy ___ zaplatiť.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: môcť + infinitív\\nФормы нужно запомнить: môžem, môžeš, môže, môžeme, môžete, môžu.\\nИзменяется только môcť; второй глагол остаётся инфинитивом: Môžeme zaplatiť.\\nMôžem…? обычно спрашивает разрешение: Môžem tu sedieť?\",\"interaction_type\":\"choice\",\"options\":[\"môže\",\"môžeme\",\"môžete\",\"môžu\",\"môžem\",\"môžeš\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"môže\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: môcť + infinitív\\nФормы нужно запомнить: môžem, môžeš, môže, môžeme, môžete, môžu.\\nИзменяется только môcť; второй глагол остаётся инфинитивом: Môžeme zaplatiť.\\nMôžem…? обычно спрашивает разрешение: Môžem tu sedieť?\",\"interaction_type\":\"choice\",\"options\":[\"môže\",\"môžeme\",\"môžete\",\"môžu\",\"môžem\",\"môžeš\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"môžeme\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -7006,9 +7006,9 @@
     {
       "lesson_slug": "moct-infinitive",
       "lesson_title": "môcť + infinitív",
-      "question": "[Базовый пакет · 16/20]\nВыберите форму môcť.\nMy ___ zaplatiť.",
+      "question": "[Базовый пакет · 16/20]\nВыберите форму môcť.\nVy ___ začať.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: môcť + infinitív\\nФормы нужно запомнить: môžem, môžeš, môže, môžeme, môžete, môžu.\\nИзменяется только môcť; второй глагол остаётся инфинитивом: Môžeme zaplatiť.\\nMôžem…? обычно спрашивает разрешение: Môžem tu sedieť?\",\"interaction_type\":\"choice\",\"options\":[\"môžete\",\"môžu\",\"môžem\",\"môžeš\",\"môže\",\"môžeme\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"môžeme\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: môcť + infinitív\\nФормы нужно запомнить: môžem, môžeš, môže, môžeme, môžete, môžu.\\nИзменяется только môcť; второй глагол остаётся инфинитивом: Môžeme zaplatiť.\\nMôžem…? обычно спрашивает разрешение: Môžem tu sedieť?\",\"interaction_type\":\"choice\",\"options\":[\"môžete\",\"môžu\",\"môžem\",\"môžeš\",\"môže\",\"môžeme\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"môžete\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -7022,9 +7022,9 @@
     {
       "lesson_slug": "moct-infinitive",
       "lesson_title": "môcť + infinitív",
-      "question": "[Базовый пакет · 18/20]\nВыберите форму môcť.\nVy ___ začať.",
+      "question": "[Базовый пакет · 18/20]\nВыберите форму môcť.\nOni ___ pomôcť.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: môcť + infinitív\\nФормы нужно запомнить: môžem, môžeš, môže, môžeme, môžete, môžu.\\nИзменяется только môcť; второй глагол остаётся инфинитивом: Môžeme zaplatiť.\\nMôžem…? обычно спрашивает разрешение: Môžem tu sedieť?\",\"interaction_type\":\"choice\",\"options\":[\"môžem\",\"môžeš\",\"môže\",\"môžeme\",\"môžete\",\"môžu\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"môžete\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: môcť + infinitív\\nФормы нужно запомнить: môžem, môžeš, môže, môžeme, môžete, môžu.\\nИзменяется только môcť; второй глагол остаётся инфинитивом: Môžeme zaplatiť.\\nMôžem…? обычно спрашивает разрешение: Môžem tu sedieť?\",\"interaction_type\":\"choice\",\"options\":[\"môžem\",\"môžeš\",\"môže\",\"môžeme\",\"môžete\",\"môžu\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"môžu\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -7038,9 +7038,9 @@
     {
       "lesson_slug": "moct-infinitive",
       "lesson_title": "môcť + infinitív",
-      "question": "[Базовый пакет · 20/20]\nВыберите форму môcť.\nOni ___ pomôcť.",
+      "question": "[Базовый пакет · 20/20]\nВыберите точный глагол.\nDnes ___ prísť o šiestej. · условия позволяют",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: môcť + infinitív\\nФормы нужно запомнить: môžem, môžeš, môže, môžeme, môžete, môžu.\\nИзменяется только môcť; второй глагол остаётся инфинитивом: Môžeme zaplatiť.\\nMôžem…? обычно спрашивает разрешение: Môžem tu sedieť?\",\"interaction_type\":\"choice\",\"options\":[\"môže\",\"môžeme\",\"môžete\",\"môžu\",\"môžem\",\"môžeš\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"môžu\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: môcť + infinitív\\nФормы нужно запомнить: môžem, môžeš, môže, môžeme, môžete, môžu.\\nИзменяется только môcť; второй глагол остаётся инфинитивом: Môžeme zaplatiť.\\nMôžem…? обычно спрашивает разрешение: Môžem tu sedieť?\",\"interaction_type\":\"choice\",\"options\":[\"nesmiem\",\"vie\",\"nemôžem\",\"môžem\",\"viem\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"môžem\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -7126,9 +7126,9 @@
     {
       "lesson_slug": "musiet-infinitive",
       "lesson_title": "musieť + infinitív",
-      "question": "[Базовый пакет · 11/20]\nВыберите форму musieť.\nEva ___ zavolať.",
+      "question": "[Базовый пакет · 11/20]\nВыберите форму musieť.\nMy ___ zaplatiť.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: musieť + infinitív\\nФормы нужно запомнить: musím, musíš, musí, musíme, musíte, musia.\\nИзменяется только musieť; второй глагол остаётся инфинитивом: Musím pracovať.\\nИсточник необходимости подсказывает контекст: правило, расписание, практическая ситуация или личная потребность.\",\"interaction_type\":\"choice\",\"options\":[\"musím\",\"musíš\",\"musí\",\"musíme\",\"musíte\",\"musia\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"musí\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: musieť + infinitív\\nФормы нужно запомнить: musím, musíš, musí, musíme, musíte, musia.\\nИзменяется только musieť; второй глагол остаётся инфинитивом: Musím pracovať.\\nИсточник необходимости подсказывает контекст: правило, расписание, практическая ситуация или личная потребность.\",\"interaction_type\":\"choice\",\"options\":[\"musím\",\"musíš\",\"musí\",\"musíme\",\"musíte\",\"musia\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"musíme\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -7142,9 +7142,9 @@
     {
       "lesson_slug": "musiet-infinitive",
       "lesson_title": "musieť + infinitív",
-      "question": "[Базовый пакет · 13/20]\nВыберите форму musieť.\nMy ___ zaplatiť.",
+      "question": "[Базовый пакет · 13/20]\nВыберите форму musieť.\nVy ___ prísť.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: musieť + infinitív\\nФормы нужно запомнить: musím, musíš, musí, musíme, musíte, musia.\\nИзменяется только musieť; второй глагол остаётся инфинитивом: Musím pracovať.\\nИсточник необходимости подсказывает контекст: правило, расписание, практическая ситуация или личная потребность.\",\"interaction_type\":\"choice\",\"options\":[\"musí\",\"musíme\",\"musíte\",\"musia\",\"musím\",\"musíš\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"musíme\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: musieť + infinitív\\nФормы нужно запомнить: musím, musíš, musí, musíme, musíte, musia.\\nИзменяется только musieť; второй глагол остаётся инфинитивом: Musím pracovať.\\nИсточник необходимости подсказывает контекст: правило, расписание, практическая ситуация или личная потребность.\",\"interaction_type\":\"choice\",\"options\":[\"musí\",\"musíme\",\"musíte\",\"musia\",\"musím\",\"musíš\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"musíte\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -7158,9 +7158,9 @@
     {
       "lesson_slug": "musiet-infinitive",
       "lesson_title": "musieť + infinitív",
-      "question": "[Базовый пакет · 15/20]\nВыберите форму musieť.\nVy ___ prísť.",
+      "question": "[Базовый пакет · 15/20]\nВыберите форму musieť.\nOni ___ pracovať.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: musieť + infinitív\\nФормы нужно запомнить: musím, musíš, musí, musíme, musíte, musia.\\nИзменяется только musieť; второй глагол остаётся инфинитивом: Musím pracovať.\\nИсточник необходимости подсказывает контекст: правило, расписание, практическая ситуация или личная потребность.\",\"interaction_type\":\"choice\",\"options\":[\"musíte\",\"musia\",\"musím\",\"musíš\",\"musí\",\"musíme\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"musíte\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: musieť + infinitív\\nФормы нужно запомнить: musím, musíš, musí, musíme, musíte, musia.\\nИзменяется только musieť; второй глагол остаётся инфинитивом: Musím pracovať.\\nИсточник необходимости подсказывает контекст: правило, расписание, практическая ситуация или личная потребность.\",\"interaction_type\":\"choice\",\"options\":[\"musíte\",\"musia\",\"musím\",\"musíš\",\"musí\",\"musíme\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"musia\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -7174,9 +7174,9 @@
     {
       "lesson_slug": "musiet-infinitive",
       "lesson_title": "musieť + infinitív",
-      "question": "[Базовый пакет · 17/20]\nВыберите форму musieť.\nOni ___ pracovať.",
+      "question": "[Базовый пакет · 17/20]\nВыберите chcieť, môcť или musieť.\nDnes ___ pracovať, mám dôležitú úlohu. · необходимость",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: musieť + infinitív\\nФормы нужно запомнить: musím, musíš, musí, musíme, musíte, musia.\\nИзменяется только musieť; второй глагол остаётся инфинитивом: Musím pracovať.\\nИсточник необходимости подсказывает контекст: правило, расписание, практическая ситуация или личная потребность.\",\"interaction_type\":\"choice\",\"options\":[\"musím\",\"musíš\",\"musí\",\"musíme\",\"musíte\",\"musia\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"musia\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: musieť + infinitív\\nФормы нужно запомнить: musím, musíš, musí, musíme, musíte, musia.\\nИзменяется только musieť; второй глагол остаётся инфинитивом: Musím pracovať.\\nИсточник необходимости подсказывает контекст: правило, расписание, практическая ситуация или личная потребность.\",\"interaction_type\":\"choice\",\"options\":[\"musím\",\"chcem\",\"môžem\",\"musíme\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"musím\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -7190,9 +7190,9 @@
     {
       "lesson_slug": "musiet-infinitive",
       "lesson_title": "musieť + infinitív",
-      "question": "[Базовый пакет · 19/20]\nВыберите chcieť, môcť или musieť.\nDnes ___ pracovať, mám dôležitú úlohu. · необходимость",
+      "question": "[Базовый пакет · 19/20]\nВыберите chcieť, môcť или musieť.\n___ piť kávu, mám na ňu chuť. · желание",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: musieť + infinitív\\nФормы нужно запомнить: musím, musíš, musí, musíme, musíte, musia.\\nИзменяется только musieť; второй глагол остаётся инфинитивом: Musím pracovať.\\nИсточник необходимости подсказывает контекст: правило, расписание, практическая ситуация или личная потребность.\",\"interaction_type\":\"choice\",\"options\":[\"môžem\",\"musíme\",\"musím\",\"chcem\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"musím\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: musieť + infinitív\\nФормы нужно запомнить: musím, musíš, musí, musíme, musíte, musia.\\nИзменяется только musieť; второй глагол остаётся инфинитивом: Musím pracovať.\\nИсточник необходимости подсказывает контекст: правило, расписание, практическая ситуация или личная потребность.\",\"interaction_type\":\"choice\",\"options\":[\"môžem\",\"musíme\",\"musím\",\"chcem\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"chcem\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -7294,9 +7294,9 @@
     {
       "lesson_slug": "vediet-infinitive",
       "lesson_title": "vedieť + infinitív",
-      "question": "[Базовый пакет · 12/20]\nВыберите форму vedieť.\nEva ___ písať.",
+      "question": "[Базовый пакет · 12/20]\nВыберите форму vedieť.\nMy ___ šoférovať.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: vedieť + infinitív\\nФормы нужно запомнить: viem, vieš, vie, vieme, viete, vedia.\\nИзменяется только vedieť; второй глагол остаётся инфинитивом: Viem variť.\\nДля прогресса используйте už, ešte ne-, dobre и trochu: Už viem čítať. Ešte neviem šoférovať.\",\"interaction_type\":\"choice\",\"options\":[\"vie\",\"vieme\",\"viete\",\"vedia\",\"viem\",\"vieš\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"vie\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: vedieť + infinitív\\nФормы нужно запомнить: viem, vieš, vie, vieme, viete, vedia.\\nИзменяется только vedieť; второй глагол остаётся инфинитивом: Viem variť.\\nДля прогресса используйте už, ešte ne-, dobre и trochu: Už viem čítať. Ešte neviem šoférovať.\",\"interaction_type\":\"choice\",\"options\":[\"vie\",\"vieme\",\"viete\",\"vedia\",\"viem\",\"vieš\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"vieme\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -7310,9 +7310,9 @@
     {
       "lesson_slug": "vediet-infinitive",
       "lesson_title": "vedieť + infinitív",
-      "question": "[Базовый пакет · 14/20]\nВыберите форму vedieť.\nMy ___ šoférovať.",
+      "question": "[Базовый пакет · 14/20]\nВыберите форму vedieť.\nVy ___ tancovať.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: vedieť + infinitív\\nФормы нужно запомнить: viem, vieš, vie, vieme, viete, vedia.\\nИзменяется только vedieť; второй глагол остаётся инфинитивом: Viem variť.\\nДля прогресса используйте už, ešte ne-, dobre и trochu: Už viem čítať. Ešte neviem šoférovať.\",\"interaction_type\":\"choice\",\"options\":[\"viete\",\"vedia\",\"viem\",\"vieš\",\"vie\",\"vieme\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"vieme\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: vedieť + infinitív\\nФормы нужно запомнить: viem, vieš, vie, vieme, viete, vedia.\\nИзменяется только vedieť; второй глагол остаётся инфинитивом: Viem variť.\\nДля прогресса используйте už, ešte ne-, dobre и trochu: Už viem čítať. Ešte neviem šoférovať.\",\"interaction_type\":\"choice\",\"options\":[\"viete\",\"vedia\",\"viem\",\"vieš\",\"vie\",\"vieme\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"viete\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -7326,9 +7326,9 @@
     {
       "lesson_slug": "vediet-infinitive",
       "lesson_title": "vedieť + infinitív",
-      "question": "[Базовый пакет · 16/20]\nВыберите форму vedieť.\nVy ___ tancovať.",
+      "question": "[Базовый пакет · 16/20]\nВыберите форму vedieť.\nOni ___ čítať.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: vedieť + infinitív\\nФормы нужно запомнить: viem, vieš, vie, vieme, viete, vedia.\\nИзменяется только vedieť; второй глагол остаётся инфинитивом: Viem variť.\\nДля прогресса используйте už, ešte ne-, dobre и trochu: Už viem čítať. Ešte neviem šoférovať.\",\"interaction_type\":\"choice\",\"options\":[\"viem\",\"vieš\",\"vie\",\"vieme\",\"viete\",\"vedia\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"viete\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: vedieť + infinitív\\nФормы нужно запомнить: viem, vieš, vie, vieme, viete, vedia.\\nИзменяется только vedieť; второй глагол остаётся инфинитивом: Viem variť.\\nДля прогресса используйте už, ešte ne-, dobre и trochu: Už viem čítať. Ešte neviem šoférovať.\",\"interaction_type\":\"choice\",\"options\":[\"viem\",\"vieš\",\"vie\",\"vieme\",\"viete\",\"vedia\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"vedia\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -7342,9 +7342,9 @@
     {
       "lesson_slug": "vediet-infinitive",
       "lesson_title": "vedieť + infinitív",
-      "question": "[Базовый пакет · 18/20]\nВыберите форму vedieť.\nOni ___ čítať.",
+      "question": "[Базовый пакет · 18/20]\nВыберите vedieť или môcť.\n___ plávať, učil som sa to. · навык",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: vedieť + infinitív\\nФормы нужно запомнить: viem, vieš, vie, vieme, viete, vedia.\\nИзменяется только vedieť; второй глагол остаётся инфинитивом: Viem variť.\\nДля прогресса используйте už, ešte ne-, dobre и trochu: Už viem čítať. Ešte neviem šoférovať.\",\"interaction_type\":\"choice\",\"options\":[\"vie\",\"vieme\",\"viete\",\"vedia\",\"viem\",\"vieš\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"vedia\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: vedieť + infinitív\\nФормы нужно запомнить: viem, vieš, vie, vieme, viete, vedia.\\nИзменяется только vedieť; второй глагол остаётся инфинитивом: Viem variť.\\nДля прогресса используйте už, ešte ne-, dobre и trochu: Už viem čítať. Ešte neviem šoférovať.\",\"interaction_type\":\"choice\",\"options\":[\"vie\",\"nemôžem\",\"viem\",\"môžem\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"viem\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -7358,9 +7358,9 @@
     {
       "lesson_slug": "vediet-infinitive",
       "lesson_title": "vedieť + infinitív",
-      "question": "[Базовый пакет · 20/20]\nВыберите vedieť или môcť.\n___ plávať, učil som sa to. · навык",
+      "question": "[Базовый пакет · 20/20]\nВыберите vedieť или môcť.\nDnes ___ plávať, bazén je otvorený. · возможность",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: vedieť + infinitív\\nФормы нужно запомнить: viem, vieš, vie, vieme, viete, vedia.\\nИзменяется только vedieť; второй глагол остаётся инфинитивом: Viem variť.\\nДля прогресса используйте už, ešte ne-, dobre и trochu: Už viem čítať. Ešte neviem šoférovať.\",\"interaction_type\":\"choice\",\"options\":[\"viem\",\"môžem\",\"vie\",\"nemôžem\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"viem\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: vedieť + infinitív\\nФормы нужно запомнить: viem, vieš, vie, vieme, viete, vedia.\\nИзменяется только vedieť; второй глагол остаётся инфинитивом: Viem variť.\\nДля прогресса используйте už, ešte ne-, dobre и trochu: Už viem čítať. Ešte neviem šoférovať.\",\"interaction_type\":\"choice\",\"options\":[\"viem\",\"môžem\",\"vie\",\"nemôžem\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"môžem\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -10750,9 +10750,9 @@
     {
       "lesson_slug": "past-regular",
       "lesson_title": "Прошедшее время: правильные глаголы",
-      "question": "[Базовый пакет · 04/20]\nВыберите форму по роду и числу.\nPeter",
+      "question": "[Базовый пакет · 04/20]\nВыберите форму по роду и числу.\nDieťa sa",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"pracoval\",\"pracovali\",\"pracovala\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"pracoval\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"hralo\",\"hrala\",\"hrali\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"hralo\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -10766,9 +10766,9 @@
     {
       "lesson_slug": "past-regular",
       "lesson_title": "Прошедшее время: правильные глаголы",
-      "question": "[Базовый пакет · 06/20]\nВыберите форму по роду и числу.\nAnna",
+      "question": "[Базовый пакет · 06/20]\nВыберите форму по роду и числу.\nRodičia",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"čítala\",\"čítal\",\"čítali\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"čítala\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"študoval\",\"študovala\",\"študovali\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"študovali\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -10782,9 +10782,9 @@
     {
       "lesson_slug": "past-regular",
       "lesson_title": "Прошедшее время: правильные глаголы",
-      "question": "[Базовый пакет · 08/20]\nВыберите форму по роду и числу.\nDieťa sa",
+      "question": "[Базовый пакет · 08/20]\nВыберите форму по роду и числу.\nMy sme",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"hrala\",\"hrali\",\"hralo\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"hralo\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"varil\",\"varila\",\"varili\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"varili\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -10798,9 +10798,9 @@
     {
       "lesson_slug": "past-regular",
       "lesson_title": "Прошедшее время: правильные глаголы",
-      "question": "[Базовый пакет · 10/20]\nВыберите форму по роду и числу.\nRodičia",
+      "question": "[Базовый пакет · 10/20]\nВыберите вспомогательную форму.\nVčera ___ pracovala. · я",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"študovala\",\"študovali\",\"študoval\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"študovali\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"si\",\"sme\",\"ste\",\"Ø\",\"som\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"som\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -10814,9 +10814,9 @@
     {
       "lesson_slug": "past-regular",
       "lesson_title": "Прошедшее время: правильные глаголы",
-      "question": "[Базовый пакет · 12/20]\nВыберите форму по роду и числу.\nMy sme",
+      "question": "[Базовый пакет · 12/20]\nВыберите вспомогательную форму.\nČo ___ robil? · ты",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"varila\",\"varili\",\"varil\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"varili\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"ste\",\"Ø\",\"som\",\"si\",\"sme\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"si\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -10830,9 +10830,9 @@
     {
       "lesson_slug": "past-regular",
       "lesson_title": "Прошедшее время: правильные глаголы",
-      "question": "[Базовый пакет · 14/20]\nВыберите вспомогательную форму.\nVčera ___ pracovala. · я",
+      "question": "[Базовый пакет · 14/20]\nВыберите вспомогательную форму.\nMy ___ čítali.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"som\",\"si\",\"sme\",\"ste\",\"Ø\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"som\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"som\",\"si\",\"sme\",\"ste\",\"Ø\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"sme\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -10846,9 +10846,9 @@
     {
       "lesson_slug": "past-regular",
       "lesson_title": "Прошедшее время: правильные глаголы",
-      "question": "[Базовый пакет · 16/20]\nВыберите вспомогательную форму.\nČo ___ robil? · ты",
+      "question": "[Базовый пакет · 16/20]\nВыберите вспомогательную форму.\nKde ___ bývali? · вы",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"sme\",\"ste\",\"Ø\",\"som\",\"si\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"si\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"sme\",\"ste\",\"Ø\",\"som\",\"si\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"ste\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -10862,9 +10862,9 @@
     {
       "lesson_slug": "past-regular",
       "lesson_title": "Прошедшее время: правильные глаголы",
-      "question": "[Базовый пакет · 18/20]\nВыберите вспомогательную форму.\nMy ___ čítali.",
+      "question": "[Базовый пакет · 18/20]\nСоберите рассказ о вчерашнем дне женщины.\n1 · работа дома",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"Ø\",\"som\",\"si\",\"sme\",\"ste\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"sme\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"Včera som pracoval doma.\",\"Včera som pracovala doma.\",\"Včera pracovala som doma.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Včera som pracovala doma.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -10878,9 +10878,9 @@
     {
       "lesson_slug": "past-regular",
       "lesson_title": "Прошедшее время: правильные глаголы",
-      "question": "[Базовый пакет · 20/20]\nВыберите вспомогательную форму.\nKde ___ bývali? · вы",
+      "question": "[Базовый пакет · 20/20]\nСоберите рассказ о вчерашнем дне женщины.\n2 · звонок утром",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"si\",\"sme\",\"ste\",\"Ø\",\"som\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"ste\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: правильные глаголы\\nДля глаголов этой темы уберите конечное -ť и добавьте -l: pracovať → pracoval, čítať → čítal, robiť → robil. Это опорная модель A1, а не правило для всех словацких глаголов.\\nЕдинственное число показывает род: pracoval (мужчина), pracovala (женщина), pracovalo (средний род). Во множественном числе используйте pracovali.\\nФормы 1-го и 2-го лица состоят из l-формы и som, si, sme или ste: pracovala som, pracoval si, pracovali sme, pracovali ste.\",\"interaction_type\":\"choice\",\"options\":[\"Ráno som telefonovala kolegovi.\",\"Ráno telefonovala som kolegovi.\",\"Ráno som telefonoval kolegovi.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Ráno som telefonovala kolegovi.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -10910,9 +10910,9 @@
     {
       "lesson_slug": "past-frequent",
       "lesson_title": "Прошедшее время: частотные глаголы",
-      "question": "[Базовый пакет · 04/20]\nВыберите форму по роду и числу.\nEva ___ doma.",
+      "question": "[Базовый пакет · 04/20]\nВыберите форму по роду и числу.\nDeti ___.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: частотные глаголы\\nЧетыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.\\nЛичные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.\\nПосле chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.\",\"interaction_type\":\"choice\",\"options\":[\"boli\",\"bol\",\"bola\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"bola\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: частотные глаголы\\nЧетыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.\\nЛичные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.\\nПосле chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.\",\"interaction_type\":\"choice\",\"options\":[\"spal\",\"spali\",\"spala\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"spali\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -10934,9 +10934,9 @@
     {
       "lesson_slug": "past-frequent",
       "lesson_title": "Прошедшее время: частотные глаголы",
-      "question": "[Базовый пакет · 07/20]\nВыберите форму по роду и числу.\nPeter ___ do práce.",
+      "question": "[Базовый пакет · 07/20]\nВыберите форму по роду и числу.\nMy sme ___ čas.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: частотные глаголы\\nЧетыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.\\nЛичные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.\\nПосле chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.\",\"interaction_type\":\"choice\",\"options\":[\"išiel\",\"išla\",\"išli\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"išiel\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: частотные глаголы\\nЧетыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.\\nЛичные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.\\nПосле chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.\",\"interaction_type\":\"choice\",\"options\":[\"mali\",\"mal\",\"mala\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"mali\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -10950,9 +10950,9 @@
     {
       "lesson_slug": "past-frequent",
       "lesson_title": "Прошедшее время: частотные глаголы",
-      "question": "[Базовый пакет · 09/20]\nВыберите форму по роду и числу.\nDeti ___.",
+      "question": "[Базовый пакет · 09/20]\nВставьте подходящий частотный глагол.\nHostia ___ večer.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: частотные глаголы\\nЧетыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.\\nЛичные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.\\nПосле chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.\",\"interaction_type\":\"choice\",\"options\":[\"spala\",\"spal\",\"spali\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"spali\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: частотные глаголы\\nЧетыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.\\nЛичные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.\\nПосле chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.\",\"interaction_type\":\"choice\",\"options\":[\"mala\",\"prišli\",\"chcel\",\"museli\",\"bol\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"prišli\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -10966,9 +10966,9 @@
     {
       "lesson_slug": "past-frequent",
       "lesson_title": "Прошедшее время: частотные глаголы",
-      "question": "[Базовый пакет · 11/20]\nВыберите форму по роду и числу.\nMy sme ___ čas.",
+      "question": "[Базовый пакет · 11/20]\nВставьте подходящий частотный глагол.\nMy sme ___ ísť.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: частотные глаголы\\nЧетыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.\\nЛичные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.\\nПосле chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.\",\"interaction_type\":\"choice\",\"options\":[\"mal\",\"mala\",\"mali\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"mali\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: частотные глаголы\\nЧетыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.\\nЛичные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.\\nПосле chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.\",\"interaction_type\":\"choice\",\"options\":[\"chcel\",\"museli\",\"bol\",\"mala\",\"prišli\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"museli\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -10982,9 +10982,9 @@
     {
       "lesson_slug": "past-frequent",
       "lesson_title": "Прошедшее время: частотные глаголы",
-      "question": "[Базовый пакет · 13/20]\nВыберите форму по роду и числу.\nAnna ___ obed.",
+      "question": "[Базовый пакет · 13/20]\nСоберите историю о прошлом мужчины.\n1 · место",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: частотные глаголы\\nЧетыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.\\nЛичные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.\\nПосле chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.\",\"interaction_type\":\"choice\",\"options\":[\"jedli\",\"jedol\",\"jedla\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"jedla\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: частотные глаголы\\nЧетыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.\\nЛичные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.\\nПосле chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.\",\"interaction_type\":\"choice\",\"options\":[\"Včera som bol doma.\",\"Včera som bola doma.\",\"Včera bol som doma.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Včera som bol doma.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -10998,9 +10998,9 @@
     {
       "lesson_slug": "past-frequent",
       "lesson_title": "Прошедшее время: частотные глаголы",
-      "question": "[Базовый пакет · 15/20]\nВставьте подходящий частотный глагол.\nPeter ___ doma.",
+      "question": "[Базовый пакет · 15/20]\nСоберите историю о прошлом мужчины.\n2 · работа и необходимость",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: частотные глаголы\\nЧетыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.\\nЛичные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.\\nПосле chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.\",\"interaction_type\":\"choice\",\"options\":[\"prišli\",\"chcel\",\"museli\",\"bol\",\"mala\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"bol\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: частотные глаголы\\nЧетыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.\\nЛичные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.\\nПосле chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.\",\"interaction_type\":\"choice\",\"options\":[\"Mal som veľa práce a musel som telefonovať.\",\"Mal som veľa práce a musela som telefonovať.\",\"Mala som veľa práce a musela som telefonovať.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Mal som veľa práce a musel som telefonovať.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -11014,9 +11014,9 @@
     {
       "lesson_slug": "past-frequent",
       "lesson_title": "Прошедшее время: частотные глаголы",
-      "question": "[Базовый пакет · 17/20]\nВставьте подходящий частотный глагол.\nEva ___ veľa práce.",
+      "question": "[Базовый пакет · 17/20]\nСоберите историю о прошлом мужчины.\n3 · желание",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: частотные глаголы\\nЧетыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.\\nЛичные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.\\nПосле chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.\",\"interaction_type\":\"choice\",\"options\":[\"museli\",\"bol\",\"mala\",\"prišli\",\"chcel\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"mala\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: частотные глаголы\\nЧетыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.\\nЛичные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.\\nПосле chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.\",\"interaction_type\":\"choice\",\"options\":[\"Potom som chcel ísť von.\",\"Potom chcel som ísť von.\",\"Potom som chcela ísť von.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Potom som chcel ísť von.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -11030,9 +11030,9 @@
     {
       "lesson_slug": "past-frequent",
       "lesson_title": "Прошедшее время: частотные глаголы",
-      "question": "[Базовый пакет · 19/20]\nВставьте подходящий частотный глагол.\nHostia ___ večer.",
+      "question": "[Базовый пакет · 19/20]\nСоберите историю о прошлом мужчины.\n4 · невозможность",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: частотные глаголы\\nЧетыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.\\nЛичные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.\\nПосле chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.\",\"interaction_type\":\"choice\",\"options\":[\"mala\",\"prišli\",\"chcel\",\"museli\",\"bol\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"prišli\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Прошедшее время: частотные глаголы\\nЧетыре главные пары: byť — bol/bola/boli, mať — mal/mala/mali, ísť — išiel/išla/išli, prísť — prišiel/prišla/prišli.\\nЛичные формы строятся как в теме 1: bol som, bola si, išli sme; в 3-м лице je и sú не добавляются.\\nПосле chcel, mohol, musel и vedel следующий глагол остаётся в инфинитиве: chcela študovať, mohol pracovať, museli ísť, vedela variť.\",\"interaction_type\":\"choice\",\"options\":[\"Nemohol som ísť.\",\"Nemusel som ísť.\",\"Som nemohol ísť.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Nemohol som ísť.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -11310,9 +11310,9 @@
     {
       "lesson_slug": "future-budem",
       "lesson_title": "Будущее: budem + infinitív",
-      "question": "[Базовый пакет · 14/20]\nВыберите форму byť по лицу.\nAnna ___ študovať.",
+      "question": "[Базовый пакет · 14/20]\nВыберите инфинитив после формы byť.\nZajtra budem ___.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Будущее: budem + infinitív\\nИспользуйте budem, budeš, bude, budeme, budete или budú + инфинитив: budeme variť, nie budeme varíme.\\nНе добавляйте som или sme: правильно budem pracovať и budeme čítať.\\nОтрицайте вспомогательную форму: nebudem pracovať, nie budem nepracovať.\",\"interaction_type\":\"choice\",\"options\":[\"budeme\",\"budú\",\"budem\",\"budeš\",\"bude\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"bude\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Будущее: budem + infinitív\\nИспользуйте budem, budeš, bude, budeme, budete или budú + инфинитив: budeme variť, nie budeme varíme.\\nНе добавляйте som или sme: правильно budem pracovať и budeme čítať.\\nОтрицайте вспомогательную форму: nebudem pracovať, nie budem nepracovať.\",\"interaction_type\":\"choice\",\"options\":[\"pracujem\",\"pracovať\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"pracovať\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -11326,9 +11326,9 @@
     {
       "lesson_slug": "future-budem",
       "lesson_title": "Будущее: budem + infinitív",
-      "question": "[Базовый пакет · 16/20]\nВыберите инфинитив после формы byť.\nZajtra budem ___.",
+      "question": "[Базовый пакет · 16/20]\nВыберите инфинитив после формы byť.\nBudeme ___ večeru.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Будущее: budem + infinitív\\nИспользуйте budem, budeš, bude, budeme, budete или budú + инфинитив: budeme variť, nie budeme varíme.\\nНе добавляйте som или sme: правильно budem pracovať и budeme čítať.\\nОтрицайте вспомогательную форму: nebudem pracovať, nie budem nepracovať.\",\"interaction_type\":\"choice\",\"options\":[\"pracujem\",\"pracovať\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"pracovať\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Будущее: budem + infinitív\\nИспользуйте budem, budeš, bude, budeme, budete или budú + инфинитив: budeme variť, nie budeme varíme.\\nНе добавляйте som или sme: правильно budem pracovať и budeme čítať.\\nОтрицайте вспомогательную форму: nebudem pracovať, nie budem nepracovať.\",\"interaction_type\":\"choice\",\"options\":[\"varíme\",\"variť\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"variť\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -11342,9 +11342,9 @@
     {
       "lesson_slug": "future-budem",
       "lesson_title": "Будущее: budem + infinitív",
-      "question": "[Базовый пакет · 18/20]\nВыберите инфинитив после формы byť.\nBudeme ___ večeru.",
+      "question": "[Базовый пакет · 18/20]\nВыберите инфинитив после формы byť.\nBudú ___ hudbu.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Будущее: budem + infinitív\\nИспользуйте budem, budeš, bude, budeme, budete или budú + инфинитив: budeme variť, nie budeme varíme.\\nНе добавляйте som или sme: правильно budem pracovať и budeme čítať.\\nОтрицайте вспомогательную форму: nebudem pracovať, nie budem nepracovať.\",\"interaction_type\":\"choice\",\"options\":[\"varíme\",\"variť\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"variť\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Будущее: budem + infinitív\\nИспользуйте budem, budeš, bude, budeme, budete или budú + инфинитив: budeme variť, nie budeme varíme.\\nНе добавляйте som или sme: правильно budem pracovať и budeme čítať.\\nОтрицайте вспомогательную форму: nebudem pracovať, nie budem nepracovať.\",\"interaction_type\":\"choice\",\"options\":[\"počúvajú\",\"počúvať\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"počúvať\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -11358,9 +11358,9 @@
     {
       "lesson_slug": "future-budem",
       "lesson_title": "Будущее: budem + infinitív",
-      "question": "[Базовый пакет · 20/20]\nВыберите инфинитив после формы byť.\nPeter bude ___ knihu.",
+      "question": "[Базовый пакет · 20/20]\nСоберите проверяемый план на завтра.\n1 · завтра",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Будущее: budem + infinitív\\nИспользуйте budem, budeš, bude, budeme, budete или budú + инфинитив: budeme variť, nie budeme varíme.\\nНе добавляйте som или sme: правильно budem pracovať и budeme čítať.\\nОтрицайте вспомогательную форму: nebudem pracovať, nie budem nepracovať.\",\"interaction_type\":\"choice\",\"options\":[\"číta\",\"čítať\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"čítať\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Будущее: budem + infinitív\\nИспользуйте budem, budeš, bude, budeme, budete или budú + инфинитив: budeme variť, nie budeme varíme.\\nНе добавляйте som или sme: правильно budem pracovať и budeme čítať.\\nОтрицайте вспомогательную форму: nebudem pracovať, nie budem nepracovať.\",\"interaction_type\":\"choice\",\"options\":[\"Zajtra budem pracujem doma.\",\"Zajtra budem pracovať doma.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Zajtra budem pracovať doma.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -11958,9 +11958,9 @@
     {
       "lesson_slug": "social-etiquette",
       "lesson_title": "Социальный этикет: ty/vy",
-      "question": "[Базовый пакет · 15/20]\nВыберите форму по ситуации.\nPani Nováková, ako sa …?",
+      "question": "[Базовый пакет · 15/20]\nВыберите форму по ситуации.\nDeti, … čaj?",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Социальный этикет: ty/vy\\nTy — близкое неофициальное обращение к одному человеку; vy — вежливое обращение к одному человеку или обычное обращение к нескольким людям.\\nПосле ty используйте форму 2-го лица единственного числа: si, máš, hovoríš, chceš, môžeš, vieš.\\nПосле vy используйте форму 2-го лица множественного числа: ste, máte, hovoríte, chcete, môžete, viete.\",\"interaction_type\":\"choice\",\"options\":[\"máš\",\"máte\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"máte\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Социальный этикет: ty/vy\\nTy — близкое неофициальное обращение к одному человеку; vy — вежливое обращение к одному человеку или обычное обращение к нескольким людям.\\nПосле ty используйте форму 2-го лица единственного числа: si, máš, hovoríš, chceš, môžeš, vieš.\\nПосле vy используйте форму 2-го лица множественного числа: ste, máte, hovoríte, chcete, môžete, viete.\",\"interaction_type\":\"choice\",\"options\":[\"chceš\",\"chcete\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"chcete\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -11974,9 +11974,9 @@
     {
       "lesson_slug": "social-etiquette",
       "lesson_title": "Социальный этикет: ty/vy",
-      "question": "[Базовый пакет · 17/20]\nВыберите форму по ситуации.\nPeter, odkiaľ …?",
+      "question": "[Базовый пакет · 17/20]\nСоберите знакомство со взрослой коллегой и переход на ty.\n3 · спросить, откуда собеседница",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Социальный этикет: ty/vy\\nTy — близкое неофициальное обращение к одному человеку; vy — вежливое обращение к одному человеку или обычное обращение к нескольким людям.\\nПосле ty используйте форму 2-го лица единственного числа: si, máš, hovoríš, chceš, môžeš, vieš.\\nПосле vy используйте форму 2-го лица множественного числа: ste, máte, hovoríte, chcete, môžete, viete.\",\"interaction_type\":\"choice\",\"options\":[\"si\",\"ste\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"si\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Социальный этикет: ty/vy\\nTy — близкое неофициальное обращение к одному человеку; vy — вежливое обращение к одному человеку или обычное обращение к нескольким людям.\\nПосле ty используйте форму 2-го лица единственного числа: si, máš, hovoríš, chceš, môžeš, vieš.\\nПосле vy используйте форму 2-го лица множественного числа: ste, máte, hovoríte, chcete, môžete, viete.\",\"interaction_type\":\"choice\",\"options\":[\"Aj mňa teší. Odkiaľ ste?\",\"Aj mňa teší. Odkiaľ si?\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Aj mňa teší. Odkiaľ ste?\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -11990,17 +11990,17 @@
     {
       "lesson_slug": "social-etiquette",
       "lesson_title": "Социальный этикет: ty/vy",
-      "question": "[Базовый пакет · 19/20]\nВыберите форму по ситуации.\nDeti, … čaj?",
+      "question": "[Базовый пакет · 19/20]\nСоберите знакомство со взрослой коллегой и переход на ty.\n4 · ответить и предложить ty",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Социальный этикет: ty/vy\\nTy — близкое неофициальное обращение к одному человеку; vy — вежливое обращение к одному человеку или обычное обращение к нескольким людям.\\nПосле ty используйте форму 2-го лица единственного числа: si, máš, hovoríš, chceš, môžeš, vieš.\\nПосле vy используйте форму 2-го лица множественного числа: ste, máte, hovoríte, chcete, môžete, viete.\",\"interaction_type\":\"choice\",\"options\":[\"chceš\",\"chcete\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"chcete\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Социальный этикет: ty/vy\\nTy — близкое неофициальное обращение к одному человеку; vy — вежливое обращение к одному человеку или обычное обращение к нескольким людям.\\nПосле ty используйте форму 2-го лица единственного числа: si, máš, hovoríš, chceš, môžeš, vieš.\\nПосле vy используйте форму 2-го лица множественного числа: ste, máte, hovoríte, chcete, môžete, viete.\",\"interaction_type\":\"choice\",\"options\":[\"Som z Bratislavy. Môžeme si tykať?\",\"Som z Bratislavy. Máte čas?\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Som z Bratislavy. Môžeme si tykať?\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "social-etiquette",
       "lesson_title": "Социальный этикет: ty/vy",
-      "question": "[Базовый пакет · 20/20]\nИсправьте ошибки в обращении.\nDobrý deň, odkiaľ si, pán Horváth?",
+      "question": "[Базовый пакет · 20/20]\nИсправьте ошибки в обращении.\nProsím ťa, môžete to zopakovať?",
       "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Социальный этикет: ty/vy\\nTy — близкое неофициальное обращение к одному человеку; vy — вежливое обращение к одному человеку или обычное обращение к нескольким людям.\\nПосле ty используйте форму 2-го лица единственного числа: si, máš, hovoríš, chceš, môžeš, vieš.\\nПосле vy используйте форму 2-го лица множественного числа: ste, máte, hovoríte, chcete, môžete, viete.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Dobrý deň, odkiaľ ste, pán Horváth?\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Социальный этикет: ty/vy\\nTy — близкое неофициальное обращение к одному человеку; vy — вежливое обращение к одному человеку или обычное обращение к нескольким людям.\\nПосле ty используйте форму 2-го лица единственного числа: si, máš, hovoríš, chceš, môžeš, vieš.\\nПосле vy используйте форму 2-го лица множественного числа: ste, máte, hovoríte, chcete, môžete, viete.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Prosím vás, môžete to zopakovať?\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -12022,9 +12022,9 @@
     {
       "lesson_slug": "supported-dialogue",
       "lesson_title": "Знакомство и поддерживаемый диалог",
-      "question": "[Базовый пакет · 03/20]\nИсправьте типичные ошибки.",
+      "question": "[Базовый пакет · 03/20]\nВставьте пропущенные слова. Во всём задании используйте вежливую форму «Вы».",
       "instruction": "Соедините слова или фразы с правильными соответствиями.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"match\",\"options\":[],\"tokens\":[],\"pairs\":[{\"prompt\":\"Ja som volať Boris.\",\"answer\":\"Volám sa Boris.\"},{\"prompt\":\"Odkiaľ vy ste?\",\"answer\":\"Odkiaľ ste?\"},{\"prompt\":\"Som z Slovensko.\",\"answer\":\"Som zo Slovenska.\"},{\"prompt\":\"Čo vy robíte?\",\"answer\":\"Čo robíte?\"}],\"accepted_answers\":[]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"match\",\"options\":[],\"tokens\":[],\"pairs\":[{\"prompt\":\"Ako sa …?\",\"answer\":\"voláte\"},{\"prompt\":\"… z Poľska.\",\"answer\":\"Som\"},{\"prompt\":\"Bývam … Bratislave.\",\"answer\":\"v\"},{\"prompt\":\"A …?\",\"answer\":\"vy\"}],\"accepted_answers\":[]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -12046,9 +12046,9 @@
     {
       "lesson_slug": "supported-dialogue",
       "lesson_title": "Знакомство и поддерживаемый диалог",
-      "question": "[Базовый пакет · 06/20]\nВставьте пропущенные слова. Во всём задании используйте вежливую форму «Вы».",
+      "question": "[Базовый пакет · 06/20]\nПереведите на словацкий.",
       "instruction": "Соедините слова или фразы с правильными соответствиями.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"match\",\"options\":[],\"tokens\":[],\"pairs\":[{\"prompt\":\"Ako sa …?\",\"answer\":\"voláte\"},{\"prompt\":\"… z Poľska.\",\"answer\":\"Som\"},{\"prompt\":\"Bývam … Bratislave.\",\"answer\":\"v\"},{\"prompt\":\"A …?\",\"answer\":\"vy\"}],\"accepted_answers\":[]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"match\",\"options\":[],\"tokens\":[],\"pairs\":[{\"prompt\":\"Очень приятно.\",\"answer\":\"Teší ma.\"},{\"prompt\":\"Где вы живёте?\",\"answer\":\"Kde bývate?\"},{\"prompt\":\"Я немного говорю по-словацки.\",\"answer\":\"Trochu hovorím po slovensky.\"},{\"prompt\":\"Это интересно. А вы?\",\"answer\":\"To je zaujímavé. A vy?\"}],\"accepted_answers\":[]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -12062,31 +12062,7 @@
     {
       "lesson_slug": "supported-dialogue",
       "lesson_title": "Знакомство и поддерживаемый диалог",
-      "question": "[Базовый пакет · 08/20]\nИсправьте типичные ошибки.\nJa som volať Boris.",
-      "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Volám sa Boris.\",\"Ja som Boris.\"]}",
-      "created_at": "2026-10-07T00:00:00Z"
-    },
-    {
-      "lesson_slug": "supported-dialogue",
-      "lesson_title": "Знакомство и поддерживаемый диалог",
-      "question": "[Базовый пакет · 09/20]\nИсправьте ошибки.",
-      "instruction": "Соедините слова или фразы с правильными соответствиями.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"match\",\"options\":[],\"tokens\":[],\"pairs\":[{\"prompt\":\"Ja som volať Boris.\",\"answer\":\"Volám sa Boris.\"},{\"prompt\":\"Odkiaľ vy ste?\",\"answer\":\"Odkiaľ ste?\"},{\"prompt\":\"Som z Slovensko.\",\"answer\":\"Som zo Slovenska.\"},{\"prompt\":\"Čo vy robíte?\",\"answer\":\"Čo robíte?\"}],\"accepted_answers\":[]}",
-      "created_at": "2026-10-07T00:00:00Z"
-    },
-    {
-      "lesson_slug": "supported-dialogue",
-      "lesson_title": "Знакомство и поддерживаемый диалог",
-      "question": "[Базовый пакет · 10/20]\nВыберите функцию каждой реплики.\nA vy?",
-      "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"choice\",\"options\":[\"представиться\",\"узнать имя\",\"отреагировать\",\"вернуть вопрос\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"вернуть вопрос\"]}",
-      "created_at": "2026-10-07T00:00:00Z"
-    },
-    {
-      "lesson_slug": "supported-dialogue",
-      "lesson_title": "Знакомство и поддерживаемый диалог",
-      "question": "[Базовый пакет · 11/20]\nИсправьте типичные ошибки.\nOdkiaľ vy ste?",
+      "question": "[Базовый пакет · 08/20]\nИсправьте типичные ошибки.\nOdkiaľ vy ste?",
       "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
       "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Odkiaľ ste?\"]}",
       "created_at": "2026-10-07T00:00:00Z"
@@ -12094,23 +12070,15 @@
     {
       "lesson_slug": "supported-dialogue",
       "lesson_title": "Знакомство и поддерживаемый диалог",
-      "question": "[Базовый пакет · 12/20]\nПереведите на словацкий.",
-      "instruction": "Соедините слова или фразы с правильными соответствиями.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"match\",\"options\":[],\"tokens\":[],\"pairs\":[{\"prompt\":\"Очень приятно.\",\"answer\":\"Teší ma.\"},{\"prompt\":\"Где вы живёте?\",\"answer\":\"Kde bývate?\"},{\"prompt\":\"Я немного говорю по-словацки.\",\"answer\":\"Trochu hovorím po slovensky.\"},{\"prompt\":\"Это интересно. А вы?\",\"answer\":\"To je zaujímavé. A vy?\"}],\"accepted_answers\":[]}",
-      "created_at": "2026-10-07T00:00:00Z"
-    },
-    {
-      "lesson_slug": "supported-dialogue",
-      "lesson_title": "Знакомство и поддерживаемый диалог",
-      "question": "[Базовый пакет · 13/20]\nВыберите естественное продолжение.\nПосле Som z Nitry.",
+      "question": "[Базовый пакет · 09/20]\nВыберите функцию каждой реплики.\nA vy?",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"choice\",\"options\":[\"Ako sa voláte?\",\"Aha. Páči sa vám tam?\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Aha. Páči sa vám tam?\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"choice\",\"options\":[\"вернуть вопрос\",\"представиться\",\"узнать имя\",\"отреагировать\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"вернуть вопрос\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "supported-dialogue",
       "lesson_title": "Знакомство и поддерживаемый диалог",
-      "question": "[Базовый пакет · 14/20]\nИсправьте типичные ошибки.\nSom z Slovensko.",
+      "question": "[Базовый пакет · 10/20]\nИсправьте типичные ошибки.\nSom z Slovensko.",
       "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
       "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Som zo Slovenska.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
@@ -12118,15 +12086,15 @@
     {
       "lesson_slug": "supported-dialogue",
       "lesson_title": "Знакомство и поддерживаемый диалог",
-      "question": "[Базовый пакет · 15/20]\nВыберите естественное продолжение.\nВернуть предыдущий вопрос",
+      "question": "[Базовый пакет · 11/20]\nВыберите естественное продолжение.\nПосле Som z Nitry.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"choice\",\"options\":[\"Prosím vás.\",\"A vy?\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"A vy?\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"choice\",\"options\":[\"Ako sa voláte?\",\"Aha. Páči sa vám tam?\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Aha. Páči sa vám tam?\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "supported-dialogue",
       "lesson_title": "Знакомство и поддерживаемый диалог",
-      "question": "[Базовый пакет · 16/20]\nИсправьте типичные ошибки.\nČo vy robíte?",
+      "question": "[Базовый пакет · 12/20]\nИсправьте типичные ошибки.\nČo vy robíte?",
       "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
       "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Čo robíte?\"]}",
       "created_at": "2026-10-07T00:00:00Z"
@@ -12134,15 +12102,15 @@
     {
       "lesson_slug": "supported-dialogue",
       "lesson_title": "Знакомство и поддерживаемый диалог",
-      "question": "[Базовый пакет · 17/20]\nСоберите полный диалог знакомства.\n3 · реакция и вопрос о стране",
+      "question": "[Базовый пакет · 13/20]\nВыберите естественное продолжение.\nВернуть предыдущий вопрос",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"choice\",\"options\":[\"Ahoj. Odkiaľ si?\",\"Aj mňa teší. Odkiaľ ste?\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Aj mňa teší. Odkiaľ ste?\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"choice\",\"options\":[\"Prosím vás.\",\"A vy?\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"A vy?\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "supported-dialogue",
       "lesson_title": "Знакомство и поддерживаемый диалог",
-      "question": "[Базовый пакет · 18/20]\nВставьте пропущенные слова. Во всём задании используйте вежливую форму «Вы».\nAko sa …?",
+      "question": "[Базовый пакет · 14/20]\nВставьте пропущенные слова. Во всём задании используйте вежливую форму «Вы».\nAko sa …?",
       "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
       "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"voláte\"]}",
       "created_at": "2026-10-07T00:00:00Z"
@@ -12150,7 +12118,23 @@
     {
       "lesson_slug": "supported-dialogue",
       "lesson_title": "Знакомство и поддерживаемый диалог",
-      "question": "[Базовый пакет · 19/20]\nСоберите полный диалог знакомства.\n4 · ответ с деталью и встречный вопрос",
+      "question": "[Базовый пакет · 15/20]\nСоберите полный диалог знакомства.\n3 · реакция и вопрос о стране",
+      "instruction": "Выберите один правильный вариант.",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"choice\",\"options\":[\"Ahoj. Odkiaľ si?\",\"Aj mňa teší. Odkiaľ ste?\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Aj mňa teší. Odkiaľ ste?\"]}",
+      "created_at": "2026-10-07T00:00:00Z"
+    },
+    {
+      "lesson_slug": "supported-dialogue",
+      "lesson_title": "Знакомство и поддерживаемый диалог",
+      "question": "[Базовый пакет · 16/20]\nВставьте пропущенные слова. Во всём задании используйте вежливую форму «Вы».\n… z Poľska.",
+      "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Som\"]}",
+      "created_at": "2026-10-07T00:00:00Z"
+    },
+    {
+      "lesson_slug": "supported-dialogue",
+      "lesson_title": "Знакомство и поддерживаемый диалог",
+      "question": "[Базовый пакет · 17/20]\nСоберите полный диалог знакомства.\n4 · ответ с деталью и встречный вопрос",
       "instruction": "Выберите один правильный вариант.",
       "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"choice\",\"options\":[\"Áno. Nie.\",\"Som zo Slovenska, z Nitry. A vy?\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Som zo Slovenska, z Nitry. A vy?\"]}",
       "created_at": "2026-10-07T00:00:00Z"
@@ -12158,9 +12142,25 @@
     {
       "lesson_slug": "supported-dialogue",
       "lesson_title": "Знакомство и поддерживаемый диалог",
-      "question": "[Базовый пакет · 20/20]\nВставьте пропущенные слова. Во всём задании используйте вежливую форму «Вы».\n… z Poľska.",
+      "question": "[Базовый пакет · 18/20]\nВставьте пропущенные слова. Во всём задании используйте вежливую форму «Вы».\nBývam … Bratislave.",
       "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Som\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"v\"]}",
+      "created_at": "2026-10-07T00:00:00Z"
+    },
+    {
+      "lesson_slug": "supported-dialogue",
+      "lesson_title": "Знакомство и поддерживаемый диалог",
+      "question": "[Базовый пакет · 19/20]\nСоберите полный диалог знакомства.\n5 · страна и город",
+      "instruction": "Выберите один правильный вариант.",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"choice\",\"options\":[\"Som z Rusko. Bratislava.\",\"Som z Ruska, ale bývam v Bratislave.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Som z Ruska, ale bývam v Bratislave.\"]}",
+      "created_at": "2026-10-07T00:00:00Z"
+    },
+    {
+      "lesson_slug": "supported-dialogue",
+      "lesson_title": "Знакомство и поддерживаемый диалог",
+      "question": "[Базовый пакет · 20/20]\nВставьте пропущенные слова. Во всём задании используйте вежливую форму «Вы».\nA …?",
+      "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Знакомство и поддерживаемый диалог\\nКаркас знакомства: приветствие → имя → Teší ma → одна тема → A vy? / A ty?.\\nНа первом знакомстве со взрослым безопасно начать с vy и согласовать все формы: voláte, ste, bývate, robíte.\\nОтвет áno или nie дополните одной деталью: городом, занятием, языком, оценкой или частотой.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"vy\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -12646,9 +12646,9 @@
     {
       "lesson_slug": "written-profile",
       "lesson_title": "Письменная самопрезентация",
-      "question": "[Базовый пакет · 01/20]\nВыберите перевод «Меня зовут Марина».",
+      "question": "[Базовый пакет · 01/20]\nЧто нужно проверить перед отправкой профиля?",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"Pracujem v obchode.\",\"Bývam v Bratislave.\",\"Volám sa Marina.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Volám sa Marina.\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"Только количество слов\",\"Обязательно возраст, семью и точный адрес\",\"Порядок, первое лицо, предлоги, язык, род и диакритику\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Порядок, первое лицо, предлоги, язык, род и диакритику\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -12670,9 +12670,9 @@
     {
       "lesson_slug": "written-profile",
       "lesson_title": "Письменная самопрезентация",
-      "question": "[Базовый пакет · 04/20]\nЧто нужно проверить перед отправкой профиля?",
+      "question": "[Базовый пакет · 04/20]\nОпределите функцию фраз профиля.\nHovorím po rusky.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"Только количество слов\",\"Обязательно возраст, семью и точный адрес\",\"Порядок, первое лицо, предлоги, язык, род и диакритику\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Порядок, первое лицо, предлоги, язык, род и диакритику\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"интерес\",\"цель\",\"имя\",\"язык\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"язык\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -12694,9 +12694,9 @@
     {
       "lesson_slug": "written-profile",
       "lesson_title": "Письменная самопрезентация",
-      "question": "[Базовый пакет · 07/20]\nОпределите функцию фраз профиля.\nHovorím po rusky.",
+      "question": "[Базовый пакет · 07/20]\nОпределите функцию фраз профиля.\nVo voľnom čase športujem.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"язык\",\"интерес\",\"цель\",\"имя\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"язык\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"язык\",\"интерес\",\"цель\",\"имя\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"интерес\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -12710,9 +12710,9 @@
     {
       "lesson_slug": "written-profile",
       "lesson_title": "Письменная самопрезентация",
-      "question": "[Базовый пакет · 09/20]\nОпределите функцию фраз профиля.\nVo voľnom čase športujem.",
+      "question": "[Базовый пакет · 09/20]\nОпределите функцию фраз профиля.\nChcem lepšie hovoriť po slovensky.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"цель\",\"имя\",\"язык\",\"интерес\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"интерес\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"цель\",\"имя\",\"язык\",\"интерес\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"цель\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -12726,9 +12726,9 @@
     {
       "lesson_slug": "written-profile",
       "lesson_title": "Письменная самопрезентация",
-      "question": "[Базовый пакет · 11/20]\nОпределите функцию фраз профиля.\nChcem lepšie hovoriť po slovensky.",
+      "question": "[Базовый пакет · 11/20]\nВставьте подходящую связку.\nSom z Ukrajiny, ___ bývam v Bratislave.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"язык\",\"интерес\",\"цель\",\"имя\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"цель\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"preto\",\"ale\",\"a\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"ale\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -12742,9 +12742,9 @@
     {
       "lesson_slug": "written-profile",
       "lesson_title": "Письменная самопрезентация",
-      "question": "[Базовый пакет · 13/20]\nВставьте подходящую связку.\nSom z Ukrajiny, ___ bývam v Bratislave.",
+      "question": "[Базовый пакет · 13/20]\nВставьте подходящую связку.\nHovorím po rusky ___ po anglicky.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"a\",\"preto\",\"ale\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"ale\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"a\",\"preto\",\"ale\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"a\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -12758,9 +12758,9 @@
     {
       "lesson_slug": "written-profile",
       "lesson_title": "Письменная самопрезентация",
-      "question": "[Базовый пакет · 15/20]\nВставьте подходящую связку.\nHovorím po rusky ___ po anglicky.",
+      "question": "[Базовый пакет · 15/20]\nВставьте подходящую связку.\nŽijem na Slovensku, ___ sa učím po slovensky.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"ale\",\"a\",\"preto\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"a\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"ale\",\"a\",\"preto\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"preto\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -12774,9 +12774,9 @@
     {
       "lesson_slug": "written-profile",
       "lesson_title": "Письменная самопрезентация",
-      "question": "[Базовый пакет · 17/20]\nВставьте подходящую связку.\nŽijem na Slovensku, ___ sa učím po slovensky.",
+      "question": "[Базовый пакет · 17/20]\nПоставьте блоки профиля на логичные места.\nVo voľnom čase športujem.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"preto\",\"ale\",\"a\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"preto\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"1\",\"2\",\"3\",\"4\",\"5\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"4\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -12790,9 +12790,9 @@
     {
       "lesson_slug": "written-profile",
       "lesson_title": "Письменная самопрезентация",
-      "question": "[Базовый пакет · 19/20]\nПоставьте блоки профиля на логичные места.\nVo voľnom čase športujem.",
+      "question": "[Базовый пакет · 19/20]\nПоставьте блоки профиля на логичные места.\nPracujem v banke.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"3\",\"4\",\"5\",\"1\",\"2\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"4\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Письменная самопрезентация\\nИспользуйте формы первого лица: volám sa, bývam, pracujem, hovorím, učím sa.\\nМестоимение ja обычно опускается: Bývam v Nitre. Pracujem v banke.\\nСтрану запоминайте вместе с z или zo: z Ruska, z Ukrajiny, zo Slovenska.\",\"interaction_type\":\"choice\",\"options\":[\"3\",\"4\",\"5\",\"1\",\"2\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"3\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -12830,9 +12830,9 @@
     {
       "lesson_slug": "simple-mediation",
       "lesson_title": "Передача простой информации",
-      "question": "[Базовый пакет · 04/20]\nОпределите функцию готовых блоков.\nAnna píše, že...",
+      "question": "[Базовый пакет · 04/20]\nОпределите функцию готовых блоков.\nJe to miestnosť 12.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"проверка\",\"источник\",\"число\",\"действие\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"источник\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"проверка\",\"источник\",\"число\",\"действие\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"число\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -12846,87 +12846,55 @@
     {
       "lesson_slug": "simple-mediation",
       "lesson_title": "Передача простой информации",
-      "question": "[Базовый пакет · 06/20]\nОпределите функцию готовых блоков.\nJe to miestnosť 12.",
+      "question": "[Базовый пакет · 06/20]\nОпределите функцию готовых блоков.\nMáme priniesť doklady.",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"число\",\"действие\",\"проверка\",\"источник\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"число\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"число\",\"действие\",\"проверка\",\"источник\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"действие\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "simple-mediation",
       "lesson_title": "Передача простой информации",
-      "question": "[Базовый пакет · 07/20]\nИсправьте искажение, сверившись с исходником.\nИсходник: Lístok stojí 18 eur. Ошибка: Lístok stojí 80 eur.",
+      "question": "[Базовый пакет · 07/20]\nПередайте по-словацки: «Преподаватель пишет, что занятие завтра».",
       "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Lístok stojí 18 eur.\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Učiteľ píše, že kurz je zajtra.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "simple-mediation",
       "lesson_title": "Передача простой информации",
-      "question": "[Базовый пакет · 08/20]\nОпределите функцию готовых блоков.\nMáme priniesť doklady.",
+      "question": "[Базовый пакет · 08/20]\nОпределите функцию готовых блоков.\nRozumiem správne: o piatej?",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"проверка\",\"источник\",\"число\",\"действие\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"действие\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"проверка\",\"источник\",\"число\",\"действие\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"проверка\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "simple-mediation",
       "lesson_title": "Передача простой информации",
-      "question": "[Базовый пакет · 09/20]\nПереведите точные сообщения.\nНам нужно принести документы.",
+      "question": "[Базовый пакет · 09/20]\nПередайте по-словацки: «Встреча в понедельник в девять».",
       "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Máme priniesť doklady.\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Stretnutie je v pondelok o deviatej.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "simple-mediation",
       "lesson_title": "Передача простой информации",
-      "question": "[Базовый пакет · 10/20]\nОпределите функцию готовых блоков.\nRozumiem správne: o piatej?",
+      "question": "[Базовый пакет · 10/20]\nНайдите обязательные детали: Kurz je v piatok o 17:30 v miestnosti 8. Prineste si učebnicu.\nДень",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"число\",\"действие\",\"проверка\",\"источник\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"проверка\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"o 17:30\",\"v miestnosti 8\",\"priniesť si učebnicu\",\"v piatok\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"v piatok\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "simple-mediation",
       "lesson_title": "Передача простой информации",
-      "question": "[Базовый пакет · 11/20]\nПереведите точные сообщения.\nЯ правильно понял: аудитория 12?",
+      "question": "[Базовый пакет · 11/20]\nПередайте по-словацки: «Нам нужно принести книгу».",
       "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Rozumiem správne: miestnosť 12?\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Máme priniesť knihu.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "simple-mediation",
       "lesson_title": "Передача простой информации",
-      "question": "[Базовый пакет · 12/20]\nВыберите форму третьего лица.\nPeter ___, že kurz je dnes.",
-      "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"hovorí\",\"hovoríš\",\"hovorím\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"hovorí\"]}",
-      "created_at": "2026-10-07T00:00:00Z"
-    },
-    {
-      "lesson_slug": "simple-mediation",
-      "lesson_title": "Передача простой информации",
-      "question": "[Базовый пакет · 13/20]\nВыберите форму третьего лица.\nEva ___ o šiestej.",
-      "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"prídeš\",\"prídem\",\"príde\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"príde\"]}",
-      "created_at": "2026-10-07T00:00:00Z"
-    },
-    {
-      "lesson_slug": "simple-mediation",
-      "lesson_title": "Передача простой информации",
-      "question": "[Базовый пакет · 14/20]\nВыберите форму третьего лица.\nJán ___ prísť.",
-      "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"nemôžem\",\"nemôže\",\"nemôžeš\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"nemôže\"]}",
-      "created_at": "2026-10-07T00:00:00Z"
-    },
-    {
-      "lesson_slug": "simple-mediation",
-      "lesson_title": "Передача простой информации",
-      "question": "[Базовый пакет · 15/20]\nНайдите обязательные детали: Kurz je v piatok o 17:30 v miestnosti 8. Prineste si učebnicu.\nДень",
-      "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"v miestnosti 8\",\"priniesť si učebnicu\",\"v piatok\",\"o 17:30\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"v piatok\"]}",
-      "created_at": "2026-10-07T00:00:00Z"
-    },
-    {
-      "lesson_slug": "simple-mediation",
-      "lesson_title": "Передача простой информации",
-      "question": "[Базовый пакет · 16/20]\nНайдите обязательные детали: Kurz je v piatok o 17:30 v miestnosti 8. Prineste si učebnicu.\nВремя",
+      "question": "[Базовый пакет · 12/20]\nНайдите обязательные детали: Kurz je v piatok o 17:30 v miestnosti 8. Prineste si učebnicu.\nВремя",
       "instruction": "Выберите один правильный вариант.",
       "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"priniesť si učebnicu\",\"v piatok\",\"o 17:30\",\"v miestnosti 8\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"o 17:30\"]}",
       "created_at": "2026-10-07T00:00:00Z"
@@ -12934,25 +12902,57 @@
     {
       "lesson_slug": "simple-mediation",
       "lesson_title": "Передача простой информации",
-      "question": "[Базовый пакет · 17/20]\nНайдите обязательные детали: Kurz je v piatok o 17:30 v miestnosti 8. Prineste si učebnicu.\nМесто",
-      "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"v piatok\",\"o 17:30\",\"v miestnosti 8\",\"priniesť si učebnicu\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"v miestnosti 8\"]}",
+      "question": "[Базовый пакет · 13/20]\nПередайте по-словацки: «Билет стоит двенадцать евро».",
+      "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Lístok stojí dvanásť eur.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "simple-mediation",
       "lesson_title": "Передача простой информации",
-      "question": "[Базовый пакет · 18/20]\nНайдите обязательные детали: Kurz je v piatok o 17:30 v miestnosti 8. Prineste si učebnicu.\nДействие",
+      "question": "[Базовый пакет · 14/20]\nНайдите обязательные детали: Kurz je v piatok o 17:30 v miestnosti 8. Prineste si učebnicu.\nМесто",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"o 17:30\",\"v miestnosti 8\",\"priniesť si učebnicu\",\"v piatok\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"priniesť si učebnicu\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"o 17:30\",\"v miestnosti 8\",\"priniesť si učebnicu\",\"v piatok\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"v miestnosti 8\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
       "lesson_slug": "simple-mediation",
       "lesson_title": "Передача простой информации",
-      "question": "[Базовый пакет · 19/20]\nКак по-словацки: «Встреча в банке на Главной улице»?",
+      "question": "[Базовый пакет · 15/20]\nИсправьте искажение, сверившись с исходником.\nИсходник: Lístok stojí 18 eur. Ошибка: Lístok stojí 80 eur.",
+      "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Lístok stojí 18 eur.\"]}",
+      "created_at": "2026-10-07T00:00:00Z"
+    },
+    {
+      "lesson_slug": "simple-mediation",
+      "lesson_title": "Передача простой информации",
+      "question": "[Базовый пакет · 16/20]\nНайдите обязательные детали: Kurz je v piatok o 17:30 v miestnosti 8. Prineste si učebnicu.\nДействие",
       "instruction": "Выберите один правильный вариант.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"Banka je dnes zatvorená.\",\"Stretnutie je v banke na Hlavnej ulici.\",\"Stretnutie je pri stanici.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Stretnutie je v banke na Hlavnej ulici.\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"priniesť si učebnicu\",\"v piatok\",\"o 17:30\",\"v miestnosti 8\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"priniesť si učebnicu\"]}",
+      "created_at": "2026-10-07T00:00:00Z"
+    },
+    {
+      "lesson_slug": "simple-mediation",
+      "lesson_title": "Передача простой информации",
+      "question": "[Базовый пакет · 17/20]\nПереведите точные сообщения.\nНам нужно принести документы.",
+      "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Máme priniesť doklady.\"]}",
+      "created_at": "2026-10-07T00:00:00Z"
+    },
+    {
+      "lesson_slug": "simple-mediation",
+      "lesson_title": "Передача простой информации",
+      "question": "[Базовый пакет · 18/20]\nКак по-словацки: «Встреча в банке на Главной улице»?",
+      "instruction": "Выберите один правильный вариант.",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"choice\",\"options\":[\"Stretnutie je pri stanici.\",\"Banka je dnes zatvorená.\",\"Stretnutie je v banke na Hlavnej ulici.\"],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Stretnutie je v banke na Hlavnej ulici.\"]}",
+      "created_at": "2026-10-07T00:00:00Z"
+    },
+    {
+      "lesson_slug": "simple-mediation",
+      "lesson_title": "Передача простой информации",
+      "question": "[Базовый пакет · 19/20]\nПереведите точные сообщения.\nЯ правильно понял: аудитория 12?",
+      "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Передача простой информации\\nСначала выделите источник, главный факт, точные детали и действие получателя.\\nИспользуйте рамки X hovorí, že... и X píše, že...; союз že вводит передаваемую информацию.\\nПри смене лица меняйте частые формы: som → je, mám → má, prídem → príde, nemôžem → nemôže, bývam → býva.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Rozumiem správne: miestnosť 12?\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -13198,9 +13198,9 @@
     {
       "lesson_slug": "a1-scenarios",
       "lesson_title": "Итоговые сценарии A1",
-      "question": "[Базовый пакет · 10/20]\nВставьте одну форму.\nPeter píše, ___ kurz je zajtra.",
+      "question": "[Базовый пакет · 10/20]\nИсправьте ошибки и запишите полные фразы.\nVy máš čas?",
       "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Итоговые сценарии A1\\nСначала выберите регистр: Dobrý deň и формы vy — с незнакомым взрослым; Ahoj и формы ty — после согласованного перехода.\\nСразу назовите цель: Potrebujem pomoc или Chcel/Chcela by som lístok.\\nСохраняйте обязательные детали: когда, где, сколько и кто.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"že\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Итоговые сценарии A1\\nСначала выберите регистр: Dobrý deň и формы vy — с незнакомым взрослым; Ahoj и формы ty — после согласованного перехода.\\nСразу назовите цель: Potrebujem pomoc или Chcel/Chcela by som lístok.\\nСохраняйте обязательные детали: когда, где, сколько и кто.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Vy máte čas?\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -13214,9 +13214,9 @@
     {
       "lesson_slug": "a1-scenarios",
       "lesson_title": "Итоговые сценарии A1",
-      "question": "[Базовый пакет · 12/20]\nИсправьте ошибки и запишите полные фразы.\nVy máš čas?",
+      "question": "[Базовый пакет · 12/20]\nИсправьте ошибки и запишите полные фразы.\nMôžeš mi pomôcť, prosím vás?",
       "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Итоговые сценарии A1\\nСначала выберите регистр: Dobrý deň и формы vy — с незнакомым взрослым; Ahoj и формы ty — после согласованного перехода.\\nСразу назовите цель: Potrebujem pomoc или Chcel/Chcela by som lístok.\\nСохраняйте обязательные детали: когда, где, сколько и кто.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Vy máte čas?\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Итоговые сценарии A1\\nСначала выберите регистр: Dobrý deň и формы vy — с незнакомым взрослым; Ahoj и формы ty — после согласованного перехода.\\nСразу назовите цель: Potrebujem pomoc или Chcel/Chcela by som lístok.\\nСохраняйте обязательные детали: когда, где, сколько и кто.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Môžete mi pomôcť, prosím vás?\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -13230,9 +13230,9 @@
     {
       "lesson_slug": "a1-scenarios",
       "lesson_title": "Итоговые сценарии A1",
-      "question": "[Базовый пакет · 14/20]\nИсправьте ошибки и запишите полные фразы.\nMôžeš mi pomôcť, prosím vás?",
+      "question": "[Базовый пакет · 14/20]\nИсправьте ошибки и запишите полные фразы.\nJa potrebovať lístok.",
       "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Итоговые сценарии A1\\nСначала выберите регистр: Dobrý deň и формы vy — с незнакомым взрослым; Ahoj и формы ty — после согласованного перехода.\\nСразу назовите цель: Potrebujem pomoc или Chcel/Chcela by som lístok.\\nСохраняйте обязательные детали: когда, где, сколько и кто.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Môžete mi pomôcť, prosím vás?\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Итоговые сценарии A1\\nСначала выберите регистр: Dobrý deň и формы vy — с незнакомым взрослым; Ahoj и формы ty — после согласованного перехода.\\nСразу назовите цель: Potrebujem pomoc или Chcel/Chcela by som lístok.\\nСохраняйте обязательные детали: когда, где, сколько и кто.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Potrebujem lístok.\",\"Ja potrebujem lístok.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -13246,9 +13246,9 @@
     {
       "lesson_slug": "a1-scenarios",
       "lesson_title": "Итоговые сценарии A1",
-      "question": "[Базовый пакет · 16/20]\nИсправьте ошибки и запишите полные фразы.\nJa potrebovať lístok.",
+      "question": "[Базовый пакет · 16/20]\nПереведите итоговые фразы.\nЯ немного говорю по-словацки.",
       "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Итоговые сценарии A1\\nСначала выберите регистр: Dobrý deň и формы vy — с незнакомым взрослым; Ahoj и формы ty — после согласованного перехода.\\nСразу назовите цель: Potrebujem pomoc или Chcel/Chcela by som lístok.\\nСохраняйте обязательные детали: когда, где, сколько и кто.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Potrebujem lístok.\",\"Ja potrebujem lístok.\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Итоговые сценарии A1\\nСначала выберите регистр: Dobrý deň и формы vy — с незнакомым взрослым; Ahoj и формы ty — после согласованного перехода.\\nСразу назовите цель: Potrebujem pomoc или Chcel/Chcela by som lístok.\\nСохраняйте обязательные детали: когда, где, сколько и кто.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Trochu hovorím po slovensky.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -13262,9 +13262,9 @@
     {
       "lesson_slug": "a1-scenarios",
       "lesson_title": "Итоговые сценарии A1",
-      "question": "[Базовый пакет · 18/20]\nПереведите итоговые фразы.\nЯ немного говорю по-словацки.",
+      "question": "[Базовый пакет · 18/20]\nПереведите итоговые фразы.\nМожете повторить медленнее?",
       "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Итоговые сценарии A1\\nСначала выберите регистр: Dobrý deň и формы vy — с незнакомым взрослым; Ahoj и формы ty — после согласованного перехода.\\nСразу назовите цель: Potrebujem pomoc или Chcel/Chcela by som lístok.\\nСохраняйте обязательные детали: когда, где, сколько и кто.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Trochu hovorím po slovensky.\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Итоговые сценарии A1\\nСначала выберите регистр: Dobrý deň и формы vy — с незнакомым взрослым; Ahoj и формы ty — после согласованного перехода.\\nСразу назовите цель: Potrebujem pomoc или Chcel/Chcela by som lístok.\\nСохраняйте обязательные детали: когда, где, сколько и кто.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Môžete to zopakovať pomalšie?\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     },
     {
@@ -13278,9 +13278,9 @@
     {
       "lesson_slug": "a1-scenarios",
       "lesson_title": "Итоговые сценарии A1",
-      "question": "[Базовый пакет · 20/20]\nПереведите итоговые фразы.\nМожете повторить медленнее?",
+      "question": "[Базовый пакет · 20/20]\nПереведите итоговые фразы.\nХорошо, я возьму билет.",
       "instruction": "Запишите короткий ответ на задание. Используйте словацкие знаки, где они нужны.",
-      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Итоговые сценарии A1\\nСначала выберите регистр: Dobrý deň и формы vy — с незнакомым взрослым; Ahoj и формы ty — после согласованного перехода.\\nСразу назовите цель: Potrebujem pomoc или Chcel/Chcela by som lístok.\\nСохраняйте обязательные детали: когда, где, сколько и кто.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Môžete to zopakovať pomalšie?\"]}",
+      "theory_snapshot": "slovokrok-exercise:v1:{\"theory\":\"Тема: Итоговые сценарии A1\\nСначала выберите регистр: Dobrý deň и формы vy — с незнакомым взрослым; Ahoj и формы ty — после согласованного перехода.\\nСразу назовите цель: Potrebujem pomoc или Chcel/Chcela by som lístok.\\nСохраняйте обязательные детали: когда, где, сколько и кто.\",\"interaction_type\":\"text\",\"options\":[],\"tokens\":[],\"pairs\":[],\"accepted_answers\":[\"Dobre, vezmem si lístok.\"]}",
       "created_at": "2026-10-07T00:00:00Z"
     }
   ],

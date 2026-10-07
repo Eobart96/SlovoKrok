@@ -1,12 +1,36 @@
-# SlovoKrok
+<p align="center"><img src="docs/screenshots/banner.svg" alt="SlovoKrok — Slovak, step by step" width="100%"></p>
 
-[Русский](README.md) · **English** · [Slovenčina](README.sk.md)
-
-[GitHub](https://github.com/Eobart96/SlovoKrok)
+<h1 align="center">Slovak, step by step</h1>
+<p align="center">83 topics · 8 modules · practice based on your progress</p>
+<p align="center">[Русский](README.md) · **English** · [Slovenčina](README.sk.md)</p>
+<p align="center"><a href="https://github.com/Eobart96/SlovoKrok">GitHub</a> · <a href="TESTING_START.md">Tester guide</a> · <a href="UPDATES.md">Updates</a></p>
 
 A local, single-user app for learning Slovak. The A1 course has 8 modules and
 83 topics, with Russian explanations, practice, reading, homework, vocabulary
 and mistake review. These translated READMEs do not change the app's language.
+
+![SlovoKrok A1 — Slovak, step by step](docs/screenshots/course.jpg)
+
+| A1 topics | Exercises | Reading texts | Homework tasks |
+| :---: | :---: | :---: | :---: |
+| **83** | **1660** | **166** | **166** |
+
+Each topic includes 20 exercises, 2 reading texts and 2 homework tasks.
+
+## Application screenshots
+
+Dark theme. Captured using a separate demo database, without personal answers or profile data. Click a screenshot to view it at full size.
+
+<table>
+<tr>
+<td width="50%" valign="top"><strong>Exercises and saved tasks</strong><br><br><a href="docs/screenshots/exercises.jpg"><img src="docs/screenshots/exercises.jpg" alt="Exercises and saved tasks" width="100%"></a></td>
+<td width="50%" valign="top"><strong>Reading and voice retelling</strong><br><br><a href="docs/screenshots/reading.jpg"><img src="docs/screenshots/reading.jpg" alt="Reading and voice retelling" width="100%"></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><strong>Welcome guide</strong><br><br><a href="docs/screenshots/welcome.jpg"><img src="docs/screenshots/welcome.jpg" alt="Welcome guide" width="100%"></a></td>
+<td width="50%" valign="top"><strong>Basic task pack in settings</strong><br><br><a href="docs/screenshots/task-pack.jpg"><img src="docs/screenshots/task-pack.jpg" alt="Basic task pack in settings" width="100%"></a></td>
+</tr>
+</table>
 
 ## Installation on Windows
 

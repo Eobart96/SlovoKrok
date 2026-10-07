@@ -12,8 +12,13 @@ for (const range of [[1, 4], [5, 8]]) {
   fs.writeFileSync(path.join(root, `tmp/basic-task-pack/lessons-${range[0]}-${range[1]}.json`), JSON.stringify(data, null, 2));
 }
 
-const personal = /(?<![\p{L}])(?:Ari|Ари|Eva|Eve|Evu|Evou|Peter|Petra|Petrovi|Petrom|Martin|Martina|Jana|Ján|Jan|Anna|Annu|Anny|Lucia|Luciu|Lucie|Lucii|Luciou|Katk(?:a|u|e|ou)|Mári(?:a|u|e|i|ou)|Tomáš|Zuzana|Andrej|Michal|Juraj|Lukáš|Adam(?:a|ovi|om)?|Nin(?:a|u|e|ou)|Em(?:a|u|e|ou)|Marek|Marka|Ivan(?:a|ovi|om)?|Адам[ау]?|Нин[ауы]|Иван[ау]?|Анн[ауы]|Ев[ауе]|Петр|Пётр|Мартин[ау]?|Луци[яюией]+|Мария|Иван|Алексей|IT|ИТ)(?![\p{L}])|[\w.+-]+@[\w.-]+\.[a-z]{2,}|\+421[\d\s-]{6,}/iu;
-function neutral(value) { return !personal.test(JSON.stringify(value, (key, item) => key === 'lesson_slug' ? undefined : item)); }
+const personal = /(?<![\p{L}])(?:Boris|Marina|Марина|Horváth|Nováková|Novák|Ari|Ари|Eva|Eve|Evu|Evou|Peter|Petra|Petrovi|Petrom|Martin|Martina|Jana|Ján|Jan|Anna|Annu|Anny|Lucia|Luciu|Lucie|Lucii|Luciou|Katk(?:a|u|e|ou)|Mári(?:a|u|e|i|ou)|Tomáš|Zuzana|Andrej|Michal|Juraj|Lukáš|Adam(?:a|ovi|om)?|Nin(?:a|u|e|ou)|Em(?:a|u|e|ou)|Marek|Marka|Ivan(?:a|ovi|om)?|Адам[ау]?|Нин[ауы]|Иван[ау]?|Анн[ауы]|Ев[ауе]|Петр|Пётр|Мартин[ау]?|Луци[яюией]+|Мария|Иван|Алексей|IT|ИТ)(?![\p{L}])|[\w.+-]+@[\w.-]+\.[a-z]{2,}|\+421[\d\s-]{6,}/iu;
+function neutral(value) {
+  if (typeof value === 'string') return !personal.test(value);
+  if (Array.isArray(value)) return value.every(neutral);
+  if (value && typeof value === 'object') return Object.entries(value).every(([key, item]) => key === 'lesson_slug' || neutral(item));
+  return true;
+}
 function convert(practice) {
   if (!neutral(practice)) return null;
   const base = { interaction_type: 'text', options: [], tokens: [], pairs: [], accepted_answers: [...new Set([practice.answer, ...(practice.acceptableAnswers ?? [])])].slice(0, 5) };
@@ -39,6 +44,12 @@ function convert(practice) {
 }
 function exercisePool(lesson) {
   const source = [...lesson.stepPractices, ...(lesson.reinforcementPractices ?? [])];
+  if (lesson.slug === 'simple-mediation') source.push(
+    { type: 'text', prompt: 'Передайте по-словацки: «Преподаватель пишет, что занятие завтра».', answer: 'Učiteľ píše, že kurz je zajtra.' },
+    { type: 'text', prompt: 'Передайте по-словацки: «Встреча в понедельник в девять».', answer: 'Stretnutie je v pondelok o deviatej.' },
+    { type: 'text', prompt: 'Передайте по-словацки: «Нам нужно принести книгу».', answer: 'Máme priniesť knihu.' },
+    { type: 'text', prompt: 'Передайте по-словацки: «Билет стоит двенадцать евро».', answer: 'Lístok stojí dvanásť eur.' },
+  );
   const individualPairs = source.flatMap(practice => (practice.pairs ?? []).map(pair => ({ ...pair, prompt: `${practice.prompt}\n${pair.prompt}`, type: pair.options?.length >= 2 ? 'choice' : 'text' })));
   const pool = [...source, ...individualPairs, ...lesson.knowledgeChecks.map(check => ({ ...check, prompt: check.question, type: 'choice' })), ...lesson.finalChecks.map(check => ({ ...check, prompt: check.question, type: 'choice' }))].map(convert).filter(Boolean);
   const unique = [...new Map(pool.map(item => [JSON.stringify([item.question, item.interaction]), item])).values()];
