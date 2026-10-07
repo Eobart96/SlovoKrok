@@ -117,7 +117,7 @@ Inštalácia na čistom počítači a ručné schválenie aktuálneho rozhrania 
 potvrdené. Prihlasovanie, viacerí používatelia a verejné nasadenie nie sú súčasťou tejto verzie.
 
 [Príručka pre testerov (po rusky)](TESTING_START.md) · [Novinky](UPDATES.md) ·
-[Architektúra](docs/ARCHITECTURE.md) · [API](docs/API.md) ·
+[Prehľad dokumentácie](docs/README.md) · [Architektúra](docs/ARCHITECTURE.md) · [API](docs/API.md) ·
 [Údaje](docs/DATABASE.md) · [Overovanie](docs/TESTING.md) · [Bezpečnosť](SECURITY.md).
 
 ## Licencia

@@ -10,22 +10,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED = {"AGENTS.md", "PROJECT_CHECKPOINT.md", "PROJECT_HISTORY.md", "PROJECT_REPORT.md"}
 PREFIXES = (".ai/", ".codex/")
-PUBLIC_PREPARATION = """# Публичный снимок исходников
 
-Включены приложение, тесты, CI, публичная документация, учебные PDF A2
-и базовые задания A1 (83 темы, 1660 упражнений, 166 текстов, 166 ДЗ).
-Личные данные, зависимости, сборки и локальные записи агента исключены.
-
-Состав фиксируется внешним manifest: пути, размеры и SHA-256 каждого файла.
-Проверка требует отсутствия пропусков, лишних файлов и несовпадений хешей.
-Копия создана без `.git`, поэтому не содержит историю исходного репозитория.
-Сборка и UI этой копии отдельно не запускались; CI выполняется после публикации.
-
-Публикация и добавление файлов в Git не выполняются сборщиком.
-Если обновляется существующий репозиторий, его прежняя история сохраняется.
-След ранее обнаруженного credential в старой истории требует отзыва ключа;
-чистый текущий снимок сам по себе не очищает историю GitHub.
-"""
 
 
 def digest(content):
@@ -51,7 +36,6 @@ def main():
     required = {"README.md", "README.en.md", "README.sk.md", ".github/workflows/ci.yml", ".gitignore", "LICENSE", "install.cmd", "start.cmd", "frontend/public/task-packs/slovokrok-a1-basic-v1.json", "scripts/build-basic-task-pack.cjs", "scripts/validate-basic-task-pack.py"}
     if not required.issubset({item["path"] for item in files}):
         raise SystemExit("Missing source requirements")
-    overrides = {"docs/GIT_PREPARATION.md": PUBLIC_PREPARATION.encode()}
     result = []
     for item in files:
         src = (ROOT / item["path"]).resolve()
@@ -60,7 +44,6 @@ def main():
         content = src.read_bytes()
         if digest(content) != item["sha256"]:
             raise SystemExit("Source changed during copy")
-        content = overrides.get(item["path"], content)
         if item["path"] == "TESTING_START.md":
             content = content.decode("utf-8").replace("Учебные PDF A2 в этот\nархив не включены; они распространяются отдельно.", "Учебные PDF A2 включены в `output/pdf/A2/`.").replace("Учебные PDF A2 в этот\r\nархив не включены; они распространяются отдельно.", "Учебные PDF A2 включены в `output/pdf/A2/`.").encode()
         target = destination / item["path"]

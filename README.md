@@ -123,7 +123,7 @@ API-ключей, личного профиля и прогресса автор
 ## Документация
 
 [Что нового](UPDATES.md) ·
-[Архитектура](docs/ARCHITECTURE.md) · [API](docs/API.md) ·
+[Все документы](docs/README.md) · [Архитектура](docs/ARCHITECTURE.md) · [API](docs/API.md) ·
 [Данные](docs/DATABASE.md) · [Проверки](docs/TESTING.md) ·
 [Локальный запуск](docs/DEPLOYMENT.md) · [Безопасность](SECURITY.md).
 

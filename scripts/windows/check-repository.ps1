@@ -28,6 +28,7 @@ $largePaths = New-Object System.Collections.Generic.List[string]
 
 $forbiddenPattern = '(^|/)(\.env($|\.)|backend/data/|\.runtime/|_backups/|Install/|node_modules/|\.next($|[-/])|playwright-report/|test-results/|\.ai/private/)|(^|/).*(sync-conflict|~syncthing~)|\.(db|sqlite3?|log|bak)$'
 $binaryInstallerPattern = '\.(exe|msi|msix|appx)$'
+$localOnlyPattern = '^(\.(ai|codex|agents|claude|tmp|obsidian-note-staging)(/|$)|AGENTS\.md$|PROJECT_(CHECKPOINT|HISTORY|REPORT)\.md$|scripts/(check-course-progress\.mjs|check-staged-release\.mjs|verify-a2-study-skill\.mjs|windows/check-a2-roadmap-and-skill\.ps1)$)'
 $allowedEnvPath = ".env.example"
 $placeholderPattern = '^(replace_me|your_[a-z0-9_-]+|placeholder|example|change[-_]?me[a-z0-9_-]*|none|null|\.\.\.|<[^>]+>|\$\{[^}]+\})$'
 $assignmentPattern = '(?im)^[ \t]*(OPENAI_API_KEY|POLZA_API_KEY|API_KEY|SECRET_KEY|JWT_SECRET|ACCESS_TOKEN|PASSWORD)[ \t]*=[ \t]*([^\s#]+)'
@@ -43,7 +44,7 @@ $credentialPatterns = @(
 foreach ($relativePath in $candidatePaths) {
     $fullPath = Join-Path $ProjectRoot $relativePath
     $normalized = Normalize-RepositoryPath $relativePath
-    if (($normalized -ne $allowedEnvPath -and $normalized -match $forbiddenPattern) -or $normalized -match $binaryInstallerPattern) {
+    if (($normalized -ne $allowedEnvPath -and $normalized -match $forbiddenPattern) -or $normalized -match $binaryInstallerPattern -or $normalized -match $localOnlyPattern) {
         $forbiddenPaths.Add($normalized)
     }
 

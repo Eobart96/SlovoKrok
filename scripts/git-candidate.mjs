@@ -9,9 +9,10 @@ const git = (...args) => execFileSync("git", ["-c", "core.quotepath=false", ...a
   cwd: root, encoding: "utf8", maxBuffer: 16 * 1024 * 1024,
 });
 const forbidden = /(^|\/)(?:\.git|\.env(?:\..*)?|node_modules|\.next(?:-[^/]*)?|\.venv|venv|__pycache__|\.pytest_cache|\.runtime|_backups|_git-package|del|tmp|Install|test-results|playwright-report)(?:\/|$)|(^|\/)(?:backend\/data|\.ai\/private)(?:\/|$)|(?:sync-conflict|~syncthing~)|\.(?:db|sqlite3?|log|bak|pyc|tsbuildinfo)$/i;
+const localOnly = /^(?:\.(?:ai|codex|agents|claude|tmp|obsidian-note-staging)(?:\/|$)|AGENTS\.md$|PROJECT_(?:CHECKPOINT|HISTORY|REPORT)\.md$|scripts\/(?:check-course-progress\.mjs|check-staged-release\.mjs|verify-a2-study-skill\.mjs|windows\/check-a2-roadmap-and-skill\.ps1)$)/i;
 
 export function isForbidden(path) {
-  return path !== ".env.example" && forbidden.test(path);
+  return path !== ".env.example" && (forbidden.test(path) || localOnly.test(path));
 }
 
 function collect() {

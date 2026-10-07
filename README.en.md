@@ -118,7 +118,7 @@ been confirmed. Authentication, multi-user operation and public deployment
 are outside the current scope.
 
 [Tester guide (Russian)](TESTING_START.md) · [Updates](UPDATES.md) ·
-[Architecture](docs/ARCHITECTURE.md) · [API](docs/API.md) ·
+[Documentation index](docs/README.md) · [Architecture](docs/ARCHITECTURE.md) · [API](docs/API.md) ·
 [Data](docs/DATABASE.md) · [Checks](docs/TESTING.md) · [Security](SECURITY.md).
 
 ## License

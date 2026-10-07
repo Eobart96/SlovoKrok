@@ -21,6 +21,7 @@ node_modules/
 .next/
 .next-dev/
 .next-build/
+.next-*/
 *.tsbuildinfo
 dist/
 frontend/playwright-report/
@@ -39,6 +40,21 @@ tmp/
 
 # Local profiles and recovery artifacts: never add them to a public repository.
 .ai/private/
+.ai/
+.codex/
+.agents/
+.claude/
+.tmp/
+.obsidian-note-staging/
+AGENTS.md
+PROJECT_CHECKPOINT.md
+PROJECT_HISTORY.md
+PROJECT_REPORT.md
+# Owner-only helpers depend on local checkpoint or personal agent skills.
+scripts/check-course-progress.mjs
+scripts/check-staged-release.mjs
+scripts/verify-a2-study-skill.mjs
+scripts/windows/check-a2-roadmap-and-skill.ps1
 _backups/
 _git-package/
 del/
