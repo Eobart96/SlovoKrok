@@ -2,7 +2,7 @@
 
 Проект рассчитан на Windows и локальный loopback.
 
-1. Установи Python 3.12+ и Node.js 20+.
+1. Установи Python 3.12+ и Node.js 22+; добавь Python в PATH.
 2. Запусти `install.cmd`.
 3. При необходимости создай ignored `.env` по `.env.example`.
 4. Запусти `start.cmd`; диагностика — `doctor.cmd`, остановка — `stop.cmd`.

@@ -109,10 +109,17 @@ def test_legacy_copy_is_upgraded_idempotently_without_changing_source(tmp_path: 
         ).all()
         assert tuple(state) == (1, '{"currentLesson":"legacy"}')
         assert probe == "preserved"
-        assert migrations == [(1, "create_active_schema")]
+        assert migrations == [
+            (1, "create_active_schema"),
+            (2, "add_offline_answer_references"),
+        ]
+        reading_columns = {row[1] for row in connection.exec_driver_sql("PRAGMA table_info(module1_beta_readings)").all()}
+        homework_columns = {row[1] for row in connection.exec_driver_sql("PRAGMA table_info(module1_beta_homework)").all()}
+        assert "reference_answer" in reading_columns
+        assert "reference_answer" in homework_columns
         assert connection.exec_driver_sql("PRAGMA quick_check").scalar_one() == "ok"
 
-    backup_path = tmp_path / "upgraded.db.pre-migration-v0-to-v1.bak"
+    backup_path = tmp_path / "upgraded.db.pre-migration-v0-to-v2.bak"
     assert backup_path.is_file()
     with closing(sqlite3.connect(f"{backup_path.resolve().as_uri()}?mode=ro", uri=True)) as backup, backup:
         assert backup.execute("SELECT value FROM legacy_probe").fetchone()[0] == "preserved"

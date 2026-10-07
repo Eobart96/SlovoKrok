@@ -48,7 +48,7 @@ class Settings(BaseSettings):
     openai_api_key: str | None = None
     openai_model: str = "gpt-5"
     polza_api_key: str | None = None
-    polza_model: str = "openai/gpt-4o-mini"
+    polza_model: str = "google/gemini-2.5-flash-lite"
     polza_base_url: str = "https://polza.ai/api/v1"
 
     _database_url_is_managed: bool = PrivateAttr(default=False)

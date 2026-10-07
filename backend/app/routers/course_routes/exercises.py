@@ -9,7 +9,7 @@ from app.config import get_settings
 from app.database import get_db
 from app.dependencies import get_tutor_provider
 from app.models import CourseExercise, CourseExerciseAttempt
-from app.routers.course_routes.common import invoke_tutor
+from app.routers.course_routes.common import commit_course_change, invoke_tutor
 from app.schemas.course import (
     CourseExerciseAnswerRequest,
     CourseExerciseAttemptResponse,
@@ -77,7 +77,7 @@ def generate_exercise(request: CourseExerciseGenerateRequest, db: Session = Depe
     generated = invoke_tutor(generate)
     exercise = CourseExercise(lesson_slug=request.lesson_slug, lesson_title=request.lesson_title, question=generated.question, instruction=generated.instruction, theory_snapshot=encode_exercise_snapshot(request.theory, generated))
     db.add(exercise)
-    db.commit()
+    commit_course_change(db)
     db.refresh(exercise)
     return _exercise_response(db, exercise)
 
@@ -88,7 +88,8 @@ def answer_exercise(exercise_id: int, request: CourseExerciseAnswerRequest, db: 
     if exercise is None:
         raise HTTPException(status_code=404, detail="Module 1 exercise not found")
     theory, interaction = decode_exercise_snapshot(exercise.theory_snapshot)
-    if request.assessment_mode == "offline":
+    has_reference = bool(interaction.pairs) if interaction.interaction_type == "match" else bool(interaction.accepted_answers)
+    if has_reference or request.assessment_mode == "offline":
         try:
             assessment = assess_exercise_offline(interaction=interaction, answer=request.answer)
         except ValueError as error:
@@ -99,7 +100,7 @@ def answer_exercise(exercise_id: int, request: CourseExerciseAnswerRequest, db: 
         assessment = invoke_tutor(lambda: parse_tutor_assessment(provider.respond(build_tutor_context(get_settings(), prompt))))
     attempt = CourseExerciseAttempt(exercise_id=exercise.id, answer=request.answer, is_correct=assessment.is_correct, score=assessment.score, corrected_answer=assessment.corrected_answer, explanation=assessment.explanation, next_exercise=assessment.next_exercise)
     db.add(attempt)
-    db.commit()
+    commit_course_change(db)
     db.refresh(attempt)
     return CourseExerciseAttemptResponse.model_validate(attempt, from_attributes=True)
 
@@ -114,7 +115,7 @@ def delete_all_exercises(request: _DeleteAllExercisesRequest, db: Session = Depe
     attempt_count = db.query(CourseExerciseAttempt).count()
     db.query(CourseExerciseAttempt).delete(synchronize_session=False)
     db.query(CourseExercise).delete(synchronize_session=False)
-    db.commit()
+    commit_course_change(db)
     return {"deleted": True, "exercises_deleted": exercise_count, "attempts_deleted": attempt_count}
 
 
@@ -125,5 +126,5 @@ def delete_exercise(exercise_id: int, db: Session = Depends(get_db)) -> dict[str
         raise HTTPException(status_code=404, detail="Module 1 exercise not found")
     db.query(CourseExerciseAttempt).filter(CourseExerciseAttempt.exercise_id == exercise.id).delete(synchronize_session=False)
     db.delete(exercise)
-    db.commit()
+    commit_course_change(db)
     return {"deleted": True}

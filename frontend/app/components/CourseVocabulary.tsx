@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import { a1CourseModules, allA1Lessons } from "../data/a1Course";
 import { ankiVocabularyText, learnedVocabularySeeds, vocabularyExportContent, type VocabularyExportDirection, type VocabularyExportFormat } from "../data/courseVocabulary";
+import { isSentenceVocabularyItem, isTranslatorVocabularySource, translatorVocabularyUpdatedEvent } from "../data/translationVocabulary";
 import { filterKnownLessonSlugs } from "../data/courseEngine";
 import { vocabularySections } from "../data/vocabularySections";
 import { reviewCourseVocabulary, syncCourseVocabulary, type CourseVocabularyItem, type CourseVocabularySeed, type VocabularyRating } from "../lib/api";
@@ -12,9 +13,7 @@ export function contentVocabulary(completedLessonSlugs: string[]): CourseVocabul
   return learnedVocabularySeeds(allA1Lessons, filterKnownLessonSlugs(a1CourseModules, completedLessonSlugs));
 }
 
-function isSentenceItem(item: Pick<CourseVocabularyItem, "lesson_slug">): boolean {
-  return item.lesson_slug.startsWith("additional-vocabulary:expanded-sentences-");
-}
+function isSentenceItem(item: Pick<CourseVocabularyItem, "lesson_slug" | "word">): boolean { return isSentenceVocabularyItem(item); }
 
 type ExportContent = "all" | "words" | "sentences";
 
@@ -32,11 +31,17 @@ export function CourseVocabulary({ completedLessonSlugs }: { completedLessonSlug
   const [exportDirection, setExportDirection] = useState<VocabularyExportDirection>("slovak-russian");
   const [loading, setLoading] = useState(true);
   const [reviewingId, setReviewingId] = useState<number | null>(null);
+  const [refreshVersion, setRefreshVersion] = useState(0);
   const [revealedId, setRevealedId] = useState<number | null>(null);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [now, setNow] = useState(() => Date.now());
   const completedKey = JSON.stringify(completedLessonSlugs);
+  useEffect(() => {
+    const refresh = () => setRefreshVersion((current) => current + 1);
+    window.addEventListener(translatorVocabularyUpdatedEvent, refresh);
+    return () => window.removeEventListener(translatorVocabularyUpdatedEvent, refresh);
+  }, []);
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 30_000);
     return () => window.clearInterval(timer);
@@ -49,14 +54,16 @@ export function CourseVocabulary({ completedLessonSlugs }: { completedLessonSlug
     const availableSources = new Set(seeds.map((item) => item.lesson_slug));
     setLoading(true); setError("");
     void syncCourseVocabulary(seeds)
-      .then((stored) => { if (!cancelled) setItems(stored.filter((item) => availableSources.has(item.lesson_slug)).sort((left, right) => (order.get(`${left.lesson_slug}:${left.word}`) ?? Number.MAX_SAFE_INTEGER) - (order.get(`${right.lesson_slug}:${right.word}`) ?? Number.MAX_SAFE_INTEGER))); })
+      .then((stored) => { if (!cancelled) setItems(stored.filter((item) => availableSources.has(item.lesson_slug) || isTranslatorVocabularySource(item.lesson_slug)).sort((left, right) => (order.get(`${left.lesson_slug}:${left.word}`) ?? Number.MAX_SAFE_INTEGER) - (order.get(`${right.lesson_slug}:${right.word}`) ?? Number.MAX_SAFE_INTEGER))); })
       .catch((cause) => { if (!cancelled) setError(cause instanceof Error ? cause.message : "Не удалось загрузить слова."); })
       .finally(() => { if (!cancelled) setLoading(false); });
     return () => { cancelled = true; };
-  }, [completedKey]);
+  }, [completedKey, refreshVersion]);
   const sections = useMemo(() => {
     const available = new Set(items.map((item) => item.lesson_title));
-    return vocabularySections.map((section) => section.title).filter((title) => available.has(title));
+    const standard: string[] = vocabularySections.map((section) => section.title).filter((title) => available.has(title));
+    const personal = [...available].filter((title) => !standard.includes(title)).sort((left, right) => left.localeCompare(right, "ru"));
+    return [...personal, ...standard];
   }, [items]);
   const visible = filter ? items.filter((item) => item.lesson_title === filter) : items;
   const displayed = visible.slice(0, visibleLimit);

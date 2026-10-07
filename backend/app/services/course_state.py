@@ -10,7 +10,7 @@ from app.models import CourseState, utc_now
 from app.schemas.course import CourseStatePayload
 
 
-CURRENT_COURSE_STATE_SCHEMA_VERSION = 2
+CURRENT_COURSE_STATE_SCHEMA_VERSION = 3
 COURSE_STATE_CONFLICT_DETAIL = "Прогресс уже изменён в другом сеансе. Загрузите более новую сохранённую версию."
 COURSE_STATE_REVISION_REQUIRED_DETAIL = "Для записи прогресса требуется актуальная revision."
 
@@ -104,6 +104,6 @@ def save_course_state(
 
 
 def decode_course_state(state: CourseState) -> CourseStatePayload:
-    if state.schema_version not in {1, CURRENT_COURSE_STATE_SCHEMA_VERSION}:
+    if state.schema_version not in {1, 2, CURRENT_COURSE_STATE_SCHEMA_VERSION}:
         raise ValueError(f"Unsupported course state schema version: {state.schema_version}")
     return CourseStatePayload.model_validate(json.loads(state.state_json))

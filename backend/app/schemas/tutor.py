@@ -124,7 +124,7 @@ class TutorSettingsUpdate(BaseModel):
     openai_api_key: str | None = Field(default=None, max_length=512)
     openai_model: str = Field(default="gpt-5", min_length=1, max_length=120)
     polza_api_key: str | None = Field(default=None, max_length=512)
-    polza_model: str = Field(default="openai/gpt-4o-mini", min_length=1, max_length=160)
+    polza_model: str = Field(default="google/gemini-2.5-flash-lite", min_length=1, max_length=160)
     clear_openai_api_key: bool = False
     clear_polza_api_key: bool = False
 

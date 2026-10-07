@@ -159,6 +159,49 @@ def test_openai_timeout_is_normalized(tmp_path: Path, monkeypatch):
         OpenAIProvider(_settings(tmp_path)).respond(TutorContext(prompt="test"))
 
 
+def test_polza_provider_uses_chat_completions_contract(tmp_path: Path, monkeypatch):
+    captured: dict[str, object] = {}
+
+    class FakeCompletions:
+        @staticmethod
+        def create(**kwargs):
+            captured["request"] = kwargs
+            message = type("Message", (), {"content": '{"answer":"ok"}'})()
+            return type("Response", (), {"choices": [type("Choice", (), {"message": message})()]})()
+
+    class FakeClient:
+        chat = type("Chat", (), {"completions": FakeCompletions()})()
+
+    def fake_openai(**kwargs):
+        captured["client"] = kwargs
+        return FakeClient()
+
+    monkeypatch.setattr(openai, "OpenAI", fake_openai)
+    settings = _settings(tmp_path)
+
+    result = OpenAIProvider(
+        settings,
+        api_key="pza_test",
+        model="google/gemini-2.5-flash-lite",
+        base_url="https://polza.ai/api/v1",
+        use_chat_completions=True,
+    ).respond(TutorContext(prompt="test"))
+
+    assert result == '{"answer":"ok"}'
+    assert captured["client"] == {
+        "api_key": "pza_test",
+        "timeout": 9.0,
+        "max_retries": 1,
+        "base_url": "https://polza.ai/api/v1",
+    }
+    assert captured["request"] == {
+        "model": "google/gemini-2.5-flash-lite",
+        "messages": [{"role": "user", "content": "test"}],
+        "max_tokens": 4096,
+        "temperature": 0.2,
+    }
+
+
 @pytest.mark.parametrize(
     ("provider_error", "status_code", "detail"),
     [

@@ -1,15 +1,22 @@
 "use client";
 
+import { useLastCourseTask } from "../hooks/useLastCourseTask";
+
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 
-import { allA1Lessons } from "../data/a1Course";
+import { a1CourseModules, allA1Lessons } from "../data/a1Course";
 import { buildExerciseGenerationContext, buildProgressGenerationContext, nextExerciseFormat, type GenerationMistakeHint } from "../data/courseGeneration";
+import { buildCourseGenerationScope, completedCourseModules, completedCourseSections, type CourseGenerationMode } from "../data/courseGenerationScope";
 import { learnedVocabularySeeds } from "../data/courseVocabulary";
 import { type LearningMode } from "../data/learningMode";
 import { answerCourseExercise, deleteCourseExercise, generateCourseExercise, getCourseExercises, type CourseExercise, type CourseExerciseAttempt } from "../lib/api";
+import { generateSequentialBatch } from "../lib/batchGeneration";
 import { CourseExercisePlayer } from "./CourseExercisePlayer";
 
-type ExerciseMode = "topic" | "progress";
+import type { TaskMistakeInput, TaskOpenRequest } from "../data/taskMistakes";
+import { CourseTaskMistakeButton } from "./CourseTaskMistakeButton";
+
+type ExerciseMode = Exclude<CourseGenerationMode, "mistakes">;
 
 function exerciseNoun(count: number): string {
   const lastTwo = count % 100;
@@ -19,13 +26,20 @@ function exerciseNoun(count: number): string {
   return "упражнений";
 }
 
-export function CourseExercises({ completedLessonSlugs, mistakeHints, learningMode }: { completedLessonSlugs: string[]; mistakeHints: GenerationMistakeHint[]; learningMode: LearningMode }) {
+export function CourseExercises({ completedLessonSlugs, mistakeHints, learningMode, recordedMistakeIds, mistakesDisabled, onRecordMistake, onTaskChecked, openRequest }: { completedLessonSlugs: string[]; mistakeHints: GenerationMistakeHint[]; learningMode: LearningMode; recordedMistakeIds: string[]; mistakesDisabled: boolean; onRecordMistake: (mistake: TaskMistakeInput) => void; onTaskChecked: (id: string, correct: boolean) => void; openRequest: TaskOpenRequest | null }) {
   const answerRef = useRef<HTMLTextAreaElement>(null);
+  const workspaceRef = useRef<HTMLFormElement>(null);
   const completedLessons = allA1Lessons.filter((item) => completedLessonSlugs.includes(item.slug));
   const [mode, setMode] = useState<ExerciseMode>("topic");
   const [lessonSlug, setLessonSlug] = useState(completedLessons[0]?.slug ?? "");
+  const sectionOptions = completedCourseSections(a1CourseModules, completedLessonSlugs);
+  const [sectionKey, setSectionKey] = useState(sectionOptions[0]?.key ?? "");
+  const moduleOptions = completedCourseModules(a1CourseModules, completedLessonSlugs);
+  const [moduleSlug, setModuleSlug] = useState(moduleOptions[0]?.module.slug ?? "");
   const [exercises, setExercises] = useState<CourseExercise[]>([]);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const { lastId, remember } = useLastCourseTask("exercise");
+  const handledRequest = useRef<number | null>(null);
   const [answer, setAnswer] = useState("");
   const [assessment, setAssessment] = useState<CourseExerciseAttempt | null>(null);
   const [loading, setLoading] = useState(true);
@@ -36,12 +50,17 @@ export function CourseExercises({ completedLessonSlugs, mistakeHints, learningMo
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const lesson = completedLessons.find((item) => item.slug === lessonSlug) ?? completedLessons[0];
-  const storageSlug = mode === "progress" ? "course-progress" : lessonSlug;
+  const scope = buildCourseGenerationScope({ mode, modules: a1CourseModules, completedLessonSlugs, lessonSlug, sectionKey, moduleSlug });
+  const storageSlug = scope.storageSlug;
   const visible = exercises.filter((item) => item.lesson_slug === storageSlug);
   const nextFormat = nextExerciseFormat(visible.length);
   const selected = visible.find((item) => item.id === selectedId) ?? visible[0];
+  const lastTask = exercises.find((item) => item.id === lastId) ?? exercises[0];
+  const selectedIndex = selected ? visible.findIndex((item) => item.id === selected.id) : -1;
+  const nextExercise = selectedIndex >= 0 ? visible[selectedIndex + 1] : undefined;
   const learnedCount = useMemo(() => learnedVocabularySeeds(allA1Lessons, completedLessonSlugs).length, [completedLessonSlugs]);
-  const relevantMistakeCount = mistakeHints.filter((hint) => mode === "progress" ? completedLessonSlugs.includes(hint.lessonSlug) : hint.lessonSlug === lesson?.slug).length;
+  const scopeLessonSlugs = new Set(scope.lessons.map((item) => item.slug));
+  const relevantMistakeCount = mistakeHints.filter((hint) => scopeLessonSlugs.has(hint.lessonSlug)).length;
 
   useEffect(() => {
     void getCourseExercises().then((items) => { setExercises(items); setSelectedId(items[0]?.id ?? null); }).catch((cause) => setError(cause instanceof Error ? cause.message : "Не удалось загрузить упражнения.")).finally(() => setLoading(false));
@@ -49,45 +68,88 @@ export function CourseExercises({ completedLessonSlugs, mistakeHints, learningMo
   useEffect(() => {
     if (!completedLessons.some((item) => item.slug === lessonSlug)) setLessonSlug(completedLessons[0]?.slug ?? "");
   }, [completedLessons, lessonSlug]);
+  useEffect(() => {
+    if (!moduleOptions.some(({ module }) => module.slug === moduleSlug)) setModuleSlug(moduleOptions[0]?.module.slug ?? "");
+  }, [moduleOptions, moduleSlug]);
+  useEffect(() => {
+    if (!sectionOptions.some(({ key }) => key === sectionKey)) setSectionKey(sectionOptions[0]?.key ?? "");
+  }, [sectionKey, sectionOptions]);
+
+  useEffect(() => {
+    if (!openRequest || handledRequest.current === openRequest.nonce) return;
+    const task = exercises.find((item) => item.id === openRequest.id);
+    if (!task) {
+      if (!loading) { handledRequest.current = openRequest.nonce; setError("Исходное упражнение удалено или недоступно. Исправление сохранено в разделе ошибок."); }
+      return;
+    }
+    handledRequest.current = openRequest.nonce;
+    remember(task.id);
+    const slug = task.lesson_slug;
+    if (slug.startsWith("section:")) { setMode("section"); setSectionKey(slug.slice(8)); }
+    else if (slug.startsWith("module:")) { setMode("module"); setModuleSlug(slug.slice(7)); }
+    else if (slug === "course-progress") setMode("progress");
+
+    else { setMode("topic"); setLessonSlug(slug); }
+    setSelectedId(task.id); setAssessment(task.latest_attempt); setAnswer("");
+  }, [openRequest, exercises, loading]);
+
+  const openExercise = (item: CourseExercise) => {
+    remember(item.id);
+    setSelectedId(item.id);
+    setAssessment(item.latest_attempt);
+    if (selected?.id !== item.id) setAnswer("");
+    requestAnimationFrame(() => workspaceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  };
+
+  const returnToLastTask = () => {
+    if (!lastTask) return;
+    const slug = lastTask.lesson_slug;
+    if (slug.startsWith("section:")) { setMode("section"); setSectionKey(slug.slice(8)); }
+    else if (slug.startsWith("module:")) { setMode("module"); setModuleSlug(slug.slice(7)); }
+    else if (slug === "course-progress") setMode("progress");
+
+    else { setMode("topic"); setLessonSlug(slug); }
+    openExercise(lastTask);
+  };
 
   const generate = async () => {
     if (generating || learningMode === "offline") return;
     const requestedCount = Math.min(20, Math.max(1, Math.trunc(batchCount)));
-    const createdItems: CourseExercise[] = [];
     setGenerating(true); setGeneratedCount(0); setGenerationNotice(""); setError(""); setAssessment(null); setAnswer("");
     try {
-      if (!completedLessons.length || (mode === "topic" && !lesson)) return;
-      const baseContext = buildProgressGenerationContext({ mode, selectedLesson: lesson, completedLessons, mistakeHints });
-      for (let index = 0; index < requestedCount; index += 1) {
+      if (!scope.lessons.length) return;
+      const baseContext = buildProgressGenerationContext({ mode, selectedLesson: lesson, completedLessons, mistakeHints, scope });
+      const batch = await generateSequentialBatch({ count: requestedCount, create: async (index, createdItems: readonly CourseExercise[]) => {
         const format = nextExerciseFormat(visible.length + index);
         const theory = buildExerciseGenerationContext({
           baseContext,
           format,
-          sourceLessons: mode === "topic" && lesson ? [lesson] : [...completedLessons].reverse().slice(0, 4),
+          sourceLessons: [...scope.lessons].reverse().slice(0, 4),
         });
-        const item = mode === "topic"
-          ? await generateCourseExercise({ lesson_slug: lesson.slug, lesson_title: lesson.title, theory })
-          : await generateCourseExercise({ lesson_slug: "course-progress", lesson_title: "Общий прогресс Slovak A1", theory });
-        createdItems.push(item);
-        setGeneratedCount(createdItems.length);
+        const knownIds = [...exercises, ...createdItems].map((item) => item.id);
+        const item = await generateCourseExercise({ lesson_slug: scope.storageSlug, lesson_title: scope.title, theory }, knownIds);
+        return item;
+      }, onProgress: ({ attempted }) => setGeneratedCount(attempted) });
+      if (batch.items.length) {
+        setExercises((current) => [...batch.items.slice().reverse(), ...current]);
+        setSelectedId(batch.items.at(-1)!.id);
+        remember(batch.items.at(-1)!.id);
       }
-    } catch (cause) { setError(cause instanceof Error ? cause.message : "Не удалось создать упражнение."); }
-    finally {
-      if (createdItems.length) {
-        setExercises((current) => [...createdItems.slice().reverse(), ...current]);
-        setSelectedId(createdItems.at(-1)!.id);
-        setGenerationNotice(`Сохранено заданий: ${createdItems.length}. Их можно выполнить в офлайн-режиме.`);
-      }
-      setGenerating(false);
-    }
+      setGenerationNotice(batch.failed
+        ? `Сохранено заданий: ${batch.created} из ${requestedCount}. Не удалось создать: ${batch.failed}.${batch.stoppedEarly ? " Генерация остановлена после трёх сбоев подряд." : ""}`
+        : `Сохранено заданий: ${batch.created}. Их можно выполнить в офлайн-режиме.`);
+      if (!batch.items.length) setError("Не удалось создать упражнения после нескольких попыток. Сохранённые ранее задания не потеряны.");
+    } finally { setGenerating(false); }
   };
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
     if (!selected || !answer.trim() || submitting) return;
+    remember(selected.id);
     setSubmitting(true); setError("");
     try {
-      const result = await answerCourseExercise(selected.id, answer.trim(), learningMode);
+      const result = await answerCourseExercise(selected.id, answer.trim(), learningMode, selected.latest_attempt?.id);
+      onTaskChecked(`exercise:${selected.id}`, result.is_correct);
       setAssessment(result);
       setExercises((current) => current.map((item) => item.id === selected.id ? { ...item, latest_attempt: result } : item));
     } catch (cause) { setError(cause instanceof Error ? cause.message : "Не удалось проверить ответ."); }
@@ -113,11 +175,14 @@ export function CourseExercises({ completedLessonSlugs, mistakeHints, learningMo
     } catch (cause) { setError(cause instanceof Error ? cause.message : "Не удалось удалить упражнение."); }
   };
 
-  return <section className="course-exercises" aria-labelledby="course-exercises-title">
+  return <section className="course-exercises" aria-labelledby="course-exercises-title" data-report-task-type="exercise" data-report-task-id={selected?.id} data-report-task-title={selected ? selected.question : undefined} data-report-scope={scope.title}>
     <div className="course-section-heading"><div><span>Практика по прогрессу</span><h3 id="course-exercises-title">Упражнения</h3></div><div className={`course-learning-mode ${learningMode}`}><strong>{learningMode === "online" ? "Онлайн" : "Офлайн"}</strong><p>{learningMode === "online" ? "ИИ доступен для генерации и гибкой проверки." : "Новых запросов к ИИ нет; ответы проверяются по сохранённым эталонам."}</p></div></div>
-    <div className="course-reading-modes" role="group" aria-label="Режим генерации упражнения"><button type="button" disabled={generating} className={mode === "topic" ? "active" : ""} onClick={() => { setMode("topic"); setSelectedId(null); setAssessment(null); setAnswer(""); }}>По теме</button><button type="button" disabled={generating} className={mode === "progress" ? "active" : ""} onClick={() => { setMode("progress"); setSelectedId(null); setAssessment(null); setAnswer(""); }}>По общему прогрессу</button></div>
+    <div className="course-task-navigation">
+    <div className="course-reading-modes" role="group" aria-label="Режим генерации упражнения">{([['topic', 'По теме'], ['section', 'По разделу'], ['module', 'По модулю'], ['progress', 'По общему прогрессу']] as const).map(([value, label]) => <button key={value} type="button" disabled={generating} className={mode === value ? "active" : ""} onClick={() => { setMode(value); setSelectedId(null); setAssessment(null); setAnswer(""); }}>{label}</button>)}</div>
+    <button type="button" className="course-task-return" onClick={returnToLastTask} disabled={loading || generating || submitting || !lastTask}>Вернуться к последнему заданию</button>
+    </div>
     <div className="course-exercise-toolbar">
-      {mode === "topic" ? <label><span>Завершённая тема</span><select value={lessonSlug} disabled={!completedLessons.length || generating} onChange={(event) => { setLessonSlug(event.target.value); setSelectedId(null); setAssessment(null); setAnswer(""); }}>{completedLessons.map((item) => <option key={item.slug} value={item.slug}>{item.title}</option>)}</select><small>{learnedCount} открытых слов и фраз · {relevantMistakeCount} активных ошибок по теме</small></label> : <div className="course-reading-scope"><span>Доступный материал</span><strong>{completedLessons.length} завершённых тем · {learnedCount} слов и фраз</strong><small>{relevantMistakeCount ? `Учитывается активных ошибок: ${relevantMistakeCount}.` : "Активных ошибок в пройденном материале нет."}</small></div>}
+      {mode === "topic" ? <div className="course-generation-selectors"><label><span>Завершённая тема</span><select value={lessonSlug} disabled={!completedLessons.length || generating} onChange={(event) => { setLessonSlug(event.target.value); setSelectedId(null); setAssessment(null); setAnswer(""); }}>{completedLessons.map((item) => <option key={item.slug} value={item.slug}>{item.title}</option>)}</select></label><small>{relevantMistakeCount} активных ошибок в выбранной теме</small></div> : mode === "section" ? <div className="course-generation-selectors"><label><span>Учебный раздел</span><select value={sectionOptions.find(({ key }) => key === sectionKey)?.key ?? ""} disabled={!sectionOptions.length || generating} onChange={(event) => { setSectionKey(event.target.value); setSelectedId(null); setAssessment(null); setAnswer(""); }}>{sectionOptions.map(({ key, module, section, lessons }) => <option key={key} value={key}>Модуль {module.order} · {section.title} · {lessons.length} тем</option>)}</select></label><small>Это раздел с экрана выбора тем; используются только завершённые темы внутри него.</small></div> : mode === "module" ? <div className="course-generation-selectors"><label><span>Модуль с завершёнными темами</span><select value={scope.module?.slug ?? ""} disabled={!moduleOptions.length || generating} onChange={(event) => { setModuleSlug(event.target.value); setSelectedId(null); setAssessment(null); setAnswer(""); }}>{moduleOptions.map(({ module, lessons }) => <option key={module.slug} value={module.slug}>Модуль {module.order}. {module.title} · {lessons.length} тем</option>)}</select></label><small>Генератор использует только завершённые темы выбранного модуля.</small></div> : <div className="course-reading-scope"><span>Доступный материал</span><strong>{completedLessons.length} завершённых тем · {learnedCount} слов и фраз</strong><small>{relevantMistakeCount ? `Учитывается активных ошибок: ${relevantMistakeCount}.` : "Активных ошибок в пройденном материале нет."}</small></div>}
       <div className="course-exercise-create">
         <small>Следующий формат: <b>{nextFormat.label}</b></small>
         <label className="course-exercise-count"><span>Количество заданий</span><input type="number" min={1} max={20} step={1} value={batchCount} disabled={generating || learningMode === "offline"} onChange={(event) => setBatchCount(Math.min(20, Math.max(1, Math.trunc(Number(event.target.value) || 1))))} /></label>
@@ -129,8 +194,8 @@ export function CourseExercises({ completedLessonSlugs, mistakeHints, learningMo
     {generationNotice && <p className="course-generation-notice" role="status">{generationNotice}</p>}
     {error && <p className="course-persistence-error" role="alert">{error}</p>}
     {loading ? <p className="course-empty">Загружаю упражнения…</p> : <div className="course-exercise-grid">
-      <aside className="course-exercise-list"><strong>Сохранённые задания · {visible.length}</strong>{visible.length === 0 ? <p>Созданных заданий пока нет.</p> : visible.map((item, index) => <article className={selected?.id === item.id ? "active" : ""} key={item.id}><button type="button" onClick={() => { setSelectedId(item.id); setAssessment(item.latest_attempt); setAnswer(""); }}><span>Упражнение {visible.length - index}</span><b>{item.question}</b>{item.latest_attempt && <small>{item.latest_attempt.is_correct ? "✓ Выполнено" : `Последний результат: ${item.latest_attempt.score}/100`}</small>}</button><button type="button" className="delete" onClick={() => void remove(item)} aria-label={`Удалить упражнение: ${item.question}`}>Удалить</button></article>)}</aside>
-      <form className="course-exercise-workspace" onSubmit={(event) => void submit(event)}>{selected ? <><span>{selected.lesson_title}</span><h4>{selected.question}</h4><p>{selected.instruction}</p><CourseExercisePlayer key={selected.id} exercise={selected} answer={answer} onAnswerChange={setAnswer} answerRef={answerRef} disabled={submitting} onInsertKey={insertKey} /><button type="submit" disabled={!answer.trim() || submitting}>{submitting ? "Проверяю…" : "Проверить ответ"}</button>{(assessment ?? selected.latest_attempt) && (() => { const result = assessment ?? selected.latest_attempt!; return <article className={result.is_correct ? "correct" : "incorrect"}><strong>{result.is_correct ? "Верно" : "Нужно исправить"} · {result.score}/100</strong>{!result.is_correct && <p><b>Исправленный вариант:</b> {result.corrected_answer}</p>}<p>{result.explanation}</p><small>Следующий шаг: {result.next_exercise}</small></article>; })()}</> : <div className="course-empty"><strong>Выберите или создайте упражнение</strong><p>Генератор использует только теорию выбранной темы.</p></div>}</form>
+      <aside className="course-exercise-list"><strong>Сохранённые задания · {visible.length}</strong>{visible.length === 0 ? <p>Созданных заданий пока нет.</p> : visible.map((item, index) => <article className={selected?.id === item.id ? "active" : ""} key={item.id}><button type="button" onClick={() => openExercise(item)}><span>Упражнение {visible.length - index}</span><b>{item.question}</b>{item.latest_attempt && <small>{item.latest_attempt.is_correct ? "✓ Выполнено" : `Последний результат: ${item.latest_attempt.score}/100`}</small>}</button><button type="button" className="delete" onClick={() => void remove(item)} aria-label={`Удалить упражнение: ${item.question}`}>Удалить</button></article>)}</aside>
+      <form ref={workspaceRef} className="course-exercise-workspace" onSubmit={(event) => void submit(event)}>{selected ? <><span>{selected.lesson_title}</span><h4>{selected.question}</h4><p>{selected.instruction}</p><CourseExercisePlayer key={selected.id} exercise={selected} answer={answer} onAnswerChange={setAnswer} answerRef={answerRef} disabled={submitting} onInsertKey={insertKey} /><button type="submit" disabled={!answer.trim() || submitting}>{submitting ? "Проверяю…" : "Проверить ответ"}</button>{(assessment ?? selected.latest_attempt) && (() => { const result = assessment ?? selected.latest_attempt!; return <><article className={result.is_correct ? "correct" : "incorrect"}><strong>{result.is_correct ? "Верно" : "Нужно исправить"} · {result.score}/100</strong>{!result.is_correct && <p><b>Исправленный вариант:</b> {result.corrected_answer}</p>}<p>{result.explanation}</p><small>Следующий шаг: {result.next_exercise}</small></article>{!result.is_correct && <CourseTaskMistakeButton mistake={{ id: `exercise:${selected.id}`, lessonSlug: selected.lesson_slug, prompt: `${selected.lesson_title} · ${selected.question}\n${selected.instruction}\nВаш ответ: ${result.answer}\n${result.explanation}`.slice(0, 2000), answer: result.corrected_answer, reviewTask: { prompt: `${selected.question}\n${selected.instruction}`.slice(0, 4000), learnerAnswer: result.answer.slice(0, 4000), explanation: result.explanation, kind: selected.interaction_type ? "exact" : "open" } }} recorded={recordedMistakeIds.includes(`exercise:${selected.id}`)} disabled={mistakesDisabled} onRecord={onRecordMistake} />}<button type="button" className="course-task-next" disabled={!nextExercise} onClick={() => nextExercise && openExercise(nextExercise)}>{nextExercise ? "Следующее задание →" : "Это последнее задание"}</button></>; })()}</> : <div className="course-empty"><strong>Выберите или создайте упражнение</strong><p>Генератор использует только теорию выбранной темы.</p></div>}</form>
     </div>}
   </section>;
 }

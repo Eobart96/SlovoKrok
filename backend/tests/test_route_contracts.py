@@ -20,6 +20,9 @@ EXPECTED_COURSE_AND_TUTOR_ROUTES = {
     ("POST", "/api/v1/course/homework"),
     ("POST", "/api/v1/course/homework/{homework_id}/submit"),
     ("DELETE", "/api/v1/course/homework/{homework_id}"),
+    ("GET", "/api/v1/course/materials/export"),
+    ("POST", "/api/v1/course/materials/import"),
+    ("DELETE", "/api/v1/course/materials"),
     ("GET", "/api/v1/tutor/settings"),
     ("PUT", "/api/v1/tutor/settings"),
     ("POST", "/api/v1/tutor/codex-login"),
@@ -57,6 +60,9 @@ def test_named_success_response_schemas_are_stable():
         ("/api/v1/course/vocabulary/{item_id}/review", "post"): "CourseVocabularyResponse",
         ("/api/v1/course/homework", "post"): "CourseHomeworkResponse",
         ("/api/v1/course/homework/{homework_id}/submit", "post"): "CourseHomeworkAttemptResponse",
+        ("/api/v1/course/materials/export", "get"): "CourseMaterialCollection",
+        ("/api/v1/course/materials/import", "post"): "CourseMaterialImportResponse",
+        ("/api/v1/course/materials", "delete"): "CourseTasksDeleteResponse",
         ("/api/v1/tutor/settings", "get"): "TutorSettingsResponse",
         ("/api/v1/tutor/settings", "put"): "TutorSettingsResponse",
         ("/api/v1/tutor/codex-login", "post"): "CodexLoginResponse",
@@ -70,3 +76,20 @@ def test_named_success_response_schemas_are_stable():
         for key in expected
     }
     assert actual == expected
+
+
+def test_cors_allows_only_local_frontend_origins(client):
+    for origin in ("http://127.0.0.1:3000", "http://localhost:3000"):
+        response = client.options(
+            "/api/v1/course/readings",
+            headers={"Origin": origin, "Access-Control-Request-Method": "GET"},
+        )
+        assert response.status_code == 200
+        assert response.headers["access-control-allow-origin"] == origin
+
+    rejected = client.options(
+        "/api/v1/course/readings",
+        headers={"Origin": "https://example.com", "Access-Control-Request-Method": "GET"},
+    )
+    assert rejected.status_code == 400
+    assert "access-control-allow-origin" not in rejected.headers

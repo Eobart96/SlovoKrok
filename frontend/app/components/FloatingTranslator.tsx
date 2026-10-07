@@ -4,8 +4,10 @@ import { type FormEvent, type KeyboardEvent, type PointerEvent as ReactPointerEv
 import { createPortal } from "react-dom";
 
 import { editTranslationDraft, swapTranslationDraft, type TranslationDraftReset } from "../data/translationState";
+import { translationVocabularySeed, translatorVocabularyUpdatedEvent } from "../data/translationVocabulary";
 import {
   askTutorTranslationQuestion,
+  syncCourseVocabulary,
   translateWithTutor,
   type TranslationDirection,
   type TutorTranslation,
@@ -40,6 +42,7 @@ export function FloatingTranslator() {
   const [questionAnswer, setQuestionAnswer] = useState("");
   const [questionLoading, setQuestionLoading] = useState(false);
   const [questionError, setQuestionError] = useState("");
+  const [vocabularyMessage, setVocabularyMessage] = useState("");
 
   const keepInsideViewport = (next = position) => {
     const rect = panelRef.current?.getBoundingClientRect();
@@ -117,6 +120,7 @@ export function FloatingTranslator() {
     setQuestion(next.question);
     setQuestionAnswer(next.questionAnswer);
     setQuestionError(next.questionError);
+    setVocabularyMessage("");
   };
 
   const swapDirection = () => {
@@ -136,6 +140,18 @@ export function FloatingTranslator() {
     try {
       const translated = await translateWithTutor(source, direction);
       setResult(translated);
+      const vocabulary = translationVocabularySeed(source, translated.translation, direction);
+      if (vocabulary) {
+        try {
+          await syncCourseVocabulary([vocabulary]);
+          window.dispatchEvent(new Event(translatorVocabularyUpdatedEvent));
+          setVocabularyMessage(vocabulary.lesson_slug.endsWith("sentences") ? "Предложение добавлено в список слов." : "Слово добавлено в список слов.");
+        } catch {
+          setVocabularyMessage("Перевод сохранён в истории, но добавить его в список слов не удалось.");
+        }
+      } else {
+        setVocabularyMessage("Перевод сохранён в истории. Слишком длинный текст не добавлен в список слов.");
+      }
     } catch (requestError) {
       setResult(null);
       setError(requestError instanceof Error ? requestError.message : "Не удалось выполнить перевод");
@@ -211,6 +227,7 @@ export function FloatingTranslator() {
             <button type="button" className="floating-translator-ask-toggle" onClick={() => setQuestionOpen((current) => !current)} aria-expanded={questionOpen}>? Спросить</button>
             <em>Сохранено · ИИ {result.provider}</em>
           </div>
+          {vocabularyMessage && <small role="status">{vocabularyMessage}</small>}
           {questionOpen && <div className="floating-translator-question">
             <label>
               <span>Вопрос о переводе</span>

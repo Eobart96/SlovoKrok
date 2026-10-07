@@ -1,4 +1,6 @@
-import { useRef, useState } from "react";
+import { type KeyboardEvent, useRef, useState } from "react";
+
+import { applySlovakAltShortcut } from "../data/slovakKeyboard";
 
 const slovakKeys = ["á", "ä", "č", "ď", "é", "í", "ĺ", "ľ", "ň", "ó", "ô", "ŕ", "š", "ť", "ú", "ý", "ž", "ch", "dz", "dž"];
 
@@ -33,8 +35,21 @@ export function SlovakTextInput({ value, onChange, placeholder, disabled = false
     });
   };
 
+  const handleAltShortcut = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (!event.altKey || event.ctrlKey || event.metaKey) return;
+    const input = inputRef.current;
+    const inserted = applySlovakAltShortcut(value, event.code, event.shiftKey, input?.selectionStart ?? value.length, input?.selectionEnd ?? value.length);
+    if (!inserted) return;
+    event.preventDefault();
+    onChange(inserted.value);
+    requestAnimationFrame(() => {
+      input?.focus();
+      input?.setSelectionRange(inserted.caret, inserted.caret);
+    });
+  };
+
   return <>
-    <input ref={inputRef} value={value} onChange={(event) => onChange(event.target.value)} placeholder={placeholder} autoComplete="off" disabled={disabled} />
+    <input ref={inputRef} value={value} onChange={(event) => onChange(event.target.value)} onKeyDown={handleAltShortcut} placeholder={placeholder} autoComplete="off" disabled={disabled} />
     <SlovakKeyboard onInsert={insertKey} disabled={disabled} />
   </>;
 }

@@ -57,3 +57,8 @@ GATES.md
 
 # Local offline installers are distributed separately from the source repository.
 Install/
+
+# Local A2 prompt recovery copy and superseded incomplete-collection list.
+# Keep the canonical output/txt/Slovak_A2_PDF_prompts.txt versioned.
+output/txt/Slovak_A2_PDF_prompts — копия.txt
+output/txt/Slovak_A2_missing_PDF_prompts.txt

@@ -464,7 +464,7 @@ test("AI settings switch provider without receiving saved secrets", async ({ pag
         openai_api_key_configured: false,
         openai_model: "gpt-5",
         polza_api_key_configured: provider === "polza",
-        polza_model: "openai/gpt-4o-mini",
+        polza_model: "google/gemini-2.5-flash-lite",
         polza_base_url: "https://polza.ai/api/v1",
       }),
     });

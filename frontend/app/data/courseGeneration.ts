@@ -1,7 +1,9 @@
 import type { CourseLesson } from "./courseTypes";
+import type { CourseGenerationScope } from "./courseGenerationScope";
 import { learnedVocabularyContext } from "./courseVocabulary";
+import { homeworkModeInstructions, type HomeworkGenerationMode } from "./homeworkPlanning";
 
-export type GenerationMode = "topic" | "progress";
+export type GenerationMode = HomeworkGenerationMode;
 export type GenerationMistakeHint = { lessonSlug: string; text: string };
 
 const contextLimit = 12_000;
@@ -87,39 +89,81 @@ export function buildProgressGenerationContext({
   selectedLesson,
   completedLessons,
   mistakeHints,
+  scope,
 }: {
   mode: GenerationMode;
   selectedLesson?: CourseLesson;
   completedLessons: CourseLesson[];
   mistakeHints: GenerationMistakeHint[];
+  scope?: CourseGenerationScope;
 }): string {
-  const completedSlugs = completedLessons.map((lesson) => lesson.slug);
-  const relevantHints = mode === "topic" && selectedLesson
-    ? mistakeHints.filter((hint) => hint.lessonSlug === selectedLesson.slug)
+  const sourceLessons = scope?.lessons ?? completedLessons;
+  const activeLesson = scope?.lesson ?? selectedLesson;
+  const completedSlugs = sourceLessons.map((lesson) => lesson.slug);
+  const relevantHints = mode === "topic" && activeLesson
+    ? mistakeHints.filter((hint) => hint.lessonSlug === activeLesson.slug)
     : mistakeHints.filter((hint) => completedSlugs.includes(hint.lessonSlug));
   const vocabulary = learnedVocabularyContext(
-    completedLessons,
+    sourceLessons,
     completedSlugs,
     undefined,
-    mode === "topic" ? 3_000 : 4_500,
+    mode === "topic" || mode === "section" ? 3_000 : mode === "mistakes" ? 2_500 : 4_500,
   );
 
-  if (mode === "topic" && selectedLesson) {
+  if (mode === "section" && scope?.section) {
+    const parts = [
+      `Рабочая область: учебный раздел «${scope.section.title}» из модуля ${scope.sectionModule?.order}. Используй только ${sourceLessons.length} завершённых тем этой карточки раздела; незавершённые темы не используй.`,
+    ];
+    if (vocabulary) appendWithinLimit(parts, vocabulary);
+    appendWithinLimit(parts, mistakeContext(relevantHints));
+    appendWithinLimit(parts, "Материал завершённых тем раздела:");
+    for (const lesson of sourceLessons) {
+      if (!appendWithinLimit(parts, compactTheory(lesson))) break;
+    }
+    return parts.join("\n\n");
+  }
+
+  if (mode === "topic" && activeLesson) {
     return [
-      `Рабочая область: только завершённая тема «${selectedLesson.title}».`,
-      `Материал темы:\n${trimAtLine(detailedTheory(selectedLesson), 6_000)}`,
+      `Рабочая область: только завершённая тема «${activeLesson.title}».`,
+      `Материал темы:\n${trimAtLine(detailedTheory(activeLesson), 6_000)}`,
       mistakeContext(relevantHints),
       vocabulary,
     ].filter(Boolean).join("\n\n");
   }
 
+  if (mode === "mistakes") {
+    const mistakeLessonSlugs = new Set(relevantHints.map((hint) => hint.lessonSlug));
+    const mistakeLessons = sourceLessons.filter((lesson) => mistakeLessonSlugs.has(lesson.slug));
+    const parts = [...homeworkModeInstructions(mode), mistakeContext(relevantHints)];
+    if (vocabulary) appendWithinLimit(parts, vocabulary);
+    appendWithinLimit(parts, "Материал тем, в которых были допущены ошибки:");
+    for (const lesson of [...mistakeLessons].reverse()) {
+      if (!appendWithinLimit(parts, compactTheory(lesson))) break;
+    }
+    return parts.join("\n\n");
+  }
+
+  if (mode === "module" && scope?.module) {
+    const parts = [
+      `Рабочая область: модуль ${scope.module.order} «${scope.module.title}». Используй только ${sourceLessons.length} завершённых тем этого модуля; незавершённые темы не используй.`,
+    ];
+    if (vocabulary) appendWithinLimit(parts, vocabulary);
+    appendWithinLimit(parts, mistakeContext(relevantHints));
+    appendWithinLimit(parts, "Материал завершённых тем модуля:");
+    for (const lesson of sourceLessons) {
+      if (!appendWithinLimit(parts, compactTheory(lesson))) break;
+    }
+    return parts.join("\n\n");
+  }
+
   const parts = [
-    `Рабочая область: общий прогресс из ${completedLessons.length} завершённых тем. Не используй незавершённые темы.`,
+    `Рабочая область: общий прогресс из ${sourceLessons.length} завершённых тем. Не используй незавершённые темы.`,
   ];
   if (vocabulary) appendWithinLimit(parts, vocabulary);
   appendWithinLimit(parts, mistakeContext(relevantHints));
   appendWithinLimit(parts, "Материал последних завершённых тем (сначала самые новые):");
-  for (const lesson of [...completedLessons].reverse()) {
+  for (const lesson of [...sourceLessons].reverse()) {
     if (!appendWithinLimit(parts, compactTheory(lesson))) break;
   }
   return parts.join("\n\n");

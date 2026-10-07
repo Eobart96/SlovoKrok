@@ -50,6 +50,9 @@ jobs:
       - name: Validate content and TypeScript
         working-directory: frontend
         run: npm run validate:a1
+      - name: Validate isolated A2 pilot
+        working-directory: frontend
+        run: npm run validate:a2
       - name: Build frontend
         working-directory: frontend
         run: npm run build
@@ -77,5 +80,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: Check Git candidate path controls
+        run: node scripts/git-candidate.mjs --self-test
       - name: Check changed lines for whitespace errors
         run: node scripts/run-git-diff-check.mjs "${{ github.event.pull_request.base.sha || github.event.before }}" "${{ github.sha }}"

@@ -5,6 +5,7 @@ const backendUrl = process.env.BACKEND_URL ?? "http://127.0.0.1:8000";
 
 export default function nextConfig(phase: string): NextConfig {
   return {
+    devIndicators: false,
     distDir:
       process.env.NEXT_DIST_DIR ??
       (phase === PHASE_DEVELOPMENT_SERVER ? ".next-dev" : ".next"),

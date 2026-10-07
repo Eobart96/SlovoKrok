@@ -30,6 +30,12 @@ def seed(client):
 def test_backup_roundtrip_preserves_relationships_and_existing_data(client):
     seed(client)
     state = _state_payload()
+    state.update({
+        "activeLevel": "A2",
+        "activeModule": 2,
+        "selectedSlug": "a2-nominative-plural-things",
+        "finalCompletedModules": {"a1:1": True, "a2:2": False},
+    })
     state["personalCheatSheets"] = [{
         "id": "note-1", "title": "Моё правило", "content": "После do — Genitív.",
         "createdAt": "2026-09-13T12:00:00Z", "updatedAt": "2026-09-13T12:00:00Z",
@@ -75,6 +81,52 @@ def test_backup_roundtrip_preserves_relationships_and_existing_data(client):
     assert len(after["tables"]["translation_questions"]) == 1
     assert after["state"]["personalCheatSheets"][0]["title"] == "Моё правило"
     assert after["state"]["mistakes"]["m1"]["answer"] == "Dobrý deň."
+    assert after["state"]["activeLevel"] == "A2"
+    assert after["state"]["finalCompletedModules"] == {"a1:1": True, "a2:2": False}
+
+
+def test_backup_roundtrip_preserves_reading_tasks_and_attempts(client):
+    seed(client)
+    backup = client.get("/api/v1/course/backup").json()
+    assert len(backup["tables"]["readings"]) == 1
+    assert len(backup["tables"]["reading_attempts"]) == 1
+
+    reading_id = backup["tables"]["readings"][0]["id"]
+    client.delete(f"/api/v1/course/readings/{reading_id}").raise_for_status()
+    assert client.get("/api/v1/course/readings").json() == []
+
+    restored = client.post(
+        "/api/v1/course/backup/restore",
+        json=backup,
+        headers=current_state_headers(client),
+    )
+    assert restored.status_code == 200
+    readings = client.get("/api/v1/course/readings").json()
+    assert len(readings) == 1
+    assert readings[0]["title"] == "Приветствие"
+    assert readings[0]["latest_attempt"]["retelling"] == "Анна представилась"
+    assert readings[0]["offline_ready"] is True
+
+
+def test_backup_preserves_homework_and_exercise_offline_references(client):
+    seed(client)
+    backup = client.get("/api/v1/course/backup").json()
+    assert backup["tables"]["exercises"][0]["theory_snapshot"]
+    assert backup["tables"]["homework"][0]["reference_answer"] == "Dobrý deň. Volám sa Anna."
+
+    client.delete("/api/v1/course/exercises/1").raise_for_status()
+    client.delete("/api/v1/course/homework/1").raise_for_status()
+    client.post(
+        "/api/v1/course/backup/restore",
+        json=backup,
+        headers=current_state_headers(client),
+    ).raise_for_status()
+
+    exercises = client.get("/api/v1/course/exercises").json()
+    homework = client.get("/api/v1/course/homework").json()
+    assert len(exercises) == 1
+    assert len(homework) == 1
+    assert homework[0]["offline_ready"] is True
 
 
 def test_backup_version_1_remains_compatible_without_translation_history(client):
@@ -87,6 +139,36 @@ def test_backup_version_1_remains_compatible_without_translation_history(client)
     assert client.post("/api/v1/course/backup/validate", json=backup).status_code == 200
     restored = client.post("/api/v1/course/backup/restore", json=backup, headers=current_state_headers(client))
     assert restored.status_code == 200
+
+
+def test_large_restore_does_not_query_once_per_record(client, monkeypatch):
+    seed(client)
+    backup = client.get("/api/v1/course/backup").json()
+    source = backup["tables"]["vocabulary"][0]
+    for item_id in range(2, 2_002):
+        item = deepcopy(source)
+        item.update({"id": item_id, "word": f"word-{item_id}", "translation": f"translation-{item_id}"})
+        backup["tables"]["vocabulary"].append(item)
+
+    from sqlalchemy.orm import Session
+    original_scalar = Session.scalar
+    scalar_calls = 0
+
+    def count_scalar(self, *args, **kwargs):
+        nonlocal scalar_calls
+        scalar_calls += 1
+        return original_scalar(self, *args, **kwargs)
+
+    monkeypatch.setattr(Session, "scalar", count_scalar)
+    restored = client.post(
+        "/api/v1/course/backup/restore",
+        json=backup,
+        headers=current_state_headers(client),
+    )
+
+    assert restored.status_code == 200
+    assert scalar_calls < 10
+    assert len(client.get("/api/v1/course/backup").json()["tables"]["vocabulary"]) == 2_001
 
 
 def test_invalid_backups_never_modify_state(client):

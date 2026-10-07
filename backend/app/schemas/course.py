@@ -24,6 +24,25 @@ class PersonalCheatSheetPayload(BaseModel):
         return self
 
 
+class CourseMistakeReviewTaskPayload(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    prompt: str = Field(min_length=1, max_length=4_000)
+    learnerAnswer: str = Field(max_length=4_000)
+    explanation: str = Field(max_length=4_000)
+    kind: Literal["exact", "open"]
+
+
+class CourseMistakeCheckRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    prompt: str = Field(min_length=1, max_length=4_000)
+    expected_answer: str = Field(min_length=1, max_length=2_000)
+    accepted_answers: list[Annotated[str, Field(min_length=1, max_length=2_000)]] = Field(default_factory=list, max_length=20)
+    answer: str = Field(min_length=1, max_length=4_000)
+    kind: Literal["exact", "open"]
+    source_exercise_id: int | None = Field(default=None, gt=0)
+    assessment_mode: Literal["online", "offline"] = "online"
+
+
 class CourseMistakePayload(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -35,6 +54,7 @@ class CourseMistakePayload(BaseModel):
     mastered: bool = Field(strict=True)
     reviewStage: int | None = Field(default=None, ge=0, le=2, strict=True)
     dueAt: datetime | None = None
+    reviewTask: CourseMistakeReviewTaskPayload | None = None
 
 
 class CourseChatMessagePayload(BaseModel):
@@ -94,6 +114,7 @@ class CourseLessonSummaryPayload(BaseModel):
 class CourseStatePayload(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
+    activeLevel: Literal["A1", "A2"] = "A1"
     activeModule: int = Field(default=1, ge=1, le=8, strict=True)
     selectedSlug: str | None = Field(default=None, min_length=1, max_length=100)
     fontSize: Literal["normal", "large", "extra-large"] = "large"
@@ -125,7 +146,12 @@ class CourseStatePayload(BaseModel):
         )
         if any(not 1 <= len(key) <= 160 for mapping in mappings for key in mapping):
             raise ValueError("Invalid course state key")
-        if any(key not in {str(module) for module in range(1, 9)} for key in self.finalCompletedModules):
+        valid_module_keys = {
+            key
+            for module in range(1, 9)
+            for key in (str(module), f"a1:{module}", f"a2:{module}")
+        }
+        if any(key not in valid_module_keys for key in self.finalCompletedModules):
             raise ValueError("Invalid completed module identifier")
         if any(len(value) > 2_000 for mapping in (self.checkSelections, self.practiceAnswers, self.finalSelections) for value in mapping.values()):
             raise ValueError("Saved answer is too long")
@@ -136,7 +162,7 @@ class CourseStatePayload(BaseModel):
 
 class CourseStateResponse(BaseModel):
     exists: bool
-    schema_version: int = 2
+    schema_version: int = 3
     revision: str | None = Field(default=None, pattern="^[0-9a-f]{64}$")
     state: CourseStatePayload | None = None
     updated_at: datetime | None = None
@@ -188,7 +214,18 @@ class CourseExerciseResponse(BaseModel):
     latest_attempt: CourseExerciseAttemptResponse | None = None
 
 
-class CourseReadingGenerateRequest(BaseModel):
+class _CourseBatchGenerateRequest(BaseModel):
+    batch_index: int = Field(default=1, ge=1, le=20)
+    batch_total: int = Field(default=1, ge=1, le=20)
+
+    @model_validator(mode="after")
+    def validate_batch_position(self):
+        if self.batch_index > self.batch_total:
+            raise ValueError("Batch index exceeds batch total")
+        return self
+
+
+class CourseReadingGenerateRequest(_CourseBatchGenerateRequest):
     lesson_slug: str = Field(min_length=1, max_length=100)
     lesson_title: str = Field(min_length=1, max_length=255)
     theory: str = Field(min_length=1, max_length=12_000)
@@ -197,6 +234,7 @@ class CourseReadingGenerateRequest(BaseModel):
 
 class CourseReadingCheckRequest(BaseModel):
     retelling: str = Field(min_length=1, max_length=4_000)
+    assessment_mode: Literal["online", "offline"] = "online"
 
 
 class CourseReadingCheckResult(BaseModel):
@@ -224,6 +262,7 @@ class CourseReadingResponse(BaseModel):
     text: str
     instruction: str
     created_at: datetime
+    offline_ready: bool = False
     latest_attempt: CourseReadingAttemptResponse | None = None
 
 
@@ -252,7 +291,7 @@ class CourseVocabularyResponse(BaseModel):
     is_due: bool
 
 
-class CourseHomeworkGenerateRequest(BaseModel):
+class CourseHomeworkGenerateRequest(_CourseBatchGenerateRequest):
     lesson_slug: str = Field(min_length=1, max_length=100)
     lesson_title: str = Field(min_length=1, max_length=255)
     theory: str = Field(min_length=1, max_length=12_000)
@@ -261,6 +300,7 @@ class CourseHomeworkGenerateRequest(BaseModel):
 
 class CourseHomeworkSubmitRequest(BaseModel):
     answer: str = Field(min_length=1, max_length=4_000)
+    assessment_mode: Literal["online", "offline"] = "online"
 
 
 class CourseHomeworkAttemptResponse(_ConsistentScoredAttempt):
@@ -280,4 +320,80 @@ class CourseHomeworkResponse(BaseModel):
     description: str
     focus_category: str
     created_at: datetime
+    offline_ready: bool = False
     latest_attempt: CourseHomeworkAttemptResponse | None = None
+
+
+class CourseMaterialExerciseItem(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+
+    lesson_slug: str = Field(min_length=1, max_length=100)
+    lesson_title: str = Field(min_length=1, max_length=255)
+    question: str = Field(min_length=1, max_length=8_000)
+    instruction: str = Field(min_length=1, max_length=4_000)
+    theory_snapshot: str = Field(min_length=1, max_length=100_000)
+    created_at: datetime
+
+
+class CourseMaterialReadingItem(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+
+    lesson_slug: str = Field(min_length=1, max_length=100)
+    lesson_title: str = Field(min_length=1, max_length=255)
+    title: str = Field(min_length=1, max_length=255)
+    text: str = Field(min_length=1, max_length=8_000)
+    instruction: str = Field(min_length=1, max_length=1_000)
+    reference_answer: str | None = Field(default=None, max_length=4_000)
+    created_at: datetime
+
+
+class CourseMaterialHomeworkItem(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+
+    lesson_slug: str = Field(min_length=1, max_length=100)
+    lesson_title: str = Field(min_length=1, max_length=255)
+    title: str = Field(min_length=1, max_length=255)
+    description: str = Field(min_length=1, max_length=8_000)
+    focus_category: str = Field(min_length=1, max_length=255)
+    theory_snapshot: str = Field(min_length=1, max_length=12_000)
+    reference_answer: str | None = Field(default=None, max_length=4_000)
+    created_at: datetime
+
+
+class CourseMaterialCollection(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    format: Literal["slovokrok-course-materials"]
+    version: Literal[1]
+    exported_at: datetime
+    exercises: list[CourseMaterialExerciseItem] = Field(max_length=2_000)
+    readings: list[CourseMaterialReadingItem] = Field(max_length=2_000)
+    homework: list[CourseMaterialHomeworkItem] = Field(max_length=2_000)
+
+
+class CourseMaterialImportBucket(BaseModel):
+    imported: int = Field(ge=0)
+    skipped: int = Field(ge=0)
+    total: int = Field(ge=0)
+
+
+class CourseMaterialImportResponse(BaseModel):
+    exercises: CourseMaterialImportBucket
+    readings: CourseMaterialImportBucket
+    homework: CourseMaterialImportBucket
+
+
+class CourseTasksDeleteRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    confirmation: Literal["delete-all-course-tasks"]
+
+
+class CourseTasksDeleteResponse(BaseModel):
+    deleted: Literal[True]
+    exercises_deleted: int = Field(ge=0)
+    exercise_attempts_deleted: int = Field(ge=0)
+    readings_deleted: int = Field(ge=0)
+    reading_attempts_deleted: int = Field(ge=0)
+    homework_deleted: int = Field(ge=0)
+    homework_attempts_deleted: int = Field(ge=0)

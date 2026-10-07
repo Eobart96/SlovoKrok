@@ -4,6 +4,7 @@ import { type Dispatch, type SetStateAction, useEffect, useRef, useState } from 
 
 import { a1CourseModules, findA1Lesson, getA1Module } from "../data/a1Course";
 import { buildInitialProgress } from "../data/courseEngine";
+import { normalizeFinalCompletedModules } from "../data/courseLevelState";
 import { type LessonSummary, type MistakeRecord } from "../data/courseProgress";
 import { type LessonStatus } from "../data/courseTypes";
 import { mergeProgress } from "../data/progressMerge";
@@ -102,7 +103,7 @@ function resolveSession(parsed: PersistedCourseSession): CourseSessionState {
     practiceResults: parsed.practiceResults ?? {},
     mistakes: parsed.mistakes ?? {},
     finalSelections: parsed.finalSelections ?? {},
-    finalCompletedModules: { ...(parsed.finalCompleted ? { "1": true } : {}), ...(parsed.finalCompletedModules ?? {}) },
+    finalCompletedModules: normalizeFinalCompletedModules(parsed.finalCompletedModules, parsed.finalCompleted),
     chatHistories: parsed.chatHistories ?? {},
     lessonSummaries: parsed.lessonSummaries ?? {},
     personalCheatSheets: Array.isArray(parsed.personalCheatSheets) ? parsed.personalCheatSheets : [],
@@ -110,7 +111,7 @@ function resolveSession(parsed: PersistedCourseSession): CourseSessionState {
 }
 
 function toCourseState(session: CourseSessionState): CourseState {
-  return { ...session, finalCompleted: Boolean(session.finalCompletedModules["1"]) };
+  return { ...session, activeLevel: "A1", finalCompleted: Boolean(session.finalCompletedModules["a1:1"]) };
 }
 
 function writeLegacySession(session: CourseSessionState, dirty: boolean, revision: string | null): void {

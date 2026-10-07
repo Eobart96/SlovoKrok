@@ -11,15 +11,16 @@ Compact runtime опубликован в GitHub 2026-08-26. Этот докум
 - `.env.example` содержит только placeholders;
 - secret/generated/database/recovery audit автоматизирован;
 - актуальные README, architecture, API, database, testing и setup docs;
-- проверяемое compact-дерево как канонический Git-кандидат.
+- проверяемое compact-дерево как канонический Git-кандидат;
+- production dependency audit чист: `source-map-js` закреплён на исправленной
+  версии 1.2.2, `npm audit --omit=dev --audit-level=high` от 2026-10-06 не
+  нашёл уязвимостей.
 
 ## После публикации
 
 1. Отозвать прежний provider credential; текущий снимок чист, но след строки
    формата ключа подтверждён в истории.
-2. Устранить 6 high dependency advisories через отдельное совместимое
-   обновление с полной test matrix.
-3. Проводить следующие изменения через reviewable commit/CI; не переписывать
+2. Проводить следующие изменения через reviewable commit/CI; не переписывать
    историю без отдельного решения и резервной копии `.git`.
 
 ## Не входит в текущую готовность

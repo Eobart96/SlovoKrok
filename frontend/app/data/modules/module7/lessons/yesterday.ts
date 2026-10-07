@@ -17,6 +17,7 @@ export const yesterdayContent = {
   duration: "35–40 мин",
   goals: [
     "Строить рассказ по маршруту начало — утро — день — вечер — итог",
+    "Выбирать формы mal / mala и другие прошедшие формы по роду рассказчика",
     "Связывать действия словами najprv, potom, neskôr и nakoniec",
     "Добавлять время, место, участника, причину и оценку",
     "Составлять связный рассказ из 6–8 фраз в одном роде",
@@ -24,7 +25,7 @@ export const yesterdayContent = {
   theory: {
     summary: "Рассказ о вчерашнем дне строится из знакомых прошедших форм, временных маркеров и коротких связок. Удобная модель: когда + что сделал(а) + где или с кем + что было потом. Главная цель темы — не новые формы, а понятная последовательность событий.",
     rules: [
-      "Начните с рамки Včera som mal/mala bežný deň или Včera bol zaujímavý deň, затем двигайтесь от утра к вечеру.",
+      "Начните с рамки Včera som mal/mala bežný deň или Včera bol zaujímavý deň, затем двигайтесь от утра к вечеру. Mal говорит мужчина, mala — женщина; som остаётся одинаковым.",
       "Обозначайте время словами ráno, dopoludnia, na obed, poobede, večer и v noci; не повторяйте včera в каждом предложении.",
       "Показывайте порядок связками najprv — сначала, potom — потом, neskôr — позже, nakoniec — наконец; predtým означает до этого.",
       "Сохраняйте один род рассказчика: vstal — raňajkoval — išiel или vstala — raňajkovala — išla.",
@@ -32,6 +33,8 @@ export const yesterdayContent = {
       "Preto вводит результат: Pršalo, preto som zostal doma. Lebo вводит причину: Zostal som doma, lebo pršalo.",
     ],
     examples: [
+      { slovak: "Včera som mal bežný deň.", russian: "Вчера у меня был обычный день.", explanation: "Так говорит мужчина: mal — мужская прошедшая форма глагола mať — иметь." },
+      { slovak: "Včera som mala bežný deň.", russian: "Вчера у меня был обычный день.", explanation: "Так говорит женщина: mala — женская прошедшая форма глагола mať — иметь." },
       { slovak: "Ráno som vstal o siedmej.", russian: "Утром я встал в семь.", explanation: "Мужская форма vstal согласована с рассказчиком, время стоит в начале." },
       { slovak: "Potom som sa naraňajkoval.", russian: "Потом я позавтракал.", explanation: "Potom связывает второе действие с первым." },
       { slovak: "Popoludní som pracoval.", russian: "Днём я работал.", explanation: "Временной маркер помогает двигать рассказ вперёд." },
@@ -45,7 +48,9 @@ export const yesterdayContent = {
       title: "Каркас рассказа и единый род",
       paragraphs: [
         "Сначала задайте рамку рассказа, затем назовите утро, день, вечер и финальную оценку. Для уровня A1 достаточно 6–8 коротких фраз.",
-        "Перед началом выберите форму рассказчика и не меняйте её: мужчина говорит vstal, raňajkoval, išiel; женщина — vstala, raňajkovala, išla.",
+        "Запись mal / mala показывает два варианта одной формы, а не два слова, которые нужно произнести вместе. Мужчина говорит mal som, женщина — mala som. Это прошедшее время глагола mať — «иметь»: Včera som mal/mala bežný deň буквально означает «Вчера я имел/имела обычный день», а естественный перевод — «Вчера у меня был обычный день».",
+        "Та же разница повторяется во всём рассказе: мужчина говорит bol, vstal, išiel, prišiel, zostal; женщина — bola, vstala, išla, prišla, zostala. Форма среднего рода оканчивается на -lo (dieťa malo), а во множественном числе используется -li (mali sme / oni mali).",
+        "Перед началом выберите род рассказчика и не меняйте его до конца рассказа: мужчина говорит vstal, raňajkoval, išiel; женщина — vstala, raňajkovala, išla.",
       ],
       table: { headers: ["Этап", "Вопрос", "Опорная фраза"], rows: [
         ["начало", "Когда? Где?", "Včera som bol / bola doma."],
@@ -54,8 +59,8 @@ export const yesterdayContent = {
         ["вечер", "С кем? Где?", "Večer som sa stretol / stretla s kamarátom."],
         ["конец", "Чем всё закончилось?", "Nakoniec som oddychoval / oddychovala."],
       ] },
-      items: ["Včera som mal / mala bežný deň.", "Včera bol zaujímavý deň.", "Ráno som vstal, raňajkoval a išiel do práce.", "Ráno som vstala, raňajkovala a išla do práce."],
-      note: "Формула: когда + что сделал(а) + где / с кем + что было потом.",
+      items: ["Мужчина: Včera som mal bežný deň.", "Женщина: Včera som mala bežný deň.", "Средний род: Dieťa malo dobrý deň.", "Множественное число: Mali sme dobrý deň.", "Мужчина: Ráno som vstal, raňajkoval a išiel do práce.", "Женщина: Ráno som vstala, raňajkovala a išla do práce."],
+      note: "Формы mal и mala означают одно и то же действие, но показывают род. Выберите один вариант и сохраняйте этот род во всём рассказе.",
     },
     {
       title: "Время и последовательность",

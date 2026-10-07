@@ -30,6 +30,7 @@ class StrictAIModel(BaseModel):
 @dataclass(frozen=True)
 class TutorContext:
     prompt: str
+    response_schema: dict | None = None
 
 
 class TutorProvider(Protocol):
@@ -63,6 +64,7 @@ class HomeworkGeneration(StrictAIModel):
     title: str = Field(min_length=1, max_length=200)
     description: str = Field(min_length=1, max_length=4_000)
     focus_category: str = Field(min_length=1, max_length=200)
+    reference_answer: str = Field(min_length=1, max_length=4_000)
 
 
 class TutorTranslation(StrictAIModel):

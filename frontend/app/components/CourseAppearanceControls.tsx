@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { type CourseSession, type FontSize } from "../hooks/useCourseSession";
 
 // Browser-only preferences; existing CourseState and legacy keys stay compatible.
@@ -16,7 +16,7 @@ const defaults: Appearance = { font: "default", spacing: "default", shadows: "de
 const labels = { font: "Шрифт", spacing: "Межстрочный интервал", shadows: "Тени", corners: "Скругление карточек" };
 const keys = Object.keys(defaults) as (keyof Appearance)[];
 
-export function CourseAppearanceControls({ session, showTitle = true }: { session: CourseSession; showTitle?: boolean }) {
+export function CourseAppearanceControls({ session, showTitle = true, themeControl }: { session: CourseSession; showTitle?: boolean; themeControl?: ReactNode }) {
   const [appearance, setAppearance] = useState<Appearance>(defaults);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState("");
@@ -42,7 +42,8 @@ export function CourseAppearanceControls({ session, showTitle = true }: { sessio
   }, [appearance, ready]);
   return <fieldset aria-label={showTitle ? undefined : "Оформление"}>
     {showTitle && <legend>Оформление</legend>}
-    <p>Изменения видны сразу и сохраняются в этом браузере. Светлая и тёмная темы переключаются в шапке.</p>
+    <p>Изменения видны сразу. Настройки оформления сохраняются.</p>
+    {themeControl}
     <label>Размер текста курса<select value={session.fontSize} onChange={(event) => session.setFontSize(event.target.value as FontSize)}>
       <option value="normal">Обычный</option><option value="large">Крупный</option><option value="extra-large">Очень крупный</option>
     </select></label>

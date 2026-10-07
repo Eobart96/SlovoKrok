@@ -1,7 +1,8 @@
 "use client";
 
-import { type RefObject, useState } from "react";
+import { type KeyboardEvent, type RefObject, useState } from "react";
 
+import { applySlovakAltShortcut } from "../data/slovakKeyboard";
 import { type CourseExercise } from "../lib/api";
 import { SlovakKeyboard } from "./SlovakKeyboard";
 
@@ -20,6 +21,19 @@ export function CourseExercisePlayer({ exercise, answer, onAnswerChange, answerR
   const tokens = exercise.tokens ?? [];
   const pairPrompts = exercise.pair_prompts ?? [];
   const pairOptions = exercise.pair_options ?? [];
+
+  const handleAltShortcut = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (!event.altKey || event.ctrlKey || event.metaKey) return;
+    const field = answerRef.current;
+    const inserted = applySlovakAltShortcut(answer, event.code, event.shiftKey, field?.selectionStart ?? answer.length, field?.selectionEnd ?? answer.length);
+    if (!inserted) return;
+    event.preventDefault();
+    onAnswerChange(inserted.value);
+    requestAnimationFrame(() => {
+      field?.focus();
+      field?.setSelectionRange(inserted.caret, inserted.caret);
+    });
+  };
 
   const updateOrder = (indexes: number[]) => {
     setOrderedIndexes(indexes);
@@ -46,5 +60,5 @@ export function CourseExercisePlayer({ exercise, answer, onAnswerChange, answerR
     {pairPrompts.map((prompt) => <label key={prompt}><span>{prompt}</span><select value={matches[prompt] ?? ""} disabled={disabled} onChange={(event) => updateMatch(prompt, event.target.value)}><option value="">Выберите пару</option>{pairOptions.map((option) => <option key={option} value={option} disabled={Object.entries(matches).some(([otherPrompt, selected]) => otherPrompt !== prompt && selected === option)}>{option}</option>)}</select></label>)}
   </div>;
 
-  return <><textarea ref={answerRef} rows={5} value={answer} onChange={(event) => onAnswerChange(event.target.value)} placeholder="Напишите ответ по-словацки…" disabled={disabled} /><SlovakKeyboard onInsert={onInsertKey} disabled={disabled} /></>;
+  return <><textarea ref={answerRef} rows={5} value={answer} onChange={(event) => onAnswerChange(event.target.value)} onKeyDown={handleAltShortcut} placeholder="Напишите ответ по-словацки…" disabled={disabled} /><SlovakKeyboard onInsert={onInsertKey} disabled={disabled} /></>;
 }

@@ -49,7 +49,9 @@ def _row_schema(name, model):
             options["ge"] = 1 if column.name == "id" or column.foreign_keys else 0
             if column.name == "score":
                 options["le"] = 100
-        fields[column.name] = (kind | None if column.nullable else kind, Field(..., **options))
+        annotation = kind | None if column.nullable else kind
+        default = None if column.nullable else ...
+        fields[column.name] = (annotation, Field(default, **options))
     return create_model(f"Backup_{name}", __config__=ConfigDict(extra="forbid"), **fields)
 
 
@@ -143,6 +145,16 @@ def backup_summary(backup: CourseBackup) -> dict:
             "counts": {name: len(rows) for name, rows in backup.tables.items()}}
 
 
+def _restore_match_key(name: str, model, values: dict[str, Any]) -> tuple[Any, ...]:
+    if name == "vocabulary":
+        return values["lesson_slug"], values["word"]
+    return tuple(
+        values[column.name]
+        for column in model.__table__.columns
+        if column.name != "id"
+    )
+
+
 def restore_backup(db: Session, backup: CourseBackup, expected_revision: str | None) -> None:
     """Add materials, preserving existing records; restore state atomically.
 
@@ -155,19 +167,35 @@ def restore_backup(db: Session, backup: CourseBackup, expected_revision: str | N
         for name, model in TABLES.items():
             if name not in backup.tables:
                 continue
-            remaps[name] = {}
+            existing_by_key: dict[tuple[Any, ...], Any] = {}
+            for existing in db.scalars(select(model)).all():
+                existing_values = {
+                    column.name: getattr(existing, column.name)
+                    for column in model.__table__.columns
+                    if column.name != "id"
+                }
+                existing_by_key.setdefault(
+                    _restore_match_key(name, model, existing_values),
+                    existing,
+                )
+            restored_rows: dict[int, Any] = {}
             for row in backup.tables[name]:
                 values = {key: value for key, value in row.items() if key != "id"}
                 if name in RELATIONS:
                     field, parent = RELATIONS[name]
                     values[field] = remaps[parent][values[field]]
-                match = {key: values[key] for key in ("lesson_slug", "word")} if name == "vocabulary" else values
-                existing = db.scalar(select(model).filter_by(**match).limit(1))
+                match_key = _restore_match_key(name, model, values)
+                existing = existing_by_key.get(match_key)
                 if existing is None:
                     existing = model(**values)
                     db.add(existing)
-                    db.flush()
-                remaps[name][row["id"]] = existing.id
+                    existing_by_key[match_key] = existing
+                restored_rows[row["id"]] = existing
+            db.flush()
+            remaps[name] = {
+                source_id: restored.id
+                for source_id, restored in restored_rows.items()
+            }
         if backup.state is not None:
             save_course_state(db, backup.state, expected_revision, commit=False)
         db.commit()

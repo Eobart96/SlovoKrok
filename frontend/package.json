@@ -10,6 +10,7 @@
     "test:unit": "node --experimental-strip-types --test tests/unit/course-logic.test.mts tests/unit/api-request.test.mts && node -e \"console.log('FRONTEND_UNIT_TESTS_OK')\"",
     "check:bundle": "node scripts/check-bundle-budget.mjs",
     "validate:a1": "node scripts/validate-a1-content.mjs && node scripts/validate-additional-vocabulary.mjs && node scripts/validate-test-option-order.cjs && tsc --noEmit --incremental false",
+    "validate:a2": "node scripts/validate-a2-content.mjs --all && tsc --noEmit --incremental false",
     "test:ui": "node scripts/run-ui-tests.mjs"
   },
   "dependencies": {
@@ -28,6 +29,7 @@
   "overrides": {
     "postcss": "^8.5.28",
     "nanoid": "^3.3.19",
-    "sharp": "^0.35.4"
+    "sharp": "^0.35.4",
+    "source-map-js": "^1.2.2"
   }
 }

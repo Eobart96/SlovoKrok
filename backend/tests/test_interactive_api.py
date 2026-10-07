@@ -7,7 +7,7 @@ from app.config import Settings
 from app.database import get_db
 from app.dependencies import get_tutor_provider
 from app.main import app
-from app.models import CourseExercise, CourseExerciseAttempt
+from app.models import CourseExercise, CourseExerciseAttempt, CourseHomework, CourseHomeworkAttempt, CourseReading, CourseReadingAttempt
 import app.services.startup as startup_module
 from app.tutor import TutorContext, build_reading_generation_context, build_tutor_context, encode_exercise_snapshot, parse_generated_exercise
 
@@ -42,14 +42,16 @@ class InteractiveTutorProvider:
         if "составь короткий текст для чтения" in prompt:
             return (
                 '{"title":"Приветствие","text":"Dobrý deň. Volám sa Anna. Teší ma.",'
-                '"instruction":"Прочитай и перескажи текст."}'
+                '"instruction":"Прочитай и перескажи текст.",'
+                '"reference_answer":"Анна поздоровалась, представилась и сказала, что рада знакомству."}'
             )
         if "проверь пересказ" in prompt:
             return '{"score":90,"feedback":"Содержание понято.","corrected_retelling":"Анна представилась."}'
         if "создай одно небольшое домашнее задание" in prompt:
             return (
                 '{"title":"Представьтесь","description":"Напишите две фразы о себе.",'
-                '"focus_category":"introductions"}'
+                '"focus_category":"introductions",'
+                '"reference_answer":"Dobrý deň. Volám sa Anna."}'
             )
         if "проверь ответ" in prompt or "проверь домашнее задание" in prompt:
             return (
@@ -60,8 +62,19 @@ class InteractiveTutorProvider:
         raise AssertionError(f"Unexpected tutor prompt: {context.prompt[:120]}")
 
 
+class UnavailableTutorProvider:
+    def respond(self, _context: TutorContext) -> str:
+        raise RuntimeError("provider failed")
+
+
+class InvalidTutorProvider:
+    def respond(self, _context: TutorContext) -> str:
+        return "{}"
+
+
 def _state_payload() -> dict[str, object]:
     return {
+        "activeLevel": "A1",
         "activeModule": 1,
         "selectedSlug": "greetings",
         "fontSize": "large",
@@ -97,7 +110,7 @@ def test_tutor_settings_save_provider_without_exposing_key(client):
     secret = "test-openai-key-never-return"
     response = client.put(
         "/api/v1/tutor/settings",
-        json={"provider": "openai", "openai_api_key": secret, "openai_model": "gpt-5", "polza_model": "openai/gpt-4o-mini"},
+        json={"provider": "openai", "openai_api_key": secret, "openai_model": "gpt-5", "polza_model": "google/gemini-2.5-flash-lite"},
     )
 
     assert response.status_code == 200
@@ -111,17 +124,45 @@ def test_tutor_settings_save_provider_without_exposing_key(client):
 def test_tutor_settings_require_key_and_allow_switching_back_to_codex(client):
     missing = client.put(
         "/api/v1/tutor/settings",
-        json={"provider": "polza", "openai_model": "gpt-5", "polza_model": "openai/gpt-4o-mini"},
+        json={"provider": "polza", "openai_model": "gpt-5", "polza_model": "google/gemini-2.5-flash-lite"},
     )
     assert missing.status_code == 422
     assert "API-ключ" in missing.json()["detail"]
 
     codex = client.put(
         "/api/v1/tutor/settings",
-        json={"provider": "codex", "openai_model": "gpt-5", "polza_model": "openai/gpt-4o-mini"},
+        json={"provider": "codex", "openai_model": "gpt-5", "polza_model": "google/gemini-2.5-flash-lite"},
     )
     assert codex.status_code == 200
     assert codex.json()["provider"] == "codex"
+
+
+def test_tutor_settings_change_polza_model_preserves_saved_key(client):
+    secret = "test-polza-key-never-return"
+    configured = client.put(
+        "/api/v1/tutor/settings",
+        json={
+            "provider": "polza",
+            "openai_model": "gpt-5",
+            "polza_api_key": secret,
+            "polza_model": "openai/gpt-4o-mini",
+        },
+    )
+    assert configured.status_code == 200
+
+    changed = client.put(
+        "/api/v1/tutor/settings",
+        json={
+            "provider": "polza",
+            "openai_model": "gpt-5",
+            "polza_model": "google/gemini-2.5-flash-lite",
+        },
+    )
+
+    assert changed.status_code == 200
+    assert changed.json()["polza_api_key_configured"] is True
+    assert changed.json()["polza_model"] == "google/gemini-2.5-flash-lite"
+    assert secret not in changed.text
 
 
 def test_course_state_round_trip_and_legacy_defaults(client):
@@ -134,7 +175,7 @@ def test_course_state_round_trip_and_legacy_defaults(client):
     }]
     saved = client.put("/api/v1/course/state", json=payload, headers=_state_headers(None))
     assert saved.status_code == 200
-    assert saved.json()["schema_version"] == 2
+    assert saved.json()["schema_version"] == 3
     assert len(saved.json()["revision"]) == 64
     assert saved.json()["state"]["selectedSlug"] == "greetings"
     assert saved.json()["state"]["personalCheatSheets"][0]["title"] == "Моё правило"
@@ -143,6 +184,7 @@ def test_course_state_round_trip_and_legacy_defaults(client):
     assert restored.json()["state"]["activeModule"] == 1
 
     legacy = _state_payload()
+    legacy.pop("activeLevel")
     legacy.pop("activeModule")
     legacy.pop("finalCompletedModules")
     legacy.pop("personalCheatSheets")
@@ -152,6 +194,7 @@ def test_course_state_round_trip_and_legacy_defaults(client):
         headers=_state_headers(restored.json()["revision"]),
     )
     assert accepted.status_code == 200
+    assert accepted.json()["state"]["activeLevel"] == "A1"
     assert accepted.json()["state"]["activeModule"] == 1
     assert accepted.json()["state"]["finalCompletedModules"] == {}
     assert accepted.json()["state"]["personalCheatSheets"] == []
@@ -397,11 +440,11 @@ def test_module1_exercise_lifecycle(client):
 
     checked = client.post(
         f"/api/v1/course/exercises/{exercise_id}/answer",
-        json={"answer": "Dobrý deň"},
+        json={"answer": "Dobrý deň → Здравствуйте; Dovidenia → До свидания"},
     )
     assert checked.status_code == 200
     assert checked.json()["is_correct"] is True
-    assert '"answer":"Здравствуйте"' in provider.prompts[1]
+    assert len(provider.prompts) == 1
     listed = client.get("/api/v1/course/exercises?lesson_slug=greetings").json()[0]
     assert listed["interaction_type"] == "match"
     assert listed["latest_attempt"] is not None
@@ -481,7 +524,8 @@ def test_delete_all_exercises_requires_confirmation_and_removes_attempts(client)
         ('{"question":"Переведите.","instruction":"Введите ответ.","interaction_type":"text","accepted_answers":["Dovidenia","Do videnia"]}', "dovidenia"),
     ],
 )
-def test_offline_exercise_uses_saved_reference_without_provider(client, payload, answer):
+@pytest.mark.parametrize("assessment_mode", ["online", "offline"])
+def test_offline_exercise_uses_saved_reference_without_provider(client, payload, answer, assessment_mode):
     class ProviderMustNotRun:
         def respond(self, context: TutorContext) -> str:
             raise AssertionError("Offline assessment called the AI provider")
@@ -501,7 +545,7 @@ def test_offline_exercise_uses_saved_reference_without_provider(client, payload,
 
     checked = client.post(
         f"/api/v1/course/exercises/{exercise_id}/answer",
-        json={"answer": answer, "assessment_mode": "offline"},
+        json={"answer": answer, "assessment_mode": assessment_mode},
     )
     assert checked.status_code == 200
     assert checked.json()["is_correct"] is True
@@ -550,7 +594,126 @@ def test_module1_reading_lifecycle(client):
     assert checked.status_code == 200
     assert checked.json()["score"] == 90
     assert client.get("/api/v1/course/readings").json()[0]["latest_attempt"] is not None
+
+    class OfflineOnlyProvider:
+        def respond(self, _context):
+            raise AssertionError("offline reading check called the provider")
+
+    app.dependency_overrides[get_tutor_provider] = OfflineOnlyProvider
+    offline = client.post(
+        f"/api/v1/course/readings/{reading_id}/check",
+        json={
+            "retelling": "Анна поздоровалась, представилась и сказала, что рада знакомству.",
+            "assessment_mode": "offline",
+        },
+    )
+    assert offline.status_code == 200
+    assert offline.json()["score"] == 100
+
+    collection = client.get("/api/v1/course/materials/export")
+    assert collection.status_code == 200
+    assert collection.json()["format"] == "slovokrok-course-materials"
+    assert collection.json()["version"] == 1
+    assert len(collection.json()["readings"]) == 1
+    assert "latest_attempt" not in collection.json()["readings"][0]
+    assert collection.json()["readings"][0]["reference_answer"].startswith("Анна")
+
     assert client.delete(f"/api/v1/course/readings/{reading_id}").json() == {"deleted": True}
+
+    imported = client.post("/api/v1/course/materials/import", json=collection.json())
+    assert imported.status_code == 200
+    assert imported.json()["readings"] == {"imported": 1, "skipped": 0, "total": 1}
+    restored = client.get("/api/v1/course/readings").json()
+    assert len(restored) == 1
+    assert restored[0]["latest_attempt"] is None
+    assert restored[0]["offline_ready"] is True
+
+    repeated = client.post("/api/v1/course/materials/import", json=collection.json())
+    assert repeated.json()["readings"] == {"imported": 0, "skipped": 1, "total": 1}
+    assert client.delete(f"/api/v1/course/readings/{restored[0]['id']}").json() == {"deleted": True}
+
+
+def test_offline_reading_and_homework_reject_legacy_without_reference(client):
+    database_provider = app.dependency_overrides[get_db]()
+    db = next(database_provider)
+    try:
+        reading = CourseReading(
+            lesson_slug="greetings",
+            lesson_title="Приветствия",
+            title="Старый текст",
+            text="Dobrý deň.",
+            instruction="Перескажите текст.",
+        )
+        homework = CourseHomework(
+            lesson_slug="greetings",
+            lesson_title="Приветствия",
+            title="Старое задание",
+            description="Представьтесь.",
+            focus_category="introductions",
+            theory_snapshot="Volám sa…",
+        )
+        db.add_all([reading, homework])
+        db.commit()
+        db.refresh(reading)
+        db.refresh(homework)
+        reading_id = reading.id
+        homework_id = homework.id
+    finally:
+        database_provider.close()
+
+    reading_check = client.post(
+        f"/api/v1/course/readings/{reading_id}/check",
+        json={"retelling": "Короткий пересказ.", "assessment_mode": "offline"},
+    )
+    homework_check = client.post(
+        f"/api/v1/course/homework/{homework_id}/submit",
+        json={"answer": "Volám sa Anna.", "assessment_mode": "offline"},
+    )
+
+    assert reading_check.status_code == 409
+    assert homework_check.status_code == 409
+    assert "офлайн-эталона" in reading_check.json()["detail"]
+    assert "офлайн-эталона" in homework_check.json()["detail"]
+
+
+def test_delete_all_course_tasks_requires_confirmation_and_is_atomic(client):
+    database_provider = app.dependency_overrides[get_db]()
+    db = next(database_provider)
+    try:
+        exercise = CourseExercise(lesson_slug="greetings", lesson_title="Приветствия", question="Упражнение", instruction="Ответьте.", theory_snapshot="Dobrý deň.")
+        reading = CourseReading(lesson_slug="greetings", lesson_title="Приветствия", title="Текст", text="Dobrý deň.", instruction="Перескажите.", reference_answer="Человек поздоровался.")
+        homework = CourseHomework(lesson_slug="greetings", lesson_title="Приветствия", title="Домашнее задание", description="Поздоровайтесь.", focus_category="greetings", theory_snapshot="Dobrý deň.", reference_answer="Dobrý deň.")
+        db.add_all([exercise, reading, homework])
+        db.flush()
+        db.add_all([
+            CourseExerciseAttempt(exercise_id=exercise.id, answer="Dobrý deň.", is_correct=True, score=100, corrected_answer="Dobrý deň.", explanation="Верно.", next_exercise="Продолжайте."),
+            CourseReadingAttempt(reading_id=reading.id, retelling="Человек поздоровался.", score=100, feedback="Верно.", corrected_retelling="Человек поздоровался."),
+            CourseHomeworkAttempt(homework_id=homework.id, answer="Dobrý deň.", is_correct=True, score=100, corrected_answer="Dobrý deň.", explanation="Верно.", next_exercise="Продолжайте."),
+        ])
+        db.commit()
+    finally:
+        database_provider.close()
+
+    rejected = client.request("DELETE", "/api/v1/course/materials", json={"confirmation": "wrong"})
+    assert rejected.status_code == 422
+    assert len(client.get("/api/v1/course/exercises").json()) == 1
+    assert len(client.get("/api/v1/course/readings").json()) == 1
+    assert len(client.get("/api/v1/course/homework").json()) == 1
+
+    deleted = client.request("DELETE", "/api/v1/course/materials", json={"confirmation": "delete-all-course-tasks"})
+    assert deleted.status_code == 200
+    assert deleted.json() == {
+        "deleted": True,
+        "exercises_deleted": 1,
+        "exercise_attempts_deleted": 1,
+        "readings_deleted": 1,
+        "reading_attempts_deleted": 1,
+        "homework_deleted": 1,
+        "homework_attempts_deleted": 1,
+    }
+    assert client.get("/api/v1/course/exercises").json() == []
+    assert client.get("/api/v1/course/readings").json() == []
+    assert client.get("/api/v1/course/homework").json() == []
 
 
 def test_reading_generation_prompt_uses_unlocked_vocabulary_without_future_grammar():
@@ -564,6 +727,16 @@ def test_reading_generation_prompt_uses_unlocked_vocabulary_without_future_gramm
     assert "не разрешает будущую грамматику" in context.prompt
     assert "Не вводи новые смысловые слова вне открытого списка" in context.prompt
     assert "Dobrý deň = Добрый день" in context.prompt
+
+    batch_context = build_reading_generation_context(
+        lesson_title="Приветствия",
+        theory="Только настоящее время.",
+        completed_theory="Dobrý deň = Добрый день",
+        batch_index=2,
+        batch_total=3,
+    )
+    assert "вариант 2 из 3" in batch_context.prompt
+    assert "заметно отличающимися" in batch_context.prompt
 
 
 def test_module1_vocabulary_sync_and_review(client):
@@ -608,7 +781,8 @@ def test_module1_vocabulary_sync_and_review(client):
 
 
 def test_module1_homework_lifecycle(client):
-    app.dependency_overrides[get_tutor_provider] = InteractiveTutorProvider
+    provider = InteractiveTutorProvider()
+    app.dependency_overrides[get_tutor_provider] = lambda: provider
     created = client.post(
         "/api/v1/course/homework",
         json={
@@ -616,6 +790,8 @@ def test_module1_homework_lifecycle(client):
             "lesson_title": "Представление",
             "theory": "Volám sa…",
             "known_mistakes": [],
+            "batch_index": 2,
+            "batch_total": 3,
         },
     )
     assert created.status_code == 200
@@ -623,12 +799,147 @@ def test_module1_homework_lifecycle(client):
 
     submitted = client.post(
         f"/api/v1/course/homework/{homework_id}/submit",
-        json={"answer": "Volám sa Anna."},
+        json={"answer": "dobrý - stôl – ďakujem — chlieb"},
     )
     assert submitted.status_code == 200
     assert submitted.json()["is_correct"] is True
+    assert "вариант 2 из 3" in provider.prompts[0]
+    assert "Не называй слова «изученными» или «неизученными»" in provider.prompts[0]
+    assert "разреши соединять элементы стрелкой, дефисом или тире" in provider.prompts[0]
+    assert "Словарный запас ученика приходит из разных источников" in provider.prompts[1]
+    assert "Не снижай оценку" in provider.prompts[1]
+    assert "dobrý → stôl → ďakujem → chlieb" in provider.prompts[1]
+    assert "считай разделители →, -, – и — равнозначными" in provider.prompts[1]
+    assert submitted.json()["answer"] == "dobrý - stôl – ďakujem — chlieb"
+
+    class OfflineOnlyProvider:
+        def respond(self, _context):
+            raise AssertionError("offline homework check called the provider")
+
+    app.dependency_overrides[get_tutor_provider] = OfflineOnlyProvider
+    offline = client.post(
+        f"/api/v1/course/homework/{homework_id}/submit",
+        json={"answer": "Dobrý deň. Volám sa Anna.", "assessment_mode": "offline"},
+    )
+    assert offline.status_code == 200
+    assert offline.json()["is_correct"] is True
+    assert offline.json()["score"] == 100
     assert client.get("/api/v1/course/homework").json()[0]["latest_attempt"] is not None
     assert client.delete(f"/api/v1/course/homework/{homework_id}").json() == {"deleted": True}
+
+
+@pytest.mark.parametrize(
+    ("provider", "expected_status", "expected_detail"),
+    [
+        (UnavailableTutorProvider(), 503, "AI provider временно недоступен"),
+        (InvalidTutorProvider(), 502, "ИИ вернул ответ в неверном формате"),
+    ],
+)
+def test_all_course_ai_writes_map_provider_failures_without_raw_500(client, provider, expected_status, expected_detail):
+    generated = parse_generated_exercise(
+        '{"question":"Поздоровайтесь.","instruction":"Введите ответ.","interaction_type":"text","accepted_answers":["Dobrý deň."]}'
+    )
+    database_provider = app.dependency_overrides[get_db]()
+    db = next(database_provider)
+    try:
+        exercise = CourseExercise(lesson_slug="greetings", lesson_title="Приветствия", question=generated.question, instruction=generated.instruction, theory_snapshot="Dobrý deň.")
+        reading = CourseReading(lesson_slug="greetings", lesson_title="Приветствия", title="Текст", text="Dobrý deň.", instruction="Перескажите.", reference_answer="Человек поздоровался.")
+        homework = CourseHomework(lesson_slug="greetings", lesson_title="Приветствия", title="Диалог", description="Поздоровайтесь.", focus_category="greetings", theory_snapshot="Dobrý deň.", reference_answer="Dobrý deň.")
+        db.add_all([exercise, reading, homework])
+        db.commit()
+        db.refresh(exercise)
+        db.refresh(reading)
+        db.refresh(homework)
+        ids = (exercise.id, reading.id, homework.id)
+    finally:
+        database_provider.close()
+
+    app.dependency_overrides[get_tutor_provider] = lambda: provider
+    requests = [
+        client.post("/api/v1/course/exercises", json={"lesson_slug": "greetings", "lesson_title": "Приветствия", "theory": "Dobrý deň."}),
+        client.post("/api/v1/course/readings", json={"lesson_slug": "greetings", "lesson_title": "Приветствия", "theory": "Dobrý deň.", "completed_theory": ""}),
+        client.post("/api/v1/course/homework", json={"lesson_slug": "greetings", "lesson_title": "Приветствия", "theory": "Dobrý deň.", "known_mistakes": []}),
+        client.post(f"/api/v1/course/exercises/{ids[0]}/answer", json={"answer": "Dobrý deň."}),
+        client.post(f"/api/v1/course/readings/{ids[1]}/check", json={"retelling": "Человек поздоровался."}),
+        client.post(f"/api/v1/course/homework/{ids[2]}/submit", json={"answer": "Dobrý deň."}),
+    ]
+
+    assert [response.status_code for response in requests] == [expected_status] * len(requests)
+    assert all(response.json()["detail"] == expected_detail for response in requests)
+    assert len(client.get("/api/v1/course/exercises").json()) == 1
+    assert len(client.get("/api/v1/course/readings").json()) == 1
+    assert len(client.get("/api/v1/course/homework").json()) == 1
+
+
+def test_all_course_task_writes_map_database_failures_without_raw_500(client, monkeypatch):
+    from sqlalchemy.exc import OperationalError
+    from sqlalchemy.orm import Session
+
+    provider = InteractiveTutorProvider()
+    app.dependency_overrides[get_tutor_provider] = lambda: provider
+    created_exercise = client.post("/api/v1/course/exercises", json={"lesson_slug": "greetings", "lesson_title": "Приветствия", "theory": "Dobrý deň."}).json()
+    created_reading = client.post("/api/v1/course/readings", json={"lesson_slug": "greetings", "lesson_title": "Приветствия", "theory": "Dobrý deň.", "completed_theory": ""}).json()
+    created_homework = client.post("/api/v1/course/homework", json={"lesson_slug": "greetings", "lesson_title": "Приветствия", "theory": "Dobrý deň.", "known_mistakes": []}).json()
+
+    original_commit = Session.commit
+
+    def fail_commit(_session):
+        raise OperationalError("WRITE", {}, RuntimeError("test commit failure"))
+
+    monkeypatch.setattr(Session, "commit", fail_commit)
+    requests = [
+        client.post("/api/v1/course/exercises", json={"lesson_slug": "greetings", "lesson_title": "Приветствия", "theory": "Dobrý deň."}),
+        client.post("/api/v1/course/readings", json={"lesson_slug": "greetings", "lesson_title": "Приветствия", "theory": "Dobrý deň.", "completed_theory": ""}),
+        client.post("/api/v1/course/homework", json={"lesson_slug": "greetings", "lesson_title": "Приветствия", "theory": "Dobrý deň.", "known_mistakes": []}),
+        client.post(f"/api/v1/course/exercises/{created_exercise['id']}/answer", json={"answer": "Dobrý deň."}),
+        client.post(f"/api/v1/course/readings/{created_reading['id']}/check", json={"retelling": "Человек поздоровался."}),
+        client.post(f"/api/v1/course/homework/{created_homework['id']}/submit", json={"answer": "Dobrý deň."}),
+        client.delete(f"/api/v1/course/exercises/{created_exercise['id']}"),
+        client.delete(f"/api/v1/course/readings/{created_reading['id']}"),
+        client.delete(f"/api/v1/course/homework/{created_homework['id']}"),
+        client.request("DELETE", "/api/v1/course/materials", json={"confirmation": "delete-all-course-tasks"}),
+    ]
+    monkeypatch.setattr(Session, "commit", original_commit)
+
+    assert [response.status_code for response in requests] == [503] * len(requests)
+    assert all(response.json()["detail"] == "Не удалось сохранить задания в локальной базе" for response in requests)
+    assert len(client.get("/api/v1/course/exercises").json()) == 1
+    assert len(client.get("/api/v1/course/readings").json()) == 1
+    assert len(client.get("/api/v1/course/homework").json()) == 1
+
+
+def test_material_collection_roundtrip_preserves_all_generated_tasks(client):
+    app.dependency_overrides[get_tutor_provider] = InteractiveTutorProvider
+    payload = {"lesson_slug": "greetings", "lesson_title": "Приветствия", "theory": "Dobrý deň."}
+    exercise = client.post("/api/v1/course/exercises", json=payload).json()
+    reading = client.post("/api/v1/course/readings", json={**payload, "completed_theory": ""}).json()
+    homework = client.post("/api/v1/course/homework", json={**payload, "known_mistakes": []}).json()
+
+    collection = client.get("/api/v1/course/materials/export")
+    assert collection.status_code == 200
+    assert collection.json()["format"] == "slovokrok-course-materials"
+    assert len(collection.json()["exercises"]) == 1
+    assert len(collection.json()["readings"]) == 1
+    assert len(collection.json()["homework"]) == 1
+    assert collection.json()["readings"][0]["reference_answer"]
+    assert collection.json()["homework"][0]["reference_answer"]
+
+    client.delete(f"/api/v1/course/exercises/{exercise['id']}").raise_for_status()
+    client.delete(f"/api/v1/course/readings/{reading['id']}").raise_for_status()
+    client.delete(f"/api/v1/course/homework/{homework['id']}").raise_for_status()
+
+    imported = client.post("/api/v1/course/materials/import", json=collection.json())
+    assert imported.status_code == 200
+    assert imported.json() == {
+        "exercises": {"imported": 1, "skipped": 0, "total": 1},
+        "readings": {"imported": 1, "skipped": 0, "total": 1},
+        "homework": {"imported": 1, "skipped": 0, "total": 1},
+    }
+    assert client.get("/api/v1/course/readings").json()[0]["offline_ready"] is True
+    assert client.get("/api/v1/course/homework").json()[0]["offline_ready"] is True
+
+    repeated = client.post("/api/v1/course/materials/import", json=collection.json())
+    assert all(bucket["skipped"] == 1 for bucket in repeated.json().values())
 
 
 def test_tutor_context_does_not_share_private_profile_by_default(tmp_path: Path):

@@ -1,9 +1,11 @@
-import { buildReinforcementPractices, isCorePractice } from "./coursePractice";
-import { scoreLessonUnderstanding } from "./courseScoring";
-import { type CourseLesson, type LessonStatus, type StepPractice } from "./courseTypes";
+import { buildReinforcementPractices, isCorePractice } from "./coursePractice.ts";
+import { scoreLessonUnderstanding } from "./courseScoring.ts";
+import type { MistakeReviewTask } from "./taskMistakes.ts";
+import { type CourseLesson, type LessonStatus, type StepPractice } from "./courseTypes.ts";
 
-export type MistakeRecord = { id: string; lessonSlug: string; prompt: string; answer: string; attempts: number; mastered: boolean; reviewStage?: number; dueAt?: string };
+export type MistakeRecord = { id: string; lessonSlug: string; prompt: string; answer: string; attempts: number; mastered: boolean; reviewStage?: number; dueAt?: string; reviewTask?: MistakeReviewTask | null };
 export type LessonSummary = { understanding: number; level: string; strengths: string[]; mistakes?: string[]; review: string[]; userTurns: number; evidence?: { coreCorrect: number; coreTotal: number } };
+export type FinalQuestionForMistakes = { id: string; lessonSlug: string; question: string; answer: string };
 
 const dayMs = 86400000;
 
@@ -47,7 +49,30 @@ export function nextMistakeRecord({ previous, id, lessonSlug, prompt, answer, co
     mastered: correct && nextStage >= 2,
     reviewStage: nextStage,
     dueAt: new Date(nowMs + (correct ? (nextStage === 1 ? 3 : 7) * dayMs : 0)).toISOString(),
+    ...(previous?.reviewTask ? { reviewTask: previous.reviewTask } : {}),
   };
+}
+
+export function recordFinalAttemptMistakes(
+  current: Record<string, MistakeRecord>,
+  questions: FinalQuestionForMistakes[],
+  selections: Record<string, string>,
+  nowMs: number,
+): Record<string, MistakeRecord> {
+  const next = { ...current };
+  for (const question of questions) {
+    const record = nextMistakeRecord({
+      previous: next[question.id],
+      id: question.id,
+      lessonSlug: question.lessonSlug,
+      prompt: question.question,
+      answer: question.answer,
+      correct: selections[question.id] === question.answer,
+      nowMs,
+    });
+    if (record) next[question.id] = record;
+  }
+  return next;
 }
 
 export function buildLessonSummary({ lesson, reinforcementPractices, practiceResults, checkSelections, mistakes, userTurns }: { lesson: CourseLesson; reinforcementPractices: StepPractice[]; practiceResults: Record<string, boolean>; checkSelections: Record<string, string>; mistakes: Record<string, MistakeRecord>; userTurns: number }): LessonSummary {

@@ -1,0 +1,221 @@
+import { defineA2Module2Lesson } from "../lessonFactory";
+
+export const a2NominativePluralThingsLesson = defineA2Module2Lesson("a2-nominative-plural-things", {
+  duration: "40–45 мин",
+  goals: [
+    "Образовывать частотные формы Nominatív множественного числа у предметов и понятий",
+    "Различать модели женского и среднего рода",
+    "Согласовывать tie/tieto, притяжательное слово, прилагательное и сказуемое",
+    "Описывать комнату, офис или город несколькими связанными фразами",
+  ],
+  theory: {
+    summary: "На A2 недостаточно изменить только существительное. Во множественном числе нужно согласовать всю именную группу: указательное или притяжательное слово, прилагательное, существительное и именную часть сказуемого.",
+    rules: [
+      "Женский род образует несколько частотных моделей: kniha – knihy, ulica – ulice, dlaň – dlane, kosť – kosti. Одно универсальное окончание использовать нельзя.",
+      "Средний род также зависит от модели: mesto – mestá, srdce – srdcia, stretnutie – stretnutia.",
+      "С предметами и понятиями употребляются tie/tieto, формы moje/tvoje/svoje/naše/vaše и прилагательное обычно на -é.",
+      "Jeho, jej и ich не изменяются: jej knihy, ich mestá.",
+      "Во множественном числе используйте sú или boli: knihy sú nové; mestá boli pokojné.",
+      "Формы людей tí noví kolegovia относятся к следующей теме 2.2 и здесь не подменяют модели предметов.",
+    ],
+    examples: [
+      { slovak: "Tie nové knihy sú zaujímavé.", russian: "Те новые книги интересные.", explanation: "Tie, nové и zaujímavé согласуются с knihy во множественном числе." },
+      { slovak: "Tieto dôležité informácie sú presné.", russian: "Эта важная информация точная.", explanation: "Словацкая форма informácie имеет значение множественного числа, поэтому нужны tieto, sú и формы на -é." },
+      { slovak: "Naše malé mestá boli pokojné.", russian: "Наши маленькие города были спокойными.", explanation: "Mestá — форма среднего рода во множественном числе; зависимые слова получают общие формы множественного числа." },
+      { slovak: "Jej nové autá sú drahé.", russian: "Её новые автомобили дорогие.", explanation: "Jej не изменяется, а nové, autá, sú и drahé образуют согласованную цепочку." },
+      { slovak: "Moje pracovné veci sú na stole.", russian: "Мои рабочие вещи находятся на столе.", explanation: "Moje и pracovné согласованы с veci; положение выражено готовой группой na stole." },
+      { slovak: "Dnešné stretnutia sú dlhé.", russian: "Сегодняшние встречи долгие.", explanation: "Stretnutie переходит в stretnutia, а определения получают окончание -é." },
+    ],
+  },
+  sections: [
+    {
+      title: "Женский род: узнаём модель",
+      paragraphs: [
+        "Форма множественного числа зависит от модели склонения, а не только от последней буквы. Новое существительное полезно сразу записывать парой: informácia – informácie.",
+        "Сначала образуйте существительное, затем добавляйте согласованные слова. Так легче заметить, где возникла ошибка.",
+      ],
+      table: {
+        headers: ["Модель", "Единственное → множественное", "Другие примеры"],
+        rows: [
+          ["žena", "kniha → knihy", "otázka → otázky; škola → školy"],
+          ["ulica", "ulica → ulice", "práca → práce; informácia → informácie"],
+          ["dlaň", "dlaň → dlane", "továreň → továrne; báseň → básne"],
+          ["kosť", "kosť → kosti", "vec → veci; možnosť → možnosti"],
+        ],
+      },
+      note: "Формы на -y, -e и -i равноправны. Не ставьте одно окончание всем словам женского рода.",
+    },
+    {
+      title: "Средний род: три частотные модели",
+      paragraphs: ["Сравнивайте готовые пары: mesto – mestá, srdce – srdcia, stretnutie – stretnutia. Форма основы тоже может измениться."],
+      table: {
+        headers: ["Модель", "Единственное → множественное", "Другие примеры"],
+        rows: [
+          ["mesto", "mesto → mestá", "okno → okná; auto → autá"],
+          ["srdce", "srdce → srdcia", "more → moria; pole → polia"],
+          ["vysvedčenie", "stretnutie → stretnutia", "cvičenie → cvičenia; námestie → námestia"],
+        ],
+      },
+      note: "Тема работает с предметами и понятиями. Формы групп людей будут отдельно в 2.2.",
+    },
+    {
+      title: "Согласуем всю группу",
+      paragraphs: ["У неодушевлённых существительных женского и среднего рода зависимые слова имеют общую схему: tie/tieto + moje/naše + nové + существительное."],
+      table: {
+        headers: ["Что согласуем", "Форма", "Пример"],
+        rows: [
+          ["указательное слово", "tie / tieto", "tie knihy; tieto mestá"],
+          ["притяжательное слово", "moje / tvoje / naše / vaše", "moje otázky; naše autá"],
+          ["его / её / их", "jeho / jej / ich", "jej knihy; ich mestá"],
+          ["прилагательное", "обычно -é", "nové knihy; malé mestá"],
+          ["сказуемое", "sú / boli + -é", "knihy sú nové; mestá boli pokojné"],
+        ],
+      },
+      items: [
+        "tá nová kniha → tie nové knihy",
+        "tá dôležitá informácia → tieto dôležité informácie",
+        "to malé mesto → tie malé mestá",
+        "moja nová kniha → moje nové knihy",
+      ],
+      note: "Обычно достаточно одного определителя: tieto nové knihy или moje nové knihy. Два определителя нужны только для контраста.",
+    },
+    {
+      title: "От списка к связному описанию",
+      paragraphs: [
+        "Сначала назовите группу предметов, затем добавьте признак, место или оценку. Повторяйте существительное только там, где без него возникает неясность.",
+        "Модель: V našej kancelárii sú nové stoličky a veľké okná. Tieto stoličky sú pohodlné a okná sú čisté.",
+      ],
+      table: {
+        headers: ["Где?", "Что есть?", "Какие?"],
+        rows: [
+          ["v izbe", "knihy, okná", "nové, čisté"],
+          ["v kancelárii", "stoličky, informácie", "pohodlné, dôležité"],
+          ["v meste", "námestia, možnosti", "veľké, užitočné"],
+        ],
+      },
+      items: [
+        "Sú tieto knihy nové? — Áno, sú nové, ale nie sú moje.",
+        "Kde sú naše cvičenia? — Naše cvičenia sú v počítači.",
+        "Sú tie informácie aktuálne? — Áno, všetky informácie sú aktuálne.",
+      ],
+    },
+    {
+      title: "Проверяем и исправляем ошибку",
+      paragraphs: ["Проверяйте четыре точки: форму существительного, определитель, окончание прилагательного и сказуемое sú/boli."],
+      table: {
+        headers: ["Ошибка", "Нормативная форма", "Что исправили"],
+        rows: [
+          ["Tieto nová knihy sú zaujímavá.", "Tieto nové knihy sú zaujímavé.", "оба прилагательных"],
+          ["Moja informácie sú presné.", "Moje informácie sú presné.", "притяжательное слово"],
+          ["Tie mesto boli veľké.", "Tie mestá boli veľké.", "существительное"],
+          ["Jej nové autá je drahé.", "Jej nové autá sú drahé.", "сказуемое"],
+        ],
+      },
+      note: "Финальная задача — описать место пятью связанными предложениями и использовать минимум две формы женского и две формы среднего рода.",
+    },
+  ],
+  stepPractices: [
+    {
+      sectionIndex: 0,
+      type: "choice",
+      prompt: "Выберите правильную форму множественного числа: dôležitá informácia → …",
+      options: ["dôležité informácie", "dôležité informáciy", "dôležitá informácie"],
+      answer: "dôležité informácie",
+      hint: "Вспомните модель ulica и окончание прилагательного во множественном числе.",
+      explanation: "Informácia образует informácie, а зависимое прилагательное получает форму dôležité.",
+    },
+    {
+      sectionIndex: 1,
+      type: "text",
+      prompt: "Преобразуйте во множественное число: to pracovné stretnutie.",
+      answer: "tie pracovné stretnutia",
+      acceptableAnswers: ["Tie pracovné stretnutia."],
+      showSlovakKeyboard: true,
+      hint: "Замените to на форму для нескольких предметов и измените stretnutie.",
+      explanation: "Правильная группа: tie pracovné stretnutia.",
+    },
+    {
+      sectionIndex: 2,
+      type: "text",
+      prompt: "Переведите: «Эта важная информация точная».",
+      answer: "Tieto dôležité informácie sú presné.",
+      acceptableAnswers: ["Tieto dôležité informácie sú presné"],
+      showSlovakKeyboard: true,
+      hint: "В словацком informácie — форма множественного числа; согласуйте всю цепочку.",
+      explanation: "Нормативно: Tieto dôležité informácie sú presné.",
+    },
+    {
+      sectionIndex: 3,
+      type: "order",
+      prompt: "Соберите фразу «Наши упражнения находятся в компьютере».",
+      tokens: ["Naše", "cvičenia", "sú", "v", "počítači."],
+      answer: "Naše cvičenia sú v počítači.",
+      hint: "Начните с Naše cvičenia, затем добавьте сказуемое и место.",
+      explanation: "Правильный порядок: Naše cvičenia sú v počítači.",
+    },
+    {
+      sectionIndex: 4,
+      type: "text",
+      prompt: "Исправьте всю фразу: Jej nové autá je drahé.",
+      answer: "Jej nové autá sú drahé.",
+      acceptableAnswers: ["Jej nové autá sú drahé"],
+      showSlovakKeyboard: true,
+      hint: "Jej не меняется; проверьте сказуемое во множественном числе.",
+      explanation: "Нормативно: Jej nové autá sú drahé.",
+    },
+  ],
+  knowledgeChecks: [
+    {
+      question: "Какая пара правильно показывает модель женского рода?",
+      options: ["možnosť → možnosti", "možnosť → možnosťy", "možnosť → možnosťe"],
+      answer: "možnosť → možnosti",
+      explanation: "Слова на -osť относятся к частотной модели kosť и образуют форму на -i.",
+    },
+    {
+      question: "Какая группа полностью согласована?",
+      options: ["tieto malé mestá", "tieto malá mestá", "tá malé mestá"],
+      answer: "tieto malé mestá",
+      explanation: "Для нескольких предметов нужны tieto и форма прилагательного malé.",
+    },
+    {
+      question: "Что происходит с jej в группе jej nové autá?",
+      options: ["Форма jej не изменяется", "Она превращается в jeje", "Она заменяется формой tieto"],
+      answer: "Форма jej не изменяется",
+      explanation: "Притяжательные формы jeho, jej и ich не склоняются.",
+    },
+  ],
+  finalChecks: [
+    {
+      question: "Выберите полностью правильное предложение.",
+      options: ["Tieto nové knihy sú zaujímavé.", "Tieto nová knihy sú zaujímavá.", "Tá nové knihy je zaujímavé."],
+      answer: "Tieto nové knihy sú zaujímavé.",
+      explanation: "Указательное слово, оба прилагательных и сказуемое согласованы с knihy во множественном числе.",
+    },
+    {
+      question: "Как правильно сказать «Наши маленькие города были спокойными»?",
+      options: ["Naše malé mestá boli pokojné.", "Náš malé mesto boli pokojné.", "Naše malá mestá bol pokojný."],
+      answer: "Naše malé mestá boli pokojné.",
+      explanation: "Naše, malé, mestá, boli и pokojné образуют согласованную цепочку множественного числа.",
+    },
+  ],
+  vocabulary: [
+    { word: "kniha – knihy", translation: "книга — книги", example: "Tie knihy sú nové." },
+    { word: "informácia – informácie", translation: "информация — сведения", example: "Informácie sú presné." },
+    { word: "možnosť – možnosti", translation: "возможность — возможности", example: "Tieto možnosti sú užitočné." },
+    { word: "vec – veci", translation: "вещь — вещи", example: "Moje veci sú na stole." },
+    { word: "mesto – mestá", translation: "город — города", example: "Mestá boli pokojné." },
+    { word: "okno – okná", translation: "окно — окна", example: "Okná sú čisté." },
+    { word: "srdce – srdcia", translation: "сердце — сердца" },
+    { word: "stretnutie – stretnutia", translation: "встреча — встречи", example: "Stretnutia sú dlhé." },
+    { word: "tie / tieto", translation: "те / эти", example: "Tieto knihy sú moje." },
+    { word: "moje / naše", translation: "мои / наши", example: "Naše cvičenia sú v počítači." },
+    { word: "sú / boli", translation: "являются / были", example: "Autá sú drahé. Mestá boli pokojné." },
+    { word: "presné", translation: "точные", example: "Všetky informácie sú presné." },
+  ],
+  chatPrompt: "Опишите комнату, офис или город пятью короткими фразами. Используйте формы женского и среднего рода во множественном числе, tie/tieto, притяжательное слово и sú или boli. Я буду проверять всю цепочку согласования.",
+  chatSuggestions: [
+    "V mojej izbe sú veľké okná.",
+    "Tieto knihy sú zaujímavé.",
+    "Naše staré cvičenia sú v počítači.",
+  ],
+});

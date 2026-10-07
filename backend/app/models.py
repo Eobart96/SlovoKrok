@@ -54,6 +54,7 @@ class CourseReading(Base):
     title: Mapped[str] = mapped_column(String(255))
     text: Mapped[str] = mapped_column(Text)
     instruction: Mapped[str] = mapped_column(Text)
+    reference_answer: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utc_now, index=True)
 
 
@@ -96,6 +97,7 @@ class CourseHomework(Base):
     description: Mapped[str] = mapped_column(Text)
     focus_category: Mapped[str] = mapped_column(String(255))
     theory_snapshot: Mapped[str] = mapped_column(Text)
+    reference_answer: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utc_now, index=True)
 
 

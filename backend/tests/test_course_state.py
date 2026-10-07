@@ -27,6 +27,8 @@ def test_state_write_requires_a_well_formed_revision(client):
         lambda value: value["progress"].update({"greetings": "unknown"}),
         lambda value: value["lessonSteps"].update({"greetings": -1}),
         lambda value: value["practiceResults"].update({"practice-1": 1}),
+        lambda value: value.update({"activeLevel": "B1"}),
+        lambda value: value["finalCompletedModules"].update({"module-2": True}),
         lambda value: value["mistakes"].update({
             "m1": {
                 "id": "m1", "lessonSlug": "greetings", "prompt": "P", "answer": "A",
@@ -56,6 +58,7 @@ def test_legacy_schema_is_read_with_defaults_and_upgraded_on_save(client):
     legacy = client.get("/api/v1/course/state")
     assert legacy.status_code == 200
     assert legacy.json()["schema_version"] == 1
+    assert legacy.json()["state"]["activeLevel"] == "A1"
     assert legacy.json()["state"]["activeModule"] == 1
     assert legacy.json()["state"]["personalCheatSheets"] == []
 
@@ -65,7 +68,7 @@ def test_legacy_schema_is_read_with_defaults_and_upgraded_on_save(client):
         headers=_state_headers(legacy.json()["revision"]),
     )
     assert upgraded.status_code == 200
-    assert upgraded.json()["schema_version"] == 2
+    assert upgraded.json()["schema_version"] == 3
     assert upgraded.json()["revision"] != legacy.json()["revision"]
 
 
@@ -101,6 +104,22 @@ def test_strict_nested_state_round_trip_preserves_supported_fields(client):
     assert restored["state"]["mistakes"]["m1"]["attempts"] == 2
     assert restored["state"]["chatHistories"]["greetings"][0]["suggestions"] == ["Volám sa Anna."]
     assert restored["state"]["lessonSummaries"]["greetings"]["evidence"]["coreTotal"] == 5
+
+
+def test_a2_level_and_qualified_module_keys_round_trip_without_colliding_with_a1(client):
+    payload = _state_payload()
+    payload.update({
+        "activeLevel": "A2",
+        "activeModule": 2,
+        "selectedSlug": "a2-nominative-plural-things",
+        "finalCompletedModules": {"a1:2": True, "a2:2": False},
+    })
+
+    saved = client.put("/api/v1/course/state", json=payload, headers=_state_headers(None))
+    assert saved.status_code == 200
+    assert saved.json()["schema_version"] == 3
+    assert saved.json()["state"]["activeLevel"] == "A2"
+    assert saved.json()["state"]["finalCompletedModules"] == {"a1:2": True, "a2:2": False}
 
 
 def test_stale_state_write_returns_conflict_without_overwriting_newer_progress(client):

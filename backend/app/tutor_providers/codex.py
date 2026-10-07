@@ -1,6 +1,7 @@
 from contextlib import contextmanager
 from dataclasses import dataclass
 import os
+import json
 from pathlib import Path
 import shutil
 import subprocess
@@ -35,7 +36,13 @@ class CodexCliProvider:
             executable_path,
             ["exec", "--ephemeral", "-s", "read-only", "--skip-git-repo-check", "-o", str(output_path)],
         )
+        schema_path = None
         try:
+            if context.response_schema is not None:
+                with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", suffix=".json", delete=False) as schema_file:
+                    schema_path = Path(schema_file.name)
+                    json.dump(context.response_schema, schema_file, ensure_ascii=False)
+                command.extend(["--output-schema", str(schema_path)])
             try:
                 with _temporary_codex_workspace(self.settings.project_root) as workspace:
                     result = subprocess.run(
@@ -68,6 +75,8 @@ class CodexCliProvider:
             return response
         finally:
             output_path.unlink(missing_ok=True)
+            if schema_path is not None:
+                schema_path.unlink(missing_ok=True)
 
 
 @dataclass(frozen=True)

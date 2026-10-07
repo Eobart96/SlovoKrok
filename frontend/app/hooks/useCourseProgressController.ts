@@ -3,7 +3,8 @@
 import { useMemo } from "react";
 
 import { buildModuleFinalQuestions, buildReinforcementPractices, getPracticeMatch, isCorePractice, isPracticeFilled, type ModuleFinalQuestion } from "../data/coursePractice";
-import { buildCourseResetScope, buildLessonSummary, nextMistakeRecord, removeActivityScope, removeLessonScope, removeMistakeScope, resetProgressScope, type MistakeRecord } from "../data/courseProgress";
+import { courseModuleCompletionKey } from "../data/courseLevelState";
+import { buildCourseResetScope, buildLessonSummary, nextMistakeRecord, recordFinalAttemptMistakes, removeActivityScope, removeLessonScope, removeMistakeScope, resetProgressScope, type MistakeRecord } from "../data/courseProgress";
 import { type CourseLesson, type CourseModule, type KnowledgeCheck, type StepPractice } from "../data/courseTypes";
 import { type CourseSession } from "./useCourseSession";
 
@@ -24,7 +25,8 @@ export function useCourseProgressController({ module, lesson, session }: { modul
   const correctPracticeCount = module.lessons.reduce((sum, item) => sum + item.stepPractices.filter((practice) => isCorePractice(item, practice) && practiceResults[practice.id]).length + (item.assessmentMode === "interactive" ? buildReinforcementPractices(item).filter((practice) => practiceResults[practice.id]).length : item.knowledgeChecks.filter((check) => checkSelections[check.id] === check.answer).length), 0);
   const totalMistakeAttempts = Object.values(mistakes).filter((mistake) => activeLessonSlugs.has(mistake.lessonSlug) && !optionalPracticeIds.has(mistake.id)).reduce((sum, mistake) => sum + mistake.attempts, 0);
   const accuracy = correctPracticeCount + totalMistakeAttempts === 0 ? 0 : Math.round((correctPracticeCount / (correctPracticeCount + totalMistakeAttempts)) * 100);
-  const finalCompleted = Boolean(finalCompletedModules[String(activeModule)]);
+  const moduleCompletionKey = courseModuleCompletionKey("A1", activeModule);
+  const finalCompleted = Boolean(finalCompletedModules[moduleCompletionKey]);
   const finalScore = finalQuestions.filter((question) => finalSelections[question.id] === question.answer).length;
   const finalPassingScore = Math.ceil(finalQuestions.length * finalPassingPercent / 100);
 
@@ -60,7 +62,7 @@ export function useCourseProgressController({ module, lesson, session }: { modul
     setPracticeResults((current) => removeActivityScope(current, scope));
     setCheckSelections((current) => removeActivityScope(current, scope));
     setFinalSelections((current) => removeActivityScope(current, scope));
-    setFinalCompletedModules((current) => ({ ...current, [String(activeModule)]: false }));
+    setFinalCompletedModules((current) => ({ ...current, [moduleCompletionKey]: false }));
     setMistakes((current) => removeMistakeScope(current, scope));
     setChatHistories((current) => removeLessonScope(current, scope));
     setLessonSummaries((current) => removeLessonScope(current, scope));
@@ -76,7 +78,7 @@ export function useCourseProgressController({ module, lesson, session }: { modul
     setPracticeResults((current) => removeActivityScope(current, scope));
     setCheckSelections((current) => removeActivityScope(current, scope));
     setFinalSelections((current) => removeActivityScope(current, scope));
-    setFinalCompletedModules((current) => ({ ...current, [String(activeModule)]: false }));
+    setFinalCompletedModules((current) => ({ ...current, [moduleCompletionKey]: false }));
     setMistakes((current) => removeMistakeScope(current, scope));
     setChatHistories((current) => removeLessonScope(current, scope));
     setLessonSummaries((current) => removeLessonScope(current, scope));
@@ -92,23 +94,14 @@ export function useCourseProgressController({ module, lesson, session }: { modul
 
   const submitFinal = () => {
     const nowMs = Date.now();
-    setMistakes((current) => {
-      const next = { ...current };
-      for (const question of finalQuestions) {
-        const record = nextMistakeRecord({
-          previous: next[question.id],
-          id: question.id,
-          lessonSlug: question.lessonSlug,
-          prompt: question.question,
-          answer: question.answer,
-          correct: finalSelections[question.id] === question.answer,
-          nowMs,
-        });
-        if (record) next[question.id] = record;
-      }
-      return next;
-    });
-    setFinalCompletedModules((current) => ({ ...current, [String(activeModule)]: true }));
+    setMistakes((current) => recordFinalAttemptMistakes(current, finalQuestions, finalSelections, nowMs));
+    setFinalCompletedModules((current) => ({ ...current, [moduleCompletionKey]: true }));
+  };
+
+  const startFinalAttempt = () => {
+    const questionIds = new Set(finalQuestions.map((question) => question.id));
+    setFinalSelections((current) => Object.fromEntries(Object.entries(current).filter(([id]) => !questionIds.has(id))));
+    setFinalCompletedModules((current) => ({ ...current, [moduleCompletionKey]: false }));
   };
 
   return {
@@ -124,8 +117,9 @@ export function useCourseProgressController({ module, lesson, session }: { modul
       finishReinforcement,
       resetLesson,
       resetModule,
-      selectFinalAnswer: (question: ModuleFinalQuestion, option: string) => { setFinalCompletedModules((current) => ({ ...current, [String(activeModule)]: false })); setFinalSelections((current) => ({ ...current, [question.id]: option })); },
+      selectFinalAnswer: (question: ModuleFinalQuestion, option: string) => { if (!finalCompleted) setFinalSelections((current) => ({ ...current, [question.id]: option })); },
       submitFinal,
+      startFinalAttempt,
     },
   };
 }

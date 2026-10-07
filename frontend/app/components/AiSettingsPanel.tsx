@@ -19,10 +19,13 @@ type Props = {
   learningMode: LearningMode;
   onLearningModeChange: (mode: LearningMode) => void;
   appearance: ReactNode;
+  profile: ReactNode;
+  tasks: ReactNode;
+  mistakes: ReactNode;
   backup: ReactNode;
   developmentTools: ReactNode;
-  settingsSections: { appearance: boolean; ai: boolean };
-  onSettingsSectionChange: (section: "appearance" | "ai", open: boolean) => void;
+  settingsSections: { appearance: boolean; tasks: boolean; mistakes: boolean; ai: boolean };
+  onSettingsSectionChange: (section: "appearance" | "tasks" | "mistakes" | "ai", open: boolean) => void;
 };
 
 const providerLabels: Record<TutorProviderName, { title: string; description: string }> = {
@@ -31,13 +34,13 @@ const providerLabels: Record<TutorProviderName, { title: string; description: st
   polza: { title: "Polza API", description: "OpenAI-совместимый API через сервис Polza." },
 };
 
-export function AiSettingsPanel({ open, onClose, developmentMode, onDevelopmentModeChange, learningMode, onLearningModeChange, appearance, backup, developmentTools, settingsSections, onSettingsSectionChange }: Props) {
+export function AiSettingsPanel({ open, onClose, developmentMode, onDevelopmentModeChange, learningMode, onLearningModeChange, appearance, profile, tasks, mistakes, backup, developmentTools, settingsSections, onSettingsSectionChange }: Props) {
   const [settings, setSettings] = useState<TutorSettings | null>(null);
   const [provider, setProvider] = useState<TutorProviderName>("codex");
   const [openaiKey, setOpenaiKey] = useState("");
   const [openaiModel, setOpenaiModel] = useState("gpt-5");
   const [polzaKey, setPolzaKey] = useState("");
-  const [polzaModel, setPolzaModel] = useState("openai/gpt-4o-mini");
+  const [polzaModel, setPolzaModel] = useState("google/gemini-2.5-flash-lite");
   const [clearOpenai, setClearOpenai] = useState(false);
   const [clearPolza, setClearPolza] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -53,6 +56,10 @@ export function AiSettingsPanel({ open, onClose, developmentMode, onDevelopmentM
       setProvider(next.provider);
       setOpenaiModel(next.openai_model);
       setPolzaModel(next.polza_model);
+      setOpenaiKey("");
+      setPolzaKey("");
+      setClearOpenai(false);
+      setClearPolza(false);
     } catch (loadError) {
       setError(loadError instanceof Error ? loadError.message : "Не удалось загрузить настройки");
     } finally {
@@ -145,7 +152,7 @@ export function AiSettingsPanel({ open, onClose, developmentMode, onDevelopmentM
         <section className="settings-section settings-development settings-learning-mode">
           <div>
             <strong>Режим обучения</strong>
-            <p>{learningMode === "online" ? "Онлайн: ИИ создаёт упражнения и помогает гибко проверять ответы." : "Офлайн для упражнений: генерация отключена, а заранее сохранённые задания проверяются по эталону без обращения к ИИ."}</p>
+            <p>{learningMode === "online" ? "Онлайн: ИИ создаёт задания и помогает гибко проверять ответы." : "Офлайн: сохранённые упражнения, тексты для чтения и домашние задания проверяются по эталону без обращения к ИИ. Создание новых заданий временно недоступно."}</p>
           </div>
           <button
             type="button"
@@ -161,29 +168,41 @@ export function AiSettingsPanel({ open, onClose, developmentMode, onDevelopmentM
         </section>
 
         {developmentTools}
+        {profile}
 
         <details className="settings-section settings-appearance" open={settingsSections.appearance} onToggle={(event) => onSettingsSectionChange("appearance", event.currentTarget.open)}>
           <summary>Оформление</summary>
           {appearance}
         </details>
 
+        <details className="settings-section settings-tasks" open={settingsSections.tasks} onToggle={(event) => onSettingsSectionChange("tasks", event.currentTarget.open)}>
+          <summary>Задания</summary>
+          {tasks}
+        </details>
+
         <section className="settings-section settings-backup">
           {backup}
         </section>
+        <details className="settings-section" open={settingsSections.mistakes} onToggle={(event) => onSettingsSectionChange("mistakes", event.currentTarget.open)}>
+          <summary>Ошибки и повторения</summary>
+          {mistakes}
+        </details>
 
         <details className="settings-section settings-ai" open={settingsSections.ai} onToggle={(event) => onSettingsSectionChange("ai", event.currentTarget.open)}>
           <summary>Подключение ИИ</summary>
-          {learningMode === "offline" && <p className="ai-settings-mode-note">Подключение сохранено, но не используется для проверки упражнений, пока включён офлайн-режим.</p>}
+          {learningMode === "offline" && <p className="ai-settings-mode-note">Подключение сохранено, но не используется для проверки заданий, пока включён офлайн-режим.</p>}
           <form onSubmit={save}>
-          <fieldset className="ai-provider-grid" disabled={busy}>
+          <fieldset className="ai-provider-picker" disabled={busy}>
             <legend>Выберите способ подключения</legend>
-            {(Object.keys(providerLabels) as TutorProviderName[]).map((name) => (
-              <label key={name} className={provider === name ? "selected" : ""}>
-                <input type="radio" name="provider" value={name} checked={provider === name} onChange={() => setProvider(name)} />
-                <strong>{providerLabels[name].title}</strong>
-                <span>{providerLabels[name].description}</span>
-              </label>
-            ))}
+            <div className="ai-provider-switch">
+              {(Object.keys(providerLabels) as TutorProviderName[]).map((name) => (
+                <label key={name} className={provider === name ? "selected" : ""}>
+                  <input type="radio" name="provider" value={name} checked={provider === name} onChange={() => { setProvider(name); setClearOpenai(false); setClearPolza(false); setError(""); }} />
+                  <span>{providerLabels[name].title}</span>
+                </label>
+              ))}
+            </div>
+            <p className="ai-provider-description" aria-live="polite">{providerLabels[provider].description}</p>
           </fieldset>
 
           {provider === "codex" && <div className="ai-provider-details">
@@ -193,16 +212,19 @@ export function AiSettingsPanel({ open, onClose, developmentMode, onDevelopmentM
           </div>}
 
           {provider === "openai" && <div className="ai-provider-details">
-            <label>API-ключ OpenAI<input type="password" autoComplete="off" value={openaiKey} onChange={(event) => { setOpenaiKey(event.target.value); setClearOpenai(false); }} placeholder={settings?.openai_api_key_configured ? "Ключ уже сохранён — оставьте пустым" : "Вставьте API-ключ"} /></label>
-            <label>Модель<input value={openaiModel} onChange={(event) => setOpenaiModel(event.target.value)} required /></label>
-            {settings?.openai_api_key_configured && <label className="ai-clear-key"><input type="checkbox" checked={clearOpenai} onChange={(event) => setClearOpenai(event.target.checked)} />Удалить сохранённый ключ</label>}
+            {settings?.openai_api_key_configured && <p className="ai-key-saved">Ключ OpenAI сохранён. Для смены модели вводить его повторно не нужно.</p>}
+            <label>{settings?.openai_api_key_configured ? "Новый API-ключ OpenAI — необязательно" : "API-ключ OpenAI"}<input type="password" autoComplete="off" value={openaiKey} onChange={(event) => { setOpenaiKey(event.target.value); setClearOpenai(false); }} placeholder={settings?.openai_api_key_configured ? "Оставьте пустым, чтобы сохранить прежний ключ" : "Вставьте API-ключ"} /></label>
+            <label>Модель<input value={openaiModel} onChange={(event) => { setOpenaiModel(event.target.value); setClearOpenai(false); setError(""); }} required /></label>
+            {settings?.openai_api_key_configured && <details className="ai-key-management"><summary>Управление сохранённым ключом</summary><label className="ai-clear-key"><input type="checkbox" checked={clearOpenai} onChange={(event) => setClearOpenai(event.target.checked)} />Удалить ключ при сохранении настроек</label></details>}
           </div>}
 
           {provider === "polza" && <div className="ai-provider-details">
-            <label>API-ключ Polza<input type="password" autoComplete="off" value={polzaKey} onChange={(event) => { setPolzaKey(event.target.value); setClearPolza(false); }} placeholder={settings?.polza_api_key_configured ? "Ключ уже сохранён — оставьте пустым" : "Вставьте API-ключ"} /></label>
-            <label>Модель<input value={polzaModel} onChange={(event) => setPolzaModel(event.target.value)} required /></label>
+            {settings?.polza_api_key_configured && <p className="ai-key-saved">Ключ Polza сохранён. Меняйте только модель — ключ подставится автоматически.</p>}
+            <label>{settings?.polza_api_key_configured ? "Новый API-ключ Polza — необязательно" : "API-ключ Polza"}<input type="password" autoComplete="off" value={polzaKey} onChange={(event) => { setPolzaKey(event.target.value); setClearPolza(false); }} placeholder={settings?.polza_api_key_configured ? "Оставьте пустым, чтобы сохранить прежний ключ" : "Вставьте API-ключ"} /></label>
+            <label>Модель<input value={polzaModel} onChange={(event) => { setPolzaModel(event.target.value); setClearPolza(false); setError(""); }} required /></label>
+            <small>Рекомендуемая для курса: <code>google/gemini-2.5-flash-lite</code> — быстрый и экономичный вариант для перевода, объяснений и генерации заданий.</small>
             <small>Endpoint: {settings?.polza_base_url ?? "https://polza.ai/api/v1"}</small>
-            {settings?.polza_api_key_configured && <label className="ai-clear-key"><input type="checkbox" checked={clearPolza} onChange={(event) => setClearPolza(event.target.checked)} />Удалить сохранённый ключ</label>}
+            {settings?.polza_api_key_configured && <details className="ai-key-management"><summary>Управление сохранённым ключом</summary><label className="ai-clear-key"><input type="checkbox" checked={clearPolza} onChange={(event) => setClearPolza(event.target.checked)} />Удалить ключ при сохранении настроек</label></details>}
           </div>}
 
           <p className="ai-settings-security">Ключ хранится только локально на backend и никогда не возвращается в браузер. Персональный профиль ученика по умолчанию не отправляется выбранному ИИ; явное включение возможно только через локальную настройку <code>SHARE_PRIVATE_TUTOR_PROFILE=true</code>.</p>

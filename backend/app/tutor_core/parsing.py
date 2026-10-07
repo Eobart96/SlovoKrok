@@ -49,8 +49,8 @@ def parse_tutor_translation_question(response: str) -> TutorTranslationQuestion:
 
 
 def parse_tutor_assessment(response: str) -> TutorAssessment:
-    """Validate a provider response and tolerate a markdown JSON fence."""
-    return parse_ai_json(response, TutorAssessment)
+    """Validate an assessment, tolerating a short preface around its JSON."""
+    return parse_ai_json(response, TutorAssessment, allow_embedded_object=True)
 
 
 def parse_homework_generation(response: str) -> HomeworkGeneration:

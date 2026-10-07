@@ -2,8 +2,16 @@ import { ApiError, ApiRequestError, apiErrorMessage } from "./apiError.ts";
 
 export const defaultRequestTimeoutMs = 30_000;
 export const aiRequestTimeoutMs = 310_000;
+export const backupRequestTimeoutMs = 310_000;
 
 export type ApiRequestInit = RequestInit & { timeoutMs?: number };
+
+const directBackendOrigin = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:8000").replace(/\/$/, "");
+
+export function apiRequestUrl(path: string, isBrowser = typeof window !== "undefined"): string {
+  const apiPath = `/api/v1${path}`;
+  return isBrowser ? `${directBackendOrigin}${apiPath}` : apiPath;
+}
 
 export async function requestJson<T>(path: string, init: ApiRequestInit = {}): Promise<T> {
   const { timeoutMs = defaultRequestTimeoutMs, signal: callerSignal, ...fetchInit } = init;
@@ -22,7 +30,7 @@ export async function requestJson<T>(path: string, init: ApiRequestInit = {}): P
   try {
     let response: Response;
     try {
-      response = await fetch(`/api/v1${path}`, {
+      response = await fetch(apiRequestUrl(path), {
         ...fetchInit,
         headers: { "Content-Type": "application/json", ...fetchInit.headers },
         signal: controller.signal,

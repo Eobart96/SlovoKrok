@@ -1,0 +1,1142 @@
+{
+  "slovak-alphabet-pronunciation": {
+    "readings": [
+      {
+        "title": "Небольшой стол",
+        "text": "Tu je stôl. Na stole je chlieb a džús. Tu je aj mlieko. Dieťa pije džús.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "На столе хлеб, сок и молоко. Ребёнок пьёт сок."
+      },
+      {
+        "title": "Во дворе",
+        "text": "Tu je malý dom. Pri dome je kôň. Kôň je hnedý. Dieťa je pri dome.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Рядом с маленьким домом стоит коричневый конь. Ребёнок тоже возле дома."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Карточка кафе",
+        "description": "Вымышленное кафе предлагает хлеб и сок. Составьте 2–3 простых предложения для карточки, используйте chlieb и džús. Прочитайте вслух, обращая внимание на ch и dž.",
+        "focus_category": "pronunciation",
+        "reference_answer": "Tu je chlieb. Tu je aj džús. Džús je dobrý."
+      },
+      {
+        "title": "Учебная картинка",
+        "description": "На учебной картинке конь и ребёнок у дома. Опишите её в 2–3 простых предложениях со словами kôň и dieťa. Прочитайте вслух, сохраняя знаки над буквами.",
+        "focus_category": "pronunciation",
+        "reference_answer": "Tu je dom. Tu je kôň. Tu je aj dieťa."
+      }
+    ]
+  },
+  "long-short-vowels": {
+    "readings": [
+      {
+        "title": "Утро в кафе",
+        "text": "Je ráno. Tu je malá káva. Káva je dobrá. Tu je aj mlieko.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Утро. Здесь маленький кофе и молоко. Кофе хороший."
+      },
+      {
+        "title": "Дом возле дерева",
+        "text": "Tu je malý dom. Pri dome je vŕba. Dom je biely. Vŕba je veľká.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Возле маленького белого дома растёт большая ива."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Напитки на столе",
+        "description": "На столе в вымышленном кафе кофе и молоко. Напишите 2–3 предложения со словами káva и malá. Прочитайте их: á звучит дольше a.",
+        "focus_category": "pronunciation",
+        "reference_answer": "Tu je káva. Káva je malá. Tu je aj mlieko."
+      },
+      {
+        "title": "Маленький дом",
+        "description": "На рисунке маленький хороший дом. Напишите 2 предложения со словами malý и dobrý. Прочитайте, сохраняя долгие гласные.",
+        "focus_category": "pronunciation",
+        "reference_answer": "Tu je malý dom. Dom je dobrý."
+      }
+    ]
+  },
+  "diphthongs": {
+    "readings": [
+      {
+        "title": "Завтрак в пятницу",
+        "text": "Je piatok. Na stole je chlieb. Tu je aj mlieko. Dieťa pije mlieko.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В пятницу на столе хлеб и молоко. Ребёнок пьёт молоко."
+      },
+      {
+        "title": "Белый дом",
+        "text": "Tu je biely dom. Pri dome je kôň. Kôň je malý. Tu je aj dieťa.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Возле белого дома маленький конь. Здесь есть и ребёнок."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Стол с завтраком",
+        "description": "На картинке стол, хлеб и молоко. Опишите её в 2–3 простых предложениях со словами stôl, chlieb, mlieko. Прочитайте дифтонги слитно.",
+        "focus_category": "pronunciation",
+        "reference_answer": "Tu je stôl. Tu je chlieb. Tu je aj mlieko."
+      },
+      {
+        "title": "День и дом",
+        "description": "На учебной карточке пятница и белый дом. Напишите 2 предложения со словами piatok и biely. Прочитайте ia и ie слитно.",
+        "focus_category": "pronunciation",
+        "reference_answer": "Je piatok. Tu je biely dom."
+      }
+    ]
+  },
+  "soft-hard-consonants": {
+    "readings": [
+      {
+        "title": "Дети у дома",
+        "text": "Tu je dom. Pri dome sú deti. Tu je aj kôň. Kôň je malý.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Возле дома дети и маленький конь."
+      },
+      {
+        "title": "Тихая комната",
+        "text": "Tu je izba. V izbe je ticho. Na stole je kniha. Dieťa je v izbe.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В комнате тихо, на столе книга, в комнате ребёнок."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Карточка с животным",
+        "description": "На вымышленной карточке маленький конь и дети. Напишите 2 предложения со словами kôň и deti. Прочитайте мягкие согласные в этих словах.",
+        "focus_category": "pronunciation",
+        "reference_answer": "Tu je malý kôň. Tu sú aj deti."
+      },
+      {
+        "title": "Тихая сцена",
+        "description": "На рисунке ребёнок в тихой комнате. Напишите 2–3 простых предложения со словами dieťa и ticho. Прочитайте их, обращая внимание на d и t.",
+        "focus_category": "pronunciation",
+        "reference_answer": "Tu je dieťa. Tu je izba. V izbe je ticho."
+      }
+    ]
+  },
+  "word-stress": {
+    "readings": [
+      {
+        "title": "Семья дома",
+        "text": "Rodina je doma. Na stole je mlieko. Tu je aj chlieb. Dieťa je malé.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Семья дома, на столе молоко и хлеб, ребёнок маленький."
+      },
+      {
+        "title": "В школьной комнате",
+        "text": "Učiteľ je v škole. Tu je malá izba. Na stole je kniha. Kniha je dobrá.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Учитель в школе. В маленькой комнате на столе хорошая книга."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Вымышленный завтрак",
+        "description": "Семья дома, на столе хлеб. Напишите 2 предложения со словами rodina и chlieb. Прочитайте с ударением на первом слоге каждого слова.",
+        "focus_category": "pronunciation",
+        "reference_answer": "Rodina je doma. Na stole je chlieb."
+      },
+      {
+        "title": "Школьная картинка",
+        "description": "На картинке учитель в школе и книга на столе. Составьте 2 предложения и прочитайте сочетания v škole и na stole плавно.",
+        "focus_category": "pronunciation",
+        "reference_answer": "Učiteľ je v škole. Kniha je na stole."
+      }
+    ]
+  },
+  "rhythmic-law": {
+    "readings": [
+      {
+        "title": "Красивый дом",
+        "text": "Tu je krásny dom. Dom je biely. Pri dome je malý stôl. Stôl je dobrý.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Красивый дом белый, рядом маленький хороший стол."
+      },
+      {
+        "title": "Пятый день",
+        "text": "Je piaty deň. Tu je dobrý chlieb. Chlieb je biely. Tu je aj mliečny nápoj.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Идёт пятый день. Здесь хороший белый хлеб и молочный напиток."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Карточка дома",
+        "description": "На учебной карточке красивый белый дом. Напишите 2 предложения со словами krásny и biely; сохраните краткое y в этих формах.",
+        "focus_category": "pronunciation",
+        "reference_answer": "Tu je krásny dom. Dom je biely."
+      },
+      {
+        "title": "Учебное меню",
+        "description": "На карточке меню хороший хлеб и молочный напиток. Напишите 2 предложения со словами dobrý и mliečny. Прочитайте, различая долгие и краткие слоги.",
+        "focus_category": "pronunciation",
+        "reference_answer": "Tu je dobrý chlieb. Tu je aj mliečny nápoj."
+      }
+    ]
+  },
+  "greetings": {
+    "readings": [
+      {
+        "title": "В магазине утром",
+        "text": "V obchode je ráno. Zákazník hovorí: „Dobré ráno. Ako sa máte?“ Predavač odpovedá: „Dobre, ďakujem. A vy?“ Zákazník hovorí: „Tiež dobre, ďakujem.“ Na stole je chlieb a mlieko. Zákazník hovorí: „Chlieb, prosím.“ Potom hovorí: „Ďakujem. Dovidenia.“ Predavač odpovedá: „Dovidenia.“",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Утром покупатель вежливо приветствует продавца, спрашивает о самочувствии, просит хлеб, благодарит и прощается."
+      },
+      {
+        "title": "Встреча у школы",
+        "text": "Dvaja študenti sú pri škole. Jeden hovorí: „Ahoj! Ako sa máš?“ Druhý odpovedá: „Dobre, ďakujem. A ty?“ Prvý hovorí: „Tiež dobre.“ Škola je otvorená a obaja sú tu ráno. Potom jeden hovorí: „Maj sa. Do zajtra!“ Druhý odpovedá: „Ahoj, do zajtra!“",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Два студента встречаются утром у открытой школы, здороваются на ты, спрашивают о самочувствии и прощаются до завтра."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Вежливая встреча",
+        "description": "Покупатель встречает незнакомого продавца днём. Напишите минидиалог из 4 коротких реплик: приветствие, вопрос о самочувствии, ответ, прощание. Используйте вежливое обращение.",
+        "focus_category": "communication",
+        "reference_answer": "— Dobrý deň. Ako sa máte?\n— Dobre, ďakujem.\n— Dovidenia.\n— Dovidenia."
+      },
+      {
+        "title": "Встреча знакомых",
+        "description": "Два знакомых студента встречаются у школы утром. Напишите 3–4 короткие реплики: приветствие на ты, вопрос, ответ и прощание до завтра.",
+        "focus_category": "communication",
+        "reference_answer": "— Ahoj! Ako sa máš?\n— Dobre, ďakujem. A ty?\n— Tiež dobre. Maj sa, do zajtra!\n— Ahoj!"
+      }
+    ]
+  },
+  "introductions": {
+    "readings": [
+      {
+        "title": "Новый студент",
+        "text": "V škole je nový študent. Hovorí: „Dobrý deň. Som študent a bývam v meste. Hovorím po rusky a trochu po slovensky. Mám dvadsať rokov. Som tu dnes prvý deň.“ Učiteľ odpovedá: „Dobrý deň. Teší ma.“ Študent hovorí: „Aj mňa. Ďakujem.“",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Новый студент живёт в городе, говорит по-русски и немного по-словацки, ему двадцать лет. Сегодня его первый день, он знакомится с учителем."
+      },
+      {
+        "title": "Посетитель курса",
+        "text": "Na kurze je nový účastník. Hovorí: „Dobrý deň. Pracujem v obchode. Bývam v malom meste. Hovorím po anglicky a trochu po slovensky. Mám tridsať rokov.“ Učiteľ je tu tiež. Hovorí: „Teší ma.“ Účastník odpovedá: „Aj mňa. Som tu rád.“",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Новому участнику курса тридцать лет, он работает в магазине, живёт в маленьком городе и говорит по-английски и немного по-словацки. Он рад быть на курсе."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Роль студента",
+        "description": "Вымышленному студенту двадцать лет; он живёт в городе и говорит по-русски. Представьте этого персонажа от первого лица в 3 предложениях, без имени.",
+        "focus_category": "communication",
+        "reference_answer": "Som študent. Bývam v meste a hovorím po rusky. Mám dvadsať rokov."
+      },
+      {
+        "title": "Роль продавца",
+        "description": "Вымышленному продавцу тридцать лет; он работает в магазине и немного говорит по-словацки. Напишите его представление в 3 предложениях, без имени.",
+        "focus_category": "communication",
+        "reference_answer": "Pracujem v obchode. Hovorím trochu po slovensky. Mám tridsať rokov."
+      }
+    ]
+  },
+  "numbers": {
+    "readings": [
+      {
+        "title": "На столе в магазине",
+        "text": "V malom obchode je stôl. Na stole sú dve knihy a tri zošity. Jedna kniha stojí päť eur a jeden zošit stojí dve eurá. Zákazník má desať eur. Tu je aj jedna taška. Taška stojí jedno euro. Všetko je nové.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "На столе две книги и три тетради. Книга стоит пять евро, тетрадь два, сумка один. У покупателя десять евро; все вещи новые."
+      },
+      {
+        "title": "Учебная комната",
+        "text": "V škole je jedna veľká izba. Sú tu štyri stoly a osem stoličiek. Pri dverách sú dve tašky. Na stole sú tri knihy a jeden zošit. Učiteľ má tridsať rokov a študent má dvadsať rokov. Dnes sú v izbe dvaja ľudia.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В большой школьной комнате четыре стола, восемь стульев, две сумки, три книги и одна тетрадь. Здесь учитель тридцати лет и студент двадцати лет."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Ценники магазина",
+        "description": "Вымышленный магазин: книга стоит 6 евро, тетрадь 2 евро, сумка 3 евро. Напишите 3 предложения с ценами; числа запишите словами.",
+        "focus_category": "vocabulary",
+        "reference_answer": "Kniha stojí šesť eur. Zošit stojí dve eurá. Taška stojí tri eurá."
+      },
+      {
+        "title": "Проверка комнаты",
+        "description": "На рисунке 2 стола, 4 стула и 1 книга. Опишите количество в 3 коротких предложениях; числа запишите словами.",
+        "focus_category": "vocabulary",
+        "reference_answer": "Tu sú dva stoly. Tu sú štyri stoličky. Tu je jedna kniha."
+      }
+    ]
+  },
+  "days-and-months": {
+    "readings": [
+      {
+        "title": "Расписание курса",
+        "text": "Dnes je pondelok a kurz je v škole. V utorok je kurz tiež. V stredu kurz nie je. Vo štvrtok sú tu študenti ráno a v piatok popoludní. V sobotu a v nedeľu je škola zatvorená. Tento kurz je v máji.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Курс проходит в мае: в понедельник и вторник, в четверг утром и в пятницу после обеда. В среду занятий нет, в выходные школа закрыта."
+      },
+      {
+        "title": "Календарь магазина",
+        "text": "Je december. Malý obchod je otvorený v pondelok, v stredu a v piatok. V utorok a vo štvrtok je zatvorený. Dnes je streda a v obchode je predavač. Zajtra je štvrtok. V sobotu je obchod otvorený ráno a v nedeľu nie je otvorený.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В декабре магазин открыт по понедельникам, средам, пятницам и в субботу утром. По вторникам, четвергам и воскресеньям закрыт. Сегодня среда, продавец в магазине."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Расписание библиотеки",
+        "description": "Вымышленная библиотека открыта в понедельник и пятницу, а в воскресенье закрыта. Напишите 3 предложения об этом расписании.",
+        "focus_category": "vocabulary",
+        "reference_answer": "Knižnica je otvorená v pondelok. Je otvorená aj v piatok. V nedeľu je zatvorená."
+      },
+      {
+        "title": "Календарная карточка",
+        "description": "На карточке сегодня вторник, завтра среда, курс проходит в июне. Напишите 3 предложения по карточке.",
+        "focus_category": "vocabulary",
+        "reference_answer": "Dnes je utorok. Zajtra je streda. Kurz je v júni."
+      }
+    ]
+  },
+  "personal-pronouns": {
+    "readings": [
+      {
+        "title": "Кто сегодня здесь",
+        "text": "V škole sú dvaja študenti a učiteľka. Ona je tu ráno. Oni sú tu tiež. Na stole sú knihy. Ony sú nové a dobré. Jeden študent hovorí: „My sme tu dnes prvý deň. Vy ste naša učiteľka?“ Učiteľka odpovedá: „Áno, som.“",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В школе учительница и два студента, на столе новые хорошие книги. Студенты здесь впервые и уточняют, она ли их учительница."
+      },
+      {
+        "title": "Встреча в кафе",
+        "text": "V kaviarni je študent a jeho sestra. On je spokojný a ona je tiež spokojná. Čašník hovorí: „Vy ste tu prvý deň?“ Študent odpovedá: „Áno, sme. My sme tu dnes spolu.“ Na stole sú dve kávy. Ony sú malé, ale dobré.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В кафе студент с сестрой, оба довольны. Они подтверждают официанту, что здесь впервые. На столе два маленьких хороших кофе."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Роли на картинке",
+        "description": "На картинке студент дома, студентка в школе, два учителя здесь. Опишите их в 3 предложениях, заменяя роли местоимениями on, ona, oni.",
+        "focus_category": "grammar",
+        "reference_answer": "On je doma. Ona je v škole. Oni sú tu."
+      },
+      {
+        "title": "Вежливое обращение",
+        "description": "Студент впервые встречает незнакомого учителя. Напишите 2 реплики: спросите на вы, учитель ли он, и дайте утвердительный ответ от лица учителя.",
+        "focus_category": "grammar",
+        "reference_answer": "— Vy ste učiteľ?\n— Áno, som učiteľ."
+      }
+    ]
+  },
+  "verb-byt": {
+    "readings": [
+      {
+        "title": "Открытая школа",
+        "text": "Dnes je škola otvorená. Učiteľ je v škole a študenti sú tu tiež. Izba je veľká, ale nie je nová. Knihy sú na stole. Jeden študent nie je tu. Je doma. Učiteľka je dnes spokojná. Všetci sú pripravení a kurz je dobrý.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Школа открыта, учитель и студенты здесь. Комната большая, но не новая, книги на столе. Один студент дома. Учительница довольна, все готовы, курс хороший."
+      },
+      {
+        "title": "Комната в отеле",
+        "text": "Hotel je malý, ale pekný. Izba je čistá a posteľ je dobrá. Stôl nie je veľký. Dve stoličky sú pri stole. Hosť je dnes v izbe. Nie je unavený, je spokojný. Hovorí: „Som tu prvý deň. Je tu ticho a všetko je dobré.“",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В маленьком красивом отеле чистая комната с хорошей кроватью, небольшим столом и двумя стульями. Гость здесь впервые, он не устал и доволен тишиной."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Статус класса",
+        "description": "В вымышленном классе учитель и два студента. Один другой студент дома. Напишите 3 предложения с je, sú и nie je.",
+        "focus_category": "grammar",
+        "reference_answer": "Učiteľ je v škole. Dvaja študenti sú tu. Jeden študent tu nie je."
+      },
+      {
+        "title": "Диалог у двери",
+        "description": "Гость спрашивает, открыт ли магазин; продавец отвечает, что открыт, но хлеба здесь нет. Составьте 2–3 короткие реплики с формами byť.",
+        "focus_category": "grammar",
+        "reference_answer": "— Je obchod otvorený?\n— Áno, je otvorený.\n— Chlieb tu nie je."
+      }
+    ]
+  },
+  "question-words": {
+    "readings": [
+      {
+        "title": "Вопросы в школе",
+        "text": "Nový študent je v škole. Hovorí: „Kde je učiteľ? Kedy je kurz?“ Učiteľka odpovedá: „Učiteľ je tu. Kurz je ráno.“ Na stole je kniha. Študent sa pýta: „Čo je to? Čia je tá kniha?“ Učiteľka hovorí: „To je slovník. Je môj.“",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Новый студент спрашивает, где учитель и когда курс: учитель здесь, курс утром. На столе словарь учительницы; студент спрашивает, что это и чей он."
+      },
+      {
+        "title": "Гость у магазина",
+        "text": "Hosť je pri malom obchode. Pýta sa: „Kto je to?“ Študent odpovedá: „To je predavač.“ Hosť sa pýta: „Kde je hotel? Je ďaleko?“ Študent hovorí: „Hotel je tu, pri škole.“ Hosť sa pýta: „Ktorý dom?“ Študent odpovedá: „Ten veľký biely dom.“",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Гость узнаёт, что возле магазина продавец, и спрашивает про отель. Отель рядом со школой в большом белом доме."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Три неизвестные детали",
+        "description": "На учебной карточке нужно узнать место курса, время курса и предмет на столе. Напишите 3 вопроса со словами kde, kedy и čo.",
+        "focus_category": "communication",
+        "reference_answer": "Kde je kurz? Kedy je kurz? Čo je na stole?"
+      },
+      {
+        "title": "Вопросы о картинке",
+        "description": "На картинке человек, книга и две сумки. Напишите 3 вопроса: кто этот человек, чья книга, какая сумка новая.",
+        "focus_category": "communication",
+        "reference_answer": "Kto je to? Čia je tá kniha? Ktorá taška je nová?"
+      }
+    ]
+  },
+  "communication-repair": {
+    "readings": [
+      {
+        "title": "Незнакомое слово",
+        "text": "Zákazník je v kaviarni. Čašník hovorí: „Účet, prosím.“ Zákazník nerozumie. Pýta sa: „Prepáčte, čo znamená účet?“ Čašník hovorí pomaly: „To je papier. Tu je cena.“ Zákazník odpovedá: „Ďakujem, už rozumiem.“ Na papieri je päť eur. Zákazník hovorí: „Päť eur?“ Čašník odpovedá: „Áno.“",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Покупатель в кафе не понимает слово účet. Официант медленно объясняет, что это бумага с ценой. Покупатель понимает и уточняет сумму — пять евро."
+      },
+      {
+        "title": "Уточнение расписания",
+        "text": "Študent je na kurze. Učiteľ hovorí: „Kurz je vo štvrtok.“ Študent sa pýta: „Ešte raz, prosím. Môžete hovoriť pomalšie?“ Učiteľ odpovedá: „Vo štvrtok ráno.“ Študent hovorí: „Správne rozumiem, že kurz je vo štvrtok ráno?“ Učiteľ odpovedá: „Áno.“ Študent hovorí: „Ďakujem. Teraz rozumiem.“",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Студент просит повторить расписание медленнее и уточняет, что курс в четверг утром. Учитель подтверждает, студент благодарит."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Непонятное слово",
+        "description": "Покупатель не понимает слово zošit. Составьте 2–3 реплики: вежливо сообщите о непонимании, спросите значение и дайте простой ответ продавца.",
+        "focus_category": "communication",
+        "reference_answer": "— Prepáčte, nerozumiem. Čo znamená zošit?\n— Zošit je na písanie.\n— Ďakujem, už rozumiem."
+      },
+      {
+        "title": "Проверка времени",
+        "description": "Вымышленный курс проходит в пятницу утром. Напишите минидиалог из 3 реплик: попросите повторить, уточните день и время, получите подтверждение.",
+        "focus_category": "communication",
+        "reference_answer": "— Ešte raz, prosím.\n— Správne rozumiem, že kurz je v piatok ráno?\n— Áno, v piatok ráno."
+      }
+    ]
+  },
+  "masculine-nouns": {
+    "readings": [
+      {
+        "title": "Новый отель",
+        "text": "V meste je nový hotel a veľký obchod. Hotel je pekný a obchod je otvorený. Pred hotelom sú dvaja turisti. Sú to noví hostia. V obchode je jeden predavač. Tu sú aj dva malé stoly. Na stole je chlieb a syr.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В городе новый отель и большой открытый магазин. Перед отелем два туриста, новые гости. В магазине продавец, два столика, хлеб и сыр."
+      },
+      {
+        "title": "Учителя на курсе",
+        "text": "Dnes je v škole nový kurz. Jeden učiteľ je pri stole a dvaja študenti sú pri dverách. Tu sú aj dvaja noví učitelia. Na stole sú tri zošity a dva slovníky. Zošity sú nové. Slovníky sú dobré. Kurz je malý, ale zaujímavý.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "На новом небольшом интересном курсе учитель, два студента и ещё два новых учителя. На столе три новые тетради и два хороших словаря."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Две группы на рисунке",
+        "description": "На рисунке два новых студента и два новых дома. Опишите эти группы в 2 предложениях, используя tí и tie с подходящими формами nový.",
+        "focus_category": "grammar",
+        "reference_answer": "Tí študenti sú noví. Tie domy sú nové."
+      },
+      {
+        "title": "Карта квартала",
+        "description": "В вымышленном квартале один большой отель и два маленьких магазина. Напишите 2 предложения с количеством и согласованными прилагательными.",
+        "focus_category": "grammar",
+        "reference_answer": "Tu je jeden veľký hotel. Tu sú dva malé obchody."
+      }
+    ]
+  },
+  "feminine-nouns": {
+    "readings": [
+      {
+        "title": "Книги в комнате",
+        "text": "V izbe je jedna nová kniha. Pri nej sú dve staré knihy. Na stole je aj jedna taška. Taška je malá a ľahká. Pri dverách sú dve veľké tašky. Študentka je v izbe a hovorí: „Tá nová kniha je dobrá. Tie staré knihy sú tiež dobré.“",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В комнате одна новая и две старые книги, маленькая лёгкая сумка на столе и две большие у двери. Студентка говорит, что новая и старые книги хорошие."
+      },
+      {
+        "title": "Две улицы и кафе",
+        "text": "V meste sú dve malé ulice. Tu je škola a pekná kaviareň. Kaviareň je otvorená ráno. Na stole sú dve kávy a jedna voda. Jedna káva je malá a druhá je veľká. Pri stole sú dve ženy. Táto kaviareň je tichá a čistá.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "На двух маленьких улицах есть школа и тихое чистое кафе. Оно открыто утром. За столом две женщины, два кофе разного размера и вода."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Уголок библиотеки",
+        "description": "На столе одна новая книга и две старые книги. Напишите 2 предложения, используя tá и tie и правильные формы прилагательных.",
+        "focus_category": "grammar",
+        "reference_answer": "Tá kniha je nová. Tie knihy sú staré."
+      },
+      {
+        "title": "Набор для кафе",
+        "description": "На учебной картинке две маленькие чашки кофе и одна большая сумка. Опишите их в 2 предложениях с числительными.",
+        "focus_category": "grammar",
+        "reference_answer": "Tu sú dve malé kávy. Tu je jedna veľká taška."
+      }
+    ]
+  },
+  "neuter-nouns": {
+    "readings": [
+      {
+        "title": "Два автомобиля",
+        "text": "Pri hoteli sú dve nové autá. Jedno auto je biele a druhé je modré. Hotel je malý, ale má veľké okno. To okno je čisté. Pri okne je malé dieťa. Dieťa je spokojné. Na stole je mlieko a jedno dobré jablko.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "У маленького отеля два новых автомобиля — белый и синий. Большое окно чистое, возле него довольный ребёнок. На столе молоко и хорошее яблоко."
+      },
+      {
+        "title": "Маленькое место",
+        "text": "Tu je malé mesto. V meste je pekné námestie a nové kino. Kino je dnes otvorené. Na námestí sú dve malé autá. Pri kine je dieťa. V meste sú aj dve ihriská. To nové ihrisko je veľké a dobré. Mesto je tiché.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В тихом маленьком городе красивый центр, открытый новый кинотеатр, две маленькие машины и две детские площадки. Новая площадка большая и хорошая."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Парковка отеля",
+        "description": "На рисунке одно новое белое авто и два маленьких синих авто. Напишите 2 предложения с числительными и согласованными прилагательными.",
+        "focus_category": "grammar",
+        "reference_answer": "Tu je jedno nové biele auto. Tu sú dve malé modré autá."
+      },
+      {
+        "title": "Два городских объекта",
+        "description": "На учебной карте маленький город и новое кино. Опишите их в 2 предложениях с to и формами malý, nový.",
+        "focus_category": "grammar",
+        "reference_answer": "To mesto je malé. To kino je nové."
+      }
+    ]
+  },
+  "noun-number": {
+    "readings": [
+      {
+        "title": "Подготовленная комната",
+        "text": "V škole je jedna veľká izba. V izbe sú dva nové stoly a štyri malé stoličky. Na stole je jeden slovník a dve knihy. Pri dverách sú dvaja noví študenti. Učiteľ je tu tiež. Knihy sú nové a slovník je dobrý.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В большой школьной комнате два новых стола, четыре маленьких стула, словарь и две книги. У двери два новых студента, учитель тоже здесь."
+      },
+      {
+        "title": "Отель и гости",
+        "text": "Tu je malý hotel. Pred hotelom je jedno nové auto a dve staré autá. V hoteli sú dvaja hostia. Jeden hosť je študent a druhý je učiteľ. V izbe je jedna posteľ a dve stoličky. Na stole sú tri čisté poháre.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Перед маленьким отелем одна новая и две старые машины. В отеле два гостя — студент и учитель. В комнате кровать, два стула и три чистых стакана."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Один и несколько",
+        "description": "На одной карточке новый стол и новая книга; на другой два новых стола и две новые книги. Напишите 2 предложения, по одному на карточку.",
+        "focus_category": "grammar",
+        "reference_answer": "Tu je nový stôl a nová kniha. Tu sú dva nové stoly a dve nové knihy."
+      },
+      {
+        "title": "Группа в классе",
+        "description": "В вымышленном классе один новый учитель и два новых студента. Опишите их в 2 предложениях, согласуя число и прилагательные.",
+        "focus_category": "grammar",
+        "reference_answer": "Tu je jeden nový učiteľ. Tu sú dvaja noví študenti."
+      }
+    ]
+  },
+  "noun-endings": {
+    "readings": [
+      {
+        "title": "После курса",
+        "text": "Študent je v škole. Na stole je kniha a malá taška. Študent hovorí: „Vidím knihu, ale nevidím zošit.“ Potom ide do mesta. Jeho sestra je v meste tiež. Študent ide so sestrou do obchodu. Tam je chlieb a mlieko. Obchod je otvorený.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Студент в школе видит книгу, но не видит тетрадь. Потом идёт в город и с сестрой в открытый магазин, где есть хлеб и молоко."
+      },
+      {
+        "title": "Возле дома",
+        "text": "Pri dome je malá záhrada. V záhrade je žena. Žena má tašku a v taške má knihu. Jej syn je v dome. Potom žena ide k lekárovi. Syn ide do školy. Na ulici je veľa ľudí. Dnes je pekný a teplý deň.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "У дома сад, в саду женщина с сумкой и книгой. Сын дома. Женщина идёт к врачу, сын в школу, на улице много людей и тепло."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Три карточки действия",
+        "description": "На карточках: покупатель видит книгу, студент идёт в город, учитель находится в доме. Напишите 3 предложения со словами kniha, mesto, dom в нужной форме.",
+        "focus_category": "grammar",
+        "reference_answer": "Zákazník vidí knihu. Študent ide do mesta. Učiteľ je v dome."
+      },
+      {
+        "title": "Путь персонажа",
+        "description": "Вымышленная студентка идёт с сестрой к врачу. Напишите 2 предложения: сначала назовите спутницу, затем цель, используя so и k.",
+        "focus_category": "grammar",
+        "reference_answer": "Študentka ide so sestrou. Ide k lekárovi."
+      }
+    ]
+  },
+  "who-what-is-it": {
+    "readings": [
+      {
+        "title": "Предметы в классе",
+        "text": "Nový študent je v škole. Na stole sú knihy a jeden slovník. Študent sa pýta: „Čo je to?“ Učiteľ odpovedá: „To je slovník.“ Pri dverách sú dvaja ľudia. „Kto sú tí ľudia?“ pýta sa študent. „To sú učitelia,“ odpovedá učiteľ. Kurz je dnes ráno.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Новый студент в школе спрашивает о словаре на столе и двух людях у двери. Это учителя, а курс проходит утром."
+      },
+      {
+        "title": "Знакомство с выставкой",
+        "text": "V malej izbe je výstava. Na stole sú fotografie a dve knihy. Návštevník sa pýta: „Čo sú to?“ Pracovníčka odpovedá: „To sú fotografie.“ Pri okne je muž. „Kto je to? Je to učiteľ?“ pýta sa návštevník. „Nie, to nie je učiteľ. To je fotograf.“",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "На выставке фотографии и две книги. Посетитель спрашивает о фотографиях и мужчине у окна. Мужчина — фотограф, а не учитель."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Два вопроса в школе",
+        "description": "Студент спрашивает о человеке у двери и предмете на столе. Это учитель и словарь. Напишите минидиалог из 4 коротких реплик с kto и čo.",
+        "focus_category": "communication",
+        "reference_answer": "— Kto je to?\n— To je učiteľ.\n— Čo je to?\n— To je slovník."
+      },
+      {
+        "title": "Исправьте догадку гостя",
+        "description": "Гость принимает две книги за тетради. Напишите 2 реплики: вопрос гостя и ответ, который исправляет ошибку.",
+        "focus_category": "communication",
+        "reference_answer": "— Sú to zošity?\n— Nie, to nie sú zošity. To sú knihy."
+      }
+    ]
+  },
+  "presence-absence": {
+    "readings": [
+      {
+        "title": "Пустой стол",
+        "text": "V izbe je veľký stôl a dve stoličky. Na stole je jeden zošit. Knihy tam nie sú. Pri dverách je malá taška, ale v taške nie je slovník. Študent je v izbe. Má knihy doma. Dnes má v škole len zošit.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В комнате стол и два стула. На столе тетрадь, книг нет. У двери сумка без словаря. Студент оставил книги дома и имеет в школе только тетрадь."
+      },
+      {
+        "title": "Завтрак в кафе",
+        "text": "Malá kaviareň je dnes otvorená. V kaviarni sú dvaja hostia a jedna čašníčka. Na stole je káva a chlieb. Mlieko tam nie je. Pri okne sú dva voľné stoly. Pri dverách nie sú stoličky. Jeden hosť má tašku, ale druhý hosť tašku nemá.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В кафе два гостя и официантка. На столе кофе и хлеб, молока нет. У окна свободные столы, у двери нет стульев. Сумка есть только у одного гостя."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Комната по карточке",
+        "description": "В вымышленной комнате есть стол и две книги; стула и тетрадей нет. Напишите 4 коротких предложения с je, sú, nie je и nie sú.",
+        "focus_category": "grammar",
+        "reference_answer": "V izbe je stôl. Na stole sú dve knihy. V izbe nie je stolička. Na stole nie sú zošity."
+      },
+      {
+        "title": "Что осталось в кафе",
+        "description": "В кафе есть кофе, но нет молока; у двери есть две сумки. Опишите ситуацию в 3 предложениях, используя утверждение и отрицание.",
+        "focus_category": "grammar",
+        "reference_answer": "V kaviarni je káva. Mlieko tam nie je. Pri dverách sú dve tašky."
+      }
+    ]
+  },
+  "adjective-gender": {
+    "readings": [
+      {
+        "title": "Комната гостя",
+        "text": "V hoteli je nová izba. Izba je veľká a svetlá. Stôl je malý, ale dobrý. Okno je veľké a čisté. Na stole je modrá kniha a nové rádio. Posteľ je biela. Hosť je spokojný, lebo izba je tichá a hotel je pekný.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В отеле новая большая светлая тихая комната. Стол небольшой, окно большое и чистое. На столе синяя книга и новое радио, кровать белая. Гость доволен."
+      },
+      {
+        "title": "Тихий квартал",
+        "text": "V meste je starý dom. Dom je malý, ale pekný. Pri dome je nová škola. Škola je veľká a moderná. Tu je aj malé kino. Kino je biele. Na ulici je červené auto. Auto je nové. Táto ulica je tichá a čistá.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "На тихой чистой улице маленький красивый старый дом, большая современная новая школа и маленький белый кинотеатр. На улице новая красная машина."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Три предмета",
+        "description": "На учебной картинке новый стол, новая сумка и новое авто. Напишите 3 предложения, выбирая правильную форму nový для каждого предмета.",
+        "focus_category": "grammar",
+        "reference_answer": "Stôl je nový. Taška je nová. Auto je nové."
+      },
+      {
+        "title": "Описание кафе",
+        "description": "Вымышленное кафе маленькое; кофе хороший; окно большое. Напишите 3 предложения со словами malý, dobrý и veľký в нужном роде.",
+        "focus_category": "grammar",
+        "reference_answer": "Kaviareň je malá. Káva je dobrá. Okno je veľké."
+      }
+    ]
+  },
+  "adjective-plural": {
+    "readings": [
+      {
+        "title": "Новые участники",
+        "text": "V škole sú noví študenti. Dvaja študenti sú mladí a jeden je starší. Učitelia sú dobrí a pokojní. V izbe sú nové stoly a malé stoličky. Okná sú veľké a čisté. Na stole sú dobré knihy. Všetci sú tu ráno a kurz je zaujímavý.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В школе новые студенты, два молодых и один постарше. Учителя хорошие и спокойные. В комнате новые столы, маленькие стулья, большие чистые окна и хорошие книги."
+      },
+      {
+        "title": "Двор возле отеля",
+        "text": "Pri hoteli sú malé domy a veľké stromy. Pred domom sú dvaja mladí muži. Sú tu aj dve mladé ženy. Tie ženy sú spokojné. Pri dverách sú dva malé psy. Na ulici sú nové autá. Domy sú biele a okná sú čisté.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Возле отеля маленькие белые дома и большие деревья. Перед домом два молодых мужчины и две довольные молодые женщины, у двери маленькие собаки, на улице новые машины."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Люди и предметы",
+        "description": "На карточке новые студенты, новые книги и новые авто. Опишите три группы в 3 предложениях с подходящими формами nový.",
+        "focus_category": "grammar",
+        "reference_answer": "Študenti sú noví. Knihy sú nové. Autá sú nové."
+      },
+      {
+        "title": "Размер на рисунке",
+        "description": "На рисунке маленькие собаки, маленькие дома и маленькие окна. Напишите 3 предложения с формами malý во множественном числе.",
+        "focus_category": "grammar",
+        "reference_answer": "Psi sú malí. Domy sú malé. Okná sú malé."
+      }
+    ]
+  },
+  "demonstratives-possessives": {
+    "readings": [
+      {
+        "title": "Две сумки",
+        "text": "Dvaja študenti sú v izbe. Pri dverách sú dve tašky. Jeden hovorí: „Táto modrá taška je moja. Tá čierna taška je tvoja.“ Na stole sú knihy. „Tieto knihy sú naše,“ hovorí druhý študent. Ich učiteľ je pri okne. Jeho zošit je na stole.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Два студента выясняют, кому принадлежат синяя и чёрная сумки. Книги общие. Учитель стоит у окна, его тетрадь лежит на столе."
+      },
+      {
+        "title": "Набор для школы",
+        "text": "Študentka má nový zošit a malú knihu. Hovorí: „Tento zošit je môj. Táto kniha je moja.“ Jej brat má dve knihy. Jeho knihy sú veľké. Na stole je aj rádio. „Toto rádio je naše,“ hovorí študentka. Ich izba je malá, ale svetlá.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Студентка называет свою новую тетрадь и маленькую книгу. У брата две большие книги. Радио общее, комната небольшая и светлая."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Распределите вещи",
+        "description": "В вымышленном диалоге синяя сумка принадлежит говорящему, чёрная — собеседнику, радио — им обоим. Напишите 3 предложения с moja, tvoja и naše.",
+        "focus_category": "grammar",
+        "reference_answer": "Táto modrá taška je moja. Tá čierna taška je tvoja. Toto rádio je naše."
+      },
+      {
+        "title": "Вещи двух персонажей",
+        "description": "У вымышленного студента большая книга, у студентки маленькая сумка. Напишите 2 предложения с неизменяемыми jeho и jej.",
+        "focus_category": "grammar",
+        "reference_answer": "Jeho kniha je veľká. Jej taška je malá."
+      }
+    ]
+  },
+  "basic-description": {
+    "readings": [
+      {
+        "title": "Магазин с сумками",
+        "text": "V obchode sú dve tašky. Jedna taška je veľká a červená. Je nová, ale drahá. Druhá taška je malá a modrá. Je tiež nová a lacná. Predavač je mladý a vysoký. Obchod je malý, ale čistý a svetlý. Na stole je biely papier.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В магазине большая красная новая дорогая сумка и маленькая синяя новая дешёвая. Продавец молодой и высокий. Магазин небольшой, чистый и светлый, на столе белая бумага."
+      },
+      {
+        "title": "Дом и двор",
+        "text": "Tento dom je starý, ale pekný. Je biely a má veľké okná. Pri dome je malé modré auto. Auto je nové a čisté. Tu je aj mladý pes. Pes je malý a čierny. Záhrada je veľká a zelená. Dnes je teplý deň.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Старый красивый белый дом с большими окнами стоит рядом с новой чистой маленькой синей машиной. Здесь молодая маленькая чёрная собака и большой зелёный сад. День тёплый."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Карточка товара",
+        "description": "Вымышленный магазин продаёт маленькую синюю новую сумку. Она дешёвая. Опишите её в 2–3 предложениях, согласуя прилагательные.",
+        "focus_category": "vocabulary",
+        "reference_answer": "Taška je malá a modrá. Je nová a lacná."
+      },
+      {
+        "title": "Описание здания",
+        "description": "На рисунке старый белый дом, большие окна и маленький зелёный сад. Опишите их в 3 предложениях.",
+        "focus_category": "vocabulary",
+        "reference_answer": "Dom je starý a biely. Okná sú veľké. Záhrada je malá a zelená."
+      }
+    ]
+  },
+  "choice-contrast": {
+    "readings": [
+      {
+        "title": "Выбор сумки",
+        "text": "Zákazník je v obchode. Na stole sú dve tašky. Predavač sa pýta: „Červená alebo modrá?“ Zákazník hovorí: „Modrá, prosím.“ Červená taška je veľká a drahá. Modrá taška je malá, ale dobrá. Zákazník hovorí: „Tá modrá taška nie je stará, ale nová. Je pekná.“",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Покупатель выбирает синюю сумку вместо красной. Красная большая и дорогая, синяя маленькая, но хорошая, новая и красивая."
+      },
+      {
+        "title": "Два места для курса",
+        "text": "Pri škole sú dve izby. Jedna je veľká, ale tmavá. Druhá je malá a svetlá. Učiteľ sa pýta: „Veľká alebo malá izba?“ Študenti hovoria: „Malá, prosím.“ Malá izba nie je nová, ale je čistá. Okná sú veľké a stoly sú dobré.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Для курса выбирают из большой тёмной и маленькой светлой комнат. Студенты выбирают маленькую: она не новая, зато чистая, с большими окнами и хорошими столами."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Выбор напитка",
+        "description": "В кафе покупатель выбирает воду или кофе и просит воду. Напишите 2 реплики с alebo и ответом.",
+        "focus_category": "grammar",
+        "reference_answer": "— Voda alebo káva?\n— Voda, prosím."
+      },
+      {
+        "title": "Исправьте описание",
+        "description": "На рисунке авто синее, а не красное; оно маленькое, но новое. Напишите 2 предложения с nie… ale и ale.",
+        "focus_category": "grammar",
+        "reference_answer": "Auto nie je červené, ale modré. Je malé, ale nové."
+      }
+    ]
+  },
+  "basic-connectors": {
+    "readings": [
+      {
+        "title": "Утро студента",
+        "text": "Študent je ráno doma. Najprv má chlieb a mlieko. Potom je v škole. Má knihu a zošit, má aj slovník. Škola je malá, ale dobrá. Potom je študent doma a oddychuje. Je unavený, ale spokojný. Zajtra je kurz tiež ráno.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Утром студент завтракает хлебом и молоком, затем идёт в небольшую хорошую школу. У него книга, тетрадь и словарь. Дома отдыхает, устал, но доволен. Завтра курс тоже утром."
+      },
+      {
+        "title": "Подготовка кафе",
+        "text": "Čašníčka je ráno v kaviarni. Najprv je na stole chlieb a syr. Potom je tam aj voda. Kaviareň je malá, ale čistá. Pri okne sú dvaja hostia a pri dverách je predavač. Hostia majú kávu a mlieko. Potom majú aj chlieb. Všetci sú spokojní.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Официантка готовит кафе: сначала хлеб и сыр, потом воду. В маленьком чистом кафе два гостя у окна и продавец у двери. Гости получают кофе, молоко и затем хлеб; все довольны."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Порядок дня персонажа",
+        "description": "Вымышленный студент сначала дома, потом в школе. У него книга и ещё словарь; школа маленькая, но хорошая. Напишите 3 предложения с potom, aj и ale.",
+        "focus_category": "grammar",
+        "reference_answer": "Najprv je študent doma, potom je v škole. Má knihu a aj slovník. Škola je malá, ale dobrá."
+      },
+      {
+        "title": "Стол в кафе",
+        "description": "Сначала на столе кофе и вода, потом хлеб. Кафе маленькое, но чистое. Опишите это в 3 предложениях с a, potom и ale.",
+        "focus_category": "grammar",
+        "reference_answer": "Na stole je káva a voda. Potom je tam aj chlieb. Kaviareň je malá, ale čistá."
+      }
+    ]
+  },
+  "nominative": {
+    "readings": [
+      {
+        "title": "Кто пришёл в школу",
+        "text": "Dnes je v škole malý kurz. Učiteľka je pri okne. Dvaja študenti sú pri dverách. Jeden študent je nový a druhý je tu často. Na stole je slovník. Slovník je veľký a dobrý. Knihy sú nové. Učiteľka je pokojná a študenti sú pripravení.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "На небольшом курсе учительница у окна и два студента у двери; один новый. На столе хороший большой словарь и новые книги. Все готовы к занятию."
+      },
+      {
+        "title": "Открытый магазин",
+        "text": "Obchod je dnes otvorený. Predavač je pri stole a zákazníčka je pri dverách. Na stole je chlieb a syr. Chlieb je čerstvý a syr je dobrý. Taška je malá, ale pevná. Dve knihy sú pri okne. Zákazníčka je spokojná a obchod je tichý.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В открытом магазине продавец у стола, покупательница у двери. Хлеб свежий, сыр хороший, сумка маленькая и прочная, у окна две книги. Покупательница довольна."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Подписи к классу",
+        "description": "На рисунке молодая учительница, новые книги и маленькое окно. Сделайте 3 подписи полными предложениями; все эти слова обозначают то, о чём говорится.",
+        "focus_category": "grammar",
+        "reference_answer": "Učiteľka je mladá. Knihy sú nové. Okno je malé."
+      },
+      {
+        "title": "Кто и что в магазине",
+        "description": "На картинке продавец и две сумки. Напишите 2 вопроса с kto и čo и 2 коротких ответа, всего 4 реплики.",
+        "focus_category": "grammar",
+        "reference_answer": "— Kto je to?\n— To je predavač.\n— Čo sú to?\n— To sú tašky."
+      }
+    ]
+  },
+  "accusative-nouns": {
+    "readings": [
+      {
+        "title": "Покупатель ищет сумку",
+        "text": "Zákazník je v obchode a hľadá tašku. Vidí predavača pri stole. Predavač má knihu a zošit. Zákazník hovorí: „Hľadám tašku a kupujem aj chlieb.“ Predavač ukazuje tašku. Zákazník má peniaze a berie tašku. Potom vidí učiteľku pri dverách. Pozná učiteľku zo školy.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Покупатель ищет сумку, видит продавца с книгой и тетрадью, покупает также хлеб и берёт сумку. Затем видит знакомую учительницу у двери."
+      },
+      {
+        "title": "Подготовка к уроку",
+        "text": "Študent je doma a hľadá knihu. Na stole vidí zošit, ale knihu tam nevidí. Kniha je v taške. Študent berie knihu a slovník. Má aj pero. Potom ide do školy. Tam vidí učiteľa a dve študentky. Pozná učiteľa, ale študentky ešte nepozná.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Студент ищет книгу дома: на столе только тетрадь, книга в сумке. Берёт книгу, словарь и ручку. В школе видит знакомого учителя и двух незнакомых студенток."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Поиск вещей",
+        "description": "Вымышленный студент ищет книгу и сумку и видит учителя. Напишите 3 предложения с hľadá и vidí; используйте kniha, taška, učiteľ в нужной форме.",
+        "focus_category": "grammar",
+        "reference_answer": "Študent hľadá knihu. Hľadá tašku. Vidí učiteľa."
+      },
+      {
+        "title": "Покупка в магазине",
+        "description": "Покупатель покупает хлеб, сыр и воду. Напишите 3 коротких предложения от лица этого вымышленного покупателя с kupujem.",
+        "focus_category": "grammar",
+        "reference_answer": "Kupujem chlieb. Kupujem syr. Kupujem vodu."
+      }
+    ]
+  },
+  "accusative-agreement": {
+    "readings": [
+      {
+        "title": "Красная сумка",
+        "text": "Zákazníčka je v obchode. Hľadá tú malú červenú tašku. Predavač ju vidí na stole. Zákazníčka hovorí: „Áno, túto tašku chcem.“ Má aj nový zošit, ale dnes ho nepotrebuje. Pri dverách vidí svojho dobrého suseda. Pozná ho a pozdraví ho. Potom berie červenú tašku.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Покупательница ищет маленькую красную сумку, продавец находит её на столе. Тетрадь сегодня не нужна. Покупательница видит и приветствует знакомого соседа, затем берёт сумку."
+      },
+      {
+        "title": "Книга для курса",
+        "text": "Študent má veľký slovník, ale potrebuje aj malú knihu. V knižnici hľadá tú novú slovenskú knihu. Vidí ju na stole. Pri okne vidí nového učiteľa. Nepozná ho. Študent sa pýta pracovníčky na knihu. Potom berie tú malú knihu a ide do školy.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "У студента большой словарь, но нужна маленькая новая словацкая книга. В библиотеке он находит её на столе и видит незнакомого нового учителя. Уточняет книгу у сотрудницы и идёт в школу."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Нужная сумка",
+        "description": "Вымышленный покупатель ищет новую синюю сумку. Напишите 2 предложения: назовите всю группу tú novú modrú tašku, затем замените её местоимением ju.",
+        "focus_category": "grammar",
+        "reference_answer": "Hľadám tú novú modrú tašku. Vidím ju na stole."
+      },
+      {
+        "title": "Знакомый учитель",
+        "description": "Студент видит своего нового учителя и знает его. Напишите 2 предложения, сначала с nového učiteľa, затем с ho.",
+        "focus_category": "grammar",
+        "reference_answer": "Študent vidí nového učiteľa. Pozná ho."
+      }
+    ]
+  },
+  "locative-v-na": {
+    "readings": [
+      {
+        "title": "Где лежат вещи",
+        "text": "Študent je v izbe. Jeho kniha je na stole a zošit je v taške. Na stoličke je modrá bunda. Slovník je v škole, nie doma. Študent hľadá pero. Pero je v knihe. Pri okne sú dve stoličky. V izbe je ticho a teplo.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Студент в комнате: книга на столе, тетрадь в сумке, куртка на стуле, словарь в школе, ручка в книге. У окна два стула, в комнате тихо и тепло."
+      },
+      {
+        "title": "Ожидание поезда",
+        "text": "Dvaja turisti sú na stanici. Jeden sedí v kaviarni a druhý je v obchode. V kaviarni je teplá káva a čerstvý chlieb. Na stole je mapa. O chvíľu sú obaja vo vlaku. Vo vlaku je veľa ľudí. Ich tašky sú na sedadlách. Cesta je krátka.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Два туриста на вокзале: один в кафе с кофе, хлебом и картой, другой в магазине. Вскоре они в поезде, где много людей, сумки на сиденьях, поездка короткая."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Разложенные вещи",
+        "description": "На рисунке книга на столе, тетрадь в сумке, куртка на стуле. Напишите 3 предложения, отвечающие на kde?",
+        "focus_category": "grammar",
+        "reference_answer": "Kniha je na stole. Zošit je v taške. Bunda je na stoličke."
+      },
+      {
+        "title": "Два пассажира",
+        "description": "Вымышленный турист на вокзале, его сестра в поезде. Напишите 2 предложения с na stanici и vo vlaku.",
+        "focus_category": "grammar",
+        "reference_answer": "Turista je na stanici. Jeho sestra je vo vlaku."
+      }
+    ]
+  },
+  "genitive-quantity": {
+    "readings": [
+      {
+        "title": "Список для завтрака",
+        "text": "Zákazník je v obchode. Kupuje kilo jabĺk a fľašu vody. Chce aj trochu syra a dva rožky. Má málo času, ale obchod je malý. Predavač má dosť chleba a veľa mlieka. Zákazník má päť eur. Na stole sú tri tašky. Jednu tašku berie domov.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Покупатель берёт килограмм яблок, бутылку воды, немного сыра и два рожка. У него мало времени и пять евро. В магазине достаточно хлеба, много молока и три сумки; одну он берёт домой."
+      },
+      {
+        "title": "Материалы для курса",
+        "text": "Učiteľka má dnes veľa práce. Na stole má päť kníh a šesť zošitov. V škole je desať študentov. Každý má jednu knihu. Učiteľka má málo času, ale dosť papiera. Má aj trochu vody. Kurz je ráno a všetci študenti sú už v izbe.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "У учительницы много работы, на столе пять книг и шесть тетрадей. В школе десять студентов, у каждого книга. Времени мало, бумаги достаточно, есть немного воды. Все уже в комнате."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Заказ продуктов",
+        "description": "Вымышленный покупатель просит килограмм яблок, бутылку воды и немного сыра. Напишите 3 коротких предложения просьбы.",
+        "focus_category": "grammar",
+        "reference_answer": "Kilo jabĺk, prosím. Fľašu vody, prosím. Trochu syra, prosím."
+      },
+      {
+        "title": "Школьный запас",
+        "description": "У вымышленного учителя пять книг, шесть тетрадей и мало времени. Опишите запас и время в 3 предложениях, числа запишите словами.",
+        "focus_category": "grammar",
+        "reference_answer": "Učiteľ má päť kníh. Má šesť zošitov. Má málo času."
+      }
+    ]
+  },
+  "genitive-absence": {
+    "readings": [
+      {
+        "title": "Перед покупкой",
+        "text": "Študent je ráno doma. V kuchyni niet mlieka a na stole niet chleba. Vodu má, ale nemá syr. Obchod je otvorený. Študent berie tašku a ide do obchodu. Tam je mlieko aj chlieb. Predavač je pri stole. Študent kupuje mlieko a chlieb na raňajky.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "У студента дома нет молока и хлеба, вода есть, сыра нет. Он берёт сумку и идёт в открытый магазин, где покупает молоко и хлеб на завтрак."
+      },
+      {
+        "title": "В комнате для курса",
+        "text": "Učiteľ je v škole. V malej izbe niet papiera. Na stole je kniha, ale niet pera. Študenti tu ešte nie sú. Učiteľ má zošit, ale nemá slovník. V druhej izbe je papier aj pero. Učiteľ berie papier a pero. Teraz je všetko pripravené.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "В школьной комнате нет бумаги и ручки, студенты ещё не пришли. У учителя тетрадь, но нет словаря. Он приносит бумагу и ручку из другой комнаты и готовит всё."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Пустая кухня",
+        "description": "В вымышленной кухне нет воды и хлеба. Напишите 2 предложения с niet и правильными формами voda, chlieb.",
+        "focus_category": "grammar",
+        "reference_answer": "V kuchyni niet vody. Niet chleba."
+      },
+      {
+        "title": "Две формы отсутствия",
+        "description": "В вымышленной учебной комнате нет ручки, а студент не имеет словаря. Напишите 2 предложения: первое с niet, второе с nemá.",
+        "focus_category": "grammar",
+        "reference_answer": "V izbe niet pera. Študent nemá slovník."
+      }
+    ]
+  },
+  "genitive-do": {
+    "readings": [
+      {
+        "title": "Утро гостя",
+        "text": "Hosť je ráno v hoteli. Berie tašku a ide do obchodu. Kupuje chlieb a mlieko. Potom sa vracia do hotela. Dáva mlieko do chladničky a chlieb na stôl. Jeho brat ide do mesta. Večer sú obaja v hoteli a majú čas na oddych.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Гость утром идёт из отеля в магазин, покупает хлеб и молоко, возвращается и кладёт продукты на место. Брат идёт в город, вечером оба отдыхают в отеле."
+      },
+      {
+        "title": "После занятий",
+        "text": "Študenti sú v škole. Po kurze idú do knižnice. Tam hľadajú knihy a slovníky. Jeden študent dáva knihu do tašky. Potom idú do kaviarne. Majú vodu a trochu chleba. Večer sa vracajú do domu. Doma dávajú tašky do izby a oddychujú spolu.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "После курса студенты идут в библиотеку за книгами и словарями, затем в кафе. Вечером возвращаются домой, относят сумки в комнату и отдыхают вместе."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Три цели на карте",
+        "description": "По вымышленной карте студент идёт в школу, турист в город, покупатель в магазин. Напишите 3 предложения с do.",
+        "focus_category": "grammar",
+        "reference_answer": "Študent ide do školy. Turista ide do mesta. Zákazník ide do obchodu."
+      },
+      {
+        "title": "Разложите покупки",
+        "description": "Вымышленный гость кладёт молоко в холодильник и книгу в сумку. Напишите 2 предложения с dáva… do.",
+        "focus_category": "grammar",
+        "reference_answer": "Hosť dáva mlieko do chladničky. Dáva knihu do tašky."
+      }
+    ]
+  },
+  "preposition-government": {
+    "readings": [
+      {
+        "title": "Прогулка после курса",
+        "text": "Študent ide zo školy so sestrou. Najprv idú cez park a potom do obchodu. Sestra kupuje vodu pre mamu. Študent chce kávu bez cukru. Potom čakajú pred domom. Mama je doma. Na stole je kniha. Študent dáva vedľa knihy svoj zošit a ide do izby.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Студент идёт из школы с сестрой через парк в магазин. Сестра покупает воду для мамы, студент хочет кофе без сахара. Они ждут перед домом, затем студент оставляет тетрадь рядом с книгой и идёт в комнату."
+      },
+      {
+        "title": "Книга на столе",
+        "text": "Hosť je v hoteli. Jeho kniha je v taške. Dáva knihu na stôl a sadá si na stoličku. Teraz je kniha na stole. Pri okne je čaj s citrónom. Hosť pije čaj a číta. Potom ide k lekárovi. Lekár je dnes v meste.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Гость в отеле достаёт книгу из сумки и кладёт на стол, садится на стул, пьёт чай с лимоном и читает. Потом идёт к врачу, который сегодня в городе."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Из школы со спутником",
+        "description": "Вымышленный студент идёт из школы с братом через парк. Напишите 3 коротких предложения, используя zo školy, s bratom и cez park.",
+        "focus_category": "grammar",
+        "reference_answer": "Študent ide zo školy. Ide s bratom. Idú cez park."
+      },
+      {
+        "title": "Место и перемещение",
+        "description": "Книга сначала находится на столе, затем гость кладёт её в сумку. Напишите 2 предложения: о месте с na и о перемещении с do.",
+        "focus_category": "grammar",
+        "reference_answer": "Kniha je na stole. Hosť dáva knihu do tašky."
+      }
+    ]
+  },
+  "where-direction-origin": {
+    "readings": [
+      {
+        "title": "Три сообщения студента",
+        "text": "Študent píše sestre: „Som v škole.“ Sestra sa pýta: „Kam ideš po kurze?“ Študent odpovedá: „Idem do knižnice.“ Potom je v knižnici a má novú knihu. Večer sestra volá: „Odkiaľ ideš?“ Študent odpovedá: „Idem z knižnice domov.“ Sestra je už doma a pripravuje čaj.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Студент сначала в школе, после курса идёт в библиотеку за книгой. Вечером сообщает сестре, что идёт из библиотеки домой; сестра уже дома и готовит чай."
+      },
+      {
+        "title": "После визита к врачу",
+        "text": "Turista je u lekára. Jeho brat je v kaviarni pri stanici. Brat sa pýta: „Kde si?“ Turista odpovedá: „Som u lekára.“ Potom ide od lekára do kaviarne. Brat sa pýta: „Kam ideme potom?“ Turista hovorí: „Ideme do hotela. Tam máme naše tašky.“",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Турист у врача, брат в кафе возле вокзала. Турист идёт от врача в кафе, затем они собираются в отель, где оставили сумки."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Путь школьника",
+        "description": "На вымышленной карточке персонаж сейчас в школе, затем идёт в магазин. Напишите 2 полных предложения, отвечающих на kde? и kam?",
+        "focus_category": "communication",
+        "reference_answer": "Je v škole. Ide do obchodu."
+      },
+      {
+        "title": "Ответы после визита",
+        "description": "Вымышленный гость идёт от врача в отель. Напишите 4 реплики: вопрос откуда, ответ, вопрос куда, ответ.",
+        "focus_category": "communication",
+        "reference_answer": "— Odkiaľ ideš?\n— Idem od lekára.\n— Kam ideš?\n— Idem do hotela."
+      }
+    ]
+  },
+  "dative-instrumental-models": {
+    "readings": [
+      {
+        "title": "Помощь перед поездкой",
+        "text": "Študent pomáha sestre. Dáva jej malú tašku a píše bratovi krátku správu. Potom ide so sestrou na stanicu. Cestujú vlakom do mesta. Vo vlaku študent píše perom do zošita. Sestra má knihu. Táto kniha sa jej páči. Večer platia v kaviarni kartou.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Студент помогает сестре, даёт ей сумку и пишет брату. С сестрой едет поездом в город, в поезде пишет ручкой, сестре нравится её книга. Вечером они платят в кафе картой."
+      },
+      {
+        "title": "Визит в город",
+        "text": "Hosť ide autobusom do mesta. Najprv ide k lekárovi. Potom sa stretne s bratom pred bankou. Brat mu dáva fľašu vody. Spolu idú do kaviarne. Hosť chce čaj s citrónom. Brat platí kartou. Kaviareň je medzi bankou a poštou. Obom sa tu páči.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Гость едет автобусом к врачу, затем встречается с братом перед банком и получает воду. В кафе между банком и почтой берёт чай с лимоном, брат платит картой. Обоим нравится место."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Помощь персонажам",
+        "description": "Вымышленный студент помогает маме и пишет сестре. Напишите 2 предложения с pomáha и píše; назовите адресатов в нужной форме.",
+        "focus_category": "grammar",
+        "reference_answer": "Študent pomáha mame. Píše sestre."
+      },
+      {
+        "title": "Поездка и оплата",
+        "description": "Вымышленный гость едет поездом с братом и платит картой в кафе. Напишите 3 предложения: транспорт, спутник, способ оплаты.",
+        "focus_category": "grammar",
+        "reference_answer": "Hosť cestuje vlakom. Cestuje s bratom. V kaviarni platí kartou."
+      }
+    ]
+  },
+  "simple-route": {
+    "readings": [
+      {
+        "title": "Как найти почту",
+        "text": "Turista je pred školou. Pýta sa: „Prepáčte, ako sa dostanem na poštu?“ Predavač odpovedá: „Choďte rovno po tejto ulici. Na križovatke odbočte doprava. Potom prejdite cez ulicu. Pošta je naľavo, vedľa banky.“ Turista sa pýta: „Je to ďaleko?“ Predavač hovorí: „Nie, asi päť minút pešo.“",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Турист у школы спрашивает путь на почту. Нужно идти прямо, на перекрёстке направо, перейти улицу; почта слева возле банка. Пешком около пяти минут."
+      },
+      {
+        "title": "Маршрут к вокзалу",
+        "text": "Hosť je v hoteli. Pýta sa pracovníčky: „Kde je stanica?“ Pracovníčka hovorí: „Choďte najprv doľava. Potom pokračujte rovno okolo parku. Stanica je napravo, oproti obchodu.“ Hosť hovorí: „Nerozumiem. Môžete to zopakovať, prosím?“ Pracovníčka opakuje cestu pomaly. Hosť ďakuje a ide na stanicu.",
+        "instruction": "Прочитайте текст и кратко перескажите его смысл по-русски: кто или что в нём описано, что происходит и какие детали важны.",
+        "reference_answer": "Гость уточняет путь из отеля на вокзал: сначала налево, затем прямо мимо парка. Вокзал справа напротив магазина. Гость просит повторить, получает медленное объяснение и отправляется туда."
+      }
+    ],
+    "homework": [
+      {
+        "title": "Маршрут для туриста",
+        "description": "По вымышленной карте до почты нужно идти прямо, на перекрёстке повернуть направо; почта слева возле банка. Дайте 3 вежливые инструкции или сообщения.",
+        "focus_category": "communication",
+        "reference_answer": "Choďte rovno. Na križovatke odbočte doprava. Pošta je naľavo, vedľa banky."
+      },
+      {
+        "title": "Уточнение на улице",
+        "description": "Турист спрашивает, где вокзал, получает ответ: идти налево, затем прямо. Напишите 3 реплики, завершив просьбой повторить.",
+        "focus_category": "communication",
+        "reference_answer": "— Prepáčte, kde je stanica?\n— Choďte doľava, potom rovno.\n— Môžete to zopakovať, prosím?"
+      }
+    ]
+  }
+}

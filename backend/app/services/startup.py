@@ -28,8 +28,16 @@ def _create_active_schema(connection: Connection) -> None:
     Base.metadata.create_all(bind=connection)
 
 
+def _add_offline_answer_references(connection: Connection) -> None:
+    for table in ("module1_beta_readings", "module1_beta_homework"):
+        columns = {row[1] for row in connection.exec_driver_sql(f"PRAGMA table_info({table})").all()}
+        if "reference_answer" not in columns:
+            connection.exec_driver_sql(f"ALTER TABLE {table} ADD COLUMN reference_answer TEXT")
+
+
 MIGRATIONS: tuple[Migration, ...] = (
     Migration(1, "create_active_schema", _create_active_schema),
+    Migration(2, "add_offline_answer_references", _add_offline_answer_references),
 )
 
 

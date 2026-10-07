@@ -265,7 +265,7 @@ test("offline exercise packs persist mode generate batch and check without AI", 
   await page.route("**/api/v1/tutor/settings", (route) => route.fulfill({ json: {
     provider: "codex", codex_installed: true, codex_authenticated: true, codex_message: "Codex подключён.",
     openai_api_key_configured: false, openai_model: "gpt-5", polza_api_key_configured: false,
-    polza_model: "openai/gpt-4o-mini", polza_base_url: "https://polza.ai/api/v1",
+    polza_model: "google/gemini-2.5-flash-lite", polza_base_url: "https://polza.ai/api/v1",
   } }));
   await page.route("**/api/v1/course/exercises/*/answer", async (route) => {
     submitted = route.request().postDataJSON() as Record<string, string>;

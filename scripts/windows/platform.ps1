@@ -361,7 +361,7 @@ function Invoke-Start {
     try {
         if ($decision -in @("start-backend", "start-both")) {
             Write-Step "Starting backend on 127.0.0.1:8000..."
-            $startedBackend = Start-Process -FilePath $VenvPython -ArgumentList @("-m", "uvicorn", "app.main:app", "--reload", "--host", "127.0.0.1", "--port", "8000") -WorkingDirectory $BackendRoot -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $LogRoot "backend.out.log") -RedirectStandardError (Join-Path $LogRoot "backend.err.log")
+            $startedBackend = Start-Process -FilePath $VenvPython -ArgumentList @("-m", "uvicorn", "app.main:app", "--reload", "--reload-dir", "app", "--host", "127.0.0.1", "--port", "8000") -WorkingDirectory $BackendRoot -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $LogRoot "backend.out.log") -RedirectStandardError (Join-Path $LogRoot "backend.err.log")
             $state.backend = New-ProcessRecord $startedBackend "backend"
             Save-LauncherState $state
             if (-not (Wait-Until ${function:Test-BackendHealthy} 45 "Backend")) {

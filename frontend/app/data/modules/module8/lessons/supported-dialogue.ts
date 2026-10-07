@@ -146,7 +146,7 @@ export const supportedDialogueContent = {
       { prompt: "После Som z Nitry.", answer: "Aha. Páči sa vám tam?", options: ["Aha. Páči sa vám tam?", "Ako sa voláte?"] },
       { prompt: "Вернуть предыдущий вопрос", answer: "A vy?", options: ["A vy?", "Prosím vás."] },
     ], hint: "Реагируйте на предыдущую реплику и сохраняйте тему.", explanation: "Правильно: Teší ma; Aha. Páči sa vám tam?; A vy?" },
-    { id: "reinforcement:supported-dialogue:2", sectionIndex: 1, type: "pairs", prompt: "Вставьте пропущенные слова.", answer: "voláte; Som; v; vy", pairs: [
+    { id: "reinforcement:supported-dialogue:2", sectionIndex: 1, type: "pairs", prompt: "Вставьте пропущенные слова. Во всём задании используйте вежливую форму «Вы».", answer: "voláte; Som; v; vy", pairs: [
       { prompt: "Ako sa …?", answer: "voláte", inputHint: "Введите одно слово" },
       { prompt: "… z Poľska.", answer: "Som", inputHint: "Введите одно слово" },
       { prompt: "Bývam … Bratislave.", answer: "v", inputHint: "Введите одно слово" },
