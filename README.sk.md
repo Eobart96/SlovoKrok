@@ -2,7 +2,7 @@
 
 <h1 align="center">Slovenčina, krok za krokom</h1>
 <p align="center">83 tém · 8 modulov · precvičovanie podľa vášho pokroku</p>
-<p align="center">[Русский](README.md) · [English](README.en.md) · **Slovenčina**</p>
+<p align="center"><a href="README.md">Русский</a> · <a href="README.en.md">English</a> · <strong>Slovenčina</strong></p>
 <p align="center"><a href="https://github.com/Eobart96/SlovoKrok">GitHub</a> · <a href="TESTING_START.md">Pre testerov</a> · <a href="UPDATES.md">Novinky</a></p>
 
 Lokálna aplikácia pre jedného používateľa na učenie slovenčiny. Kurz A1 má
