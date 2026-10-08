@@ -7,11 +7,11 @@ import subprocess
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-ROOT_FILES = {"README.md", "TESTING_START.md", "LICENSE", "SECURITY.md", "CONTRIBUTING.md", "UPDATES.md", ".env.example", "install.cmd", "start.cmd", "stop.cmd", "doctor.cmd"}
+ROOT_FILES = {"README.md", "TESTING_START.md", "LICENSE", "SECURITY.md", "CONTRIBUTING.md", "UPDATES.md", ".env.example", "install.cmd", "start.cmd", "stop.cmd", "doctor.cmd", "update.bat"}
 
 
 def selected(path):
-    return path in ROOT_FILES or path.startswith(("backend/app/", "frontend/", "course-content/", "docs/")) or path in {"backend/requirements.txt", "backend/requirements.lock.txt", "scripts/windows/platform.ps1"}
+    return path in ROOT_FILES or path.startswith(("backend/app/", "frontend/", "course-content/", "docs/")) or path in {"backend/requirements.txt", "backend/requirements.lock.txt", "scripts/windows/platform.ps1", "scripts/windows/update.ps1"}
 
 
 def main():
@@ -26,7 +26,7 @@ def main():
     subprocess.run(["node", str(ROOT / "scripts/git-candidate.mjs"), "--verify", str(manifest)], cwd=ROOT, check=True)
     candidate = json.loads(manifest.read_text(encoding="utf-8"))
     files = [item for item in candidate["files"] if selected(item["path"])]
-    required = {"TESTING_START.md", "install.cmd", "start.cmd", "stop.cmd", "doctor.cmd", "scripts/windows/platform.ps1", "backend/app/main.py", "backend/requirements.lock.txt", "frontend/package.json", "frontend/package-lock.json", "course-content/slovak-a1/learning/student_profile.md", "frontend/public/task-packs/slovokrok-a1-basic-v1.json"}
+    required = {"update.bat", "scripts/windows/update.ps1", "TESTING_START.md", "install.cmd", "start.cmd", "stop.cmd", "doctor.cmd", "scripts/windows/platform.ps1", "backend/app/main.py", "backend/requirements.lock.txt", "frontend/package.json", "frontend/package-lock.json", "course-content/slovak-a1/learning/student_profile.md", "frontend/public/task-packs/slovokrok-a1-basic-v1.json"}
     if not required.issubset({item["path"] for item in files}):
         raise SystemExit("Missing required runtime or tester instructions.")
     destination.parent.mkdir(parents=True, exist_ok=True)
