@@ -4,9 +4,9 @@ import { useLastCourseTask } from "../hooks/useLastCourseTask";
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 
-import { a1CourseModules, allA1Lessons } from "../data/a1Course";
+import type { CourseModule } from "../data/courseTypes";
 import { buildExerciseGenerationContext, buildProgressGenerationContext, nextExerciseFormat, type GenerationMistakeHint } from "../data/courseGeneration";
-import { buildCourseGenerationScope, completedCourseModules, completedCourseSections, type CourseGenerationMode } from "../data/courseGenerationScope";
+import { buildCourseGenerationScope, completedCourseModules, completedCourseSections, isCourseGenerationScopeSlug, type CourseGenerationMode } from "../data/courseGenerationScope";
 import { learnedVocabularySeeds } from "../data/courseVocabulary";
 import { type LearningMode } from "../data/learningMode";
 import { answerCourseExercise, deleteCourseExercise, generateCourseExercise, getCourseExercises, type CourseExercise, type CourseExerciseAttempt } from "../lib/api";
@@ -26,19 +26,20 @@ function exerciseNoun(count: number): string {
   return "упражнений";
 }
 
-export function CourseExercises({ completedLessonSlugs, mistakeHints, learningMode, recordedMistakeIds, mistakesDisabled, onRecordMistake, onTaskChecked, openRequest }: { completedLessonSlugs: string[]; mistakeHints: GenerationMistakeHint[]; learningMode: LearningMode; recordedMistakeIds: string[]; mistakesDisabled: boolean; onRecordMistake: (mistake: TaskMistakeInput) => void; onTaskChecked: (id: string, correct: boolean) => void; openRequest: TaskOpenRequest | null }) {
+export function CourseExercises({ modules, completedLessonSlugs, mistakeHints, learningMode, recordedMistakeIds, mistakesDisabled, onRecordMistake, onTaskChecked, openRequest }: { modules: CourseModule[]; completedLessonSlugs: string[]; mistakeHints: GenerationMistakeHint[]; learningMode: LearningMode; recordedMistakeIds: string[]; mistakesDisabled: boolean; onRecordMistake: (mistake: TaskMistakeInput) => void; onTaskChecked: (id: string, correct: boolean) => void; openRequest: TaskOpenRequest | null }) {
   const answerRef = useRef<HTMLTextAreaElement>(null);
   const workspaceRef = useRef<HTMLFormElement>(null);
-  const completedLessons = allA1Lessons.filter((item) => completedLessonSlugs.includes(item.slug));
+  const allLessons = useMemo(() => modules.flatMap((module) => module.lessons), [modules]);
+  const completedLessons = allLessons.filter((item) => completedLessonSlugs.includes(item.slug));
   const [mode, setMode] = useState<ExerciseMode>("topic");
   const [lessonSlug, setLessonSlug] = useState(completedLessons[0]?.slug ?? "");
-  const sectionOptions = completedCourseSections(a1CourseModules, completedLessonSlugs);
+  const sectionOptions = completedCourseSections(modules, completedLessonSlugs);
   const [sectionKey, setSectionKey] = useState(sectionOptions[0]?.key ?? "");
-  const moduleOptions = completedCourseModules(a1CourseModules, completedLessonSlugs);
+  const moduleOptions = completedCourseModules(modules, completedLessonSlugs);
   const [moduleSlug, setModuleSlug] = useState(moduleOptions[0]?.module.slug ?? "");
   const [exercises, setExercises] = useState<CourseExercise[]>([]);
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  const { lastId, remember } = useLastCourseTask("exercise");
+  const { lastId, remember } = useLastCourseTask("exercise", modules[0]?.level === "A2" ? "a2" : "a1");
   const handledRequest = useRef<number | null>(null);
   const [answer, setAnswer] = useState("");
   const [assessment, setAssessment] = useState<CourseExerciseAttempt | null>(null);
@@ -50,7 +51,7 @@ export function CourseExercises({ completedLessonSlugs, mistakeHints, learningMo
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const lesson = completedLessons.find((item) => item.slug === lessonSlug) ?? completedLessons[0];
-  const scope = buildCourseGenerationScope({ mode, modules: a1CourseModules, completedLessonSlugs, lessonSlug, sectionKey, moduleSlug });
+  const scope = buildCourseGenerationScope({ mode, modules, completedLessonSlugs, lessonSlug, sectionKey, moduleSlug });
   const storageSlug = scope.storageSlug;
   const visible = exercises.filter((item) => item.lesson_slug === storageSlug);
   const nextFormat = nextExerciseFormat(visible.length);
@@ -58,13 +59,19 @@ export function CourseExercises({ completedLessonSlugs, mistakeHints, learningMo
   const lastTask = exercises.find((item) => item.id === lastId) ?? exercises[0];
   const selectedIndex = selected ? visible.findIndex((item) => item.id === selected.id) : -1;
   const nextExercise = selectedIndex >= 0 ? visible[selectedIndex + 1] : undefined;
-  const learnedCount = useMemo(() => learnedVocabularySeeds(allA1Lessons, completedLessonSlugs).length, [completedLessonSlugs]);
+  const learnedCount = useMemo(() => learnedVocabularySeeds(allLessons, completedLessonSlugs).length, [allLessons, completedLessonSlugs]);
   const scopeLessonSlugs = new Set(scope.lessons.map((item) => item.slug));
   const relevantMistakeCount = mistakeHints.filter((hint) => scopeLessonSlugs.has(hint.lessonSlug)).length;
 
   useEffect(() => {
-    void getCourseExercises().then((items) => { setExercises(items); setSelectedId(items[0]?.id ?? null); }).catch((cause) => setError(cause instanceof Error ? cause.message : "Не удалось загрузить упражнения.")).finally(() => setLoading(false));
-  }, []);
+    let cancelled = false;
+    void getCourseExercises().then((items) => {
+      if (cancelled) return;
+      const available = items.filter((item) => isCourseGenerationScopeSlug(modules, item.lesson_slug));
+      setExercises(available); setSelectedId(available[0]?.id ?? null);
+    }).catch((cause) => { if (!cancelled) setError(cause instanceof Error ? cause.message : "Не удалось загрузить упражнения."); }).finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [modules]);
   useEffect(() => {
     if (!completedLessons.some((item) => item.slug === lessonSlug)) setLessonSlug(completedLessons[0]?.slug ?? "");
   }, [completedLessons, lessonSlug]);
@@ -87,7 +94,7 @@ export function CourseExercises({ completedLessonSlugs, mistakeHints, learningMo
     const slug = task.lesson_slug;
     if (slug.startsWith("section:")) { setMode("section"); setSectionKey(slug.slice(8)); }
     else if (slug.startsWith("module:")) { setMode("module"); setModuleSlug(slug.slice(7)); }
-    else if (slug === "course-progress") setMode("progress");
+    else if (slug === "course-progress" || slug === "course:a2:progress") setMode("progress");
 
     else { setMode("topic"); setLessonSlug(slug); }
     setSelectedId(task.id); setAssessment(task.latest_attempt); setAnswer("");
@@ -106,7 +113,7 @@ export function CourseExercises({ completedLessonSlugs, mistakeHints, learningMo
     const slug = lastTask.lesson_slug;
     if (slug.startsWith("section:")) { setMode("section"); setSectionKey(slug.slice(8)); }
     else if (slug.startsWith("module:")) { setMode("module"); setModuleSlug(slug.slice(7)); }
-    else if (slug === "course-progress") setMode("progress");
+    else if (slug === "course-progress" || slug === "course:a2:progress") setMode("progress");
 
     else { setMode("topic"); setLessonSlug(slug); }
     openExercise(lastTask);
@@ -114,7 +121,7 @@ export function CourseExercises({ completedLessonSlugs, mistakeHints, learningMo
 
   const generate = async () => {
     if (generating || learningMode === "offline") return;
-    const requestedCount = Math.min(20, Math.max(1, Math.trunc(batchCount)));
+    const requestedCount = Math.min(100, Math.max(1, Math.trunc(batchCount)));
     setGenerating(true); setGeneratedCount(0); setGenerationNotice(""); setError(""); setAssessment(null); setAnswer("");
     try {
       if (!scope.lessons.length) return;
@@ -127,8 +134,18 @@ export function CourseExercises({ completedLessonSlugs, mistakeHints, learningMo
           sourceLessons: [...scope.lessons].reverse().slice(0, 4),
         });
         const knownIds = [...exercises, ...createdItems].map((item) => item.id);
-        const item = await generateCourseExercise({ lesson_slug: scope.storageSlug, lesson_title: scope.title, theory }, knownIds);
-        return item;
+        let lastError: unknown;
+        for (let attempt = 0; attempt < 3; attempt += 1) {
+          try {
+            const attemptTheory = attempt === 0
+              ? theory
+              : `${theory}\n\nПовторная попытка ${attempt + 1}: прошлый ответ не был принят. Создай другое упражнение того же формата. Верни ровно один корректный JSON без текста до или после него и соблюдай указанный тип интерактива.`;
+            return await generateCourseExercise({ lesson_slug: scope.storageSlug, lesson_title: scope.title, theory: attemptTheory }, knownIds);
+          } catch (cause) {
+            lastError = cause;
+          }
+        }
+        throw lastError;
       }, onProgress: ({ attempted }) => setGeneratedCount(attempted) });
       if (batch.items.length) {
         setExercises((current) => [...batch.items.slice().reverse(), ...current]);
@@ -185,7 +202,7 @@ export function CourseExercises({ completedLessonSlugs, mistakeHints, learningMo
       {mode === "topic" ? <div className="course-generation-selectors"><label><span>Завершённая тема</span><select value={lessonSlug} disabled={!completedLessons.length || generating} onChange={(event) => { setLessonSlug(event.target.value); setSelectedId(null); setAssessment(null); setAnswer(""); }}>{completedLessons.map((item) => <option key={item.slug} value={item.slug}>{item.title}</option>)}</select></label><small>{relevantMistakeCount} активных ошибок в выбранной теме</small></div> : mode === "section" ? <div className="course-generation-selectors"><label><span>Учебный раздел</span><select value={sectionOptions.find(({ key }) => key === sectionKey)?.key ?? ""} disabled={!sectionOptions.length || generating} onChange={(event) => { setSectionKey(event.target.value); setSelectedId(null); setAssessment(null); setAnswer(""); }}>{sectionOptions.map(({ key, module, section, lessons }) => <option key={key} value={key}>Модуль {module.order} · {section.title} · {lessons.length} тем</option>)}</select></label><small>Это раздел с экрана выбора тем; используются только завершённые темы внутри него.</small></div> : mode === "module" ? <div className="course-generation-selectors"><label><span>Модуль с завершёнными темами</span><select value={scope.module?.slug ?? ""} disabled={!moduleOptions.length || generating} onChange={(event) => { setModuleSlug(event.target.value); setSelectedId(null); setAssessment(null); setAnswer(""); }}>{moduleOptions.map(({ module, lessons }) => <option key={module.slug} value={module.slug}>Модуль {module.order}. {module.title} · {lessons.length} тем</option>)}</select></label><small>Генератор использует только завершённые темы выбранного модуля.</small></div> : <div className="course-reading-scope"><span>Доступный материал</span><strong>{completedLessons.length} завершённых тем · {learnedCount} слов и фраз</strong><small>{relevantMistakeCount ? `Учитывается активных ошибок: ${relevantMistakeCount}.` : "Активных ошибок в пройденном материале нет."}</small></div>}
       <div className="course-exercise-create">
         <small>Следующий формат: <b>{nextFormat.label}</b></small>
-        <label className="course-exercise-count"><span>Количество заданий</span><input type="number" min={1} max={20} step={1} value={batchCount} disabled={generating || learningMode === "offline"} onChange={(event) => setBatchCount(Math.min(20, Math.max(1, Math.trunc(Number(event.target.value) || 1))))} /></label>
+        <label className="course-exercise-count"><span>Количество заданий</span><input type="number" min={1} max={100} step={1} value={batchCount} disabled={generating || learningMode === "offline"} onChange={(event) => setBatchCount(Math.min(100, Math.max(1, Math.trunc(Number(event.target.value) || 1))))} /></label>
         <button type="button" onClick={() => void generate()} disabled={generating || !completedLessons.length || learningMode === "offline"}>{generating ? `Создаю ${generatedCount}/${batchCount}…` : batchCount === 1 ? "Создать упражнение" : `Создать ${batchCount} ${exerciseNoun(batchCount)}`}</button>
         {learningMode === "offline" && <small>Чтобы пополнить запас, включите онлайн-режим в настройках.</small>}
       </div>

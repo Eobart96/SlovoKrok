@@ -16,6 +16,12 @@ from app.tutor import (
 
 
 ResultT = TypeVar("ResultT")
+
+
+def course_level_for_slug(slug: str) -> str:
+    return "A2" if slug.startswith(("a2-", "module:a2-", "section:a2-", "course:a2:")) else "A1"
+
+
 COURSE_STORAGE_UNAVAILABLE_DETAIL = "Не удалось сохранить задания в локальной базе"
 
 

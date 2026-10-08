@@ -9,7 +9,7 @@ from app.config import get_settings
 from app.database import get_db
 from app.dependencies import get_tutor_provider
 from app.models import CourseHomework, CourseHomeworkAttempt
-from app.routers.course_routes.common import commit_course_change, invoke_tutor
+from app.routers.course_routes.common import commit_course_change, invoke_tutor, course_level_for_slug
 from app.schemas.course import (
     CourseHomeworkAttemptResponse,
     CourseHomeworkGenerateRequest,
@@ -54,7 +54,7 @@ def generate_course_homework(request: CourseHomeworkGenerateRequest, db: Session
         if request.batch_total > 1
         else ""
     )
-    prompt = f"""Создай одно небольшое домашнее задание для начинающего изучать словацкий A1.
+    prompt = f"""Создай одно небольшое домашнее задание по словацкому {course_level_for_slug(request.lesson_slug)}.
 Тема: {request.lesson_title}
 Теория (не выходи за её пределы):
 {request.theory}
@@ -66,7 +66,7 @@ def generate_course_homework(request: CourseHomeworkGenerateRequest, db: Session
 Не называй слова «изученными» или «неизученными» и не требуй использовать слова только из выбранной темы.
 Если в ответе нужна цепочка, разреши соединять элементы стрелкой, дефисом или тире и явно укажи это в условии.
 Верни только JSON: {{"title":"короткое название","description":"понятная инструкция по-русски","focus_category":"навык или правило","reference_answer":"один полный образец правильного ответа по-словацки для офлайн-проверки"}}"""
-    generated = invoke_tutor(lambda: parse_homework_generation(provider.respond(build_tutor_context(get_settings(), prompt))))
+    generated = invoke_tutor(lambda: parse_homework_generation(provider.respond(build_tutor_context(get_settings(), prompt, course_level=course_level_for_slug(request.lesson_slug)))))
     homework = CourseHomework(lesson_slug=request.lesson_slug, lesson_title=request.lesson_title, title=generated.title, description=generated.description, focus_category=generated.focus_category, theory_snapshot=request.theory, reference_answer=generated.reference_answer)
     db.add(homework)
     commit_course_change(db)
@@ -98,7 +98,7 @@ def submit_course_homework(homework_id: int, request: CourseHomeworkSubmitReques
         )
     else:
         answer_for_assessment = normalize_homework_sequence_separators(request.answer)
-        prompt = f"""Проверь домашнее задание начинающего изучать словацкий A1.
+        prompt = f"""Проверь домашнее задание по словацкому {course_level_for_slug(homework.lesson_slug)}.
 Тема: {homework.lesson_title}
 Теория (единственная граница проверки): {homework.theory_snapshot}
 Задание: {homework.description}
@@ -115,7 +115,7 @@ def submit_course_homework(homework_id: int, request: CourseHomeworkSubmitReques
         for definition in schema.get("$defs", {}).values():
             if "properties" in definition:
                 definition["required"] = list(definition["properties"])
-        context = replace(build_tutor_context(get_settings(), prompt), response_schema=schema)
+        context = replace(build_tutor_context(get_settings(), prompt, course_level=course_level_for_slug(homework.lesson_slug)), response_schema=schema)
         assessment = invoke_tutor(lambda: parse_tutor_assessment(provider.respond(context)))
     attempt = CourseHomeworkAttempt(homework_id=homework.id, answer=request.answer, is_correct=assessment.is_correct, score=assessment.score, corrected_answer=assessment.corrected_answer, explanation=assessment.explanation, next_exercise=assessment.next_exercise)
     db.add(attempt)

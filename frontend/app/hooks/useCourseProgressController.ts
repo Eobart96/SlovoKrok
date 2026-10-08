@@ -1,9 +1,10 @@
 "use client";
 
 import { useMemo } from "react";
+import { canUpdateCourseAnswer } from "../data/courseAnswerBounds";
 
 import { buildModuleFinalQuestions, buildReinforcementPractices, getPracticeMatch, isCorePractice, isPracticeFilled, type ModuleFinalQuestion } from "../data/coursePractice";
-import { courseModuleCompletionKey } from "../data/courseLevelState";
+import { courseModuleCompletionKey, isCourseFinalCompleted, reopenExpandedA2Final } from "../data/courseLevelState";
 import { buildCourseResetScope, buildLessonSummary, nextMistakeRecord, recordFinalAttemptMistakes, removeActivityScope, removeLessonScope, removeMistakeScope, resetProgressScope, type MistakeRecord } from "../data/courseProgress";
 import { type CourseLesson, type CourseModule, type KnowledgeCheck, type StepPractice } from "../data/courseTypes";
 import { type CourseSession } from "./useCourseSession";
@@ -25,8 +26,8 @@ export function useCourseProgressController({ module, lesson, session }: { modul
   const correctPracticeCount = module.lessons.reduce((sum, item) => sum + item.stepPractices.filter((practice) => isCorePractice(item, practice) && practiceResults[practice.id]).length + (item.assessmentMode === "interactive" ? buildReinforcementPractices(item).filter((practice) => practiceResults[practice.id]).length : item.knowledgeChecks.filter((check) => checkSelections[check.id] === check.answer).length), 0);
   const totalMistakeAttempts = Object.values(mistakes).filter((mistake) => activeLessonSlugs.has(mistake.lessonSlug) && !optionalPracticeIds.has(mistake.id)).reduce((sum, mistake) => sum + mistake.attempts, 0);
   const accuracy = correctPracticeCount + totalMistakeAttempts === 0 ? 0 : Math.round((correctPracticeCount / (correctPracticeCount + totalMistakeAttempts)) * 100);
-  const moduleCompletionKey = courseModuleCompletionKey("A1", activeModule);
-  const finalCompleted = Boolean(finalCompletedModules[moduleCompletionKey]);
+  const moduleCompletionKey = courseModuleCompletionKey(session.activeLevel, activeModule);
+  const finalCompleted = isCourseFinalCompleted(session.activeLevel, Boolean(finalCompletedModules[moduleCompletionKey]), finalQuestions.map((question) => question.id), finalSelections);
   const finalScore = finalQuestions.filter((question) => finalSelections[question.id] === question.answer).length;
   const finalPassingScore = Math.ceil(finalQuestions.length * finalPassingPercent / 100);
 
@@ -38,6 +39,7 @@ export function useCourseProgressController({ module, lesson, session }: { modul
   };
 
   const updatePractice = (practice: StepPractice, answer: string) => {
+    if (!canUpdateCourseAnswer(practiceAnswers[practice.id] ?? "", answer)) return;
     setPracticeAnswers((current) => ({ ...current, [practice.id]: answer }));
     setPracticeResults((current) => { const next = { ...current }; delete next[practice.id]; return next; });
   };
@@ -117,7 +119,12 @@ export function useCourseProgressController({ module, lesson, session }: { modul
       finishReinforcement,
       resetLesson,
       resetModule,
-      selectFinalAnswer: (question: ModuleFinalQuestion, option: string) => { if (!finalCompleted) setFinalSelections((current) => ({ ...current, [question.id]: option })); },
+      selectFinalAnswer: (question: ModuleFinalQuestion, option: string) => {
+        if (finalCompleted) return;
+        // Clear only a stale completion flag when continuing an expanded A2 final.
+        setFinalCompletedModules((current) => reopenExpandedA2Final(session.activeLevel, moduleCompletionKey, current, finalQuestions.map((item) => item.id), finalSelections));
+        setFinalSelections((current) => ({ ...current, [question.id]: option }));
+      },
       submitFinal,
       startFinalAttempt,
     },

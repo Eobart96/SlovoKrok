@@ -4,9 +4,9 @@ import { useLastCourseTask } from "../hooks/useLastCourseTask";
 
 import { FormEvent, type KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
 
-import { a1CourseModules, allA1Lessons } from "../data/a1Course";
+import type { CourseModule } from "../data/courseTypes";
 import { buildProgressGenerationContext, type GenerationMistakeHint } from "../data/courseGeneration";
-import { buildCourseGenerationScope, completedCourseModules, completedCourseSections, type CourseGenerationMode } from "../data/courseGenerationScope";
+import { buildCourseGenerationScope, completedCourseModules, completedCourseSections, isCourseGenerationScopeSlug, type CourseGenerationMode } from "../data/courseGenerationScope";
 import { homeworkAssignmentHints, rankHomeworkReferenceLessons, selectHomeworkReferenceLessons } from "../data/homeworkPlanning";
 import { type LearningMode } from "../data/learningMode";
 import { applySlovakAltShortcut } from "../data/slovakKeyboard";
@@ -29,17 +29,18 @@ function homeworkNoun(count: number): string {
   return "домашних заданий";
 }
 
-export function CourseHomework({ completedLessonSlugs, mistakeHints, learningMode, personalCheatSheets, recordedMistakeIds, mistakesDisabled, onRecordMistake, onTaskChecked, openRequest }: { completedLessonSlugs: string[]; mistakeHints: GenerationMistakeHint[]; learningMode: LearningMode; personalCheatSheets: PersonalCheatSheet[]; recordedMistakeIds: string[]; mistakesDisabled: boolean; onRecordMistake: (mistake: TaskMistakeInput) => void; onTaskChecked: (id: string, correct: boolean) => void; openRequest: TaskOpenRequest | null }) {
-  const completedLessons = useMemo(() => allA1Lessons.filter((item) => completedLessonSlugs.includes(item.slug)), [completedLessonSlugs]);
+export function CourseHomework({ modules, completedLessonSlugs, mistakeHints, learningMode, personalCheatSheets, recordedMistakeIds, mistakesDisabled, onRecordMistake, onTaskChecked, openRequest }: { modules: CourseModule[]; completedLessonSlugs: string[]; mistakeHints: GenerationMistakeHint[]; learningMode: LearningMode; personalCheatSheets: PersonalCheatSheet[]; recordedMistakeIds: string[]; mistakesDisabled: boolean; onRecordMistake: (mistake: TaskMistakeInput) => void; onTaskChecked: (id: string, correct: boolean) => void; openRequest: TaskOpenRequest | null }) {
+  const allLessons = useMemo(() => modules.flatMap((module) => module.lessons), [modules]);
+  const completedLessons = useMemo(() => allLessons.filter((item) => completedLessonSlugs.includes(item.slug)), [allLessons, completedLessonSlugs]);
   const [mode, setMode] = useState<HomeworkMode>("topic");
   const [lessonSlug, setLessonSlug] = useState(completedLessons[0]?.slug ?? "");
-  const sectionOptions = completedCourseSections(a1CourseModules, completedLessonSlugs);
+  const sectionOptions = completedCourseSections(modules, completedLessonSlugs);
   const [sectionKey, setSectionKey] = useState(sectionOptions[0]?.key ?? "");
-  const moduleOptions = completedCourseModules(a1CourseModules, completedLessonSlugs);
+  const moduleOptions = completedCourseModules(modules, completedLessonSlugs);
   const [moduleSlug, setModuleSlug] = useState(moduleOptions[0]?.module.slug ?? "");
   const [items, setItems] = useState<Homework[]>([]);
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  const { lastId, remember } = useLastCourseTask("homework");
+  const { lastId, remember } = useLastCourseTask("homework", modules[0]?.level === "A2" ? "a2" : "a1");
   const handledRequest = useRef<number | null>(null);
   const [answer, setAnswer] = useState("");
   const [result, setResult] = useState<CourseHomeworkAttempt | null>(null);
@@ -54,7 +55,7 @@ export function CourseHomework({ completedLessonSlugs, mistakeHints, learningMod
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const workspaceRef = useRef<HTMLFormElement>(null);
   const lesson = completedLessons.find((item) => item.slug === lessonSlug) ?? completedLessons[0];
-  const scope = buildCourseGenerationScope({ mode, modules: a1CourseModules, completedLessonSlugs, lessonSlug, sectionKey, moduleSlug });
+  const scope = buildCourseGenerationScope({ mode, modules, completedLessonSlugs, lessonSlug, sectionKey, moduleSlug });
   const storageSlug = scope.storageSlug;
   const visible = items.filter((item) => item.lesson_slug === storageSlug);
   const selected = visible.find((item) => item.id === selectedId) ?? visible[0];
@@ -66,7 +67,7 @@ export function CourseHomework({ completedLessonSlugs, mistakeHints, learningMod
     const directLesson = completedLessons.find((item) => item.slug === selected.lesson_slug);
     const candidateLessons = directLesson
       ? [directLesson]
-      : selected.lesson_slug === "course-mistakes"
+      : selected.lesson_slug === "course-mistakes" || selected.lesson_slug === "course:a2:mistakes"
         ? completedLessons.filter((item) => mistakeHints.some((hint) => hint.lessonSlug === item.slug))
         : selected.lesson_slug === scope.storageSlug
           ? scope.lessons
@@ -80,11 +81,19 @@ export function CourseHomework({ completedLessonSlugs, mistakeHints, learningMod
     return directLesson ? [directLesson] : selectHomeworkReferenceLessons({ title: selected.title, description: selected.description, focusCategory: selected.focus_category }, referenceLessons);
   }, [completedLessons, referenceLessons, selected]);
   const hints = useMemo(() => selected ? homeworkAssignmentHints({ title: selected.title, description: selected.description, focusCategory: selected.focus_category, lessons: recommendedLessons }) : [], [recommendedLessons, selected]);
-  const learnedCount = useMemo(() => learnedVocabularySeeds(allA1Lessons, completedLessonSlugs).length, [completedLessonSlugs]);
+  const learnedCount = useMemo(() => learnedVocabularySeeds(allLessons, completedLessonSlugs).length, [allLessons, completedLessonSlugs]);
   const scopeLessonSlugs = new Set(scope.lessons.map((item) => item.slug));
   const relevantMistakes = mistakeHints.filter((hint) => scopeLessonSlugs.has(hint.lessonSlug));
 
-  useEffect(() => { void getCourseHomework().then((homework) => { setItems(homework); setSelectedId(homework[0]?.id ?? null); }).catch((cause) => setError(cause instanceof Error ? cause.message : "Не удалось загрузить домашние задания.")).finally(() => setLoading(false)); }, []);
+  useEffect(() => {
+    let cancelled = false;
+    void getCourseHomework().then((homework) => {
+      if (cancelled) return;
+      const available = homework.filter((item) => isCourseGenerationScopeSlug(modules, item.lesson_slug));
+      setItems(available); setSelectedId(available[0]?.id ?? null);
+    }).catch((cause) => { if (!cancelled) setError(cause instanceof Error ? cause.message : "Не удалось загрузить домашние задания."); }).finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [modules]);
   useEffect(() => {
     if (!completedLessons.some((item) => item.slug === lessonSlug)) setLessonSlug(completedLessons[0]?.slug ?? "");
   }, [completedLessons, lessonSlug]);
@@ -108,8 +117,8 @@ export function CourseHomework({ completedLessonSlugs, mistakeHints, learningMod
     const slug = task.lesson_slug;
     if (slug.startsWith("section:")) { setMode("section"); setSectionKey(slug.slice(8)); }
     else if (slug.startsWith("module:")) { setMode("module"); setModuleSlug(slug.slice(7)); }
-    else if (slug === "course-progress") setMode("progress");
-    else if (slug === "course-mistakes") setMode("mistakes");
+    else if (slug === "course-progress" || slug === "course:a2:progress") setMode("progress");
+    else if (slug === "course-mistakes" || slug === "course:a2:mistakes") setMode("mistakes");
     else { setMode("topic"); setLessonSlug(slug); }
     setSelectedId(task.id); setResult(task.latest_attempt); setAnswer("");
   }, [openRequest, items, loading]);
@@ -127,8 +136,8 @@ export function CourseHomework({ completedLessonSlugs, mistakeHints, learningMod
     const slug = lastTask.lesson_slug;
     if (slug.startsWith("section:")) { setMode("section"); setSectionKey(slug.slice(8)); }
     else if (slug.startsWith("module:")) { setMode("module"); setModuleSlug(slug.slice(7)); }
-    else if (slug === "course-progress") setMode("progress");
-    else if (slug === "course-mistakes") setMode("mistakes");
+    else if (slug === "course-progress" || slug === "course:a2:progress") setMode("progress");
+    else if (slug === "course-mistakes" || slug === "course:a2:mistakes") setMode("mistakes");
     else { setMode("topic"); setLessonSlug(slug); }
     openHomework(lastTask);
   };

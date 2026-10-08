@@ -5,7 +5,7 @@ import type { MistakeRecord } from "../data/courseProgress";
 import type { CourseModule } from "../data/courseTypes";
 import type { LearningMode } from "../data/learningMode";
 import { buildReinforcementPractices } from "../data/coursePractice";
-import { taskMistakeSource } from "../data/taskMistakes";
+import { taskMistakeKind, taskMistakeSource } from "../data/taskMistakes";
 import { checkCourseMistake, type MistakeReviewAssessment } from "../lib/api";
 import { SlovakKeyboard } from "./SlovakKeyboard";
 import { applySlovakAltShortcut } from "../data/slovakKeyboard";
@@ -17,7 +17,7 @@ function reviewTask(mistake: MistakeRecord, modules: CourseModule[]) {
   const check = lesson && [...lesson.knowledgeChecks, ...lesson.finalChecks].find((item) => item.id === mistake.id);
   // Older manual records put the answer and explanation after this marker.
   const [prompt, previous = ""] = mistake.prompt.split("\nВаш ответ:");
-  return { prompt, learnerAnswer: previous.split("\n")[0].trim(), explanation: practice?.explanation || check?.explanation || lesson?.theory.summary || "Сравните свой вариант с исправлением и обратите внимание на форму слов.", acceptedAnswers: practice?.acceptableAnswers ?? [], kind: taskMistakeSource(mistake.id)?.kind === "homework" ? "open" as const : "exact" as const };
+  return { prompt, learnerAnswer: previous.split("\n")[0].trim(), explanation: practice?.explanation || check?.explanation || lesson?.theory.summary || "Сравните свой вариант с исправлением и обратите внимание на форму слов.", acceptedAnswers: practice?.acceptableAnswers ?? [], kind: taskMistakeKind(mistake.id) === "homework" ? "open" as const : "exact" as const };
 }
 
 export function CourseMistakePractice({ mistakes, modules, learningMode, disabled, onChecked, onActiveChange }: { mistakes: Record<string, MistakeRecord>; modules: CourseModule[]; learningMode: LearningMode; disabled: boolean; onChecked: (id: string, correct: boolean, independent?: boolean) => void; onActiveChange: (active: boolean) => void }) {

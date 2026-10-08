@@ -5,9 +5,9 @@ import { useLastCourseTask } from "../hooks/useLastCourseTask";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 
-import { a1CourseModules, allA1Lessons } from "../data/a1Course";
+import type { CourseModule } from "../data/courseTypes";
 import { buildProgressGenerationContext } from "../data/courseGeneration";
-import { buildCourseGenerationScope, completedCourseModules, completedCourseSections, type CourseGenerationMode } from "../data/courseGenerationScope";
+import { buildCourseGenerationScope, completedCourseModules, completedCourseSections, isCourseGenerationScopeSlug, type CourseGenerationMode } from "../data/courseGenerationScope";
 import { learnedVocabularyContext, learnedVocabularySeeds } from "../data/courseVocabulary";
 import { type LearningMode } from "../data/learningMode";
 import { checkCourseReading, deleteCourseReading, generateCourseReading, getCourseReadings, type CourseReading as Reading, type CourseReadingAttempt } from "../lib/api";
@@ -23,18 +23,18 @@ function readingNoun(count: number): string {
   return "текстов";
 }
 
-export function CourseReading({ completedLessonSlugs, learningMode, active = true }: { completedLessonSlugs: string[]; learningMode: LearningMode; active?: boolean }) {
+export function CourseReading({ modules, completedLessonSlugs, learningMode, active = true }: { modules: CourseModule[]; completedLessonSlugs: string[]; learningMode: LearningMode; active?: boolean }) {
   const workspaceRef = useRef<HTMLFormElement>(null);
-  const completedLessons = allA1Lessons.filter((item) => completedLessonSlugs.includes(item.slug));
+  const completedLessons = modules.flatMap((module) => module.lessons).filter((item) => completedLessonSlugs.includes(item.slug));
   const [mode, setMode] = useState<ReadingMode>("topic");
   const [lessonSlug, setLessonSlug] = useState(completedLessons[0]?.slug ?? "");
-  const sectionOptions = completedCourseSections(a1CourseModules, completedLessonSlugs);
+  const sectionOptions = completedCourseSections(modules, completedLessonSlugs);
   const [sectionKey, setSectionKey] = useState(sectionOptions[0]?.key ?? "");
-  const moduleOptions = completedCourseModules(a1CourseModules, completedLessonSlugs);
+  const moduleOptions = completedCourseModules(modules, completedLessonSlugs);
   const [moduleSlug, setModuleSlug] = useState(moduleOptions[0]?.module.slug ?? "");
   const [items, setItems] = useState<Reading[]>([]);
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  const { lastId, remember } = useLastCourseTask("reading");
+  const { lastId, remember } = useLastCourseTask("reading", modules[0]?.level === "A2" ? "a2" : "a1");
   const [retelling, setRetelling] = useState("");
   const [result, setResult] = useState<CourseReadingAttempt | null>(null);
   const [loading, setLoading] = useState(true);
@@ -45,7 +45,7 @@ export function CourseReading({ completedLessonSlugs, learningMode, active = tru
   const [checking, setChecking] = useState(false);
   const [error, setError] = useState("");
   const lesson = completedLessons.find((item) => item.slug === lessonSlug) ?? completedLessons[0];
-  const scope = buildCourseGenerationScope({ mode, modules: a1CourseModules, completedLessonSlugs, lessonSlug, sectionKey, moduleSlug });
+  const scope = buildCourseGenerationScope({ mode, modules, completedLessonSlugs, lessonSlug, sectionKey, moduleSlug });
   const storageSlug = scope.storageSlug;
   const visible = items.filter((item) => item.lesson_slug === storageSlug);
   const selected = visible.find((item) => item.id === selectedId) ?? visible[0];
@@ -56,7 +56,15 @@ export function CourseReading({ completedLessonSlugs, learningMode, active = tru
   const vocabularyContext = learnedVocabularyContext(scope.lessons, scopeLessonSlugs);
   const vocabularyCount = learnedVocabularySeeds(scope.lessons, scopeLessonSlugs).length;
 
-  useEffect(() => { void getCourseReadings().then((readings) => { setItems(readings); setSelectedId(readings[0]?.id ?? null); }).catch((cause) => setError(cause instanceof Error ? cause.message : "Не удалось загрузить тексты.")).finally(() => setLoading(false)); }, []);
+  useEffect(() => {
+    let cancelled = false;
+    void getCourseReadings().then((readings) => {
+      if (cancelled) return;
+      const available = readings.filter((item) => isCourseGenerationScopeSlug(modules, item.lesson_slug));
+      setItems(available); setSelectedId(available[0]?.id ?? null);
+    }).catch((cause) => { if (!cancelled) setError(cause instanceof Error ? cause.message : "Не удалось загрузить тексты."); }).finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [modules]);
   useEffect(() => {
     if (!completedLessons.some((item) => item.slug === lessonSlug)) setLessonSlug(completedLessons[0]?.slug ?? "");
   }, [completedLessons, lessonSlug]);
@@ -80,7 +88,7 @@ export function CourseReading({ completedLessonSlugs, learningMode, active = tru
     const slug = lastTask.lesson_slug;
     if (slug.startsWith("section:")) { setMode("section"); setSectionKey(slug.slice(8)); }
     else if (slug.startsWith("module:")) { setMode("module"); setModuleSlug(slug.slice(7)); }
-    else if (slug === "course-progress") setMode("progress");
+    else if (slug === "course-progress" || slug === "course:a2:progress") setMode("progress");
 
     else { setMode("topic"); setLessonSlug(slug); }
     openReading(lastTask);

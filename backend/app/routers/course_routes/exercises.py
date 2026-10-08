@@ -9,7 +9,7 @@ from app.config import get_settings
 from app.database import get_db
 from app.dependencies import get_tutor_provider
 from app.models import CourseExercise, CourseExerciseAttempt
-from app.routers.course_routes.common import commit_course_change, invoke_tutor
+from app.routers.course_routes.common import commit_course_change, invoke_tutor, course_level_for_slug
 from app.schemas.course import (
     CourseExerciseAnswerRequest,
     CourseExerciseAttemptResponse,
@@ -68,7 +68,7 @@ def list_exercises(lesson_slug: str | None = None, db: Session = Depends(get_db)
 @router.post("/exercises", response_model=CourseExerciseResponse)
 def generate_exercise(request: CourseExerciseGenerateRequest, db: Session = Depends(get_db), provider: TutorProvider = Depends(get_tutor_provider)) -> CourseExerciseResponse:
     def generate():
-        result = parse_generated_exercise(provider.respond(build_generated_exercise_context(lesson_title=request.lesson_title, theory=request.theory)))
+        result = parse_generated_exercise(provider.respond(build_generated_exercise_context(lesson_title=request.lesson_title, theory=request.theory, level=course_level_for_slug(request.lesson_slug))))
         requested_interaction = requested_exercise_interaction(request.theory)
         if requested_interaction and result.interaction_type != requested_interaction:
             raise AIResponseError(f"Generator returned {result.interaction_type} instead of {requested_interaction}")
@@ -96,8 +96,8 @@ def answer_exercise(exercise_id: int, request: CourseExerciseAnswerRequest, db: 
             raise HTTPException(status_code=409, detail="Для этого старого упражнения нет сохранённого эталона. Переключитесь в онлайн-режим.") from error
     else:
         interaction_details = interaction.model_dump_json()
-        prompt = f"""Проверь ответ на отдельное упражнение словацкого A1.\nТема: {exercise.lesson_title}\nТеория: {theory}\nЗадание: {exercise.question}\nИнструкция: {exercise.instruction}\nСкрытая структура интерактива с сохранённым эталоном: {interaction_details}\nОтвет ученика: {request.answer}\nСначала сравни с сохранённым эталоном, но допускай равноценную формулировку, если она правильна по теории.\nВерни только JSON: {{"is_correct":false,"score":0,"corrected_answer":"","explanation":"объяснение по-русски","next_exercise":"следующий короткий шаг","mistake_category":null,"new_words":[]}}"""
-        assessment = invoke_tutor(lambda: parse_tutor_assessment(provider.respond(build_tutor_context(get_settings(), prompt))))
+        prompt = f"""Проверь ответ на отдельное упражнение словацкого {course_level_for_slug(exercise.lesson_slug)}.\nТема: {exercise.lesson_title}\nТеория: {theory}\nЗадание: {exercise.question}\nИнструкция: {exercise.instruction}\nСкрытая структура интерактива с сохранённым эталоном: {interaction_details}\nОтвет ученика: {request.answer}\nСначала сравни с сохранённым эталоном, но допускай равноценную формулировку, если она правильна по теории.\nВерни только JSON: {{"is_correct":false,"score":0,"corrected_answer":"","explanation":"объяснение по-русски","next_exercise":"следующий короткий шаг","mistake_category":null,"new_words":[]}}"""
+        assessment = invoke_tutor(lambda: parse_tutor_assessment(provider.respond(build_tutor_context(get_settings(), prompt, course_level=course_level_for_slug(exercise.lesson_slug)))))
     attempt = CourseExerciseAttempt(exercise_id=exercise.id, answer=request.answer, is_correct=assessment.is_correct, score=assessment.score, corrected_answer=assessment.corrected_answer, explanation=assessment.explanation, next_exercise=assessment.next_exercise)
     db.add(attempt)
     commit_course_change(db)

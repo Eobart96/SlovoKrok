@@ -81,15 +81,28 @@ def encode_exercise_snapshot(theory: str, exercise: GeneratedExercise) -> str:
     return _EXERCISE_SNAPSHOT_PREFIX + json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
 
 
-def decode_exercise_snapshot(snapshot: str) -> tuple[str, ExerciseInteraction]:
+def _parse_exercise_snapshot(snapshot: str) -> tuple[str, ExerciseInteraction]:
     if not snapshot.startswith(_EXERCISE_SNAPSHOT_PREFIX):
         return snapshot, ExerciseInteraction()
     try:
         payload = json.loads(snapshot.removeprefix(_EXERCISE_SNAPSHOT_PREFIX))
-        theory = payload.pop("theory")
-        if not isinstance(theory, str):
-            raise ValueError("Invalid exercise theory")
-        return theory, ExerciseInteraction.model_validate(payload)
+    except RecursionError as error:
+        raise ValueError("Exercise snapshot is too deeply nested") from error
+    if not isinstance(payload, dict) or not isinstance(payload.get("theory"), str):
+        raise ValueError("Invalid exercise snapshot theory")
+    theory = payload.pop("theory")
+    return theory, ExerciseInteraction.model_validate(payload)
+
+
+def validate_exercise_snapshot(snapshot: str) -> None:
+    """Reject broken versioned imports while accepting legacy plain theory."""
+    _parse_exercise_snapshot(snapshot)
+
+
+def decode_exercise_snapshot(snapshot: str) -> tuple[str, ExerciseInteraction]:
+    # Reads must remain available for legacy or previously imported bad records.
+    try:
+        return _parse_exercise_snapshot(snapshot)
     except (json.JSONDecodeError, TypeError, ValueError):
         return "", ExerciseInteraction()
 

@@ -1,16 +1,85 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { canUpdateCourseAnswer, courseAnswerMaxLength } from "../../app/data/courseAnswerBounds.ts";
+import { taskMistakeKind, taskMistakeSource } from "../../app/data/taskMistakes.ts";
+
+test("detached backup reviews keep their kind without a source task to open", () => {
+  for (const kind of ["exercise", "homework"] as const) {
+    const detached = `detached:${kind}:${"a".repeat(64)}`;
+    assert.equal(taskMistakeKind(detached), kind);
+    assert.equal(taskMistakeSource(detached), null);
+    assert.deepEqual(taskMistakeSource(`${kind}:2`), { kind, id: 2 });
+    assert.equal(taskMistakeKind(`${kind}:2`), kind);
+  }
+  assert.equal(taskMistakeKind("lesson-practice"), null);
+  assert.equal(taskMistakeKind("detached:homework:2"), null);
+});
+
+test("saved practice answers bound new input and allow repairing oversized legacy answers", () => {
+  const full = "a".repeat(courseAnswerMaxLength);
+  assert.equal(canUpdateCourseAnswer("", full), true);
+  assert.equal(canUpdateCourseAnswer("", full + "a"), false);
+  assert.equal(canUpdateCourseAnswer(full, full + "á"), false);
+  assert.equal(canUpdateCourseAnswer(full, full.slice(0, -1) + "á"), true);
+  const legacy = full + "extra";
+  assert.equal(canUpdateCourseAnswer(legacy, legacy.slice(0, -1)), true);
+  assert.equal(canUpdateCourseAnswer(legacy, full), true);
+  assert.equal(canUpdateCourseAnswer(legacy, legacy + "a"), false);
+  assert.equal(canUpdateCourseAnswer(legacy, "b".repeat(legacy.length)), false);
+});
+import { createLazyCourseLoader } from "../../app/data/lazyCourseLoader.ts";
+
+test("lazy course loader shares imports and caches success", async () => {
+  let calls = 0;
+  const catalog = { level: "A2" };
+  const load = createLazyCourseLoader(async () => { calls += 1; return catalog; });
+  const first = load();
+  assert.equal(load(), first);
+  assert.equal(await first, catalog);
+  assert.equal(await load(), catalog);
+  assert.equal(calls, 1);
+});
+
+test("lazy course loader retries rejected and synchronously failed imports", async () => {
+  let calls = 0;
+  const load = createLazyCourseLoader(() => { calls += 1; if (calls === 1) throw new Error("chunk unavailable"); return Promise.resolve("A2"); });
+  await assert.rejects(load(), /chunk unavailable/);
+  assert.equal(await load(), "A2");
+  assert.equal(calls, 2);
+  let attempts = 0;
+  const retry = createLazyCourseLoader(async () => { attempts += 1; if (attempts === 1) throw new Error("download failed"); return "ready"; });
+  await assert.rejects(retry(), /download failed/);
+  assert.equal(await retry(), "ready");
+});
 
 import { scoreLessonUnderstanding } from "../../app/data/courseScoring.ts";
 import { recordFinalAttemptMistakes } from "../../app/data/courseProgress.ts";
-import { courseModuleCompletionKey, normalizeFinalCompletedModules } from "../../app/data/courseLevelState.ts";
+import { courseModuleCompletionKey, isCourseFinalCompleted, reopenExpandedA2Final, normalizeFinalCompletedModules, resolveCoursePosition, switchCourseLevel } from "../../app/data/courseLevelState.ts";
 import { homeworkAssignmentHints, homeworkModeInstructions, homeworkReferenceSections, rankHomeworkReferenceLessons } from "../../app/data/homeworkPlanning.ts";
-import { buildCourseGenerationScope, completedCourseModules, completedCourseSections } from "../../app/data/courseGenerationScope.ts";
+import { buildCourseGenerationScope, completedCourseModules, completedCourseSections, isCourseGenerationScopeSlug } from "../../app/data/courseGenerationScope.ts";
 import { mergeProgress } from "../../app/data/progressMerge.ts";
 import { applySlovakAltShortcut } from "../../app/data/slovakKeyboard.ts";
 import { editTranslationDraft, swapTranslationDraft } from "../../app/data/translationState.ts";
 import { isSentenceVocabularyItem, translationVocabularySeed } from "../../app/data/translationVocabulary.ts";
 import { ApiError, apiErrorMessage } from "../../app/lib/apiError.ts";
+
+test("expanding A2 reopens its final without changing legacy A1 or saved answers", () => {
+  const selections = { "a2-pilot-final": "answer" };
+  assert.equal(isCourseFinalCompleted("A2", true, ["a2-pilot-final"], selections), true);
+  assert.equal(isCourseFinalCompleted("A2", true, ["a2-pilot-final", "a2-new-final"], selections), false);
+  assert.equal(isCourseFinalCompleted("A2", false, ["a2-pilot-final"], selections), false);
+  assert.equal(isCourseFinalCompleted("A2", true, [], selections), false);
+  assert.equal(isCourseFinalCompleted("A1", true, ["legacy-question"], {}), true);
+  assert.deepEqual(selections, { "a2-pilot-final": "answer" });
+  const flags = { "a1:2": true, "a2:2": true, "a2:3": true };
+  const expandedIds = ["a2-pilot-final", "a2-new-final"];
+  const reopened = reopenExpandedA2Final("A2", "a2:2", flags, expandedIds, selections);
+  assert.deepEqual(reopened, { "a1:2": true, "a2:2": false, "a2:3": true });
+  assert.equal(isCourseFinalCompleted("A2", reopened["a2:2"], expandedIds, { ...selections, "a2-new-final": "new" }), false);
+  assert.equal(reopenExpandedA2Final("A1", "a1:2", flags, expandedIds, {}), flags);
+  assert.equal(reopenExpandedA2Final("A2", "a2:2", flags, ["a2-pilot-final"], selections), flags);
+  assert.equal(flags["a2:2"], true);
+});
 
 test("progress merge keeps defaults and lets cached session win over legacy storage", () => {
   assert.deepEqual(
@@ -50,6 +119,106 @@ test("course level state keeps legacy A1 module results separate from A2", () =>
     { "a1:1": true, "a1:2": true, "a2:2": false },
   );
   assert.deepEqual(normalizeFinalCompletedModules({ "1": false }, true), { "a1:1": false });
+});
+
+test("switching levels preserves A1 location, answers and qualified finals", () => {
+  const a1 = [{ order: 1, lessons: [{ slug: "greetings" }] }, { order: 2, lessons: [{ slug: "a1-topic" }] }];
+  const a2 = [{ order: 2, lessons: [{ slug: "a2-pilot" }] }];
+  const original = { activeLevel: "A1" as "A1" | "A2", activeModule: 2, selectedSlug: "a1-topic", levelPositions: {}, progress: { "a1-topic": "completed" }, answers: { "a1-test": "áno" }, finalCompletedModules: { "a1:2": true } };
+  const switched = switchCourseLevel(original, "A2", a2);
+  assert.equal(switched.selectedSlug, "a2-pilot");
+  assert.equal(switched.activeModule, 2);
+  assert.strictEqual(switched.progress, original.progress);
+  assert.strictEqual(switched.answers, original.answers);
+  assert.strictEqual(switched.finalCompletedModules, original.finalCompletedModules);
+  assert.deepEqual(switchCourseLevel(switched, "A1", a1), { ...original, levelPositions: { A1: { activeModule: 2, selectedSlug: "a1-topic" }, A2: { activeModule: 2, selectedSlug: "a2-pilot" } } });
+  assert.deepEqual(resolveCoursePosition(a2, { activeModule: 1, selectedSlug: "greetings" }), { activeModule: 2, selectedSlug: "a2-pilot" });
+  assert.deepEqual(resolveCoursePosition(a1, { selectedSlug: "a1-topic" }), { activeModule: 2, selectedSlug: "a1-topic" });
+});
+
+test("A2 global task scopes stay separate from legacy A1 tasks", () => {
+  const modules = [{ slug: "a2-module-2", order: 2, title: "Pilot", level: "A2", description: "", lessons: [], topicGroups: [] }];
+  assert.equal(buildCourseGenerationScope({ mode: "progress", modules, completedLessonSlugs: [] }).storageSlug, "course:a2:progress");
+  assert.equal(buildCourseGenerationScope({ mode: "mistakes", modules, completedLessonSlugs: [] }).storageSlug, "course:a2:mistakes");
+  assert.equal(isCourseGenerationScopeSlug(modules, "course-progress"), false);
+  assert.equal(isCourseGenerationScopeSlug(modules, "course:a2:progress"), true);
+  assert.equal(isCourseGenerationScopeSlug(modules, "module:module-2"), false);
+  assert.equal(isCourseGenerationScopeSlug(modules, "module:a2-module-2"), true);
+});
+
+test("prepending A2 Module1 preserves Module2 positions and starts new learners at Module1", () => {
+  const modules = [{ order: 1, lessons: [{ slug: "a2-readiness-for-a2" }] }, { order: 2, lessons: [{ slug: "a2-nominative-plural-things" }, { slug: "a2-case-triads" }] }];
+  assert.deepEqual(resolveCoursePosition(modules), { activeModule: 1, selectedSlug: "a2-readiness-for-a2" });
+  assert.deepEqual(resolveCoursePosition(modules, { activeModule: 2 }), { activeModule: 2, selectedSlug: "a2-nominative-plural-things" });
+  assert.deepEqual(resolveCoursePosition(modules, { activeModule: 1, selectedSlug: "a2-case-triads" }), { activeModule: 2, selectedSlug: "a2-case-triads" });
+  const original = { activeLevel: "A1" as "A1" | "A2", activeModule: 3, selectedSlug: "a1-topic", levelPositions: { A2: { activeModule: 2, selectedSlug: "a2-case-triads" } }, progress: { "a2-case-triads": "completed" }, answers: { "a2-m2-case-triads-step-1": "answer" }, finalCompletedModules: { "a1:1": true, "a2:2": true } };
+  const switched = switchCourseLevel(original, "A2", modules);
+  assert.equal(switched.activeModule, 2);
+  assert.equal(switched.selectedSlug, "a2-case-triads");
+  assert.strictEqual(switched.progress, original.progress);
+  assert.strictEqual(switched.answers, original.answers);
+  assert.strictEqual(switched.finalCompletedModules, original.finalCompletedModules);
+});
+
+test("A2 Module1 final stays separate from legacy A1 and completed Module2", () => {
+  const flags = normalizeFinalCompletedModules({ "1": true, "a2:2": true });
+  const selections = { "a2-m2-final": "answer" };
+  assert.equal(courseModuleCompletionKey("A2", 1), "a2:1");
+  assert.deepEqual(flags, { "a1:1": true, "a2:2": true });
+  assert.equal(isCourseFinalCompleted("A2", Boolean(flags["a2:1"]), ["a2-m1-final"], selections), false);
+  assert.equal(isCourseFinalCompleted("A2", flags["a2:2"], ["a2-m2-final"], selections), true);
+  assert.equal(reopenExpandedA2Final("A2", "a2:1", flags, ["a2-m1-final"], selections), flags);
+});
+
+test("adding A2 Module3 preserves previous modules and restores its own position", () => {
+  const modules = [{ order: 1, lessons: [{ slug: "a2-readiness-for-a2" }] }, { order: 2, lessons: [{ slug: "a2-case-triads" }] }, { order: 3, lessons: [{ slug: "a2-adjective-case-agreement" }, { slug: "a2-numerals-dates-quantity" }] }];
+  for (const [activeModule, selectedSlug] of [[1, "a2-readiness-for-a2"], [2, "a2-case-triads"], [3, "a2-numerals-dates-quantity"]] as const) {
+    assert.deepEqual(resolveCoursePosition(modules, { activeModule, selectedSlug }), { activeModule, selectedSlug });
+  }
+  const original = { activeLevel: "A1" as "A1" | "A2", activeModule: 8, selectedSlug: "a1-topic", levelPositions: { A2: { activeModule: 3, selectedSlug: "a2-numerals-dates-quantity" } }, progress: { "a2-case-triads": "completed" }, practiceAnswers: { "a2-m2-case-triads-step-1": "answer" }, finalCompletedModules: { "a1:1": true, "a2:1": true, "a2:2": true } };
+  const restored = switchCourseLevel(original, "A2", modules);
+  assert.equal(restored.activeModule, 3);
+  assert.equal(restored.selectedSlug, "a2-numerals-dates-quantity");
+  assert.strictEqual(restored.progress, original.progress);
+  assert.strictEqual(restored.practiceAnswers, original.practiceAnswers);
+  assert.strictEqual(restored.finalCompletedModules, original.finalCompletedModules);
+});
+
+test("A2 Module3 completion cannot be supplied by A1 or earlier A2 finals", () => {
+  const flags = normalizeFinalCompletedModules({ "3": true, "a2:1": true, "a2:2": true });
+  const answers = { "a2-m1-final": "answer", "a2-m2-final": "answer" };
+  assert.equal(courseModuleCompletionKey("A2", 3), "a2:3");
+  assert.deepEqual(flags, { "a1:3": true, "a2:1": true, "a2:2": true });
+  assert.equal(isCourseFinalCompleted("A2", Boolean(flags["a2:3"]), ["a2-m3-final"], answers), false);
+  assert.equal(isCourseFinalCompleted("A2", true, ["a2-m3-final"], answers), false);
+  const completed = { ...flags, "a2:3": true };
+  const allAnswers = { ...answers, "a2-m3-final": "answer" };
+  assert.equal(isCourseFinalCompleted("A2", completed["a2:3"], ["a2-m3-final"], allAnswers), true);
+  assert.strictEqual(reopenExpandedA2Final("A2", "a2:3", completed, ["a2-m3-final"], allAnswers), completed);
+});
+
+test("A2 Module4 restores without changing earlier answers or completion", () => {
+  const modules = [1, 2, 3, 4].map((order) => ({ order, lessons: [{ slug: `a2-topic-${order}` }] }));
+  for (const order of [1, 2, 3, 4]) assert.deepEqual(resolveCoursePosition(modules, { activeModule: order, selectedSlug: `a2-topic-${order}` }), { activeModule: order, selectedSlug: `a2-topic-${order}` });
+  const original = { activeLevel: "A1" as "A1" | "A2", activeModule: 4, selectedSlug: "a1-topic", levelPositions: { A2: { activeModule: 4, selectedSlug: "a2-topic-4" } }, answers: { previous: "answer" }, progress: { previous: "completed" }, finalCompletedModules: { "a1:4": true, "a2:1": true, "a2:2": true, "a2:3": true } };
+  const switched = switchCourseLevel(original, "A2", modules);
+  assert.equal(switched.activeModule, 4);
+  assert.equal(switched.selectedSlug, "a2-topic-4");
+  assert.strictEqual(switched.answers, original.answers);
+  assert.strictEqual(switched.progress, original.progress);
+  assert.strictEqual(switched.finalCompletedModules, original.finalCompletedModules);
+});
+
+test("expanding A2 Module4 final reopens only its own flag and retains answers", () => {
+  const flags = normalizeFinalCompletedModules({ "4": true, "a2:1": true, "a2:2": true, "a2:3": true, "a2:4": true });
+  const answers = { "a2-m4-old": "answer" };
+  assert.equal(courseModuleCompletionKey("A2", 4), "a2:4");
+  const reopened = reopenExpandedA2Final("A2", "a2:4", flags, ["a2-m4-old", "a2-m4-new"], answers);
+  assert.deepEqual(reopened, { ...flags, "a2:4": false });
+  assert.equal(flags["a1:4"], true);
+  assert.equal(flags["a2:4"], true);
+  assert.deepEqual(answers, { "a2-m4-old": "answer" });
+  assert.equal(isCourseFinalCompleted("A2", reopened["a2:4"], ["a2-m4-old", "a2-m4-new"], { ...answers, "a2-m4-new": "answer" }), false);
 });
 
 test("Alt shortcuts use the physical key and cycle Slovak variants", () => {

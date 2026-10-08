@@ -42,6 +42,14 @@ export function completedCourseSections(modules: CourseModule[], completedLesson
   }))).filter(({ lessons }) => lessons.length > 0);
 }
 
+export function isCourseGenerationScopeSlug(modules: CourseModule[], slug: string): boolean {
+  const a2 = modules[0]?.level === "A2";
+  if (slug === (a2 ? "course:a2:progress" : "course-progress") || slug === (a2 ? "course:a2:mistakes" : "course-mistakes")) return true;
+  return modules.some((module) => module.lessons.some((lesson) => lesson.slug === slug)
+    || slug === `module:${module.slug}`
+    || module.topicGroups?.some((section) => slug === `section:${module.slug}:${section.id}`));
+}
+
 export function buildCourseGenerationScope({
   mode,
   modules,
@@ -86,7 +94,8 @@ export function buildCourseGenerationScope({
     };
   }
 
-  if (mode === "mistakes") return { mode, storageSlug: "course-mistakes", title: "Работа над ошибками", lessons };
-  if (mode === "progress") return { mode, storageSlug: "course-progress", title: "Общий прогресс Slovak A1", lessons };
+  const level = modules[0]?.level ?? "A1";
+  if (mode === "mistakes") return { mode, storageSlug: level === "A2" ? "course:a2:mistakes" : "course-mistakes", title: "Работа над ошибками", lessons };
+  if (mode === "progress") return { mode, storageSlug: level === "A2" ? "course:a2:progress" : "course-progress", title: `Общий прогресс Slovak ${level}`, lessons };
   return { mode: "topic", storageSlug: lesson?.slug ?? "", title: lesson?.title ?? "Завершённая тема", lessons: lesson ? [lesson] : [], lesson };
 }

@@ -1,6 +1,8 @@
 """Portable, validated course backup. Never reads provider settings or files."""
 import json
 from datetime import datetime, timezone
+from hashlib import sha256
+import re
 from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, create_model, model_validator
@@ -155,6 +157,44 @@ def _restore_match_key(name: str, model, values: dict[str, Any]) -> tuple[Any, .
     )
 
 
+def _restore_mistake_references(
+    state: BackupState, remaps: dict[str, dict[int, int]],
+) -> BackupState:
+    """Keep review records attached to their archive tasks, never local ID collisions."""
+    identifiers = set(state.mistakes) | {mistake.id for mistake in state.mistakes.values()}
+    sources = {
+        identifier: match
+        for identifier in identifiers
+        if (match := re.fullmatch(r"(exercise|homework):([0-9]+)", identifier))
+    }
+    # Reserve untouched identifiers so a remapped task cannot overwrite a review.
+    used = identifiers - sources.keys()
+    replacements: dict[str, str] = {}
+    for identifier, match in sorted(sources.items()):
+        kind, source_id = match.groups()
+        table = "exercises" if kind == "exercise" else "homework"
+        restored_id = remaps.get(table, {}).get(int(source_id))
+        candidate = f"{kind}:{restored_id}" if restored_id is not None else None
+        if candidate is None or candidate in used:
+            # A stable non-task ID retains deleted-source reviews across repeated
+            # restores and subsequent exports without opening an unrelated task.
+            salt = 0
+            while True:
+                digest = sha256(f"{identifier}:{salt}".encode("utf-8")).hexdigest()
+                candidate = f"detached:{kind}:{digest}"
+                if candidate not in used:
+                    break
+                salt += 1
+        replacements[identifier] = candidate
+        used.add(candidate)
+    return state.model_copy(update={"mistakes": {
+        replacements.get(key, key): mistake.model_copy(update={
+            "id": replacements.get(mistake.id, mistake.id),
+        })
+        for key, mistake in state.mistakes.items()
+    }})
+
+
 def restore_backup(db: Session, backup: CourseBackup, expected_revision: str | None) -> None:
     """Add materials, preserving existing records; restore state atomically.
 
@@ -197,7 +237,8 @@ def restore_backup(db: Session, backup: CourseBackup, expected_revision: str | N
                 for source_id, restored in restored_rows.items()
             }
         if backup.state is not None:
-            save_course_state(db, backup.state, expected_revision, commit=False)
+            restored_state = _restore_mistake_references(backup.state, remaps)
+            save_course_state(db, restored_state, expected_revision, commit=False)
         db.commit()
     except Exception:
         db.rollback()

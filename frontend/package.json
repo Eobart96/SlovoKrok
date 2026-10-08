@@ -1,6 +1,6 @@
 {
   "name": "ai-learning-platform-frontend",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "private": true,
   "scripts": {
@@ -14,7 +14,7 @@
     "test:ui": "node scripts/run-ui-tests.mjs"
   },
   "dependencies": {
-    "next": "~15.5.25",
+    "next": "~15.5.27",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
@@ -29,7 +29,7 @@
   "overrides": {
     "postcss": "^8.5.28",
     "nanoid": "^3.3.19",
-    "sharp": "^0.35.4",
+    "sharp": "^0.35.5",
     "source-map-js": "^1.2.2"
   }
 }

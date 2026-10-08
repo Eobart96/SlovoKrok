@@ -1,6 +1,6 @@
 import type { CourseLesson, CourseModule, LessonStatus } from "./courseTypes";
 
-export function buildInitialProgress(modules: CourseModule[]): Record<string, LessonStatus> {
+export function buildInitialProgress(modules: Array<{ lessons: Array<{ slug: string }> }>): Record<string, LessonStatus> {
   return Object.fromEntries(modules.flatMap((module) => module.lessons.map((lesson) => [lesson.slug, "not_started" as const])));
 }
 

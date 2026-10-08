@@ -57,7 +57,7 @@ def build_translation_question_context(
 """)
 
 
-def build_tutor_context(settings: Settings, user_message: str) -> TutorContext:
+def build_tutor_context(settings: Settings, user_message: str, *, course_level: str = "A1") -> TutorContext:
     """Build the teacher prompt from versioned learning documents."""
     learning_dir = settings.learning_path
     local_profile = settings.project_root / ".ai" / "private" / "student_profile.local.md"
@@ -67,8 +67,8 @@ def build_tutor_context(settings: Settings, user_message: str) -> TutorContext:
         else learning_dir / "student_profile.md"
     )
     profile = _read_learning_file(profile_path)
-    roadmap = _read_learning_file(learning_dir / "learning_roadmap.md")
-    method = _read_learning_file(learning_dir / "teaching_method.md")
+    roadmap = _read_learning_file(learning_dir / "learning_roadmap.md") if course_level == "A1" else "Уровень и границы грамматики заданы текущим заданием. Не ограничивай A2 дорожной картой A1."
+    method = _read_learning_file(learning_dir / "teaching_method.md") if course_level == "A1" else "Опирайся на переданные теорию, условие и эталон. Объясняй просто по-русски, сохраняя уровень текущего задания."
 
     prompt = f"""Ты — AI-преподаватель словацкого языка для русскоговорящего ученика.
 
@@ -170,8 +170,8 @@ def build_mistake_chat_context(
     return TutorContext(prompt=prompt)
 
 
-def build_generated_exercise_context(*, lesson_title: str, theory: str | None) -> TutorContext:
-    prompt = f"""Ты — генератор упражнений по словацкому языку A1.
+def build_generated_exercise_context(*, lesson_title: str, theory: str | None, level: str = "A1") -> TutorContext:
+    prompt = f"""Ты — генератор упражнений по словацкому языку {level}.
 
 Текущая тема: {lesson_title}
 Теория текущей темы:
@@ -189,13 +189,13 @@ def build_generated_exercise_context(*, lesson_title: str, theory: str | None) -
     return TutorContext(prompt=prompt)
 
 
-def build_reading_generation_context(*, lesson_title: str, theory: str | None, completed_theory: str, batch_index: int = 1, batch_total: int = 1) -> TutorContext:
+def build_reading_generation_context(*, lesson_title: str, theory: str | None, completed_theory: str, batch_index: int = 1, batch_total: int = 1, level: str = "A1") -> TutorContext:
     variation = (
         f"Это вариант {batch_index} из {batch_total} в одном наборе. Сделай сюжет и формулировки заметно отличающимися от других вариантов набора."
         if batch_total > 1
         else ""
     )
-    return TutorContext(prompt=f"""Ты — преподаватель словацкого языка A1. Составь короткий текст для чтения на словацком языке (80–120 слов) строго по текущему прогрессу ученика.
+    return TutorContext(prompt=f"""Ты — преподаватель словацкого языка {level}. Составь короткий текст для чтения на словацком языке (80–120 слов) строго по текущему прогрессу ученика.
 Текущая тема: «{lesson_title}».
 Теория текущей темы: {theory or 'нет отдельной теории'}.
 Открытые слова и фразы ученика: {completed_theory or 'список пока пуст'}.

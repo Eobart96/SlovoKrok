@@ -82,5 +82,7 @@ jobs:
           node-version: "22"
       - name: Check Git candidate path controls
         run: node scripts/git-candidate.mjs --self-test
+      - name: Check public update notes
+        run: node scripts/check-public-updates.mjs
       - name: Check changed lines for whitespace errors
         run: node scripts/run-git-diff-check.mjs "${{ github.event.pull_request.base.sha || github.event.before }}" "${{ github.sha }}"

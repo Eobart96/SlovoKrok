@@ -2,15 +2,20 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { a1CourseModules, allA1Lessons } from "../data/a1Course";
+import { a1CourseModules } from "../data/a1Course";
+import type { CourseModule } from "../data/courseTypes";
 import { ankiVocabularyText, learnedVocabularySeeds, vocabularyExportContent, type VocabularyExportDirection, type VocabularyExportFormat } from "../data/courseVocabulary";
 import { isSentenceVocabularyItem, isTranslatorVocabularySource, translatorVocabularyUpdatedEvent } from "../data/translationVocabulary";
 import { filterKnownLessonSlugs } from "../data/courseEngine";
 import { vocabularySections } from "../data/vocabularySections";
 import { reviewCourseVocabulary, syncCourseVocabulary, type CourseVocabularyItem, type CourseVocabularySeed, type VocabularyRating } from "../lib/api";
 
-export function contentVocabulary(completedLessonSlugs: string[]): CourseVocabularySeed[] {
-  return learnedVocabularySeeds(allA1Lessons, filterKnownLessonSlugs(a1CourseModules, completedLessonSlugs));
+export function contentVocabulary(completedLessonSlugs: string[], modules: CourseModule[] = a1CourseModules): CourseVocabularySeed[] {
+  const lessons = modules.flatMap((module) => module.lessons);
+  const completed = filterKnownLessonSlugs(modules, completedLessonSlugs);
+  return modules.every((module) => module.level === "A1")
+    ? learnedVocabularySeeds(lessons, completed)
+    : learnedVocabularySeeds(lessons, completed, []);
 }
 
 function isSentenceItem(item: Pick<CourseVocabularyItem, "lesson_slug" | "word">): boolean { return isSentenceVocabularyItem(item); }
@@ -21,7 +26,8 @@ function safeFilenamePart(value: string): string {
   return value.trim().toLocaleLowerCase("ru").replace(/[<>:"/\\|?*]+/g, "").replace(/\s+/g, "-") || "all";
 }
 
-export function CourseVocabulary({ completedLessonSlugs }: { completedLessonSlugs: string[] }) {
+export function CourseVocabulary({ modules, completedLessonSlugs }: { modules: CourseModule[]; completedLessonSlugs: string[] }) {
+  const level = modules[0]?.level.toLocaleLowerCase() ?? "a1";
   const [items, setItems] = useState<CourseVocabularyItem[]>([]);
   const [filter, setFilter] = useState("");
   const [visibleLimit, setVisibleLimit] = useState(200);
@@ -49,7 +55,7 @@ export function CourseVocabulary({ completedLessonSlugs }: { completedLessonSlug
   useEffect(() => {
     let cancelled = false;
     const slugs = JSON.parse(completedKey) as string[];
-    const seeds = contentVocabulary(slugs);
+    const seeds = contentVocabulary(slugs, modules);
     const order = new Map(seeds.map((item, index) => [`${item.lesson_slug}:${item.word}`, index]));
     const availableSources = new Set(seeds.map((item) => item.lesson_slug));
     setLoading(true); setError("");
@@ -58,7 +64,7 @@ export function CourseVocabulary({ completedLessonSlugs }: { completedLessonSlug
       .catch((cause) => { if (!cancelled) setError(cause instanceof Error ? cause.message : "Не удалось загрузить слова."); })
       .finally(() => { if (!cancelled) setLoading(false); });
     return () => { cancelled = true; };
-  }, [completedKey, refreshVersion]);
+  }, [completedKey, modules, refreshVersion]);
   const sections = useMemo(() => {
     const available = new Set(items.map((item) => item.lesson_title));
     const standard: string[] = vocabularySections.map((section) => section.title).filter((title) => available.has(title));
@@ -98,7 +104,7 @@ export function CourseVocabulary({ completedLessonSlugs }: { completedLessonSlug
   const downloadCustomExport = () => {
     const exported = vocabularyExportContent(exportItems, exportFormat, exportDirection);
     const scope = exportScope === "section" && filter ? `section-${safeFilenamePart(filter)}` : "opened";
-    const filename = `slovak-a1-${exportContent}-${scope}-${exportDirection}.${exported.extension}`;
+    const filename = `slovak-${level}-${exportContent}-${scope}-${exportDirection}.${exported.extension}`;
     const prefix = exported.extension === "json" ? "" : "\ufeff";
     const url = URL.createObjectURL(new Blob([prefix + exported.content], { type: exported.mimeType }));
     const link = document.createElement("a"); link.href = url; link.download = filename; link.click();
@@ -109,9 +115,9 @@ export function CourseVocabulary({ completedLessonSlugs }: { completedLessonSlug
     <div className="course-vocabulary-actions">
       <span>{visible.length} карточек</span>
       <div className="course-vocabulary-downloads">
-        <button type="button" onClick={() => download(visible, `${filter || "slovak-a1-all"}.txt`)} disabled={!visible.length}>{filter ? "Скачать раздел" : "Скачать всё"}</button>
-        <button type="button" onClick={() => download(openedWords, "slovak-a1-words.txt")} disabled={!openedWords.length}>Скачать слова ({openedWords.length})</button>
-        <button type="button" onClick={() => download(openedSentences, "slovak-a1-sentences.txt")} disabled={!openedSentences.length}>Скачать предложения ({openedSentences.length})</button>
+        <button type="button" onClick={() => download(visible, `${filter || `slovak-${level}-all`}.txt`)} disabled={!visible.length}>{filter ? "Скачать раздел" : "Скачать всё"}</button>
+        <button type="button" onClick={() => download(openedWords, `slovak-${level}-words.txt`)} disabled={!openedWords.length}>Скачать слова ({openedWords.length})</button>
+        <button type="button" onClick={() => download(openedSentences, `slovak-${level}-sentences.txt`)} disabled={!openedSentences.length}>Скачать предложения ({openedSentences.length})</button>
       </div>
     </div>
     <details className="course-vocabulary-export">

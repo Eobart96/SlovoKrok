@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { CourseScreen } from "./components/CourseScreen";
 import { IssueReports } from "./components/IssueReports";
 import { CourseWelcome } from "./components/CourseWelcome";
+import type { CourseLevel } from "./data/courseLevelState";
 
 const FloatingTranslator = dynamic(() => import("./components/FloatingTranslator").then((module) => module.FloatingTranslator));
 
@@ -19,6 +20,7 @@ export default function HomePage() {
   const [themeReady, setThemeReady] = useState(false);
   const [activeArea, setActiveArea] = useState<ModuleArea>("learning");
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [activeLevel, setActiveLevel] = useState<CourseLevel>("A1");
 
   useEffect(() => {
     const storedTheme = window.localStorage.getItem(themeStorageKey);
@@ -39,10 +41,10 @@ export default function HomePage() {
     <main className="course-route-shell">
       <header className="course-route-header">
         <div>
-          <span>Курс словацкого языка · Slovak A1</span>
+          <span>Курс словацкого языка · Slovak {activeLevel}</span>
           <strong>SlovoKrok</strong>
         </div>
-        <nav aria-label="Навигация курса Slovak A1">
+        <nav aria-label={`Навигация курса Slovak ${activeLevel}`}>
           <div className="course-primary-navigation" aria-label="Основные разделы">
             <button type="button" className={activeArea === "learning" ? "active" : ""} onClick={() => setActiveArea("learning")}>Обучение</button>
             <button type="button" className={activeArea === "cheats" ? "active" : ""} onClick={() => setActiveArea("cheats")}>Шпаргалки</button>
@@ -60,7 +62,7 @@ export default function HomePage() {
           </button>
         </nav>
       </header>
-      <CourseScreen requestedArea={activeArea} onAreaChange={setActiveArea} settingsOpen={settingsOpen} onSettingsClose={() => setSettingsOpen(false)} themeControl={<label>Тема интерфейса<select value={theme} disabled={!themeReady} onChange={(event) => setTheme(event.target.value as Theme)}><option value="light">Светлая</option><option value="dark">Тёмная</option></select></label>} />
+      <CourseScreen requestedArea={activeArea} onAreaChange={setActiveArea} onLevelChange={setActiveLevel} settingsOpen={settingsOpen} onSettingsClose={() => setSettingsOpen(false)} themeControl={<label>Тема интерфейса<select value={theme} disabled={!themeReady} onChange={(event) => setTheme(event.target.value as Theme)}><option value="light">Светлая</option><option value="dark">Тёмная</option></select></label>} />
       <div aria-label="Связь и проект">
         <div className="course-footer-links">
           <IssueReports section={activeArea} />

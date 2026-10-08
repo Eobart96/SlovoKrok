@@ -153,6 +153,7 @@ export type PersonalCheatSheet = {
 
 export type CourseState = {
   activeLevel?: CourseLevel;
+  levelPositions?: Partial<Record<CourseLevel, { activeModule: number; selectedSlug: string }>>;
   activeModule?: number;
   selectedSlug?: string;
   fontSize: "normal" | "large" | "extra-large";

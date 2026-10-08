@@ -57,6 +57,8 @@ scripts/verify-a2-study-skill.mjs
 scripts/windows/check-a2-roadmap-and-skill.ps1
 _backups/
 _git-package/
+# Separate Sites checkout; published through Sites, not the application repository.
+/website/
 del/
 head_main.py
 tools/auto-improve/results/

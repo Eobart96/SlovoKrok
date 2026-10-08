@@ -75,7 +75,7 @@ preskočí rovnaké úlohy a zachová pokrok.
 - Voliteľný profil na prispôsobenie príkladov; nastavenie témy a veľkosti textu.
 - Hlásenia chýb s kontextom obrazovky, snímkou obrazovky, exportom ZIP a vymazaním zoznamu.
 - Prenos úloh cez JSON, správa úloh a zálohovanie pokroku.
-- 72 študijných PDF A2; interaktívny pilot A2 zatiaľ nie je sprístupnený.
+- 72 študijných PDF A2; dostupných je 31 tém: celé moduly 1–3 a témy 4.1–4.3 modulu 4: prechod na A2, slovesný vid, slovosled, súvislá reč, pády, opis a množstvo. Názvy modulov sú anglické; vysvetlenia zostávajú ruské. Úroveň A1/A2 sa vyberá v nastaveniach; obe úrovne majú rovnaké rozloženie hlavičky. Ručné schválenie nových tém prebehne neskôr spoločne.
 
 Sekcie: učenie → prehľady pravidiel → cvičenia → domáce úlohy → čítanie → chyby
 → slovíčka. Rozhranie a výučbové vysvetlenia sú zatiaľ v ruštine.
@@ -112,7 +112,8 @@ odpovede ani hodnotenia. Aplikácia nemá účty ani cloudovú synchronizáciu.
 `output/pdf/A2/`: PDF A2. `scripts/`: spúšťanie a overovanie.
 `.github/`: CI a šablóny spätnej väzby. `docs/`: technická dokumentácia.
 
-Ide o verziu na testovanie. Moduly 7–8 ešte čakajú na úplné ručné schválenie.
+Vlastník skontroloval a schválil všetkých 8 modulov A1: 83 z 83 tém.
+Ide o verziu na testovanie.
 Inštalácia na čistom počítači a ručné schválenie aktuálneho rozhrania nie sú
 potvrdené. Prihlasovanie, viacerí používatelia a verejné nasadenie nie sú súčasťou tejto verzie.
 

@@ -2,13 +2,13 @@
 
 import { type Dispatch, type FormEvent, type SetStateAction, useMemo, useState } from "react";
 
-import { a1CourseModules } from "../data/a1Course";
-import { type CourseLesson } from "../data/courseTypes";
+import { type CourseLesson, type CourseModule } from "../data/courseTypes";
 import { type PersonalCheatSheet } from "../lib/api";
 
 type CheatSheetLesson = { lesson: CourseLesson; moduleOrder: number; moduleTitle: string };
 
-export function CourseCheatSheets({ completedLessonSlugs, personalCheatSheets, setPersonalCheatSheets, openLesson }: {
+export function CourseCheatSheets({ modules, completedLessonSlugs, personalCheatSheets, setPersonalCheatSheets, openLesson }: {
+  modules: CourseModule[];
   completedLessonSlugs: string[];
   personalCheatSheets: PersonalCheatSheet[];
   setPersonalCheatSheets: Dispatch<SetStateAction<PersonalCheatSheet[]>>;
@@ -21,17 +21,17 @@ export function CourseCheatSheets({ completedLessonSlugs, personalCheatSheets, s
   const [personalTitle, setPersonalTitle] = useState("");
   const [personalContent, setPersonalContent] = useState("");
   const completed = useMemo(() => new Set(completedLessonSlugs), [completedLessonSlugs]);
-  const sheets = useMemo<CheatSheetLesson[]>(() => a1CourseModules.flatMap((module) =>
+  const sheets = useMemo<CheatSheetLesson[]>(() => modules.flatMap((module) =>
     module.lessons
       .filter((lesson) => completed.has(lesson.slug))
       .map((lesson) => ({ lesson, moduleOrder: module.order, moduleTitle: module.title })),
-  ), [completed]);
+  ), [completed, modules]);
   const normalizedQuery = query.trim().toLocaleLowerCase("ru-RU");
   const visible = sheets.filter(({ lesson, moduleOrder }) =>
     (moduleFilter === "all" || moduleOrder === Number(moduleFilter))
     && (!normalizedQuery || `${lesson.title} ${lesson.slovakTitle} ${lesson.theory.summary}`.toLocaleLowerCase("ru-RU").includes(normalizedQuery)),
   );
-  const availableModules = a1CourseModules.filter((module) => module.lessons.some((lesson) => completed.has(lesson.slug)));
+  const availableModules = modules.filter((module) => module.lessons.some((lesson) => completed.has(lesson.slug)));
   const clearPersonalForm = () => { setEditingId(null); setPersonalTitle(""); setPersonalContent(""); };
   const savePersonalSheet = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -75,7 +75,7 @@ Adding the same pack again skips identical tasks and preserves progress.
 - Optional learner profile to adapt examples; theme and text size settings.
 - Bug reports with screen context, screen capture, ZIP export and list clearing.
 - Tasks-only JSON transfer, task management and course backups.
-- 72 A2 study PDFs; the interactive A2 pilot is not enabled in the UI.
+- 72 A2 study PDFs; 31 lessons are available: complete Modules 1–3 and topics 4.1–4.3 of Module 4: transition to A2, aspect, word order, connected speech, cases, description and quantity. Module names are English; explanations remain Russian. Choose A1/A2 in settings; both levels share the same header layout. Manual acceptance of the new lessons is deferred to a batch review.
 
 Navigation: learning → cheat sheets → exercises → homework → reading → mistakes
 → words. The interface and teaching explanations are currently in Russian.
@@ -112,7 +112,8 @@ and grades. There is no account system or cloud sync.
 `output/pdf/A2/`: A2 PDFs. `scripts/`: launchers and validators.
 `.github/`: CI and feedback templates. `docs/`: technical documentation.
 
-This is a testing version. Modules 7–8 still await full manual acceptance.
+The owner has reviewed and accepted all 8 A1 modules: 83 out of 83 topics.
+This is a testing version.
 Clean-computer installation and manual acceptance of the current UI have not
 been confirmed. Authentication, multi-user operation and public deployment
 are outside the current scope.

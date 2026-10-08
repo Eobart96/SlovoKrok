@@ -1,0 +1,136 @@
+import { defineA2Module2Lesson } from "../lessonFactory";
+
+export const a2NominativePluralPeopleLesson = defineA2Module2Lesson("a2-nominative-plural-people", {
+  duration: "40–45 мин",
+  goals: [
+    "Называть группы людей с окончаниями -i, -ia и -ovia",
+    "Согласовывать tí/títo, moji/naši, прилагательное и сказуемое",
+    "Различать мужчин, смешанные группы, женщин и детей",
+    "Представлять команду и употреблять dvaja, traja, štyria",
+  ],
+  theory: {
+    summary: "У мужчин и смешанных групп во множественном числе особая цепочка: tí noví kolegovia sú milí. Для женщин и детей остаётся другая модель: tie nové kolegyne, tie malé deti. Меняется не только существительное.",
+    rules: [
+      "Частотные окончания мужских названий людей: študent – študenti, učiteľ – učitelia, kolega – kolegovia. Запоминайте пару, а не одно универсальное окончание.",
+      "Перед -i может измениться согласная: Slovák – Slováci, pracovník – pracovníci.",
+      "У мужчин и смешанных групп согласуйте tí/títo, moji/naši и прилагательное: títo naši noví kolegovia. Jeho, jej и ich не меняются.",
+      "Предикативное прилагательное тоже согласуется: kolegovia sú milí; študenti boli spokojní. Мягкое cudzí сохраняется на письме: cudzí muž – cudzí muži.",
+      "О женщинах говорите tie nové kolegyne, о детях tie malé deti; мужские tí/noví нельзя переносить на эти группы.",
+      "Для 2–4 мужчин: dvaja muži, traja učitelia, štyria študenti. Для женщин и детей: dve ženy, tri deti, štyri kolegyne.",
+      "От пяти различайте piati študenti prišli и päť študentov prišlo. Вторая конструкция считает количество и требует Genitív; подробно он появится в следующих темах.",
+    ],
+    examples: [
+      { slovak: "Tí noví kolegovia sú milí.", russian: "Те новые коллеги приветливые.", explanation: "Tí, noví и milí согласованы с мужской или смешанной группой." },
+      { slovak: "Naši slovenskí učitelia boli spokojní.", russian: "Наши словацкие учителя были довольны.", explanation: "Náš превращается в naši, а прилагательные получают мужскую форму множественного числа." },
+      { slovak: "Moji dobrí priatelia prišli včera.", russian: "Мои хорошие друзья пришли вчера.", explanation: "Priateľ – priatelia; môj dobrý – moji dobrí." },
+      { slovak: "Tieto nové kolegyne sú milé.", russian: "Эти новые коллеги-женщины приветливые.", explanation: "Только женщины: tieto, nové и milé, а не títo, noví и milí." },
+      { slovak: "Naše malé deti sú doma.", russian: "Наши маленькие дети дома.", explanation: "Deti в этой модели требуют naše и malé, а не naši и malí." },
+      { slovak: "V tíme pracujú traja Slováci a dvaja Česi.", russian: "В команде работают трое словаков и двое чехов.", explanation: "Национальности пишутся с большой буквы; с мужчинами используем traja и dvaja." },
+    ],
+  },
+  sections: [
+    {
+      title: "Формы людей: -i, -ia, -ovia",
+      paragraphs: ["Существительное сначала переводим во множественное число, а затем согласуем остальные слова. По последней букве нельзя надёжно угадать все формы."],
+      table: { headers: ["Окончание", "Пары", "Перевод"], rows: [
+        ["-i", "študent → študenti; lekár → lekári", "студенты; врачи"],
+        ["-i со сменой согласной", "Slovák → Slováci; pracovník → pracovníci", "словаки; работники"],
+        ["-ia", "učiteľ → učitelia; priateľ → priatelia; brat → bratia", "учителя; друзья; братья"],
+        ["-ovia", "kolega → kolegovia; otec → otcovia; syn → synovia", "коллеги; отцы; сыновья"],
+      ] },
+      note: "Слово kolega заканчивается на -a, но называет мужчину: это не модель женского рода kniha – knihy.",
+    },
+    {
+      title: "Профессии, национальности и частотные исключения",
+      paragraphs: ["Для представления команды нужны готовые формы. Названия национальностей пишутся с большой буквы, профессий — с маленькой."],
+      table: { headers: ["Единственное → множественное", "Значение", "Пример с переводом"], rows: [
+        ["programátor → programátori", "программисты", "Programátori pracujú z domu. — Программисты работают из дома."],
+        ["Čech → Česi; Nemec → Nemci", "чехи; немцы", "Česi sú naši susedia. — Чехи — наши соседи."],
+        ["Talian → Taliani; Slovák → Slováci", "итальянцы; словаки", "Slováci hovoria po slovensky. — Словаки говорят по-словацки."],
+        ["človek → ľudia; muž → muži", "люди; мужчины", "Tí ľudia sú mladí. — Те люди молодые."],
+        ["sused → susedia; hosť → hostia", "соседи; гости", "Hostia sú tu. — Гости здесь."],
+        ["rodič → rodičia; pán → páni", "родители; господа", "Rodičia sú doma. — Родители дома."],
+      ] },
+      note: "Для смешанной группы обычно используется мужская одушевлённая форма: kolegovia, študenti. Только женщины: kolegyne, študentky, Slovenky.",
+    },
+    {
+      title: "Согласуем мужчин, женщин и детей",
+      paragraphs: ["Проверьте всю цепочку: указание, принадлежность, признак, существительное и сказуемое. Два определителя нужны для контраста; в обычной фразе достаточно tí noví kolegovia или naši noví kolegovia."],
+      table: { headers: ["Группа", "Цепочка", "Перевод"], rows: [
+        ["мужчины / смешанная", "títo naši noví kolegovia sú milí", "эти наши новые коллеги приветливые"],
+        ["только женщины", "tieto naše nové kolegyne sú milé", "эти наши новые коллеги-женщины приветливые"],
+        ["дети", "tieto naše malé deti sú milé", "эти наши маленькие дети милые"],
+        ["мягкое прилагательное", "ten cudzí muž → tí cudzí muži", "тот иностранный мужчина → те иностранные мужчины"],
+        ["неизменяемая принадлежность", "jej dobrí priatelia", "её хорошие друзья"],
+      ] },
+      note: "Сравните: môj dobrý priateľ → moji dobrí priatelia; moja dobrá priateľka → moje dobré priateľky.",
+    },
+    {
+      title: "Считаем людей: двое, трое, четверо",
+      paragraphs: ["Специальные формы dvaja, traja, štyria употребляются с мужскими названиями людей. С женщинами и детьми используйте dve, tri, štyri."],
+      table: { headers: ["Сколько?", "Мужчины / смешанная группа", "Женщины и дети"], rows: [
+        ["2", "dvaja kolegovia", "dve kolegyne; dve deti"],
+        ["3", "traja učitelia", "tri učiteľky; tri deti"],
+        ["4", "štyria Slováci", "štyri Slovenky; štyri deti"],
+        ["5: действующая группа", "piati študenti prišli", "пятеро студентов пришли"],
+        ["5: количество", "päť študentov prišlo", "пришло пять студентов"],
+      ] },
+      note: "Форму študentov здесь запомните как часть модели. Строить все формы Genitív до соответствующей темы не требуется.",
+    },
+    {
+      title: "Представляем команду и исправляем ошибки",
+      paragraphs: [
+        "Модель: V našom tíme pracujú traja Slováci a dvaja Česi. Naši noví kolegovia sú skúsení programátori. — В нашей команде работают трое словаков и двое чехов. Наши новые коллеги — опытные программисты.",
+        "Мини-диалог: Kto sú tí noví ľudia? — To sú naši kolegovia. Koľkí prišli? — Prišli traja kolegovia. — Кто те новые люди? — Это наши коллеги. Сколько человек пришло? — Пришли трое коллег.",
+      ],
+      table: { headers: ["Ошибка", "Исправление", "Причина"], rows: [
+        ["Tie nový kolegovia sú milé.", "Tí noví kolegovia sú milí.", "согласовать мужскую группу"],
+        ["Moje dobrí priatelia prišli.", "Moji dobrí priatelia prišli.", "moji для мужской группы"],
+        ["Traja ženy pracujú.", "Tri ženy pracujú.", "женщины: tri, не traja"],
+        ["Dva učitelia sú v škole.", "Dvaja učitelia sú v škole.", "мужчины: dvaja"],
+      ] },
+      note: "Самостоятельно представьте группу в 5–7 фразах: назовите людей, профессию, число участников и один контраст с женщинами или детьми. Свободный рассказ — самопроверка; автоматическая практика ниже проверяет заданную модель.",
+    },
+  ],
+  stepPractices: [
+    { sectionIndex: 0, type: "pairs", prompt: "Соедините мужское название человека и его форму множественного числа.", pairs: [
+      { prompt: "učiteľ", answer: "učitelia" }, { prompt: "kolega", answer: "kolegovia" }, { prompt: "Slovák", answer: "Slováci" }, { prompt: "otec", answer: "otcovia" },
+    ], answer: "učiteľ → učitelia; kolega → kolegovia; Slovák → Slováci; otec → otcovia", hint: "Формы на -i, -ia и -ovia нужно запоминать парами.", explanation: "Učitelia и kolegovia принадлежат разным моделям; у Slovák меняется k на c." },
+    { sectionIndex: 1, type: "choice", prompt: "Выберите правильное множественное число: človek → …", options: ["ľudia", "človeki", "človekovia"], answer: "ľudia", hint: "У этого частотного слова меняется основа.", explanation: "Человек — človek, люди — ľudia." },
+    { sectionIndex: 2, type: "text", prompt: "Преобразуйте всю группу во множественное число: môj dobrý priateľ.", answer: "moji dobrí priatelia", acceptableAnswers: ["Moji dobrí priatelia."], showSlovakKeyboard: true, hint: "Измените все три слова; priateľ образует priatelia.", explanation: "Мужская цепочка: moji dobrí priatelia — мои хорошие друзья." },
+    { sectionIndex: 3, type: "pairs", prompt: "Дополните фразы числительным по числу в скобках.", pairs: [
+      { prompt: "___ muži (2)", answer: "dvaja" }, { prompt: "___ učitelia (3)", answer: "traja" }, { prompt: "___ študenti (4)", answer: "štyria" }, { prompt: "___ ženy (2)", answer: "dve" },
+    ], answer: "dvaja; traja; štyria; dve", hint: "Различайте мужчин и женщин.", explanation: "Мужчины: dvaja/traja/štyria; две женщины: dve ženy." },
+    { sectionIndex: 4, type: "text", prompt: "Исправьте всю фразу: Tie nový kolegovia sú milé.", answer: "Tí noví kolegovia sú milí.", acceptableAnswers: ["Tí noví kolegovia sú milí"], showSlovakKeyboard: true, hint: "Исправьте указание и оба прилагательных, а не только одно слово.", explanation: "Для мужской или смешанной группы нужны tí, noví и milí." },
+    { sectionIndex: 4, type: "order", prompt: "Представьте группу словами «В нашей команде работают трое словаков».", tokens: ["V", "našom", "tíme", "pracujú", "traja", "Slováci."], answer: "V našom tíme pracujú traja Slováci.", hint: "Начните с места, затем действие и группа людей.", explanation: "V našom tíme pracujú traja Slováci. Национальность пишется с большой буквы." },
+  ],
+  knowledgeChecks: [
+    { question: "Как сказать о группе только женщин?", options: ["tieto nové kolegyne", "títo noví kolegyne", "tie noví kolegyne"], answer: "tieto nové kolegyne", explanation: "Женская группа сохраняет tieto и nové." },
+    { question: "Какая группа полностью согласована?", options: ["naši slovenskí učitelia", "naše slovenské učitelia", "náš slovenskí učitelia"], answer: "naši slovenskí učitelia", explanation: "Учителя — мужская или смешанная группа: naši slovenskí učitelia." },
+    { question: "Какая пара названий людей правильная?", options: ["hosť → hostia", "hosť → hosty", "hosť → hosťovia"], answer: "hosť → hostia", explanation: "Нормативная частотная пара: hosť – hostia." },
+    { question: "Как сказать «наши маленькие дети»?", options: ["naše malé deti", "naši malí deti", "naše malí deti"], answer: "naše malé deti", explanation: "С deti нужны формы naše и malé, а не мужские naši и malí." },
+  ],
+  finalChecks: [
+    { question: "Выберите правильное представление команды.", options: ["Títo naši noví kolegovia sú milí.", "Tieto naše nové kolegovia sú milé.", "Títo náš nový kolegovia je milý."], answer: "Títo naši noví kolegovia sú milí.", explanation: "Вся цепочка согласована с мужской или смешанной группой." },
+    { question: "Как сказать «Трое учителей и две учительницы пришли»?", options: ["Traja učitelia a dve učiteľky prišli.", "Tri učitelia a dvaja učiteľky prišli.", "Traja učiteľov a dve učiteľky prišlo."], answer: "Traja učitelia a dve učiteľky prišli.", explanation: "Мужчины: traja učitelia, женщины: dve učiteľky; группа: prišli." },
+    { question: "Какая фраза правильно считает пять студентов?", options: ["Päť študentov prišlo.", "Päť študenti prišli.", "Päť študentov prišli."], answer: "Päť študentov prišlo.", explanation: "Количественная модель: päť + Genitív plural + prišlo." },
+  ],
+  vocabulary: [
+    { word: "učiteľ – učitelia", translation: "учитель — учителя", example: "Naši učitelia sú spokojní." },
+    { word: "kolega – kolegovia", translation: "коллега — коллеги", example: "Kolegovia pracujú z domu." },
+    { word: "priateľ – priatelia", translation: "друг — друзья", example: "Moji priatelia prišli." },
+    { word: "Slovák – Slováci", translation: "словак — словаки", example: "Traja Slováci sú tu." },
+    { word: "Čech – Česi", translation: "чех — чехи", example: "Česi sú naši susedia." },
+    { word: "človek – ľudia", translation: "человек — люди", example: "Tí ľudia sú milí." },
+    { word: "otec – otcovia", translation: "отец — отцы" },
+    { word: "hosť – hostia", translation: "гость — гости" },
+    { word: "sused – susedia", translation: "сосед — соседи" },
+    { word: "kolegyňa – kolegyne", translation: "коллега-женщина — коллеги-женщины" },
+    { word: "dvaja / traja / štyria", translation: "двое / трое / четверо мужчин" },
+    { word: "tí / títo", translation: "те / эти (мужчины, смешанная группа)" },
+    { word: "moji / naši", translation: "мои / наши (мужчины, смешанная группа)" },
+    { word: "skúsení programátori", translation: "опытные программисты" },
+  ],
+  chatPrompt: "Представьте команду или знакомых в 5–7 коротких предложениях. Используйте четыре названия людей, согласованную группу tí/naši/noví, dvaja/traja/štyria и один контраст с женщинами или детьми. Сравните окончания всех зависимых слов.",
+  chatSuggestions: ["V našom tíme pracujú traja Slováci.", "Naši noví kolegovia sú milí.", "Tieto kolegyne sú skúsené programátorky."],
+});

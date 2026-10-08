@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-export function useLastCourseTask(kind: "exercise" | "reading" | "homework") {
-  const key = `slovokrok-last-task-${kind}-v1`;
+export function useLastCourseTask(kind: "exercise" | "reading" | "homework", level: "a1" | "a2" = "a1") {
+  const key = level === "a1" ? `slovokrok-last-task-${kind}-v1` : `slovokrok-last-task-a2-${kind}-v1`;
   const [lastId, setLastId] = useState<number | null>(null);
   useEffect(() => {
     try {

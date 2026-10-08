@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from typing import Any
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -15,6 +15,7 @@ from app.models import (
     CourseReadingAttempt,
 )
 from app.routers.course_routes.common import commit_course_change
+from app.tutor_core.exercise import validate_exercise_snapshot
 from app.schemas.course import (
     CourseMaterialCollection,
     CourseMaterialExerciseItem,
@@ -82,6 +83,11 @@ def _import_rows(db: Session, model: Any, fields: tuple[str, ...], rows: list[An
 
 @router.post("/materials/import", response_model=CourseMaterialImportResponse)
 def import_materials(collection: CourseMaterialCollection, db: Session = Depends(get_db)) -> CourseMaterialImportResponse:
+    try:
+        for item in collection.exercises:
+            validate_exercise_snapshot(item.theory_snapshot)
+    except ValueError as error:
+        raise HTTPException(status_code=422, detail="Повреждена структура импортируемого упражнения.") from error
     try:
         result = CourseMaterialImportResponse(
             exercises=_import_rows(db, CourseExercise, EXERCISE_FIELDS, collection.exercises),

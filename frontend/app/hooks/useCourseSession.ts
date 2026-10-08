@@ -2,9 +2,10 @@
 
 import { type Dispatch, type SetStateAction, useEffect, useRef, useState } from "react";
 
-import { a1CourseModules, findA1Lesson, getA1Module } from "../data/a1Course";
+import { a1CourseModules } from "../data/a1Course";
+import { coursePositionCatalog as courseCatalog } from "../data/coursePositionCatalog";
 import { buildInitialProgress } from "../data/courseEngine";
-import { normalizeFinalCompletedModules } from "../data/courseLevelState";
+import { normalizeFinalCompletedModules, resolveCoursePosition, switchCourseLevel, type CourseLevel, type CoursePositions } from "../data/courseLevelState";
 import { type LessonSummary, type MistakeRecord } from "../data/courseProgress";
 import { type LessonStatus } from "../data/courseTypes";
 import { mergeProgress } from "../data/progressMerge";
@@ -20,6 +21,8 @@ export type { LessonSummary, MistakeRecord } from "../data/courseProgress";
 type SessionSetter<Key extends keyof CourseSessionState> = Dispatch<SetStateAction<CourseSessionState[Key]>>;
 
 export type CourseSessionState = {
+  activeLevel: CourseLevel;
+  levelPositions: CoursePositions;
   activeModule: number;
   selectedSlug: string;
   fontSize: FontSize;
@@ -37,6 +40,7 @@ export type CourseSessionState = {
 };
 
 export type CourseSessionActions = {
+  selectLevel: (level: CourseLevel) => void;
   setActiveModule: SessionSetter<"activeModule">;
   setSelectedSlug: SessionSetter<"selectedSlug">;
   setFontSize: SessionSetter<"fontSize">;
@@ -63,7 +67,7 @@ const sessionStorageKey = "slovak-module-1-beta-session-v1";
 const fontSizeStorageKey = "slovak-module-1-beta-font-size";
 
 function initialProgress(): ProgressMap {
-  return buildInitialProgress(a1CourseModules);
+  return buildInitialProgress([...courseCatalog.A1, ...courseCatalog.A2]);
 }
 
 function readJsonObject(key: string): Record<string, unknown> {
@@ -89,12 +93,12 @@ function readLegacySession(): PersistedCourseSession {
 }
 
 function resolveSession(parsed: PersistedCourseSession): CourseSessionState {
-  const restoredLesson = parsed.selectedSlug ? findA1Lesson(parsed.selectedSlug) : undefined;
-  const restoredModule = restoredLesson ? a1CourseModules.find((module) => module.lessons.some((lesson) => lesson.slug === restoredLesson.slug)) : undefined;
-  const activeModule = restoredModule?.order ?? (parsed.activeModule && a1CourseModules.some((module) => module.order === parsed.activeModule) ? parsed.activeModule : 1);
+  const activeLevel = parsed.activeLevel === "A2" ? "A2" : "A1";
+  const position = resolveCoursePosition(courseCatalog[activeLevel], parsed);
   return {
-    activeModule,
-    selectedSlug: restoredLesson?.slug ?? getA1Module(activeModule).lessons[0].slug,
+    activeLevel,
+    levelPositions: { A1: resolveCoursePosition(courseCatalog.A1, parsed.levelPositions?.A1), A2: resolveCoursePosition(courseCatalog.A2, parsed.levelPositions?.A2), [activeLevel]: position },
+    ...position,
     fontSize: parsed.fontSize ?? "large",
     progress: { ...initialProgress(), ...(parsed.progress ?? {}) },
     lessonSteps: parsed.lessonSteps ?? {},
@@ -111,7 +115,7 @@ function resolveSession(parsed: PersistedCourseSession): CourseSessionState {
 }
 
 function toCourseState(session: CourseSessionState): CourseState {
-  return { ...session, activeLevel: "A1", finalCompleted: Boolean(session.finalCompletedModules["a1:1"]) };
+  return { ...session, levelPositions: { ...session.levelPositions, [session.activeLevel]: { activeModule: session.activeModule, selectedSlug: session.selectedSlug } }, finalCompleted: Boolean(session.finalCompletedModules["a1:1"]) };
 }
 
 function writeLegacySession(session: CourseSessionState, dirty: boolean, revision: string | null): void {
@@ -121,6 +125,8 @@ function writeLegacySession(session: CourseSessionState, dirty: boolean, revisio
 }
 
 export function useCourseSession(): CourseSession {
+  const [activeLevel, setActiveLevel] = useState<CourseLevel>("A1");
+  const [levelPositions, setLevelPositions] = useState<CoursePositions>({});
   const [activeModule, setActiveModule] = useState(1);
   const [selectedSlug, setSelectedSlug] = useState(a1CourseModules[0].lessons[0].slug);
   const [fontSize, setFontSize] = useState<FontSize>("large");
@@ -142,6 +148,8 @@ export function useCourseSession(): CourseSession {
   const persistenceRef = useRef<CoursePersistence | null>(null);
 
   const applySession = (session: CourseSessionState) => {
+    setActiveLevel(session.activeLevel);
+    setLevelPositions(session.levelPositions);
     setActiveModule(session.activeModule);
     setSelectedSlug(session.selectedSlug);
     setFontSize(session.fontSize);
@@ -196,8 +204,8 @@ export function useCourseSession(): CourseSession {
 
   useEffect(() => {
     if (!storageReady || readOnly) return;
-    persistenceRef.current?.update(toCourseState({ activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries, personalCheatSheets }));
-  }, [storageReady, readOnly, activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries, personalCheatSheets]);
+    persistenceRef.current?.update(toCourseState({ activeLevel, levelPositions, activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries, personalCheatSheets }));
+  }, [storageReady, readOnly, activeLevel, levelPositions, activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries, personalCheatSheets]);
 
   const maintenance = async (operation: (revision: string | null) => Promise<CourseStateSnapshot | void>) => {
     if (!persistenceRef.current || readOnly) throw new Error("Сеанс курса ещё не готов.");
@@ -215,5 +223,10 @@ export function useCourseSession(): CourseSession {
     window.location.reload();
   };
 
-  return { activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries, personalCheatSheets, setActiveModule, setSelectedSlug, setFontSize, setProgress, setLessonSteps, setCheckSelections, setPracticeAnswers, setPracticeResults, setMistakes, setFinalSelections, setFinalCompletedModules, setChatHistories, setLessonSummaries, setPersonalCheatSheets, persistenceError, readOnly, canDiscardLocalChanges, maintenance, discardLocalChanges };
+  const selectLevel = (level: CourseLevel) => {
+    if (readOnly || persistenceError) return;
+    const next = switchCourseLevel({ activeLevel, levelPositions, activeModule, selectedSlug }, level, courseCatalog[level]);
+    setLevelPositions(next.levelPositions); setActiveLevel(next.activeLevel); setActiveModule(next.activeModule); setSelectedSlug(next.selectedSlug);
+  };
+  return { activeLevel, levelPositions, selectLevel, activeModule, selectedSlug, fontSize, progress, lessonSteps, checkSelections, practiceAnswers, practiceResults, mistakes, finalSelections, finalCompletedModules, chatHistories, lessonSummaries, personalCheatSheets, setActiveModule, setSelectedSlug, setFontSize, setProgress, setLessonSteps, setCheckSelections, setPracticeAnswers, setPracticeResults, setMistakes, setFinalSelections, setFinalCompletedModules, setChatHistories, setLessonSummaries, setPersonalCheatSheets, persistenceError, readOnly, canDiscardLocalChanges, maintenance, discardLocalChanges };
 }

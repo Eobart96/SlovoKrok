@@ -19,6 +19,7 @@ type Props = {
   learningMode: LearningMode;
   onLearningModeChange: (mode: LearningMode) => void;
   appearance: ReactNode;
+  courseSelection?: ReactNode;
   profile: ReactNode;
   tasks: ReactNode;
   mistakes: ReactNode;
@@ -34,7 +35,7 @@ const providerLabels: Record<TutorProviderName, { title: string; description: st
   polza: { title: "Polza API", description: "OpenAI-совместимый API через сервис Polza." },
 };
 
-export function AiSettingsPanel({ open, onClose, developmentMode, onDevelopmentModeChange, learningMode, onLearningModeChange, appearance, profile, tasks, mistakes, backup, developmentTools, settingsSections, onSettingsSectionChange }: Props) {
+export function AiSettingsPanel({ open, onClose, developmentMode, onDevelopmentModeChange, learningMode, onLearningModeChange, appearance, courseSelection, profile, tasks, mistakes, backup, developmentTools, settingsSections, onSettingsSectionChange }: Props) {
   const [settings, setSettings] = useState<TutorSettings | null>(null);
   const [provider, setProvider] = useState<TutorProviderName>("codex");
   const [openaiKey, setOpenaiKey] = useState("");
@@ -168,6 +169,7 @@ export function AiSettingsPanel({ open, onClose, developmentMode, onDevelopmentM
         </section>
 
         {developmentTools}
+        {courseSelection}
         {profile}
 
         <details className="settings-section settings-appearance" open={settingsSections.appearance} onToggle={(event) => onSettingsSectionChange("appearance", event.currentTarget.open)}>

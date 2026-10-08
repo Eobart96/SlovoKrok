@@ -3,6 +3,7 @@ from pydantic import ValidationError
 from sqlalchemy.orm import Session
 
 from app.database import get_db
+from app.tutor_core.exercise import validate_exercise_snapshot
 from app.services.course_backup import CourseBackup, backup_summary, export_backup, restore_backup
 from app.services.course_state import (
     COURSE_STATE_CONFLICT_DETAIL,
@@ -25,7 +26,10 @@ async def read_backup(request: Request) -> CourseBackup:
         if len(data) > MAX_BACKUP_BYTES:
             raise HTTPException(413, "Резервная копия превышает 10 МБ.")
     try:
-        return CourseBackup.model_validate_json(bytes(data))
+        backup = CourseBackup.model_validate_json(bytes(data))
+        for row in backup.tables["exercises"]:
+            validate_exercise_snapshot(row["theory_snapshot"])
+        return backup
     except (ValidationError, ValueError):
         raise HTTPException(422, "Неверный формат резервной копии, версия или связи записей.") from None
 

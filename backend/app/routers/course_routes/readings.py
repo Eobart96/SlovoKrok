@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.dependencies import get_tutor_provider
 from app.models import CourseReading, CourseReadingAttempt
-from app.routers.course_routes.common import commit_course_change, invoke_tutor
+from app.routers.course_routes.common import commit_course_change, invoke_tutor, course_level_for_slug
 from app.schemas.course import (
     CourseReadingAttemptResponse,
     CourseReadingCheckRequest,
@@ -54,6 +54,7 @@ def generate_reading(request: CourseReadingGenerateRequest, db: Session = Depend
             completed_theory=request.completed_theory,
             batch_index=request.batch_index,
             batch_total=request.batch_total,
+            level=course_level_for_slug(request.lesson_slug),
         )),
         _GeneratedReading,
     ))

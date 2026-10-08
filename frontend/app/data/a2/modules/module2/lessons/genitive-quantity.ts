@@ -1,0 +1,67 @@
+import { defineA2Module2Lesson } from "../lessonFactory";
+
+export const a2GenitiveQuantityLesson = defineA2Module2Lesson("a2-genitive-quantity", {
+  duration: "40–45 мин",
+  goals: ["Заказывать продукт по весу, объёму или частям", "Различать меры после одного, двух–четырёх и пяти", "Называть точное и приблизительное количество", "Согласовывать сказуемое в простых предложениях с количеством"],
+  theory: {
+    summary: "Genitív связывает количество с продуктом или предметом: kilo jabĺk — килограмм яблок, päť rožkov — пять рогаликов. Вопрос koľko? означает ‘сколько?’. Название меры меняется, а продукт после неё остаётся в Genitív.",
+    rules: [
+      "После меры продукт стоит в Genitív: liter mlieka, plátok syra, kus torty, kúsok chleba. Вещество обычно в единственном числе, считаемые продукты — во множественном: kilo jabĺk.",
+      "Мера зависит от числа: jedno kilo → dve kilá → päť kíl; jeden liter → dva litre → päť litrov. Но jabĺk и vody после меры не меняются.",
+      "После обычных числительных от пяти в прямом счёте нужен Genitív plural: päť lístkov, šesť rožkov, sedem detí, desať eur. Формы учим готовыми парами; их образование — тема 2.7.",
+      "Trochu — немного, veľa — много, málo — мало, viac — больше, menej — меньше. После них тоже Genitív: trochu vody, veľa ľudí, málo času, viac zeleniny, menej cukru.",
+      "Предлог z не нужен: trochu vody, а не trochu z vody. Сравнивая количество, сохраняйте тот же падеж: viac vody / menej vody.",
+      "Когда подлежащее — количество с неизменённым числом päť, šesť или словом veľa, простая модель сказуемого — единственное число: Päť ľudí čaká. В прошедшем — средний род: Päť ľudí čakalo. Но Dvaja ľudia čakajú. / Dvaja ľudia čakali.",
+      "В магазине используйте Prosím si + заказ; Dám si + выбранное блюдо. Koľko kusov potrebujete? — Сколько штук вам нужно?",
+    ],
+    examples: [
+      { slovak: "Prosím si kilo jabĺk a dva litre mlieka.", russian: "Килограмм яблок и два литра молока, пожалуйста.", explanation: "Меры kilo и litre; продукты jabĺk и mlieka — Genitív." },
+      { slovak: "Dám si kúsok torty.", russian: "Я возьму кусочек торта.", explanation: "Kúsok обозначает небольшую часть; torty — форма продукта." },
+      { slovak: "Potrebujem päť lístkov.", russian: "Мне нужно пять билетов.", explanation: "После päť — множественный Genitív lístkov." },
+      { slovak: "Dajte mi menej cukru, prosím.", russian: "Положите мне меньше сахара, пожалуйста.", explanation: "Menej + cukru: вещество в единственном Genitív." },
+      { slovak: "Na stretnutí je desať ľudí.", russian: "На встрече десять человек.", explanation: "Количество desať ľudí сочетается с je." },
+      { slovak: "Päť ľudí čakalo pred obchodom.", russian: "Пять человек ждали перед магазином.", explanation: "В простой количественной модели сказуемое čakalo — единственное число, средний род." },
+    ],
+  },
+  sections: [
+    { title: "Мера или часть + продукт", paragraphs: ["Назовите сначала единицу, затем продукт: kilo jabĺk. Форма продукта сообщает, чего именно килограмм. Считаемые яблоки дают множественное число, молоко как вещество — единственное."], table: { headers: ["Мера", "Сочетание", "Перевод"], rows: [["kilo", "kilo jabĺk", "килограмм яблок"], ["liter", "liter mlieka", "литр молока"], ["kus", "kus torty", "кусок торта"], ["kúsok", "kúsok chleba", "кусочек хлеба"], ["plátok", "plátok syra", "ломтик сыра"], ["gram", "dvesto gramov šunky", "двести граммов ветчины"]] }, note: "Kus — кусок или штука; kúsok — небольшой кусочек. Долгота ú помогает различить слова." },
+    { title: "Меняется мера: один, два–четыре, пять", paragraphs: ["Число меняет название меры, но не название продукта после неё. После двух–четырёх — kilá / litre / kusy / plátky; после пяти — kíl / litrov / kusov / plátkov."], table: { headers: ["1", "2–4", "5", "Перевод последнего сочетания"], rows: [["jedno kilo jabĺk", "dve kilá jabĺk", "päť kíl jabĺk", "пять килограммов яблок"], ["jeden liter vody", "dva litre vody", "päť litrov vody", "пять литров воды"], ["jeden kus torty", "tri kusy torty", "päť kusov torty", "пять кусков торта"], ["jeden plátok syra", "štyri plátky syra", "päť plátkov syra", "пять ломтиков сыра"]] }, note: "Kilo — средний род: dve kilá. Liter — мужской: dva litre." },
+    { title: "Считаем предметы и людей: от пяти", paragraphs: ["Без меры число относится сразу к предмету: päť jabĺk — пять яблок. В этой теме используйте готовые формы, не пытайтесь добавлять одно окончание ко всем словам."], table: { headers: ["Число", "Сочетание", "Перевод"], rows: [["5", "päť ľudí / päť lístkov", "пять человек / билетов"], ["6", "šesť kolegov / šesť rožkov", "шесть коллег / рогаликов"], ["7", "sedem detí / sedem vajec", "семь детей / яиц"], ["8", "osem žien / osem izieb", "восемь женщин / номеров"], ["10", "desať hostí / desať eur", "десять гостей / евро"]] }, note: "Potrebujem päť lístkov. — Мне нужно пять билетов. Hotel má osem izieb. — В отеле восемь номеров." },
+    { title: "Приблизительное количество и сравнение", paragraphs: ["Если точная цифра не важна, выберите trochu, veľa или málo. Для сравнения — viac или menej. Вещество или понятие стоит в единственном Genitív, люди и предметы — во множественном."], table: { headers: ["Слово", "С веществом или понятием", "Со считаемым", "Значение"], rows: [["trochu", "trochu vody", "trochu jabĺk", "немного"], ["veľa", "veľa práce", "veľa ľudí", "много"], ["málo", "málo času", "málo obchodov", "мало"], ["viac", "viac zeleniny", "viac ľudí", "больше"], ["menej", "menej cukru", "menej áut", "меньше"]] }, note: "Potrebujem viac ryže. — Мне нужно больше риса. Никакого дополнительного z после слова количества." },
+    { title: "Количество и сказуемое", paragraphs: ["Сказуемое — слово о действии или наличии: čaká — ждёт, je — есть. Когда подлежащее построено как päť ľudí, šesť detí или veľa ľudí, используйте простую модель единственного числа. В прошедшем времени — средний род. Это правило для подлежащего, а не для любого числа в предложении."], table: { headers: ["Подлежащее", "Настоящее", "Прошедшее и перевод"], rows: [["dvaja ľudia", "Dvaja ľudia čakajú.", "Dvaja ľudia čakali. — Два человека ждали."], ["päť ľudí", "Päť ľudí čaká.", "Päť ľudí čakalo. — Пять человек ждали."], ["veľa ľudí", "Veľa ľudí čaká.", "Veľa ľudí čakalo. — Много людей ждали."], ["desať hostí", "Na stretnutí je desať hostí.", "Na stretnutí bolo desať hostí. — На встрече было десять гостей."]] }, note: "Kúpime päť rožkov. — Мы купим пять рогаликов. Здесь подлежащее — ‘мы’, поэтому kúpime. Мужское личное piati hostia даёт другую модель: Piati hostia prišli. — Пятеро гостей пришли." },
+    { title: "Делаем заказ и исправляем ошибки", paragraphs: ["Predavačka: Čo si prosíte? — Продавец: Что желаете? Zákazník: Prosím si kilo jabĺk, dva litre mlieka a päť rožkov. — Покупатель: Килограмм яблок, два литра молока и пять рогаликов, пожалуйста.", "Predavačka: Ešte niečo? — Ещё что-нибудь? Zákazník: Ešte trochu zeleniny, ale menej paradajok. To je všetko, ďakujem. — Ещё немного овощей, но поменьше помидоров. Это всё, спасибо."], table: { headers: ["Ошибка", "Правильно", "Почему"], rows: [["kilo jablká", "kilo jabĺk", "продукт после меры — Genitív"], ["dve kíl", "dve kilá", "после двух — kilá"], ["päť rožky", "päť rožkov", "после пяти — Genitív plural"], ["veľa čas", "veľa času", "понятие после количества — Genitív"], ["viac cukor", "viac cukru", "сравнение количества тоже требует Genitív"]] }, note: "Для своей проверяемой фразы выберите один из двух заказов в практике. Более свободный заказ из 5–7 реплик обсудите с наставником." },
+  ],
+  stepPractices: [
+    { sectionIndex: 0, type: "text", prompt: "Напишите ‘ломтик сыра’: plátok + syr.", answer: "plátok syra", showSlovakKeyboard: true, hint: "Сыр после меры: syra.", explanation: "Plátok syra — ломтик сыра; продукт стоит в Genitív." },
+    { sectionIndex: 1, type: "choice", prompt: "Выберите ‘два литра молока и пять килограммов яблок’.", options: ["dva litre mlieka a päť kíl jabĺk", "dva litrov mlieka a päť kilá jabĺk", "dve litre mlieko a päť kilo jablká"], answer: "dva litre mlieka a päť kíl jabĺk", hint: "Два: litre; пять: kíl; продукты — Genitív.", explanation: "Меры меняются по числу, продукты mlieka и jabĺk остаются в Genitív." },
+    { sectionIndex: 2, type: "text", prompt: "Напишите ‘семь детей и десять евро’.", answer: "sedem detí a desať eur", showSlovakKeyboard: true, hint: "Готовые формы: detí, eur.", explanation: "Sedem detí a desať eur: после обычного числа от пяти — Genitív plural." },
+    { sectionIndex: 3, type: "order", prompt: "Соберите ‘Мне нужно больше овощей, но меньше сахара’.", tokens: ["Potrebujem", "viac", "zeleniny,", "ale", "menej", "cukru."], answer: "Potrebujem viac zeleniny, ale menej cukru.", hint: "Viac zeleniny — больше овощей; menej cukru — меньше сахара.", explanation: "Обе группы сравнения используют Genitív, предлог z не нужен." },
+    { sectionIndex: 4, type: "choice", prompt: "Выберите ‘Пять человек ждали перед магазином’.", options: ["Päť ľudí čakalo pred obchodom.", "Päť ľudí čakali pred obchodom.", "Päť ľudia čakal pred obchodom."], answer: "Päť ľudí čakalo pred obchodom.", hint: "Подлежащее päť ľudí: в прошедшем времени средний род единственного числа.", explanation: "Čakalo согласовано с количественным подлежащим; сравните Dvaja ľudia čakali." },
+    { sectionIndex: 5, type: "text", prompt: "Сделайте свой заказ по модели Prosím si + количество. Выберите один вариант: kilo + jablká ИЛИ liter + mlieko. Напишите одно предложение.", answer: "Prosím si kilo jabĺk.", acceptableAnswers: ["Prosím si kilo jabĺk", "Prosím si liter mlieka.", "Prosím si liter mlieka"], showSlovakKeyboard: true, hint: "Яблоки: jabĺk; молоко: mlieka.", explanation: "Принимаются два заказа: Prosím si kilo jabĺk. / Prosím si liter mlieka. — Килограмм яблок / литр молока, пожалуйста." },
+  ],
+  knowledgeChecks: [
+    { question: "Как меняется продукт при изменении меры?", options: ["jedno kilo jabĺk → dve kilá jabĺk → päť kíl jabĺk", "jedno kilo jablko → dve kilá jablká → päť kíl jabĺk", "jedno kilo jabĺk → dve kíl jabĺk → päť kilá jabĺk"], answer: "jedno kilo jabĺk → dve kilá jabĺk → päť kíl jabĺk", explanation: "Меняется мера kilo / kilá / kíl; продукт сохраняет Genitív jabĺk." },
+    { question: "Как сказать ‘немного воды и много людей’?", options: ["trochu vody a veľa ľudí", "trochu z vody a veľa ľudia", "trochu voda a veľa ľudov"], answer: "trochu vody a veľa ľudí", explanation: "Вода — вещество в единственном Genitív; люди — множественный Genitív." },
+    { question: "Выберите согласованную пару предложений.", options: ["Dvaja ľudia čakajú. Päť ľudí čaká.", "Dvaja ľudia čaká. Päť ľudí čakajú.", "Dvaja ľudí čakajú. Päť ľudia čaká."], answer: "Dvaja ľudia čakajú. Päť ľudí čaká.", explanation: "Личная форма dvaja даёт множественное сказуемое; количественная группа päť ľudí — единственное." },
+  ],
+  finalChecks: [
+    { question: "Выберите правильный заказ: две меры и пять предметов.", options: ["Prosím si dve kilá jabĺk, dva litre mlieka a päť rožkov.", "Prosím si dve kíl jabĺk, dva litrov mlieka a päť rožky.", "Prosím si dva kilá jablká, dve litre mlieko a päť rožkov."], answer: "Prosím si dve kilá jabĺk, dva litre mlieka a päť rožkov.", explanation: "После двух: kilá / litre; после меры: jabĺk / mlieka; после пяти: rožkov." },
+    { question: "Как сказать ‘На встрече было десять человек. Нам нужно больше времени’?", options: ["Na stretnutí bolo desať ľudí. Potrebujeme viac času.", "Na stretnutí boli desať ľudia. Potrebujeme viac čas.", "Na stretnutí bol desať ľudí. Potrebujeme viac z času."], answer: "Na stretnutí bolo desať ľudí. Potrebujeme viac času.", explanation: "Количественное подлежащее: bolo; viac + Genitív: času. Potrebujeme относится к ‘мы’." },
+  ],
+  vocabulary: [
+    { word: "kilo / kilá / kíl", translation: "килограмм / килограммы / килограммов", example: "Prosím si päť kíl jabĺk." },
+    { word: "liter / litre / litrov", translation: "литр / литры / литров", example: "Kupujem dva litre mlieka." },
+    { word: "kus / kúsok", translation: "кусок, штука / кусочек", example: "Dám si kúsok torty." },
+    { word: "plátok syra", translation: "ломтик сыра", example: "Prosím si štyri plátky syra." },
+    { word: "gramov šunky", translation: "граммов ветчины", example: "Prosím si dvesto gramov šunky." },
+    { word: "trochu", translation: "немного", example: "Dajte mi trochu vody." },
+    { word: "veľa / málo", translation: "много / мало", example: "Máme veľa práce a málo času." },
+    { word: "viac / menej", translation: "больше / меньше", example: "Chcem viac zeleniny a menej cukru." },
+    { word: "koľko", translation: "сколько", example: "Koľko kusov potrebujete?" },
+    { word: "rožok → rožkov", translation: "рогалик → рогаликов", example: "Kúpime šesť rožkov." },
+    { word: "lístok → lístkov", translation: "билет → билетов", example: "Potrebujem päť lístkov." },
+    { word: "ryža → ryže", translation: "рис → риса", example: "Potrebujem viac ryže." },
+  ],
+  chatPrompt: "Сделайте заказ для завтрака в 5–7 репликах: две точные меры, число от пяти, trochu или veľa, сравнение viac / menej. Затем скажите, сколько людей было за столом, используя bolo. Я проверю формы меры, продуктов и сказуемого.",
+  chatSuggestions: ["Prosím si kilo jabĺk a dva litre mlieka.", "Dajte mi trochu syra a menej cukru.", "Na raňajkách bolo päť ľudí."],
+});

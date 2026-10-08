@@ -1,0 +1,117 @@
+import { defineA2Module2Lesson } from "../lessonFactory";
+
+export const a2AccusativeSingularAgreementLesson = defineA2Module2Lesson("a2-accusative-singular-agreement", {
+  duration: "40–45 мин",
+  goals: [
+    "Различать человека и предмет в мужском роде",
+    "Согласовывать указательное слово, притяжательное слово, прилагательное и объект",
+    "Выбирать svoj, когда объект принадлежит подлежащему",
+    "Заменять известный объект личным местоимением и описывать выбор покупки или приглашение",
+  ],
+  theory: {
+    summary: "Akuzatív отвечает на koho? čo? — кого? что? Здесь это прямой объект: человек или предмет, на который направлено действие. Проверяем всю группу, а не только существительное.",
+    rules: [
+      "Мужской одушевлённый объект меняется: ten nový kolega → toho nového kolegu; môj dobrý priateľ → môjho dobrého priateľa.",
+      "Мужской неодушевлённый объект сохраняет форму: ten nový telefón. Не переносите на предмет окончания человека.",
+      "В женском роде tá → tú, moja → moju, nová → novú; существительные на -a обычно получают -u: kniha → knihu. Слова на согласную, например vec, сохраняют форму.",
+      "Средний род сохраняет форму: to moje malé auto. Jeho, jej и ich как притяжательные слова также не меняются.",
+      "Svoj означает принадлежность подлежащему: Peter čaká svojho brata — Петер ждёт своего брата. Môjho brata — брата говорящего.",
+      "Известный объект заменяем ma, ťa, ho, ju, nás, vás, ich. Короткие ma, ťa, ho обычно стоят после первой смысловой части, а не в начале: Peter ma pozná.",
+    ],
+    examples: [
+      { slovak: "Vidím toho nového kolegu.", russian: "Я вижу того нового коллегу.", explanation: "Человек: toho + nového + kolegu." },
+      { slovak: "Kupujem ten nový telefón.", russian: "Я покупаю тот новый телефон.", explanation: "Предмет мужского рода: группа сохраняет форму." },
+      { slovak: "Hľadám tú moju novú knihu.", russian: "Я ищу ту мою новую книгу.", explanation: "Все изменяемые слова женской группы получают нужную форму." },
+      { slovak: "Hľadám to moje malé auto.", russian: "Я ищу ту мою маленькую машину.", explanation: "Auto — средний род; группа не меняется." },
+      { slovak: "Peter čaká svojho brata.", russian: "Петер ждёт своего брата.", explanation: "Брат принадлежит к семье подлежащего Peter: svojho." },
+      { slovak: "Poznám tú novú kolegyňu. Poznám ju.", russian: "Я знаю ту новую коллегу. Я её знаю.", explanation: "Женский объект заменён местоимением ju." },
+      { slovak: "Peter ma pozná.", russian: "Петер меня знает.", explanation: "Нейтральная короткая форма ma стоит после Peter." },
+    ],
+  },
+  sections: [
+    {
+      title: "Кого или что: четыре модели объекта",
+      paragraphs: ["После vidím (вижу), hľadám (ищу), poznám (знаю) и kupujem (покупаю) найдите объект. Затем определите его род и, для мужского рода, одушевлённость."],
+      table: { headers: ["Тип", "Исходная группа → объект", "Перевод объекта"], rows: [
+        ["мужской, человек", "ten nový kolega → toho nového kolegu", "того нового коллегу"],
+        ["мужской, предмет", "ten nový telefón → ten nový telefón", "тот новый телефон"],
+        ["женский", "tá milá učiteľka → tú milú učiteľku", "ту милую учительницу"],
+        ["средний", "to malé auto → to malé auto", "ту маленькую машину"],
+      ] },
+      note: "Другие частотные пары: muž → muža, učiteľ → učiteľa, priateľ → priateľa; kniha → knihu, kolegyňa → kolegyňu. Но vec → vec и možnosť → možnosť.",
+    },
+    {
+      title: "Согласование всей цепочки",
+      paragraphs: ["Указательное слово, притяжательное слово и прилагательное получают форму объекта. В обычной речи достаточно одного определителя: môjho nového kolegu или toho nového kolegu. Оба вместе нужны, когда вы уточняете, о ком речь."],
+      table: { headers: ["Тип объекта", "С môj", "С náš"], rows: [
+        ["человек, мужской род", "toho môjho nového kolegu", "nášho dobrého priateľa"],
+        ["предмет, мужской род", "ten môj nový telefón", "náš pracovný počítač"],
+        ["женский род", "tú moju dobrú kamarátku", "našu milú susedu"],
+        ["средний род", "to moje malé auto", "naše staré mesto"],
+      ] },
+      note: "Jeho / jej / ich не изменяются: Vidím jeho nového kolegu. — Я вижу его нового коллегу. Меняется nového kolegu, а jeho остаётся прежним.",
+    },
+    {
+      title: "Мой, его или свой?",
+      paragraphs: ["Посмотрите, кто выполняет действие. Если объект принадлежит этому человеку, используйте svoj. Форма svoj тоже согласуется с объектом: svojho brata, svoju sestru, svoj telefón, svoje auto."],
+      items: [
+        "Peter čaká svojho brata. — Петер ждёт своего брата.",
+        "Peter čaká môjho brata. — Петер ждёт моего брата.",
+        "Peter pozýva svoju sestru. — Петер приглашает свою сестру.",
+        "Peter pozýva jeho sestru. — Петер приглашает его сестру (сестру другого мужчины).",
+      ],
+      note: "Не заменяйте svoj словом jeho автоматически: тогда меняется смысл принадлежности.",
+    },
+    {
+      title: "Повторяем объект местоимением",
+      paragraphs: ["Назовите объект полностью один раз, затем замените его местоимением: Vidím Martina. Vidím ho. — Я вижу Мартина. Я его вижу.", "Короткая форма не начинает нейтральную фразу. Для сильного контраста есть полные формы mňa, teba, jeho: Mňa pozná, teba nie. — Меня знает, тебя нет."],
+      table: { headers: ["Кто?", "Кого?", "Пример и перевод"], rows: [
+        ["ja / ty", "ma (mňa) / ťa (teba)", "Peter ma pozná. Čakám ťa. — Петер меня знает. Я тебя жду."],
+        ["on / ono", "ho (jeho)", "Vidím ho. — Я его вижу."],
+        ["ona", "ju", "Pozývam ju. — Я её приглашаю."],
+        ["my / vy", "nás / vás", "Učiteľ nás počuje. — Учитель нас слышит."],
+        ["oni / ony", "ich", "Hľadám ich. — Я их ищу."],
+      ] },
+    },
+    {
+      title: "От формы к своей фразе",
+      paragraphs: ["Модель приглашения: Poznám toho nového kolegu. Chcem ho pozvať na obed. Pozvem aj tú novú kolegyňu. — Я знаю того нового коллегу. Хочу пригласить его на обед. Приглашу и ту новую коллегу.", "Модель покупки: Hľadám nový telefón. Vidím tento čierny model. Vyberám si ho. — Я ищу новый телефон. Вижу эту чёрную модель. Выбираю её."],
+      items: ["Ошибка: Vidím ten nového kolegu. → Vidím toho nového kolegu.", "Ошибка: Kupujem toho drahého telefón. → Kupujem ten drahý telefón.", "Ошибка: Ma Peter pozná. → Peter ma pozná."],
+      note: "Для собственной истории напишите 5–7 фраз о покупке или приглашении: четыре типа объекта, одна группа со svoj и три замены местоимением. В практике ниже выберите один из двух заданных объектов; свободную историю обсудите с наставником.",
+    },
+  ],
+  stepPractices: [
+    { sectionIndex: 0, type: "choice", prompt: "Выберите: «Я вижу того нового учителя». Но učiteľ — человек.", options: ["Vidím toho nového učiteľa.", "Vidím ten nový učiteľ.", "Vidím toho nový učiteľa."], answer: "Vidím toho nového učiteľa.", hint: "У человека мужского рода меняется вся группа.", explanation: "Toho nového učiteľa — согласованная форма мужского одушевлённого объекта." },
+    { sectionIndex: 1, type: "text", prompt: "После Hľadám измените всю группу tá moja nová kniha. Напишите только группу.", answer: "tú moju novú knihu", acceptableAnswers: ["Tú moju novú knihu."], showSlovakKeyboard: true, hint: "Женский род: tú, moju, novú, knihu.", explanation: "Hľadám tú moju novú knihu. — Я ищу ту мою новую книгу." },
+    { sectionIndex: 2, type: "choice", prompt: "Петер ждёт своего собственного брата. Выберите точную фразу.", options: ["Peter čaká svojho brata.", "Peter čaká jeho brata.", "Peter čaká môjho brata."], answer: "Peter čaká svojho brata.", hint: "Брат относится к подлежащему Peter.", explanation: "Svojho показывает принадлежность подлежащему. Jeho означает другого мужчину, môjho — говорящего." },
+    { sectionIndex: 3, type: "order", prompt: "Соберите нейтральную фразу «Петер меня знает».", tokens: ["Peter", "ma", "pozná."], answer: "Peter ma pozná.", hint: "Короткое ma не ставим первым.", explanation: "Peter ma pozná. — Петер меня знает." },
+    { sectionIndex: 4, type: "text", prompt: "Составьте свою фразу по модели Hľadám + объект. Выберите: môj nový telefón или moja nová kniha. Напишите одно полное предложение.", answer: "Hľadám môj nový telefón.", acceptableAnswers: ["Hľadám môj nový telefón", "Hľadám moju novú knihu.", "Hľadám moju novú knihu"], showSlovakKeyboard: true, hint: "Телефон сохраняет форму; книга получает moju novú knihu.", explanation: "Принимаются две фразы: Hľadám môj nový telefón. / Hľadám moju novú knihu. — Я ищу мой новый телефон / мою новую книгу. Другую свободную фразу можно проверить с наставником." },
+  ],
+  knowledgeChecks: [
+    { question: "Почему формы nový telefón и nového kolegu различаются?", options: ["Telefón — предмет, kolega — человек мужского рода", "Telefón всегда женского рода", "После vidím все слова остаются без изменений"], answer: "Telefón — предмет, kolega — человек мужского рода", explanation: "Мужской одушевлённый объект меняется, мужской неодушевлённый сохраняет форму." },
+    { question: "Какая группа правильна после hľadám?", options: ["to moje malé auto", "toho môjho malého auto", "tú moju malú auto"], answer: "to moje malé auto", explanation: "Auto — средний род: форма объекта совпадает с исходной формой." },
+    { question: "Как заменить Jana в Pozývam Janu?", options: ["Pozývam ju.", "Pozývam ho.", "Pozývam ona."], answer: "Pozývam ju.", explanation: "Женский объект заменяем местоимением ju: Я её приглашаю." },
+  ],
+  finalChecks: [
+    { question: "Выберите полностью согласованное предложение.", options: ["Čakáme nášho dobrého priateľa.", "Čakáme náš dobrý priateľ.", "Čakáme nášho dobrý priateľa."], answer: "Čakáme nášho dobrého priateľa.", explanation: "Мы ждём нашего хорошего друга: nášho + dobrého + priateľa — мужской одушевлённый объект." },
+    { question: "Петер покупает свою машину. Затем замените машину местоимением.", options: ["Peter kupuje svoje auto. Kupuje ho.", "Peter kupuje svojho auto. Kupuje ho.", "Peter kupuje svoju auto. Kupuje ju."], answer: "Peter kupuje svoje auto. Kupuje ho.", explanation: "Auto — средний род: svoje auto; местоимение среднего рода — ho." },
+  ],
+  vocabulary: [
+    { word: "vidieť", translation: "видеть", example: "Vidím toho učiteľa." },
+    { word: "hľadať", translation: "искать", example: "Hľadám tú knihu." },
+    { word: "poznať", translation: "знать кого-либо", example: "Poznám ju." },
+    { word: "čakať", translation: "ждать", example: "Čakám svojho brata." },
+    { word: "pozvať", translation: "пригласить", example: "Chcem ho pozvať na obed." },
+    { word: "kupovať", translation: "покупать", example: "Kupujem nový telefón." },
+    { word: "vybrať si", translation: "выбрать себе", example: "Chcem si vybrať nový model." },
+    { word: "kolega → kolegu", translation: "коллега → коллегу", example: "Vidím nového kolegu." },
+    { word: "priateľ → priateľa", translation: "друг → друга", example: "Čakám dobrého priateľa." },
+    { word: "kolegyňa → kolegyňu", translation: "коллега-женщина → коллегу-женщину", example: "Pozývam novú kolegyňu." },
+    { word: "vec", translation: "вещь", example: "Hľadám tú dôležitú vec." },
+    { word: "svojho / svoju / svoje", translation: "своего / свою / своё", example: "Peter hľadá svoje auto." },
+    { word: "ma / ťa / ho / ju", translation: "меня / тебя / его / её", example: "Peter ma pozná. Vidím ju." },
+    { word: "nás / vás / ich", translation: "нас / вас / их", example: "Učiteľ nás počuje." },
+  ],
+  chatPrompt: "Опишите покупку или приглашение в 5–7 фразах. Используйте человека мужского рода, предмет мужского рода, женский и средний род; одну группу со svoj и три замены местоимением. Я проверю форму всей группы и смысл принадлежности.",
+  chatSuggestions: ["Hľadám nový telefón. Chcem si ho kúpiť.", "Peter čaká svojho brata.", "Poznám tú novú kolegyňu. Chcem ju pozvať na obed."],
+});

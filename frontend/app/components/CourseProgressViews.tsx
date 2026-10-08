@@ -7,18 +7,18 @@ import { CourseMistakePractice } from "./CourseMistakePractice";
 import { buildReinforcementPractices, type ModuleFinalQuestion } from "../data/coursePractice";
 import { type CourseLesson, type CourseModule } from "../data/courseTypes";
 import { type MistakeRecord } from "../hooks/useCourseSession";
-import { taskMistakeSource } from "../data/taskMistakes";
+import { taskMistakeKind, taskMistakeSource } from "../data/taskMistakes";
 
 export type CourseReviewViewModel = { mistakes: Record<string, MistakeRecord>; modules: CourseModule[] };
 export type CourseReviewActions = { openMistake: (module: CourseModule, lesson: CourseLesson, mistake: MistakeRecord) => void; openTask: (id: string) => void; openTheory: (module: CourseModule, lesson: CourseLesson) => void; back: () => void };
 
 export function CourseReviewView({ model: { mistakes, modules }, actions, learningMode, disabled, onChecked }: { model: CourseReviewViewModel; actions: CourseReviewActions; learningMode: LearningMode; disabled: boolean; onChecked: (id: string, correct: boolean, independent?: boolean) => void }) {
   const [trainingActive, setTrainingActive] = useState(false);
-  const taskMistakes = Object.values(mistakes).filter((mistake) => taskMistakeSource(mistake.id));
+  const taskMistakes = Object.values(mistakes).filter((mistake) => taskMistakeKind(mistake.id));
   const activeTaskMistakes = taskMistakes.filter((mistake) => !mistake.mastered);
   const lessonLocations = new Map(modules.flatMap((module) => module.lessons.map((lesson) => [lesson.slug, { module, lesson }] as const)));
   const allMistakes = Object.values(mistakes).flatMap((mistake) => {
-    if (taskMistakeSource(mistake.id)) return [];
+    if (taskMistakeKind(mistake.id)) return [];
     const location = lessonLocations.get(mistake.lessonSlug);
     return location ? [{ mistake, ...location }] : [];
   });
@@ -59,7 +59,7 @@ export function CourseReviewView({ model: { mistakes, modules }, actions, learni
     <div className="course-section-heading"><div><span>Практика и закрепление</span><h3 id="course-review-title">Ошибки</h3></div><p>Разберите ошибку, попробуйте снова и закрепите результат.</p></div>
     <CourseMistakePractice mistakes={mistakes} modules={modules} learningMode={learningMode} disabled={disabled} onChecked={onChecked} onActiveChange={setTrainingActive} />
     <div hidden={trainingActive}>
-    {taskMistakes.length > 0 && <section className="course-gap-priorities"><h3>Ошибки из упражнений и домашнего задания</h3><div className="course-review-list">{taskMistakes.map((mistake) => <article key={mistake.id} className={mistake.mastered ? "mastered" : ""}><span>{taskMistakeSource(mistake.id)?.kind === "exercise" ? "Упражнение" : "Домашнее задание"} · {mistake.mastered ? "Закреплено" : "Нужно повторить"}</span><p style={{ whiteSpace: "pre-wrap" }}>{mistake.prompt}</p><p>Правильный ответ: <b>{mistake.answer}</b></p>{mistake.dueAt && <small>Повторение: {new Date(mistake.dueAt).toLocaleDateString("ru-RU")}</small>}<button type="button" onClick={() => actions.openTask(mistake.id)}>Открыть задание для повторения →</button></article>)}</div><p>После правильного ответа повторите задание через 3 дня. Два успешных повторения по расписанию закрепляют ошибку.</p></section>}
+    {taskMistakes.length > 0 && <section className="course-gap-priorities"><h3>Ошибки из упражнений и домашнего задания</h3><div className="course-review-list">{taskMistakes.map((mistake) => <article key={mistake.id} className={mistake.mastered ? "mastered" : ""}><span>{taskMistakeKind(mistake.id) === "exercise" ? "Упражнение" : "Домашнее задание"} · {mistake.mastered ? "Закреплено" : "Нужно повторить"}</span><p style={{ whiteSpace: "pre-wrap" }}>{mistake.prompt}</p><p>Правильный ответ: <b>{mistake.answer}</b></p>{mistake.dueAt && <small>Повторение: {new Date(mistake.dueAt).toLocaleDateString("ru-RU")}</small>}{taskMistakeSource(mistake.id) ? <button type="button" onClick={() => actions.openTask(mistake.id)}>Открыть задание для повторения →</button> : <small>Исходное задание недоступно. Повторите сохранённую ошибку через «Начать работу над ошибками».</small>}</article>)}</div><p>После правильного ответа повторите задание через 3 дня. Два успешных повторения по расписанию закрепляют ошибку.</p></section>}
     <div className="course-section-heading"><div><span>Весь курс Slovak A1</span><h3>Где нужно подтянуть знания</h3></div><p>{dueCount ? `Можно проработать сейчас: ${dueCount}` : (activeMistakes.length + activeTaskMistakes.length) ? "Следующее повторение уже запланировано" : "Активных ошибок сейчас нет."}</p></div>
     <div className="course-review-overview" aria-label="Сводка ошибок по курсу">
       <article><strong>{activeMistakes.length + activeTaskMistakes.length}</strong><span>активных ошибок</span></article>

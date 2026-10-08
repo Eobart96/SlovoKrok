@@ -111,10 +111,17 @@ class CourseLessonSummaryPayload(BaseModel):
         return self
 
 
+class CoursePositionPayload(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    activeModule: int = Field(ge=1, le=8, strict=True)
+    selectedSlug: str = Field(min_length=1, max_length=100)
+
+
 class CourseStatePayload(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     activeLevel: Literal["A1", "A2"] = "A1"
+    levelPositions: dict[Literal["A1", "A2"], CoursePositionPayload] = Field(default_factory=dict, max_length=2)
     activeModule: int = Field(default=1, ge=1, le=8, strict=True)
     selectedSlug: str | None = Field(default=None, min_length=1, max_length=100)
     fontSize: Literal["normal", "large", "extra-large"] = "large"

@@ -1,6 +1,7 @@
 import { type KeyboardEvent, useRef, useState } from "react";
 
 import { applySlovakAltShortcut } from "../data/slovakKeyboard";
+import { canUpdateCourseAnswer, courseAnswerMaxLength } from "../data/courseAnswerBounds";
 
 const slovakKeys = ["á", "ä", "č", "ď", "é", "í", "ĺ", "ľ", "ň", "ó", "ô", "ŕ", "š", "ť", "ú", "ý", "ž", "ch", "dz", "dž"];
 
@@ -28,7 +29,9 @@ export function SlovakTextInput({ value, onChange, placeholder, disabled = false
     const input = inputRef.current;
     const start = input?.selectionStart ?? value.length;
     const end = input?.selectionEnd ?? start;
-    onChange(`${value.slice(0, start)}${key}${value.slice(end)}`);
+    const next = `${value.slice(0, start)}${key}${value.slice(end)}`;
+    if (!canUpdateCourseAnswer(value, next)) return;
+    onChange(next);
     requestAnimationFrame(() => {
       input?.focus();
       input?.setSelectionRange(start + key.length, start + key.length);
@@ -41,6 +44,7 @@ export function SlovakTextInput({ value, onChange, placeholder, disabled = false
     const inserted = applySlovakAltShortcut(value, event.code, event.shiftKey, input?.selectionStart ?? value.length, input?.selectionEnd ?? value.length);
     if (!inserted) return;
     event.preventDefault();
+    if (!canUpdateCourseAnswer(value, inserted.value)) return;
     onChange(inserted.value);
     requestAnimationFrame(() => {
       input?.focus();
@@ -49,7 +53,8 @@ export function SlovakTextInput({ value, onChange, placeholder, disabled = false
   };
 
   return <>
-    <input ref={inputRef} value={value} onChange={(event) => onChange(event.target.value)} onKeyDown={handleAltShortcut} placeholder={placeholder} autoComplete="off" disabled={disabled} />
+    <input ref={inputRef} value={value} maxLength={courseAnswerMaxLength} onChange={(event) => { if (canUpdateCourseAnswer(value, event.target.value)) onChange(event.target.value); }} onKeyDown={handleAltShortcut} placeholder={placeholder} autoComplete="off" disabled={disabled} />
+    {value.length >= courseAnswerMaxLength && <small role="status">{value.length > courseAnswerMaxLength ? "Сохранённый ответ слишком длинный. Сократите его до 2000 символов, чтобы прогресс снова сохранялся." : "Достигнут предел ответа: 2000 символов."}</small>}
     <SlovakKeyboard onInsert={insertKey} disabled={disabled} />
   </>;
 }

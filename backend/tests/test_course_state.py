@@ -28,6 +28,8 @@ def test_state_write_requires_a_well_formed_revision(client):
         lambda value: value["lessonSteps"].update({"greetings": -1}),
         lambda value: value["practiceResults"].update({"practice-1": 1}),
         lambda value: value.update({"activeLevel": "B1"}),
+        lambda value: value.update({"levelPositions": {"B1": {"activeModule": 1, "selectedSlug": "topic"}}}),
+        lambda value: value.update({"levelPositions": {"A2": {"activeModule": 9, "selectedSlug": "topic"}}}),
         lambda value: value["finalCompletedModules"].update({"module-2": True}),
         lambda value: value["mistakes"].update({
             "m1": {
@@ -108,6 +110,8 @@ def test_strict_nested_state_round_trip_preserves_supported_fields(client):
 
 def test_a2_level_and_qualified_module_keys_round_trip_without_colliding_with_a1(client):
     payload = _state_payload()
+    payload["activeLevel"] = "A2"
+    payload["levelPositions"] = {"A1": {"activeModule": 1, "selectedSlug": "greetings"}, "A2": {"activeModule": 2, "selectedSlug": "a2-pilot"}}
     payload.update({
         "activeLevel": "A2",
         "activeModule": 2,
@@ -119,6 +123,7 @@ def test_a2_level_and_qualified_module_keys_round_trip_without_colliding_with_a1
     assert saved.status_code == 200
     assert saved.json()["schema_version"] == 3
     assert saved.json()["state"]["activeLevel"] == "A2"
+    assert saved.json()["state"]["levelPositions"] == payload["levelPositions"]
     assert saved.json()["state"]["finalCompletedModules"] == {"a1:2": True, "a2:2": False}
 
 

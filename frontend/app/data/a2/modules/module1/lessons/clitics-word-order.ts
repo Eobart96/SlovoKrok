@@ -1,0 +1,93 @@
+import { defineA2Module1Lesson } from "../lessonFactory";
+
+export const a2CliticsWordOrderLesson = defineA2Module1Lesson("a2-clitics-word-order", {
+  duration: "45–50 мин",
+  goals: ["Находить первый смысловой блок, даже если в нём несколько слов", "Собирать группу by — som/si/sme/ste — sa/si — кому — кого/что", "Размещать группу в главной и придаточной части", "Выбирать короткую или полную форму по смыслу"],
+  theory: {
+    summary: "Клитики — короткие безударные слова, которые опираются на соседний блок: som, by, sa, mi, ho. В нейтральной учебной модели вся группа следует после первого смыслового блока. Это вторая синтаксическая позиция, а не второе слово. Внутри группы порядок устойчивее, чем порядок остальных слов.",
+    rules: [
+      "Найдите целый первый блок: Po náročnom pracovnom dni | som si | oddýchol. Длинное обстоятельство не разрезаем после первого слова.",
+      "Порядок коротких форм: by → вспомогательное som/si/sme/ste → возвратное sa/si → дательный mi/ti/mu/jej/nám/vám/im → винительный ma/ťa/ho/ju/nás/vás/ich. Нужны только те позиции, которые требует фраза.",
+      "Si бывает вспомогательным (‘ты’ в прошедшем: Včera si prišiel) и возвратным (‘себе’: Včera som si čítal). Определяйте его работу, а не только написание.",
+      "В наших нейтральных моделях после že, keď, lebo и aby группа идёт сразу: že som sa; keď si mi; lebo sa mu; aby mi. Это новое придаточное со своей группой.",
+      "Короткое mi/ho нейтрально; полное mne/jeho выделяет участника. После предлога нужна соответствующая полная форма: pre mňa, k nemu, o ňom, s ňou.",
+      "Перенос первого блока не меняет внутреннюю цепочку: Ráno som mu ho poslal. Po práci som mu ho poslal. Полные слова могут иметь другой порядок ради акцента; в заданиях задана конкретная нейтральная модель.",
+    ],
+    examples: [
+      { slovak: "Včera som mu zavolal.", russian: "Вчера я ему позвонил.", explanation: "Первый блок Včera, группа som mu." },
+      { slovak: "Po dlhej ceste som si oddýchol.", russian: "После долгой дороги я отдохнул.", explanation: "Po dlhej ceste — один блок; som перед возвратным si." },
+      { slovak: "Ráno som ti ho poslal.", russian: "Утром я отправил его тебе.", explanation: "Вспомогательное som, получатель ti, объект ho." },
+      { slovak: "Určite by som sa ti ospravedlnil.", russian: "Я бы точно перед тобой извинился.", explanation: "By → som → sa → ti; условная форма здесь дана готовой моделью." },
+      { slovak: "Viem, že sa ti to páči.", russian: "Я знаю, что тебе это нравится.", explanation: "После že группа sa ti; to в этом примере стоит отдельно после неё." },
+      { slovak: "Toto je pre mňa. Videl práve jeho.", russian: "Это для меня. Он увидел именно его.", explanation: "Полная форма после предлога и при контрастном выделении." },
+    ],
+  },
+  sections: [
+    {
+      title: "Вторая позиция: считаем блоки, а не слова", importance: "core",
+      paragraphs: ["Произнесите сначала то, с чего начинается сообщение, затем короткую группу. Первый блок может быть временем, местом, предметом или целой группой слов. Не ставьте клитики внутрь предложного оборота.", "Правило относится к безударным формам в этих моделях. Som как самостоятельное ‘я есть’ в Som doma — другое употребление; не объявляем такое начало ошибкой."],
+      table: { headers: ["Первый блок", "Клитики", "Продолжение и перевод"], rows: [["Včera", "som mu", "zavolal. — Вчера я ему позвонил."], ["Po práci", "som si", "oddýchol. — После работы я отдохнул."], ["Tú správu", "som mu", "poslal ráno. — То сообщение я отправил ему утром."], ["V novom byte", "sa mi", "dobre býva. — В новой квартире мне хорошо живётся."], ["Tento nový byt", "sa mi", "páči. — Эта новая квартира мне нравится."]] },
+      note: "В упражнениях с перестановкой явно задан первый блок. Другие грамматические варианты могут выражать другой акцент; здесь тренируем выбранную модель.",
+    },
+    {
+      title: "Цепочка коротких форм", importance: "core",
+      paragraphs: ["В группе заполняем только нужные места. Datív — кому? Akuzatív — кого/что? ‘Мне это нравится’ строится sa mi, не mi sa. ‘Я отправил ему его’ — som mu ho.", "By som — ‘я бы’; by si — ‘ты бы’. Вспомогательное si связано с лицом, возвратное si — со значением ‘себе’. Полный условный наклон разберём отдельно; сейчас удерживаем готовую цепочку."],
+      table: { headers: ["Позиция", "Формы", "Функция"], rows: [["1", "by", "условие: бы"], ["2", "som, si, sme, ste", "вспомогательная форма"], ["3", "sa, si", "возвратность / себе"], ["4", "mi, ti, mu, jej, nám, vám, im", "кому?"], ["5", "ma, ťa, ho, ju, nás, vás, ich", "кого? что?"]] },
+      items: ["Možno by som si ho kúpil. — Возможно, я бы купил его себе.", "Chcel by som sa ti poďakovať. — Я хотел бы тебя поблагодарить.", "Tento nápad sa mi páči. — Эта идея мне нравится."],
+    },
+    {
+      title: "Прошедшее и придаточные: новая часть, своя группа", importance: "core",
+      paragraphs: ["Каждая часть сложного предложения строит свою цепочку. В нейтральных примерах že, keď, lebo и aby открывают придаточную часть, а группа идёт сразу после них. Не переносите som из одной части в другую.", "Aby уже содержит элемент by: не добавляйте после него отдельное by. Prosím ho, aby mi zavolal — ‘Я прошу его, чтобы он мне позвонил’."],
+      table: { headers: ["Начало", "Пример", "Перевод"], rows: [["že", "Viem, že sa ti to páči.", "Я знаю, что тебе это нравится."], ["keď", "Keď som sa vrátil, zavolal som mu.", "Когда я вернулся, я ему позвонил."], ["lebo", "Neprišiel, lebo sa mu nechcelo.", "Он не пришёл, потому что ему не хотелось."], ["aby", "Prosím ho, aby mi zavolal.", "Я прошу его, чтобы он мне позвонил."], ["keď + si", "Keď si mi zavolal, bol som doma.", "Когда ты мне позвонил, я был дома."]] },
+      note: "‘Сразу после союза’ — ориентир для представленных нейтральных моделей, не запрет на все более сложные или контрастные конструкции языка.",
+    },
+    {
+      title: "Короткое местоимение, контраст и предлог", importance: "core",
+      paragraphs: ["Короткая форма удобно называет уже известного участника без особого ударения. Полная форма нужна для выделения: Mne, nie Petrovi — ‘мне, не Петру’. После предлога выбираем полную форму в нужном падеже."],
+      table: { headers: ["Нейтрально", "Выделение / предлог", "Перевод второй модели"], rows: [["Dal mi knihu.", "Mne dal knihu, nie Petrovi.", "Он дал книгу мне, не Петру."], ["Videl ho.", "Videl práve jeho.", "Он увидел именно его."], ["Pomôžem mu.", "Pomôžem jemu, nie jej.", "Я помогу ему, не ей."], ["ma — меня", "Toto je pre mňa.", "Это для меня."], ["mu — ему", "Idem k nemu.", "Я иду к нему."], ["ho — его", "Hovoríme o ňom.", "Мы говорим о нём."], ["ju — её", "Stretol som sa s ňou.", "Я встретился с ней."]] },
+      note: "Полная форма не является клитикой той же цепочки. Не подставляйте короткое ma после pre или ho после o.",
+    },
+    {
+      title: "Документ: собираем фразу и проверяем себя", importance: "core",
+      paragraphs: ["A: Poslal si Anne ten dokument? B: Áno, včera som jej ho poslal. A: Páči sa jej? B: Viem, že sa jej páči. — Ты отправил Анне тот документ? — Да, вчера я его ей отправил. — Он ей нравится? — Я знаю, что нравится.", "Проверка: найдите первый блок → определите функции коротких форм → соберите цепочку → проверьте каждую придаточную часть → выберите полную форму, если есть предлог или контраст."],
+      table: { headers: ["Что проверить", "Ошибка в заданной модели", "Нейтральное исправление"], rows: [["вспомогательная перед получателем", "Včera mu som to povedal.", "Včera som mu to povedal. — Вчера я ему это сказал."], ["sa перед ti", "Viem, že ti sa to páči.", "Viem, že sa ti to páči. — Я знаю, что тебе это нравится."], ["группа после keď", "Keď vrátil som sa…", "Keď som sa vrátil… — Когда я вернулся…"], ["порядок условной цепочки", "Chcel by sa ti som poďakovať.", "Chcel by som sa ti poďakovať. — Я хотел бы тебя поблагодарить."]] },
+      note: "Напишите свой диалог из пяти реплик в чате. В автоматической практике выбирайте только оговорённые модели; свободный текст допускает больше правильных решений.",
+    },
+  ],
+  stepPractices: [
+    { sectionIndex: 0, type: "choice", prompt: "В Po náročnom pracovnom dni som si oddýchol какой фрагмент занимает первый смысловой блок?", options: ["Po náročnom pracovnom dni целиком", "Только Po", "Po náročnom pracovnom dni som si"], answer: "Po náročnom pracovnom dni целиком", hint: "Предложный оборот задаёт время целиком.", explanation: "Вторая позиция считается после блока из пяти слов; затем идёт som si." },
+    { sectionIndex: 0, type: "order", prompt: "Соберите модель ‘После работы я отдохнул’. Начните целым блоком Po práci, затем группа, затем глагол.", tokens: ["Po práci", "som", "si", "oddýchol."], answer: "Po práci som si oddýchol.", hint: "Сначала обстоятельство, затем som si.", explanation: "Po práci не разрывается; вспомогательное som идёт перед возвратным si." },
+    { sectionIndex: 1, type: "order", prompt: "Соберите заданную модель ‘Я бы точно перед тобой извинился’: начало Určite, цепочка, затем глагол.", tokens: ["Určite", "by", "som", "sa", "ti", "ospravedlnil."], answer: "Určite by som sa ti ospravedlnil.", hint: "By → som → sa → ti.", explanation: "Получатель ti следует после возвратного sa; цепочка остаётся целой." },
+    { sectionIndex: 1, type: "pairs", prompt: "Вставьте только недостающие короткие формы в указанном порядке.", answer: "mi; ti ju; mu", showSlovakKeyboard: true, pairs: [{ prompt: "Peter dal ___ knihu. (мне)", answer: "mi", options: ["mi", "ma", "som"] }, { prompt: "Ráno som ___ ___ poslal. (тебе её, речь о správa)", answer: "ti ju", options: ["ti ju", "ju ti", "ťa jej"] }, { prompt: "Tento film sa ___ páči. (ему)", answer: "mu", options: ["mu", "ho", "ma"] }], hint: "Кому — дательный; сообщение správa — ju.", explanation: "Mi и mu отвечают ‘кому’; ti перед ju: получатель перед объектом." },
+    { sectionIndex: 2, type: "choice", prompt: "Какова нейтральная учебная модель придаточного после keď?", options: ["Keď som sa vrátil, zavolal som mu.", "Keď vrátil som sa, zavolal som mu.", "Keď sa som vrátil, zavolal som mu."], answer: "Keď som sa vrátil, zavolal som mu.", hint: "Сначала keď, потом som sa.", explanation: "У придаточного и главной части свои группы: som sa и som mu." },
+    { sectionIndex: 2, type: "text", prompt: "Исправьте только порядок коротких форм, остальные слова оставьте на местах: Viem, že ti sa to páči.", answer: "Viem, že sa ti to páči.", showSlovakKeyboard: true, hint: "После že группа sa ti.", explanation: "Возвратное sa стоит перед получателем ti; смысл ‘Я знаю, что тебе это нравится’." },
+    { sectionIndex: 3, type: "pairs", prompt: "Подберите полную форму после предлога.", answer: "mňa; nemu; ňom; ňou", showSlovakKeyboard: true, pairs: [{ prompt: "pre ___ (для меня)", answer: "mňa", options: ["mňa", "ma", "mi"] }, { prompt: "k ___ (к нему)", answer: "nemu", options: ["nemu", "mu", "ho"] }, { prompt: "o ___ (о нём)", answer: "ňom", options: ["ňom", "ho", "mu"] }, { prompt: "s ___ (с ней)", answer: "ňou", options: ["ňou", "ju", "jej"] }], hint: "После предлога короткие формы заменяются полными.", explanation: "Pre mňa, k nemu, o ňom, s ňou — готовые модели с нужным падежом." },
+    { sectionIndex: 3, type: "choice", prompt: "Что выражает Mne dal knihu, nie Petrovi по сравнению с Dal mi knihu?", options: ["Выделение получателя: мне, а не Петру", "Изменение времени на будущее", "Обязательную ошибку: mne всегда запрещено"], answer: "Выделение получателя: мне, а не Петру", hint: "Полная форма получает смысловой акцент.", explanation: "Оба предложения грамматичны; полное mne противопоставляет участников." },
+    { sectionIndex: 4, type: "text", prompt: "Создайте одну фразу по ограниченной модели: Včera + som + получатель + ho + poslal. Получатель — ему (mu) ИЛИ ей (jej). Не добавляйте другие слова.", answer: "Včera som mu ho poslal.", acceptableAnswers: ["Včera som jej ho poslal."], showSlovakKeyboard: true, hint: "Som → mu/jej → ho.", explanation: "Принимаются две модели: Včera som mu ho poslal / Včera som jej ho poslal. Свободный диалог проверяется в чате." },
+  ],
+  knowledgeChecks: [
+    { question: "Почему в Po dlhej porade som mu to vysvetlil клитики идут после porade?", options: ["Po dlhej porade — целый первый блок", "Som обязано быть четвёртым словом в любой фразе", "Клитики ставят только после существительного"], answer: "Po dlhej porade — целый первый блок", explanation: "Важна синтаксическая группа, не число слов и не часть речи последнего слова." },
+    { question: "Выберите внутренний порядок цепочки для ‘я бы его себе купил’.", options: ["by som si ho", "by si ho som", "ho by som si"], answer: "by som si ho", explanation: "By → вспомогательное som → возвратное si → объект ho." },
+    { question: "Как сказать ‘Я прошу его, чтобы он мне позвонил’ в изученной модели?", options: ["Prosím ho, aby mi zavolal.", "Prosím ho, aby by mi zavolal.", "Prosím ho, aby ma zavolal."], answer: "Prosím ho, aby mi zavolal.", explanation: "Aby уже содержит by; zavolať кому — mi, не винительное ma." },
+  ],
+  finalChecks: [
+    { question: "Для нейтральной модели начало задано Po dlhej ceste. Как продолжить ‘я хотел бы тебя поблагодарить’?", options: ["Po dlhej ceste by som sa ti chcel poďakovať.", "Po by som dlhej ceste sa ti chcel poďakovať.", "Po dlhej ceste by sa ti som chcel poďakovať."], answer: "Po dlhej ceste by som sa ti chcel poďakovať.", explanation: "Целый первый блок и устойчивая цепочка by som sa ti; затем продолжение." },
+    { question: "Выберите пару: ‘Я знаю, что тебе это нравится. Это для меня’.", options: ["Viem, že sa ti to páči. Toto je pre mňa.", "Viem, že ti sa to páči. Toto je pre ma.", "Viem, že sa ťa to páči. Toto je pre mi."], answer: "Viem, že sa ti to páči. Toto je pre mňa.", explanation: "После že нейтральная группа sa ti; после pre полная форма mňa." },
+  ],
+  vocabulary: [
+    { word: "klitika / príklonka", translation: "клитика, короткое безударное слово", example: "Som mu — skupina krátkych tvarov." },
+    { word: "poradie", translation: "порядок, последовательность", example: "Poradie krátkych tvarov je dôležité." },
+    { word: "správa", translation: "сообщение", example: "Včera som jej poslal správu." },
+    { word: "poslať", translation: "отправить", example: "Ráno som ti ho poslal." },
+    { word: "zavolať", translation: "позвонить", example: "Po práci som mu zavolal." },
+    { word: "oddýchnuť si", translation: "отдохнуть", example: "Po dlhej ceste som si oddýchol." },
+    { word: "ospravedlniť sa", translation: "извиниться", example: "Chcel by som sa vám ospravedlniť." },
+    { word: "poďakovať sa", translation: "поблагодарить", example: "Chcel by som sa ti poďakovať." },
+    { word: "páčiť sa", translation: "нравиться", example: "Tento nápad sa mi páči." },
+    { word: "vysvetliť", translation: "объяснить", example: "Včera som mu to vysvetlil." },
+    { word: "pre mňa", translation: "для меня", example: "Toto je pre mňa." },
+    { word: "k nemu", translation: "к нему", example: "Idem k nemu." },
+  ],
+  chatPrompt: "Напишите диалог из пяти реплик о документе или подарке. Используйте минимум три разные цепочки: som mu/jej ho, sa mi, že si mi, by som ti. Затем перестройте одну фразу, начав с длинного обстоятельства. Проверим первый блок, внутренний порядок, придаточную часть и выбор полной формы; другие правильные варианты с иным акцентом обсуждаем, а не объявляем ошибкой.",
+  chatSuggestions: ["Poslal si Anne ten dokument? Áno, včera som jej ho poslal.", "Viem, že sa jej páči. Mohol by som jej poslať aj prílohu.", "Po náročnom pracovnom dni som si oddýchol."],
+});

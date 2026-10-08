@@ -24,8 +24,8 @@ const item = (slug: string, title: string, slovakTitle: string, outcome: string)
 export const plannedA2Module2: A2PlannedModule = {
   order: 2,
   slug: "a2-module-2-cases",
-  title: "A2 · Модуль 2 — Падежи и управление",
-  shortTitle: "Падежи и управление",
+  title: "Module 2 — Cases and Government",
+  shortTitle: "Cases and Government",
   description: "Полное согласование именной группы, падежные формы и управление в ситуациях уровня A2.",
   lessons: [
     item("a2-nominative-plural-things", "Nominatív множественного числа: предметы и понятия", "Nominatív množného čísla: veci a pojmy", "Называть и описывать несколько предметов с полным согласованием."),
@@ -43,7 +43,56 @@ export const plannedA2Module2: A2PlannedModule = {
   ],
 };
 
-export const plannedA2Modules: A2PlannedModule[] = [plannedA2Module2];
+export const plannedA2Module1: A2PlannedModule = {
+  order: 1,
+  slug: "a2-module-1-transition",
+  title: "Module 1 — Transition to A2",
+  shortTitle: "Transition to A2",
+  description: "Диагностика опор A1, вид глагола, порядок слов, словарные связи и связная речь.",
+  lessons: [
+    item("a2-readiness-for-a2", "Что нужно уметь перед A2", "Pripravenosť na A2", "Проверить опоры A1 и составить личный список пробелов без повторного прохождения курса."),
+    item("a2-verb-aspect", "Вид глагола: процесс, повтор и результат", "Slovesný vid: priebeh, opakovanie a výsledok", "Выбирать вид по смыслу действия и различать процесс, повторяемость и результат."),
+    item("a2-clitics-word-order", "Клитики и порядок слов: вторая позиция", "Príklonky a slovosled: druhá pozícia", "Размещать короткие безударные формы в главной и придаточной части предложения."),
+    item("a2-word-families", "Семьи слов: как расширять словарный запас", "Slovné rodiny a rozširovanie slovnej zásoby", "Узнавать родственные слова и расширять словарь без механического угадывания форм."),
+    item("a2-case-map-government", "Карта падежей и управление", "Mapa pádov a väzby", "Выбирать падеж по функции, вопросу, предлогу или управляющему слову."),
+    item("a2-coherence-focus", "Связность: тема, новая информация и смысловой акцент", "Súdržnosť: téma, nová informácia a dôraz", "Связывать предложения и менять смысловой акцент без нарушения грамматики."),
+    item("a2-connected-pronunciation", "Произношение A2: связная речь", "Výslovnosť A2: súvislá reč", "Разборчиво произносить длинные фразы, контролируя долготу, ударение и интонацию."),
+  ],
+};
+
+export const plannedA2Module3: A2PlannedModule = {
+  order: 3,
+  slug: "a2-module-3-adjectives-pronouns-numerals",
+  title: "Module 3 — Description and Quantity",
+  shortTitle: "Description and Quantity",
+  description: "Согласование, сравнение, местоимения, принадлежность, числа и даты.",
+  lessons: [
+    item("a2-adjective-case-agreement", "Прилагательные: согласование во всех изученных падежах", "Prídavné mená: zhoda v pádoch", "Согласовывать определение с существительным в единственном числе."),
+    item("a2-adjectives-plural", "Прилагательные во множественном числе", "Prídavné mená v množnom čísle", "Описывать группы людей и предметов в разных падежах."),
+    item("a2-adjective-comparison", "Степени сравнения прилагательных", "Stupňovanie prídavných mien", "Сравнивать людей, места, товары и варианты."),
+    item("a2-adverb-comparison", "Наречия и их сравнение", "Príslovky a ich stupňovanie", "Сравнивать, как, где и насколько происходит действие."),
+    item("a2-personal-pronoun-cases", "Личные местоимения в косвенных падежах", "Osobné zámená v nepriamych pádoch", "Выбирать краткую или полную форму личного местоимения и ставить её в предложении."),
+    item("a2-possessives-svoj", "Притяжательные слова и местоимение svoj", "Privlastňovacie zámená a svoj", "Различать принадлежность субъекту и другому человеку."),
+    item("a2-possessive-adjectives", "Притяжательные прилагательные", "Privlastňovacie prídavné mená", "Называть индивидуальную принадлежность человеку или члену семьи."),
+    item("a2-indefinite-negative-pronouns", "Неопределённые, отрицательные и обобщающие местоимения", "Neurčité, záporné a zovšeobecňujúce zámená", "Говорить о неопределённом, отсутствующем или полном множестве."),
+    item("a2-numerals-dates-quantity", "Числительные, даты и количество", "Číslovky, dátumy a množstvo", "Использовать числа с людьми и предметами, произносить даты и формы количества."),
+  ],
+};
+
+export const plannedA2Module4: A2PlannedModule = {
+  order: 4,
+  slug: "a2-module-4-verbs",
+  title: "Module 4 — Verb Aspect, Tense and Mood",
+  shortTitle: "Verb Aspect, Tense and Mood",
+  description: "Вид в рассказе и частотные видовые пары. Сейчас доступны темы 4.1–4.3.",
+  lessons: [
+    item("a2-aspect-in-narrative", "Вид в связном рассказе: фон и цепочка событий", "Vid v súvislom rozprávaní", "Чередовать фон, незавершённый процесс и последовательность завершённых событий."),
+    item("a2-aspect-prefix-pairs", "Видовые пары с приставками", "Vidové dvojice s predponami", "Узнавать частотные пары и различать результат и дополнительный смысл приставки."),
+    item("a2-aspect-stem-pairs", "Видовые пары с суффиксами и изменением основы", "Vidové dvojice so zmenou kmeňa", "Использовать частотные пары с изменением основы вместе с управлением и частицами."),
+  ],
+};
+
+export const plannedA2Modules: A2PlannedModule[] = [plannedA2Module1, plannedA2Module2, plannedA2Module3, plannedA2Module4];
 
 export const getPlannedA2Module = (order: number): A2PlannedModule | undefined =>
   plannedA2Modules.find((module) => module.order === order);
