@@ -3,7 +3,7 @@
 <h1 align="center">Slovak, step by step</h1>
 <p align="center">83 topics · 8 modules · practice based on your progress</p>
 <p align="center"><a href="README.md">Русский</a> · <strong>English</strong> · <a href="README.sk.md">Slovenčina</a></p>
-<p align="center"><a href="https://github.com/Eobart96/SlovoKrok">GitHub</a> · <a href="TESTING_START.md">Tester guide</a> · <a href="UPDATES.md">Updates</a></p>
+<p align="center"><a href="https://slovokrok.pages.dev">Project website</a> · <a href="https://github.com/Eobart96/SlovoKrok">GitHub</a> · <a href="TESTING_START.md">Tester guide</a> · <a href="UPDATES.md">Updates</a></p>
 
 A local, single-user app for learning Slovak. The A1 course has 8 modules and
 83 topics, with Russian explanations, practice, reading, homework, vocabulary

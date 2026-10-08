@@ -3,7 +3,7 @@
 <h1 align="center">Словацкий, шаг за шагом</h1>
 <p align="center">83 темы · 8 модулей · практика по вашему прогрессу</p>
 <p align="center"><strong>Русский</strong> · <a href="README.en.md">English</a> · <a href="README.sk.md">Slovenčina</a></p>
-<p align="center"><a href="https://github.com/Eobart96/SlovoKrok">GitHub</a> · <a href="TESTING_START.md">Тестировщикам</a> · <a href="UPDATES.md">Обновления</a></p>
+<p align="center"><a href="https://slovokrok.pages.dev">Сайт проекта</a> · <a href="https://github.com/Eobart96/SlovoKrok">GitHub</a> · <a href="TESTING_START.md">Тестировщикам</a> · <a href="UPDATES.md">Обновления</a></p>
 
 Локальное приложение для самостоятельного изучения словацкого языка.
 Объяснения на русском, курс A1 из 8 модулей и 83 тем, практика, чтение,
