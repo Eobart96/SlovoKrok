@@ -1,32 +1,49 @@
 "use client";
 
 import { useState } from "react";
+import type { MistakeReviewTask } from "../data/taskMistakes";
 import type { LearningMode } from "../data/learningMode";
+import type { CourseLevel } from "../data/courseLevelState";
 import { CourseMistakePractice } from "./CourseMistakePractice";
 
 import { buildReinforcementPractices, type ModuleFinalQuestion } from "../data/coursePractice";
 import { type CourseLesson, type CourseModule } from "../data/courseTypes";
 import { type MistakeRecord } from "../hooks/useCourseSession";
 import { taskMistakeKind, taskMistakeSource } from "../data/taskMistakes";
+import { frequentMistakeTopics, needsTopicRuleReview } from "../data/frequentMistakeTopics";
 
-export type CourseReviewViewModel = { mistakes: Record<string, MistakeRecord>; modules: CourseModule[] };
+export type CourseReviewViewModel = { mistakes: Record<string, MistakeRecord>; modules: CourseModule[]; savedAnswers: Record<string, string>; level: CourseLevel };
 export type CourseReviewActions = { openMistake: (module: CourseModule, lesson: CourseLesson, mistake: MistakeRecord) => void; openTask: (id: string) => void; openTheory: (module: CourseModule, lesson: CourseLesson) => void; back: () => void };
 
-export function CourseReviewView({ model: { mistakes, modules }, actions, learningMode, disabled, onChecked }: { model: CourseReviewViewModel; actions: CourseReviewActions; learningMode: LearningMode; disabled: boolean; onChecked: (id: string, correct: boolean, independent?: boolean) => void }) {
+function CourseRulesReminder({ lesson, onClose, disabled }: { lesson: CourseLesson; onClose: () => void; disabled: boolean }) {
+  return <section className="course-review-topic-plan course-rules-reminder" aria-label={`Повторение правил: ${lesson.title}`}>
+    <h4>Правила темы «{lesson.title}»</h4>
+    <p>{lesson.theory.summary}</p>
+    <ul>{lesson.theory.rules.map((rule, index) => <li key={index}>{rule}</li>)}</ul>
+    <details><summary>Примеры с переводом</summary>{lesson.theory.examples.map((example, index) => <article key={index}>
+      <p lang="sk"><b>{example.slovak}</b></p><p>{example.russian}</p><p>{example.explanation}</p>
+    </article>)}</details>
+    <p>Вспомните правило, затем придумайте свою фразу по одному из примеров.</p>
+    <button type="button" disabled={disabled} onClick={onClose}>Я повторил правила</button>
+  </section>;
+}
+
+export function CourseReviewView({ model: { mistakes, modules, savedAnswers, level }, actions, learningMode, disabled, onChecked, onRulesReviewed }: { model: CourseReviewViewModel; actions: CourseReviewActions; learningMode: LearningMode; disabled: boolean; onRulesReviewed: (lessonSlug: string) => void; onChecked: (id: string, correct: boolean, reviewTask?: MistakeReviewTask) => void }) {
   const [trainingActive, setTrainingActive] = useState(false);
-  const taskMistakes = Object.values(mistakes).filter((mistake) => taskMistakeKind(mistake.id));
+  const [rulesKey, setRulesKey] = useState<string | null>(null);
+  const taskMistakes = Object.values(mistakes).filter((mistake) => !mistake.mastered && taskMistakeKind(mistake.id));
   const activeTaskMistakes = taskMistakes.filter((mistake) => !mistake.mastered);
   const lessonLocations = new Map(modules.flatMap((module) => module.lessons.map((lesson) => [lesson.slug, { module, lesson }] as const)));
+  const frequentTopics = frequentMistakeTopics(mistakes, new Set(lessonLocations.keys()));
   const allMistakes = Object.values(mistakes).flatMap((mistake) => {
     if (taskMistakeKind(mistake.id)) return [];
     const location = lessonLocations.get(mistake.lessonSlug);
     return location ? [{ mistake, ...location }] : [];
   });
   const activeMistakes = allMistakes.filter(({ mistake }) => !mistake.mastered);
-  const masteredMistakes = allMistakes.filter(({ mistake }) => mistake.mastered);
   const isDue = (mistake: MistakeRecord) => !mistake.dueAt || new Date(mistake.dueAt).getTime() <= Date.now();
   const dueCount = activeMistakes.filter(({ mistake }) => isDue(mistake)).length + activeTaskMistakes.filter(isDue).length;
-  const repeatedCount = activeMistakes.filter(({ mistake }) => mistake.attempts > 1).length + activeTaskMistakes.filter((mistake) => mistake.attempts > 1).length;
+  const repeatedCount = Object.values(mistakes).reduce((total, mistake) => total + Math.max(0, mistake.attempts - 1), 0);
   const gaps = [...activeMistakes.reduce((byLesson, item) => {
     const current = byLesson.get(item.lesson.slug) ?? { module: item.module, lesson: item.lesson, mistakes: 0, attempts: 0, due: 0 };
     current.mistakes += 1;
@@ -37,7 +54,7 @@ export function CourseReviewView({ model: { mistakes, modules }, actions, learni
   }, new Map<string, { module: CourseModule; lesson: CourseLesson; mistakes: number; attempts: number; due: number }>()).values()]
     .sort((left, right) => Number(right.due > 0) - Number(left.due > 0) || right.attempts - left.attempts || right.mistakes - left.mistakes || left.module.order - right.module.order);
   const sortedActiveMistakes = [...activeMistakes].sort((left, right) => right.mistake.attempts - left.mistake.attempts || Number(isDue(right.mistake)) - Number(isDue(left.mistake)));
-  const reviewPlan = gaps.flatMap((gap) => {
+  const reviewPlan = gaps.filter((gap) => needsTopicRuleReview(mistakes, gap.lesson.slug)).flatMap((gap) => {
     const lessonMistakes = sortedActiveMistakes.filter((item) => item.lesson.slug === gap.lesson.slug);
     const dueMistakes = lessonMistakes.filter((item) => isDue(item.mistake));
     const focus = dueMistakes.length ? dueMistakes : lessonMistakes;
@@ -56,18 +73,28 @@ export function CourseReviewView({ model: { mistakes, modules }, actions, learni
     </article>;
   };
   return <section className="course-review course-exercises" aria-labelledby="course-review-title">
-    <div className="course-section-heading"><div><span>Практика и закрепление</span><h3 id="course-review-title">Ошибки</h3></div><p>Разберите ошибку, попробуйте снова и закрепите результат.</p></div>
-    <CourseMistakePractice mistakes={mistakes} modules={modules} learningMode={learningMode} disabled={disabled} onChecked={onChecked} onActiveChange={setTrainingActive} />
+    <div className="course-section-heading"><div><span>Практика и закрепление</span><h3 id="course-review-title">Ошибки {level}</h3></div><p>Разберите ошибку, попробуйте снова и закрепите результат.</p></div>
+    <CourseMistakePractice mistakes={mistakes} modules={modules} savedAnswers={savedAnswers} learningMode={learningMode} disabled={disabled} onChecked={onChecked} onActiveChange={setTrainingActive} />
     <div hidden={trainingActive}>
-    {taskMistakes.length > 0 && <section className="course-gap-priorities"><h3>Ошибки из упражнений и домашнего задания</h3><div className="course-review-list">{taskMistakes.map((mistake) => <article key={mistake.id} className={mistake.mastered ? "mastered" : ""}><span>{taskMistakeKind(mistake.id) === "exercise" ? "Упражнение" : "Домашнее задание"} · {mistake.mastered ? "Закреплено" : "Нужно повторить"}</span><p style={{ whiteSpace: "pre-wrap" }}>{mistake.prompt}</p><p>Правильный ответ: <b>{mistake.answer}</b></p>{mistake.dueAt && <small>Повторение: {new Date(mistake.dueAt).toLocaleDateString("ru-RU")}</small>}{taskMistakeSource(mistake.id) ? <button type="button" onClick={() => actions.openTask(mistake.id)}>Открыть задание для повторения →</button> : <small>Исходное задание недоступно. Повторите сохранённую ошибку через «Начать работу над ошибками».</small>}</article>)}</div><p>После правильного ответа повторите задание через 3 дня. Два успешных повторения по расписанию закрепляют ошибку.</p></section>}
-    <div className="course-section-heading"><div><span>Весь курс Slovak A1</span><h3>Где нужно подтянуть знания</h3></div><p>{dueCount ? `Можно проработать сейчас: ${dueCount}` : (activeMistakes.length + activeTaskMistakes.length) ? "Следующее повторение уже запланировано" : "Активных ошибок сейчас нет."}</p></div>
+    {taskMistakes.length > 0 && <section className="course-gap-priorities"><h3>Ошибки из упражнений и домашнего задания</h3><div className="course-review-list">{taskMistakes.map((mistake) => <article key={mistake.id} className={mistake.mastered ? "mastered" : ""}><span>{taskMistakeKind(mistake.id) === "exercise" ? "Упражнение" : "Домашнее задание"} · {mistake.mastered ? "Закреплено" : "Нужно повторить"}</span><p style={{ whiteSpace: "pre-wrap" }}>{mistake.prompt}</p><p>Правильный ответ: <b>{mistake.answer}</b></p>{mistake.dueAt && <small>Повторение: {new Date(mistake.dueAt).toLocaleDateString("ru-RU")}</small>}{taskMistakeSource(mistake.id) ? <button type="button" onClick={() => actions.openTask(mistake.id)}>Открыть задание для повторения →</button> : <small>Исходное задание недоступно. Повторите сохранённую ошибку через «Начать работу над ошибками».</small>}</article>)}</div><p>После правильного ответа ошибка исчезнет из списка.</p></section>}
+    <div className="course-section-heading"><div><span>Весь курс Slovak {level}</span><h3>Где нужно подтянуть знания</h3></div><p>{dueCount ? `Можно проработать сейчас: ${dueCount}` : (activeMistakes.length + activeTaskMistakes.length) ? "Следующее повторение уже запланировано" : "Активных ошибок сейчас нет."}</p></div>
     <div className="course-review-overview" aria-label="Сводка ошибок по курсу">
       <article><strong>{activeMistakes.length + activeTaskMistakes.length}</strong><span>активных ошибок</span></article>
-      <article><strong>{gaps.length}</strong><span>тем с пробелами</span></article>
+      <article><strong>{frequentTopics.length}</strong><span>тем с частыми ошибками</span></article>
       <article><strong>{repeatedCount}</strong><span>повторных промахов</span></article>
       <article><strong>{dueCount}</strong><span>можно повторить сейчас</span></article>
     </div>
-    {!activeMistakes.length ? <div className="course-empty"><strong>{masteredMistakes.length ? "Все сохранённые ошибки закреплены" : taskMistakes.length ? "В темах курса активных ошибок нет" : "Ошибок по курсу пока нет"}</strong><p>Неверные ответы из тем и итоговых тестов автоматически появятся здесь.</p></div> : <>
+    <section className="course-gap-priorities" aria-labelledby="course-frequent-topics-title">
+      <div><strong id="course-frequent-topics-title">Темы, где вы часто ошибаетесь</strong><span>От трёх промахов в теме: в разных заданиях или повторно в одном. Исправленные ошибки тоже учитываются. После повторения правил тема скрывается до трёх новых промахов.</span></div>
+      {frequentTopics.length ? <ol>{frequentTopics.map((topic, index) => {
+        const location = lessonLocations.get(topic.lessonSlug)!;
+        const key = `frequent:${topic.lessonSlug}`;
+        return <li key={topic.lessonSlug}><button type="button" aria-expanded={rulesKey === key} onClick={() => setRulesKey(rulesKey === key ? null : key)}>
+          <span>{index + 1}</span><b>{location.lesson.title}</b><small>{location.module.title} · {topic.attempts} промахов за всё время</small><i>{topic.active ? `${topic.active} активн. ошибок` : "Ошибки исправлены"}</i>
+        </button><p>{topic.active ? `Исправлено заданий: ${topic.corrected}. Повторите правило и разберите оставшиеся ошибки.` : "Ошибки исправлены. Тема остаётся в списке для повторения по истории промахов."}</p><small>Нажмите на тему, чтобы повторить правила.</small>{rulesKey === key && <CourseRulesReminder lesson={location.lesson} disabled={disabled} onClose={() => { onRulesReviewed(location.lesson.slug); setRulesKey(null); }} />}</li>;
+      })}</ol> : <p>Тем с частыми ошибками пока нет. Повторённые темы скрыты; три новых промаха вернут тему в список.</p>}
+    </section>
+    {!activeMistakes.length ? <div className="course-empty"><strong>В темах курса активных ошибок нет</strong><p>Новые ошибки из тем и итоговых тестов появятся здесь. История частых ошибок показана выше.</p></div> : <>
       <section className="course-gap-priorities" aria-labelledby="course-gap-priorities-title">
         <div><strong id="course-gap-priorities-title">План повторения по темам</strong><span>Порядок учитывает число ошибок и повторных промахов. Сначала темы, которые уже пора повторить.</span></div>
         <ol>{reviewPlan.map((item, index) => <li key={item.lesson.slug}>
@@ -77,9 +104,10 @@ export function CourseReviewView({ model: { mistakes, modules }, actions, learni
           <div className="course-review-topic-plan">
             <p><b>Почему эта тема:</b> {item.attempts > item.allCount ? `есть повторяющиеся ошибки: ${item.attempts - item.allCount} повторных промахов.` : "есть ошибки, которые ещё нужно закрепить."}</p>
             <p><b>1. Вспомнить правило.</b> {item.lesson.theory.summary}</p>
-            <button type="button" onClick={() => actions.openTheory(item.module, item.lesson)}>Открыть объяснение темы →</button>
+            <button type="button" aria-expanded={rulesKey === `active:${item.lesson.slug}`} onClick={() => setRulesKey(rulesKey === `active:${item.lesson.slug}` ? null : `active:${item.lesson.slug}`)}>Повторить правила темы</button>
+            {rulesKey === `active:${item.lesson.slug}` && <CourseRulesReminder lesson={item.lesson} disabled={disabled} onClose={() => { onRulesReviewed(item.lesson.slug); setRulesKey(null); }} />}
             <p><b>2. Применить без подсказки.</b> Начните с {item.focus.length} {item.focus.length === 1 ? "задания" : "заданий"}: {item.focus.map(({ mistake }) => `«${mistake.prompt}»`).join("; ")}. Затем разберите остальные ошибки этой темы.</p>
-            <p><b>3. Закрепить.</b> После правильного ответа повторите задание через 3 дня. Два успешных повторения по расписанию переводят ошибку в закреплённые. Ранняя тренировка не меняет срок повторения.</p>
+            <p><b>3. Исправить ошибку.</b> Выполните проверку через «Начать работу над ошибками». После правильного ответа ошибка исчезнет из списка.</p>
             {!item.due && <p>Следующая проверка памяти: {new Date(Math.min(...sortedActiveMistakes.filter((entry) => entry.lesson.slug === item.lesson.slug).map(({ mistake }) => Date.parse(mistake.dueAt!)))).toLocaleDateString("ru-RU")}.</p>}
             <details><summary>Ошибки этой темы ({item.allCount})</summary><div className="course-review-list">{sortedActiveMistakes.filter((entry) => entry.lesson.slug === item.lesson.slug).map(renderMistake)}</div></details>
           </div>
@@ -87,7 +115,6 @@ export function CourseReviewView({ model: { mistakes, modules }, actions, learni
       </section>
       <details className="course-review-details"><summary>Разобрать отдельные ошибки: {sortedActiveMistakes.length}</summary><div className="course-review-list">{sortedActiveMistakes.map(renderMistake)}</div></details>
     </>}
-    {masteredMistakes.length > 0 && <details className="course-mastered-mistakes"><summary>Закреплённые ошибки: {masteredMistakes.length}</summary><div className="course-review-list">{masteredMistakes.map(renderMistake)}</div></details>}
     <div className="course-actions"><button type="button" className="secondary" onClick={actions.back}>← К обучению</button></div>
     </div>
   </section>;

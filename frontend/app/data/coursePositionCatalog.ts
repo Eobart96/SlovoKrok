@@ -38,9 +38,11 @@ export const a2Module3ReadyLessonSlugs = [
   "a2-numerals-dates-quantity",
 ];
 
-export const a2Module4ReadyLessonSlugs = ["a2-aspect-in-narrative", "a2-aspect-prefix-pairs", "a2-aspect-stem-pairs"];
+export const a2Module4ReadyLessonSlugs = ["a2-aspect-in-narrative", "a2-aspect-prefix-pairs", "a2-aspect-stem-pairs", "a2-aspect-present-past", "a2-imperfective-future", "a2-perfective-future", "a2-motion-verbs", "a2-reflexive-sa-si", "a2-imperative-requests", "a2-conditional-by", "a2-conditional-modals", "a2-verbal-nouns-participles"];
 
-export const a2ReadyLessonSlugs = [...a2Module1ReadyLessonSlugs, ...a2Module2ReadyLessonSlugs, ...a2Module3ReadyLessonSlugs, ...a2Module4ReadyLessonSlugs];
+export const a2Module5ReadyLessonSlugs = ["a2-conjunctions-a-ale-alebo", "a2-paired-conjunctions", "a2-reported-statements-ze", "a2-relative-clauses-ktory", "a2-embedded-questions", "a2-cause-and-consequence", "a2-time-and-real-condition", "a2-connected-story-focus"];
+
+export const a2ReadyLessonSlugs = [...a2Module1ReadyLessonSlugs, ...a2Module2ReadyLessonSlugs, ...a2Module3ReadyLessonSlugs, ...a2Module4ReadyLessonSlugs, ...a2Module5ReadyLessonSlugs];
 
 export const coursePositionCatalog = {
   A1: a1CourseModules,
@@ -49,5 +51,6 @@ export const coursePositionCatalog = {
     { order: 2, lessons: a2Module2ReadyLessonSlugs.map((slug) => ({ slug })) },
     { order: 3, lessons: a2Module3ReadyLessonSlugs.map((slug) => ({ slug })) },
     { order: 4, lessons: a2Module4ReadyLessonSlugs.map((slug) => ({ slug })) },
+    { order: 5, lessons: a2Module5ReadyLessonSlugs.map((slug) => ({ slug })) },
   ],
 };

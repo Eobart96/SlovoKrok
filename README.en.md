@@ -75,7 +75,7 @@ Adding the same pack again skips identical tasks and preserves progress.
 - Optional learner profile to adapt examples; theme and text size settings.
 - Bug reports with screen context, screen capture, ZIP export and list clearing.
 - Tasks-only JSON transfer, task management and course backups.
-- 72 A2 study PDFs; 31 lessons are available: complete Modules 1–3 and topics 4.1–4.3 of Module 4: transition to A2, aspect, word order, connected speech, cases, description and quantity. Module names are English; explanations remain Russian. Choose A1/A2 in settings; both levels share the same header layout. Manual acceptance of the new lessons is deferred to a batch review.
+- 72 A2 study PDFs; 48 lessons are available across complete Modules 1–5. Module 5 covers conjunctions, reported statements with že, relative clauses with ktorý, embedded questions, cause and consequence, time and real conditions, and connected storytelling. Module names are English; explanations remain Russian. Choose A1/A2 in settings; both levels share the same header layout. Manual acceptance of the new lessons is deferred to a batch review.
 
 Navigation: learning → cheat sheets → exercises → homework → reading → mistakes
 → words. The interface and teaching explanations are currently in Russian.

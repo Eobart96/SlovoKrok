@@ -16,9 +16,26 @@ const lesson = read("app/data/a2/modules/module2/lessons/nominative-plural-thing
 
 function validateRoadmap() {
   const entries = [...roadmap.matchAll(/item\("([^"]+)", "([^"]+)"/g)];
-  if (entries.length !== 31) fail(`expected 7/12/9/3 ready Module 1/2/3/4 topics, found ${entries.length}`);
+  if (entries.length !== 48) fail(`expected 7/12/9/12/8 ready Module 1/2/3/4/5 topics, found ${entries.length}`);
   if (new Set(entries.map((entry) => entry[1])).size !== entries.length) fail("duplicate A2 lesson slug");
   const requiredTitles = [
+    "Время и реальное условие",
+    "Связный рассказ и актуальное членение",
+    "Относительные предложения с ktorý",
+    "Придаточные с kto, čo и kde",
+    "Причина и следствие",
+    "Соединяем мысли: a, ale, alebo",
+    "Парные союзы aj — aj и ani — ani",
+    "Передаём сообщение с že",
+    "Кондиционал с частицей by",
+    "Модальные глаголы в условных просьбах и советах",
+    "Отглагольные существительные и пассивные причастия",
+    "Глаголы движения ísť и chodiť",
+    "Возвратные глаголы sa и si",
+    "Императив: просьба, инструкция и запрет",
+    "Вид в настоящем и прошедшем времени",
+    "Аналитическое будущее несовершенных глаголов",
+    "Синтетическое будущее совершенных глаголов",
     "Вид в связном рассказе: фон и цепочка событий",
     "Видовые пары с приставками",
     "Видовые пары с суффиксами и изменением основы",
@@ -65,6 +82,12 @@ function validatePlan() {
     "## Этап 6. Полный Module 1",
     "## Этап 7. Полный Module 3",
     "## Этап 8. Module 4: рассказ и видовые пары",
+    "## Этап 9. Module 4: вид и время",
+    "## Этап 10. Module 4: движение, sa/si и императив",
+    "## Этап 11. Полный Module 4: кондиционал и формы результата",
+    "## Этап 12. Module 5: союзы и передача сообщения",
+    "## Этап 13. Module 5: уточнение, косвенные вопросы и причина",
+    "## Этап 14. Полный Module 5: время, условие и рассказ",
     "A1 продолжает работать без изменения существующих slug",
     "2.11-2.12",
     "validate:a2",
@@ -126,10 +149,10 @@ function validateReadyLessons() {
   if (JSON.stringify(a2ReadyLessonSlugs) !== JSON.stringify(readyLessons.map((lesson) => lesson.slug))) fail("A2 position catalog differs from ready lessons");
   const positions = a2CourseModules.map((module) => ({ order: module.order, lessons: module.lessons.map(({ slug }) => ({ slug })) }));
   if (JSON.stringify(positions) !== JSON.stringify(coursePositionCatalog.A2)) fail("A2 module positions differ from runtime catalog");
-  if (a2CourseModules.length !== 4 || a2CourseModules.some((module, index) => module.order !== index + 1)) fail("ready A2 modules must be Module1/2/3/4 in order");
+  if (a2CourseModules.length !== 5 || a2CourseModules.some((module, index) => module.order !== index + 1)) fail("ready A2 modules must be Module1/2/3/4/5 in order");
   const { validateCourseModules } = loadData(resolve(dataRoot, "courseValidation.ts"));
   const { getPracticeMatch, buildModuleFinalQuestions, buildReinforcementPractices } = loadData(resolve(dataRoot, "coursePractice.ts"));
-  const { resolveCoursePosition, isCourseFinalCompleted } = loadData(resolve(dataRoot, "courseLevelState.ts"));
+  const { resolveCoursePosition, isCourseFinalCompleted, reopenExpandedA2Final } = loadData(resolve(dataRoot, "courseLevelState.ts"));
   for (const module of a2CourseModules) {
     for (const lesson of module.lessons) {
       const restored = resolveCoursePosition(coursePositionCatalog.A2, { activeModule: module.order, selectedSlug: lesson.slug });
@@ -162,7 +185,18 @@ function validateReadyLessons() {
   if (module3Final.length !== 18 || isCourseFinalCompleted("A2", true, module3Final.map(({ id }) => id), previousAnswers)) fail("Module3 final incomplete or completed by previous modules");
   const module4Final = buildModuleFinalQuestions(a2CourseModules[3].lessons);
   const earlierAnswers = { ...previousAnswers, ...Object.fromEntries(module3Final.map(({ id, answer }) => [id, answer])) };
-  if (module4Final.length !== 6 || isCourseFinalCompleted("A2", true, module4Final.map(({ id }) => id), earlierAnswers)) fail("Module4 final incomplete or completed by previous modules");
+  if (module4Final.length !== 24 || isCourseFinalCompleted("A2", true, module4Final.map(({ id }) => id), earlierAnswers)) fail("Module4 final incomplete or completed by previous modules");
+  for (const size of [3, 6, 9]) {
+    const oldModule4Final = buildModuleFinalQuestions(a2CourseModules[3].lessons.slice(0, size));
+    const oldModule4Answers = Object.fromEntries(oldModule4Final.map(({ id, answer }) => [id, answer]));
+    if (oldModule4Final.length !== size * 2 || oldModule4Final.some(({ id, answer }) => !module4Final.some((item) => item.id === id && item.answer === answer))) fail(`existing ${size}-topic Module4 final questions changed`);
+    if (isCourseFinalCompleted("A2", true, module4Final.map(({ id }) => id), oldModule4Answers)) fail(`old ${size}-topic Module4 answers close expanded final`);
+    const savedAnswers = { ...earlierAnswers, ...oldModule4Answers };
+    const answersBefore = JSON.stringify(savedAnswers);
+    const savedFlags = { "a1:4": true, "a2:1": true, "a2:2": true, "a2:3": true, "a2:4": true };
+    const reopened = reopenExpandedA2Final("A2", "a2:4", savedFlags, module4Final.map(({ id }) => id), savedAnswers);
+    if (reopened["a2:4"] !== false || ["a1:4", "a2:1", "a2:2", "a2:3"].some((key) => reopened[key] !== true) || savedFlags["a2:4"] !== true || JSON.stringify(savedAnswers) !== answersBefore) fail("expanding Module4 changed previous progress or answers");
+  }
   const ownAnswers = Object.fromEntries(module4Final.map(({ id, answer }) => [id, answer]));
   if (!isCourseFinalCompleted("A2", true, module4Final.map(({ id }) => id), ownAnswers)) fail("Module4 submitted final cannot complete");
   if (isCourseFinalCompleted("A2", false, module4Final.map(({ id }) => id), ownAnswers)) fail("Module4 completes without submitting");
@@ -172,6 +206,28 @@ function validateReadyLessons() {
     if (!isCourseFinalCompleted("A2", true, buildModuleFinalQuestions(earlier.lessons).map(({ id }) => id), answersWithModule4)) fail("Module4 invalidated earlier final");
   }
   if (new Set([...allEarlierFinals, ...module4Final].map(({ id }) => id)).size !== allEarlierFinals.length + module4Final.length) fail("Module4 final ID collision");
+  const module5Final = buildModuleFinalQuestions(a2CourseModules[4].lessons);
+  const module5Ids = module5Final.map(({ id }) => id);
+  if (module5Final.length !== 16 || isCourseFinalCompleted("A2", true, module5Ids, answersWithModule4)) fail("Module5 final incomplete or completed by previous modules");
+  for (const size of [3, 6]) {
+  const oldModule5Final = buildModuleFinalQuestions(a2CourseModules[4].lessons.slice(0, size));
+  const oldModule5Answers = Object.fromEntries(oldModule5Final.map(({ id, answer }) => [id, answer]));
+  if (oldModule5Final.length !== size * 2 || oldModule5Final.some(({ id, answer }) => !module5Final.some((item) => item.id === id && item.answer === answer))) fail(`previous ${size}-topic Module5 final questions changed`);
+  if (isCourseFinalCompleted("A2", true, module5Ids, oldModule5Answers)) fail(`old ${size * 2} Module5 answers close expanded final`);
+  const savedModule5Answers = { ...answersWithModule4, ...oldModule5Answers };
+  const module5Before = JSON.stringify(savedModule5Answers);
+  const savedModule5Flags = { "a1:5": true, "a2:1": true, "a2:2": true, "a2:3": true, "a2:4": true, "a2:5": true };
+  const reopenedModule5 = reopenExpandedA2Final("A2", "a2:5", savedModule5Flags, module5Ids, savedModule5Answers);
+  if (reopenedModule5["a2:5"] !== false || ["a1:5", "a2:1", "a2:2", "a2:3", "a2:4"].some((key) => reopenedModule5[key] !== true) || savedModule5Flags["a2:5"] !== true || JSON.stringify(savedModule5Answers) !== module5Before) fail("expanding Module5 changed previous progress or answers");
+  }
+  const module5Answers = Object.fromEntries(module5Final.map(({ id, answer }) => [id, answer]));
+  if (!isCourseFinalCompleted("A2", true, module5Ids, module5Answers) || isCourseFinalCompleted("A2", false, module5Ids, module5Answers)) fail("Module5 requires its own submitted final");
+  const mergedAnswers = { ...answersWithModule4, ...module5Answers };
+  for (const earlier of a2CourseModules.slice(0, 4)) {
+    if (!isCourseFinalCompleted("A2", true, buildModuleFinalQuestions(earlier.lessons).map(({ id }) => id), mergedAnswers)) fail("Module5 invalidated earlier final");
+  }
+  const everyFinal = a2CourseModules.flatMap(({ lessons }) => buildModuleFinalQuestions(lessons));
+  if (new Set(everyFinal.map(({ id }) => id)).size !== everyFinal.length) fail("Module5 final ID collision");
   for (const module of a2CourseModules) {
     if (!/^Module \d+ — /.test(module.title) || module.title.startsWith("A2")) fail(`module title is not concise English: ${module.slug}`);
   }
@@ -183,7 +239,7 @@ function validateReadyLessons() {
     if (files.length !== imports.length || files.some((name) => !imports.includes(name))) fail(`unregistered A2 Module${module.order} lesson file`);
     if (!planned || module.slug !== planned.slug || module.title !== planned.title || module.level !== "A2" || module.lessons.length !== files.length || module.lessons.length !== planned.lessons.length) fail(`incomplete A2 Module${module.order}`);
     const groupSlugs = (module.topicGroups ?? []).flatMap((group) => group.lessonSlugs);
-    if (module.topicGroups?.length !== (module.order === 4 ? 1 : module.order === 2 ? 4 : 3) || JSON.stringify(groupSlugs) !== JSON.stringify(module.lessons.map((lesson) => lesson.slug))) fail(`A2 Module${module.order} groups must cover all lessons once in roadmap order`);
+    if (module.topicGroups?.length !== ([2, 4].includes(module.order) ? 4 : 3) || JSON.stringify(groupSlugs) !== JSON.stringify(module.lessons.map((lesson) => lesson.slug))) fail(`A2 Module${module.order} groups must cover all lessons once in roadmap order`);
   }
   const { allCourseModules } = loadData(resolve(dataRoot, "courseCatalog.ts"));
   const ids = new Set();

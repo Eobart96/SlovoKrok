@@ -723,7 +723,9 @@ def test_reading_generation_prompt_uses_unlocked_vocabulary_without_future_gramm
         completed_theory="Dobrý deň = Добрый день\nrodina = семья",
     )
     assert "Открытые слова и фразы ученика" in context.prompt
-    assert "не менее 8 его элементов" in context.prompt
+    assert "не менее 8 его элементов" not in context.prompt
+    assert "Связность и естественность важнее объёма" in context.prompt
+    assert "одну простую жизненную ситуацию" in context.prompt
     assert "не разрешает будущую грамматику" in context.prompt
     assert "Не вводи новые смысловые слова вне открытого списка" in context.prompt
     assert "Dobrý deň = Добрый день" in context.prompt
@@ -872,6 +874,7 @@ def test_all_course_ai_writes_map_provider_failures_without_raw_500(client, prov
 
 
 def test_all_course_task_writes_map_database_failures_without_raw_500(client, monkeypatch):
+    import json
     from sqlalchemy.exc import OperationalError
     from sqlalchemy.orm import Session
 
@@ -880,6 +883,18 @@ def test_all_course_task_writes_map_database_failures_without_raw_500(client, mo
     created_exercise = client.post("/api/v1/course/exercises", json={"lesson_slug": "greetings", "lesson_title": "Приветствия", "theory": "Dobrý deň."}).json()
     created_reading = client.post("/api/v1/course/readings", json={"lesson_slug": "greetings", "lesson_title": "Приветствия", "theory": "Dobrý deň.", "completed_theory": ""}).json()
     created_homework = client.post("/api/v1/course/homework", json={"lesson_slug": "greetings", "lesson_title": "Приветствия", "theory": "Dobrý deň.", "known_mistakes": []}).json()
+
+    original_respond = provider.respond
+
+    def varied_response(context):
+        response = original_respond(context)
+        if "создай одно небольшое домашнее задание" in context.prompt.lower():
+            payload = json.loads(response)
+            payload["description"] = "Поздоровайтесь и попрощайтесь с соседом."
+            return json.dumps(payload)
+        return response
+
+    monkeypatch.setattr(provider, "respond", varied_response)
 
     original_commit = Session.commit
 

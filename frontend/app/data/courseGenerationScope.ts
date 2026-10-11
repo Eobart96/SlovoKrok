@@ -50,6 +50,18 @@ export function isCourseGenerationScopeSlug(modules: CourseModule[], slug: strin
     || module.topicGroups?.some((section) => slug === `section:${module.slug}:${section.id}`));
 }
 
+export function filterCourseMistakes<T extends { lessonSlug: string }>(modules: CourseModule[], mistakes: Record<string, T>): Record<string, T> {
+  return Object.fromEntries(Object.entries(mistakes).filter(([, mistake]) => isCourseGenerationScopeSlug(modules, mistake.lessonSlug)));
+}
+
+export function filterCourseTasks<T extends { lesson_slug: string }>(modules: CourseModule[], tasks: T[]): T[] {
+  return tasks.filter((task) => isCourseGenerationScopeSlug(modules, task.lesson_slug));
+}
+
+export function clearCourseMistakes<T extends { lessonSlug: string }>(modules: CourseModule[], mistakes: Record<string, T>): Record<string, T> {
+  return Object.fromEntries(Object.entries(mistakes).filter(([, mistake]) => !isCourseGenerationScopeSlug(modules, mistake.lessonSlug)));
+}
+
 export function buildCourseGenerationScope({
   mode,
   modules,

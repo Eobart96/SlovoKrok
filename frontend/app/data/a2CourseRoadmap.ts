@@ -84,15 +84,42 @@ export const plannedA2Module4: A2PlannedModule = {
   slug: "a2-module-4-verbs",
   title: "Module 4 — Verb Aspect, Tense and Mood",
   shortTitle: "Verb Aspect, Tense and Mood",
-  description: "Вид в рассказе и частотные видовые пары. Сейчас доступны темы 4.1–4.3.",
+  description: "Вид и время, движение, возвратность, инструкции, условные просьбы и результативные формы.",
   lessons: [
     item("a2-aspect-in-narrative", "Вид в связном рассказе: фон и цепочка событий", "Vid v súvislom rozprávaní", "Чередовать фон, незавершённый процесс и последовательность завершённых событий."),
     item("a2-aspect-prefix-pairs", "Видовые пары с приставками", "Vidové dvojice s predponami", "Узнавать частотные пары и различать результат и дополнительный смысл приставки."),
     item("a2-aspect-stem-pairs", "Видовые пары с суффиксами и изменением основы", "Vidové dvojice so zmenou kmeňa", "Использовать частотные пары с изменением основы вместе с управлением и частицами."),
+    item("a2-aspect-present-past", "Вид в настоящем и прошедшем времени", "Vid v prítomnom a minulom čase", "Различать текущий процесс, привычку, прошлый факт и завершённый результат."),
+    item("a2-imperfective-future", "Аналитическое будущее несовершенных глаголов", "Opisné futúrum nedokonavých slovies", "Строить budem + инфинитив, отрицания и вопросы, сохраняя раннюю позицию sa/si."),
+    item("a2-perfective-future", "Синтетическое будущее совершенных глаголов", "Jednoduché futúrum dokonavých slovies", "Выбирать napíšem, zavolám, stretneme sa для будущего результата и сочетать их с процессом."),
+    item("a2-motion-verbs", "Глаголы движения ísť и chodiť", "Smer, opakovanie a cestovanie", "Различать конкретное движение и обычный маршрут, описывать транспорт и пересадки."),
+    item("a2-reflexive-sa-si", "Возвратные глаголы sa и si", "Zvratnosť, vzájomnosť a zmena významu", "Сохранять sa/si, различать их функции, согласование и управление всей конструкции."),
+    item("a2-imperative-requests", "Императив: просьба, инструкция и запрет", "Rozkaz, návod, prosba a zákaz", "Выбирать ty/my/vy, строить команды, запреты и уместные вежливые просьбы."),
+    item("a2-conditional-by", "Кондиционал с частицей by", "Podmieňovací spôsob s časticou by", "Строить условное наклонение, согласовывать род, использовать keby и короткие формы."),
+    item("a2-conditional-modals", "Модальные глаголы в условных просьбах и советах", "Zdvorilá prosba, možnosť a jemná rada", "Различать chcel, mohol и mal by для желания, возможности, просьбы и мягкого совета."),
+    item("a2-verbal-nouns-participles", "Отглагольные существительные и пассивные причастия", "Názov deja a výsledný stav", "Различать названия действий и результативные признаки, согласовывать формы и читать объявления."),
   ],
 };
 
-export const plannedA2Modules: A2PlannedModule[] = [plannedA2Module1, plannedA2Module2, plannedA2Module3, plannedA2Module4];
+export const plannedA2Module5: A2PlannedModule = {
+  order: 5,
+  slug: "a2-module-5-sentences",
+  title: "Module 5 — Connected Speech and Complex Sentences",
+  shortTitle: "Connected Speech and Complex Sentences",
+  description: "Союзы, сообщение и уточнение, косвенные вопросы, причина, время и условие, связный рассказ.",
+  lessons: [
+    item("a2-conjunctions-a-ale-alebo", "Соединяем мысли: a, ale, alebo", "Spájame myšlienky: a, ale, alebo", "Соединять факты, показывать контраст и предлагать выбор с подходящей пунктуацией."),
+    item("a2-paired-conjunctions", "Парные союзы aj — aj и ani — ani", "Párové spojky aj — aj a ani — ani", "Подчёркивать включение или исключение обоих элементов, согласовывать формы и отрицание."),
+    item("a2-reported-statements-ze", "Передаём сообщение с že", "Sprostredkujeme správu so spojkou že", "Пересказывать факт, мнение, надежду и инструкцию с новой точкой зрения и временем по смыслу."),
+    item("a2-relative-clauses-ktory", "Относительные предложения с ktorý", "Vzťažné vety so zámenom ktorý", "Уточнять существительное с согласованием, падежом по роли внутри уточнения и нужным предлогом."),
+    item("a2-embedded-questions", "Придаточные с kto, čo и kde", "Vedľajšie vety s kto, čo a kde", "Передавать неизвестного человека, содержание или место внутри сообщения, просьбы и общего вопроса."),
+    item("a2-cause-and-consequence", "Причина и следствие", "Príčina a následok", "Объяснять причину с lebo/pretože и результат с preto, сохраняя направление связи."),
+    item("a2-time-and-real-condition", "Время и реальное условие", "Čas a reálna podmienka", "Различать kedy/keď/ak, строить реальный план с подходящим временем и условием."),
+    item("a2-connected-story-focus", "Связный рассказ и актуальное членение", "Súvislé rozprávanie a aktuálne členenie", "Строить рассказ с временными переходами, связью известного и нового и понятным смысловым акцентом."),
+  ],
+};
+
+export const plannedA2Modules: A2PlannedModule[] = [plannedA2Module1, plannedA2Module2, plannedA2Module3, plannedA2Module4, plannedA2Module5];
 
 export const getPlannedA2Module = (order: number): A2PlannedModule | undefined =>
   plannedA2Modules.find((module) => module.order === order);

@@ -55,6 +55,7 @@ class CourseMistakePayload(BaseModel):
     reviewStage: int | None = Field(default=None, ge=0, le=2, strict=True)
     dueAt: datetime | None = None
     reviewTask: CourseMistakeReviewTaskPayload | None = None
+    rulesReviewedAttempts: int | None = Field(default=None, ge=0, le=100_000, strict=True, exclude_if=lambda value: value is None)
 
 
 class CourseChatMessagePayload(BaseModel):
@@ -308,6 +309,19 @@ class CourseHomeworkGenerateRequest(_CourseBatchGenerateRequest):
 class CourseHomeworkSubmitRequest(BaseModel):
     answer: str = Field(min_length=1, max_length=4_000)
     assessment_mode: Literal["online", "offline"] = "online"
+
+
+class CourseHomeworkQuestionRequest(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    attempt_id: int = Field(ge=1)
+    question: str = Field(min_length=1, max_length=2_000)
+
+
+class CourseHomeworkQuestionResponse(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True, strict=True)
+
+    answer: str = Field(min_length=1, max_length=4_000)
 
 
 class CourseHomeworkAttemptResponse(_ConsistentScoredAttempt):

@@ -1,5 +1,7 @@
 "use client";
 
+import { ReadingAloudExercise } from "./ReadingAloudExercise";
+import type { ReadingPracticeMode } from "../data/readingAloud";
 import { ReadingDictation } from "./ReadingDictation";
 import { useLastCourseTask } from "../hooks/useLastCourseTask";
 
@@ -7,10 +9,10 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 
 import type { CourseModule } from "../data/courseTypes";
 import { buildProgressGenerationContext } from "../data/courseGeneration";
-import { buildCourseGenerationScope, completedCourseModules, completedCourseSections, isCourseGenerationScopeSlug, type CourseGenerationMode } from "../data/courseGenerationScope";
+import { buildCourseGenerationScope, completedCourseModules, completedCourseSections, filterCourseTasks, type CourseGenerationMode } from "../data/courseGenerationScope";
 import { learnedVocabularyContext, learnedVocabularySeeds } from "../data/courseVocabulary";
 import { type LearningMode } from "../data/learningMode";
-import { checkCourseReading, deleteCourseReading, generateCourseReading, getCourseReadings, type CourseReading as Reading, type CourseReadingAttempt } from "../lib/api";
+import { checkCourseReading, deleteCourseReading, generateCourseReading, getCourseReadings, type CourseReading as Reading } from "../lib/api";
 import { generateSequentialBatch } from "../lib/batchGeneration";
 
 type ReadingMode = Exclude<CourseGenerationMode, "mistakes">;
@@ -24,6 +26,7 @@ function readingNoun(count: number): string {
 }
 
 export function CourseReading({ modules, completedLessonSlugs, learningMode, active = true }: { modules: CourseModule[]; completedLessonSlugs: string[]; learningMode: LearningMode; active?: boolean }) {
+  const level = modules[0]?.level === "A2" ? "A2" : "A1";
   const workspaceRef = useRef<HTMLFormElement>(null);
   const completedLessons = modules.flatMap((module) => module.lessons).filter((item) => completedLessonSlugs.includes(item.slug));
   const [mode, setMode] = useState<ReadingMode>("topic");
@@ -36,7 +39,9 @@ export function CourseReading({ modules, completedLessonSlugs, learningMode, act
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const { lastId, remember } = useLastCourseTask("reading", modules[0]?.level === "A2" ? "a2" : "a1");
   const [retelling, setRetelling] = useState("");
-  const [result, setResult] = useState<CourseReadingAttempt | null>(null);
+  const [practiceMode, setPracticeMode] = useState<ReadingPracticeMode>("retelling");
+  const [readAloudId, setReadAloudId] = useState<number | null>(null);
+  const [retellingListening, setRetellingListening] = useState(false);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
   const [batchCount, setBatchCount] = useState(1);
@@ -49,18 +54,20 @@ export function CourseReading({ modules, completedLessonSlugs, learningMode, act
   const storageSlug = scope.storageSlug;
   const visible = items.filter((item) => item.lesson_slug === storageSlug);
   const selected = visible.find((item) => item.id === selectedId) ?? visible[0];
+  useEffect(() => { setReadAloudId(null); }, [selected?.id]);
+  const canRetell = practiceMode === "retelling" || (practiceMode === "aloud-retelling" && readAloudId === selected?.id);
   const lastTask = items.find((item) => item.id === lastId) ?? items[0];
   const selectedIndex = selected ? visible.findIndex((item) => item.id === selected.id) : -1;
   const nextReading = selectedIndex >= 0 ? visible[selectedIndex + 1] : undefined;
   const scopeLessonSlugs = scope.lessons.map((item) => item.slug);
-  const vocabularyContext = learnedVocabularyContext(scope.lessons, scopeLessonSlugs);
-  const vocabularyCount = learnedVocabularySeeds(scope.lessons, scopeLessonSlugs).length;
+  const vocabularyContext = learnedVocabularyContext(scope.lessons, scopeLessonSlugs, level === "A2" ? [] : undefined);
+  const vocabularyCount = learnedVocabularySeeds(scope.lessons, scopeLessonSlugs, level === "A2" ? [] : undefined).length;
 
   useEffect(() => {
     let cancelled = false;
     void getCourseReadings().then((readings) => {
       if (cancelled) return;
-      const available = readings.filter((item) => isCourseGenerationScopeSlug(modules, item.lesson_slug));
+      const available = filterCourseTasks(modules, readings);
       setItems(available); setSelectedId(available[0]?.id ?? null);
     }).catch((cause) => { if (!cancelled) setError(cause instanceof Error ? cause.message : "Не удалось загрузить тексты."); }).finally(() => { if (!cancelled) setLoading(false); });
     return () => { cancelled = true; };
@@ -78,7 +85,8 @@ export function CourseReading({ modules, completedLessonSlugs, learningMode, act
   const openReading = (item: Reading) => {
     remember(item.id);
     setSelectedId(item.id);
-    setResult(item.latest_attempt);
+    if (selected?.id !== item.id) setReadAloudId(null);
+
     if (selected?.id !== item.id) setRetelling("");
     requestAnimationFrame(() => workspaceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
   };
@@ -97,7 +105,7 @@ export function CourseReading({ modules, completedLessonSlugs, learningMode, act
   const generate = async () => {
     if (generating || learningMode === "offline") return;
     const requestedCount = Math.min(20, Math.max(1, Math.trunc(batchCount)));
-    setGenerating(true); setGeneratedCount(0); setGenerationNotice(""); setError(""); setResult(null); setRetelling("");
+    setGenerating(true); setGeneratedCount(0); setGenerationNotice(""); setError(""); setRetelling("");
     try {
       if (!scope.lessons.length) return;
       const theory = buildProgressGenerationContext({ mode, selectedLesson: lesson, completedLessons, mistakeHints: [], scope });
@@ -119,10 +127,10 @@ export function CourseReading({ modules, completedLessonSlugs, learningMode, act
   };
 
   const submit = async (event: FormEvent) => {
-    event.preventDefault(); if (!selected || !retelling.trim()) return;
+    event.preventDefault(); if (!selected || !retelling.trim() || !canRetell || checking || generating || retellingListening) return;
     remember(selected.id);
     setChecking(true); setError("");
-    try { const checked = await checkCourseReading(selected.id, retelling.trim(), learningMode, selected.latest_attempt?.id); setResult(checked); setItems((current) => current.map((item) => item.id === selected.id ? { ...item, latest_attempt: checked } : item)); }
+    try { const checked = await checkCourseReading(selected.id, retelling.trim(), learningMode, selected.latest_attempt?.id); setItems((current) => current.map((item) => item.id === selected.id ? { ...item, latest_attempt: checked } : item)); }
     catch (cause) { setError(cause instanceof Error ? cause.message : "Не удалось проверить пересказ."); }
     finally { setChecking(false); }
   };
@@ -133,20 +141,22 @@ export function CourseReading({ modules, completedLessonSlugs, learningMode, act
     try {
       await deleteCourseReading(item.id);
       setItems((current) => current.filter((reading) => reading.id !== item.id));
-      if (selectedId === item.id) { setSelectedId(null); setResult(null); setRetelling(""); }
+      if (selectedId === item.id) { setSelectedId(null); setRetelling(""); }
     } catch (cause) { setError(cause instanceof Error ? cause.message : "Не удалось удалить текст."); }
   };
 
   return <section className="course-exercises course-reading" aria-labelledby="course-reading-title" data-report-task-type="reading" data-report-task-id={selected?.id} data-report-task-title={selected ? selected.title : undefined} data-report-scope={scope.title}>
-    <div className="course-section-heading"><div><span>Практика понимания</span><h3 id="course-reading-title">Чтение</h3></div><div className={`course-learning-mode ${learningMode}`}><strong>{learningMode === "online" ? "Онлайн" : "Офлайн"}</strong><p>{learningMode === "online" ? "ИИ создаёт тексты и гибко проверяет пересказ." : "Сохранённые тексты проверяются по эталону без обращения к ИИ."}</p></div></div>
+    <div className="course-section-heading"><div><span>Практика понимания</span><h3 id="course-reading-title">Чтение {level}</h3></div><div className={`course-learning-mode ${learningMode}`}><strong>{learningMode === "online" ? "Онлайн" : "Офлайн"}</strong><p>{learningMode === "online" ? "ИИ создаёт тексты и гибко проверяет пересказ." : "Сохранённые тексты проверяются по эталону без обращения к ИИ."}</p></div></div>
     <div className="course-task-navigation">
-    <div className="course-reading-modes" role="group" aria-label="Режим генерации текста">{([['topic', 'По теме'], ['section', 'По разделу'], ['module', 'По модулю'], ['progress', 'По общему прогрессу']] as const).map(([value, label]) => <button key={value} type="button" disabled={generating} className={mode === value ? "active" : ""} onClick={() => { setMode(value); setSelectedId(null); setResult(null); setRetelling(""); }}>{label}</button>)}</div>
+    <div className="course-reading-modes" role="group" aria-label="Режим генерации текста">{([['topic', 'По теме'], ['section', 'По разделу'], ['module', 'По модулю'], ['progress', 'По общему прогрессу']] as const).map(([value, label]) => <button key={value} type="button" disabled={generating} className={mode === value ? "active" : ""} onClick={() => { setMode(value); setSelectedId(null); setRetelling(""); }}>{label}</button>)}</div>
     <button type="button" className="course-task-return" onClick={returnToLastTask} disabled={loading || generating || checking || !lastTask}>Вернуться к последнему заданию</button>
     </div>
-    <div className="course-exercise-toolbar">{mode === "topic" ? <div className="course-generation-selectors"><label><span>Завершённая тема</span><select value={lessonSlug} disabled={!completedLessons.length || generating} onChange={(event) => { setLessonSlug(event.target.value); setSelectedId(null); setResult(null); setRetelling(""); }}>{completedLessons.map((item) => <option value={item.slug} key={item.slug}>{item.title}</option>)}</select></label><small>{vocabularyCount} открытых слов и фраз в выбранной теме.</small></div> : mode === "section" ? <div className="course-generation-selectors"><label><span>Учебный раздел</span><select value={sectionOptions.find(({ key }) => key === sectionKey)?.key ?? ""} disabled={!sectionOptions.length || generating} onChange={(event) => { setSectionKey(event.target.value); setSelectedId(null); setResult(null); setRetelling(""); }}>{sectionOptions.map(({ key, module, section, lessons }) => <option key={key} value={key}>Модуль {module.order} · {section.title} · {lessons.length} тем</option>)}</select></label><small>{vocabularyCount} открытых слов и фраз · только завершённые темы этого раздела.</small></div> : mode === "module" ? <div className="course-generation-selectors"><label><span>Модуль с завершёнными темами</span><select value={scope.module?.slug ?? ""} disabled={!moduleOptions.length || generating} onChange={(event) => { setModuleSlug(event.target.value); setSelectedId(null); setResult(null); setRetelling(""); }}>{moduleOptions.map(({ module, lessons }) => <option key={module.slug} value={module.slug}>Модуль {module.order}. {module.title} · {lessons.length} тем</option>)}</select></label><small>{vocabularyCount} открытых слов и фраз · только завершённые темы модуля.</small></div> : <div className="course-reading-scope"><span>Доступный материал</span><strong>{completedLessons.length} завершённых тем · {vocabularyCount} слов и фраз</strong><small>Используются только завершённые темы.</small></div>}<div className="course-exercise-create"><label className="course-exercise-count"><span>Количество текстов</span><input type="number" min={1} max={20} step={1} value={batchCount} disabled={generating || learningMode === "offline"} onChange={(event) => setBatchCount(Math.min(20, Math.max(1, Math.trunc(Number(event.target.value) || 1))))} /></label><button type="button" onClick={() => void generate()} disabled={generating || !scope.lessons.length || learningMode === "offline"}>{generating ? `Создаю ${generatedCount}/${batchCount}…` : batchCount === 1 ? "Новый текст" : `Создать ${batchCount} ${readingNoun(batchCount)}`}</button>{learningMode === "offline" && <small>Новые тексты создаются только онлайн.</small>}</div></div>
+    <div className="course-exercise-toolbar">{mode === "topic" ? <div className="course-generation-selectors"><label><span>Завершённая тема</span><select value={lessonSlug} disabled={!completedLessons.length || generating} onChange={(event) => { setLessonSlug(event.target.value); setSelectedId(null); setRetelling(""); }}>{completedLessons.map((item) => <option value={item.slug} key={item.slug}>{item.title}</option>)}</select></label><small>{vocabularyCount} открытых слов и фраз в выбранной теме.</small></div> : mode === "section" ? <div className="course-generation-selectors"><label><span>Учебный раздел</span><select value={sectionOptions.find(({ key }) => key === sectionKey)?.key ?? ""} disabled={!sectionOptions.length || generating} onChange={(event) => { setSectionKey(event.target.value); setSelectedId(null); setRetelling(""); }}>{sectionOptions.map(({ key, module, section, lessons }) => <option key={key} value={key}>Модуль {module.order} · {section.title} · {lessons.length} тем</option>)}</select></label><small>{vocabularyCount} открытых слов и фраз · только завершённые темы этого раздела.</small></div> : mode === "module" ? <div className="course-generation-selectors"><label><span>Модуль с завершёнными темами</span><select value={scope.module?.slug ?? ""} disabled={!moduleOptions.length || generating} onChange={(event) => { setModuleSlug(event.target.value); setSelectedId(null); setRetelling(""); }}>{moduleOptions.map(({ module, lessons }) => <option key={module.slug} value={module.slug}>Модуль {module.order}. {module.title} · {lessons.length} тем</option>)}</select></label><small>{vocabularyCount} открытых слов и фраз · только завершённые темы модуля.</small></div> : <div className="course-reading-scope"><span>Доступный материал</span><strong>{completedLessons.length} завершённых тем · {vocabularyCount} слов и фраз</strong><small>Используются только завершённые темы.</small></div>}<div className="course-exercise-create"><label className="course-exercise-count"><span>Количество текстов</span><input type="number" min={1} max={20} step={1} value={batchCount} disabled={generating || learningMode === "offline"} onChange={(event) => setBatchCount(Math.min(20, Math.max(1, Math.trunc(Number(event.target.value) || 1))))} /></label><button type="button" onClick={() => void generate()} disabled={generating || !scope.lessons.length || learningMode === "offline"}>{generating ? `Создаю ${generatedCount}/${batchCount}…` : batchCount === 1 ? "Новый текст" : `Создать ${batchCount} ${readingNoun(batchCount)}`}</button>{learningMode === "offline" && <small>Новые тексты создаются только онлайн.</small>}</div></div>
     {!completedLessons.length && <p className="course-empty">Завершите хотя бы одну тему, чтобы создавать тексты.</p>}
     {generationNotice && <p className="course-generation-notice" role="status">{generationNotice}</p>}
     {error && <p className="course-persistence-error" role="alert">{error}</p>}
-    {loading ? <p>Загружаю тексты…</p> : <div className="course-exercise-grid"><aside className="course-exercise-list"><strong>Сохранённые тексты</strong>{visible.length ? visible.map((item) => <article className={selected?.id === item.id ? "active" : ""} key={item.id}><button type="button" onClick={() => openReading(item)}><span>{item.lesson_title}</span><b>{item.title}</b>{item.latest_attempt && <small>Пересказ: {item.latest_attempt.score}/100</small>}</button><button type="button" className="delete" onClick={() => void remove(item)} aria-label={`Удалить текст: ${item.title}`}>Удалить</button></article>) : <p>Текстов по этой теме пока нет.</p>}</aside><form ref={workspaceRef} className="course-exercise-workspace" onSubmit={(event) => void submit(event)}>{selected ? <><span>{selected.lesson_title}</span><h4>{selected.title}</h4><p className="course-reading-text" lang="sk">{selected.text}</p><small>{selected.instruction}</small><ReadingDictation key={selected.id} active={active && !generating} disabled={checking} onText={(text) => setRetelling((current) => current + (current && !/\s$/.test(current) ? " " : "") + text)} /><textarea rows={6} value={retelling} onChange={(event) => setRetelling(event.target.value)} placeholder="Напишите по-русски, о чём этот текст…" disabled={checking} /><button type="submit" disabled={!retelling.trim() || checking || (learningMode === "offline" && !selected.offline_ready)}>{checking ? "Проверяю…" : learningMode === "offline" ? "Проверить офлайн" : "Проверить пересказ"}</button>{learningMode === "offline" && !selected.offline_ready && <small>У старого текста нет эталона. Для него нужна онлайн-проверка.</small>}{(result ?? selected.latest_attempt) && (() => { const checked = result ?? selected.latest_attempt!; return <><article className={checked.score >= 70 ? "correct" : "incorrect"}><strong>Результат: {checked.score}/100</strong><p>{checked.feedback}</p><p><b>Хороший вариант:</b> {checked.corrected_retelling}</p></article><button type="button" className="course-task-next" disabled={!nextReading} onClick={() => nextReading && openReading(nextReading)}>{nextReading ? "Следующий текст →" : "Это последний текст"}</button></>; })()}</> : <div className="course-empty"><strong>Выберите или создайте текст</strong><p>Текст будет ограничен грамматикой выбранной и предыдущих тем.</p></div>}</form></div>}
+    {loading ? <p>Загружаю тексты…</p> : <div className="course-exercise-grid"><aside className="course-exercise-list"><strong>Сохранённые тексты {level}</strong>{visible.length ? visible.map((item) => <article className={selected?.id === item.id ? "active" : ""} key={item.id}><button type="button" onClick={() => openReading(item)}><span>{item.lesson_title}</span><b>{item.title}</b>{item.latest_attempt && <small>Пересказ: {item.latest_attempt.score}/100</small>}</button><button type="button" className="delete" onClick={() => void remove(item)} aria-label={`Удалить текст: ${item.title}`}>Удалить</button></article>) : <p>Текстов по этой теме пока нет.</p>}</aside><form ref={workspaceRef} className="course-exercise-workspace" onSubmit={(event) => void submit(event)}>{selected ? <><span>{selected.lesson_title}</span><h4>{selected.title}</h4><p className="course-reading-text" lang="sk">{selected.text}</p><div className="course-reading-practice-modes" role="group" aria-label="Вариант упражнения">{([["retelling", "Пересказ по-русски"], ["aloud", "Чтение вслух"], ["aloud-retelling", "Прочитать и пересказать"]] as const).map(([value, label]) => <button type="button" key={value} aria-pressed={practiceMode === value} disabled={checking || generating} onClick={() => { if (practiceMode !== value) { setPracticeMode(value); setReadAloudId(null); } }}>{label}</button>)}</div>
+      {practiceMode !== "retelling" && !canRetell && <ReadingAloudExercise key={`${selected.id}:${practiceMode}`} text={selected.text} active={active && !generating} disabled={checking} combined={practiceMode === "aloud-retelling"} onContinue={() => setReadAloudId(selected.id)} />}
+      {canRetell && <section className="reading-practice-card reading-retelling-exercise" aria-label="Пересказ по-русски"><h5>{practiceMode === "aloud-retelling" ? "Шаг 2 из 2. Перескажите по-русски" : "Перескажите текст по-русски"}</h5><p>{selected.instruction}</p>{practiceMode === "aloud-retelling" && <button type="button" disabled={checking || generating} onClick={() => setReadAloudId(null)}>Вернуться к чтению вслух</button>}{level === "A2" && <p>В пересказе передайте участников, последовательность событий, причину и итог. При онлайн-проверке учитываются смысловые связи; оговорки диктовки сами по себе не снижают оценку.</p>}<ReadingDictation key={selected.id} active={active && !generating} disabled={checking} onListeningChange={setRetellingListening} onText={(text) => setRetelling((current) => current + (current && !/\s$/.test(current) ? " " : "") + text)} /><textarea rows={6} value={retelling} onChange={(event) => setRetelling(event.target.value)} placeholder="Напишите по-русски, о чём этот текст…" disabled={checking} /><button type="submit" className="reading-submit-button" disabled={!retelling.trim() || checking || generating || retellingListening || (learningMode === "offline" && !selected.offline_ready)}>{checking ? "Проверяю…" : learningMode === "offline" ? "Проверить офлайн" : "Проверить пересказ"}</button>{learningMode === "offline" && !selected.offline_ready && <small>У старого текста нет эталона. Для него нужна онлайн-проверка.</small>}{selected.latest_attempt && (() => { const checked = selected.latest_attempt!; return <><article className={checked.score >= 70 ? "correct" : "incorrect"}><strong>Результат: {checked.score}/100</strong><p>{checked.feedback}</p><p><b>Хороший вариант:</b> {checked.corrected_retelling}</p></article><button type="button" className="course-task-next" disabled={!nextReading} onClick={() => nextReading && openReading(nextReading)}>{nextReading ? "Следующий текст →" : "Это последний текст"}</button></>; })()}</section>}</> : <div className="course-empty"><strong>Выберите или создайте текст</strong><p>Текст будет ограничен грамматикой выбранной и предыдущих тем.</p></div>}</form></div>}
   </section>;
 }

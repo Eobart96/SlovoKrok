@@ -12,13 +12,15 @@ type Recognition = {
 };
 type RecognitionConstructor = new () => Recognition;
 
-export function ReadingDictation({ active, disabled, onText }: { active: boolean; disabled: boolean; onText: (text: string) => void }) {
+export function ReadingDictation({ active, disabled, onText, language = "ru-RU", onListeningChange }: { active: boolean; disabled: boolean; onText: (text: string) => void; language?: "ru-RU" | "sk-SK"; onListeningChange?: (listening: boolean) => void }) {
   const [supported, setSupported] = useState<boolean | null>(null);
   const [listening, setListening] = useState(false);
   const [message, setMessage] = useState("");
   const recognition = useRef<Recognition | null>(null);
   const appendText = useRef(onText);
   appendText.current = onText;
+  const slovak = language === "sk-SK";
+  useEffect(() => { onListeningChange?.(listening); }, [listening, onListeningChange]);
   const cancel = () => {
     const instance = recognition.current;
     recognition.current = null;
@@ -30,8 +32,8 @@ export function ReadingDictation({ active, disabled, onText }: { active: boolean
     return cancel;
   }, []);
   useEffect(() => {
-    if (!active || disabled) { cancel(); setListening(false); }
-  }, [active, disabled]);
+    cancel(); setListening(false);
+  }, [active, disabled, language]);
   const toggle = () => {
     if (recognition.current) { recognition.current.stop(); return; }
     const browser = window as Window & { SpeechRecognition?: RecognitionConstructor; webkitSpeechRecognition?: RecognitionConstructor };
@@ -39,7 +41,7 @@ export function ReadingDictation({ active, disabled, onText }: { active: boolean
     if (!Constructor || disabled || !active) return;
     const instance = new Constructor();
     const processed = new Set<number>();
-    instance.lang = "ru-RU"; instance.continuous = true; instance.interimResults = false;
+    instance.lang = language; instance.continuous = true; instance.interimResults = false;
     recognition.current = instance;
     instance.onresult = (event) => {
       if (recognition.current !== instance) return;
@@ -53,7 +55,8 @@ export function ReadingDictation({ active, disabled, onText }: { active: boolean
       if (phrases.length) appendText.current(phrases.join(" "));
     };
     instance.onerror = (event) => {
-      const errors: Record<string, string> = { "not-allowed": "Разрешите браузеру доступ к микрофону для голосового ввода.", "service-not-allowed": "Браузер не разрешает распознавание речи.", "audio-capture": "Микрофон не найден или занят другим приложением.", "no-speech": "Речь не распознана. Попробуйте ещё раз.", network: "Не удалось подключиться к распознаванию речи. Проверьте интернет." };
+      if (recognition.current !== instance) return;
+      const errors: Record<string, string> = { "not-allowed": "Разрешите браузеру доступ к микрофону для голосового ввода.", "service-not-allowed": "Браузер не разрешает распознавание речи.", "language-not-supported": "Браузер не поддерживает распознавание выбранного языка. Прочитайте текст вслух самостоятельно.", "audio-capture": "Микрофон не найден или занят другим приложением.", "no-speech": "Речь не распознана. Попробуйте ещё раз.", network: "Не удалось подключиться к распознаванию речи. Проверьте интернет." };
       setMessage(errors[event.error] ?? "Голосовой ввод прервался. Можно продолжить вводить текст вручную.");
     };
     instance.onend = () => { if (recognition.current === instance) { recognition.current = null; setListening(false); } };
@@ -62,7 +65,7 @@ export function ReadingDictation({ active, disabled, onText }: { active: boolean
     catch { cancel(); setListening(false); setMessage("Не удалось включить микрофон. Попробуйте ещё раз."); }
   };
   return <div className="course-reading-dictation">
-    <button type="button" onClick={toggle} disabled={disabled || !active || !supported} aria-pressed={listening}><span aria-hidden="true">{listening ? "■" : "🎙"}</span> {listening ? "Остановить диктовку" : "Надиктовать пересказ"}</button>
-    <small role="status" aria-live="polite">{message || (supported === false ? "Этот браузер не поддерживает голосовой ввод. Пересказ можно написать вручную." : listening ? "Слушаю по-русски… Текст добавляется в поле ответа." : "Голосовой ввод на русском. Браузер запросит микрофон; для распознавания может требоваться интернет.")}</small>
+    <button type="button" onClick={toggle} disabled={disabled || !active || !supported} aria-pressed={listening}><span aria-hidden="true">{listening ? "■" : "🎙"}</span> {listening ? "Остановить запись" : slovak ? "Читать вслух по-словацки" : "Надиктовать пересказ"}</button>
+    <small role="status" aria-live="polite">{message || (supported === false ? slovak ? "Этот браузер не поддерживает голосовой ввод. Прочитайте текст вслух самостоятельно." : "Этот браузер не поддерживает голосовой ввод. Пересказ можно написать вручную." : listening ? slovak ? "Слушаю по-словацки… Распознанные слова появятся ниже." : "Слушаю по-русски… Текст добавляется в поле ответа." : `Голосовой ввод на ${slovak ? "словацком" : "русском"}. Браузер запросит микрофон; для распознавания может требоваться интернет. Звук может передаваться службе распознавания браузера.`)}</small>
   </div>;
 }

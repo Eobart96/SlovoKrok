@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import { a1CourseModules } from "../data/a1Course";
 import type { CourseModule } from "../data/courseTypes";
+import { includesA1Vocabulary } from "../data/courseLevelState";
 import { ankiVocabularyText, learnedVocabularySeeds, vocabularyExportContent, type VocabularyExportDirection, type VocabularyExportFormat } from "../data/courseVocabulary";
 import { isSentenceVocabularyItem, isTranslatorVocabularySource, translatorVocabularyUpdatedEvent } from "../data/translationVocabulary";
 import { filterKnownLessonSlugs } from "../data/courseEngine";
@@ -13,7 +14,7 @@ import { reviewCourseVocabulary, syncCourseVocabulary, type CourseVocabularyItem
 export function contentVocabulary(completedLessonSlugs: string[], modules: CourseModule[] = a1CourseModules): CourseVocabularySeed[] {
   const lessons = modules.flatMap((module) => module.lessons);
   const completed = filterKnownLessonSlugs(modules, completedLessonSlugs);
-  return modules.every((module) => module.level === "A1")
+  return includesA1Vocabulary(modules)
     ? learnedVocabularySeeds(lessons, completed)
     : learnedVocabularySeeds(lessons, completed, []);
 }
@@ -27,7 +28,7 @@ function safeFilenamePart(value: string): string {
 }
 
 export function CourseVocabulary({ modules, completedLessonSlugs }: { modules: CourseModule[]; completedLessonSlugs: string[] }) {
-  const level = modules[0]?.level.toLocaleLowerCase() ?? "a1";
+  const level = includesA1Vocabulary(modules) ? "a1" : "a2";
   const [items, setItems] = useState<CourseVocabularyItem[]>([]);
   const [filter, setFilter] = useState("");
   const [visibleLimit, setVisibleLimit] = useState(200);

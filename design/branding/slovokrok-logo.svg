@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="300" viewBox="0 0 1080 300" role="img" aria-labelledby="title desc">
+  <title id="title">SlovoKrok</title>
+  <desc id="desc">Речевое облако со ступеньками и словацким гербом. Редактируемая векторная перерисовка логотипа.</desc>
+  <!-- Editable vector reconstruction, not an automatic trace of the generated PNG. -->
+  <g id="speech-bubble" fill="none" stroke="#0B4EA2" stroke-width="23" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M95 49 H204 C249 49 277 78 277 118 V174 C277 210 249 234 211 234 H102 L66 263 L76 228 C43 216 31 193 31 160 V120 C31 76 53 49 95 49 Z"/>
+  </g>
+  <g id="stairs">
+    <path fill="#EE1C25" d="M90 227 V199 Q90 188 102 188 H167 V217 Q167 227 155 227 Z"/>
+    <path fill="#0B4EA2" d="M135 188 V165 Q135 153 147 153 H214 V227 H155 Q167 227 167 217 V188 Z"/>
+    <path fill="#fff" stroke="#0B4EA2" stroke-width="3" d="M184 153 V132 Q184 122 196 122 H264 V144 Q264 156 252 156 H202 L184 166 Z"/>
+    <path fill="#0B4EA2" d="M202 156 H266 V185 Q266 224 229 227 H202 Z"/>
+  </g>
+  <g id="slovak-emblem" transform="translate(72 83)">
+    <path fill="#EE1C25" stroke="#fff" stroke-width="3" d="M0 0 H66 L69 41 C69 61 59 75 33 88 C7 75 -3 61 -3 41 Z"/>
+    <clipPath id="shield-clip"><path d="M0 0 H66 L69 41 C69 61 59 75 33 88 C7 75 -3 61 -3 41 Z"/></clipPath>
+    <g clip-path="url(#shield-clip)">
+      <path fill="#fff" d="M29 7 H37 V21 L49 19 V27 L37 25 V37 L53 35 V44 L37 42 V64 H29 V42 L13 44 V35 L29 37 V25 L17 27 V19 L29 21 Z"/>
+      <path fill="#0B4EA2" d="M-3 72 C0 52 15 51 22 59 C25 46 41 46 45 59 C54 50 68 55 72 72 V92 H-3 Z"/>
+    </g>
+  </g>
+  <!-- Text remains editable. Font appearance depends on installed fonts. -->
+  <text id="wordmark" x="309" y="218" font-family="Arial Rounded MT Bold, Nunito, Arial, sans-serif" font-size="139" font-weight="700" letter-spacing="-5"><tspan fill="#0B4EA2">Slovo</tspan><tspan fill="#EE1C25">Krok</tspan></text>
+</svg>

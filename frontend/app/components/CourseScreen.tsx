@@ -7,11 +7,11 @@ import { a1CourseModules } from "../data/a1Course";
 import { coursePositionCatalog } from "../data/coursePositionCatalog";
 import { createLazyCourseLoader } from "../data/lazyCourseLoader";
 import { getCourseModule } from "../data/courseEngine";
-import { isCourseGenerationScopeSlug } from "../data/courseGenerationScope";
+import { clearCourseMistakes, filterCourseMistakes } from "../data/courseGenerationScope";
 import type { CourseLevel } from "../data/courseLevelState";
 import { orderedModuleLessons as getOrderedModuleLessons } from "../data/courseEngine";
 import { type CourseLesson, type CourseModule } from "../data/courseTypes";
-import { nextMistakeRecord } from "../data/courseProgress";
+import { completeMistakeReview, nextMistakeRecord } from "../data/courseProgress";
 import { taskMistakeSource, type TaskMistakeInput, type TaskOpenRequest } from "../data/taskMistakes";
 import { learningModeStorageKey, readLearningMode, type LearningMode } from "../data/learningMode";
 import { useCourseProgressController } from "../hooks/useCourseProgressController";
@@ -20,6 +20,7 @@ import { CourseListening } from "./CourseListening";
 import { CourseMaterialView } from "./CourseMaterialView";
 import { CourseReinforcementView } from "./CourseReinforcementView";
 import { CourseTopicsView } from "./CourseTopicsView";
+import { markTopicRulesReviewed } from "../data/frequentMistakeTopics";
 import { CourseFinalView, CourseReviewView } from "./CourseProgressViews";
 import { emptyLearnerProfile, getLearnerProfile } from "../lib/api";
 import { personalizeModule } from "../data/personalizeCourse";
@@ -94,7 +95,7 @@ function CourseScreenContent({ requestedArea = "learning", onAreaChange, setting
 
   const courseModules = courseCatalog[activeLevel];
   const courseLessons = courseModules.flatMap((module) => module.lessons);
-  const levelMistakes = Object.fromEntries(Object.entries(mistakes).filter(([, mistake]) => isCourseGenerationScopeSlug(courseModules, mistake.lessonSlug)));
+  const levelMistakes = filterCourseMistakes(courseModules, mistakes);
   const activeCourseModule = useMemo(() => personalizeModule(getCourseModule(courseModules, activeModule), learnerProfile), [courseModules, activeModule, learnerProfile]);
   const orderedModuleLessons = useMemo(() => getOrderedModuleLessons(activeCourseModule), [activeCourseModule]);
   const displayLessonNumber = (lesson: CourseLesson): number => orderedModuleLessons.findIndex((item) => item.slug === lesson.slug) + 1;
@@ -107,7 +108,7 @@ function CourseScreenContent({ requestedArea = "learning", onAreaChange, setting
   const allLessonsCompleted = completedCount === activeCourseModule.lessons.length;
   const generatedMistakeHints = Object.values(levelMistakes).filter((mistake) => !mistake.mastered).map((mistake) => ({ lessonSlug: mistake.lessonSlug, text: `${mistake.prompt}: ${mistake.answer}` }));
   const mistakesDisabled = session.readOnly || Boolean(persistenceError);
-  const recordedMistakeIds = Object.values(mistakes).filter((mistake) => !mistake.mastered).map((mistake) => mistake.id);
+  const recordedMistakeIds = Object.values(levelMistakes).filter((mistake) => !mistake.mastered).map((mistake) => mistake.id);
   const recordTaskMistake = (input: TaskMistakeInput) => {
     if (mistakesDisabled) return;
     session.setMistakes((current) => {
@@ -116,14 +117,12 @@ function CourseScreenContent({ requestedArea = "learning", onAreaChange, setting
       return record ? { ...current, [input.id]: { ...record, ...(input.reviewTask ? { reviewTask: input.reviewTask } : {}) } } : current;
     });
   };
-  const checkTaskMistake = (id: string, correct: boolean, independent = true) => {
+  const checkTaskMistake = (id: string, correct: boolean, reviewTask?: TaskMistakeInput["reviewTask"]) => {
     if (mistakesDisabled) return;
     session.setMistakes((current) => {
       const previous = current[id];
       if (!previous) return current;
-      if (correct && !independent && (previous.reviewStage ?? 0) > 0) return current;
-      const record = nextMistakeRecord({ ...previous, previous, correct, nowMs: Date.now() });
-      return record ? { ...current, [id]: record } : current;
+      return { ...current, [id]: { ...completeMistakeReview(previous, correct, Date.now()), ...(!correct && reviewTask ? { reviewTask } : {}) } };
     });
   };
   const openTaskMistake = (id: string) => {
@@ -268,7 +267,7 @@ function CourseScreenContent({ requestedArea = "learning", onAreaChange, setting
       </nav>}
 
       {view === "topics" && <CourseTopicsView
-        model={{ module: activeCourseModule, lessons: orderedModuleLessons, selectedGroupId: topicGroup, progress, mistakeCount: Object.keys(mistakes).length, activeMistakeCount: activeMistakes.length, finalCompleted, finalPassed, finalScore, finalQuestionCount: finalQuestions.length, completedCount, accuracy, correctPracticeCount, totalPracticeCount }}
+        model={{ module: activeCourseModule, lessons: orderedModuleLessons, selectedGroupId: topicGroup, progress, mistakeCount: Object.keys(levelMistakes).length, activeMistakeCount: activeMistakes.length, finalCompleted, finalPassed, finalScore, finalQuestionCount: finalQuestions.length, completedCount, accuracy, correctPracticeCount, totalPracticeCount }}
         actions={{
           selectGroup: setTopicGroup,
           openLesson: openMaterial,
@@ -306,8 +305,8 @@ function CourseScreenContent({ requestedArea = "learning", onAreaChange, setting
         }}
       />}
       <div hidden={view !== "review"}><CourseReviewView
-        learningMode={learningMode} disabled={mistakesDisabled} onChecked={checkTaskMistake}
-        key={activeLevel} model={{ mistakes: levelMistakes, modules: courseModules }}
+        learningMode={learningMode} disabled={mistakesDisabled} onChecked={checkTaskMistake} onRulesReviewed={(lessonSlug) => { if (!mistakesDisabled) session.setMistakes((current) => markTopicRulesReviewed(current, lessonSlug)); }}
+        key={activeLevel} model={{ mistakes: levelMistakes, modules: courseModules, savedAnswers: { ...finalSelections, ...checkSelections, ...practiceAnswers }, level: activeLevel }}
         actions={{ openTask: openTaskMistake, openTheory: (targetModule, lesson) => { setManualPreview(null); setActiveModule(targetModule.order); setSelectedSlug(lesson.slug); session.setLessonSteps((current) => ({ ...current, [lesson.slug]: 0 })); setTopicGroup("root"); openTestView("material"); }, openMistake: (targetModule, lesson, mistake) => { setManualPreview(null); setActiveModule(targetModule.order); setTopicGroup("root"); progressController.actions.openMistake(lesson, mistake); openTestView("material"); }, back: () => { setView("topics"); onAreaChange?.("learning"); } }}
       /></div>
       {view === "final" && <CourseFinalView
@@ -328,7 +327,7 @@ function CourseScreenContent({ requestedArea = "learning", onAreaChange, setting
         progress={progress}
         practiceResults={practiceResults}
         checkSelections={checkSelections}
-        mistakes={mistakes}
+        mistakes={levelMistakes}
         summaries={lessonSummaries}
         completedCount={completedCount}
         accuracy={accuracy}
@@ -368,7 +367,7 @@ function CourseScreenContent({ requestedArea = "learning", onAreaChange, setting
       onSettingsSectionChange={changeSettingsSection}
       appearance={<div className="course-test-grid course-settings-appearance"><CourseAppearanceControls session={session} showTitle={false} themeControl={themeControl} /></div>}
       tasks={<CourseTasksManager onChanged={() => setMaterialRevision((current) => current + 1)} />}
-      mistakes={<div className="course-mistake-settings"><p>Сохранено ошибок: {Object.keys(mistakes).length}. Удаление очистит активные и закреплённые ошибки и план повторения. Прогресс уроков, ответы и задания сохранятся.</p><button type="button" disabled={session.readOnly || Boolean(persistenceError) || !Object.keys(mistakes).length} onClick={() => { if (!session.readOnly && !persistenceError && window.confirm("Удалить все сохранённые ошибки и план повторения? Прогресс уроков и задания останутся. Отменить удаление можно только восстановлением резервной копии.")) session.setMistakes({}); }}>Удалить все ошибки</button>{persistenceError && <p role="alert">Сначала устраните ошибку сохранения курса.</p>}</div>}
+      mistakes={<div className="course-mistake-settings"><p>Сохранено ошибок {activeLevel}: {Object.keys(levelMistakes).length}. Удаление очистит активные и закреплённые ошибки и план повторения только уровня {activeLevel}. Прогресс уроков, ответы и задания сохранятся.</p><button type="button" disabled={session.readOnly || Boolean(persistenceError) || !Object.keys(levelMistakes).length} onClick={() => { if (!session.readOnly && !persistenceError && window.confirm(`Удалить ошибки и план повторения только уровня ${activeLevel}? Ошибки другого уровня, прогресс уроков и задания останутся. Отменить удаление можно только восстановлением резервной копии.`)) session.setMistakes((current) => clearCourseMistakes(courseModules, current)); }}>Удалить ошибки {activeLevel}</button>{persistenceError && <p role="alert">Сначала устраните ошибку сохранения курса.</p>}</div>}
       backup={<CourseBackupPanel session={session} onRestored={() => { setMaterialRevision((current) => current + 1); setManualPreview(null); setTopicGroup("root"); setExerciseOpenRequest(null); setHomeworkOpenRequest(null); setView("topics"); onAreaChange?.("learning"); }} open={settingsSections.backup} onOpenChange={(open) => changeSettingsSection("backup", open)} />}
       developmentTools={developmentMode ? <CourseTestPanel session={session} lessons={orderedModuleLessons} lesson={selectedLesson}
         open={settingsSections.development}

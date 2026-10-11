@@ -87,7 +87,7 @@ test("progress and vocabulary ignore unknown or duplicate lesson slugs", () => {
   const knownSlug = allA1Lessons[0].slug;
   expect(Object.keys(buildInitialProgress(a1CourseModules))).toEqual(allA1Lessons.map((lesson) => lesson.slug));
   expect(filterKnownLessonSlugs(a1CourseModules, [knownSlug, "removed-lesson", knownSlug])).toEqual([knownSlug]);
-  expect(contentVocabulary([knownSlug, "removed-lesson"]).every((item) => item.lesson_slug === knownSlug)).toBe(true);
+  expect(contentVocabulary([knownSlug, "removed-lesson", knownSlug])).toEqual(contentVocabulary([knownSlug]));
   expect(contentVocabulary([knownSlug])).not.toHaveLength(0);
 });
 

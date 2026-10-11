@@ -75,7 +75,7 @@ preskočí rovnaké úlohy a zachová pokrok.
 - Voliteľný profil na prispôsobenie príkladov; nastavenie témy a veľkosti textu.
 - Hlásenia chýb s kontextom obrazovky, snímkou obrazovky, exportom ZIP a vymazaním zoznamu.
 - Prenos úloh cez JSON, správa úloh a zálohovanie pokroku.
-- 72 študijných PDF A2; dostupných je 31 tém: celé moduly 1–3 a témy 4.1–4.3 modulu 4: prechod na A2, slovesný vid, slovosled, súvislá reč, pády, opis a množstvo. Názvy modulov sú anglické; vysvetlenia zostávajú ruské. Úroveň A1/A2 sa vyberá v nastaveniach; obe úrovne majú rovnaké rozloženie hlavičky. Ručné schválenie nových tém prebehne neskôr spoločne.
+- 72 študijných PDF A2; dostupných je 48 tém v celých moduloch 1–5. Modul 5 obsahuje spojky, sprostredkovanie správy so že, vzťažné vety s ktorý, nepriame otázky, príčinu a následok, čas a reálnu podmienku aj súvislé rozprávanie. Názvy modulov sú anglické; vysvetlenia zostávajú ruské. Úroveň A1/A2 sa vyberá v nastaveniach; obe úrovne majú rovnaké rozloženie hlavičky. Ručné schválenie nových tém prebehne neskôr spoločne.
 
 Sekcie: učenie → prehľady pravidiel → cvičenia → domáce úlohy → čítanie → chyby
 → slovíčka. Rozhranie a výučbové vysvetlenia sú zatiaľ v ruštine.

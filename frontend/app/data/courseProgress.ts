@@ -3,11 +3,19 @@ import { scoreLessonUnderstanding } from "./courseScoring.ts";
 import type { MistakeReviewTask } from "./taskMistakes.ts";
 import { type CourseLesson, type LessonStatus, type StepPractice } from "./courseTypes.ts";
 
-export type MistakeRecord = { id: string; lessonSlug: string; prompt: string; answer: string; attempts: number; mastered: boolean; reviewStage?: number; dueAt?: string; reviewTask?: MistakeReviewTask | null };
+export type MistakeRecord = { id: string; lessonSlug: string; prompt: string; answer: string; attempts: number; mastered: boolean; reviewStage?: number; dueAt?: string; reviewTask?: MistakeReviewTask | null; rulesReviewedAttempts?: number | null };
 export type LessonSummary = { understanding: number; level: string; strengths: string[]; mistakes?: string[]; review: string[]; userTurns: number; evidence?: { coreCorrect: number; coreTotal: number } };
 export type FinalQuestionForMistakes = { id: string; lessonSlug: string; question: string; answer: string };
 
 const dayMs = 86400000;
+
+// A checked correction completes the work on this error immediately. Keep its
+// attempt history for course statistics, but exclude it from active reviews.
+export function completeMistakeReview(previous: MistakeRecord, correct: boolean, nowMs: number): MistakeRecord {
+  if (!correct) return nextMistakeRecord({ ...previous, previous, correct, nowMs })!;
+  const { dueAt: _dueAt, ...record } = previous;
+  return { ...record, mastered: true, reviewStage: 2 };
+}
 
 export type CourseResetScope = { lessonSlugs: Set<string>; activityIds: Set<string> };
 
@@ -50,6 +58,7 @@ export function nextMistakeRecord({ previous, id, lessonSlug, prompt, answer, co
     reviewStage: nextStage,
     dueAt: new Date(nowMs + (correct ? (nextStage === 1 ? 3 : 7) * dayMs : 0)).toISOString(),
     ...(previous?.reviewTask ? { reviewTask: previous.reviewTask } : {}),
+    ...(previous?.rulesReviewedAttempts != null ? { rulesReviewedAttempts: previous.rulesReviewedAttempts } : {}),
   };
 }
 

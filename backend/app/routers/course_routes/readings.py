@@ -85,7 +85,7 @@ def check_reading(reading_id: int, request: CourseReadingCheckRequest, db: Sessi
         )
     else:
         checked = invoke_tutor(lambda: parse_ai_json(
-            provider.respond(build_reading_check_context(text=reading.text, retelling=request.retelling)),
+            provider.respond(build_reading_check_context(text=reading.text, retelling=request.retelling, level=course_level_for_slug(reading.lesson_slug))),
             CourseReadingCheckResult,
         ))
     attempt = CourseReadingAttempt(reading_id=reading.id, retelling=request.retelling, score=checked.score, feedback=checked.feedback, corrected_retelling=checked.corrected_retelling)

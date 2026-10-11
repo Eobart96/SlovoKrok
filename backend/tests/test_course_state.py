@@ -82,7 +82,7 @@ def test_strict_nested_state_round_trip_preserves_supported_fields(client):
         "m1": {
             "id": "m1", "lessonSlug": "greetings", "prompt": "Pozdravte.",
             "answer": "Dobrý deň.", "attempts": 2, "mastered": False,
-            "reviewStage": 1, "dueAt": "2026-09-20T12:00:00Z",
+            "reviewStage": 1, "dueAt": "2026-09-20T12:00:00Z", "rulesReviewedAttempts": 2,
         }
     }
     payload["chatHistories"] = {
@@ -104,6 +104,7 @@ def test_strict_nested_state_round_trip_preserves_supported_fields(client):
     restored = client.get("/api/v1/course/state").json()
     assert restored["revision"] == saved.json()["revision"]
     assert restored["state"]["mistakes"]["m1"]["attempts"] == 2
+    assert restored["state"]["mistakes"]["m1"]["rulesReviewedAttempts"] == 2
     assert restored["state"]["chatHistories"]["greetings"][0]["suggestions"] == ["Volám sa Anna."]
     assert restored["state"]["lessonSummaries"]["greetings"]["evidence"]["coreTotal"] == 5
 

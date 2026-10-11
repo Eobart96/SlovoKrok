@@ -49,7 +49,7 @@ def test_backup_roundtrip_preserves_relationships_and_existing_data(client):
     state["mistakes"] = {
         "m1": {
             "id": "m1", "lessonSlug": "greetings", "prompt": "Pozdravte.",
-            "answer": "Dobrý deň.", "attempts": 1, "mastered": False,
+            "answer": "Dobrý deň.", "attempts": 1, "mastered": False, "rulesReviewedAttempts": 1,
         }
     }
     client.put("/api/v1/course/state", json=state, headers=current_state_headers(client)).raise_for_status()
@@ -88,6 +88,7 @@ def test_backup_roundtrip_preserves_relationships_and_existing_data(client):
     assert len(after["tables"]["translation_questions"]) == 1
     assert after["state"]["personalCheatSheets"][0]["title"] == "Моё правило"
     assert after["state"]["mistakes"]["m1"]["answer"] == "Dobrý deň."
+    assert after["state"]["mistakes"]["m1"]["rulesReviewedAttempts"] == 1
     assert after["state"]["activeLevel"] == "A2"
     assert after["state"]["finalCompletedModules"] == {"a1:1": True, "a2:2": False}
 

@@ -1,4 +1,8 @@
 export type CourseLevel = "A1" | "A2";
+
+export function includesA1Vocabulary(modules: readonly { level: string }[]): boolean {
+  return modules.length > 0 && modules.every((module) => module.level === "A1" || module.level === "Slovak A1");
+}
 export type CoursePosition = { activeModule: number; selectedSlug: string };
 export type CoursePositions = Partial<Record<CourseLevel, CoursePosition>>;
 

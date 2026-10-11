@@ -16,7 +16,7 @@ type SlovakTextInputProps = {
 
 export function SlovakKeyboard({ onInsert, disabled = false }: SlovakKeyboardProps) {
   const [capsLock, setCapsLock] = useState(false);
-  return <div className="native-keyboard" aria-label="Словацкие буквы">
+  return <div className="native-keyboard" aria-label="Словацкие буквы" onMouseDown={(event) => { if (event.button === 0) event.preventDefault(); }}>
     <button className={`native-keyboard-caps ${capsLock ? "active" : ""}`} type="button" aria-pressed={capsLock} onClick={() => setCapsLock((value) => !value)} disabled={disabled}>Caps Lock</button>
     {slovakKeys.map((key) => <button key={key} type="button" onClick={(event) => onInsert(event.shiftKey || capsLock ? key.toUpperCase() : key)} disabled={disabled}>{capsLock ? key.toUpperCase() : key}</button>)}
   </div>;

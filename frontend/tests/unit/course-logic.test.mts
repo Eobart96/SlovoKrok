@@ -1,5 +1,104 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { frequentMistakeTopics, markTopicRulesReviewed, needsTopicRuleReview } from "../../app/data/frequentMistakeTopics.ts";
+
+test("reviewed rules hide a topic until three new mistakes, without mastering answers", () => {
+  const record = { id: "repeat", lessonSlug: "topic", attempts: 3, mastered: false, prompt: "Prompt", answer: "Answer" };
+  const mistakes = { repeat: record, other: { ...record, id: "other", lessonSlug: "other" } };
+  const reviewed = markTopicRulesReviewed(mistakes, "topic");
+  assert.equal(reviewed.repeat.rulesReviewedAttempts, 3);
+  assert.equal(reviewed.repeat.mastered, false);
+  assert.equal(record.attempts, 3);
+  assert.equal(reviewed.other, mistakes.other);
+  assert.equal(needsTopicRuleReview(reviewed, "topic"), false);
+  assert.deepEqual(frequentMistakeTopics(reviewed, new Set(["topic"])), []);
+  let current = reviewed.repeat;
+  for (let count = 1; count <= 3; count++) {
+    current = nextMistakeRecord({ ...current, previous: current, correct: false, nowMs: count })!;
+    assert.equal(current.rulesReviewedAttempts, 3);
+    assert.equal(needsTopicRuleReview({ repeat: current }, "topic"), count === 3);
+  }
+  const single = { repeat: { ...record, attempts: 1 } };
+  assert.deepEqual(frequentMistakeTopics(single, new Set(["topic"])), []);
+  assert.deepEqual(frequentMistakeTopics({ repeat: { ...record, attempts: 2 } }, new Set(["topic"])), []);
+});
+
+test("frequent topics keep corrected history, combine task mistakes and isolate lessons", () => {
+  const record = (id: string, lessonSlug: string, attempts: number, mastered: boolean) => ({ id, lessonSlug, attempts, mastered, prompt: "Prompt", answer: "Answer" });
+  const records = {
+    one: record("one", "a2-one", 2, true),
+    homework: record("homework:5", "a2-one", 1, true),
+    repeated: record("exercise:4", "a2-two", 4, false),
+    single: record("single", "a2-three", 1, false),
+    a1: record("a1", "a1-lesson", 30, false),
+    global: record("homework:8", "course:a2:progress", 20, false),
+  };
+  const topics = frequentMistakeTopics(records, new Set(["a2-one", "a2-two", "a2-three"]));
+  assert.deepEqual(topics, [
+    { lessonSlug: "a2-two", attempts: 4, active: 1, corrected: 0, repeated: 3 },
+    { lessonSlug: "a2-one", attempts: 3, active: 0, corrected: 2, repeated: 1 },
+  ]);
+  assert.deepEqual(frequentMistakeTopics({}, new Set(["a2-one"])), []);
+  assert.deepEqual(frequentMistakeTopics(records, new Set()), []);
+  assert.equal(records.repeated.attempts, 4);
+});
+import { practiceMistakeReview, practiceReviewPrompt, readableMistakeAnswer } from "../../app/data/mistakeReviewContext.ts";
+
+test("mistake review keeps pair conditions and options without revealing solutions", () => {
+  const practice = { id: "links", sectionIndex: 0, type: "pairs" as const, prompt: "Соедините мысли", pairs: [{ prompt: "Nemôžem prísť, ___ som chorý.", options: ["pretože", "preto"], answer: "pretože" }, { prompt: "Mám čas, ___ ti pomôžem.", answer: "preto" }], answer: "pretože; preto", hint: "Причина → pretože; следствие → preto.", explanation: "Различайте причину и следствие." };
+  const task = practiceMistakeReview(practice, '["preto","preto"]');
+  assert.ok(task.prompt.includes("1. Nemôžem prísť, ___ som chorý."));
+  assert.ok(task.prompt.includes("2. Mám čas, ___ ti pomôžem."));
+  assert.ok(task.prompt.includes("Варианты: pretože / preto"));
+  assert.ok(!task.prompt.includes("Причина →"));
+  assert.equal(task.learnerAnswer, '["preto","preto"]');
+  assert.equal(readableMistakeAnswer(task.learnerAnswer), "1. preto\n2. preto");
+  assert.ok(task.explanation.includes(practice.hint));
+  assert.equal(readableMistakeAnswer("старый ответ"), "старый ответ");
+  assert.equal(readableMistakeAnswer('["",42]'), '["",42]');
+  assert.ok(practiceReviewPrompt({ ...practice, type: "order", tokens: ["Mám", "čas."], pairs: undefined }).includes("Слова: Mám / čas."));
+});
+import { compareReadAloud } from "../../app/data/readingAloud.ts";
+
+test("reading aloud tolerates recognition spelling while preserving the order of spoken words", () => {
+  const same = compareReadAloud("Dobrý deň! Volám sa Anna.", "dobry den volam sa anna");
+  assert.equal(same.matched, 5);
+  assert.ok(same.original.every((word) => !word.changed));
+  const missing = compareReadAloud("Dnes varím dobrý obed.", "dnes varim obed");
+  assert.equal(missing.matched, 3);
+  assert.deepEqual(missing.original.filter((word) => word.changed).map((word) => word.text), ["dobrý"]);
+  const repeated = compareReadAloud("varím varím obed", "varim obed navyse");
+  assert.equal(repeated.matched, 2);
+  assert.equal(repeated.original.filter((word) => word.changed).length, 1);
+  assert.deepEqual(repeated.recognized.filter((word) => word.changed).map((word) => word.text), ["navyse"]);
+  assert.equal(compareReadAloud("Anna varí obed", "obed vari anna").matched, 1);
+  assert.equal(compareReadAloud("Dobrý deň", "").matched, 0);
+  assert.equal(compareReadAloud("a ".repeat(1100), "a ".repeat(1100)).tooLong, true);
+});
+import { compareHomeworkAnswers, homeworkPassed } from "../../app/data/homeworkReview.ts";
+
+test("homework passes from 80 points while linguistic corrections remain independent", () => {
+  assert.equal(homeworkPassed(79), false);
+  assert.equal(homeworkPassed(80), true);
+  assert.equal(homeworkPassed(90), true);
+  assert.equal(homeworkPassed(Number.NaN), false);
+});
+
+test("homework comparison preserves both texts and marks words, accents and punctuation", () => {
+  for (const [original, corrected] of [
+    ["Nakonec som napísal. Každý ráno\nUvarím jo", "Nakoniec som napísal. Každé ráno\nUvarím ho."],
+    ["Ahoj", "Ahoj"], ["", "Nový text"], ["Starý text", ""],
+    ["varím varím obed", "varím obed"], ["a  b", "a b"],
+  ]) {
+    const diff = compareHomeworkAnswers(original, corrected);
+    assert.equal(diff.original.map((token) => token.text).join(""), original);
+    assert.equal(diff.corrected.map((token) => token.text).join(""), corrected);
+    if (original === corrected) assert.ok(diff.original.every((token) => !token.changed));
+  }
+  const diff = compareHomeworkAnswers("Každý ráno varím obed", "Každé ráno uvarím obed.");
+  assert.deepEqual(diff.original.filter((token) => token.changed).map((token) => token.text), ["Každý", "varím"]);
+  assert.deepEqual(diff.corrected.filter((token) => token.changed).map((token) => token.text), ["Každé", "uvarím", "."]);
+});
 import { canUpdateCourseAnswer, courseAnswerMaxLength } from "../../app/data/courseAnswerBounds.ts";
 import { taskMistakeKind, taskMistakeSource } from "../../app/data/taskMistakes.ts";
 
@@ -53,10 +152,57 @@ test("lazy course loader retries rejected and synchronously failed imports", asy
 });
 
 import { scoreLessonUnderstanding } from "../../app/data/courseScoring.ts";
-import { recordFinalAttemptMistakes } from "../../app/data/courseProgress.ts";
-import { courseModuleCompletionKey, isCourseFinalCompleted, reopenExpandedA2Final, normalizeFinalCompletedModules, resolveCoursePosition, switchCourseLevel } from "../../app/data/courseLevelState.ts";
+import { completeMistakeReview, nextMistakeRecord, recordFinalAttemptMistakes } from "../../app/data/courseProgress.ts";
+
+test("corrected mistakes leave active reviews immediately, including early scheduled reviews", () => {
+  const nowMs = Date.UTC(2026, 9, 9);
+  for (const id of ["lesson-practice", "exercise:2", "homework:3", "a2-final"]) {
+    const failed = nextMistakeRecord({ id, lessonSlug: "lesson", prompt: "Prompt", answer: "Answer", correct: false, nowMs })!;
+    for (const previous of [failed, { ...failed, reviewStage: 1, dueAt: new Date(nowMs + 86400000).toISOString() }]) {
+      const corrected = completeMistakeReview(previous, true, nowMs);
+      assert.equal(corrected.mastered, true);
+      assert.equal(corrected.dueAt, undefined);
+      assert.equal(corrected.attempts, previous.attempts);
+      assert.equal(previous.mastered, false);
+      assert.equal(Object.values({ [id]: corrected }).filter((item) => !item.mastered).length, 0);
+      const repeated = completeMistakeReview(corrected, false, nowMs);
+      assert.equal(repeated.mastered, false);
+      assert.equal(repeated.attempts, corrected.attempts + 1);
+      assert.equal(repeated.reviewStage, 0);
+    }
+  }
+});
+import { includesA1Vocabulary, courseModuleCompletionKey, isCourseFinalCompleted, reopenExpandedA2Final, normalizeFinalCompletedModules, resolveCoursePosition, switchCourseLevel } from "../../app/data/courseLevelState.ts";
+
+test("A1 vocabulary recognizes legacy module labels and never includes the A1 catalog for A2", () => {
+  assert.equal(includesA1Vocabulary([{ level: "Slovak A1" }, { level: "Slovak A1" }]), true);
+  assert.equal(includesA1Vocabulary([{ level: "A1" }]), true);
+  assert.equal(includesA1Vocabulary([{ level: "A2" }]), false);
+  assert.equal(includesA1Vocabulary([{ level: "Slovak A1" }, { level: "A2" }]), false);
+  assert.equal(includesA1Vocabulary([]), false);
+});
 import { homeworkAssignmentHints, homeworkModeInstructions, homeworkReferenceSections, rankHomeworkReferenceLessons } from "../../app/data/homeworkPlanning.ts";
-import { buildCourseGenerationScope, completedCourseModules, completedCourseSections, isCourseGenerationScopeSlug } from "../../app/data/courseGenerationScope.ts";
+import { buildCourseGenerationScope, clearCourseMistakes, filterCourseMistakes, filterCourseTasks, completedCourseModules, completedCourseSections, isCourseGenerationScopeSlug } from "../../app/data/courseGenerationScope.ts";
+
+test("mistake lists and clearing isolate A1/A2 lesson and generated-task scopes", () => {
+  const a1 = [{ level: "Slovak A1", slug: "module-1", lessons: [{ slug: "greetings" }], topicGroups: [{ id: "intro" }] }] as unknown as CourseModule[];
+  const a2 = [{ level: "A2", slug: "a2-module-1", lessons: [{ slug: "a2-intro" }], topicGroups: [{ id: "intro" }] }] as unknown as CourseModule[];
+  const slugs = ["greetings", "course-progress", "course-mistakes", "module:module-1", "section:module-1:intro", "a2-intro", "course:a2:progress", "course:a2:mistakes", "module:a2-module-1", "section:a2-module-1:intro", "unknown-future-topic"];
+  const mistakes = Object.fromEntries(slugs.map((lessonSlug, index) => [`mistake:${index}`, { lessonSlug, attempts: index + 1, mastered: index % 2 === 0 }]));
+  const a1Mistakes = filterCourseMistakes(a1, mistakes);
+  const a2Mistakes = filterCourseMistakes(a2, mistakes);
+  assert.deepEqual(Object.values(a1Mistakes).map((item) => item.lessonSlug), slugs.slice(0, 5));
+  assert.deepEqual(Object.values(a2Mistakes).map((item) => item.lessonSlug), slugs.slice(5, 10));
+  const cleared = clearCourseMistakes(a1, mistakes);
+  assert.deepEqual(filterCourseMistakes(a2, cleared), a2Mistakes);
+  assert.deepEqual(Object.values(cleared).map((item) => item.lessonSlug), slugs.slice(5));
+  assert.deepEqual(Object.values(clearCourseMistakes(a2, mistakes)).map((item) => item.lessonSlug), [...slugs.slice(0, 5), slugs[10]]);
+  assert.equal(Object.keys(mistakes).length, 11);
+  const readings = slugs.map((lesson_slug, id) => ({ lesson_slug, id }));
+  assert.deepEqual(filterCourseTasks(a1, readings).map((item) => item.lesson_slug), slugs.slice(0, 5));
+  assert.deepEqual(filterCourseTasks(a2, readings).map((item) => item.lesson_slug), slugs.slice(5, 10));
+  assert.equal(readings.length, 11);
+});
 import { mergeProgress } from "../../app/data/progressMerge.ts";
 import { applySlovakAltShortcut } from "../../app/data/slovakKeyboard.ts";
 import { editTranslationDraft, swapTranslationDraft } from "../../app/data/translationState.ts";

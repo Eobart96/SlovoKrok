@@ -1,9 +1,22 @@
 import pytest
+import json
 
 from app.database import get_db
 from app.main import app
 from app.models import CourseExercise
 from app.tutor_core.exercise import decode_exercise_snapshot
+
+
+def test_legacy_order_is_repaired_on_listing_without_rewriting_saved_snapshot(client):
+    snapshot = "slovokrok-exercise:v1:" + json.dumps({"theory": "Old theory", "interaction_type": "order", "tokens": ["Kuriér", "Sergej", "je."], "accepted_answers": ["Sergej je kuriér."]})
+    assert client.post("/api/v1/course/materials/import", json=collection(snapshot)).status_code == 200
+    exercise = client.get("/api/v1/course/exercises").json()[0]
+    assert exercise["tokens"] == ["kuriér.", "Sergej", "je"]
+    attempt = client.post(f"/api/v1/course/exercises/{exercise['id']}/answer", json={"answer": "Sergej je kuriér.", "assessment_mode": "offline"})
+    assert attempt.status_code == 200
+    assert attempt.json()["is_correct"] is True
+    exported = client.get("/api/v1/course/materials/export").json()
+    assert exported["exercises"][0]["theory_snapshot"] == snapshot
 
 
 def collection(snapshot):

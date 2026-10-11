@@ -164,7 +164,7 @@ export type CourseState = {
   practiceResults: Record<string, boolean>;
   mistakes: Record<string, {
     id: string; lessonSlug: string; prompt: string; answer: string;
-    attempts: number; mastered: boolean; reviewStage?: number | null; dueAt?: string | null;
+    attempts: number; mastered: boolean; reviewStage?: number | null; dueAt?: string | null; rulesReviewedAttempts?: number | null;
   }>;
   finalSelections: Record<string, string>;
   finalCompleted: boolean;
@@ -312,6 +312,9 @@ export function reviewCourseVocabulary(itemId: number, rating?: VocabularyRating
 export type CourseHomeworkAttempt = { id: number; answer: string; is_correct: boolean; score: number; corrected_answer: string; explanation: string; next_exercise: string; created_at: string };
 export type CourseHomework = { id: number; lesson_slug: string; lesson_title: string; title: string; description: string; focus_category: string; created_at: string; offline_ready: boolean; latest_attempt: CourseHomeworkAttempt | null };
 export function getCourseHomework(): Promise<CourseHomework[]> { return request<CourseHomework[]>("/course/homework"); }
+export function askCourseHomeworkQuestion(homeworkId: number, attemptId: number, question: string): Promise<{ answer: string }> {
+  return aiRequest("/course/homework/" + homeworkId + "/question", { method: "POST", body: JSON.stringify({ attempt_id: attemptId, question }) });
+}
 export async function generateCourseHomework(payload: { lesson_slug: string; lesson_title: string; theory: string; known_mistakes: string[]; batch_index?: number; batch_total?: number }, knownIds: readonly number[]): Promise<CourseHomework> { try { return await aiRequest<CourseHomework>("/course/homework", { method: "POST", body: JSON.stringify(payload) }); } catch (error) { if (!isAmbiguousMutationError(error)) throw error; const recovered = await recoverGeneratedItem(getCourseHomework, payload.lesson_slug, knownIds); if (recovered) return recovered; throw error; } }
 
 export function findRecoveredHomeworkAttempt(homework: CourseHomework[], homeworkId: number, answer: string, previousAttemptId?: number): CourseHomeworkAttempt | null {

@@ -48,6 +48,20 @@ class ExerciseInteraction(BaseModel):
             raise ValueError("Accepted answers must be unique")
         if self.pairs and (len({pair.prompt for pair in self.pairs}) != len(self.pairs) or len({pair.answer for pair in self.pairs}) != len(self.pairs)):
             raise ValueError("Matching prompts and answers must be unique")
+        if self.interaction_type == "order" and self.accepted_answers:
+            # AI may shuffle casing and final punctuation along with the words.
+            # Use the reference spelling while retaining the shuffled word order.
+            # This also repairs legacy snapshots in memory, without writing on read.
+            reference_tokens = self.accepted_answers[0].split()
+            available = Counter(_normalized_exercise_answer(token) for token in self.tokens)
+            reference = Counter(_normalized_exercise_answer(token) for token in reference_tokens)
+            if available == reference:
+                if any(len(token) > 100 for token in reference_tokens):
+                    raise ValueError("Order reference tokens must not exceed 100 characters")
+                spellings: dict[str, list[str]] = {}
+                for token in reference_tokens:
+                    spellings.setdefault(_normalized_exercise_answer(token), []).append(token)
+                self.tokens = [spellings[_normalized_exercise_answer(token)].pop(0) for token in self.tokens]
         return self
 
 

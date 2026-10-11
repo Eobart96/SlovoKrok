@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo } from "react";
+import { practiceMistakeReview } from "../data/mistakeReviewContext";
+import type { MistakeReviewTask } from "../data/taskMistakes";
 import { canUpdateCourseAnswer } from "../data/courseAnswerBounds";
 
 import { buildModuleFinalQuestions, buildReinforcementPractices, getPracticeMatch, isCorePractice, isPracticeFilled, type ModuleFinalQuestion } from "../data/coursePractice";
@@ -31,10 +33,10 @@ export function useCourseProgressController({ module, lesson, session }: { modul
   const finalScore = finalQuestions.filter((question) => finalSelections[question.id] === question.answer).length;
   const finalPassingScore = Math.ceil(finalQuestions.length * finalPassingPercent / 100);
 
-  const scheduleMistake = (id: string, prompt: string, answer: string, correct: boolean, lessonSlug = lesson.slug) => {
+  const scheduleMistake = (id: string, prompt: string, answer: string, correct: boolean, lessonSlug = lesson.slug, reviewTask?: MistakeReviewTask) => {
     setMistakes((current) => {
       const next = nextMistakeRecord({ previous: current[id], id, lessonSlug, prompt, answer, correct, nowMs: Date.now() });
-      return next ? { ...current, [id]: next } : current;
+      return next ? { ...current, [id]: reviewTask && !correct ? { ...next, reviewTask } : next } : current;
     });
   };
 
@@ -47,12 +49,12 @@ export function useCourseProgressController({ module, lesson, session }: { modul
   const checkPractice = (practice: StepPractice) => {
     const correct = getPracticeMatch(practice, practiceAnswers[practice.id] ?? "") === "correct";
     setPracticeResults((current) => ({ ...current, [practice.id]: correct }));
-    scheduleMistake(practice.id, practice.prompt, practice.answer, correct);
+    scheduleMistake(practice.id, practice.prompt, practice.answer, correct, lesson.slug, practiceMistakeReview(practice, practiceAnswers[practice.id] ?? ""));
   };
 
   const selectKnowledgeAnswer = (check: KnowledgeCheck, option: string) => {
     setCheckSelections((current) => ({ ...current, [check.id]: option }));
-    scheduleMistake(check.id, check.question, check.answer, option === check.answer);
+    scheduleMistake(check.id, check.question, check.answer, option === check.answer, lesson.slug, { prompt: check.question, learnerAnswer: option, explanation: check.explanation, kind: "exact" });
   };
 
   const resetLesson = (target: CourseLesson): boolean => {

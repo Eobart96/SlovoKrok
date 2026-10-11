@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import { CourseScreen } from "./components/CourseScreen";
@@ -40,9 +41,21 @@ export default function HomePage() {
   return (
     <main className="course-route-shell">
       <header className="course-route-header">
-        <div>
-          <span>Курс словацкого языка · Slovak {activeLevel}</span>
-          <strong>SlovoKrok</strong>
+        <div className="course-header-top">
+          <div className="course-header-brand">
+            <a className="course-brand-link" href="https://slovokrok.pages.dev" target="_blank" rel="noopener noreferrer" aria-label="Сайт SlovoKrok — открыть в новой вкладке">
+              <Image className="course-brand-logo" src="/branding/slovokrok-logo.png" alt="SlovoKrok" width={2172} height={724} sizes="220px" priority />
+            </a>
+            <span>Курс словацкого языка · Slovak {activeLevel}</span>
+          </div>
+          <div className="course-header-actions">
+            <FloatingTranslator />
+            <CourseWelcome onStart={() => { setSettingsOpen(false); setActiveArea("learning"); }} onProfile={() => setSettingsOpen(true)} />
+            <button type="button" onClick={() => setSettingsOpen(true)} aria-label="Открыть настройки">
+              <span aria-hidden="true">⚙</span>
+              Настройки
+            </button>
+          </div>
         </div>
         <nav aria-label={`Навигация курса Slovak ${activeLevel}`}>
           <div className="course-primary-navigation" aria-label="Основные разделы">
@@ -54,12 +67,6 @@ export default function HomePage() {
             <button type="button" className={activeArea === "review" ? "active" : ""} onClick={() => setActiveArea("review")}>Ошибки</button>
             <button type="button" className={activeArea === "vocabulary" ? "active" : ""} onClick={() => setActiveArea("vocabulary")}>Слова</button>
           </div>
-          <FloatingTranslator />
-          <CourseWelcome onStart={() => { setSettingsOpen(false); setActiveArea("learning"); }} onProfile={() => setSettingsOpen(true)} />
-          <button type="button" onClick={() => setSettingsOpen(true)} aria-label="Открыть настройки">
-            <span aria-hidden="true">⚙</span>
-            Настройки
-          </button>
         </nav>
       </header>
       <CourseScreen requestedArea={activeArea} onAreaChange={setActiveArea} onLevelChange={setActiveLevel} settingsOpen={settingsOpen} onSettingsClose={() => setSettingsOpen(false)} themeControl={<label>Тема интерфейса<select value={theme} disabled={!themeReady} onChange={(event) => setTheme(event.target.value as Theme)}><option value="light">Светлая</option><option value="dark">Тёмная</option></select></label>} />
