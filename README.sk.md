@@ -75,7 +75,7 @@ preskočí rovnaké úlohy a zachová pokrok.
 - Voliteľný profil na prispôsobenie príkladov; nastavenie témy a veľkosti textu.
 - Hlásenia chýb s kontextom obrazovky, snímkou obrazovky, exportom ZIP a vymazaním zoznamu.
 - Prenos úloh cez JSON, správa úloh a zálohovanie pokroku.
-- 72 študijných PDF A2; dostupných je 48 tém v celých moduloch 1–5. Modul 5 obsahuje spojky, sprostredkovanie správy so že, vzťažné vety s ktorý, nepriame otázky, príčinu a následok, čas a reálnu podmienku aj súvislé rozprávanie. Názvy modulov sú anglické; vysvetlenia zostávajú ruské. Úroveň A1/A2 sa vyberá v nastaveniach; obe úrovne majú rovnaké rozloženie hlavičky. Ručné schválenie nových tém prebehne neskôr spoločne.
+- 72 študijných PDF A2; v aplikácii je dostupných všetkých 72 tém ôsmich modulov vrátane riešenia problému a záverečnej samostatnej práce. Zdravotné situácie a športové plány sú jazykovým cvičením, nie predpisom liečby ani záťaže; záver A2 nie je oficiálnou skúškou ani certifikátom. Názvy modulov sú anglické; vysvetlenia zostávajú ruské. Úroveň A1/A2 sa vyberá v nastaveniach; obe úrovne majú rovnaké rozloženie hlavičky. Vlastník práve ručne kontroluje A2; konečné schválenie ešte nie je dokončené.
 
 Sekcie: učenie → prehľady pravidiel → cvičenia → domáce úlohy → čítanie → chyby
 → slovíčka. Rozhranie a výučbové vysvetlenia sú zatiaľ v ruštine.

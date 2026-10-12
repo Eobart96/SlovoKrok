@@ -16,9 +16,33 @@ const lesson = read("app/data/a2/modules/module2/lessons/nominative-plural-thing
 
 function validateRoadmap() {
   const entries = [...roadmap.matchAll(/item\("([^"]+)", "([^"]+)"/g)];
-  if (entries.length !== 48) fail(`expected 7/12/9/12/8 ready Module 1/2/3/4/5 topics, found ${entries.length}`);
+  if (entries.length !== 72) fail(`expected 7/12/9/12/8/9/8/7 ready Module 1/2/3/4/5/6/7/8 topics, found ${entries.length}`);
   if (new Set(entries.map((entry) => entry[1])).size !== entries.length) fail("duplicate A2 lesson slug");
   const requiredTitles = [
+    "Интегрированная задача: решаем проблему",
+    "Итог A2: мой опыт, планы и самостоятельность",
+    "Аптека, травма и первая помощь",
+    "Образ жизни и спорт",
+    "Семья, друзья, внешность и характер",
+    "Эмоции, недоразумение и поддержка",
+    "Самочувствие и разговор с врачом",
+    "География, регионы и погода Словакии",
+    "Моя страна и Словакия: информация для гостя",
+    "Билет, маршрут и пересадка",
+    "Бронирование и план поездки",
+    "История путешествия",
+    "Профессия, обязанности и опыт",
+    "Вакансия, анкета и условия работы",
+    "Поручение, встреча и изменение плана",
+    "Количество, упаковка и информация о товаре",
+    "Одежда, примерка, оплата и обмен",
+    "Онлайн-заказ, доставка и возврат",
+    "Устройства, файлы и приложения",
+    "Звонок, сообщение и электронное письмо",
+    "Социальные сети и цифровая безопасность",
+    "Жильё и район",
+    "Объявление и поиск жилья",
+    "Бытовая проблема и договорённость",
     "Время и реальное условие",
     "Связный рассказ и актуальное членение",
     "Относительные предложения с ktorý",
@@ -88,6 +112,15 @@ function validatePlan() {
     "## Этап 12. Module 5: союзы и передача сообщения",
     "## Этап 13. Module 5: уточнение, косвенные вопросы и причина",
     "## Этап 14. Полный Module 5: время, условие и рассказ",
+    "## Этап 15. Module 6: жильё и бытовые договорённости",
+    "## Этап 16. Module 6: устройства, сообщения и безопасность",
+    "## Этап 17. Полный Module 6: товары и покупки",
+    "## Этап 18. Module 7: работа и договорённости",
+    "## Этап 19. Module 7: маршруты, бронирование и рассказ",
+    "## Этап 20. Полный Module 7: страна, погода и информация для гостя",
+    "## Этап 21. Module 8: отношения, поддержка и разговор с врачом",
+    "## Этап 22. Module 8: аптека, травма и образ жизни",
+    "## Этап 23. Полный Module 8: решение проблемы и итог A2",
     "A1 продолжает работать без изменения существующих slug",
     "2.11-2.12",
     "validate:a2",
@@ -149,7 +182,7 @@ function validateReadyLessons() {
   if (JSON.stringify(a2ReadyLessonSlugs) !== JSON.stringify(readyLessons.map((lesson) => lesson.slug))) fail("A2 position catalog differs from ready lessons");
   const positions = a2CourseModules.map((module) => ({ order: module.order, lessons: module.lessons.map(({ slug }) => ({ slug })) }));
   if (JSON.stringify(positions) !== JSON.stringify(coursePositionCatalog.A2)) fail("A2 module positions differ from runtime catalog");
-  if (a2CourseModules.length !== 5 || a2CourseModules.some((module, index) => module.order !== index + 1)) fail("ready A2 modules must be Module1/2/3/4/5 in order");
+  if (a2CourseModules.length !== 8 || a2CourseModules.some((module, index) => module.order !== index + 1)) fail("ready A2 modules must be Module1/2/3/4/5/6/7/8 in order");
   const { validateCourseModules } = loadData(resolve(dataRoot, "courseValidation.ts"));
   const { getPracticeMatch, buildModuleFinalQuestions, buildReinforcementPractices } = loadData(resolve(dataRoot, "coursePractice.ts"));
   const { resolveCoursePosition, isCourseFinalCompleted, reopenExpandedA2Final } = loadData(resolve(dataRoot, "courseLevelState.ts"));
@@ -227,7 +260,106 @@ function validateReadyLessons() {
     if (!isCourseFinalCompleted("A2", true, buildModuleFinalQuestions(earlier.lessons).map(({ id }) => id), mergedAnswers)) fail("Module5 invalidated earlier final");
   }
   const everyFinal = a2CourseModules.flatMap(({ lessons }) => buildModuleFinalQuestions(lessons));
-  if (new Set(everyFinal.map(({ id }) => id)).size !== everyFinal.length) fail("Module5 final ID collision");
+  if (new Set(everyFinal.map(({ id }) => id)).size !== everyFinal.length) fail("A2 final ID collision");
+  const module6Final = buildModuleFinalQuestions(a2CourseModules[5].lessons);
+  const module6Ids = module6Final.map(({ id }) => id);
+  if (module6Final.length !== 18 || isCourseFinalCompleted("A2", true, module6Ids, mergedAnswers)) fail("Module6 completed by earlier answers or missing questions");
+  const oldModule6Final = buildModuleFinalQuestions(a2CourseModules[5].lessons.slice(0, 6));
+  const oldModule6Answers = Object.fromEntries(oldModule6Final.map(({ id, answer }) => [id, answer]));
+  for (const oldLessonCount of [3, 6]) {
+    const previousFinal = buildModuleFinalQuestions(a2CourseModules[5].lessons.slice(0, oldLessonCount));
+    const previousAnswers = Object.fromEntries(previousFinal.map(({ id, answer }) => [id, answer]));
+    if (previousFinal.length !== oldLessonCount * 2 || previousFinal.some(({ id, answer }) => !module6Final.some((item) => item.id === id && item.answer === answer))) fail("previous Module6 final changed");
+    if (isCourseFinalCompleted("A2", true, module6Ids, previousAnswers)) fail("old Module6 answers close expanded final");
+    const previousFlags = { "a1:6": true, "a2:1": true, "a2:2": true, "a2:3": true, "a2:4": true, "a2:5": true, "a2:6": true };
+    const previousFlagsSnapshot = JSON.stringify(previousFlags);
+    const previousAnswersSnapshot = JSON.stringify(previousAnswers);
+    const nextFlags = reopenExpandedA2Final("A2", "a2:6", previousFlags, module6Ids, previousAnswers);
+    if (nextFlags["a2:6"] !== false || Object.keys(previousFlags).filter((key) => key !== "a2:6").some((key) => nextFlags[key] !== true) || JSON.stringify(previousFlags) !== previousFlagsSnapshot || JSON.stringify(previousAnswers) !== previousAnswersSnapshot) fail("old Module6 expansion mutated progress");
+  }
+  const module6Answers = Object.fromEntries(module6Final.map(({ id, answer }) => [id, answer]));
+  if (!isCourseFinalCompleted("A2", true, module6Ids, module6Answers) || isCourseFinalCompleted("A2", false, module6Ids, module6Answers)) fail("Module6 requires its own submitted final");
+  for (const missingId of module6Ids) {
+    const incomplete = { ...module6Answers };
+    delete incomplete[missingId];
+    if (isCourseFinalCompleted("A2", true, module6Ids, incomplete)) fail(`Module6 missing answer accepted: ${missingId}`);
+  }
+  const savedModule6Answers = { ...mergedAnswers, ...oldModule6Answers };
+  const priorSnapshot = JSON.stringify(savedModule6Answers);
+  const savedFlags = { "a1:6": true, "a2:1": true, "a2:2": true, "a2:3": true, "a2:4": true, "a2:5": true, "a2:6": true };
+  const flagSnapshot = JSON.stringify(savedFlags);
+  const reopened = reopenExpandedA2Final("A2", "a2:6", savedFlags, module6Ids, savedModule6Answers);
+  if (reopened["a2:6"] !== false || Object.keys(savedFlags).filter((key) => key !== "a2:6").some((key) => reopened[key] !== true) || JSON.stringify(savedFlags) !== flagSnapshot || JSON.stringify(savedModule6Answers) !== priorSnapshot) fail("expanding Module6 changed earlier flags or answers");
+  const withModule6 = { ...mergedAnswers, ...module6Answers };
+  for (const earlier of a2CourseModules.slice(0, 5)) {
+    if (!isCourseFinalCompleted("A2", true, buildModuleFinalQuestions(earlier.lessons).map(({ id }) => id), withModule6)) fail("Module6 invalidated earlier final");
+  }
+  const module7Final = buildModuleFinalQuestions(a2CourseModules[6].lessons);
+  const module7Ids = module7Final.map(({ id }) => id);
+  if (module7Final.length !== 16 || isCourseFinalCompleted("A2", true, module7Ids, withModule6)) fail("Module7 completed by earlier answers or missing questions");
+  const oldModule7Final = buildModuleFinalQuestions(a2CourseModules[6].lessons.slice(0, 3));
+  const oldModule7Answers = Object.fromEntries(oldModule7Final.map(({ id, answer }) => [id, answer]));
+  if (oldModule7Final.length !== 6 || oldModule7Final.some(({ id, answer }) => !module7Final.some((item) => item.id === id && item.answer === answer))) fail("previous Module7 questions or answers changed");
+  if (isCourseFinalCompleted("A2", true, module7Ids, oldModule7Answers)) fail("old six Module7 answers close expanded final");
+  const travelModule7Final = buildModuleFinalQuestions(a2CourseModules[6].lessons.slice(0, 6));
+  const travelModule7Answers = Object.fromEntries(travelModule7Final.map(({ id, answer }) => [id, answer]));
+  if (travelModule7Final.length !== 12 || travelModule7Final.some(({ id, answer }) => !module7Final.some((item) => item.id === id && item.answer === answer))) fail("previous twelve Module7 questions or answers changed");
+  if (isCourseFinalCompleted("A2", true, module7Ids, travelModule7Answers)) fail("old twelve Module7 answers close full final");
+  const savedModule7Answers = { ...withModule6, ...travelModule7Answers };
+  const savedModule7Snapshot = JSON.stringify(savedModule7Answers);
+  const savedModule7Flags = { "a1:7": true, "a2:1": true, "a2:2": true, "a2:3": true, "a2:4": true, "a2:5": true, "a2:6": true, "a2:7": true };
+  const savedModule7FlagSnapshot = JSON.stringify(savedModule7Flags);
+  const expandedModule7Flags = reopenExpandedA2Final("A2", "a2:7", savedModule7Flags, module7Ids, savedModule7Answers);
+  if (expandedModule7Flags["a2:7"] !== false || Object.keys(savedModule7Flags).filter((key) => key !== "a2:7").some((key) => expandedModule7Flags[key] !== true) || JSON.stringify(savedModule7Flags) !== savedModule7FlagSnapshot || JSON.stringify(savedModule7Answers) !== savedModule7Snapshot) fail("expanding Module7 mutated earlier flags or answers");
+  const module7Answers = Object.fromEntries(module7Final.map(({ id, answer }) => [id, answer]));
+  if (!isCourseFinalCompleted("A2", true, module7Ids, module7Answers) || isCourseFinalCompleted("A2", false, module7Ids, module7Answers)) fail("Module7 requires its own submitted final");
+  for (const missingId of module7Ids) {
+    const incomplete = { ...module7Answers };
+    delete incomplete[missingId];
+    if (isCourseFinalCompleted("A2", true, module7Ids, incomplete)) fail(`Module7 missing answer accepted: ${missingId}`);
+  }
+  const earlierFlags = { "a1:7": true, "a2:1": true, "a2:2": true, "a2:3": true, "a2:4": true, "a2:5": true, "a2:6": true };
+  const earlierFlagSnapshot = JSON.stringify(earlierFlags);
+  const earlierAnswerSnapshot = JSON.stringify(withModule6);
+  const afterAddingModule7 = reopenExpandedA2Final("A2", "a2:7", earlierFlags, module7Ids, withModule6);
+  if (JSON.stringify(afterAddingModule7) !== earlierFlagSnapshot || JSON.stringify(earlierFlags) !== earlierFlagSnapshot || JSON.stringify(withModule6) !== earlierAnswerSnapshot) fail("adding Module7 mutated earlier progress");
+  const withModule7 = { ...withModule6, ...module7Answers };
+  for (const earlier of a2CourseModules.slice(0, 6)) {
+    if (!isCourseFinalCompleted("A2", true, buildModuleFinalQuestions(earlier.lessons).map(({ id }) => id), withModule7)) fail("Module7 invalidated earlier final");
+  }
+  const module8Final = buildModuleFinalQuestions(a2CourseModules[7].lessons);
+  const module8Ids = module8Final.map(({ id }) => id);
+  if (module8Final.length !== 14 || isCourseFinalCompleted("A2", true, module8Ids, withModule7)) fail("Module8 completed by earlier answers or missing questions");
+  const oldModule8Final = buildModuleFinalQuestions(a2CourseModules[7].lessons.slice(0, 3));
+  const oldModule8Answers = Object.fromEntries(oldModule8Final.map(({ id, answer }) => [id, answer]));
+  if (oldModule8Final.length !== 6 || oldModule8Final.some(({ id, answer }) => !module8Final.some((item) => item.id === id && item.answer === answer))) fail("previous Module8 questions or answers changed");
+  if (isCourseFinalCompleted("A2", true, module8Ids, oldModule8Answers)) fail("old six Module8 answers close expanded final");
+  const healthModule8Final = buildModuleFinalQuestions(a2CourseModules[7].lessons.slice(0, 5));
+  const healthModule8Answers = Object.fromEntries(healthModule8Final.map(({ id, answer }) => [id, answer]));
+  if (healthModule8Final.length !== 10 || healthModule8Final.some(({ id, answer }) => !module8Final.some((item) => item.id === id && item.answer === answer))) fail("previous ten Module8 questions or answers changed");
+  if (isCourseFinalCompleted("A2", true, module8Ids, healthModule8Answers)) fail("old ten Module8 answers close full final");
+  const savedModule8Answers = { ...withModule7, ...healthModule8Answers };
+  const savedModule8Flags = { "a1:8": true, ...Object.fromEntries(a2CourseModules.map(({ order }) => [`a2:${order}`, true])) };
+  const savedModule8AnswerSnapshot = JSON.stringify(savedModule8Answers);
+  const savedModule8FlagSnapshot = JSON.stringify(savedModule8Flags);
+  const expandedModule8Flags = reopenExpandedA2Final("A2", "a2:8", savedModule8Flags, module8Ids, savedModule8Answers);
+  if (expandedModule8Flags["a2:8"] !== false || Object.keys(savedModule8Flags).filter((key) => key !== "a2:8").some((key) => expandedModule8Flags[key] !== true) || JSON.stringify(savedModule8Flags) !== savedModule8FlagSnapshot || JSON.stringify(savedModule8Answers) !== savedModule8AnswerSnapshot) fail("expanding Module8 mutated earlier flags or answers");
+  const module8Answers = Object.fromEntries(module8Final.map(({ id, answer }) => [id, answer]));
+  if (!isCourseFinalCompleted("A2", true, module8Ids, module8Answers) || isCourseFinalCompleted("A2", false, module8Ids, module8Answers)) fail("Module8 requires its own submitted final");
+  for (const missingId of module8Ids) {
+    const incomplete = { ...module8Answers };
+    delete incomplete[missingId];
+    if (isCourseFinalCompleted("A2", true, module8Ids, incomplete)) fail(`Module8 missing answer accepted: ${missingId}`);
+  }
+  const flagsBeforeModule8 = { "a1:8": true, ...Object.fromEntries(a2CourseModules.slice(0, 7).map(({ order }) => [`a2:${order}`, true])) };
+  const flagsBeforeModule8Snapshot = JSON.stringify(flagsBeforeModule8);
+  const answersBeforeModule8Snapshot = JSON.stringify(withModule7);
+  const afterAddingModule8 = reopenExpandedA2Final("A2", "a2:8", flagsBeforeModule8, module8Ids, withModule7);
+  if (JSON.stringify(afterAddingModule8) !== flagsBeforeModule8Snapshot || JSON.stringify(flagsBeforeModule8) !== flagsBeforeModule8Snapshot || JSON.stringify(withModule7) !== answersBeforeModule8Snapshot) fail("adding Module8 mutated previous flags or answers");
+  const withModule8 = { ...withModule7, ...module8Answers };
+  for (const earlier of a2CourseModules.slice(0, 7)) {
+    if (!isCourseFinalCompleted("A2", true, buildModuleFinalQuestions(earlier.lessons).map(({ id }) => id), withModule8)) fail("Module8 invalidated earlier final");
+  }
   for (const module of a2CourseModules) {
     if (!/^Module \d+ — /.test(module.title) || module.title.startsWith("A2")) fail(`module title is not concise English: ${module.slug}`);
   }

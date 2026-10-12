@@ -119,7 +119,61 @@ export const plannedA2Module5: A2PlannedModule = {
   ],
 };
 
-export const plannedA2Modules: A2PlannedModule[] = [plannedA2Module1, plannedA2Module2, plannedA2Module3, plannedA2Module4, plannedA2Module5];
+export const plannedA2Module6: A2PlannedModule = {
+  order: 6,
+  slug: "a2-module-6-home-online-shopping",
+  title: "Module 6 — Home, Online Life and Shopping",
+  shortTitle: "Home, Online Life and Shopping",
+  description: "Жильё, бытовые договорённости, цифровая жизнь, товары, покупки и доставка.",
+  lessons: [
+    item("a2-housing-and-neighbourhood", "Жильё и район", "Bývanie a okolie", "Описывать жильё, обстановку и район, сравнивать варианты и объяснять предпочтение."),
+    item("a2-rental-ad-and-search", "Объявление и поиск жилья", "Inzerát a hľadanie bývania", "Читать факты и условия объявления, сравнивать расходы и вежливо уточнять условия просмотра."),
+    item("a2-household-problem-and-agreement", "Бытовая проблема и договорённость", "Porucha a dohoda", "Сообщать о неисправности, просить помощь, согласовывать время и передавать подтверждённое решение."),
+    item("a2-devices-files-and-apps", "Устройства, файлы и приложения", "Zariadenia, súbory a aplikácie", "Давать последовательную цифровую инструкцию, выбирать императив и вид, уточнять шаг и проверять результат."),
+    item("a2-calls-messages-and-email", "Звонок, сообщение и электронное письмо", "Telefonát, správa a e-mail", "Называть цель и адресата сообщения, использовать Datív и короткие формы, сохранять тон и следующий шаг."),
+    item("a2-social-networks-and-digital-safety", "Социальные сети и цифровая безопасность", "Sociálne siete a digitálna bezpečnosť", "Описывать онлайн-привычки, различать отрицательные формы, давать мягкий совет и обращаться за помощью без секретов."),
+    item("a2-quantity-packaging-and-product-info", "Количество, упаковка и информация о товаре", "Množstvo, balenie a údaje o výrobku", "Просить количество и упаковку, читать состав, происхождение, цену, срок и хранение."),
+    item("a2-clothes-fitting-payment-and-exchange", "Одежда, примерка, оплата и обмен", "Oblečenie, skúšanie, platba a výmena", "Выбирать вещь, сравнивать посадку, называть оплату и вежливо просить обмен с причиной."),
+    item("a2-online-order-delivery-and-return", "Онлайн-заказ, доставка и возврат", "Online objednávka, doručenie a vrátenie", "Понимать статус, объяснять проблему доставки и точно передавать условия получения и возврата."),
+  ],
+};
+
+export const plannedA2Module7: A2PlannedModule = {
+  order: 7,
+  slug: "a2-module-7-work-travel-and-country",
+  title: "Module 7 — Work, Travel and Country",
+  shortTitle: "Work, Travel and Country",
+  description: "Работа, поездки и их история, география и погода Словакии, информация для гостя.",
+  lessons: [
+    item("a2-profession-duties-and-experience", "Профессия, обязанности и опыт", "Povolanie, pracovné povinnosti a skúsenosti", "Рассказать о нынешней и прошлой работе, обязанностях, навыках и результате."),
+    item("a2-vacancy-form-and-working-conditions", "Вакансия, анкета и условия работы", "Pracovná ponuka, formulár a pracovné podmienky", "Найти факты вакансии, заполнить учебную анкету и вежливо уточнить условия."),
+    item("a2-task-meeting-and-plan-change", "Поручение, встреча и изменение плана", "Úloha, stretnutie a zmena plánu", "Подтвердить задачу и срок, перенести встречу и точно передать коллеге изменение."),
+    item("a2-ticket-route-and-transfer", "Билет, маршрут и пересадка", "Lístok, trasa a prestup", "Сравнить рейсы, попросить билет и понять время, платформу и условия пересадки."),
+    item("a2-booking-and-travel-plan", "Бронирование и план поездки", "Rezervácia a plán cesty", "Уточнить условия, предложить вариант и согласовать бронирование и общий план."),
+    item("a2-travel-story", "История путешествия", "Príbeh z cesty", "Связать фон, события, неожиданность, решение и итог поездки с естественными sa/si."),
+    item("a2-geography-regions-and-weather", "География, регионы и погода Словакии", "Geografia, regióny a počasie Slovenska", "Описать положение, соседей, края и природу; дать учебный прогноз и сравнить регионы."),
+    item("a2-country-information-for-guest", "Моя страна и Словакия: информация для гостя", "Moja krajina a Slovensko: informácie pre hosťa", "Выбрать нужные гостю факты, передать даты и детали источника и осторожно уточнить неизвестное."),
+  ],
+};
+
+export const plannedA2Module8: A2PlannedModule = {
+  order: 8,
+  slug: "a2-module-8-relationships-health-and-review",
+  title: "Module 8 — Relationships, Health and A2 Review",
+  shortTitle: "Relationships, Health and A2 Review",
+  description: "Отношения, здоровье и образ жизни, решение проблемы и итоговая учебная работа A2.",
+  lessons: [
+    item("a2-family-friends-appearance-and-character", "Семья, друзья, внешность и характер", "Rodina, priatelia, vzhľad a povaha", "Представить близкого человека, согласовать описание и сравнить людей и отношения."),
+    item("a2-emotions-misunderstanding-and-support", "Эмоции, недоразумение и поддержка", "Emócie, nedorozumenie a podpora", "Выразить чувство, объяснить факт, извиниться и предложить помощь без давления."),
+    item("a2-wellbeing-and-doctor-conversation", "Самочувствие и разговор с врачом", "Zdravotný stav a rozhovor s lekárom", "Описать жалобы, начало и длительность; понять вежливую реплику и переспросить без медицинских выводов."),
+    item("a2-pharmacy-injury-and-first-aid", "Аптека, травма и первая помощь", "Lekáreň, úraz a prvá pomoc", "Вежливо попросить предмет, понять учебную этикетку и сообщить о травме без диагноза или назначения лечения."),
+    item("a2-lifestyle-and-sport", "Образ жизни и спорт", "Životný štýl a šport", "Описать привычки, сравнить действия и составить учебный план с советом себе, временем и запасным условием."),
+    item("a2-integrated-problem-solving", "Интегрированная задача: решаем проблему", "Integrovaná úloha: riešime problém", "Понять источник, уточнить пробел, подтвердить выполнимое решение и точно передать его третьему лицу."),
+    item("a2-experience-plans-and-independence", "Итог A2: мой опыт, планы и самостоятельность", "Záver A2: moje skúsenosti, plány a samostatnosť", "Выполнить четыре части самостоятельной работы и определить следующий шаг без подмены официального экзамена."),
+  ],
+};
+
+export const plannedA2Modules: A2PlannedModule[] = [plannedA2Module1, plannedA2Module2, plannedA2Module3, plannedA2Module4, plannedA2Module5, plannedA2Module6, plannedA2Module7, plannedA2Module8];
 
 export const getPlannedA2Module = (order: number): A2PlannedModule | undefined =>
   plannedA2Modules.find((module) => module.order === order);

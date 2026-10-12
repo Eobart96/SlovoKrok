@@ -75,7 +75,7 @@ Adding the same pack again skips identical tasks and preserves progress.
 - Optional learner profile to adapt examples; theme and text size settings.
 - Bug reports with screen context, screen capture, ZIP export and list clearing.
 - Tasks-only JSON transfer, task management and course backups.
-- 72 A2 study PDFs; 48 lessons are available across complete Modules 1–5. Module 5 covers conjunctions, reported statements with že, relative clauses with ktorý, embedded questions, cause and consequence, time and real conditions, and connected storytelling. Module names are English; explanations remain Russian. Choose A1/A2 in settings; both levels share the same header layout. Manual acceptance of the new lessons is deferred to a batch review.
+- 72 A2 study PDFs; all 72 lessons across eight modules are available, including problem-solving and a final independent study task. Medical scenes and sports plans are language practice, not prescriptions; the A2 review is not an official exam or certificate. Module names are English; explanations remain Russian. Choose A1/A2 in settings; both levels share the same header layout. The owner is manually reviewing A2; final acceptance is still pending.
 
 Navigation: learning → cheat sheets → exercises → homework → reading → mistakes
 → words. The interface and teaching explanations are currently in Russian.

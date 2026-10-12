@@ -42,7 +42,13 @@ export const a2Module4ReadyLessonSlugs = ["a2-aspect-in-narrative", "a2-aspect-p
 
 export const a2Module5ReadyLessonSlugs = ["a2-conjunctions-a-ale-alebo", "a2-paired-conjunctions", "a2-reported-statements-ze", "a2-relative-clauses-ktory", "a2-embedded-questions", "a2-cause-and-consequence", "a2-time-and-real-condition", "a2-connected-story-focus"];
 
-export const a2ReadyLessonSlugs = [...a2Module1ReadyLessonSlugs, ...a2Module2ReadyLessonSlugs, ...a2Module3ReadyLessonSlugs, ...a2Module4ReadyLessonSlugs, ...a2Module5ReadyLessonSlugs];
+export const a2Module6ReadyLessonSlugs = ["a2-housing-and-neighbourhood", "a2-rental-ad-and-search", "a2-household-problem-and-agreement", "a2-devices-files-and-apps", "a2-calls-messages-and-email", "a2-social-networks-and-digital-safety", "a2-quantity-packaging-and-product-info", "a2-clothes-fitting-payment-and-exchange", "a2-online-order-delivery-and-return"];
+
+export const a2Module7ReadyLessonSlugs = ["a2-profession-duties-and-experience", "a2-vacancy-form-and-working-conditions", "a2-task-meeting-and-plan-change", "a2-ticket-route-and-transfer", "a2-booking-and-travel-plan", "a2-travel-story", "a2-geography-regions-and-weather", "a2-country-information-for-guest"];
+
+export const a2Module8ReadyLessonSlugs = ["a2-family-friends-appearance-and-character", "a2-emotions-misunderstanding-and-support", "a2-wellbeing-and-doctor-conversation", "a2-pharmacy-injury-and-first-aid", "a2-lifestyle-and-sport", "a2-integrated-problem-solving", "a2-experience-plans-and-independence"];
+
+export const a2ReadyLessonSlugs = [...a2Module1ReadyLessonSlugs, ...a2Module2ReadyLessonSlugs, ...a2Module3ReadyLessonSlugs, ...a2Module4ReadyLessonSlugs, ...a2Module5ReadyLessonSlugs, ...a2Module6ReadyLessonSlugs, ...a2Module7ReadyLessonSlugs, ...a2Module8ReadyLessonSlugs];
 
 export const coursePositionCatalog = {
   A1: a1CourseModules,
@@ -52,5 +58,8 @@ export const coursePositionCatalog = {
     { order: 3, lessons: a2Module3ReadyLessonSlugs.map((slug) => ({ slug })) },
     { order: 4, lessons: a2Module4ReadyLessonSlugs.map((slug) => ({ slug })) },
     { order: 5, lessons: a2Module5ReadyLessonSlugs.map((slug) => ({ slug })) },
+    { order: 6, lessons: a2Module6ReadyLessonSlugs.map((slug) => ({ slug })) },
+    { order: 7, lessons: a2Module7ReadyLessonSlugs.map((slug) => ({ slug })) },
+    { order: 8, lessons: a2Module8ReadyLessonSlugs.map((slug) => ({ slug })) },
   ],
 };
